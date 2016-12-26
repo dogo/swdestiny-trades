@@ -11,16 +11,11 @@ import UIKit
 class CardListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView?
-    var swdSets: [String] = ["Darth Vader", "Padme", "Leia Organa", "Luke Skywalker"]
+    var swdCards: [String] = ["Darth Vader", "Padme", "Leia Organa", "Luke Skywalker"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - <UITableViewDelegate>
@@ -44,7 +39,7 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return swdSets.count
+        return swdCards.count
     }
 }
 
