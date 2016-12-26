@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD6E06881E114E88004A5653 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E06871E114E88004A5653 /* AppDelegate.swift */; };
-		DD6E068A1E114E88004A5653 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E06891E114E88004A5653 /* FirstViewController.swift */; };
-		DD6E068C1E114E88004A5653 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E068B1E114E88004A5653 /* SecondViewController.swift */; };
 		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
+		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
+		DD8E8AA91E11610100C54FD9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8AA51E11610100C54FD9 /* SecondViewController.swift */; };
+		DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */; };
+		DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */; };
+		DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C51E117DA700A03C35 /* CardListViewController.swift */; };
+		DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C71E117DA700A03C35 /* CardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,9 +31,6 @@
 
 /* Begin PBXFileReference section */
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD6E06871E114E88004A5653 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DD6E06891E114E88004A5653 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		DD6E068B1E114E88004A5653 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD6E06931E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +38,12 @@
 		DD6E069A1E114E88004A5653 /* SWDestiny TradesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDestiny TradesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestiny_TradesTests.swift; sourceTree = "<group>"; };
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DD8E8AA51E11610100C54FD9 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
+		DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
+		DDAA62C51E117DA700A03C35 /* CardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
+		DDAA62C71E117DA700A03C35 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +85,7 @@
 		DD6E06861E114E88004A5653 /* SWDestiny Trades */ = {
 			isa = PBXGroup;
 			children = (
-				DD6E06871E114E88004A5653 /* AppDelegate.swift */,
-				DD6E06891E114E88004A5653 /* FirstViewController.swift */,
-				DD6E068B1E114E88004A5653 /* SecondViewController.swift */,
+				DD8E8A9A1E11610100C54FD9 /* Classes */,
 				DD6E068D1E114E88004A5653 /* Main.storyboard */,
 				DD6E06901E114E88004A5653 /* Assets.xcassets */,
 				DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */,
@@ -97,6 +101,99 @@
 				DD6E06A01E114E88004A5653 /* Info.plist */,
 			);
 			path = "SWDestiny TradesTests";
+			sourceTree = "<group>";
+		};
+		DD8E8A9A1E11610100C54FD9 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DD8E8A9B1E11610100C54FD9 /* AppDelegate */,
+				DD8E8A9D1E11610100C54FD9 /* Cards */,
+				DD8E8AA31E11610100C54FD9 /* Second */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		DD8E8A9B1E11610100C54FD9 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		DD8E8A9D1E11610100C54FD9 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62BD1E117D7C00A03C35 /* SetsList */,
+				DDAA62BC1E117D6C00A03C35 /* CardList */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		DD8E8AA31E11610100C54FD9 /* Second */ = {
+			isa = PBXGroup;
+			children = (
+				DD8E8AA41E11610100C54FD9 /* Controller */,
+			);
+			path = Second;
+			sourceTree = "<group>";
+		};
+		DD8E8AA41E11610100C54FD9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD8E8AA51E11610100C54FD9 /* SecondViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DDAA62BC1E117D6C00A03C35 /* CardList */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62C41E117DA700A03C35 /* Controller */,
+				DDAA62C61E117DA700A03C35 /* View */,
+			);
+			path = CardList;
+			sourceTree = "<group>";
+		};
+		DDAA62BD1E117D7C00A03C35 /* SetsList */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62BE1E117D7C00A03C35 /* Controller */,
+				DDAA62C01E117D7C00A03C35 /* View */,
+			);
+			path = SetsList;
+			sourceTree = "<group>";
+		};
+		DDAA62BE1E117D7C00A03C35 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DDAA62C01E117D7C00A03C35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDAA62C41E117DA700A03C35 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62C51E117DA700A03C35 /* CardListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DDAA62C61E117DA700A03C35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA62C71E117DA700A03C35 /* CardCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,9 +301,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD6E068C1E114E88004A5653 /* SecondViewController.swift in Sources */,
-				DD6E06881E114E88004A5653 /* AppDelegate.swift in Sources */,
-				DD6E068A1E114E88004A5653 /* FirstViewController.swift in Sources */,
+				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
+				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
+				DD8E8AA91E11610100C54FD9 /* SecondViewController.swift in Sources */,
+				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
+				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
+				DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +516,7 @@
 				DD6E06A51E114E88004A5653 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD6E06A61E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny TradesTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +525,7 @@
 				DD6E06A81E114E88004A5653 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
