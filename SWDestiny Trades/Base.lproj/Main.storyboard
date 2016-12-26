@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Cards-->
+        <!--Sets List View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="SetsListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="SetsListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-6A-2eK">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SetsTableCell" id="47l-df-LYV" customClass="SetsTableCell" customModule="SWDestiny_Trades" customModuleProvider="target">
@@ -70,7 +70,7 @@
                             <constraint firstItem="uRh-6A-2eK" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="xFE-b2-uat"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Cards" image="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="2xV-Y6-gLn"/>
                     <connections>
                         <outlet property="tableView" destination="uRh-6A-2eK" id="c8G-li-qm0"/>
                         <segue destination="ZC5-E2-SXr" kind="show" identifier="ShowSetSegue" id="whF-EO-2LZ"/>
@@ -78,12 +78,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
         </scene>
         <!--Card List View Controller-->
         <scene sceneID="Dzj-gZ-iez">
             <objects>
-                <viewController id="ZC5-E2-SXr" customClass="CardListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZC5-E2-SXr" customClass="CardListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="npj-ab-sJH"/>
                         <viewControllerLayoutGuide type="bottom" id="AfK-8i-OCS"/>
@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rhV-Mm-9rU">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" rowHeight="53" id="4KR-EU-hRR" customClass="CardCell" customModule="SWDestiny_Trades" customModuleProvider="target">
@@ -154,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yb6-6f-J4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495.2" y="-321.58920539730138"/>
+            <point key="canvasLocation" x="2434.4000000000001" y="-321.58920539730138"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -207,13 +207,32 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="mrQ-Pv-hRT" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Cards-->
+        <scene sceneID="ECU-D5-qCu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrQ-Pv-hRT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Cards" image="first" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gkv-hN-R1T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="xsl-Wi-dpW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KXq-oH-BQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
     </scenes>
     <resources>
