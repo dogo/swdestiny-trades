@@ -18,32 +18,37 @@ class BaseAPIClient {
     // MARK: - RESTFull Request
     
     func GET(url: String, headers: [String: String], parameters: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            completionHandler(response)
-        }
+        Alamofire.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                completionHandler(response)
+            }
     }
     
     func POST(url: String, headers: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .post, parameters: ["":""], encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            completionHandler(response)
-        }
+        Alamofire.request(url, method: .post, parameters: ["":""], encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                completionHandler(response)
+            }
     }
     
     func PATCH(url: String, headers: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .patch, parameters: ["":""], encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            completionHandler(response)
-        }
+        Alamofire.request(url, method: .patch, parameters: ["":""], encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                completionHandler(response)
+            }
     }
     
     func PUT(url: String, headers: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .put, parameters: ["":""], encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            completionHandler(response)
-        }
+        Alamofire.request(url, method: .put, parameters: ["":""], encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                completionHandler(response)
+            }
     }
     
     func DELETE(url: String, headers: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .delete, parameters: ["":""], encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            completionHandler(response)
-        }
+        Alamofire.request(url, method: .delete, parameters: ["":""], encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                completionHandler(response)
+            }
     }
 }
