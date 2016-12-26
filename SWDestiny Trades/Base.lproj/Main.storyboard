@@ -136,6 +136,11 @@
                                                 <constraint firstItem="966-RF-DTv" firstAttribute="leading" secondItem="qWt-xr-xO3" secondAttribute="leadingMargin" constant="12" id="uLl-BC-bQY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cardAffiliationLabel" destination="TYs-jS-Fhh" id="Z0G-Wu-Cep"/>
+                                            <outlet property="cardNameLabel" destination="966-RF-DTv" id="LhM-Xr-857"/>
+                                            <outlet property="priceLabel" destination="fUf-bh-4IH" id="eW1-GX-w5F"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

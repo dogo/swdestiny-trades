@@ -10,5 +10,23 @@ import UIKit
 
 class CardCell: UITableViewCell {
 
-    //@IBOutlet weak var thumbnailView: UIImageView!
+    @IBOutlet weak var cardNameLabel: UILabel!
+    @IBOutlet weak var cardAffiliationLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    internal static func cellIdentifier() -> String {
+        return "CardCell"
+    }
+    
+    internal func configureCell(cardDTO: CardDTO) {
+        cardNameLabel.text = cardDTO.name
+        cardAffiliationLabel.text = cardDTO.affiliationName
+        priceLabel.text = ""//cardDTO.price
+    }
+    
+    override func prepareForReuse() {
+        cardNameLabel.text = nil
+        cardAffiliationLabel.text = nil
+        priceLabel.text = nil
+    }
 }

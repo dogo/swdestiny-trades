@@ -17,8 +17,8 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SetsAPIClient.retrieveSetList(successBlock: { (array: Array<SetDTO>) in
-            self.swdSets = array
+        SetsAPIClient.retrieveSetList(successBlock: { (setsArray: Array<SetDTO>) in
+            self.swdSets = setsArray
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
           print(error)

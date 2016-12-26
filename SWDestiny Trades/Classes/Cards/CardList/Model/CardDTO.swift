@@ -40,7 +40,7 @@ class CardDTO: Mappable {
     var imageUrl: String = ""
     var label: String = ""
     var cp: Int = 0
-    
+
     required init?(map: Map) {
     }
 

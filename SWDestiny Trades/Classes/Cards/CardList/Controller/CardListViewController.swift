@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import Alamofire
 
 class CardListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView?
-    var swdCards: [String] = ["Darth Vader", "Padme", "Leia Organa", "Luke Skywalker"]
+    var swdCards: [CardDTO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
+            self.swdCards = cardsArray
+            self.tableView?.reloadData()
+        }) { (error: DataResponse<Any>) in
+            print(error)
+        }
     }
 
     // MARK: - <UITableViewDelegate>
@@ -27,10 +34,11 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDataSource>
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as? CardCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.cellIdentifier(), for: indexPath) as? CardCell else {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
+        cell.configureCell(cardDTO: self.swdCards[indexPath.row])
         return cell
     }
 
