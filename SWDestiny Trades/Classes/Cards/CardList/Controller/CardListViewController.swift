@@ -32,7 +32,7 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDataSource>
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SetsTableCell", for: indexPath) as? UITableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as? CardCell else {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }

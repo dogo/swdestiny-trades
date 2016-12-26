@@ -26,15 +26,13 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDelegate>
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.row)!")
-        //self.performSegue(withIdentifier: "ShowSetSegue", sender: nil)
-        
+        self.performSegue(withIdentifier: "ShowSetSegue", sender: nil)
     }
 
     // MARK: - <UITableViewDataSource>
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SetsTableCell", for: indexPath) as? UITableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SetsTableCell", for: indexPath) as? SetsTableCell else {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
