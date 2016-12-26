@@ -2,6 +2,8 @@
 # platform :ios, '9.0'
 
 target 'SWDestiny Trades' do
+
+	use_frameworks!
   
   # Pods for SWDestiny Trades
   pod 'Kingfisher'
