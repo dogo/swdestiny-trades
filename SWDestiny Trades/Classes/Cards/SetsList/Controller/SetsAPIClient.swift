@@ -11,12 +11,12 @@ import Alamofire
 import ObjectMapper
 
 class SetsAPIClient: BaseAPIClient {
-    
+
     static let baseAPIClient = BaseAPIClient.sharedInstance
-    
+
     static func retrieveSetList(successBlock: @escaping (_ setsDTO: Array<SetDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/sets/"
-        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["" : ""], parameters: ["" : ""]) { (response: DataResponse<Any>) in
+        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
             switch response.result {
             case .success(let data):
                 successBlock(Mapper<SetDTO>().mapArray(JSONObject: data)!)
@@ -26,4 +26,3 @@ class SetsAPIClient: BaseAPIClient {
         }
     }
 }
-

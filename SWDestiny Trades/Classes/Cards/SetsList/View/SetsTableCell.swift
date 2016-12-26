@@ -9,7 +9,6 @@
 import UIKit
 
 class SetsTableCell: UITableViewCell {
-    
+
     //@IBOutlet weak var thumbnailView: UIImageView!
 }
-

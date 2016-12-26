@@ -9,7 +9,6 @@
 import UIKit
 
 class CardCell: UITableViewCell {
-    
+
     //@IBOutlet weak var thumbnailView: UIImageView!
 }
-
