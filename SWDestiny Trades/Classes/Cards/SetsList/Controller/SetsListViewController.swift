@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SetsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,6 +17,11 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SetsAPIClient.retrieveSetList(successBlock: { (array: Array<SetDTO>) in
+            print(array)
+        }) { (error: DataResponse<Any>) in
+          print(error)
+        }
     }
 
     // MARK: - <UITableViewDelegate>
