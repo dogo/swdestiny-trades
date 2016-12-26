@@ -19,8 +19,7 @@ class SetsAPIClient: BaseAPIClient {
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["" : ""], parameters: ["" : ""]) { (response: DataResponse<Any>) in
             switch response.result {
             case .success(let data):
-                //successBlock(setsDTO: Mapper<SetDTO>().mapArray(data)!)
-                print(data)
+                successBlock(Mapper<SetDTO>().mapArray(JSONObject: data)!)
             case .failure(_):
                 failureBlock(response)
             }

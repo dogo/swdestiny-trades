@@ -18,7 +18,7 @@ class BaseAPIClient {
     // MARK: - RESTFull Request
     
     func GET(url: String, headers: [String: String], parameters: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers)
             .responseJSON { response in
                 completionHandler(response)
             }
