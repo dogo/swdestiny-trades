@@ -10,5 +10,19 @@ import UIKit
 
 class SetsTableCell: UITableViewCell {
 
-    //@IBOutlet weak var thumbnailView: UIImageView!
+    @IBOutlet weak var setNameLabel: UILabel!
+    @IBOutlet weak var setIconImage: UIImageView!
+    
+    internal static func cellIdentifier() -> String {
+        return "SetsTableCell"
+    }
+    
+    internal func configureCell(setDTO: SetDTO) {
+        setNameLabel.text = setDTO.name
+    }
+    
+    override func prepareForReuse() {
+        setNameLabel.text = nil
+        setIconImage.image = nil
+    }
 }

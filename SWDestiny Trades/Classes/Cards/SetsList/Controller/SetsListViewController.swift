@@ -12,13 +12,14 @@ import Alamofire
 class SetsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView?
-    var swdSets: [String] = ["Awakenings"]
+    var swdSets: [SetDTO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SetsAPIClient.retrieveSetList(successBlock: { (array: Array<SetDTO>) in
-            print(array)
+            self.swdSets = array
+            self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
           print(error)
         }
@@ -33,10 +34,11 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDataSource>
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SetsTableCell", for: indexPath) as? SetsTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SetsTableCell.cellIdentifier(), for: indexPath) as? SetsTableCell else {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
+        cell.configureCell(setDTO: self.swdSets[indexPath.row])
         return cell
     }
 
