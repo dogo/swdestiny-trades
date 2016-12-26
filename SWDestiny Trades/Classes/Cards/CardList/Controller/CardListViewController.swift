@@ -11,7 +11,7 @@ import UIKit
 class CardListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView?
-    var swdSets: [String] = ["Awakenings"]
+    var swdSets: [String] = ["Darth Vader", "Padme", "Leia Organa", "Luke Skywalker"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
