@@ -4,10 +4,14 @@
 target 'SWDestiny Trades' do
   
   # Pods for SWDestiny Trades
+  pod 'Kingfisher'
+  pod 'Alamofire'
+  pod 'ObjectMapper'
 
   target 'SWDestiny TradesTests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'Quick'
+    pod 'Nimble'
   end
 
 end
