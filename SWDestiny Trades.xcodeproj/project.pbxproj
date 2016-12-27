@@ -13,6 +13,7 @@
 		DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CB1E11B142000D5D63 /* CardDTO.swift */; };
 		DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */; };
 		DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D11E12985B000D5D63 /* LoansViewController.swift */; };
+		DD1770D41E129B5B000D5D63 /* NewLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D31E129B5B000D5D63 /* NewLoanViewController.swift */; };
 		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
@@ -48,6 +49,7 @@
 		DD1770CB1E11B142000D5D63 /* CardDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDTO.swift; sourceTree = "<group>"; };
 		DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
 		DD1770D11E12985B000D5D63 /* LoansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansViewController.swift; sourceTree = "<group>"; };
+		DD1770D31E129B5B000D5D63 /* NewLoanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLoanViewController.swift; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				DD1770D11E12985B000D5D63 /* LoansViewController.swift */,
+				DD1770D31E129B5B000D5D63 /* NewLoanViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */,
 				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
 				DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */,
+				DD1770D41E129B5B000D5D63 /* NewLoanViewController.swift in Sources */,
 				DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,

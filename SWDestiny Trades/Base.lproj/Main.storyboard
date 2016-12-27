@@ -235,10 +235,10 @@
             </objects>
             <point key="canvasLocation" x="1688.8" y="359.37031484257875"/>
         </scene>
-        <!--View Controller-->
+        <!--New Loan View Controller-->
         <scene sceneID="HJZ-RO-GQg">
             <objects>
-                <viewController id="Vr3-wR-clj" sceneMemberID="viewController">
+                <viewController id="Vr3-wR-clj" customClass="NewLoanViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FFP-Ib-pWL"/>
                         <viewControllerLayoutGuide type="bottom" id="5Sd-lV-TXy"/>
