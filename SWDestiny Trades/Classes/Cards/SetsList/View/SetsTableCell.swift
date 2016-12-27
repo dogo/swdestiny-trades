@@ -19,6 +19,10 @@ class SetsTableCell: UITableViewCell {
 
     internal func configureCell(setDTO: SetDTO) {
         setNameLabel.text = setDTO.name
+
+        if setDTO.code.lowercased() == "aw" {
+            setIconImage.image = UIImage(named: "ic_awakenings")
+        }
     }
 
     override func prepareForReuse() {
