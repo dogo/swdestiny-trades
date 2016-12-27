@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  LoansViewController.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 26/12/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class LoansViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

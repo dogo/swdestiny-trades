@@ -12,12 +12,12 @@
 		DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */; };
 		DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CB1E11B142000D5D63 /* CardDTO.swift */; };
 		DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */; };
+		DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D11E12985B000D5D63 /* LoansViewController.swift */; };
 		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
-		DD8E8AA91E11610100C54FD9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8AA51E11610100C54FD9 /* SecondViewController.swift */; };
 		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
 		DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */; };
 		DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */; };
@@ -47,6 +47,7 @@
 		DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
 		DD1770CB1E11B142000D5D63 /* CardDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDTO.swift; sourceTree = "<group>"; };
 		DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
+		DD1770D11E12985B000D5D63 /* LoansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansViewController.swift; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestiny_TradesTests.swift; sourceTree = "<group>"; };
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DD8E8AA51E11610100C54FD9 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
 		DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
 		DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
@@ -109,6 +109,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DD1770CF1E12985B000D5D63 /* Loans */ = {
+			isa = PBXGroup;
+			children = (
+				DD1770D01E12985B000D5D63 /* Controller */,
+			);
+			path = Loans;
+			sourceTree = "<group>";
+		};
+		DD1770D01E12985B000D5D63 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD1770D11E12985B000D5D63 /* LoansViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		DD6E067B1E114E88004A5653 = {
 			isa = PBXGroup;
 			children = (
@@ -153,10 +169,10 @@
 		DD8E8A9A1E11610100C54FD9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DD9289061E11933C00FDEC48 /* Rest */,
 				DD8E8A9B1E11610100C54FD9 /* AppDelegate */,
 				DD8E8A9D1E11610100C54FD9 /* Cards */,
-				DD8E8AA31E11610100C54FD9 /* Second */,
+				DD1770CF1E12985B000D5D63 /* Loans */,
+				DD9289061E11933C00FDEC48 /* Rest */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -176,22 +192,6 @@
 				DDAA62BC1E117D6C00A03C35 /* CardList */,
 			);
 			path = Cards;
-			sourceTree = "<group>";
-		};
-		DD8E8AA31E11610100C54FD9 /* Second */ = {
-			isa = PBXGroup;
-			children = (
-				DD8E8AA41E11610100C54FD9 /* Controller */,
-			);
-			path = Second;
-			sourceTree = "<group>";
-		};
-		DD8E8AA41E11610100C54FD9 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				DD8E8AA51E11610100C54FD9 /* SecondViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		DD9289061E11933C00FDEC48 /* Rest */ = {
@@ -475,9 +475,9 @@
 				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
 				DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */,
 				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
+				DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */,
 				DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
-				DD8E8AA91E11610100C54FD9 /* SecondViewController.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
 				DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */,
