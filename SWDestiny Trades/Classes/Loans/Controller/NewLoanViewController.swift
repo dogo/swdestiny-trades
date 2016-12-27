@@ -6,4 +6,18 @@
 //  Copyright © 2016 Diogo Autilio. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class NewLoanViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    // MARK: IBActions
+    
+    @IBAction func cancelButtonTouched(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+}
