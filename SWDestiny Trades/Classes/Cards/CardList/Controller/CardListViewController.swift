@@ -20,7 +20,9 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
 
         CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
-            self.swdCards = cardsArray
+            self.swdCards = cardsArray.sorted {
+                $0.name < $1.name
+            }
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
             print(error)
