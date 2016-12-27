@@ -14,6 +14,8 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView?
     var swdCards: [CardDTO] = []
 
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +24,14 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
             print(error)
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let path = self.tableView?.indexPathForSelectedRow {
+            self.tableView?.deselectRow(at: path, animated: animated)
         }
     }
 

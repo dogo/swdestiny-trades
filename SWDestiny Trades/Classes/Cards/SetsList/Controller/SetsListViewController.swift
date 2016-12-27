@@ -13,7 +13,7 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var tableView: UITableView?
     var swdSets: [SetDTO] = []
-    
+
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
