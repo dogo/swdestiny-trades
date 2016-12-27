@@ -210,6 +210,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="4dI-MN-8QG"/>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="PKf-58-bxl"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -221,7 +225,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="People" id="UYs-tC-q50">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="O2y-Jb-i80"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="O2y-Jb-i80">
+                            <connections>
+                                <action selector="editButtonTouched:" destination="8rJ-Kc-sve" id="Drd-cj-dp8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="97X-aJ-qXL">
                             <connections>
                                 <segue destination="Vr3-wR-clj" kind="popoverPresentation" popoverAnchorBarButtonItem="97X-aJ-qXL" id="8ti-9b-Wgq">
@@ -230,6 +238,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="pJz-Qv-QG8" id="4vM-jb-uoE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
