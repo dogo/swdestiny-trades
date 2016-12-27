@@ -39,7 +39,7 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.row)!")
+        performSegue(withIdentifier: "CardDetailsSegue", sender: nil)
     }
 
     // MARK: - <UITableViewDataSource>
