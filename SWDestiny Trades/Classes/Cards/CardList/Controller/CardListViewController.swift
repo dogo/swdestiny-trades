@@ -39,7 +39,8 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "CardDetailsSegue", sender: nil)
+        let selectedCard = swdCards[sectionLetters[indexPath.section]]?[indexPath.row]
+        performSegue(withIdentifier: "CardDetailsSegue", sender: selectedCard)
     }
 
     // MARK: - <UITableViewDataSource>
@@ -63,6 +64,16 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swdCards[sectionLetters[section]]!.count
+    }
+
+    // MARK: - Segue
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CardDetailsSegue" {
+            if let nextViewController = segue.destination as? CardDetailViewController {
+                nextViewController.cardDTO = sender as? CardDTO
+            }
+        }
     }
 
     // MARK: - Split and Sort UITableView source
