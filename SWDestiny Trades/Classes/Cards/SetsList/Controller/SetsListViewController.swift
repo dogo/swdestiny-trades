@@ -65,9 +65,9 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swdSets[sectionLetters[section]]!.count
     }
-    
+
     // MARK: - Segue
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSetSegue" {
             if let nextViewController = segue.destination as? CardListViewController {

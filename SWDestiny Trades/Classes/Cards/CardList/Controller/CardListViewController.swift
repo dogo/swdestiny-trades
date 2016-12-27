@@ -12,8 +12,8 @@ import Alamofire
 class CardListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView?
-    var swdCards: [Character : [CardDTO]] = [ : ]
-    var sectionLetters: [Character] = []
+    var swdCards: [String : [CardDTO]] = [ : ]
+    var sectionLetters: [String] = []
 
     // MARK: - Life Cycle
 
@@ -66,6 +66,10 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
         return swdCards[sectionLetters[section]]!.count
     }
 
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sectionLetters
+    }
+
     // MARK: - Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -78,19 +82,19 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
 
     // MARK: - Split and Sort UITableView source
 
-    func createTableData(cardList: [CardDTO]) -> (firstLetters: [Character], source: [Character : [CardDTO]]) {
+    func createTableData(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
 
         // Build Character Set
-        var letters = Set<Character>()
+        var letters = Set<String>()
 
-        func getFirstLetter(cardDTO: CardDTO) -> Character {
-            return cardDTO.name[cardDTO.name.startIndex]
+        func getFirstLetter(cardDTO: CardDTO) -> String {
+            return String(cardDTO.name[cardDTO.name.startIndex])
         }
 
         cardList.forEach {_ = letters.insert(getFirstLetter(cardDTO: $0)) }
 
         // Build tableSource array
-        var tableViewSource = [Character: [CardDTO]]()
+        var tableViewSource = [String: [CardDTO]]()
 
         for symbol in letters {
 

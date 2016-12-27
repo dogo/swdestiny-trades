@@ -20,7 +20,7 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.title = cardDTO.name
-        
+
         let url = URL(string: cardDTO.imageUrl)
         cardImageView.kf.indicatorType = .activity
         cardImageView.kf.setImage(with: url)
