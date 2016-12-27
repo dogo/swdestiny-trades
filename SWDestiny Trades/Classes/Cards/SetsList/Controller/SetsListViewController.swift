@@ -39,7 +39,8 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "ShowSetSegue", sender: nil)
+        let selectedSet = swdSets[sectionLetters[indexPath.section]]?[indexPath.row]
+        self.performSegue(withIdentifier: "ShowSetSegue", sender: selectedSet)
     }
 
     // MARK: - <UITableViewDataSource>
@@ -63,6 +64,16 @@ class SetsListViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swdSets[sectionLetters[section]]!.count
+    }
+    
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowSetSegue" {
+            if let nextViewController = segue.destination as? CardListViewController {
+                nextViewController.navigationItem.title = (sender as? SetDTO)?.name
+            }
+        }
     }
 
     // MARK: - Split and Sort UITableView source  
