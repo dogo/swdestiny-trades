@@ -483,7 +483,7 @@
         <scene sceneID="ECU-D5-qCu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrQ-Pv-hRT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cards" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Cards" image="ic_cards" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gkv-hN-R1T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -519,8 +519,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
         <image name="ic_awakenings" width="256" height="256"/>
+        <image name="ic_cards" width="33" height="33"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
