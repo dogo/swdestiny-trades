@@ -19,6 +19,8 @@
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
+		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
+		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
 		DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */; };
@@ -60,6 +62,8 @@
 		DD6E069A1E114E88004A5653 /* SWDestiny TradesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDestiny TradesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestiny_TradesTests.swift; sourceTree = "<group>"; };
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
+		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
 		DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +191,31 @@
 			path = "SWDestiny TradesTests";
 			sourceTree = "<group>";
 		};
+		DD77FCE81E13DC3F0046EFCA /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DD77FCE91E13DC3F0046EFCA /* Controller */,
+				DD77FCEB1E13DC3F0046EFCA /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		DD77FCE91E13DC3F0046EFCA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD77FCEB1E13DC3F0046EFCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DD8E8A9A1E11610100C54FD9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +223,7 @@
 				DD8E8A9D1E11610100C54FD9 /* Cards */,
 				DD1770CF1E12985B000D5D63 /* Loans */,
 				DD9289061E11933C00FDEC48 /* Rest */,
+				DD77FCE81E13DC3F0046EFCA /* Search */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -499,8 +529,10 @@
 				DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */,
 				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
 				DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */,
+				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
 				DD1770D41E129B5B000D5D63 /* NewLoanViewController.swift in Sources */,
 				DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */,
+				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,

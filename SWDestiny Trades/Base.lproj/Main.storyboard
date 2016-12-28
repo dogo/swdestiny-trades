@@ -10,6 +10,106 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Search List View Controller-->
+        <scene sceneID="qc8-QI-JK9">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BoE-F8-C2n" customClass="SearchListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v1N-n9-3aG"/>
+                        <viewControllerLayoutGuide type="bottom" id="QR8-U9-Fxr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LgO-6E-lWP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mYy-nW-KGI">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search All Cards" id="Of7-MI-dFf">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="BoE-F8-C2n" id="Fwm-ie-MVh"/>
+                                    </connections>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CardSearchCell" rowHeight="53" id="Bms-JR-e8h" customClass="CardSearchCell" customModule="SWDestiny_Trades" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="53"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bms-JR-e8h" id="tgI-Ay-BTb">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hc-lg-Kfy">
+                                                    <rect key="frame" x="20" y="8" width="87.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.33" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqD-NH-NMP">
+                                                    <rect key="frame" x="287" y="16" width="35" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Villain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E29-oc-jYz">
+                                                    <rect key="frame" x="20" y="27.5" width="38.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="E29-oc-jYz" firstAttribute="top" secondItem="9Hc-lg-Kfy" secondAttribute="bottom" id="0jR-be-RwF"/>
+                                                <constraint firstItem="E29-oc-jYz" firstAttribute="leading" secondItem="tgI-Ay-BTb" secondAttribute="leadingMargin" constant="12" id="CgP-QD-TAW"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="E29-oc-jYz" secondAttribute="bottom" id="L8i-tx-PJo"/>
+                                                <constraint firstItem="dqD-NH-NMP" firstAttribute="centerY" secondItem="tgI-Ay-BTb" secondAttribute="centerY" id="W3v-Vx-6GJ"/>
+                                                <constraint firstItem="9Hc-lg-Kfy" firstAttribute="leading" secondItem="tgI-Ay-BTb" secondAttribute="leadingMargin" constant="12" id="XSb-Wr-q9W"/>
+                                                <constraint firstItem="9Hc-lg-Kfy" firstAttribute="top" secondItem="tgI-Ay-BTb" secondAttribute="topMargin" id="hSb-RH-3xI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dqD-NH-NMP" secondAttribute="trailing" constant="12" id="rJa-M4-uS1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cardAffiliationLabel" destination="E29-oc-jYz" id="uIB-aX-7A4"/>
+                                            <outlet property="cardNameLabel" destination="9Hc-lg-Kfy" id="sTK-a9-liC"/>
+                                            <outlet property="priceLabel" destination="dqD-NH-NMP" id="IuQ-7H-Ycl"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BoE-F8-C2n" id="0aC-Qf-cj9"/>
+                                    <outlet property="delegate" destination="BoE-F8-C2n" id="KWN-mw-8uc"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mYy-nW-KGI" firstAttribute="top" secondItem="v1N-n9-3aG" secondAttribute="bottom" id="0tk-ZE-wig"/>
+                            <constraint firstItem="mYy-nW-KGI" firstAttribute="leading" secondItem="LgO-6E-lWP" secondAttribute="leading" id="7YM-ec-4cl"/>
+                            <constraint firstItem="QR8-U9-Fxr" firstAttribute="top" secondItem="mYy-nW-KGI" secondAttribute="bottom" id="MQN-cZ-V1U"/>
+                            <constraint firstAttribute="trailing" secondItem="mYy-nW-KGI" secondAttribute="trailing" id="jze-c4-Z88"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="Of7-MI-dFf" id="HrA-1b-Gvz"/>
+                        <outlet property="searchDisplayController" destination="FO0-wR-Qfc" id="MOG-Yq-Nps"/>
+                        <outlet property="tableView" destination="mYy-nW-KGI" id="DqK-rD-KIG"/>
+                        <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="xDF-eU-mGQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kZA-kl-Tfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="FO0-wR-Qfc">
+                    <connections>
+                        <outlet property="delegate" destination="BoE-F8-C2n" id="ypx-nm-7G4"/>
+                        <outlet property="searchContentsController" destination="BoE-F8-C2n" id="08M-YD-1n6"/>
+                        <outlet property="searchResultsDataSource" destination="BoE-F8-C2n" id="ejJ-XE-NLE"/>
+                        <outlet property="searchResultsDelegate" destination="BoE-F8-C2n" id="Ruw-0F-Jc8"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1695" y="-975"/>
+        </scene>
         <!--Expansions-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -74,7 +174,13 @@
                             <constraint firstItem="uRh-6A-2eK" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="xFE-b2-uat"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Expansions" id="2xV-Y6-gLn"/>
+                    <navigationItem key="navigationItem" title="Expansions" id="2xV-Y6-gLn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="OJK-N4-vPB">
+                            <connections>
+                                <segue destination="BoE-F8-C2n" kind="show" id="ozO-Zz-UV6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="uRh-6A-2eK" id="c8G-li-qm0"/>
                         <segue destination="ZC5-E2-SXr" kind="show" identifier="ShowSetSegue" id="whF-EO-2LZ"/>
@@ -404,4 +510,7 @@
         <image name="ic_awakenings" width="256" height="256"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="xDF-eU-mGQ"/>
+    </inferredMetricsTieBreakers>
 </document>
