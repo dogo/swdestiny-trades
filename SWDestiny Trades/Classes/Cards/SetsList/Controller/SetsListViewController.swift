@@ -24,8 +24,11 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTableView()
+        
         SetsAPIClient.retrieveSetList(successBlock: { (setsArray: Array<SetDTO>) in
-            self.setupTableView(with: setsArray)
+            self.tableViewDatasource?.sortAndSplitTableData(setList: setsArray)
+            self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
           print(error)
         }
@@ -39,9 +42,11 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
         }
     }
 
-    func setupTableView(with sets: [SetDTO]) {
+    func setupTableView() {
+        tableViewDatasource = SetsListDatasource()
         tableViewDelegate = SetsListDelegate(self)
-        tableViewDatasource = SetsListDatasource(sets: sets, tableView: self.tableView!, delegate: tableViewDelegate!)
+        self.tableView?.dataSource = tableViewDatasource
+        self.tableView?.delegate = tableViewDelegate
     }
 
     // MARK: - <SetsListViewDelegate>

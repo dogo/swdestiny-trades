@@ -12,16 +12,6 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
 
     var swdSets: [Character : [SetDTO]] = [ : ]
     var sectionLetters: [Character] = []
-    weak var tableView: UITableView?
-
-    required init(sets: [SetDTO], tableView: UITableView, delegate: UITableViewDelegate) {
-        super.init()
-        self.tableView = tableView
-        sortAndSplitTableData(setList: sets)
-        self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
-        self.tableView?.reloadData()
-    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SetsTableCell.cellIdentifier(), for: indexPath) as? SetsTableCell else {
@@ -85,7 +75,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
         return (sortedSymbols, tableViewSource)
     }
 
-    func sortAndSplitTableData(setList: [SetDTO]) {
+    public func sortAndSplitTableData(setList: [SetDTO]) {
         swdSets = createTableData(setList: setList).source
         sectionLetters = createTableData(setList: setList).firstLetters
     }
