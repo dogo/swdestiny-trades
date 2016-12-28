@@ -64,7 +64,7 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSetSegue" {
             if let nextViewController = segue.destination as? CardListViewController {
-                nextViewController.navigationItem.title = (sender as? SetDTO)?.name
+                nextViewController.setDTO = (sender as? SetDTO)
             }
         }
     }

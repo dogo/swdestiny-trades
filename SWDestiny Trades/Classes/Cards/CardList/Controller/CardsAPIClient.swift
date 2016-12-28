@@ -14,7 +14,19 @@ class CardsAPIClient: BaseAPIClient {
 
     static let baseAPIClient = BaseAPIClient.sharedInstance
 
-    static func retrieveCardList(successBlock: @escaping (_ setsDTO: Array<CardDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
+    static func retrieveSetCardList(setCode : String, successBlock: @escaping (_ setsDTO: Array<CardDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
+        let path = "/api/public/cards/\(setCode)"
+        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
+            switch response.result {
+            case .success(let data):
+                successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
+            case .failure(_):
+                failureBlock(response)
+            }
+        }
+    }
+    
+    static func retrieveAllCards(successBlock: @escaping (_ setsDTO: Array<CardDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/cards/"
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
             switch response.result {

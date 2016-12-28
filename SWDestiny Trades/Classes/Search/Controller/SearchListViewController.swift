@@ -26,12 +26,13 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationItem.title = "Search"
 
         self.activityIndicator.startAnimating()
-        CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
+        CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardsData = cardsArray
             self.filtered = cardsArray
             self.activityIndicator.stopAnimating()
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
+            self.activityIndicator.stopAnimating()
             print(error)
         }
     }
