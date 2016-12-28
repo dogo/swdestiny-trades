@@ -52,6 +52,7 @@ class CardListViewController: UIViewController, CardListViewDelegate {
     func setupTableView() {
         tableViewDatasource = CardListDatasource()
         tableViewDelegate = CardListDelegate(self)
+        self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
         self.tableView?.dataSource = tableViewDatasource
         self.tableView?.delegate = tableViewDelegate
     }
