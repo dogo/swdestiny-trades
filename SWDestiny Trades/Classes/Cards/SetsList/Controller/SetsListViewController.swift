@@ -25,7 +25,7 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
         super.viewDidLoad()
 
         setupTableView()
-        
+
         SetsAPIClient.retrieveSetList(successBlock: { (setsArray: Array<SetDTO>) in
             self.tableViewDatasource?.sortAndSplitTableData(setList: setsArray)
             self.tableView?.reloadData()
@@ -50,7 +50,7 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
     }
 
     // MARK: - <SetsListViewDelegate>
-    
+
     func didSelectSet(at index: IndexPath) {
         self.performSegue(withIdentifier: "ShowSetSegue", sender: tableViewDatasource?.getSWDSetAt(index: index))
     }

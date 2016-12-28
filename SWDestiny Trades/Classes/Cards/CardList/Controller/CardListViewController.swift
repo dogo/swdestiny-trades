@@ -9,19 +9,25 @@
 import UIKit
 import Alamofire
 
-class CardListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol CardListViewDelegate {
+    func didSelectSet(at index: IndexPath)
+}
+
+class CardListViewController: UIViewController, CardListViewDelegate {
 
     @IBOutlet weak var tableView: UITableView?
-    var swdCards: [String : [CardDTO]] = [ : ]
-    var sectionLetters: [String] = []
+    var tableViewDatasource: CardListDatasource?
+    var tableViewDelegate: CardListDelegate?
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTableView()
+
         CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
-            self.getTableData(cardList: cardsArray)
+            self.tableViewDatasource?.sortAndSplitTableData(cardList: cardsArray)
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
             print(error)
@@ -36,38 +42,17 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    // MARK: - <UITableViewDelegate>
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCard = swdCards[sectionLetters[indexPath.section]]?[indexPath.row]
-        performSegue(withIdentifier: "CardDetailsSegue", sender: selectedCard)
+    func setupTableView() {
+        tableViewDatasource = CardListDatasource()
+        tableViewDelegate = CardListDelegate(self)
+        self.tableView?.dataSource = tableViewDatasource
+        self.tableView?.delegate = tableViewDelegate
     }
 
-    // MARK: - <UITableViewDataSource>
+    // MARK: - <CardListViewDelegate>
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.cellIdentifier(), for: indexPath) as? CardCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
-        cell.configureCell(cardDTO: (swdCards[sectionLetters[indexPath.section]]?[indexPath.row])!)
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(sectionLetters[section])
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLetters.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return swdCards[sectionLetters[section]]!.count
-    }
-
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return sectionLetters
+    func didSelectSet(at index: IndexPath) {
+        self.performSegue(withIdentifier: "CardDetailsSegue", sender: tableViewDatasource?.getSWDCardAt(index: index))
     }
 
     // MARK: - Segue
@@ -78,47 +63,5 @@ class CardListViewController: UIViewController, UITableViewDelegate, UITableView
                 nextViewController.cardDTO = sender as? CardDTO
             }
         }
-    }
-
-    // MARK: - Split and Sort UITableView source
-
-    func createTableData(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
-
-        // Build Character Set
-        var letters = Set<String>()
-
-        func getFirstLetter(cardDTO: CardDTO) -> String {
-            return String(cardDTO.name[cardDTO.name.startIndex])
-        }
-
-        cardList.forEach {_ = letters.insert(getFirstLetter(cardDTO: $0)) }
-
-        // Build tableSource array
-        var tableViewSource = [String: [CardDTO]]()
-
-        for symbol in letters {
-
-            var cardsDTO = [CardDTO]()
-
-            for card in cardList {
-                if symbol == getFirstLetter(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
-            }
-            tableViewSource[symbol] = cardsDTO.sorted {
-                $0.name < $1.name
-            }
-        }
-
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
-    }
-
-    func getTableData(cardList: [CardDTO]) {
-        swdCards = createTableData(cardList: cardList).source
-        sectionLetters = createTableData(cardList: cardList).firstLetters
     }
 }

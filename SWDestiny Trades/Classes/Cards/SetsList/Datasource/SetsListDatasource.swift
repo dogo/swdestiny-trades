@@ -33,7 +33,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swdSets[sectionLetters[section]]!.count
     }
-    
+
     public func getSWDSetAt(index: IndexPath) -> SetDTO? {
         return (swdSets[sectionLetters[index.section]]?[index.row])
     }
