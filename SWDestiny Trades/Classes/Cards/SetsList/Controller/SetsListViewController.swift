@@ -47,8 +47,7 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
     // MARK: - <SetsListViewDelegate>
     
     func didSelectSet(at index: IndexPath) {
-        let selectedSet = tableViewDatasource?.swdSets[(tableViewDatasource?.sectionLetters[index.section])!]?[index.row]
-        self.performSegue(withIdentifier: "ShowSetSegue", sender: selectedSet)
+        self.performSegue(withIdentifier: "ShowSetSegue", sender: tableViewDatasource?.getSWDSetAt(index: index))
     }
 
     // MARK: - Segue

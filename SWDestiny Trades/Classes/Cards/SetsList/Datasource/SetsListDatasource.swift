@@ -28,7 +28,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
-        cell.configureCell(setDTO: (swdSets[sectionLetters[indexPath.section]]?[indexPath.row])!)
+        cell.configureCell(setDTO: getSWDSetAt(index: indexPath)!)
         return cell
     }
 
@@ -42,6 +42,10 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swdSets[sectionLetters[section]]!.count
+    }
+    
+    public func getSWDSetAt(index: IndexPath) -> SetDTO? {
+        return (swdSets[sectionLetters[index.section]]?[index.row])
     }
 
     // MARK: - Split and Sort UITableView source
