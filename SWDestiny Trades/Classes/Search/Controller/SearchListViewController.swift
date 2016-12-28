@@ -13,6 +13,7 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var searchBar: UISearchBar!
+    var searchIsActive: Bool = false
     var cardsData: [CardDTO] = []
     var filtered: [CardDTO] = []
 
@@ -22,9 +23,11 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
 
         self.navigationItem.title = "Search"
-        
+
         CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardsData = cardsArray
+            self.filtered = cardsArray
+            self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
             print(error)
         }
@@ -37,7 +40,7 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
             tableView?.deselectRow(at: path, animated: animated)
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.searchBar.becomeFirstResponder()
@@ -46,7 +49,7 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "CardDetailsSegue", sender: filtered[indexPath.row])
+        performSegue(withIdentifier: "CardDetailsSegue", sender: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
     }
 
     // MARK: - <UITableViewDataSource>
@@ -56,7 +59,7 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
-        cell.configureCell(cardDTO: filtered[indexPath.row])
+        cell.configureCell(cardDTO: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
         return cell
     }
 
@@ -65,17 +68,36 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filtered.count
+        if searchIsActive {
+            return filtered.count
+        }
+        return cardsData.count
     }
 
     // MARK: - <UISearchBarDelegate>
 
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchIsActive = true
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchIsActive = false
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchIsActive = false
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchIsActive = false
+    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         filtered = cardsData.filter({ (card) -> Bool in
-            let tmp: String = card.name
-            return tmp.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
+            return card.name.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
         })
+        searchIsActive = !(filtered.count == 0)
         tableView?.reloadData()
     }
 
