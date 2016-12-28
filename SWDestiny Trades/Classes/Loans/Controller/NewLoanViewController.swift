@@ -10,6 +10,9 @@ import UIKit
 
 class NewLoanViewController: UIViewController {
 
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,5 +22,8 @@ class NewLoanViewController: UIViewController {
 
     @IBAction func cancelButtonTouched(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doneButtonTouched(_ sender: Any) {
     }
 }
