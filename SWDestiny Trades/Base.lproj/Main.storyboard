@@ -82,16 +82,22 @@
                                     <outlet property="delegate" destination="BoE-F8-C2n" id="KWN-mw-8uc"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wyC-VS-klF">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mYy-nW-KGI" firstAttribute="top" secondItem="v1N-n9-3aG" secondAttribute="bottom" id="0tk-ZE-wig"/>
                             <constraint firstItem="mYy-nW-KGI" firstAttribute="leading" secondItem="LgO-6E-lWP" secondAttribute="leading" id="7YM-ec-4cl"/>
+                            <constraint firstItem="wyC-VS-klF" firstAttribute="centerX" secondItem="LgO-6E-lWP" secondAttribute="centerX" id="IQ5-Xd-eU7"/>
                             <constraint firstItem="QR8-U9-Fxr" firstAttribute="top" secondItem="mYy-nW-KGI" secondAttribute="bottom" id="MQN-cZ-V1U"/>
+                            <constraint firstItem="wyC-VS-klF" firstAttribute="centerY" secondItem="LgO-6E-lWP" secondAttribute="centerY" id="YP0-jg-TNR"/>
                             <constraint firstAttribute="trailing" secondItem="mYy-nW-KGI" secondAttribute="trailing" id="jze-c4-Z88"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="wyC-VS-klF" id="Up7-vM-CLk"/>
                         <outlet property="searchBar" destination="Of7-MI-dFf" id="HrA-1b-Gvz"/>
                         <outlet property="searchDisplayController" destination="FO0-wR-Qfc" id="MOG-Yq-Nps"/>
                         <outlet property="tableView" destination="mYy-nW-KGI" id="DqK-rD-KIG"/>
@@ -161,10 +167,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LJm-Fp-Bhr">
+                                <rect key="frame" x="177.5" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="uRh-6A-2eK" secondAttribute="bottom" id="7Np-l9-AT4"/>
+                            <constraint firstItem="LJm-Fp-Bhr" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="7VY-13-oqa"/>
+                            <constraint firstItem="LJm-Fp-Bhr" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="8dG-53-OZk"/>
                             <constraint firstItem="uRh-6A-2eK" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="ZBL-Z4-QWZ"/>
                             <constraint firstAttribute="trailing" secondItem="uRh-6A-2eK" secondAttribute="trailing" id="lIq-BR-nHg"/>
                             <constraint firstItem="uRh-6A-2eK" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="xFE-b2-uat"/>
@@ -178,6 +189,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="LJm-Fp-Bhr" id="mdA-KC-AwK"/>
                         <outlet property="tableView" destination="uRh-6A-2eK" id="c8G-li-qm0"/>
                         <segue destination="ZC5-E2-SXr" kind="show" identifier="ShowSetSegue" id="whF-EO-2LZ"/>
                     </connections>
@@ -250,6 +262,10 @@
                                     <outlet property="delegate" destination="ZC5-E2-SXr" id="dzh-VE-39j"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IGc-bH-xGB">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -260,6 +276,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="IGc-bH-xGB" id="UHg-yN-2U0"/>
                         <outlet property="tableView" destination="rhV-Mm-9rU" id="fOf-rO-ska"/>
                         <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="j9I-dZ-cMs"/>
                     </connections>

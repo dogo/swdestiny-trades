@@ -15,6 +15,7 @@ protocol SetsListViewDelegate {
 
 class SetsListViewController: UIViewController, SetsListViewDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView?
     var tableViewDatasource: SetsListDatasource?
     var tableViewDelegate: SetsListDelegate?
@@ -26,11 +27,14 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
 
         setupTableView()
 
+        activityIndicator.startAnimating()
         SetsAPIClient.retrieveSetList(successBlock: { (setsArray: Array<SetDTO>) in
             self.tableViewDatasource?.sortAndSplitTableData(setList: setsArray)
+            self.activityIndicator.stopAnimating()
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
-          print(error)
+            self.activityIndicator.stopAnimating()
+            print(error)
         }
     }
 

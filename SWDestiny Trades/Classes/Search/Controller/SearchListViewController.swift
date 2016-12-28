@@ -11,6 +11,7 @@ import Alamofire
 
 class SearchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var searchBar: UISearchBar!
     var searchIsActive: Bool = false
@@ -24,9 +25,11 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
 
         self.navigationItem.title = "Search"
 
+        self.activityIndicator.startAnimating()
         CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardsData = cardsArray
             self.filtered = cardsArray
+            self.activityIndicator.stopAnimating()
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
             print(error)

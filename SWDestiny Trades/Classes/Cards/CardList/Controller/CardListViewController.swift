@@ -15,6 +15,7 @@ protocol CardListViewDelegate {
 
 class CardListViewController: UIViewController, CardListViewDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView?
     var tableViewDatasource: CardListDatasource?
     var tableViewDelegate: CardListDelegate?
@@ -26,8 +27,10 @@ class CardListViewController: UIViewController, CardListViewDelegate {
 
         setupTableView()
 
+        activityIndicator.startAnimating()
         CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
             self.tableViewDatasource?.sortAndSplitTableData(cardList: cardsArray)
+            self.activityIndicator.stopAnimating()
             self.tableView?.reloadData()
         }) { (error: DataResponse<Any>) in
             print(error)
