@@ -700,6 +700,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DB84A888BE92ACC6F1E9E4E /* Pods-SWDestiny Trades.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
 				INFOPLIST_FILE = "SWDestiny Trades/Info.plist";
@@ -714,6 +715,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1CBA029A8D87653D1E2BD9EE /* Pods-SWDestiny Trades.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
 				INFOPLIST_FILE = "SWDestiny Trades/Info.plist";
