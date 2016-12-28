@@ -21,6 +21,8 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "Search"
+        
         CardsAPIClient.retrieveCardList(successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardsData = cardsArray
         }) { (error: DataResponse<Any>) in
@@ -34,6 +36,11 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
         if let path = tableView?.indexPathForSelectedRow {
             tableView?.deselectRow(at: path, animated: animated)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.searchBar.becomeFirstResponder()
     }
 
     // MARK: - <UITableViewDelegate>
