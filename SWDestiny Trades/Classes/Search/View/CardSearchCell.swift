@@ -20,7 +20,7 @@ class CardSearchCell: UITableViewCell {
 
     internal func configureCell(cardDTO: CardDTO) {
         cardNameLabel.text = cardDTO.name
-        cardAffiliationLabel.text = cardDTO.affiliationName
+        cardAffiliationLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
         priceLabel.text = ""//cardDTO.price
     }
 
