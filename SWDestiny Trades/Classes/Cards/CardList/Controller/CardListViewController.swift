@@ -25,7 +25,7 @@ class CardListViewController: UIViewController, CardListViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = setDTO?.name
 
         setupTableView()
