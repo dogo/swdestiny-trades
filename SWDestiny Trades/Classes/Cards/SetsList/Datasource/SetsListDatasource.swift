@@ -10,8 +10,8 @@ import UIKit
 
 class SetsListDatasource: NSObject, UITableViewDataSource {
 
-    var swdSets: [Character : [SetDTO]] = [ : ]
-    var sectionLetters: [Character] = []
+    private var swdSets: [Character : [SetDTO]] = [ : ]
+    private var sectionLetters: [Character] = []
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SetsTableCell.cellIdentifier(), for: indexPath) as? SetsTableCell else {
@@ -83,7 +83,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
 
 class SetsListDelegate: NSObject, UITableViewDelegate {
 
-    let delegate: SetsListViewDelegate
+    private let delegate: SetsListViewDelegate
 
     init(_ delegate: SetsListViewDelegate) {
         self.delegate = delegate
