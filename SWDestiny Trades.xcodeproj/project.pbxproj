@@ -260,8 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				DD1770D51E12AF5A000D5D63 /* CardDetail */,
-				DDAA62BD1E117D7C00A03C35 /* SetsList */,
 				DDAA62BC1E117D6C00A03C35 /* CardList */,
+				DDAA62BD1E117D7C00A03C35 /* SetsList */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -277,9 +277,9 @@
 		DDAA62BC1E117D6C00A03C35 /* CardList */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA62C41E117DA700A03C35 /* Controller */,
 				DD77FCF21E14237F0046EFCA /* Datasource */,
 				DD1770CA1E11B142000D5D63 /* Model */,
-				DDAA62C41E117DA700A03C35 /* Controller */,
 				DDAA62C61E117DA700A03C35 /* View */,
 			);
 			path = CardList;
@@ -288,9 +288,9 @@
 		DDAA62BD1E117D7C00A03C35 /* SetsList */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA62BE1E117D7C00A03C35 /* Controller */,
 				DD77FCEF1E140E990046EFCA /* Datasource */,
 				DD1770C51E119406000D5D63 /* Model */,
-				DDAA62BE1E117D7C00A03C35 /* Controller */,
 				DDAA62C01E117D7C00A03C35 /* View */,
 			);
 			path = SetsList;
