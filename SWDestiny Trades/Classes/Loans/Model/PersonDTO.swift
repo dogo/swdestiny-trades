@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class LoanDTO: Object {
-    let card: CardDTO? = nil
+    var card: CardDTO? = nil
     dynamic var hasLentMe = false
 }
 
