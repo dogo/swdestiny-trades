@@ -13,11 +13,11 @@ class LoansListDatasource: NSObject, UITableViewDataSource {
     private var names: [String] = []
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoansCell", for: indexPath) as? UITableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LoanCell.cellIdentifier(), for: indexPath) as? LoanCell else {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
-        //cell.configureCell(setDTO: (swdSets[sectionLetters[indexPath.section]]?[indexPath.row])!)
+        cell.configureCell(cardDTO: names[indexPath.row])
         return cell
     }
     
