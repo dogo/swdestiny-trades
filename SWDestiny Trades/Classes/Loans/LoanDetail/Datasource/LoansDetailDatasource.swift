@@ -18,9 +18,9 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         super.init()
 
         if loanList.count > 0 {
-            let lentMe = loanList.filter("hasLentMe == true")
+            let jfke = Array(loanList)
             let borrowedList = loanList.filter("hasLentMe == false")
-            print("ds")
+            print(jfke)
         }
 
         //self.tableView?.reloadData()

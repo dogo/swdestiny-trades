@@ -23,7 +23,7 @@ class NewLoanViewController: UIViewController {
         
         CardsAPIClient.retrieveCard(successBlock: { (card: CardDTO) in
             
-            self.person.name = "panda"
+            self.person.name = "dsd"
             self.person.lastName = "lele"
             
             let ds = LoanDTO()
