@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		6EEB8E59A7CCF724CAD4D6C3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */; };
-		DD1725841E1535BC001F7C4A /* LoansListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1725831E1535BC001F7C4A /* LoansListDatasource.swift */; };
-		DD1725871E1539B0001F7C4A /* LoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1725861E1539B0001F7C4A /* LoanCell.swift */; };
 		DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C61E119406000D5D63 /* SetDTO.swift */; };
 		DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */; };
 		DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CB1E11B142000D5D63 /* CardDTO.swift */; };
 		DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */; };
-		DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D11E12985B000D5D63 /* LoansViewController.swift */; };
-		DD1770D41E129B5B000D5D63 /* NewLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D31E129B5B000D5D63 /* NewLoanViewController.swift */; };
 		DD1770D81E12AF5A000D5D63 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D71E12AF5A000D5D63 /* CardDetailViewController.swift */; };
-		DD2F273E1E15488C0044437D /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F273D1E15488C0044437D /* PersonDTO.swift */; };
+		DD2F274D1E1571050044437D /* LoansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F27451E1571050044437D /* LoansViewController.swift */; };
+		DD2F274E1E1571050044437D /* NewLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F27461E1571050044437D /* NewLoanViewController.swift */; };
+		DD2F274F1E1571050044437D /* LoansListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F27481E1571050044437D /* LoansListDatasource.swift */; };
+		DD2F27501E1571050044437D /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F274A1E1571050044437D /* PersonDTO.swift */; };
+		DD2F27511E1571050044437D /* LoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F274C1E1571050044437D /* LoanCell.swift */; };
 		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
@@ -52,16 +52,16 @@
 		552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6923C8546BAAAC67833D4293 /* Pods-SWDestiny TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.release.xcconfig"; sourceTree = "<group>"; };
 		8901A0001FC742571251CA26 /* Pods-SWDestiny TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		DD1725831E1535BC001F7C4A /* LoansListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansListDatasource.swift; sourceTree = "<group>"; };
-		DD1725861E1539B0001F7C4A /* LoanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanCell.swift; sourceTree = "<group>"; };
 		DD1770C61E119406000D5D63 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
 		DD1770CB1E11B142000D5D63 /* CardDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDTO.swift; sourceTree = "<group>"; };
 		DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
-		DD1770D11E12985B000D5D63 /* LoansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansViewController.swift; sourceTree = "<group>"; };
-		DD1770D31E129B5B000D5D63 /* NewLoanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLoanViewController.swift; sourceTree = "<group>"; };
 		DD1770D71E12AF5A000D5D63 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
-		DD2F273D1E15488C0044437D /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
+		DD2F27451E1571050044437D /* LoansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansViewController.swift; sourceTree = "<group>"; };
+		DD2F27461E1571050044437D /* NewLoanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewLoanViewController.swift; sourceTree = "<group>"; };
+		DD2F27481E1571050044437D /* LoansListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansListDatasource.swift; sourceTree = "<group>"; };
+		DD2F274A1E1571050044437D /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
+		DD2F274C1E1571050044437D /* LoanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanCell.swift; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,22 +111,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DD1725821E153589001F7C4A /* Datasource */ = {
-			isa = PBXGroup;
-			children = (
-				DD1725831E1535BC001F7C4A /* LoansListDatasource.swift */,
-			);
-			path = Datasource;
-			sourceTree = "<group>";
-		};
-		DD1725851E1539B0001F7C4A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				DD1725861E1539B0001F7C4A /* LoanCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		DD1770C51E119406000D5D63 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,21 +130,10 @@
 		DD1770CF1E12985B000D5D63 /* Loans */ = {
 			isa = PBXGroup;
 			children = (
-				DD1770D01E12985B000D5D63 /* Controller */,
-				DD1725821E153589001F7C4A /* Datasource */,
-				DD2F273C1E15483F0044437D /* Model */,
-				DD1725851E1539B0001F7C4A /* View */,
+				DD2F273F1E1571050044437D /* LoanDetail */,
+				DD2F27431E1571050044437D /* LoansList */,
 			);
 			path = Loans;
-			sourceTree = "<group>";
-		};
-		DD1770D01E12985B000D5D63 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				DD1770D11E12985B000D5D63 /* LoansViewController.swift */,
-				DD1770D31E129B5B000D5D63 /* NewLoanViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		DD1770D51E12AF5A000D5D63 /* CardDetail */ = {
@@ -179,12 +152,79 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		DD2F273C1E15483F0044437D /* Model */ = {
+		DD2F273F1E1571050044437D /* LoanDetail */ = {
 			isa = PBXGroup;
 			children = (
-				DD2F273D1E15488C0044437D /* PersonDTO.swift */,
+				DD2F27401E1571050044437D /* Controller */,
+				DD2F27411E1571050044437D /* Datasource */,
+				DD2F27421E1571050044437D /* View */,
+			);
+			path = LoanDetail;
+			sourceTree = "<group>";
+		};
+		DD2F27401E1571050044437D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD2F27411E1571050044437D /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		DD2F27421E1571050044437D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DD2F27431E1571050044437D /* LoansList */ = {
+			isa = PBXGroup;
+			children = (
+				DD2F27441E1571050044437D /* Controller */,
+				DD2F27471E1571050044437D /* Datasource */,
+				DD2F27491E1571050044437D /* Model */,
+				DD2F274B1E1571050044437D /* View */,
+			);
+			path = LoansList;
+			sourceTree = "<group>";
+		};
+		DD2F27441E1571050044437D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD2F27451E1571050044437D /* LoansViewController.swift */,
+				DD2F27461E1571050044437D /* NewLoanViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD2F27471E1571050044437D /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				DD2F27481E1571050044437D /* LoansListDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		DD2F27491E1571050044437D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD2F274A1E1571050044437D /* PersonDTO.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DD2F274B1E1571050044437D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD2F274C1E1571050044437D /* LoanCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DD6E067B1E114E88004A5653 = {
@@ -578,25 +618,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD2F274F1E1571050044437D /* LoansListDatasource.swift in Sources */,
+				DD2F274D1E1571050044437D /* LoansViewController.swift in Sources */,
 				DD1770D81E12AF5A000D5D63 /* CardDetailViewController.swift in Sources */,
 				DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */,
 				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
 				DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */,
 				DD77FCF41E14237F0046EFCA /* CardListDatasource.swift in Sources */,
-				DD1725871E1539B0001F7C4A /* LoanCell.swift in Sources */,
 				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
-				DD1770D21E12985B000D5D63 /* LoansViewController.swift in Sources */,
-				DD2F273E1E15488C0044437D /* PersonDTO.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
-				DD1770D41E129B5B000D5D63 /* NewLoanViewController.swift in Sources */,
 				DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */,
 				DD77FCF11E140ED10046EFCA /* SetsListDatasource.swift in Sources */,
+				DD2F27501E1571050044437D /* PersonDTO.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
+				DD2F274E1E1571050044437D /* NewLoanViewController.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
+				DD2F27511E1571050044437D /* LoanCell.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
 				DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */,
-				DD1725841E1535BC001F7C4A /* LoansListDatasource.swift in Sources */,
 				DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
