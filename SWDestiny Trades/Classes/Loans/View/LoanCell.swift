@@ -19,7 +19,7 @@ class LoanCell: UITableViewCell {
     }
 
     internal func configureCell(personDTO: PersonDTO) {
-        personNameLabel.text = personDTO.name
+        personNameLabel.text = "\(personDTO.name) \(personDTO.lastName)"
         loanStatusLabel.text = getLoanState(loans: personDTO.loans)
     }
     
