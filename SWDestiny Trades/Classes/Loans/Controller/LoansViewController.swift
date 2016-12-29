@@ -21,10 +21,10 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupTableView()
     }
-    
+
     func setupTableView() {
         tableViewDatasource = LoansListDatasource()
         tableViewDelegate = LoansListDelegate(self)
@@ -47,19 +47,18 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
             navigationItem.leftBarButtonItem?.style = .done
         }
     }
-    
+
     internal func insertNew(person: String) {
         tableViewDatasource?.insert(person: person)
         tableView?.reloadData()
     }
-    
+
     internal func didSelectSet(at: IndexPath) {
-        
+
     }
 
-    
     // MARK: - Segue
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewLoanSegue" {
             if let nextViewController = segue.destination as? NewLoanViewController {

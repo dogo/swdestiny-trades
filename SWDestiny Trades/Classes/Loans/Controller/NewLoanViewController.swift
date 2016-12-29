@@ -13,7 +13,7 @@ class NewLoanViewController: UIViewController {
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     var delegate: LoansListViewDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,7 +24,7 @@ class NewLoanViewController: UIViewController {
     @IBAction func cancelButtonTouched(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func doneButtonTouched(_ sender: Any) {
         if !firstNameTextField.text!.isEmpty {
             delegate?.insertNew(person: firstNameTextField.text!)
