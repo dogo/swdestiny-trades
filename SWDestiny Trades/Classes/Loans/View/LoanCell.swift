@@ -17,13 +17,13 @@ class LoanCell: UITableViewCell {
         return "LoanCell"
     }
 
-    internal func configureCell(cardDTO: String) {
-        personNameLabel.text = cardDTO
-        //loanStatusLabel.text = cardDTO.affiliationName
+    internal func configureCell(personDTO: PersonDTO) {
+        personNameLabel.text = personDTO.name
+        loanStatusLabel.text = personDTO.lastName
     }
 
     override func prepareForReuse() {
         personNameLabel.text = nil
-        //loanStatusLabel.text = nil
+        loanStatusLabel.text = nil
     }
 }

@@ -7,23 +7,28 @@
 //
 
 import UIKit
+import RealmSwift
 
 class LoansListDatasource: NSObject, UITableViewDataSource {
 
-    private var names: [String] = []
+    private var persons: [PersonDTO] = []
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LoanCell.cellIdentifier(), for: indexPath) as? LoanCell else {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
-        cell.configureCell(cardDTO: names[indexPath.row])
+        cell.configureCell(personDTO: persons[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            names.remove(at: indexPath.row)
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(persons[indexPath.row])
+                persons.remove(at: indexPath.row)
+            }
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
@@ -40,11 +45,19 @@ class LoansListDatasource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return persons.count
     }
 
-    public func insert(person: String) {
-        names.append(person)
+    public func insert(personArray: [PersonDTO]) {
+        persons = personArray
+    }
+
+    public func insert(person: PersonDTO) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(person)
+            persons.append(person)
+        }
     }
 }
 

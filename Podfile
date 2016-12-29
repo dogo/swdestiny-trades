@@ -9,7 +9,8 @@ target 'SWDestiny Trades' do
   pod 'Kingfisher'
   pod 'Alamofire'
   pod 'ObjectMapper'
-  pod "TextFieldEffects"
+  pod 'TextFieldEffects'
+  pod 'RealmSwift'
 
   target 'SWDestiny TradesTests' do
     inherit! :search_paths

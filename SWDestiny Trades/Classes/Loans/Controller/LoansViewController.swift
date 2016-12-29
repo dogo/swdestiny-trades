@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol LoansListViewDelegate {
-    func insertNew(person: String)
+    func insertNew(person: PersonDTO)
     func didSelectSet(at: IndexPath)
 }
 
@@ -23,6 +24,15 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
         super.viewDidLoad()
 
         setupTableView()
+        loadDataFromRealm()
+    }
+
+    func loadDataFromRealm() {
+        let realm = try! Realm()
+        let persons = Array(realm.objects(PersonDTO.self))
+        print(persons)
+        tableViewDatasource?.insert(personArray: persons)
+        tableView?.reloadData()
     }
 
     func setupTableView() {
@@ -48,7 +58,7 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
         }
     }
 
-    internal func insertNew(person: String) {
+    internal func insertNew(person: PersonDTO) {
         tableViewDatasource?.insert(person: person)
         tableView?.reloadData()
     }

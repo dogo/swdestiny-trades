@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewLoanViewController: UIViewController {
 
@@ -27,7 +28,10 @@ class NewLoanViewController: UIViewController {
 
     @IBAction func doneButtonTouched(_ sender: Any) {
         if !firstNameTextField.text!.isEmpty {
-            delegate?.insertNew(person: firstNameTextField.text!)
+            let person = PersonDTO()
+            person.name = firstNameTextField.text!
+            person.lastName = lastNameTextField.text!
+            delegate?.insertNew(person: person)
         }
         dismiss(animated: true, completion: nil)
     }
