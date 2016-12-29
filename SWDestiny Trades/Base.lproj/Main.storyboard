@@ -544,7 +544,7 @@
         <scene sceneID="3z6-M7-1Th">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BuU-2p-M4w" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Loans" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Loans" image="ic_loans" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="L9l-i9-a1X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -566,7 +566,7 @@
         <image name="ic_awakenings" width="256" height="256"/>
         <image name="ic_cards" width="33" height="33"/>
         <image name="ic_cards_filled" width="33" height="33"/>
-        <image name="second" width="30" height="30"/>
+        <image name="ic_loans" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="j9I-dZ-cMs"/>
