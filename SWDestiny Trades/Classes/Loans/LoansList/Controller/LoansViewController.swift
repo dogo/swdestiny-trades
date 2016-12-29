@@ -27,6 +27,14 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
         loadDataFromRealm()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if let path = tableView?.indexPathForSelectedRow {
+            tableView?.deselectRow(at: path, animated: animated)
+        }
+    }
+
     func loadDataFromRealm() {
         let realm = try! Realm()
         let persons = Array(realm.objects(PersonDTO.self))
@@ -64,7 +72,7 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
     }
 
     internal func didSelectSet(at: IndexPath) {
-
+        performSegue(withIdentifier: "LoanDetailSegue", sender: nil)
     }
 
     // MARK: - Segue

@@ -22,9 +22,9 @@ class LoanCell: UITableViewCell {
         personNameLabel.text = "\(personDTO.name) \(personDTO.lastName)"
         loanStatusLabel.text = getLoanState(loans: personDTO.loans)
     }
-    
+
     private func getLoanState(loans: List<LoanDTO>) -> String {
-        
+
         var loanState = "No loans"
         if loans.count > 0 {
             let lentMeCount = loans.filter("hasLentMe == true").count
