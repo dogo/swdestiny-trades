@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LoansViewDelegate {
-    func insertNew(person: Any)
+    func insertNew(person: String)
 }
 
 class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoansViewDelegate {
@@ -37,8 +37,8 @@ class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    internal func insertNew(person: Any) {
-        names.append("Panda lele lalala")
+    internal func insertNew(person: String) {
+        names.append(person)
         tableView?.reloadData()
     }
     

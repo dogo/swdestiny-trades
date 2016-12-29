@@ -26,7 +26,9 @@ class NewLoanViewController: UIViewController {
     }
     
     @IBAction func doneButtonTouched(_ sender: Any) {
-        delegate?.insertNew(person: "ds")
+        if !firstNameTextField.text!.isEmpty {
+            delegate?.insertNew(person: firstNameTextField.text!)
+        }
         dismiss(animated: true, completion: nil)
     }
 }
