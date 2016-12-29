@@ -12,6 +12,7 @@ class NewLoanViewController: UIViewController {
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
+    var delegate: LoansViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,5 +26,7 @@ class NewLoanViewController: UIViewController {
     }
     
     @IBAction func doneButtonTouched(_ sender: Any) {
+        delegate?.insertNew(person: "ds")
+        dismiss(animated: true, completion: nil)
     }
 }

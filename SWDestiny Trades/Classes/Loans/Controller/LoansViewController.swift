@@ -8,14 +8,17 @@
 
 import UIKit
 
-class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol LoansViewDelegate {
+    func insertNew(person: Any)
+}
+
+class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoansViewDelegate {
 
     @IBOutlet weak var tableView: UITableView?
     var names: [String] = ["Panda lele lalala"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     // MARK: IBActions
@@ -31,6 +34,21 @@ class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDat
             tableView?.setEditing(true, animated: true)
             navigationItem.leftBarButtonItem?.title = "Done"
             navigationItem.leftBarButtonItem?.style = .done
+        }
+    }
+    
+    internal func insertNew(person: Any) {
+        names.append("Panda lele lalala")
+        tableView?.reloadData()
+    }
+    
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NewLoanSegue" {
+            if let nextViewController = segue.destination as? NewLoanViewController {
+                nextViewController.delegate = self
+            }
         }
     }
 

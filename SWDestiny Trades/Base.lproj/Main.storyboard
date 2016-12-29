@@ -38,7 +38,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bms-JR-e8h" id="tgI-Ay-BTb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hc-lg-Kfy">
@@ -136,7 +136,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="47l-df-LYV" id="F9W-33-jlt">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_awakenings" translatesAutoresizingMaskIntoConstraints="NO" id="Okp-Wg-UoC">
@@ -218,7 +218,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4KR-EU-hRR" id="qWt-xr-xO3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="966-RF-DTv">
@@ -337,7 +337,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eRS-UF-VET" id="q3P-cg-oxb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mr Robot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5j-Yc-qf9">
@@ -384,7 +384,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="97X-aJ-qXL">
                             <connections>
-                                <segue destination="Vr3-wR-clj" kind="popoverPresentation" popoverAnchorBarButtonItem="97X-aJ-qXL" id="8ti-9b-Wgq">
+                                <segue destination="Vr3-wR-clj" kind="popoverPresentation" identifier="NewLoanSegue" popoverAnchorBarButtonItem="97X-aJ-qXL" id="8ti-9b-Wgq">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -396,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688.8" y="359.37031484257875"/>
+            <point key="canvasLocation" x="1689" y="419"/>
         </scene>
         <!--New Loan View Controller-->
         <scene sceneID="HJZ-RO-GQg">
@@ -432,35 +432,49 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFb-GK-pPA">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgv-U3-s1s">
-                                        <rect key="frame" x="0.0" y="46" width="375" height="35"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgv-U3-s1s" customClass="AkiraTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="12" y="46" width="351" height="56"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="k2R-3q-Blg"/>
+                                            <constraint firstAttribute="height" constant="56" id="k2R-3q-Blg"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MOl-gd-dEl">
-                                        <rect key="frame" x="0.0" y="83" width="375" height="35"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MOl-gd-dEl" customClass="AkiraTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="12" y="117" width="351" height="56"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="FZB-Ic-xQU"/>
+                                            <constraint firstAttribute="height" constant="56" id="FZB-Ic-xQU"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="rgv-U3-s1s" secondAttribute="trailing" id="1Xq-aP-1oL"/>
-                                    <constraint firstItem="MOl-gd-dEl" firstAttribute="leading" secondItem="QFb-GK-pPA" secondAttribute="leading" id="36r-gt-zg5"/>
+                                    <constraint firstAttribute="trailing" secondItem="rgv-U3-s1s" secondAttribute="trailing" constant="12" id="1Xq-aP-1oL"/>
+                                    <constraint firstItem="MOl-gd-dEl" firstAttribute="leading" secondItem="QFb-GK-pPA" secondAttribute="leading" constant="12" id="36r-gt-zg5"/>
                                     <constraint firstItem="rgv-U3-s1s" firstAttribute="top" secondItem="QFb-GK-pPA" secondAttribute="top" constant="46" id="3GO-hu-9mh"/>
-                                    <constraint firstItem="rgv-U3-s1s" firstAttribute="leading" secondItem="QFb-GK-pPA" secondAttribute="leading" id="DfJ-gG-FZj"/>
-                                    <constraint firstItem="MOl-gd-dEl" firstAttribute="top" secondItem="rgv-U3-s1s" secondAttribute="bottom" constant="2" id="FtI-UK-MKB"/>
-                                    <constraint firstAttribute="trailing" secondItem="MOl-gd-dEl" secondAttribute="trailing" id="vNb-kw-DHQ"/>
+                                    <constraint firstItem="rgv-U3-s1s" firstAttribute="leading" secondItem="QFb-GK-pPA" secondAttribute="leading" constant="12" id="DfJ-gG-FZj"/>
+                                    <constraint firstItem="MOl-gd-dEl" firstAttribute="top" secondItem="rgv-U3-s1s" secondAttribute="bottom" constant="15" id="FtI-UK-MKB"/>
+                                    <constraint firstAttribute="trailing" secondItem="MOl-gd-dEl" secondAttribute="trailing" constant="12" id="vNb-kw-DHQ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -482,7 +496,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0q-Q0-XAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2484" y="359"/>
+            <point key="canvasLocation" x="2434" y="419"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -555,6 +569,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xDF-eU-mGQ"/>
+        <segue reference="j9I-dZ-cMs"/>
     </inferredMetricsTieBreakers>
 </document>
