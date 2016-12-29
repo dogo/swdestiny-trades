@@ -59,7 +59,7 @@ class LoansListDatasource: NSObject, UITableViewDataSource {
     public func insert(person: PersonDTO) {
         let realm = try! Realm()
         try! realm.write {
-            realm.add(person)
+            realm.add(person, update: true)
             persons.append(person)
         }
     }
