@@ -32,6 +32,9 @@
 		DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */; };
 		DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C51E117DA700A03C35 /* CardListViewController.swift */; };
 		DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C71E117DA700A03C35 /* CardCell.swift */; };
+		DDDB56881E158BFD00B9DCE6 /* LoansDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB56871E158BFC00B9DCE6 /* LoansDetailViewController.swift */; };
+		DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB56891E158F9800B9DCE6 /* LoansDetailDatasource.swift */; };
+		DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB568B1E159F8F00B9DCE6 /* LoanDetailCell.swift */; };
 		F728BD09DF3536056693B01E /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +83,9 @@
 		DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DDAA62C51E117DA700A03C35 /* CardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
 		DDAA62C71E117DA700A03C35 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		DDDB56871E158BFC00B9DCE6 /* LoansDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansDetailViewController.swift; sourceTree = "<group>"; };
+		DDDB56891E158F9800B9DCE6 /* LoansDetailDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansDetailDatasource.swift; sourceTree = "<group>"; };
+		DDDB568B1E159F8F00B9DCE6 /* LoanDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanDetailCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,7 @@
 		DD2F27401E1571050044437D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DDDB56871E158BFC00B9DCE6 /* LoansDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -172,6 +179,7 @@
 		DD2F27411E1571050044437D /* Datasource */ = {
 			isa = PBXGroup;
 			children = (
+				DDDB56891E158F9800B9DCE6 /* LoansDetailDatasource.swift */,
 			);
 			path = Datasource;
 			sourceTree = "<group>";
@@ -179,6 +187,7 @@
 		DD2F27421E1571050044437D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DDDB568B1E159F8F00B9DCE6 /* LoanDetailCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -625,6 +634,7 @@
 				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
 				DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */,
 				DD77FCF41E14237F0046EFCA /* CardListDatasource.swift in Sources */,
+				DDDB56881E158BFD00B9DCE6 /* LoansDetailViewController.swift in Sources */,
 				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
 				DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */,
@@ -635,7 +645,9 @@
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
 				DD2F27511E1571050044437D /* LoanCell.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
+				DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
+				DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */,
 				DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */,
 				DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */,
 			);

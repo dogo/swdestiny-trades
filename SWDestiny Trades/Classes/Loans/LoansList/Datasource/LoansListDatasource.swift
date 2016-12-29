@@ -48,6 +48,10 @@ class LoansListDatasource: NSObject, UITableViewDataSource {
         return persons.count
     }
 
+    public func getPersonAt(index: IndexPath) -> PersonDTO? {
+        return persons[index.row]
+    }
+
     public func insert(personArray: [PersonDTO]) {
         persons = personArray
     }

@@ -71,8 +71,8 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
         tableView?.reloadData()
     }
 
-    internal func didSelectSet(at: IndexPath) {
-        performSegue(withIdentifier: "LoanDetailSegue", sender: nil)
+    internal func didSelectSet(at index: IndexPath) {
+        performSegue(withIdentifier: "LoanDetailSegue", sender: tableViewDatasource?.getPersonAt(index: index))
     }
 
     // MARK: - Segue
@@ -81,6 +81,10 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
         if segue.identifier == "NewLoanSegue" {
             if let nextViewController = segue.destination as? NewLoanViewController {
                 nextViewController.delegate = self
+            }
+        } else if segue.identifier == "LoanDetailSegue" {
+            if let nextViewController = segue.destination as? LoansDetailViewController {
+                nextViewController.personDTO = (sender as? PersonDTO)
             }
         }
     }

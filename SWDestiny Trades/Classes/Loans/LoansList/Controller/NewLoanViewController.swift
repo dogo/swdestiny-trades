@@ -31,6 +31,10 @@ class NewLoanViewController: UIViewController {
             let person = PersonDTO()
             person.name = firstNameTextField.text!
             person.lastName = lastNameTextField.text!
+
+            let ds = LoanDTO()
+            ds.hasLentMe =  true
+            person.loans.append(ds)
             delegate?.insertNew(person: person)
         }
         dismiss(animated: true, completion: nil)
