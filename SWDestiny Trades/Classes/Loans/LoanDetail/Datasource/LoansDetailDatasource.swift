@@ -32,7 +32,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             fatalError("Wrong Cell Type")
         }
         if indexPath.row == lentMe.count {
-            cell.textLabel?.text = "Add new row"
+            cell.textLabel?.text = "Add new card..."
             cell.textLabel?.textColor = UIColor.darkGray
         } else {
             cell.configureCell(cardDTO: lentMe[indexPath.row])
