@@ -8,17 +8,28 @@
 
 import UIKit
 
-protocol LoansViewDelegate {
+protocol LoansListViewDelegate {
     func insertNew(person: String)
+    func didSelectSet(at: IndexPath)
 }
 
-class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoansViewDelegate {
+class LoansViewController: UIViewController, LoansListViewDelegate {
 
     @IBOutlet weak var tableView: UITableView?
-    var names: [String] = ["Panda lele lalala"]
+    var tableViewDatasource: LoansListDatasource?
+    var tableViewDelegate: LoansListDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupTableView()
+    }
+    
+    func setupTableView() {
+        tableViewDatasource = LoansListDatasource()
+        tableViewDelegate = LoansListDelegate(self)
+        self.tableView?.dataSource = tableViewDatasource
+        self.tableView?.delegate = tableViewDelegate
     }
 
     // MARK: IBActions
@@ -38,9 +49,14 @@ class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     internal func insertNew(person: String) {
-        names.append(person)
+        tableViewDatasource?.insert(person: person)
         tableView?.reloadData()
     }
+    
+    internal func didSelectSet(at: IndexPath) {
+        
+    }
+
     
     // MARK: - Segue
     
@@ -50,38 +66,5 @@ class LoansViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 nextViewController.delegate = self
             }
         }
-    }
-
-    // MARK: - <UITableViewDataSource>
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LoansCell", for: indexPath) as? UITableViewCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
-        //cell.configureCell(setDTO: (swdSets[sectionLetters[indexPath.section]]?[indexPath.row])!)
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            names.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if tableView.isEditing {
-            return UITableViewCellEditingStyle.delete
-        }
-        return UITableViewCellEditingStyle.none
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
     }
 }

@@ -12,7 +12,7 @@ class NewLoanViewController: UIViewController {
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
-    var delegate: LoansViewDelegate?
+    var delegate: LoansListViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
