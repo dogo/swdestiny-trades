@@ -28,10 +28,11 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
     }
 
     func setupTableView() {
-        tableViewDatasource = LoansDetailDatasource(loanList: personDTO.loans)
+        tableViewDatasource = LoansDetailDatasource(borrowedList: personDTO.borrowed, lentMeList: personDTO.lentMe)
         tableViewDelegate = LoansDetailDelegate(self)
         self.tableView?.dataSource = tableViewDatasource
         self.tableView?.delegate = tableViewDelegate
+        self.tableView?.reloadData()
     }
 
     internal func didSelectSet(at index: IndexPath) {

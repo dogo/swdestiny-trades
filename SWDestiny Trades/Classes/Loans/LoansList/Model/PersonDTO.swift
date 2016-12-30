@@ -9,15 +9,11 @@
 import Foundation
 import RealmSwift
 
-class LoanDTO: Object {
-    var card: CardDTO? = nil
-    dynamic var hasLentMe = false
-}
-
 class PersonDTO: Object {
     dynamic var name = ""
     dynamic var lastName = ""
-    let loans = List<LoanDTO>()
+    let lentMe = List<CardDTO>()
+    let borrowed = List<CardDTO>()
 
     override class func primaryKey() -> String {
         return "name"

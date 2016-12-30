@@ -20,23 +20,23 @@ class LoanCell: UITableViewCell {
 
     internal func configureCell(personDTO: PersonDTO) {
         personNameLabel.text = "\(personDTO.name) \(personDTO.lastName)"
-        loanStatusLabel.text = getLoanState(loans: personDTO.loans)
+        loanStatusLabel.text = getLoanState(personDTO: personDTO)
     }
 
-    private func getLoanState(loans: List<LoanDTO>) -> String {
+    private func getLoanState(personDTO: PersonDTO) -> String {
 
         var loanState = "No loans"
-        if loans.count > 0 {
-            let lentMeCount = loans.filter("hasLentMe == true").count
-            let borrowedCount = loans.filter("hasLentMe == false").count
-            if (lentMeCount > 0 && borrowedCount > 0) {
-                loanState = "Lent me \(lentMeCount) card & borrowed me \(lentMeCount) card"
-            } else if lentMeCount > 0 {
-                loanState = "Lent me \(lentMeCount) card"
-            } else if borrowedCount > 0 {
-               loanState = "Borrowed me \(lentMeCount) card"
-            }
+        
+        let lentMeCount = personDTO.lentMe.count
+        let borrowedCount = personDTO.borrowed.count
+        if (lentMeCount > 0 && borrowedCount > 0) {
+            loanState = "Lent me \(lentMeCount) card & borrowed me \(lentMeCount) card"
+        } else if lentMeCount > 0 {
+            loanState = "Lent me \(lentMeCount) card"
+        } else if borrowedCount > 0 {
+           loanState = "Borrowed me \(lentMeCount) card"
         }
+        
         return loanState
     }
 

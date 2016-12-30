@@ -25,11 +25,8 @@ class NewLoanViewController: UIViewController {
 
             self.person.name = card.name
             self.person.lastName = card.setName
-
-            let loan = LoanDTO()
-            loan.hasLentMe = true
-            loan.card = card
-            self.person.loans.append(loan)
+            self.person.lentMe.append(card)
+            self.person.borrowed.append(card)
         }) { (error: DataResponse<Any>) in
             print(error)
         }

@@ -14,16 +14,11 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     var lentMe: [CardDTO] = []
     var borrowed: [CardDTO] = []
 
-    required init(loanList: List<LoanDTO>) {
+    required init(borrowedList: List<CardDTO>, lentMeList: List<CardDTO>) {
         super.init()
 
-        if loanList.count > 0 {
-            let jfke = Array(loanList)
-            let borrowedList = loanList.filter("hasLentMe == false")
-            print(jfke)
-        }
-
-        //self.tableView?.reloadData()
+        lentMe = Array(lentMeList)
+        borrowed = Array(borrowedList)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
