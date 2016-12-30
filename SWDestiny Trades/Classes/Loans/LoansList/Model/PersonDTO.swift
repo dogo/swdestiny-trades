@@ -18,7 +18,7 @@ class PersonDTO: Object {
     dynamic var name = ""
     dynamic var lastName = ""
     let loans = List<LoanDTO>()
-    
+
     override class func primaryKey() -> String {
         return "name"
     }

@@ -37,7 +37,7 @@ class CardsAPIClient: BaseAPIClient {
             }
         }
     }
-    
+
     static func retrieveCard(successBlock: @escaping (_ cardDTO: CardDTO) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/card/01001"
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in

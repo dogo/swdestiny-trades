@@ -20,20 +20,19 @@ class NewLoanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
         CardsAPIClient.retrieveCard(successBlock: { (card: CardDTO) in
-            
-            self.person.name = "dsd"
-            self.person.lastName = "lele"
-            
-            let ds = LoanDTO()
-            ds.hasLentMe = true
-            ds.card = card
-            self.person.loans.append(ds)
+
+            self.person.name = card.name
+            self.person.lastName = card.setName
+
+            let loan = LoanDTO()
+            loan.hasLentMe = true
+            loan.card = card
+            self.person.loans.append(loan)
         }) { (error: DataResponse<Any>) in
             print(error)
         }
-        
     }
 
     // MARK: IBActions
@@ -43,9 +42,9 @@ class NewLoanViewController: UIViewController {
     }
 
     @IBAction func doneButtonTouched(_ sender: Any) {
-        if !firstNameTextField.text!.isEmpty {
+        //if !firstNameTextField.text!.isEmpty {
             delegate?.insertNew(person: person)
-        }
+        //}
         dismiss(animated: true, completion: nil)
     }
 }
