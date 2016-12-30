@@ -8,8 +8,9 @@
 
 import Foundation
 import ObjectMapper
+import RealmSwift
 
-class CardDTO: Mappable {
+class CardDTO: Object, Mappable {
 
     var sides: String = ""
     var setCode: String = ""
@@ -41,7 +42,9 @@ class CardDTO: Mappable {
     var label: String = ""
     var cp: Int = 0
 
-    required init?(map: Map) {
+    required convenience public init?(map: Map) {
+        self.init()
+        mapping(map: map)
     }
 
     func mapping(map: Map) {
