@@ -384,9 +384,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="97X-aJ-qXL">
                             <connections>
-                                <segue destination="Vr3-wR-clj" kind="popoverPresentation" identifier="NewLoanSegue" popoverAnchorBarButtonItem="97X-aJ-qXL" id="8ti-9b-Wgq">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="jSr-lg-8qu" kind="presentation" id="YMN-Cj-eOm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -398,6 +396,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1689" y="419"/>
+        </scene>
+        <!--New Loan View Controller-->
+        <scene sceneID="CZ0-FP-gbn">
+            <objects>
+                <viewController id="87Q-ee-NMu" customClass="NewLoanViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mbl-eE-ffd"/>
+                        <viewControllerLayoutGuide type="bottom" id="1KU-bT-wXn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qvG-ds-a9P">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S26-UK-Qwc">
+                                <rect key="frame" x="12" y="129" width="351" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="skP-hP-Psz">
+                                <rect key="frame" x="12" y="192" width="351" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="S26-UK-Qwc" firstAttribute="top" secondItem="mbl-eE-ffd" secondAttribute="bottom" constant="65" id="G5X-Cn-PaW"/>
+                            <constraint firstItem="skP-hP-Psz" firstAttribute="leading" secondItem="qvG-ds-a9P" secondAttribute="leading" constant="12" id="JW4-ze-WJl"/>
+                            <constraint firstItem="S26-UK-Qwc" firstAttribute="leading" secondItem="qvG-ds-a9P" secondAttribute="leading" constant="12" id="PYH-sN-pUh"/>
+                            <constraint firstAttribute="trailing" secondItem="S26-UK-Qwc" secondAttribute="trailing" constant="12" id="QaJ-Vc-qwK"/>
+                            <constraint firstItem="skP-hP-Psz" firstAttribute="top" secondItem="S26-UK-Qwc" secondAttribute="bottom" constant="33" id="RC4-g3-TtD"/>
+                            <constraint firstAttribute="trailing" secondItem="skP-hP-Psz" secondAttribute="trailing" constant="12" id="kER-uJ-LXc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PKX-v2-J9G">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ibu-CB-lC8">
+                            <connections>
+                                <action selector="cancelButtonTouched:" destination="87Q-ee-NMu" id="mJ5-TJ-AGA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="y7R-ub-uSk">
+                            <connections>
+                                <action selector="doneButtonTouched:" destination="87Q-ee-NMu" id="Vex-e3-hG9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="firstNameTextField" destination="S26-UK-Qwc" id="9sG-vK-XMA"/>
+                        <outlet property="lastNameTextField" destination="skP-hP-Psz" id="XE8-0f-osd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1K-fB-QNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3378.4000000000001" y="418.74062968515744"/>
         </scene>
         <!--Loans Detail View Controller-->
         <scene sceneID="X7u-Zk-LCU">
@@ -478,106 +532,6 @@
             </objects>
             <point key="canvasLocation" x="1689" y="1146"/>
         </scene>
-        <!--New Loan View Controller-->
-        <scene sceneID="HJZ-RO-GQg">
-            <objects>
-                <viewController id="Vr3-wR-clj" customClass="NewLoanViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FFP-Ib-pWL"/>
-                        <viewControllerLayoutGuide type="bottom" id="5Sd-lV-TXy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cdY-ZG-N7s">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="ctF-Mz-FmM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem title="New Person" id="NK3-mX-IW2">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TIt-Q8-nV3">
-                                            <connections>
-                                                <action selector="cancelButtonTouched:" destination="Vr3-wR-clj" id="HjD-Pf-5oY"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="gt7-I6-D4H">
-                                            <connections>
-                                                <action selector="doneButtonTouched:" destination="Vr3-wR-clj" id="S0C-Lz-twj"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFb-GK-pPA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rgv-U3-s1s" customClass="AkiraTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="12" y="46" width="351" height="56"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="k2R-3q-Blg"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MOl-gd-dEl" customClass="AkiraTextField" customModule="TextFieldEffects">
-                                        <rect key="frame" x="12" y="117" width="351" height="56"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="FZB-Ic-xQU"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="rgv-U3-s1s" secondAttribute="trailing" constant="12" id="1Xq-aP-1oL"/>
-                                    <constraint firstItem="MOl-gd-dEl" firstAttribute="leading" secondItem="QFb-GK-pPA" secondAttribute="leading" constant="12" id="36r-gt-zg5"/>
-                                    <constraint firstItem="rgv-U3-s1s" firstAttribute="top" secondItem="QFb-GK-pPA" secondAttribute="top" constant="46" id="3GO-hu-9mh"/>
-                                    <constraint firstItem="rgv-U3-s1s" firstAttribute="leading" secondItem="QFb-GK-pPA" secondAttribute="leading" constant="12" id="DfJ-gG-FZj"/>
-                                    <constraint firstItem="MOl-gd-dEl" firstAttribute="top" secondItem="rgv-U3-s1s" secondAttribute="bottom" constant="15" id="FtI-UK-MKB"/>
-                                    <constraint firstAttribute="trailing" secondItem="MOl-gd-dEl" secondAttribute="trailing" constant="12" id="vNb-kw-DHQ"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="QFb-GK-pPA" secondAttribute="trailing" id="5aU-Ev-J9K"/>
-                            <constraint firstItem="QFb-GK-pPA" firstAttribute="leading" secondItem="cdY-ZG-N7s" secondAttribute="leading" id="8iL-SW-KHi"/>
-                            <constraint firstItem="5Sd-lV-TXy" firstAttribute="top" secondItem="QFb-GK-pPA" secondAttribute="bottom" id="KZS-id-chB"/>
-                            <constraint firstItem="ctF-Mz-FmM" firstAttribute="leading" secondItem="cdY-ZG-N7s" secondAttribute="leading" id="P6T-yh-0be"/>
-                            <constraint firstAttribute="trailing" secondItem="ctF-Mz-FmM" secondAttribute="trailing" id="TSi-ks-Yvc"/>
-                            <constraint firstItem="ctF-Mz-FmM" firstAttribute="top" secondItem="FFP-Ib-pWL" secondAttribute="bottom" id="hYM-2o-RI9"/>
-                            <constraint firstItem="QFb-GK-pPA" firstAttribute="top" secondItem="ctF-Mz-FmM" secondAttribute="bottom" id="szq-BX-htS"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="firstNameTextField" destination="rgv-U3-s1s" id="ign-vm-d1B"/>
-                        <outlet property="lastNameTextField" destination="MOl-gd-dEl" id="UuT-3t-VRN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R0q-Q0-XAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2434" y="419"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -640,6 +594,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFD-dl-NKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="359.37031484257875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NJP-wl-jOL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jSr-lg-8qu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="AdD-Sp-84z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="87Q-ee-NMu" kind="relationship" relationship="rootViewController" id="zqz-hj-kh6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dT-6q-zgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2439.1999999999998" y="418.74062968515744"/>
         </scene>
     </scenes>
     <resources>
