@@ -79,8 +79,10 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NewLoanSegue" {
-            if let nextViewController = segue.destination as? NewLoanViewController {
-                nextViewController.delegate = self
+            if let navController = segue.destination as? UINavigationController {
+                if let nextViewController = navController.topViewController as? NewLoanViewController {
+                    nextViewController.delegate = self
+                }
             }
         } else if segue.identifier == "LoanDetailSegue" {
             if let nextViewController = segue.destination as? LoansDetailViewController {

@@ -384,7 +384,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="97X-aJ-qXL">
                             <connections>
-                                <segue destination="jSr-lg-8qu" kind="presentation" id="YMN-Cj-eOm"/>
+                                <segue destination="jSr-lg-8qu" kind="presentation" identifier="NewLoanSegue" id="YMN-Cj-eOm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
