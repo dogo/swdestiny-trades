@@ -397,7 +397,7 @@
             </objects>
             <point key="canvasLocation" x="1689" y="419"/>
         </scene>
-        <!--New Loan View Controller-->
+        <!--New Person-->
         <scene sceneID="CZ0-FP-gbn">
             <objects>
                 <viewController id="87Q-ee-NMu" customClass="NewLoanViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
@@ -432,7 +432,7 @@
                             <constraint firstAttribute="trailing" secondItem="skP-hP-Psz" secondAttribute="trailing" constant="12" id="kER-uJ-LXc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="PKX-v2-J9G">
+                    <navigationItem key="navigationItem" title="New Person" id="PKX-v2-J9G">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ibu-CB-lC8">
                             <connections>
                                 <action selector="cancelButtonTouched:" destination="87Q-ee-NMu" id="mJ5-TJ-AGA"/>
