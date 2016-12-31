@@ -26,7 +26,7 @@ class LoanCell: UITableViewCell {
     private func getLoanState(personDTO: PersonDTO) -> String {
 
         var loanState = "No loans"
-        
+
         let lentMeCount = personDTO.lentMe.count
         let borrowedCount = personDTO.borrowed.count
         if (lentMeCount > 0 && borrowedCount > 0) {
@@ -36,7 +36,7 @@ class LoanCell: UITableViewCell {
         } else if borrowedCount > 0 {
            loanState = "Borrowed me \(lentMeCount) card"
         }
-        
+
         return loanState
     }
 

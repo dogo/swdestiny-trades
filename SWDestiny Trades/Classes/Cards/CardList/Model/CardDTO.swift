@@ -12,35 +12,35 @@ import RealmSwift
 
 class CardDTO: Object, Mappable {
 
-    var sides: String = ""
-    var setCode: String = ""
-    var setName: String = ""
-    var typeCode: String = ""
-    var typeName: String = ""
-    var factionCode: String = ""
-    var factionName: String = ""
-    var affiliationCode: String = ""
-    var affiliationName: String = ""
-    var rarityCode: String = ""
-    var rarityName: String = ""
-    var position: Int = 0
-    var code: String = ""
-    var ttscardid: String = ""
-    var name: String = ""
-    var subtitle: String = ""
-    var cost: Float = 0.0
-    var health: Int = 0
-    var points: String = ""
-    var text: String = ""
-    var deckLimit: Int = 0
-    var flavor: String = ""
-    var illustrator: String = ""
-    var isUnique: Bool = false
-    var hasDie: Bool = false
-    var externalUrl: String = ""
-    var imageUrl: String = ""
-    var label: String = ""
-    var cp: Int = 0
+    dynamic var sides: String = ""
+    dynamic var setCode: String = ""
+    dynamic var setName: String = ""
+    dynamic var typeCode: String = ""
+    dynamic var typeName: String = ""
+    dynamic var factionCode: String = ""
+    dynamic var factionName: String = ""
+    dynamic var affiliationCode: String = ""
+    dynamic var affiliationName: String = ""
+    dynamic var rarityCode: String = ""
+    dynamic var rarityName: String = ""
+    dynamic var position: Int = 0
+    dynamic var code: String = ""
+    dynamic var ttscardid: String = ""
+    dynamic var name: String = ""
+    dynamic var subtitle: String = ""
+    dynamic var cost: Float = 0.0
+    dynamic var health: Int = 0
+    dynamic var points: String = ""
+    dynamic var text: String = ""
+    dynamic var deckLimit: Int = 0
+    dynamic var flavor: String = ""
+    dynamic var illustrator: String = ""
+    dynamic var isUnique: Bool = false
+    dynamic var hasDie: Bool = false
+    dynamic var externalUrl: String = ""
+    dynamic var imageUrl: String = ""
+    dynamic var label: String = ""
+    dynamic var cp: Int = 0
 
     required convenience public init?(map: Map) {
         self.init()

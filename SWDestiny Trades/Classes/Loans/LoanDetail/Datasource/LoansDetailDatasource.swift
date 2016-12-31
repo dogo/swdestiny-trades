@@ -29,14 +29,16 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         if indexPath.row == lentMe.count {
             cell.textLabel?.text = "Add new card..."
             cell.textLabel?.textColor = UIColor.darkGray
-        } else {
+        } else if indexPath.section == 0 {
             cell.configureCell(cardDTO: lentMe[indexPath.row])
+        } else if indexPath.section == 1 {
+            cell.configureCell(cardDTO: borrowed[indexPath.row])
         }
         return cell
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (section == 0) {
+        if section == 0 {
             return "Has lent me:"
         } else {
             return "Has borrowed my:"
