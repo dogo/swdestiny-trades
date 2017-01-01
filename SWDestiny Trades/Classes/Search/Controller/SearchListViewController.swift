@@ -97,11 +97,15 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        filtered = cardsData.filter({ (card) -> Bool in
-            return card.name.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
-        })
-        searchIsActive = !(filtered.count == 0)
+        
+        if searchText.trim().isEmpty {
+            searchIsActive = false
+        } else {
+            filtered = cardsData.filter({ (card) -> Bool in
+                return card.name.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
+            })
+            searchIsActive = true
+        }
         tableView?.reloadData()
     }
 
