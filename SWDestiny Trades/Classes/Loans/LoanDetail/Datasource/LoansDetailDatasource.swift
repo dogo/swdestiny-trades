@@ -77,6 +77,14 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             return borrowed.count + 1
         }
     }
+    
+    public func getCard(atIndex: IndexPath) -> CardDTO {
+        if atIndex.section == 0 {
+            return lentMe[atIndex.row]
+        } else {
+            return borrowed[atIndex.row]
+        }
+    }
 }
 
 class LoansDetailDelegate: NSObject, UITableViewDelegate {
