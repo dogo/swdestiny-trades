@@ -551,7 +551,6 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="Clp-ds-etH" id="BQn-2A-Nq5"/>
                         <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="jXR-bh-rzk"/>
