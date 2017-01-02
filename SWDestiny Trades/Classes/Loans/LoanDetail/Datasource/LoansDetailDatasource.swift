@@ -93,7 +93,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             return borrowed[index.row]
         }
     }
-    
+
     public func updateTableViewData(borrowedList: List<CardDTO>, lentMeList: List<CardDTO>) {
         lentMe = Array(lentMeList)
         borrowed = Array(borrowedList)

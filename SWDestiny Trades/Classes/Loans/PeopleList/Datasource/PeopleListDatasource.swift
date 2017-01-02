@@ -24,11 +24,7 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let realm = try! Realm()
-            try! realm.write {
-                realm.delete(persons[indexPath.row])
-                persons.remove(at: indexPath.row)
-            }
+            remove(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
@@ -61,6 +57,14 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
         try! realm.write {
             realm.add(person, update: true)
             persons.append(person)
+        }
+    }
+
+    private func remove(at indexPath: IndexPath) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(persons[indexPath.row])
+            persons.remove(at: indexPath.row)
         }
     }
 }

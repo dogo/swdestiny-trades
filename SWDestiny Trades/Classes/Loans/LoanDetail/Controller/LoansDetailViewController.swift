@@ -15,7 +15,7 @@ protocol LoansDetailViewDelegate {
 class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
 
     static let notificationName = Notification.Name("ReloadLoansDetailsTableNotification")
-    
+
     @IBOutlet weak var tableView: UITableView?
     var personDTO: PersonDTO!
     var tableViewDatasource: LoansDetailDatasource?
@@ -38,7 +38,7 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
             tableView?.deselectRow(at: path, animated: animated)
         }
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -50,7 +50,7 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
         self.tableView?.delegate = tableViewDelegate
         self.tableView?.reloadData()
     }
-    
+
     @objc private func reloadTableView(_ notification: NSNotification) {
         if let person = notification.userInfo?["personDTO"] as? PersonDTO {
             personDTO = person
