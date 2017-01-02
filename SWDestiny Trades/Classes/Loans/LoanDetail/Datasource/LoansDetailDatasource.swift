@@ -59,11 +59,13 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if tableView.isEditing {
-            return UITableViewCellEditingStyle.delete
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 && indexPath.row == lentMe.count {
+            return false
+        } else if indexPath.section == 1 && indexPath.row == borrowed.count {
+            return false
         }
-        return UITableViewCellEditingStyle.none
+        return true
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
