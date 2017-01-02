@@ -30,11 +30,11 @@ class LoanCell: UITableViewCell {
         let lentMeCount = personDTO.lentMe.count
         let borrowedCount = personDTO.borrowed.count
         if (lentMeCount > 0 && borrowedCount > 0) {
-            loanState = "Lent me \(lentMeCount) card & borrowed me \(lentMeCount) card"
+            loanState = "Lent me \(lentMeCount) card & borrowed me \(borrowedCount) card"
         } else if lentMeCount > 0 {
             loanState = "Lent me \(lentMeCount) card"
         } else if borrowedCount > 0 {
-           loanState = "Borrowed me \(lentMeCount) card"
+           loanState = "Borrowed me \(borrowedCount) card"
         }
 
         return loanState
