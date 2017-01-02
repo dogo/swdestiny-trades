@@ -10,6 +10,24 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--About-->
+        <scene sceneID="YhU-Xu-jj2">
+            <objects>
+                <viewController title="About" id="AaR-Vz-eia" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ITd-hQ-q0v"/>
+                        <viewControllerLayoutGuide type="bottom" id="sEH-1K-fRV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W5g-SK-nDi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n9x-j7-MUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-976"/>
+        </scene>
         <!--Search List View Controller-->
         <scene sceneID="qc8-QI-JK9">
             <objects>
@@ -38,7 +56,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bms-JR-e8h" id="tgI-Ay-BTb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hc-lg-Kfy">
@@ -136,7 +154,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="47l-df-LYV" id="F9W-33-jlt">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_awakenings" translatesAutoresizingMaskIntoConstraints="NO" id="Okp-Wg-UoC">
@@ -182,6 +200,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Expansions" id="2xV-Y6-gLn">
+                        <barButtonItem key="leftBarButtonItem" image="ic_about" id="afW-8v-ClC">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="AaR-Vz-eia" kind="show" id="Qsg-V0-flj"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="OJK-N4-vPB">
                             <connections>
                                 <segue destination="BoE-F8-C2n" kind="show" id="ozO-Zz-UV6"/>
@@ -218,7 +242,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4KR-EU-hRR" id="qWt-xr-xO3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="966-RF-DTv">
@@ -337,7 +361,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eRS-UF-VET" id="q3P-cg-oxb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mr Robot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5j-Yc-qf9">
@@ -501,7 +525,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fvI-Hk-6cn" id="Nez-t0-Esd">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLe-dm-5nG">
@@ -736,6 +760,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_about" width="44" height="44"/>
         <image name="ic_awakenings" width="256" height="256"/>
         <image name="ic_cards" width="33" height="33"/>
         <image name="ic_cards_filled" width="33" height="33"/>
