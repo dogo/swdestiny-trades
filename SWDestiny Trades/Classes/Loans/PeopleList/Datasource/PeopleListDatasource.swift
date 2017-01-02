@@ -1,5 +1,5 @@
 //
-//  LoansListDatasource.swift
+//  PeopleListDatasource.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 29/12/16.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class LoansListDatasource: NSObject, UITableViewDataSource {
+class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     private var persons: [PersonDTO] = []
 
@@ -65,11 +65,11 @@ class LoansListDatasource: NSObject, UITableViewDataSource {
     }
 }
 
-class LoansListDelegate: NSObject, UITableViewDelegate {
+class PeopleListDelegate: NSObject, UITableViewDelegate {
 
-    private let delegate: LoansListViewDelegate
+    private let delegate: PeopleListViewDelegate
 
-    init(_ delegate: LoansListViewDelegate) {
+    init(_ delegate: PeopleListViewDelegate) {
         self.delegate = delegate
     }
 

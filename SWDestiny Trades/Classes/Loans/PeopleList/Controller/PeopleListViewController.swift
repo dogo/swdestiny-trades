@@ -1,5 +1,5 @@
 //
-//  LoansViewController.swift
+//  PeopleListViewController.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 26/12/16.
@@ -9,16 +9,16 @@
 import UIKit
 import RealmSwift
 
-protocol LoansListViewDelegate {
+protocol PeopleListViewDelegate {
     func insertNew(person: PersonDTO)
     func didSelectSet(at: IndexPath)
 }
 
-class LoansViewController: UIViewController, LoansListViewDelegate {
+class PeopleListViewController: UIViewController, PeopleListViewDelegate {
 
     @IBOutlet weak var tableView: UITableView?
-    var tableViewDatasource: LoansListDatasource?
-    var tableViewDelegate: LoansListDelegate?
+    var tableViewDatasource: PeopleListDatasource?
+    var tableViewDelegate: PeopleListDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,8 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
     }
 
     func setupTableView() {
-        tableViewDatasource = LoansListDatasource()
-        tableViewDelegate = LoansListDelegate(self)
+        tableViewDatasource = PeopleListDatasource()
+        tableViewDelegate = PeopleListDelegate(self)
         self.tableView?.dataSource = tableViewDatasource
         self.tableView?.delegate = tableViewDelegate
     }
@@ -78,9 +78,9 @@ class LoansViewController: UIViewController, LoansListViewDelegate {
     // MARK: - Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "NewLoanSegue" {
+        if segue.identifier == "NewPersonSegue" {
             if let navController = segue.destination as? UINavigationController {
-                if let nextViewController = navController.topViewController as? NewLoanViewController {
+                if let nextViewController = navController.topViewController as? NewPersonViewController {
                     nextViewController.delegate = self
                 }
             }

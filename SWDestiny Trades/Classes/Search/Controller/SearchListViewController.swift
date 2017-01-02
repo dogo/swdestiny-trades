@@ -97,7 +97,7 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         if searchText.trim().isEmpty {
             searchIsActive = false
         } else {

@@ -26,10 +26,10 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
 
         setupTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let path = tableView?.indexPathForSelectedRow {
             tableView?.deselectRow(at: path, animated: animated)
         }
@@ -42,7 +42,7 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
         self.tableView?.delegate = tableViewDelegate
         self.tableView?.reloadData()
     }
-    
+
     // MARK: - <LoansDetailViewDelegate>
 
     internal func didSelectSet(at index: IndexPath) {
@@ -52,9 +52,9 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
             performSegue(withIdentifier: "CardDetailsSegue", sender: tableViewDatasource?.getCard(atIndex: index))
         }
     }
-    
+
     // MARK: - Segue
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CardDetailsSegue" {
             if let nextViewController = segue.destination as? CardDetailViewController {

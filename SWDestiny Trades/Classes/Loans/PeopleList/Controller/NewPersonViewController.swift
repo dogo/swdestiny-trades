@@ -1,5 +1,5 @@
 //
-//  NewLoanViewController.swift
+//  NewPersonViewController.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 27/12/16.
@@ -10,11 +10,11 @@ import UIKit
 import RealmSwift
 import Alamofire
 
-class NewLoanViewController: UIViewController {
+class NewPersonViewController: UIViewController {
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
-    var delegate: LoansListViewDelegate?
+    var delegate: PeopleListViewDelegate?
     let person = PersonDTO()
 
     override func viewDidLoad() {
