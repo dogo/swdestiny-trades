@@ -47,7 +47,7 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
 
     internal func didSelectSet(at index: IndexPath) {
         if index.row == tableViewDatasource?.lentMe.count || index.row == tableViewDatasource?.borrowed.count {
-            print("if")
+            performSegue(withIdentifier: "AddCardSegue", sender: index.section == 0)
         } else {
             performSegue(withIdentifier: "CardDetailsSegue", sender: tableViewDatasource?.getCard(atIndex: index))
         }
@@ -59,6 +59,11 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
         if segue.identifier == "CardDetailsSegue" {
             if let nextViewController = segue.destination as? CardDetailViewController {
                 nextViewController.cardDTO = sender as? CardDTO
+            }
+        } else if segue.identifier == "AddCardSegue" {
+            if let nextViewController = segue.destination as? AddCardViewController {
+                nextViewController.isLentMe = sender as? Bool
+                nextViewController.personDTO = personDTO
             }
         }
     }

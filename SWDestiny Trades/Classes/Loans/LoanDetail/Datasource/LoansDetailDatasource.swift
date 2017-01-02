@@ -26,13 +26,20 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             //The impossible happened
             fatalError("Wrong Cell Type")
         }
-        if indexPath.row == lentMe.count {
-            cell.textLabel?.text = "Add new card..."
-            cell.textLabel?.textColor = UIColor.darkGray
-        } else if indexPath.section == 0 {
-            cell.configureCell(cardDTO: lentMe[indexPath.row])
+        if indexPath.section == 0 {
+            if indexPath.row == lentMe.count {
+                cell.textLabel?.text = "Add their card..."
+                cell.textLabel?.textColor = UIColor.darkGray
+            } else {
+                cell.configureCell(cardDTO: lentMe[indexPath.row])
+            }
         } else if indexPath.section == 1 {
-            cell.configureCell(cardDTO: borrowed[indexPath.row])
+            if indexPath.row == borrowed.count {
+                cell.textLabel?.text = "Add my card..."
+                cell.textLabel?.textColor = UIColor.darkGray
+            } else {
+                cell.configureCell(cardDTO: borrowed[indexPath.row])
+            }
         }
         return cell
     }

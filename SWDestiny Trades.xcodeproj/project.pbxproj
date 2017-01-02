@@ -18,6 +18,7 @@
 		DD36C4171E1A185C00177B64 /* PeopleListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4101E1A185C00177B64 /* PeopleListDatasource.swift */; };
 		DD36C4181E1A185C00177B64 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4121E1A185C00177B64 /* PersonDTO.swift */; };
 		DD36C4191E1A185C00177B64 /* LoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4141E1A185C00177B64 /* LoanCell.swift */; };
+		DD36C41B1E1A1CCB00177B64 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C41A1E1A1CCB00177B64 /* AddCardViewController.swift */; };
 		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
@@ -66,6 +67,7 @@
 		DD36C4101E1A185C00177B64 /* PeopleListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListDatasource.swift; sourceTree = "<group>"; };
 		DD36C4121E1A185C00177B64 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD36C4141E1A185C00177B64 /* LoanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanCell.swift; sourceTree = "<group>"; };
+		DD36C41A1E1A1CCB00177B64 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 		DD2F27401E1571050044437D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DD36C41A1E1A1CCB00177B64 /* AddCardViewController.swift */,
 				DDDB56871E158BFC00B9DCE6 /* LoansDetailViewController.swift */,
 			);
 			path = Controller;
@@ -662,6 +665,7 @@
 				DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */,
 				DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */,
 				DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */,
+				DD36C41B1E1A1CCB00177B64 /* AddCardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
