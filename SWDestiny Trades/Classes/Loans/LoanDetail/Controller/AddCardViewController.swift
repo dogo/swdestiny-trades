@@ -57,8 +57,8 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.view.endEditing(true)
         insert(at: indexPath)
+        self.view.endEditing(true)
         if let path = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: path, animated: true)
         }
