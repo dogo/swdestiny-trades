@@ -54,21 +54,22 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            //tableData.removeAtIndex(indexPath.row)
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(getCard(at: indexPath))
+                if indexPath.section == 0 {
+                    lentMe.remove(at: indexPath.row)
+                } else {
+                    borrowed.remove(at: indexPath.row)
+                }
+            }
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        } else if editingStyle == UITableViewCellEditingStyle.insert {
-            //tableData.append(thingToInsert)
-            tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if tableView.isEditing {
-            if indexPath.row == lentMe.count || indexPath.row == borrowed.count {
-                return UITableViewCellEditingStyle.insert
-            } else {
-                return UITableViewCellEditingStyle.delete
-            }
+            return UITableViewCellEditingStyle.delete
         }
         return UITableViewCellEditingStyle.none
     }
@@ -85,11 +86,11 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    public func getCard(atIndex: IndexPath) -> CardDTO {
-        if atIndex.section == 0 {
-            return lentMe[atIndex.row]
+    public func getCard(at index: IndexPath) -> CardDTO {
+        if index.section == 0 {
+            return lentMe[index.row]
         } else {
-            return borrowed[atIndex.row]
+            return borrowed[index.row]
         }
     }
 }
