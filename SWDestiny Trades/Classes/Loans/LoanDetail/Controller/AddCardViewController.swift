@@ -58,7 +58,6 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         insert(at: indexPath)
-        self.view.endEditing(true)
         if let path = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: path, animated: true)
         }
@@ -119,7 +118,7 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
         success.configureContent(title: "Added", body: card.name)
         success.button?.isHidden = true
         var successConfig = SwiftMessages.defaultConfig
-        successConfig.presentationStyle = .bottom
+        successConfig.presentationStyle = .top
         successConfig.presentationContext = .window(windowLevel: UIWindowLevelNormal)
         SwiftMessages.show(config: successConfig, view: success)
     }
@@ -131,14 +130,6 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchIsActive = false
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchIsActive = false
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchIsActive = false
     }
 

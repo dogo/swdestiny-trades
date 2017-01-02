@@ -88,14 +88,6 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
         searchIsActive = false
     }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchIsActive = false
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchIsActive = false
-    }
-
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         if searchText.trim().isEmpty {
