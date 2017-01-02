@@ -54,15 +54,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            let realm = try! Realm()
-            try! realm.write {
-                realm.delete(getCard(at: indexPath))
-                if indexPath.section == 0 {
-                    lentMe.remove(at: indexPath.row)
-                } else {
-                    borrowed.remove(at: indexPath.row)
-                }
-            }
+            remove(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
@@ -84,6 +76,19 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         } else {
             return borrowed.count + 1
         }
+    }
+
+    private func remove(at indexPath: IndexPath) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(getCard(at: indexPath))
+            if indexPath.section == 0 {
+                lentMe.remove(at: indexPath.row)
+            } else {
+                borrowed.remove(at: indexPath.row)
+            }
+        }
+        NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
     }
 
     public func getCard(at index: IndexPath) -> CardDTO {
