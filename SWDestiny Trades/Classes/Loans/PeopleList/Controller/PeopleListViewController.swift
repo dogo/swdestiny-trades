@@ -59,21 +59,13 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
         loadDataFromRealm()
     }
 
-    // MARK: IBActions
+    // MARK: - IBActions
 
     @IBAction func editButtonTouched(_ sender: Any) {
-        if self.isEditing {
-            super.setEditing(false, animated: true)
-            tableView?.setEditing(false, animated: true)
-            navigationItem.leftBarButtonItem?.title = "Edit"
-            navigationItem.leftBarButtonItem?.style = .plain
-        } else {
-            super.setEditing(true, animated: true)
-            tableView?.setEditing(true, animated: true)
-            navigationItem.leftBarButtonItem?.title = "Done"
-            navigationItem.leftBarButtonItem?.style = .done
-        }
+        toggleTableViewEditable(editable: self.isEditing)
     }
+
+    // MARK: - <PeopleListViewDelegate>
 
     internal func insertNew(person: PersonDTO) {
         tableViewDatasource?.insert(person: person)
@@ -87,6 +79,11 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
     // MARK: - Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if self.isEditing {
+            toggleTableViewEditable(editable: self.isEditing)
+        }
+
         if segue.identifier == "NewPersonSegue" {
             if let navController = segue.destination as? UINavigationController {
                 if let nextViewController = navController.topViewController as? NewPersonViewController {
@@ -98,5 +95,14 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
                 nextViewController.personDTO = (sender as? PersonDTO)
             }
         }
+    }
+
+    // MARK: - Helper
+
+    private func toggleTableViewEditable(editable: Bool) {
+        super.setEditing(!editable, animated: true)
+        tableView?.setEditing(!editable, animated: true)
+        navigationItem.leftBarButtonItem?.title = !editable ? "Done" : "Edit"
+        navigationItem.leftBarButtonItem?.style = !editable ? .done : .plain
     }
 }
