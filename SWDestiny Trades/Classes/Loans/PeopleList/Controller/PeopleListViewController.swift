@@ -25,6 +25,8 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
 
         setupTableView()
         loadDataFromRealm()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(PeopleListViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,10 +37,13 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
         }
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func loadDataFromRealm() {
         let realm = try! Realm()
         let persons = Array(realm.objects(PersonDTO.self))
-        print(persons)
         tableViewDatasource?.insert(personArray: persons)
         tableView?.reloadData()
     }
@@ -48,6 +53,10 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
         tableViewDelegate = PeopleListDelegate(self)
         self.tableView?.dataSource = tableViewDatasource
         self.tableView?.delegate = tableViewDelegate
+    }
+
+    @objc private func reloadTableView(_ notification: NSNotification) {
+        loadDataFromRealm()
     }
 
     // MARK: IBActions

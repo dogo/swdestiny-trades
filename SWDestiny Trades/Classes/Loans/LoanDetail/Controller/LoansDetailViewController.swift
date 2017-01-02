@@ -14,8 +14,6 @@ protocol LoansDetailViewDelegate {
 
 class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
 
-    static let notificationName = Notification.Name("ReloadLoansDetailsTableNotification")
-
     @IBOutlet weak var tableView: UITableView?
     var personDTO: PersonDTO!
     var tableViewDatasource: LoansDetailDatasource?
@@ -27,8 +25,7 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
         navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
 
         setupTableView()
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:LoansDetailViewController.notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {

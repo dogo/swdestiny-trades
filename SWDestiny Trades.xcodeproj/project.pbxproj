@@ -37,6 +37,7 @@
 		DDDB56881E158BFD00B9DCE6 /* LoansDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB56871E158BFC00B9DCE6 /* LoansDetailViewController.swift */; };
 		DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB56891E158F9800B9DCE6 /* LoansDetailDatasource.swift */; };
 		DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB568B1E159F8F00B9DCE6 /* LoanDetailCell.swift */; };
+		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
 		F728BD09DF3536056693B01E /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		DDDB56871E158BFC00B9DCE6 /* LoansDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansDetailViewController.swift; sourceTree = "<group>"; };
 		DDDB56891E158F9800B9DCE6 /* LoansDetailDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoansDetailDatasource.swift; sourceTree = "<group>"; };
 		DDDB568B1E159F8F00B9DCE6 /* LoanDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanDetailCell.swift; sourceTree = "<group>"; };
+		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				DD888C3E1E1947820093B3BF /* String.swift */,
+				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				DD36C4151E1A185C00177B64 /* PeopleListViewController.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
+				DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */,
 				DD36C4171E1A185C00177B64 /* PeopleListDatasource.swift in Sources */,
 				DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
