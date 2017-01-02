@@ -46,7 +46,7 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
     // MARK: - <LoansDetailViewDelegate>
 
     internal func didSelectSet(at index: IndexPath) {
-        if index.row == tableViewDatasource?.lentMe.count || index.row == tableViewDatasource?.borrowed.count {
+        if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
             performSegue(withIdentifier: "AddCardSegue", sender: index.section == 0)
         } else {
             performSegue(withIdentifier: "CardDetailsSegue", sender: tableViewDatasource?.getCard(atIndex: index))
