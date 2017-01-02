@@ -12,6 +12,7 @@ target 'SWDestiny Trades' do
   pod 'RealmSwift'
   pod 'TextFieldEffects'
   pod 'SwiftMessages'
+  pod 'Firebase/Core'
 
   target 'SWDestiny TradesTests' do
     inherit! :search_paths
