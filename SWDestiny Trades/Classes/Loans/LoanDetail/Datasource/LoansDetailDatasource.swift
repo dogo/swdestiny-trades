@@ -16,9 +16,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     required init(borrowedList: List<CardDTO>, lentMeList: List<CardDTO>) {
         super.init()
-
-        lentMe = Array(lentMeList)
-        borrowed = Array(borrowedList)
+        updateTableViewData(borrowedList: borrowedList, lentMeList: lentMeList)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,6 +90,11 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         } else {
             return borrowed[index.row]
         }
+    }
+    
+    public func updateTableViewData(borrowedList: List<CardDTO>, lentMeList: List<CardDTO>) {
+        lentMe = Array(lentMeList)
+        borrowed = Array(borrowedList)
     }
 }
 
