@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import RealmSwift
+import SwiftMessages
 
 class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
@@ -91,17 +92,31 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
         return searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row]
     }
 
-    public func insert(at indexPath: IndexPath) {
+    private func insert(at indexPath: IndexPath) {
         let realm = try! Realm()
         try! realm.write {
+            let card = getCard(at: indexPath)
             if isLentMe! {
-                personDTO.lentMe.append(getCard(at: indexPath))
+                personDTO.lentMe.append(card)
             } else {
-                personDTO.borrowed.append(getCard(at: indexPath))
+                personDTO.borrowed.append(card)
             }
+            showSuccessMessage(card: card)
             realm.add(personDTO, update: true)
             //calback
         }
+    }
+
+    private func showSuccessMessage(card: CardDTO) {
+        let success = MessageView.viewFromNib(layout: .CardView)
+        success.configureTheme(.success)
+        success.configureDropShadow()
+        success.configureContent(title: "Added", body: card.name)
+        success.button?.isHidden = true
+        var successConfig = SwiftMessages.defaultConfig
+        successConfig.presentationStyle = .bottom
+        successConfig.presentationContext = .window(windowLevel: UIWindowLevelNormal)
+        SwiftMessages.show(config: successConfig, view: success)
     }
 
     // MARK: - <UISearchBarDelegate>
