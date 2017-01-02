@@ -14,6 +14,8 @@ protocol LoansDetailViewDelegate {
 
 class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
 
+    static let notificationName = Notification.Name("ReloadLoansDetailsTableNotification")
+    
     @IBOutlet weak var tableView: UITableView?
     var personDTO: PersonDTO!
     var tableViewDatasource: LoansDetailDatasource?
@@ -25,6 +27,8 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
         navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
 
         setupTableView()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:LoansDetailViewController.notificationName, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +38,10 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
             tableView?.deselectRow(at: path, animated: animated)
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func setupTableView() {
         tableViewDatasource = LoansDetailDatasource(borrowedList: personDTO.borrowed, lentMeList: personDTO.lentMe)
@@ -41,6 +49,14 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
         self.tableView?.dataSource = tableViewDatasource
         self.tableView?.delegate = tableViewDelegate
         self.tableView?.reloadData()
+    }
+    
+    @objc private func reloadTableView(_ notification: NSNotification) {
+        if let person = notification.userInfo?["personDTO"] as? PersonDTO {
+            personDTO = person
+            tableViewDatasource?.updateTableViewData(borrowedList: personDTO.borrowed, lentMeList: personDTO.lentMe)
+            self.tableView?.reloadData()
+        }
     }
 
     // MARK: - <LoansDetailViewDelegate>

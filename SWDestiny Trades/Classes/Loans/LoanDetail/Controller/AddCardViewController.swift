@@ -107,7 +107,8 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             showSuccessMessage(card: card)
             realm.add(personDTO, update: true)
-            //calback
+            let personDataDict:[String: PersonDTO] = ["personDTO": personDTO]
+            NotificationCenter.default.post(name: LoansDetailViewController.notificationName, object: nil, userInfo: personDataDict)
         }
     }
 

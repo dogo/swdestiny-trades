@@ -29,6 +29,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
                 cell.textLabel?.text = "Add their card..."
                 cell.textLabel?.textColor = UIColor.darkGray
             } else {
+                cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: lentMe[indexPath.row])
             }
         } else if indexPath.section == 1 {
@@ -36,6 +37,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
                 cell.textLabel?.text = "Add my card..."
                 cell.textLabel?.textColor = UIColor.darkGray
             } else {
+                cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: borrowed[indexPath.row])
             }
         }
