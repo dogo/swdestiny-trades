@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import Alamofire
 
-class NewPersonViewController: UIViewController {
+class NewPersonViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -18,9 +18,11 @@ class NewPersonViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        firstNameTextField.delegate = self
     }
 
-    // MARK: IBActions
+    // MARK: - IBActions
 
     @IBAction func cancelButtonTouched(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -34,5 +36,14 @@ class NewPersonViewController: UIViewController {
             delegate?.insertNew(person: person)
         }
         dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - UITextFieldDelegate
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if firstNameTextField == textField {
+            lastNameTextField.becomeFirstResponder()
+        }
+        return true
     }
 }
