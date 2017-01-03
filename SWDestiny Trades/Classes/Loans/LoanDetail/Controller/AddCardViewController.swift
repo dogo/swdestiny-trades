@@ -117,10 +117,7 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
         success.configureDropShadow()
         success.configureContent(title: "Added", body: card.name)
         success.button?.isHidden = true
-        var successConfig = SwiftMessages.defaultConfig
-        successConfig.presentationStyle = .top
-        successConfig.presentationContext = .window(windowLevel: UIWindowLevelNormal)
-        SwiftMessages.show(config: successConfig, view: success)
+        SwiftMessages.show(view: success)
     }
 
     // MARK: - <UISearchBarDelegate>
