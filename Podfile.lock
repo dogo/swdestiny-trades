@@ -3,6 +3,9 @@ PODS:
   - Firebase/Core (3.11.0):
     - FirebaseAnalytics (= 3.6.0)
     - FirebaseCore (= 3.4.6)
+  - Firebase/Crash (3.11.0):
+    - Firebase/Core
+    - FirebaseCrash (= 1.1.4)
   - FirebaseAnalytics (3.6.0):
     - FirebaseCore (~> 3.4)
     - FirebaseInstanceID (~> 1.0)
@@ -12,11 +15,20 @@ PODS:
   - FirebaseCore (3.4.6):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCrash (1.1.4):
+    - FirebaseAnalytics (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.8)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleSymbolUtilities (1.1.2)
   - GoogleToolboxForMac/Defines (2.1.0)
+  - GoogleToolboxForMac/Logger (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - Kingfisher (3.2.2)
@@ -34,6 +46,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Firebase/Core
+  - Firebase/Crash
   - Kingfisher
   - Nimble
   - ObjectMapper
@@ -47,6 +60,7 @@ SPEC CHECKSUMS:
   Firebase: b8134e285eb33201115bc688bc5d7f112923bc1f
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseCore: 03da1cb32615569bbc2830a22f9ad753d9a02ef5
+  FirebaseCrash: 34f0349908ec87945a5ae96c402e7201a3f3aede
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
@@ -60,6 +74,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 87816be9b0b6dc37ff0e84ce3ff4555144554c32
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
 
-PODFILE CHECKSUM: 691a3eb50c4cc68e72db42dc67987aa416e5f66c
+PODFILE CHECKSUM: 24f539beda723ff91bd7260410202037c4a09846
 
 COCOAPODS: 1.1.1

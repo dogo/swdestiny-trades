@@ -3,7 +3,7 @@
 
 target 'SWDestiny Trades' do
 
-	use_frameworks!
+  use_frameworks!
   
   # Pods for SWDestiny Trades
   pod 'Kingfisher'
@@ -13,6 +13,7 @@ target 'SWDestiny Trades' do
   pod 'TextFieldEffects'
   pod 'SwiftMessages'
   pod 'Firebase/Core'
+  pod 'Firebase/Crash'
 
   target 'SWDestiny TradesTests' do
     inherit! :search_paths
