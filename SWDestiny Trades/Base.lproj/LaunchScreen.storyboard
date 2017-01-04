@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LargeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="q4s-xb-qjN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LargeIconTransparent" translatesAutoresizingMaskIntoConstraints="NO" id="q4s-xb-qjN">
                                 <rect key="frame" x="47.5" y="193.5" width="280" height="280"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="42n-0l-zGD"/>
@@ -42,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LargeIcon" width="280" height="280"/>
+        <image name="LargeIconTransparent" width="280" height="280"/>
     </resources>
 </document>
