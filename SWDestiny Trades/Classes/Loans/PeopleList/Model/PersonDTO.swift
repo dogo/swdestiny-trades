@@ -10,12 +10,13 @@ import Foundation
 import RealmSwift
 
 class PersonDTO: Object {
+    dynamic var id = NSUUID().uuidString
     dynamic var name = ""
     dynamic var lastName = ""
     let lentMe = List<CardDTO>()
     let borrowed = List<CardDTO>()
 
     override class func primaryKey() -> String {
-        return "name"
+        return "id"
     }
 }
