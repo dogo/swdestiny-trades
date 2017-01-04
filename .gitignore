@@ -45,3 +45,5 @@ playground.xcworkspace
 ## CocoaPods
 Pods/
 
+## Fastlane
+fastlane/report.xml
