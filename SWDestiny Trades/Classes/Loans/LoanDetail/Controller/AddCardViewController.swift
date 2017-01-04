@@ -112,7 +112,12 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     private func showSuccessMessage(card: CardDTO) {
-        let success = MessageView.viewFromNib(layout: .CardView)
+        let success: MessageView
+        if #available(iOS 9.0, *) {
+            success = MessageView.viewFromNib(layout: .CardView)
+        } else {
+            success = MessageView.viewFromNib(layout: .MessageViewIOS8)
+        }
         success.configureTheme(.success)
         success.configureDropShadow()
         success.configureContent(title: "Added", body: card.name)
