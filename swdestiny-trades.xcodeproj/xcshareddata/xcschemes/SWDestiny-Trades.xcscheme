@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DD6E06831E114E88004A5653"
+               BuildableName = "SWDestiny Trades.app"
+               BlueprintName = "SWDestiny Trades"
+               ReferencedContainer = "container:swdestiny-trades.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "DD6E06991E114E88004A5653"
                BuildableName = "SWDestiny TradesTests.xctest"
                BlueprintName = "SWDestiny TradesTests"
