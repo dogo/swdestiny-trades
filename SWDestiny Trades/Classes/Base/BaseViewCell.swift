@@ -29,6 +29,11 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         return label
     }()
 
+    var contentView: UIView = {
+        let view = UIView(frame: .zero)
+        return view
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         buildViewHierarchy()
@@ -41,26 +46,31 @@ class BaseViewCell: UIView, BaseViewConfiguration {
     }
 
     internal func buildViewHierarchy() {
-        self.addSubview(titleLabel)
-        self.addSubview(subtitleLabel)
-        self.addSubview(accessoryLabel)
+        self.addSubview(contentView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subtitleLabel)
+        contentView.addSubview(accessoryLabel)
     }
 
     internal func setupConstraints() {
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(self).inset(UIEdgeInsets(top: 11, left: 8, bottom: 11, right: 8))
+        }
+
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self).offset(12)
+            make.top.equalTo(contentView)
+            make.left.equalTo(contentView).offset(12)
         }
 
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(self).offset(12)
-            make.bottom.equalTo(self)
+            make.left.equalTo(contentView).offset(12)
+            make.bottom.equalTo(contentView)
         }
 
         accessoryLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.right.equalTo(self).offset(-12)
+            make.centerY.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-12)
         }
     }
 

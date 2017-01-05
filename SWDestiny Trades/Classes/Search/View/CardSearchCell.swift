@@ -24,10 +24,17 @@ class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        baseViewCell.accessoryLabel.snp.updateConstraints { make in
+            make.right.equalTo(-36)
+        }
+        super.layoutSubviews()
+    }
+
     internal func configureCell(cardDTO: CardDTO) {
         baseViewCell.titleLabel.text = cardDTO.name
         baseViewCell.subtitleLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
-        baseViewCell.accessoryLabel.text = "2.33"//cardDTO.price
+        baseViewCell.accessoryLabel.text = ""//cardDTO.price
     }
 
     static func height() -> CGFloat {
