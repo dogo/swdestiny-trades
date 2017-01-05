@@ -392,16 +392,11 @@
 		DD8E8A9A1E11610100C54FD9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DD8CE7571E1C27FB00110B07 /* About */,
 				DD8E8A9B1E11610100C54FD9 /* AppDelegate */,
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
-				DDCDE37F1E1DF7A600B4BE18 /* CardDetail */,
-				DD8E8A9D1E11610100C54FD9 /* Cards */,
 				DDCDE3861E1DFA2300B4BE18 /* Extensions */,
-				DD1770CF1E12985B000D5D63 /* Loans */,
-				DD7FF0FA1E1DE524004FC6CF /* NewPerson */,
 				DD9289061E11933C00FDEC48 /* Rest */,
-				DD77FCE81E13DC3F0046EFCA /* Search */,
+				DDCDE38B1E1DFED100B4BE18 /* Screens */,
 				DD888C3D1E1947820093B3BF /* Utils */,
 			);
 			path = Classes;
@@ -520,6 +515,19 @@
 				DDCDE3871E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DDCDE38B1E1DFED100B4BE18 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				DD8CE7571E1C27FB00110B07 /* About */,
+				DDCDE37F1E1DF7A600B4BE18 /* CardDetail */,
+				DD8E8A9D1E11610100C54FD9 /* Cards */,
+				DD1770CF1E12985B000D5D63 /* Loans */,
+				DD7FF0FA1E1DE524004FC6CF /* NewPerson */,
+				DD77FCE81E13DC3F0046EFCA /* Search */,
+			);
+			name = Screens;
 			sourceTree = "<group>";
 		};
 		F0F79EAA73208C4792AE7D85 /* Pods */ = {
