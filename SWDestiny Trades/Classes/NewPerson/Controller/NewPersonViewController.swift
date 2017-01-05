@@ -36,26 +36,18 @@ class NewPersonViewController: UIViewController {
 
     func setupNavigationItem() {
         self.navigationItem.title = "New Person"
-        self.navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTouched(_:))),
-            UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTouched(_:)))
-        ]
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTouched(_:)))
     }
 
     // MARK: - UIBarButton Actions
 
-    func cancelButtonTouched(_ sender: Any) {
-        //dismiss(animated: true, completion: nil)
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-
     func doneButtonTouched(_ sender: Any) {
-//        if !firstNameTextField.text!.isEmpty {
-//            let person = PersonDTO()
-//            person.name = firstNameTextField.text!
-//            person.lastName = lastNameTextField.text!
-//            delegate?.insertNew(person: person)
-//        }
-        dismiss(animated: true, completion: nil)
+        if !newPersonView.firstNameTextField.text!.isEmpty {
+            let person = PersonDTO()
+            person.name = newPersonView.firstNameTextField.text!
+            person.lastName = newPersonView.lastNameTextField.text!
+            delegate?.insertNew(person: person)
+        }
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }
