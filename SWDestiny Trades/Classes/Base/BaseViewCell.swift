@@ -54,7 +54,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
 
     internal func setupConstraints() {
         contentView.snp.makeConstraints { make in
-            make.edges.equalTo(self).inset(UIEdgeInsets(top: 11, left: 8, bottom: 11, right: 8))
+            make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         }
 
         titleLabel.snp.makeConstraints { make in
