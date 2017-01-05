@@ -86,7 +86,7 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        performSegue(withIdentifier: "CardDetailsSegue", sender: getCard(at: indexPath))
+        navigateToNextController(with: getCard(at: indexPath))
     }
 
     // MARK: - Helpers
@@ -148,13 +148,11 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView?.reloadData()
     }
 
-    // MARK: - Segue
+    // MARK: TEMP
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CardDetailsSegue" {
-            if let nextViewController = segue.destination as? CardDetailViewController {
-                nextViewController.cardDTO = sender as? CardDTO
-            }
-        }
+    func navigateToNextController(with card: CardDTO?) {
+        let nextController = CardDetailViewController()
+        nextController.cardDTO = card
+        self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

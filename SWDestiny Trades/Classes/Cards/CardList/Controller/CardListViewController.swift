@@ -60,16 +60,14 @@ class CardListViewController: UIViewController, CardListViewDelegate {
     // MARK: - <CardListViewDelegate>
 
     func didSelectSet(at index: IndexPath) {
-        self.performSegue(withIdentifier: "CardDetailsSegue", sender: tableViewDatasource?.getSWDCardAt(index: index))
+        navigateToNextController(with: tableViewDatasource?.getSWDCardAt(index: index))
     }
 
-    // MARK: - Segue
+    // MARK: TEMP
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CardDetailsSegue" {
-            if let nextViewController = segue.destination as? CardDetailViewController {
-                nextViewController.cardDTO = sender as? CardDTO
-            }
-        }
+    func navigateToNextController(with card: CardDTO?) {
+        let nextController = CardDetailViewController()
+        nextController.cardDTO = card
+        self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

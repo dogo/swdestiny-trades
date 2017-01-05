@@ -53,7 +53,7 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "CardDetailsSegue", sender: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
+        navigateToNextController(with: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
     }
 
     // MARK: - <UITableViewDataSource>
@@ -101,13 +101,11 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView?.reloadData()
     }
 
-    // MARK: - Segue
+    // MARK: TEMP
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CardDetailsSegue" {
-            if let nextViewController = segue.destination as? CardDetailViewController {
-                nextViewController.cardDTO = sender as? CardDTO
-            }
-        }
+    func navigateToNextController(with card: CardDTO?) {
+        let nextController = CardDetailViewController()
+        nextController.cardDTO = card
+        self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

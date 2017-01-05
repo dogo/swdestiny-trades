@@ -101,7 +101,6 @@
                         <outlet property="searchBar" destination="Of7-MI-dFf" id="HrA-1b-Gvz"/>
                         <outlet property="searchDisplayController" destination="FO0-wR-Qfc" id="MOG-Yq-Nps"/>
                         <outlet property="tableView" destination="mYy-nW-KGI" id="DqK-rD-KIG"/>
-                        <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="xDF-eU-mGQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZA-kl-Tfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,44 +284,11 @@
                     <connections>
                         <outlet property="activityIndicator" destination="IGc-bH-xGB" id="UHg-yN-2U0"/>
                         <outlet property="tableView" destination="rhV-Mm-9rU" id="fOf-rO-ska"/>
-                        <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="j9I-dZ-cMs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yb6-6f-J4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2434.4000000000001" y="-321.58920539730138"/>
-        </scene>
-        <!--Card Detail View Controller-->
-        <scene sceneID="lCo-Jd-jsS">
-            <objects>
-                <viewController id="XID-1r-c07" customClass="CardDetailViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="j1a-Lg-A3X"/>
-                        <viewControllerLayoutGuide type="bottom" id="e9E-iP-Oef"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="goH-3H-T8t">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Apu-qJ-QXY">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Apu-qJ-QXY" firstAttribute="leading" secondItem="goH-3H-T8t" secondAttribute="leading" id="K1G-tO-wCm"/>
-                            <constraint firstAttribute="trailing" secondItem="Apu-qJ-QXY" secondAttribute="trailing" id="VQK-Mm-UBf"/>
-                            <constraint firstItem="e9E-iP-Oef" firstAttribute="top" secondItem="Apu-qJ-QXY" secondAttribute="bottom" id="faB-A6-YRy"/>
-                            <constraint firstItem="Apu-qJ-QXY" firstAttribute="top" secondItem="j1a-Lg-A3X" secondAttribute="bottom" id="lrZ-Wg-cSt"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="cardImageView" destination="Apu-qJ-QXY" id="uQt-Xi-71Q"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6JX-FL-JJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3164" y="-321.58920539730138"/>
         </scene>
         <!--People-->
         <scene sceneID="wg7-f3-ORb">
@@ -476,7 +442,6 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="tableView" destination="Clp-ds-etH" id="BQn-2A-Nq5"/>
-                        <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="jXR-bh-rzk"/>
                         <segue destination="lTO-DY-H5m" kind="show" identifier="AddCardSegue" id="MqT-7i-vKe"/>
                     </connections>
                 </viewController>
@@ -566,7 +531,6 @@
                         <outlet property="activityIndicator" destination="Nef-sK-FIL" id="Jyq-2l-wwN"/>
                         <outlet property="searchBar" destination="vjS-6g-5zK" id="9J5-rv-xMR"/>
                         <outlet property="tableView" destination="Rev-fP-oNg" id="uEk-s0-nzb"/>
-                        <segue destination="XID-1r-c07" kind="show" identifier="CardDetailsSegue" id="MWC-Ts-EGB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQg-OZ-mMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -645,7 +609,4 @@
         <image name="ic_cards_filled" width="33" height="33"/>
         <image name="ic_loans" width="33" height="33"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="j9I-dZ-cMs"/>
-    </inferredMetricsTieBreakers>
 </document>

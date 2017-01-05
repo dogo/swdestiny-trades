@@ -12,6 +12,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     var logoImage: UIImageView = {
         let image = UIImageView(frame: .zero)
+        image.contentMode = .scaleAspectFill
         return image
     }()
 
@@ -59,7 +60,6 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         self.backgroundColor = UIColor.white
 
         logoImage.image = UIImage(named: "LargeIconBlack")
-        logoImage.contentMode = .scaleAspectFill
 
         aboutTextView.delegate = self
         aboutTextView.isEditable = false
