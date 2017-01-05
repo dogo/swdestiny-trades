@@ -68,4 +68,11 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
             }
         }
     }
+
+    // MARK: - TEMP
+
+    @IBAction func navigateToNextController(_ sender: Any) {
+        let nextController = AboutViewController()
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
 }

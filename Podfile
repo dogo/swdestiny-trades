@@ -6,14 +6,15 @@ target 'SWDestiny Trades' do
   use_frameworks!
   
   # Pods for SWDestiny Trades
-  pod 'Kingfisher'
   pod 'Alamofire'
-  pod 'ObjectMapper'
-  pod 'RealmSwift'
-  pod 'TextFieldEffects'
-  pod 'SwiftMessages'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
+  pod 'Kingfisher'
+  pod 'ObjectMapper'
+  pod 'RealmSwift'
+  pod 'SnapKit'
+  pod 'SwiftMessages'
+  pod 'TextFieldEffects'
 
   target 'SWDestiny TradesTests' do
     inherit! :search_paths

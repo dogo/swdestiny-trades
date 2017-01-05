@@ -8,24 +8,26 @@
 
 import UIKit
 
-class AboutViewController: UIViewController, UITextViewDelegate {
+class AboutViewController: UIViewController {
 
-    @IBOutlet weak var aboutText: UITextView!
+    fileprivate var aboutView = AboutView()
 
     // MARK: - Life Cycle
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        aboutText.delegate = self
-        let attributedString = NSMutableAttributedString(string: "By Diogo Autilio\n\nAPI Data by Paco http://swdestinydb.com\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.")
-        attributedString.setAsLink(textToFind: "http://swdestinydb.com", linkURL: "http://swdestinydb.com")
-        aboutText.attributedText = attributedString
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openURL(URL)
-        return false
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
+    override func loadView() {
+        self.view = aboutView
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = "About"
+    }
 }

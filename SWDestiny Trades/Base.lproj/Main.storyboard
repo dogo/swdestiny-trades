@@ -10,59 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--About-->
-        <scene sceneID="YhU-Xu-jj2">
-            <objects>
-                <viewController title="About" id="AaR-Vz-eia" customClass="AboutViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ITd-hQ-q0v"/>
-                        <viewControllerLayoutGuide type="bottom" id="sEH-1K-fRV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="W5g-SK-nDi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LargeIconBlack" translatesAutoresizingMaskIntoConstraints="NO" id="dgU-3O-uNx">
-                                <rect key="frame" x="47.5" y="98" width="280" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Hcu-4T-oA1"/>
-                                    <constraint firstAttribute="width" constant="280" id="paf-mO-Rce"/>
-                                </constraints>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ap6-6N-fHn">
-                                <rect key="frame" x="34" y="270" width="307" height="314"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <attributes>
-                                            <font key="NSFont" metaFont="system" size="14"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ap6-6N-fHn" firstAttribute="leading" secondItem="W5g-SK-nDi" secondAttribute="leading" constant="34" id="04E-Zq-fBk"/>
-                            <constraint firstAttribute="trailing" secondItem="ap6-6N-fHn" secondAttribute="trailing" constant="34" id="2KN-8T-FMF"/>
-                            <constraint firstItem="dgU-3O-uNx" firstAttribute="centerX" secondItem="W5g-SK-nDi" secondAttribute="centerX" id="BQ9-UZ-fK7"/>
-                            <constraint firstItem="dgU-3O-uNx" firstAttribute="top" secondItem="ITd-hQ-q0v" secondAttribute="bottom" constant="34" id="TGi-Rj-rNa"/>
-                            <constraint firstItem="sEH-1K-fRV" firstAttribute="top" secondItem="ap6-6N-fHn" secondAttribute="bottom" constant="34" id="ZWM-9M-mOF"/>
-                            <constraint firstItem="ap6-6N-fHn" firstAttribute="top" secondItem="dgU-3O-uNx" secondAttribute="bottom" constant="22" id="keu-lu-6Ze"/>
-                            <constraint firstItem="ap6-6N-fHn" firstAttribute="centerX" secondItem="W5g-SK-nDi" secondAttribute="centerX" id="tIf-1t-hDD"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="aboutText" destination="ap6-6N-fHn" id="HZb-Y4-Jcv"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n9x-j7-MUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-976.46176911544239"/>
-        </scene>
         <!--Search List View Controller-->
         <scene sceneID="qc8-QI-JK9">
             <objects>
@@ -238,7 +185,7 @@
                         <barButtonItem key="leftBarButtonItem" image="ic_about" id="afW-8v-ClC">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="AaR-Vz-eia" kind="show" id="Qsg-V0-flj"/>
+                                <action selector="navigateToNextController:" destination="9pv-A4-QxB" id="dbO-vl-lUW"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="OJK-N4-vPB">
@@ -796,7 +743,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LargeIconBlack" width="280" height="280"/>
         <image name="ic_about" width="20" height="20"/>
         <image name="ic_awakenings" width="256" height="256"/>
         <image name="ic_cards" width="33" height="33"/>
