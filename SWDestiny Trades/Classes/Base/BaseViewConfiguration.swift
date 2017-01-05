@@ -10,7 +10,7 @@ import Foundation
 import SnapKit
 
 protocol BaseViewConfiguration {
-    func setupConstraints()
     func buildViewHierarchy()
+    func setupConstraints()
     func configureViews()
 }

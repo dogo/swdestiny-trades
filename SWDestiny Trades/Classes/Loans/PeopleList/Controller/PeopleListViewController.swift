@@ -105,4 +105,12 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
         navigationItem.leftBarButtonItem?.title = !editable ? "Done" : "Edit"
         navigationItem.leftBarButtonItem?.style = !editable ? .done : .plain
     }
+
+    // MARK: TEMP
+
+    @IBAction func navigateToNextController(_ sender: Any) {
+        let nextController = NewPersonViewController()
+        nextController.delegate = self
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
 }

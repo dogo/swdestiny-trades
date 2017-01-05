@@ -14,7 +14,6 @@
 		DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */; };
 		DD1770D81E12AF5A000D5D63 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770D71E12AF5A000D5D63 /* CardDetailViewController.swift */; };
 		DD36C4151E1A185C00177B64 /* PeopleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C40D1E1A185C00177B64 /* PeopleListViewController.swift */; };
-		DD36C4161E1A185C00177B64 /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C40E1E1A185C00177B64 /* NewPersonViewController.swift */; };
 		DD36C4171E1A185C00177B64 /* PeopleListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4101E1A185C00177B64 /* PeopleListDatasource.swift */; };
 		DD36C4181E1A185C00177B64 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4121E1A185C00177B64 /* PersonDTO.swift */; };
 		DD36C4191E1A185C00177B64 /* LoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4141E1A185C00177B64 /* LoanCell.swift */; };
@@ -30,6 +29,8 @@
 		DD77FCF41E14237F0046EFCA /* CardListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCF31E14237F0046EFCA /* CardListDatasource.swift */; };
 		DD7FF0F61E1DCD69004FC6CF /* BaseViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */; };
 		DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */; };
+		DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */; };
+		DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */; };
 		DD888C3F1E1947820093B3BF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD888C3E1E1947820093B3BF /* String.swift */; };
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
@@ -68,7 +69,6 @@
 		DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
 		DD1770D71E12AF5A000D5D63 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		DD36C40D1E1A185C00177B64 /* PeopleListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListViewController.swift; sourceTree = "<group>"; };
-		DD36C40E1E1A185C00177B64 /* NewPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
 		DD36C4101E1A185C00177B64 /* PeopleListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListDatasource.swift; sourceTree = "<group>"; };
 		DD36C4121E1A185C00177B64 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD36C4141E1A185C00177B64 /* LoanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanCell.swift; sourceTree = "<group>"; };
@@ -88,6 +88,8 @@
 		DD77FCF31E14237F0046EFCA /* CardListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDatasource.swift; sourceTree = "<group>"; };
 		DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewConfiguration.swift; sourceTree = "<group>"; };
 		DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
+		DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
 		DD888C3E1E1947820093B3BF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -222,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				DD36C40D1E1A185C00177B64 /* PeopleListViewController.swift */,
-				DD36C40E1E1A185C00177B64 /* NewPersonViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -350,6 +351,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DD7FF0FA1E1DE524004FC6CF /* NewPerson */ = {
+			isa = PBXGroup;
+			children = (
+				DD7FF0FB1E1DE524004FC6CF /* Controller */,
+				DD7FF0FD1E1DE524004FC6CF /* View */,
+			);
+			path = NewPerson;
+			sourceTree = "<group>";
+		};
+		DD7FF0FB1E1DE524004FC6CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD7FF0FD1E1DE524004FC6CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DD888C3D1E1947820093B3BF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +410,7 @@
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
 				DD8E8A9D1E11610100C54FD9 /* Cards */,
 				DD1770CF1E12985B000D5D63 /* Loans */,
+				DD7FF0FA1E1DE524004FC6CF /* NewPerson */,
 				DD9289061E11933C00FDEC48 /* Rest */,
 				DD77FCE81E13DC3F0046EFCA /* Search */,
 				DD888C3D1E1947820093B3BF /* Utils */,
@@ -706,6 +733,7 @@
 				DD1770D81E12AF5A000D5D63 /* CardDetailViewController.swift in Sources */,
 				DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */,
 				DD36C4181E1A185C00177B64 /* PersonDTO.swift in Sources */,
+				DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD36C4191E1A185C00177B64 /* LoanCell.swift in Sources */,
 				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
@@ -719,7 +747,6 @@
 				DD77FCF11E140ED10046EFCA /* SetsListDatasource.swift in Sources */,
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DD888C3F1E1947820093B3BF /* String.swift in Sources */,
-				DD36C4161E1A185C00177B64 /* NewPersonViewController.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
 				DD36C4151E1A185C00177B64 /* PeopleListViewController.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
@@ -727,6 +754,7 @@
 				DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */,
 				DD36C4171E1A185C00177B64 /* PeopleListDatasource.swift in Sources */,
 				DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */,
+				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
 				DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */,
 				DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */,

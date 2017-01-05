@@ -33,12 +33,12 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     // MARK: <BaseViewConfiguration>
 
-    func buildViewHierarchy() {
+    internal func buildViewHierarchy() {
         self.addSubview(logoImage)
         self.addSubview(aboutTextView)
     }
 
-    func setupConstraints() {
+    internal func setupConstraints() {
         logoImage.snp.makeConstraints { make in
             make.top.equalTo(self).offset(34+44+20)
             make.centerX.equalTo(self)
@@ -54,7 +54,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         }
     }
 
-    func configureViews() {
+    internal func configureViews() {
 
         self.backgroundColor = UIColor.white
 
