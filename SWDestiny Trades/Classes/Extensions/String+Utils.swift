@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public extension String {
+extension String {
 
     func trim() -> String {
         return self.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
