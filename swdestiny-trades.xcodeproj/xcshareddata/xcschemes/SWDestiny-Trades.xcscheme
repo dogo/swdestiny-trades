@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DD6E06831E114E88004A5653"
-               BuildableName = "SWDestiny Trades.app"
-               BlueprintName = "SWDestiny Trades"
-               ReferencedContainer = "container:SWDestiny Trades.xcodeproj">
+               BlueprintIdentifier = "DD6E06991E114E88004A5653"
+               BuildableName = "SWDestiny TradesTests.xctest"
+               BlueprintName = "SWDestiny TradesTests"
+               ReferencedContainer = "container:swdestiny-trades.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DD6E06991E114E88004A5653"
-               BuildableName = "SWDestiny TradesTests.xctest"
-               BlueprintName = "SWDestiny TradesTests"
-               ReferencedContainer = "container:SWDestiny Trades.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -45,7 +35,7 @@
             BlueprintIdentifier = "DD6E06831E114E88004A5653"
             BuildableName = "SWDestiny Trades.app"
             BlueprintName = "SWDestiny Trades"
-            ReferencedContainer = "container:SWDestiny Trades.xcodeproj">
+            ReferencedContainer = "container:swdestiny-trades.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -68,7 +58,7 @@
             BlueprintIdentifier = "DD6E06831E114E88004A5653"
             BuildableName = "SWDestiny Trades.app"
             BlueprintName = "SWDestiny Trades"
-            ReferencedContainer = "container:SWDestiny Trades.xcodeproj">
+            ReferencedContainer = "container:swdestiny-trades.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -87,7 +77,7 @@
             BlueprintIdentifier = "DD6E06831E114E88004A5653"
             BuildableName = "SWDestiny Trades.app"
             BlueprintName = "SWDestiny Trades"
-            ReferencedContainer = "container:SWDestiny Trades.xcodeproj">
+            ReferencedContainer = "container:swdestiny-trades.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
