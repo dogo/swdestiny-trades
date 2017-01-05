@@ -12,6 +12,7 @@ target 'SWDestiny Trades' do
   pod 'Kingfisher'
   pod 'ObjectMapper'
   pod 'RealmSwift'
+  pod 'Reusable'
   pod 'SnapKit'
   pod 'SwiftMessages'
   pod 'TextFieldEffects'

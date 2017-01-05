@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import RealmSwift
 import SwiftMessages
+import Reusable
 
 class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
@@ -28,6 +29,8 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
 
         self.navigationItem.title = "Add Card"
+
+        tableView?.register(cellType: CardSearchCell.self)
 
         self.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
@@ -66,10 +69,7 @@ class AddCardViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - <UITableViewDataSource>
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardSearchCell.cellIdentifier(), for: indexPath) as? CardSearchCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
+        let cell =  tableView.dequeueReusableCell(for: indexPath, cellType: CardSearchCell.self)
         cell.configureCell(cardDTO: getCard(at: indexPath))
         return cell
     }

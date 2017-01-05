@@ -33,50 +33,6 @@
                                         <outlet property="delegate" destination="BoE-F8-C2n" id="Fwm-ie-MVh"/>
                                     </connections>
                                 </searchBar>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CardSearchCell" rowHeight="53" id="Bms-JR-e8h" customClass="CardSearchCell" customModule="SWDestiny_Trades" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="53"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bms-JR-e8h" id="tgI-Ay-BTb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hc-lg-Kfy">
-                                                    <rect key="frame" x="20" y="8" width="88" height="19"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.33" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqD-NH-NMP">
-                                                    <rect key="frame" x="287" y="16" width="35" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Villain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E29-oc-jYz">
-                                                    <rect key="frame" x="20" y="27" width="39" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="E29-oc-jYz" firstAttribute="top" secondItem="9Hc-lg-Kfy" secondAttribute="bottom" id="0jR-be-RwF"/>
-                                                <constraint firstItem="E29-oc-jYz" firstAttribute="leading" secondItem="tgI-Ay-BTb" secondAttribute="leadingMargin" constant="12" id="CgP-QD-TAW"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="E29-oc-jYz" secondAttribute="bottom" id="L8i-tx-PJo"/>
-                                                <constraint firstItem="dqD-NH-NMP" firstAttribute="centerY" secondItem="tgI-Ay-BTb" secondAttribute="centerY" id="W3v-Vx-6GJ"/>
-                                                <constraint firstItem="9Hc-lg-Kfy" firstAttribute="leading" secondItem="tgI-Ay-BTb" secondAttribute="leadingMargin" constant="12" id="XSb-Wr-q9W"/>
-                                                <constraint firstItem="9Hc-lg-Kfy" firstAttribute="top" secondItem="tgI-Ay-BTb" secondAttribute="topMargin" id="hSb-RH-3xI"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="dqD-NH-NMP" secondAttribute="trailing" constant="12" id="rJa-M4-uS1"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="cardAffiliationLabel" destination="E29-oc-jYz" id="uIB-aX-7A4"/>
-                                            <outlet property="cardNameLabel" destination="9Hc-lg-Kfy" id="sTK-a9-liC"/>
-                                            <outlet property="priceLabel" destination="dqD-NH-NMP" id="IuQ-7H-Ycl"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BoE-F8-C2n" id="0aC-Qf-cj9"/>
                                     <outlet property="delegate" destination="BoE-F8-C2n" id="KWN-mw-8uc"/>

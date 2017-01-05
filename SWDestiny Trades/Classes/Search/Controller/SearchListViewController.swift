@@ -25,6 +25,8 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
 
         self.navigationItem.title = "Search"
 
+        tableView?.register(cellType: CardSearchCell.self)
+
         self.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardsData = cardsArray
@@ -56,13 +58,14 @@ class SearchListViewController: UIViewController, UITableViewDelegate, UITableVi
         navigateToNextController(with: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CardSearchCell.height()
+    }
+
     // MARK: - <UITableViewDataSource>
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardSearchCell.cellIdentifier(), for: indexPath) as? CardSearchCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardSearchCell.self)
         cell.configureCell(cardDTO: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
         return cell
     }

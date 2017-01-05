@@ -7,26 +7,57 @@
 //
 
 import UIKit
+import Reusable
 
-class CardSearchCell: UITableViewCell {
+class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    @IBOutlet weak var cardNameLabel: UILabel!
-    @IBOutlet weak var cardAffiliationLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel?
+    var baseViewCell = BaseViewCell()
 
-    internal static func cellIdentifier() -> String {
-        return "CardSearchCell"
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        buildViewHierarchy()
+        setupConstraints()
+        configureViews()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     internal func configureCell(cardDTO: CardDTO) {
-        cardNameLabel.text = cardDTO.name
-        cardAffiliationLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
-        priceLabel?.text = ""//cardDTO.price
+        baseViewCell.titleLabel.text = cardDTO.name
+        baseViewCell.subtitleLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
+        baseViewCell.accessoryLabel.text = "2.33"//cardDTO.price
+    }
+
+    static func height() -> CGFloat {
+        return 53
     }
 
     override func prepareForReuse() {
-        cardNameLabel.text = nil
-        cardAffiliationLabel.text = nil
-        priceLabel?.text = nil
+        baseViewCell.titleLabel.text = nil
+        baseViewCell.subtitleLabel.text = nil
+        baseViewCell.accessoryLabel.text = nil
+    }
+
+    // MARK: <BaseViewConfiguration>
+
+    internal func buildViewHierarchy() {
+        self.contentView.addSubview(baseViewCell)
+    }
+
+    internal func setupConstraints() {
+        baseViewCell.snp.makeConstraints { make in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            make.bottom.equalTo(self)
+        }
+    }
+
+    internal func configureViews() {
+        self.contentView.backgroundColor = UIColor.white
+        self.accessoryType = .disclosureIndicator
+        self.selectionStyle = .default
     }
 }
