@@ -404,90 +404,6 @@
             </objects>
             <point key="canvasLocation" x="1689" y="419"/>
         </scene>
-        <!--New Person-->
-        <scene sceneID="CZ0-FP-gbn">
-            <objects>
-                <viewController id="87Q-ee-NMu" customClass="NewPersonViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mbl-eE-ffd"/>
-                        <viewControllerLayoutGuide type="bottom" id="1KU-bT-wXn"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qvG-ds-a9P">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S26-UK-Qwc" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="12" y="129" width="351" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Zna-6N-C0b"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="skP-hP-Psz" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="12" y="222" width="351" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="w3y-oe-zEK"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="S26-UK-Qwc" firstAttribute="top" secondItem="mbl-eE-ffd" secondAttribute="bottom" constant="65" id="G5X-Cn-PaW"/>
-                            <constraint firstItem="skP-hP-Psz" firstAttribute="leading" secondItem="qvG-ds-a9P" secondAttribute="leading" constant="12" id="JW4-ze-WJl"/>
-                            <constraint firstItem="S26-UK-Qwc" firstAttribute="leading" secondItem="qvG-ds-a9P" secondAttribute="leading" constant="12" id="PYH-sN-pUh"/>
-                            <constraint firstAttribute="trailing" secondItem="S26-UK-Qwc" secondAttribute="trailing" constant="12" id="QaJ-Vc-qwK"/>
-                            <constraint firstItem="skP-hP-Psz" firstAttribute="top" secondItem="S26-UK-Qwc" secondAttribute="bottom" constant="33" id="RC4-g3-TtD"/>
-                            <constraint firstAttribute="trailing" secondItem="skP-hP-Psz" secondAttribute="trailing" constant="12" id="kER-uJ-LXc"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="New Person" id="PKX-v2-J9G">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ibu-CB-lC8">
-                            <connections>
-                                <action selector="cancelButtonTouched:" destination="87Q-ee-NMu" id="mJ5-TJ-AGA"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="y7R-ub-uSk">
-                            <connections>
-                                <action selector="doneButtonTouched:" destination="87Q-ee-NMu" id="Vex-e3-hG9"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="firstNameTextField" destination="S26-UK-Qwc" id="9sG-vK-XMA"/>
-                        <outlet property="lastNameTextField" destination="skP-hP-Psz" id="XE8-0f-osd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c1K-fB-QNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3378.4000000000001" y="418.74062968515744"/>
-        </scene>
         <!--Loans Detail View Controller-->
         <scene sceneID="X7u-Zk-LCU">
             <objects>
@@ -720,26 +636,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFD-dl-NKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="359.37031484257875"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="NJP-wl-jOL">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jSr-lg-8qu" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="AdD-Sp-84z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="87Q-ee-NMu" kind="relationship" relationship="rootViewController" id="zqz-hj-kh6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7dT-6q-zgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2439.1999999999998" y="418.74062968515744"/>
         </scene>
     </scenes>
     <resources>
