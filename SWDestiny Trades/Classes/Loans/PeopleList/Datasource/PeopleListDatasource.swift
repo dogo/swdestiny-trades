@@ -11,7 +11,7 @@ import RealmSwift
 
 class PeopleListDatasource: NSObject, UITableViewDataSource {
 
-    private var persons: [PersonDTO] = []
+    fileprivate var persons: [PersonDTO] = []
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LoanCell.cellIdentifier(), for: indexPath) as? LoanCell else {

@@ -10,67 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search List View Controller-->
-        <scene sceneID="qc8-QI-JK9">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BoE-F8-C2n" customClass="SearchListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="v1N-n9-3aG"/>
-                        <viewControllerLayoutGuide type="bottom" id="QR8-U9-Fxr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LgO-6E-lWP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mYy-nW-KGI">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search All Cards" id="Of7-MI-dFf">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="BoE-F8-C2n" id="Fwm-ie-MVh"/>
-                                    </connections>
-                                </searchBar>
-                                <connections>
-                                    <outlet property="dataSource" destination="BoE-F8-C2n" id="0aC-Qf-cj9"/>
-                                    <outlet property="delegate" destination="BoE-F8-C2n" id="KWN-mw-8uc"/>
-                                </connections>
-                            </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wyC-VS-klF">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="mYy-nW-KGI" firstAttribute="top" secondItem="v1N-n9-3aG" secondAttribute="bottom" id="0tk-ZE-wig"/>
-                            <constraint firstItem="mYy-nW-KGI" firstAttribute="leading" secondItem="LgO-6E-lWP" secondAttribute="leading" id="7YM-ec-4cl"/>
-                            <constraint firstItem="wyC-VS-klF" firstAttribute="centerX" secondItem="LgO-6E-lWP" secondAttribute="centerX" id="IQ5-Xd-eU7"/>
-                            <constraint firstItem="QR8-U9-Fxr" firstAttribute="top" secondItem="mYy-nW-KGI" secondAttribute="bottom" id="MQN-cZ-V1U"/>
-                            <constraint firstItem="wyC-VS-klF" firstAttribute="centerY" secondItem="LgO-6E-lWP" secondAttribute="centerY" id="YP0-jg-TNR"/>
-                            <constraint firstAttribute="trailing" secondItem="mYy-nW-KGI" secondAttribute="trailing" id="jze-c4-Z88"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="activityIndicator" destination="wyC-VS-klF" id="Up7-vM-CLk"/>
-                        <outlet property="searchBar" destination="Of7-MI-dFf" id="HrA-1b-Gvz"/>
-                        <outlet property="searchDisplayController" destination="FO0-wR-Qfc" id="MOG-Yq-Nps"/>
-                        <outlet property="tableView" destination="mYy-nW-KGI" id="DqK-rD-KIG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kZA-kl-Tfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="FO0-wR-Qfc">
-                    <connections>
-                        <outlet property="delegate" destination="BoE-F8-C2n" id="ypx-nm-7G4"/>
-                        <outlet property="searchContentsController" destination="BoE-F8-C2n" id="08M-YD-1n6"/>
-                        <outlet property="searchResultsDataSource" destination="BoE-F8-C2n" id="ejJ-XE-NLE"/>
-                        <outlet property="searchResultsDelegate" destination="BoE-F8-C2n" id="Ruw-0F-Jc8"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="1695" y="-975"/>
-        </scene>
         <!--Expansions-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -145,7 +84,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="OJK-N4-vPB">
                             <connections>
-                                <segue destination="BoE-F8-C2n" kind="show" id="ozO-Zz-UV6"/>
+                                <action selector="searchButtonTouched:" destination="9pv-A4-QxB" id="ac6-Qz-1PB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

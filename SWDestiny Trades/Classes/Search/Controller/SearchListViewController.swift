@@ -9,102 +9,50 @@
 import UIKit
 import Alamofire
 
-class SearchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+protocol SearchDelegate {
+    func didSelectCard(at index: IndexPath)
+}
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableView: UITableView?
-    @IBOutlet weak var searchBar: UISearchBar!
-    var searchIsActive: Bool = false
-    var cardsData: [CardDTO] = []
-    var filtered: [CardDTO] = []
+class SearchListViewController: UIViewController {
+
+    let searchView = SearchView()
 
     // MARK: - Life Cycle
+
+    override func loadView() {
+        self.view = searchView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.title = "Search"
 
-        tableView?.register(cellType: CardSearchCell.self)
-
-        self.activityIndicator.startAnimating()
+        self.searchView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
-            self.cardsData = cardsArray
-            self.filtered = cardsArray
-            self.activityIndicator.stopAnimating()
-            self.tableView?.reloadData()
+            self.searchView.searchTableView.updateSearchList(cardsArray)
+            self.searchView.activityIndicator.stopAnimating()
+
         }) { (error: DataResponse<Any>) in
-            self.activityIndicator.stopAnimating()
+            self.searchView.activityIndicator.stopAnimating()
             print(error)
         }
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        self.searchView.searchTableView.didSelectCard = { [weak self] card in
+            self?.navigateToNextController(with: card)
+        }
 
-        if let path = tableView?.indexPathForSelectedRow {
-            tableView?.deselectRow(at: path, animated: animated)
+        self.searchView.searchBar.doingSearch = { [weak self] query in
+            self?.searchView.searchTableView.doingSearch(query)
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.searchBar.becomeFirstResponder()
+        self.searchView.searchBar.becomeFirstResponder()
     }
 
-    // MARK: - <UITableViewDelegate>
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigateToNextController(with: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CardSearchCell.height()
-    }
-
-    // MARK: - <UITableViewDataSource>
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardSearchCell.self)
-        cell.configureCell(cardDTO: searchIsActive ? filtered[indexPath.row] : cardsData[indexPath.row])
-        return cell
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchIsActive {
-            return filtered.count
-        }
-        return cardsData.count
-    }
-
-    // MARK: - <UISearchBarDelegate>
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchIsActive = true
-    }
-
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchIsActive = false
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        if searchText.trim().isEmpty {
-            searchIsActive = false
-        } else {
-            filtered = cardsData.filter({ (card) -> Bool in
-                return card.name.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
-            })
-            searchIsActive = true
-        }
-        tableView?.reloadData()
-    }
-
-    // MARK: TEMP
+    // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO?) {
         let nextController = CardDetailViewController()

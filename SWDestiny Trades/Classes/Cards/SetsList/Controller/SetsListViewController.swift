@@ -75,4 +75,9 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
         let nextController = AboutViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }
+
+    @IBAction func searchButtonTouched(_ sender: Any) {
+        let nextController = SearchListViewController()
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
 }

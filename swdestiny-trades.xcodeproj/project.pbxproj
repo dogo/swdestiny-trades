@@ -18,6 +18,10 @@
 		DD36C4181E1A185C00177B64 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4121E1A185C00177B64 /* PersonDTO.swift */; };
 		DD36C4191E1A185C00177B64 /* LoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C4141E1A185C00177B64 /* LoanCell.swift */; };
 		DD36C41B1E1A1CCB00177B64 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD36C41A1E1A1CCB00177B64 /* AddCardViewController.swift */; };
+		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
+		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
+		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
+		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
 		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
@@ -76,6 +80,10 @@
 		DD36C4121E1A185C00177B64 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD36C4141E1A185C00177B64 /* LoanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanCell.swift; sourceTree = "<group>"; };
 		DD36C41A1E1A1CCB00177B64 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
+		DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
+		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
+		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -242,6 +250,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DD61B93D1E1FBC5400F38482 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
 		DD6E067B1E114E88004A5653 = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				DD77FCE91E13DC3F0046EFCA /* Controller */,
+				DD61B93D1E1FBC5400F38482 /* Datasource */,
 				DD77FCEB1E13DC3F0046EFCA /* View */,
 			);
 			path = Search;
@@ -305,6 +322,9 @@
 			isa = PBXGroup;
 			children = (
 				DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */,
+				DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */,
+				DD61B9401E1FC59600F38482 /* SearchView.swift */,
+				DD61B9421E1FCE8C00F38482 /* SearchBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -763,10 +783,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */,
 				DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */,
 				DD36C4181E1A185C00177B64 /* PersonDTO.swift in Sources */,
 				DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */,
+				DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD36C4191E1A185C00177B64 /* LoanCell.swift in Sources */,
 				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
@@ -790,6 +812,8 @@
 				DD36C4171E1A185C00177B64 /* PeopleListDatasource.swift in Sources */,
 				DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
+				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
+				DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
 				DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */,
 				DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */,
