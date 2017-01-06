@@ -31,7 +31,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
-  - Kingfisher (3.2.2)
+  - Kingfisher (3.2.4)
   - Nimble (5.1.1)
   - ObjectMapper (2.2.2)
   - Quick (1.0.0)
@@ -46,7 +46,7 @@ PODS:
   - Reusable/Storyboard (3.0.1)
   - Reusable/View (3.0.1)
   - SnapKit (3.1.2)
-  - SwiftMessages (3.1.2)
+  - SwiftMessages (3.1.3)
   - TextFieldEffects (1.3.0)
 
 DEPENDENCIES:
@@ -73,7 +73,7 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
-  Kingfisher: 821466474ad7ffc375a4aecadfa05068cfed67b3
+  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
@@ -81,7 +81,7 @@ SPEC CHECKSUMS:
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   Reusable: 5362d10271ca8316b104698a21e90498f47e8339
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
-  SwiftMessages: 87816be9b0b6dc37ff0e84ce3ff4555144554c32
+  SwiftMessages: 9d03bb95d394ac60f9c20335e2305dfea9cac70a
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
 
 PODFILE CHECKSUM: d1926985ae9d0bb24d7f07b167b2b5e83964e2cf
