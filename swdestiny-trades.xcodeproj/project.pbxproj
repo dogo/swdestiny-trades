@@ -10,8 +10,11 @@
 		6EEB8E59A7CCF724CAD4D6C3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */; };
 		DD0F80F21E23B8ED0088BE43 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F11E23B8ED0088BE43 /* CardListView.swift */; };
 		DD0F80F41E23B9B80088BE43 /* CardListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */; };
-		DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C61E119406000D5D63 /* SetDTO.swift */; };
-		DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */; };
+		DD0F80FF1E23C9980088BE43 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */; };
+		DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */; };
+		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
+		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
+		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
 		DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CB1E11B142000D5D63 /* CardDTO.swift */; };
 		DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
@@ -31,7 +34,6 @@
 		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
 		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
 		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
-		DD77FCF11E140ED10046EFCA /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCF01E140ED10046EFCA /* SetsListDatasource.swift */; };
 		DD77FCF41E14237F0046EFCA /* CardListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCF31E14237F0046EFCA /* CardListDatasource.swift */; };
 		DD7FF0F61E1DCD69004FC6CF /* BaseViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */; };
 		DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */; };
@@ -40,8 +42,6 @@
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
-		DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */; };
-		DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */; };
 		DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C51E117DA700A03C35 /* CardListViewController.swift */; };
 		DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA62C71E117DA700A03C35 /* CardCell.swift */; };
 		DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */; };
@@ -74,8 +74,11 @@
 		8901A0001FC742571251CA26 /* Pods-SWDestiny TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0F80F11E23B8ED0088BE43 /* CardListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableView.swift; sourceTree = "<group>"; };
-		DD1770C61E119406000D5D63 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
-		DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
+		DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
+		DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
+		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
+		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
+		DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DD1770CB1E11B142000D5D63 /* CardDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDTO.swift; sourceTree = "<group>"; };
 		DD1770CD1E11B51B000D5D63 /* CardsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsAPIClient.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
@@ -99,7 +102,6 @@
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
-		DD77FCF01E140ED10046EFCA /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
 		DD77FCF31E14237F0046EFCA /* CardListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDatasource.swift; sourceTree = "<group>"; };
 		DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewConfiguration.swift; sourceTree = "<group>"; };
 		DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -108,8 +110,6 @@
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
-		DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
-		DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DDAA62C51E117DA700A03C35 /* CardListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
 		DDAA62C71E117DA700A03C35 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
@@ -151,12 +151,48 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DD1770C51E119406000D5D63 /* Model */ = {
+		DD0F80F51E23C9980088BE43 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
-				DD1770C61E119406000D5D63 /* SetDTO.swift */,
+				DD0F80F61E23C9980088BE43 /* Controller */,
+				DD0F80F91E23C9980088BE43 /* Datasource */,
+				DD0F80FB1E23C9980088BE43 /* Model */,
+				DD0F80FD1E23C9980088BE43 /* View */,
+			);
+			path = Sets;
+			sourceTree = "<group>";
+		};
+		DD0F80F61E23C9980088BE43 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */,
+				DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD0F80F91E23C9980088BE43 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		DD0F80FB1E23C9980088BE43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD0F80FC1E23C9980088BE43 /* SetDTO.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DD0F80FD1E23C9980088BE43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DD1770CA1E11B142000D5D63 /* Model */ = {
@@ -333,14 +369,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		DD77FCEF1E140E990046EFCA /* Datasource */ = {
-			isa = PBXGroup;
-			children = (
-				DD77FCF01E140ED10046EFCA /* SetsListDatasource.swift */,
-			);
-			path = Datasource;
-			sourceTree = "<group>";
-		};
 		DD77FCF21E14237F0046EFCA /* Datasource */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,7 +469,6 @@
 			isa = PBXGroup;
 			children = (
 				DDAA62BC1E117D6C00A03C35 /* CardList */,
-				DDAA62BD1E117D7C00A03C35 /* SetsList */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -463,34 +490,6 @@
 				DDAA62C61E117DA700A03C35 /* View */,
 			);
 			path = CardList;
-			sourceTree = "<group>";
-		};
-		DDAA62BD1E117D7C00A03C35 /* SetsList */ = {
-			isa = PBXGroup;
-			children = (
-				DDAA62BE1E117D7C00A03C35 /* Controller */,
-				DD77FCEF1E140E990046EFCA /* Datasource */,
-				DD1770C51E119406000D5D63 /* Model */,
-				DDAA62C01E117D7C00A03C35 /* View */,
-			);
-			path = SetsList;
-			sourceTree = "<group>";
-		};
-		DDAA62BE1E117D7C00A03C35 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				DDAA62BF1E117D7C00A03C35 /* SetsListViewController.swift */,
-				DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		DDAA62C01E117D7C00A03C35 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				DDAA62C11E117D7C00A03C35 /* SetsTableCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		DDAA62C41E117DA700A03C35 /* Controller */ = {
@@ -555,6 +554,7 @@
 				DD1770CF1E12985B000D5D63 /* Loans */,
 				DD7FF0FA1E1DE524004FC6CF /* NewPerson */,
 				DD77FCE81E13DC3F0046EFCA /* Search */,
+				DD0F80F51E23C9980088BE43 /* Sets */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -796,20 +796,18 @@
 				DD36C4181E1A185C00177B64 /* PersonDTO.swift in Sources */,
 				DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */,
 				DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */,
+				DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD36C4191E1A185C00177B64 /* LoanCell.swift in Sources */,
-				DDAA62C21E117D7C00A03C35 /* SetsListViewController.swift in Sources */,
 				DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */,
 				DD1770CE1E11B51B000D5D63 /* CardsAPIClient.swift in Sources */,
+				DD0F80FF1E23C9980088BE43 /* SetsAPIClient.swift in Sources */,
 				DD77FCF41E14237F0046EFCA /* CardListDatasource.swift in Sources */,
 				DDCDE3881E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift in Sources */,
 				DDDB56881E158BFD00B9DCE6 /* LoansDetailViewController.swift in Sources */,
 				DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */,
 				DD7FF0F61E1DCD69004FC6CF /* BaseViewConfiguration.swift in Sources */,
-				DDAA62C31E117D7C00A03C35 /* SetsTableCell.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
-				DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */,
-				DD77FCF11E140ED10046EFCA /* SetsListDatasource.swift in Sources */,
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
 				DD0F80F21E23B8ED0088BE43 /* CardListView.swift in Sources */,
@@ -818,14 +816,16 @@
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
 				DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */,
 				DD36C4171E1A185C00177B64 /* PeopleListDatasource.swift in Sources */,
+				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DDDB568C1E159F8F00B9DCE6 /* LoanDetailCell.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
+				DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */,
 				DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
 				DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */,
 				DDDB568A1E158F9800B9DCE6 /* LoansDetailDatasource.swift in Sources */,
-				DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */,
+				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
 				DDAA62C91E117DA700A03C35 /* CardCell.swift in Sources */,
 				DD36C41B1E1A1CCB00177B64 /* AddCardViewController.swift in Sources */,
 			);
