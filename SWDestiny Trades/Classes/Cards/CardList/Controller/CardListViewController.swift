@@ -43,7 +43,7 @@ class CardListViewController: UIViewController {
         }
     }
 
-    // MARK: TEMP
+    // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO?) {
         let nextController = CardDetailViewController()

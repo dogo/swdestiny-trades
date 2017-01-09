@@ -16,7 +16,6 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
-        //self.cardsData = cards
         self.tableView = tableView
         tableView.register(cellType: CardCell.self)
         self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
