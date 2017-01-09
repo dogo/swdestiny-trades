@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6EEB8E59A7CCF724CAD4D6C3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */; };
+		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
+		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0F80F21E23B8ED0088BE43 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F11E23B8ED0088BE43 /* CardListView.swift */; };
 		DD0F80F41E23B9B80088BE43 /* CardListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */; };
 		DD0F80FF1E23C9980088BE43 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */; };
@@ -72,6 +74,8 @@
 		552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6923C8546BAAAC67833D4293 /* Pods-SWDestiny TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.release.xcconfig"; sourceTree = "<group>"; };
 		8901A0001FC742571251CA26 /* Pods-SWDestiny TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
+		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		DD0F80F11E23B8ED0088BE43 /* CardListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableView.swift; sourceTree = "<group>"; };
 		DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */,
+				DD0905181E244E4000D9EFB0 /* SetsTableView.swift */,
+				DD09051A1E2450B300D9EFB0 /* SetsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -789,6 +795,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD0F80F41E23B9B80088BE43 /* CardListTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */,
@@ -821,6 +828,7 @@
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
 				DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */,
+				DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */,
 				DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */,
 				DDAA62C81E117DA700A03C35 /* CardListViewController.swift in Sources */,
 				DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */,

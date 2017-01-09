@@ -10,15 +10,23 @@ import UIKit
 
 class SetsListDatasource: NSObject, UITableViewDataSource {
 
-    private var swdSets: [Character : [SetDTO]] = [ : ]
-    private var sectionLetters: [Character] = []
+    fileprivate var tableView: UITableView?
+    fileprivate var swdSets: [Character : [SetDTO]] = [ : ]
+    fileprivate var sectionLetters: [Character] = []
+    
+    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+        super.init()
+        self.tableView = tableView
+        tableView.register(cellType: SetsTableCell.self)
+        self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = delegate
+        self.tableView?.reloadData()
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SetsTableCell.cellIdentifier(), for: indexPath) as? SetsTableCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
-        cell.configureCell(setDTO: getSWDSetAt(index: indexPath)!)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SetsTableCell.self)
+        cell.configureCell(setDTO: getSet(at: indexPath))
         return cell
     }
 
@@ -34,8 +42,8 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
         return swdSets[sectionLetters[section]]!.count
     }
 
-    public func getSWDSetAt(index: IndexPath) -> SetDTO? {
-        return (swdSets[sectionLetters[index.section]]?[index.row])
+    public func getSet(at index: IndexPath) -> SetDTO {
+        return (swdSets[sectionLetters[index.section]]?[index.row])!
     }
 
     // MARK: - Split and Sort UITableView source
@@ -78,6 +86,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     public func sortAndSplitTableData(setList: [SetDTO]) {
         swdSets = createTableData(setList: setList).source
         sectionLetters = createTableData(setList: setList).firstLetters
+        tableView?.reloadData()
     }
 }
 
@@ -87,6 +96,10 @@ class SetsListDelegate: NSObject, UITableViewDelegate {
 
     init(_ delegate: SetsListViewDelegate) {
         self.delegate = delegate
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

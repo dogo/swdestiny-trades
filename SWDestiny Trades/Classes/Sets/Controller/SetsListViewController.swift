@@ -13,62 +13,67 @@ protocol SetsListViewDelegate {
     func didSelectSet(at index: IndexPath)
 }
 
-class SetsListViewController: UIViewController, SetsListViewDelegate {
+class SetsListViewController: UIViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableView: UITableView?
-    var tableViewDatasource: SetsListDatasource?
-    var tableViewDelegate: SetsListDelegate?
+    let setsView = SetsView()
 
     // MARK: - Life Cycle
+    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//    }
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    override func loadView() {
+        self.view = setsView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigationItem()
 
-        setupTableView()
-
-        activityIndicator.startAnimating()
+        setsView.activityIndicator.startAnimating()
         SetsAPIClient.retrieveSetList(successBlock: { (setsArray: Array<SetDTO>) in
-            self.tableViewDatasource?.sortAndSplitTableData(setList: setsArray)
-            self.activityIndicator.stopAnimating()
-            self.tableView?.reloadData()
+            self.setsView.setsTableView.updateSetList(setsArray)
+            self.setsView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
-            self.activityIndicator.stopAnimating()
+            self.setsView.activityIndicator.stopAnimating()
             print(error)
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let path = self.tableView?.indexPathForSelectedRow {
-            self.tableView?.deselectRow(at: path, animated: animated)
+        
+        setsView.setsTableView.didSelectSet = { [weak self] set in
+            self?.navigateToNextController(with: set)
         }
     }
-
-    func setupTableView() {
-        tableViewDatasource = SetsListDatasource()
-        tableViewDelegate = SetsListDelegate(self)
-        self.tableView?.dataSource = tableViewDatasource
-        self.tableView?.delegate = tableViewDelegate
+    
+    func setupNavigationItem() {
+        self.navigationItem.title = "Expansions"
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(named: "ic_about"), style: .plain, target: self, action: #selector(aboutButtonTouched(_:))),
+            UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
+        ]
     }
 
     // MARK: - <SetsListViewDelegate>
 
-    func didSelectSet(at index: IndexPath) {
+    func navigateToNextController(with set: SetDTO) {
         let nextController = CardListViewController()
-        nextController.setDTO = tableViewDatasource?.getSWDSetAt(index: index)
+        nextController.setDTO = set
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    // MARK: - TEMP
+    // MARK: - UIBarButton Actions
 
-    @IBAction func navigateToNextController(_ sender: Any) {
+    func aboutButtonTouched(_ sender: Any) {
         let nextController = AboutViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }
-
-    @IBAction func searchButtonTouched(_ sender: Any) {
+    
+    func searchButtonTouched(_ sender: Any) {
         let nextController = SearchListViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }

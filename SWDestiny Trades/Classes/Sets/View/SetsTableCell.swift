@@ -7,26 +7,68 @@
 //
 
 import UIKit
+import Reusable
 
-class SetsTableCell: UITableViewCell {
+class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    @IBOutlet weak var setNameLabel: UILabel!
-    @IBOutlet weak var setIconImage: UIImageView!
-
-    internal static func cellIdentifier() -> String {
-        return "SetsTableCell"
+    var titleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = UIFont.systemFont(ofSize: 17)
+        return label
+    }()
+    
+    var expansionImageView: UIImageView = {
+        let image = UIImageView(frame: .zero)
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        buildViewHierarchy()
+        setupConstraints()
+        configureViews()
     }
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     internal func configureCell(setDTO: SetDTO) {
-        setNameLabel.text = setDTO.name
-
+        titleLabel.text = setDTO.name
+        
         if setDTO.code.lowercased() == "aw" {
-            setIconImage.image = UIImage(named: "ic_awakenings")
+            expansionImageView.image = UIImage(named: "ic_awakenings")
         }
     }
-
+    
     override func prepareForReuse() {
-        setNameLabel.text = nil
-        setIconImage.image = nil
+        titleLabel.text = nil
+        expansionImageView.image = nil
+    }
+    
+    // MARK: <BaseViewConfiguration>
+    
+    internal func buildViewHierarchy() {
+        self.contentView.addSubview(expansionImageView)
+        self.contentView.addSubview(titleLabel)
+    }
+    
+    internal func setupConstraints() {
+        expansionImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(self)
+            make.left.equalTo(self).offset(12)
+            make.height.equalTo(35)
+            make.width.equalTo(35)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self)
+            make.left.equalTo(expansionImageView.snp.right).offset(12)
+        }
+    }
+    
+    internal func configureViews() {
+        self.accessoryType = .disclosureIndicator
     }
 }
