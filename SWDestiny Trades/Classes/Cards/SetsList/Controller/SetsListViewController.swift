@@ -56,17 +56,9 @@ class SetsListViewController: UIViewController, SetsListViewDelegate {
     // MARK: - <SetsListViewDelegate>
 
     func didSelectSet(at index: IndexPath) {
-        self.performSegue(withIdentifier: "ShowSetSegue", sender: tableViewDatasource?.getSWDSetAt(index: index))
-    }
-
-    // MARK: - Segue
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowSetSegue" {
-            if let nextViewController = segue.destination as? CardListViewController {
-                nextViewController.setDTO = (sender as? SetDTO)
-            }
-        }
+        let nextController = CardListViewController()
+        nextController.setDTO = tableViewDatasource?.getSWDSetAt(index: index)
+        self.navigationController?.pushViewController(nextController, animated: true)
     }
 
     // MARK: - TEMP

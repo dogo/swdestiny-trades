@@ -68,7 +68,7 @@ class SearchTableDelegate: NSObject, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CardSearchCell.height()
+        return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

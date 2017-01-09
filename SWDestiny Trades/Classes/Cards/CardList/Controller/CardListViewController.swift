@@ -10,57 +10,37 @@ import UIKit
 import Alamofire
 
 protocol CardListViewDelegate {
-    func didSelectSet(at index: IndexPath)
+    func didSelectCard(at index: IndexPath)
 }
 
-class CardListViewController: UIViewController, CardListViewDelegate {
+class CardListViewController: UIViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableView: UITableView?
+    let cardListView = CardListView()
     var setDTO: SetDTO?
-    var tableViewDatasource: CardListDatasource?
-    var tableViewDelegate: CardListDelegate?
 
     // MARK: - Life Cycle
+    
+    override func loadView() {
+        self.view = cardListView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = setDTO?.name
-
-        setupTableView()
-
-        activityIndicator.startAnimating()
+        
+        cardListView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: Array<CardDTO>) in
-            self.tableViewDatasource?.sortAndSplitTableData(cardList: cardsArray)
-            self.activityIndicator.stopAnimating()
-            self.tableView?.reloadData()
+            self.cardListView.cardListTableView.updateCardList(cardsArray)
+            self.cardListView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
-            self.activityIndicator.stopAnimating()
+            self.cardListView.activityIndicator.stopAnimating()
             print(error)
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let path = tableView?.indexPathForSelectedRow {
-            tableView?.deselectRow(at: path, animated: animated)
+        
+        self.cardListView.cardListTableView.didSelectCard = { [weak self] card in
+            self?.navigateToNextController(with: card)
         }
-    }
-
-    func setupTableView() {
-        tableViewDatasource = CardListDatasource()
-        tableViewDelegate = CardListDelegate(self)
-        self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
-        self.tableView?.dataSource = tableViewDatasource
-        self.tableView?.delegate = tableViewDelegate
-    }
-
-    // MARK: - <CardListViewDelegate>
-
-    func didSelectSet(at index: IndexPath) {
-        navigateToNextController(with: tableViewDatasource?.getSWDCardAt(index: index))
     }
 
     // MARK: TEMP

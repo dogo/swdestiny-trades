@@ -37,10 +37,6 @@ class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.accessoryLabel.text = ""//cardDTO.price
     }
 
-    static func height() -> CGFloat {
-        return 53
-    }
-
     override func prepareForReuse() {
         baseViewCell.titleLabel.text = nil
         baseViewCell.subtitleLabel.text = nil
@@ -63,8 +59,6 @@ class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.contentView.backgroundColor = UIColor.white
         self.accessoryType = .disclosureIndicator
-        self.selectionStyle = .default
     }
 }

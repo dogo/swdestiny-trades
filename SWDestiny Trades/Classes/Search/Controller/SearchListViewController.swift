@@ -32,7 +32,6 @@ class SearchListViewController: UIViewController {
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.searchView.searchTableView.updateSearchList(cardsArray)
             self.searchView.activityIndicator.stopAnimating()
-
         }) { (error: DataResponse<Any>) in
             self.searchView.activityIndicator.stopAnimating()
             print(error)

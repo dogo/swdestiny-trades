@@ -33,6 +33,10 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         let view = UIView(frame: .zero)
         return view
     }()
+    
+    static func height() -> CGFloat {
+        return 53
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,5 +79,6 @@ class BaseViewCell: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
+        self.contentView.backgroundColor = UIColor.white
     }
 }

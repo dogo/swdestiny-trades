@@ -91,99 +91,11 @@
                     <connections>
                         <outlet property="activityIndicator" destination="LJm-Fp-Bhr" id="mdA-KC-AwK"/>
                         <outlet property="tableView" destination="uRh-6A-2eK" id="c8G-li-qm0"/>
-                        <segue destination="ZC5-E2-SXr" kind="show" identifier="ShowSetSegue" id="whF-EO-2LZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
-        </scene>
-        <!--Card List View Controller-->
-        <scene sceneID="Dzj-gZ-iez">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZC5-E2-SXr" customClass="CardListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="npj-ab-sJH"/>
-                        <viewControllerLayoutGuide type="bottom" id="AfK-8i-OCS"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uHk-7i-678">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rhV-Mm-9rU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" rowHeight="53" id="4KR-EU-hRR" customClass="CardCell" customModule="SWDestiny_Trades" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="53"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4KR-EU-hRR" id="qWt-xr-xO3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Darth Vader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="966-RF-DTv">
-                                                    <rect key="frame" x="20" y="8" width="88" height="19"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.33" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUf-bh-4IH">
-                                                    <rect key="frame" x="320" y="16" width="35" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Villain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYs-jS-Fhh">
-                                                    <rect key="frame" x="20" y="27" width="39" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fUf-bh-4IH" secondAttribute="trailing" constant="12" id="0hO-c7-eNH"/>
-                                                <constraint firstItem="TYs-jS-Fhh" firstAttribute="top" secondItem="966-RF-DTv" secondAttribute="bottom" id="8He-N2-3X5"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="TYs-jS-Fhh" secondAttribute="bottom" id="EHG-wq-jdG"/>
-                                                <constraint firstItem="966-RF-DTv" firstAttribute="top" secondItem="qWt-xr-xO3" secondAttribute="topMargin" id="Lui-Tw-AMf"/>
-                                                <constraint firstItem="fUf-bh-4IH" firstAttribute="centerY" secondItem="qWt-xr-xO3" secondAttribute="centerY" id="Pdx-LY-1Ff"/>
-                                                <constraint firstItem="TYs-jS-Fhh" firstAttribute="leading" secondItem="qWt-xr-xO3" secondAttribute="leadingMargin" constant="12" id="ok6-V6-Vs2"/>
-                                                <constraint firstItem="966-RF-DTv" firstAttribute="leading" secondItem="qWt-xr-xO3" secondAttribute="leadingMargin" constant="12" id="uLl-BC-bQY"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="cardAffiliationLabel" destination="TYs-jS-Fhh" id="Z0G-Wu-Cep"/>
-                                            <outlet property="cardNameLabel" destination="966-RF-DTv" id="LhM-Xr-857"/>
-                                            <outlet property="priceLabel" destination="fUf-bh-4IH" id="eW1-GX-w5F"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="ZC5-E2-SXr" id="REl-gZ-Fst"/>
-                                    <outlet property="delegate" destination="ZC5-E2-SXr" id="dzh-VE-39j"/>
-                                </connections>
-                            </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IGc-bH-xGB">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="rhV-Mm-9rU" firstAttribute="leading" secondItem="uHk-7i-678" secondAttribute="leading" id="90r-Z3-2vM"/>
-                            <constraint firstItem="rhV-Mm-9rU" firstAttribute="top" secondItem="npj-ab-sJH" secondAttribute="bottom" id="Hpn-Fr-feJ"/>
-                            <constraint firstItem="AfK-8i-OCS" firstAttribute="top" secondItem="rhV-Mm-9rU" secondAttribute="bottom" id="QfF-uI-sqN"/>
-                            <constraint firstAttribute="trailing" secondItem="rhV-Mm-9rU" secondAttribute="trailing" id="j8U-aj-Zmw"/>
-                            <constraint firstItem="IGc-bH-xGB" firstAttribute="centerX" secondItem="uHk-7i-678" secondAttribute="centerX" id="mxc-V2-7d1"/>
-                            <constraint firstItem="IGc-bH-xGB" firstAttribute="centerY" secondItem="uHk-7i-678" secondAttribute="centerY" id="oGh-hW-9IX"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="activityIndicator" destination="IGc-bH-xGB" id="UHg-yN-2U0"/>
-                        <outlet property="tableView" destination="rhV-Mm-9rU" id="fOf-rO-ska"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yb6-6f-J4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2434.4000000000001" y="-321.58920539730138"/>
         </scene>
         <!--People-->
         <scene sceneID="wg7-f3-ORb">

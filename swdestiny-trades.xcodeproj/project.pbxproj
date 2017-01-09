@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6EEB8E59A7CCF724CAD4D6C3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */; };
+		DD0F80F21E23B8ED0088BE43 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F11E23B8ED0088BE43 /* CardListView.swift */; };
+		DD0F80F41E23B9B80088BE43 /* CardListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */; };
 		DD1770C71E119406000D5D63 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C61E119406000D5D63 /* SetDTO.swift */; };
 		DD1770C91E11953B000D5D63 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */; };
 		DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1770CB1E11B142000D5D63 /* CardDTO.swift */; };
@@ -70,6 +72,8 @@
 		552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6923C8546BAAAC67833D4293 /* Pods-SWDestiny TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.release.xcconfig"; sourceTree = "<group>"; };
 		8901A0001FC742571251CA26 /* Pods-SWDestiny TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny TradesTests/Pods-SWDestiny TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD0F80F11E23B8ED0088BE43 /* CardListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
+		DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListTableView.swift; sourceTree = "<group>"; };
 		DD1770C61E119406000D5D63 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD1770C81E11953B000D5D63 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
 		DD1770CB1E11B142000D5D63 /* CardDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDTO.swift; sourceTree = "<group>"; };
@@ -502,6 +506,8 @@
 			isa = PBXGroup;
 			children = (
 				DDAA62C71E117DA700A03C35 /* CardCell.swift */,
+				DD0F80F11E23B8ED0088BE43 /* CardListView.swift */,
+				DD0F80F31E23B9B80088BE43 /* CardListTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -783,6 +789,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD0F80F41E23B9B80088BE43 /* CardListTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */,
 				DD1770CC1E11B142000D5D63 /* CardDTO.swift in Sources */,
@@ -805,6 +812,7 @@
 				DD77FCF11E140ED10046EFCA /* SetsListDatasource.swift in Sources */,
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
+				DD0F80F21E23B8ED0088BE43 /* CardListView.swift in Sources */,
 				DD36C4151E1A185C00177B64 /* PeopleListViewController.swift in Sources */,
 				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,

@@ -10,15 +10,24 @@ import UIKit
 
 class CardListDatasource: NSObject, UITableViewDataSource {
 
-    private var swdCards: [String : [CardDTO]] = [ : ]
-    private var sectionLetters: [String] = []
+    fileprivate var tableView: UITableView?
+    fileprivate var swdCards: [String : [CardDTO]] = [ : ]
+    fileprivate var sectionLetters: [String] = []
+    
+    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+        super.init()
+        //self.cardsData = cards
+        self.tableView = tableView
+        tableView.register(cellType: CardCell.self)
+        self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = delegate
+        self.tableView?.reloadData()
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.cellIdentifier(), for: indexPath) as? CardCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
-        cell.configureCell(cardDTO: getSWDCardAt(index: indexPath)!)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
+        cell.configureCell(cardDTO: getCard(at: indexPath))
         return cell
     }
 
@@ -38,8 +47,8 @@ class CardListDatasource: NSObject, UITableViewDataSource {
         return sectionLetters
     }
 
-    public func getSWDCardAt(index: IndexPath) -> CardDTO? {
-        return (swdCards[sectionLetters[index.section]]?[index.row])
+    public func getCard(at index: IndexPath) -> CardDTO {
+        return (swdCards[sectionLetters[index.section]]?[index.row])!
     }
 
     // MARK: - Split and Sort UITableView source
@@ -82,6 +91,7 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     public func sortAndSplitTableData(cardList: [CardDTO]) {
         swdCards = createTableData(cardList: cardList).source
         sectionLetters = createTableData(cardList: cardList).firstLetters
+        tableView?.reloadData()
     }
 }
 
@@ -92,8 +102,12 @@ class CardListDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: CardListViewDelegate) {
         self.delegate = delegate
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectSet(at: indexPath)
+        delegate.didSelectCard(at: indexPath)
     }
 }
