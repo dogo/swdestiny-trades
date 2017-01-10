@@ -76,7 +76,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == 0) {
+        if section == 0 {
             return lentMe.count + 1
         } else {
             return borrowed.count + 1
