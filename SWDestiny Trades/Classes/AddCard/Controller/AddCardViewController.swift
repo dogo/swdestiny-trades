@@ -98,7 +98,7 @@ class AddCardViewController: UIViewController {
         SwiftMessages.show(view: success)
     }
 
-    // MARK: TEMP
+    // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO?) {
         let nextController = CardDetailViewController()
