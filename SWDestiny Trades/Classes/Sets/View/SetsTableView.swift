@@ -25,13 +25,7 @@ final class SetsTableView: UITableView, SetsListViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func willMove(toSuperview newSuperview: UIView?) {
-        if let path = indexPathForSelectedRow {
-            deselectRow(at: path, animated: true)
-        }
-    }
-        
+            
     func updateSetList(_ sets: [SetDTO]) {
         tableViewDatasource?.sortAndSplitTableData(setList: sets)
     }

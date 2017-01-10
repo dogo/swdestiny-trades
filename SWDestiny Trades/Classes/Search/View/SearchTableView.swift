@@ -27,12 +27,6 @@ final class SearchTableView: UITableView, SearchDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func willMove(toSuperview newSuperview: UIView?) {
-        if let path = indexPathForSelectedRow {
-            deselectRow(at: path, animated: true)
-        }
-    }
-
     func doingSearch(_ query: String) {
         searchDatasource?.doingSearch(query)
     }

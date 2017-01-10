@@ -26,13 +26,7 @@ final class PeopleListTableView: UITableView, PeopleListViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func willMove(toSuperview newSuperview: UIView?) {
-        if let path = indexPathForSelectedRow {
-            deselectRow(at: path, animated: true)
-        }
-    }
-    
+        
     func updatePeopleList(_ peopleList: [PersonDTO]) {
         tableViewDatasource?.insert(personArray: peopleList)
     }

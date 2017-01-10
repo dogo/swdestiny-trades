@@ -25,13 +25,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func willMove(toSuperview newSuperview: UIView?) {
-        if let path = indexPathForSelectedRow {
-            deselectRow(at: path, animated: true)
-        }
-    }
-    
+        
     func updateCardList(_ cards: [CardDTO]) {
         cardListDatasource?.sortAndSplitTableData(cardList: cards)
     }

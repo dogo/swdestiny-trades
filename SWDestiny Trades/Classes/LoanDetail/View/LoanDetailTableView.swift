@@ -26,13 +26,7 @@ final class LoanDetailTableView: UITableView, LoansDetailViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func willMove(toSuperview newSuperview: UIView?) {
-        if let path = indexPathForSelectedRow {
-            deselectRow(at: path, animated: true)
-        }
-    }
-        
+            
     func updateTableViewData(borrowedList: [CardDTO], lentMeList: [CardDTO]) {
         tableViewDatasource?.updateTableViewData(borrowedList: borrowedList, lentMeList: lentMeList)
     }
