@@ -18,19 +18,19 @@ protocol UpdateTableDataDelegate {
 }
 
 class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
-    
+
     fileprivate let peopleListView = PeopleListView()
-    
+
     // MARK: - Life Cycle
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         self.view = peopleListView
     }
@@ -39,19 +39,19 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
         super.viewDidLoad()
 
         setupNavigationItem()
-        
+
         loadDataFromRealm()
 
         NotificationCenter.default.addObserver(self, selector: #selector(PeopleListViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
-        
+
         peopleListView.peopleListTableView.didSelectPerson = { [weak self] person in
             self?.navigateToLoansDetailViewController(person: person)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let path = peopleListView.peopleListTableView.indexPathForSelectedRow {
             peopleListView.peopleListTableView.deselectRow(at: path, animated: animated)
         }
@@ -60,7 +60,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     func setupNavigationItem() {
         self.navigationItem.title = "People"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTouched(_:)))
@@ -76,7 +76,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     @objc private func reloadTableView(_ notification: NSNotification) {
         loadDataFromRealm()
     }
-    
+
     internal func insertNew(person: PersonDTO) {
         peopleListView.peopleListTableView.insert(person)
     }
@@ -98,16 +98,16 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     // MARK: Navigation
 
     func navigateToNextController(_ sender: Any) {
-        
+
         if self.isEditing {
             toggleTableViewEditable(editable: self.isEditing)
         }
-        
+
         let nextController = NewPersonViewController()
         nextController.delegate = self
         self.navigationController?.pushViewController(nextController, animated: true)
     }
-    
+
     func navigateToLoansDetailViewController(person: PersonDTO) {
         let nextController = LoansDetailViewController()
         nextController.personDTO = person

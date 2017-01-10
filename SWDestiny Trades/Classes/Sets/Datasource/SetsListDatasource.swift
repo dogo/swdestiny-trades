@@ -13,7 +13,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     fileprivate var tableView: UITableView?
     fileprivate var swdSets: [Character : [SetDTO]] = [ : ]
     fileprivate var sectionLetters: [Character] = []
-    
+
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
@@ -97,7 +97,7 @@ class SetsListDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: SetsListViewDelegate) {
         self.delegate = delegate
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

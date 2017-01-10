@@ -12,14 +12,14 @@ import Reusable
 class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var baseViewCell = BaseViewCell()
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         buildViewHierarchy()
         setupConstraints()
         configureViews()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,13 +50,13 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.titleLabel.text = nil
         baseViewCell.titleLabel.text = nil
     }
-    
+
     // MARK: <BaseViewConfiguration>
-    
+
     internal func buildViewHierarchy() {
         self.contentView.addSubview(baseViewCell)
     }
-    
+
     internal func setupConstraints() {
         baseViewCell.snp.makeConstraints { make in
             make.top.equalTo(self)
@@ -65,7 +65,7 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
             make.bottom.equalTo(self)
         }
     }
-    
+
     internal func configureViews() {
         self.accessoryType = .disclosureIndicator
     }

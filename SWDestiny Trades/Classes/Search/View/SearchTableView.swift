@@ -34,7 +34,7 @@ final class SearchTableView: UITableView, SearchDelegate {
     func updateSearchList(_ cards: [CardDTO]) {
         searchDatasource?.updateSearchList(cards)
     }
-    
+
     // Mark: <SearchDelegate>
 
     internal func didSelectCard(at index: IndexPath) {

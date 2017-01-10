@@ -18,22 +18,22 @@ class SetsListViewController: UIViewController {
     fileprivate let setsView = SetsView()
 
     // MARK: - Life Cycle
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         self.view = setsView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationItem()
 
         setsView.activityIndicator.startAnimating()
@@ -44,20 +44,20 @@ class SetsListViewController: UIViewController {
             self.setsView.activityIndicator.stopAnimating()
             print(error)
         }
-        
+
         setsView.setsTableView.didSelectSet = { [weak self] set in
             self?.navigateToNextController(with: set)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let path = setsView.setsTableView.indexPathForSelectedRow {
             setsView.setsTableView.deselectRow(at: path, animated: animated)
         }
     }
-    
+
     func setupNavigationItem() {
         self.navigationItem.title = "Expansions"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_about"), style: .plain, target: self, action: #selector(aboutButtonTouched(_:)))
@@ -78,7 +78,7 @@ class SetsListViewController: UIViewController {
         let nextController = AboutViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }
-    
+
     func searchButtonTouched(_ sender: Any) {
         let nextController = SearchListViewController()
         self.navigationController?.pushViewController(nextController, animated: true)

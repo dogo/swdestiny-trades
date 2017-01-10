@@ -13,7 +13,7 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
     fileprivate var persons: [PersonDTO] = []
-    
+
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
@@ -85,7 +85,7 @@ class PeopleListDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: PeopleListViewDelegate) {
         self.delegate = delegate
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

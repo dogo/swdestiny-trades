@@ -18,11 +18,11 @@ class SearchListViewController: UIViewController {
     fileprivate let searchView = SearchView()
 
     // MARK: - Life Cycle
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,10 +53,10 @@ class SearchListViewController: UIViewController {
             self?.searchView.searchTableView.doingSearch(query)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let path = searchView.searchTableView.indexPathForSelectedRow {
             searchView.searchTableView.deselectRow(at: path, animated: animated)
         }

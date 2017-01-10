@@ -33,7 +33,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         let view = UIView(frame: .zero)
         return view
     }()
-    
+
     static func height() -> CGFloat {
         return 53
     }

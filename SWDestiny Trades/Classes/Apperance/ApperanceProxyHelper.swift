@@ -9,13 +9,13 @@
 import UIKit
 
 struct ApperanceProxyHelper {
-    
+
     static func customizeTabBar() {
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.tintColor = UIColor.white
         tabBarAppearance.barTintColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
     }
-    
+
     static func customizeNavigationBar() {
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.tintColor = UIColor.white

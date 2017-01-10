@@ -26,7 +26,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
-        
+
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
                 cell.textLabel?.text = "Add their card..."
@@ -118,7 +118,7 @@ class LoansDetailDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: LoansDetailViewDelegate) {
         self.delegate = delegate
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

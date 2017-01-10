@@ -19,15 +19,15 @@ class CardListViewController: UIViewController {
     var setDTO: SetDTO?
 
     // MARK: - Life Cycle
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         self.view = cardListView
     }
@@ -36,7 +36,7 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = setDTO?.name
-        
+
         cardListView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
@@ -45,15 +45,15 @@ class CardListViewController: UIViewController {
             self.cardListView.activityIndicator.stopAnimating()
             print(error)
         }
-        
+
         self.cardListView.cardListTableView.didSelectCard = { [weak self] card in
             self?.navigateToNextController(with: card)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let path = cardListView.cardListTableView.indexPathForSelectedRow {
             cardListView.cardListTableView.deselectRow(at: path, animated: animated)
         }

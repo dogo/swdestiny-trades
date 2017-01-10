@@ -13,7 +13,7 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     fileprivate var tableView: UITableView?
     fileprivate var swdCards: [String : [CardDTO]] = [ : ]
     fileprivate var sectionLetters: [String] = []
-    
+
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
@@ -101,7 +101,7 @@ class CardListDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: CardListViewDelegate) {
         self.delegate = delegate
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

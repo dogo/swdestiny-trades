@@ -18,15 +18,15 @@ class AddCardViewController: UIViewController {
     var personDTO: PersonDTO!
 
     // MARK: - Life Cycle
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         self.view = searchView
     }
@@ -44,19 +44,19 @@ class AddCardViewController: UIViewController {
             self.searchView.activityIndicator.stopAnimating()
             print(error)
         }
-        
+
         searchView.searchTableView.didSelectCard = { [weak self] card in
             self?.insert(card: card)
             if let path = self?.searchView.searchTableView.indexPathForSelectedRow {
                 self?.searchView.searchTableView.deselectRow(at: path, animated: true)
             }
         }
-        
+
         searchView.searchBar.doingSearch = { [weak self] query in
             self?.searchView.searchTableView.doingSearch(query)
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchView.searchBar.becomeFirstResponder()
