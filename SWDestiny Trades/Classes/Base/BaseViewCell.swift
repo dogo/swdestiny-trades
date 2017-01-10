@@ -79,6 +79,6 @@ class BaseViewCell: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = UIColor.white
     }
 }

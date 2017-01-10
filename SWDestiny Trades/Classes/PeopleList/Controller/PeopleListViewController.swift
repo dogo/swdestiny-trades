@@ -84,27 +84,22 @@ class PeopleListViewController: UIViewController {
         toggleTableViewEditable(editable: self.isEditing)
     }
 
-    // MARK: - Segue
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if self.isEditing {
-            toggleTableViewEditable(editable: self.isEditing)
-        }
-    }
-
     // MARK: - Helper
 
     private func toggleTableViewEditable(editable: Bool) {
         super.setEditing(!editable, animated: true)
-        peopleListView.peopleListTableView.setEditing(!editable, animated: true)
+        peopleListView.peopleListTableView.toggleTableViewEditable(editable: editable)
         navigationItem.leftBarButtonItem?.title = !editable ? "Done" : "Edit"
-        navigationItem.leftBarButtonItem?.style = !editable ? .done : .plain
     }
 
     // MARK: Navigation
 
     func navigateToNextController(_ sender: Any) {
+        
+        if self.isEditing {
+            toggleTableViewEditable(editable: self.isEditing)
+        }
+        
         let nextController = NewPersonViewController()
         //nextController.delegate = self
         self.navigationController?.pushViewController(nextController, animated: true)

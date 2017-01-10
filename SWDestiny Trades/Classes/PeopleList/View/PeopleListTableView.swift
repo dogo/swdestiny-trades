@@ -41,6 +41,10 @@ final class PeopleListTableView: UITableView, PeopleListViewDelegate {
         tableViewDatasource?.insert(person: people)
     }
     
+    func toggleTableViewEditable(editable: Bool) {
+        self.setEditing(!editable, animated: true)
+    }
+    
     // MARK: <PeopleListViewDelegate>
     
     internal func didSelectPerson(at index: IndexPath) {
