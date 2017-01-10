@@ -16,7 +16,7 @@ protocol PeopleListViewDelegate {
 
 class PeopleListViewController: UIViewController {
     
-    let peopleListView = PeopleListView()
+    fileprivate let peopleListView = PeopleListView()
     
     // MARK: - Life Cycle
     
@@ -47,6 +47,14 @@ class PeopleListViewController: UIViewController {
         
         peopleListView.peopleListTableView.didSelectInsetPerson = { [weak self] person in
             self?.peopleListView.peopleListTableView.insert(person)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = peopleListView.peopleListTableView.indexPathForSelectedRow {
+            peopleListView.peopleListTableView.deselectRow(at: path, animated: animated)
         }
     }
 

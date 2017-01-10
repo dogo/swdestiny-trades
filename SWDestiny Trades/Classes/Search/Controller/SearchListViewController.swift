@@ -15,7 +15,7 @@ protocol SearchDelegate {
 
 class SearchListViewController: UIViewController {
 
-    let searchView = SearchView()
+    fileprivate let searchView = SearchView()
 
     // MARK: - Life Cycle
     
@@ -51,6 +51,14 @@ class SearchListViewController: UIViewController {
 
         searchView.searchBar.doingSearch = { [weak self] query in
             self?.searchView.searchTableView.doingSearch(query)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = searchView.searchTableView.indexPathForSelectedRow {
+            searchView.searchTableView.deselectRow(at: path, animated: animated)
         }
     }
 

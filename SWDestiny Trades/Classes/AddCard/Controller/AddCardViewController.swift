@@ -13,7 +13,7 @@ import SwiftMessages
 
 class AddCardViewController: UIViewController {
 
-    let searchView = SearchView()
+    fileprivate let searchView = SearchView()
     var isLentMe: Bool!
     var personDTO: PersonDTO!
 
@@ -47,13 +47,16 @@ class AddCardViewController: UIViewController {
         
         searchView.searchTableView.didSelectCard = { [weak self] card in
             self?.insert(card: card)
+            if let path = self?.searchView.searchTableView.indexPathForSelectedRow {
+                self?.searchView.searchTableView.deselectRow(at: path, animated: true)
+            }
         }
         
         searchView.searchBar.doingSearch = { [weak self] query in
             self?.searchView.searchTableView.doingSearch(query)
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchView.searchBar.becomeFirstResponder()

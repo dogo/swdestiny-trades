@@ -10,7 +10,7 @@ import UIKit
 
 class CardDetailViewController: UIViewController {
 
-    fileprivate var cardView = CardView()
+    fileprivate let cardView = CardView()
     var cardDTO: CardDTO?
 
     // MARK: - Life Cycle

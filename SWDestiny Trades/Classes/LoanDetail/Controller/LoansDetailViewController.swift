@@ -14,9 +14,9 @@ protocol LoansDetailViewDelegate {
 
 class LoansDetailViewController: UIViewController {
 
-    var personDTO: PersonDTO!
+    fileprivate let loanDetailView = LoanDetailView()
     
-    let loanDetailView = LoanDetailView()
+    var personDTO: PersonDTO!
     
     // MARK: - Life Cycle
     
@@ -48,6 +48,14 @@ class LoansDetailViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = loanDetailView.loanDetailTableView.indexPathForSelectedRow {
+            loanDetailView.loanDetailTableView.deselectRow(at: path, animated: animated)
+        }
     }
 
     deinit {

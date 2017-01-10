@@ -15,7 +15,7 @@ protocol CardListViewDelegate {
 
 class CardListViewController: UIViewController {
 
-    let cardListView = CardListView()
+    fileprivate let cardListView = CardListView()
     var setDTO: SetDTO?
 
     // MARK: - Life Cycle
@@ -48,6 +48,14 @@ class CardListViewController: UIViewController {
         
         self.cardListView.cardListTableView.didSelectCard = { [weak self] card in
             self?.navigateToNextController(with: card)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = cardListView.cardListTableView.indexPathForSelectedRow {
+            cardListView.cardListTableView.deselectRow(at: path, animated: animated)
         }
     }
 

@@ -15,7 +15,7 @@ protocol SetsListViewDelegate {
 
 class SetsListViewController: UIViewController {
 
-    let setsView = SetsView()
+    fileprivate let setsView = SetsView()
 
     // MARK: - Life Cycle
     
@@ -47,6 +47,14 @@ class SetsListViewController: UIViewController {
         
         setsView.setsTableView.didSelectSet = { [weak self] set in
             self?.navigateToNextController(with: set)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = setsView.setsTableView.indexPathForSelectedRow {
+            setsView.setsTableView.deselectRow(at: path, animated: animated)
         }
     }
     
