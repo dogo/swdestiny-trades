@@ -10,11 +10,14 @@ import UIKit
 import RealmSwift
 
 protocol PeopleListViewDelegate {
-    func insertNew(person: PersonDTO)
     func didSelectPerson(at: IndexPath)
 }
 
-class PeopleListViewController: UIViewController {
+protocol UpdateTableDataDelegate {
+    func insertNew(person: PersonDTO)
+}
+
+class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     
     fileprivate let peopleListView = PeopleListView()
     
@@ -43,10 +46,6 @@ class PeopleListViewController: UIViewController {
         
         peopleListView.peopleListTableView.didSelectPerson = { [weak self] person in
             self?.navigateToLoansDetailViewController(person: person)
-        }
-        
-        peopleListView.peopleListTableView.didSelectInsetPerson = { [weak self] person in
-            self?.peopleListView.peopleListTableView.insert(person)
         }
     }
     
@@ -77,6 +76,10 @@ class PeopleListViewController: UIViewController {
     @objc private func reloadTableView(_ notification: NSNotification) {
         loadDataFromRealm()
     }
+    
+    internal func insertNew(person: PersonDTO) {
+        peopleListView.peopleListTableView.insert(person)
+    }
 
     // MARK: - UIBarButton Actions
 
@@ -101,7 +104,7 @@ class PeopleListViewController: UIViewController {
         }
         
         let nextController = NewPersonViewController()
-        //nextController.delegate = self
+        nextController.delegate = self
         self.navigationController?.pushViewController(nextController, animated: true)
     }
     

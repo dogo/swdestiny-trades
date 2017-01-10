@@ -11,7 +11,6 @@ import UIKit
 final class PeopleListTableView: UITableView, PeopleListViewDelegate {
     
     var didSelectPerson: ((PersonDTO) -> Void)?
-    var didSelectInsetPerson: ((PersonDTO) -> Void)?
     
     fileprivate var tableViewDatasource: PeopleListDatasource?
     fileprivate var tableViewDelegate: PeopleListDelegate?
@@ -45,9 +44,5 @@ final class PeopleListTableView: UITableView, PeopleListViewDelegate {
         if let person = tableViewDatasource?.getPerson(at: index) {
             didSelectPerson?(person)
         }
-    }
-        
-    internal func insertNew(person: PersonDTO) {
-        didSelectInsetPerson?(person)
     }
 }

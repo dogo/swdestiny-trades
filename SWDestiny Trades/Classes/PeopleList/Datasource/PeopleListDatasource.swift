@@ -66,6 +66,7 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
             realm.add(person, update: true)
             persons.append(person)
         }
+        tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
