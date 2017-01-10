@@ -13,7 +13,7 @@ import SwiftMessages
 
 class AddCardViewController: UIViewController {
 
-    fileprivate let searchView = SearchView()
+    fileprivate let addCardView = AddCardView()
     var isLentMe: Bool!
     var personDTO: PersonDTO!
 
@@ -28,7 +28,7 @@ class AddCardViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = searchView
+        self.view = addCardView
     }
 
     override func viewDidLoad() {
@@ -36,36 +36,32 @@ class AddCardViewController: UIViewController {
 
         self.navigationItem.title = "Add Card"
 
-        searchView.activityIndicator.startAnimating()
+        addCardView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
-            self.searchView.activityIndicator.stopAnimating()
-            self.searchView.searchTableView.updateSearchList(cardsArray)
+            self.addCardView.activityIndicator.stopAnimating()
+            self.addCardView.addCardTableView.updateSearchList(cardsArray)
         }) { (error: DataResponse<Any>) in
-            self.searchView.activityIndicator.stopAnimating()
+            self.addCardView.activityIndicator.stopAnimating()
             print(error)
         }
 
-        searchView.searchTableView.didSelectCard = { [weak self] card in
+        addCardView.addCardTableView.didSelectCard = { [weak self] card in
             self?.insert(card: card)
-            if let path = self?.searchView.searchTableView.indexPathForSelectedRow {
-                self?.searchView.searchTableView.deselectRow(at: path, animated: true)
-            }
+        }
+        
+        addCardView.addCardTableView.didSelectAccessory = { [weak self] card in
+            self?.navigateToNextController(with: card)
         }
 
-        searchView.searchBar.doingSearch = { [weak self] query in
-            self?.searchView.searchTableView.doingSearch(query)
+        addCardView.searchBar.doingSearch = { [weak self] query in
+            self?.addCardView.addCardTableView.doingSearch(query)
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchView.searchBar.becomeFirstResponder()
+        addCardView.searchBar.becomeFirstResponder()
     }
-
-//
-//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-//        navigateToNextController(with: getCard(at: indexPath))
-//    }
 
     // MARK: - Helpers
 

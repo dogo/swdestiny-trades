@@ -59,6 +59,10 @@
 		DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */; };
 		DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */; };
 		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
+		DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */; };
+		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
+		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
+		DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95B1E253A04004EADE9 /* AddCardView.swift */; };
 		F728BD09DF3536056693B01E /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +138,10 @@
 		DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListTableView.swift; sourceTree = "<group>"; };
 		DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
+		DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardDatasource.swift; sourceTree = "<group>"; };
+		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
+		DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardTableView.swift; sourceTree = "<group>"; };
+		DDFEB95B1E253A04004EADE9 /* AddCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				DD09051D1E24594E00D9EFB0 /* Controller */,
+				DDFEB9551E253A04004EADE9 /* Datasource */,
+				DDFEB9571E253A04004EADE9 /* View */,
 			);
 			path = AddCard;
 			sourceTree = "<group>";
@@ -604,6 +614,24 @@
 			name = Screens;
 			sourceTree = "<group>";
 		};
+		DDFEB9551E253A04004EADE9 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
+		DDFEB9571E253A04004EADE9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDFEB9581E253A04004EADE9 /* AddCardCell.swift */,
+				DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */,
+				DDFEB95B1E253A04004EADE9 /* AddCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F0F79EAA73208C4792AE7D85 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,12 +861,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,
 				DD09054A1E24701D00D9EFB0 /* CardCell.swift in Sources */,
+				DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */,
 				DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */,
 				DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */,
 				DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */,
@@ -867,6 +897,7 @@
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DD09055C1E24759000D9EFB0 /* ApperanceProxyHelper.swift in Sources */,
+				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
@@ -874,6 +905,7 @@
 				DD09054D1E24701D00D9EFB0 /* LoansDetailViewController.swift in Sources */,
 				DD09054C1E24701D00D9EFB0 /* CardListView.swift in Sources */,
 				DD0905531E24701D00D9EFB0 /* PeopleListDatasource.swift in Sources */,
+				DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */,
 				DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */,
 				DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */,
 				DD0905541E24701D00D9EFB0 /* PersonDTO.swift in Sources */,

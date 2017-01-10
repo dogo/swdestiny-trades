@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 
-protocol SearchDelegate {
+@objc protocol SearchDelegate {
     func didSelectCard(at index: IndexPath)
+    @objc optional func didSelectAccessory(at index: IndexPath)
 }
 
 class SearchListViewController: UIViewController {
