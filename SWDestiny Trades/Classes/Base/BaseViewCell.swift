@@ -70,11 +70,12 @@ class BaseViewCell: UIView, BaseViewConfiguration {
             make.top.equalTo(titleLabel.snp.bottom)
             make.left.equalTo(contentView).offset(12)
             make.bottom.equalTo(contentView)
+            make.right.equalTo(accessoryLabel.snp.left)
         }
 
         accessoryLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.right.equalTo(contentView).offset(-12)
+            make.right.equalTo(contentView)
         }
     }
 

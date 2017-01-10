@@ -35,8 +35,8 @@ class NewPersonViewController: UIViewController {
     }
 
     func setupNavigationItem() {
-        self.navigationItem.title = "New Person"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTouched(_:)))
+        self.navigationItem.title = NSLocalizedString("NEW_PERSON", comment: "")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTouched(_:)))
     }
 
     // MARK: - UIBarButton Actions

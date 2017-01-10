@@ -59,7 +59,7 @@ class SetsListViewController: UIViewController {
     }
 
     func setupNavigationItem() {
-        self.navigationItem.title = "Expansions"
+        self.navigationItem.title = NSLocalizedString("EXPANSIONS", comment: "")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_about"), style: .plain, target: self, action: #selector(aboutButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
     }

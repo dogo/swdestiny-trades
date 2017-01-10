@@ -34,7 +34,7 @@ class AddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "Add Card"
+        self.navigationItem.title = NSLocalizedString("ADD_CARD", comment: "")
 
         addCardView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
@@ -89,7 +89,7 @@ class AddCardViewController: UIViewController {
         }
         success.configureTheme(.success)
         success.configureDropShadow()
-        success.configureContent(title: "Added", body: card.name)
+        success.configureContent(title: NSLocalizedString("ADDED", comment: ""), body: card.name)
         success.button?.isHidden = true
         SwiftMessages.show(view: success)
     }

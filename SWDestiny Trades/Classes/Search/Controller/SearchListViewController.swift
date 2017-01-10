@@ -35,7 +35,7 @@ class SearchListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "Search"
+        self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
 
         searchView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in

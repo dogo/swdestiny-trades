@@ -62,8 +62,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     }
 
     func setupNavigationItem() {
-        self.navigationItem.title = "People"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTouched(_:)))
+        self.navigationItem.title = NSLocalizedString("PEOPLE", comment: "")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("EDIT", comment: ""), style: .plain, target: self, action: #selector(editButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToNextController(_:)))
     }
 
@@ -92,7 +92,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     private func toggleTableViewEditable(editable: Bool) {
         super.setEditing(!editable, animated: true)
         peopleListView.peopleListTableView.toggleTableViewEditable(editable: editable)
-        navigationItem.leftBarButtonItem?.title = !editable ? "Done" : "Edit"
+        navigationItem.leftBarButtonItem?.title = !editable ? NSLocalizedString("DONE", comment: "") : NSLocalizedString("EDIT", comment: "")
     }
 
     // MARK: Navigation

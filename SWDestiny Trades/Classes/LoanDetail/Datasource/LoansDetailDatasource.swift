@@ -29,7 +29,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
-                cell.textLabel?.text = "Add their card..."
+                cell.textLabel?.text = NSLocalizedString("ADD_THEIR_CARD", comment: "")
                 cell.textLabel?.textColor = UIColor.darkGray
             } else {
                 cell.textLabel?.text = nil
@@ -37,7 +37,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             }
         } else if indexPath.section == 1 {
             if indexPath.row == borrowed.count {
-                cell.textLabel?.text = "Add my card..."
+                cell.textLabel?.text = NSLocalizedString("ADD_MY_CARD", comment: "")
                 cell.textLabel?.textColor = UIColor.darkGray
             } else {
                 cell.textLabel?.text = nil
@@ -49,9 +49,9 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Has lent me:"
+            return NSLocalizedString("HAS_LENT_ME", comment: "")
         } else {
-            return "Has borrowed my:"
+            return NSLocalizedString("HAS_BORROWED_MY", comment: "")
         }
     }
 

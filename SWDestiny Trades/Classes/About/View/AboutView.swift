@@ -64,7 +64,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         aboutTextView.delegate = self
         aboutTextView.isEditable = false
 
-        let attributedString = NSMutableAttributedString(string: "By Diogo Autilio\n\nAPI Data by Paco http://swdestinydb.com\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.")
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("ABOUT_TEXT", comment: ""))
         attributedString.setAsLink(textToFind: "http://swdestinydb.com", linkURL: "http://swdestinydb.com")
 
         aboutTextView.attributedText = attributedString

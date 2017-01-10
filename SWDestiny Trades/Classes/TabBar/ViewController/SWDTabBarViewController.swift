@@ -19,7 +19,7 @@ final class SWDTabBarViewController: UITabBarController {
 
         // Create Tab two
         let tabTwo = UINavigationController(rootViewController: PeopleListViewController())
-        tabTwo.tabBarItem = UITabBarItem(title: "Loans", image: UIImage(named: "ic_loans"), selectedImage: nil)
+        tabTwo.tabBarItem = UITabBarItem(title: NSLocalizedString("LOANS", comment: ""), image: UIImage(named: "ic_loans"), selectedImage: nil)
 
         self.viewControllers = [tabOne, tabTwo]
     }

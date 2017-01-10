@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  swdestiny-trades
+
+  Created by Diogo Autilio on 10/01/17.
+  Copyright © 2017 Diogo Autilio. All rights reserved.
+*/
+
+"ADD_THEIR_CARD" = "Adicionar card...";
+"ADD_MY_CARD" = "Adiconar meu card...";
+"HAS_LENT_ME" = "Me emprestou:";
+"HAS_BORROWED_MY" = "Pegou emprestado:";
+"NO_LOANS" = "Sem empréstimos";
+"LENT_ME_AND_BORROWED_ME_CARD" = "Me emprestou %d card & pegou emprestado %d card";
+"LENT_ME_CARD"= "Me emprestou %d card";
+"BORROWED_ME_CARD" = "Pegou emprestado %d card";
+"ABOUT" = "Sobre";
+"ADD_CARD"= "Adicionar Card";
+"ADDED" = "Adicionado";
+"NEW_PERSON" = "Nova Pessoa";
+"PEOPLE" = "Pessoas";
+"DONE" = "Feito";
+"EDIT" = "Editar";
+"SEARCH" = "Procurar";
+"EXPANSIONS" = "Expansões";
+"FIRST_NAME" = "Primeiro Nome";
+"LAST_NAME" = "Sobrenome";
+"ALL_CARDS" = "Todos os cards";
+"LOANS" = "Empréstimos";
+"ABOUT_TEXT" = "Por Diogo Autilio\n\nInformação de API por Paco http://swdestinydb.com\n\nAs informações apresentadas neste aplicativo sobre Star Wars Destiny, tanto literal quanto gráfica, são protegidas por direitos autorais por Fantasy Flight Games. Este aplicativo não é produzido, endossado, apoiado ou afiliado a Fantasy Flight Games.";

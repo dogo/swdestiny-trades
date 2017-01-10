@@ -31,16 +31,16 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     private func getLoanState(personDTO: PersonDTO) -> String {
 
-        var loanState = "No loans"
+        var loanState = NSLocalizedString("NO_LOANS", comment: "")
 
         let lentMeCount = personDTO.lentMe.count
         let borrowedCount = personDTO.borrowed.count
         if lentMeCount > 0 && borrowedCount > 0 {
-            loanState = "Lent me \(lentMeCount) card & borrowed me \(borrowedCount) card"
+            loanState = String(format: NSLocalizedString("LENT_ME_AND_BORROWED_ME_CARD", comment: ""), lentMeCount, borrowedCount)
         } else if lentMeCount > 0 {
-            loanState = "Lent me \(lentMeCount) card"
+            loanState = String(format: NSLocalizedString("LENT_ME_CARD", comment: ""), lentMeCount)
         } else if borrowedCount > 0 {
-           loanState = "Borrowed me \(borrowedCount) card"
+            loanState = String(format: NSLocalizedString("BORROWED_ME_CARD", comment: ""), borrowedCount)
         }
 
         return loanState
@@ -68,5 +68,6 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func configureViews() {
         self.accessoryType = .disclosureIndicator
+        baseViewCell.subtitleLabel.adjustsFontSizeToFitWidth = true
     }
 }

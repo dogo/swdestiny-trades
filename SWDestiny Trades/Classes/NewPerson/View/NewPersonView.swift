@@ -62,7 +62,7 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
         firstNameTextField.textColor = UIColor.black
         firstNameTextField.autocapitalizationType = .sentences
         firstNameTextField.font = UIFont.systemFont(ofSize: 17)
-        firstNameTextField.placeholder = "First Name"
+        firstNameTextField.placeholder = NSLocalizedString("FIRST_NAME", comment: "")
         firstNameTextField.placeholderColor = UIColor.darkGray
         firstNameTextField.borderInactiveColor = UIColor.black
         firstNameTextField.borderActiveColor = UIColor.black
@@ -70,7 +70,7 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
         lastNameTextField.textColor = UIColor.black
         lastNameTextField.autocapitalizationType = .sentences
         lastNameTextField.font = UIFont.systemFont(ofSize: 17)
-        lastNameTextField.placeholder = "Last Name"
+        lastNameTextField.placeholder = NSLocalizedString("LAST_NAME", comment: "")
         lastNameTextField.placeholderColor = UIColor.darkGray
         lastNameTextField.borderInactiveColor = UIColor.black
         lastNameTextField.borderActiveColor = UIColor.black

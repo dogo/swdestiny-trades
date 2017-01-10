@@ -28,6 +28,6 @@ class AboutViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = "About"
+        self.navigationItem.title = NSLocalizedString("ABOUT", comment: "")
     }
 }
