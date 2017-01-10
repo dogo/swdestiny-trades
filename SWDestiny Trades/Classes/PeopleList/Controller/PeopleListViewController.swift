@@ -63,7 +63,7 @@ class PeopleListViewController: UIViewController {
     }
     
     func setupNavigationItem() {
-        self.navigationItem.title = "Expansions"
+        self.navigationItem.title = "People"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToNextController(_:)))
     }
