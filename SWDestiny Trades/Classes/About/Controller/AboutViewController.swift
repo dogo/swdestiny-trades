@@ -10,7 +10,7 @@ import UIKit
 
 class AboutViewController: UIViewController {
 
-    fileprivate var aboutView = AboutView()
+    fileprivate let aboutView = AboutView()
 
     // MARK: - Life Cycle
 

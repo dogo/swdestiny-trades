@@ -60,28 +60,24 @@ class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
 
     internal func didSelectSet(at index: IndexPath) {
         if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
-            performSegue(withIdentifier: "AddCardSegue", sender: index.section == 0)
+            navigateToAddCardViewController(lentMe: index.section == 0)
         } else {
-            navigateToNextController(with: tableViewDatasource?.getCard(at: index))
+            navigateToCardDetailViewController(with: tableViewDatasource?.getCard(at: index))
         }
     }
 
-    // MARK: - Segue
+    // MARK: Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddCardSegue" {
-            if let nextViewController = segue.destination as? AddCardViewController {
-                nextViewController.isLentMe = sender as? Bool
-                nextViewController.personDTO = personDTO
-            }
-        }
-    }
-
-    // MARK: TEMP
-
-    func navigateToNextController(with card: CardDTO?) {
+    func navigateToCardDetailViewController(with card: CardDTO?) {
         let nextController = CardDetailViewController()
         nextController.cardDTO = card
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
+    
+    func navigateToAddCardViewController(lentMe: Bool) {
+        let nextController = AddCardViewController()
+        nextController.isLentMe = lentMe
+        nextController.personDTO = personDTO
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

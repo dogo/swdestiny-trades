@@ -28,7 +28,7 @@ class SearchListViewController: UIViewController {
 
         self.navigationItem.title = "Search"
 
-        self.searchView.activityIndicator.startAnimating()
+        searchView.activityIndicator.startAnimating()
         CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.searchView.searchTableView.updateSearchList(cardsArray)
             self.searchView.activityIndicator.stopAnimating()
@@ -37,18 +37,18 @@ class SearchListViewController: UIViewController {
             print(error)
         }
 
-        self.searchView.searchTableView.didSelectCard = { [weak self] card in
+        searchView.searchTableView.didSelectCard = { [weak self] card in
             self?.navigateToNextController(with: card)
         }
 
-        self.searchView.searchBar.doingSearch = { [weak self] query in
+        searchView.searchBar.doingSearch = { [weak self] query in
             self?.searchView.searchTableView.doingSearch(query)
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.searchView.searchBar.becomeFirstResponder()
+        searchView.searchBar.becomeFirstResponder()
     }
 
     // MARK: Navigation
