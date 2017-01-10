@@ -9,60 +9,55 @@
 import UIKit
 
 protocol LoansDetailViewDelegate {
-    func didSelectSet(at: IndexPath)
+    func didSelectItem(at: IndexPath)
 }
 
-class LoansDetailViewController: UIViewController, LoansDetailViewDelegate {
+class LoansDetailViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView?
     var personDTO: PersonDTO!
-    var tableViewDatasource: LoansDetailDatasource?
-    var tableViewDelegate: LoansDetailDelegate?
+    
+    let loanDetailView = LoanDetailView()
+    
+    // MARK: - Life Cycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        self.view = loanDetailView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
 
-        setupTableView()
-        NotificationCenter.default.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let path = tableView?.indexPathForSelectedRow {
-            tableView?.deselectRow(at: path, animated: animated)
+        loanDetailView.loanDetailTableView.updateTableViewData(borrowedList: Array(personDTO.borrowed), lentMeList: Array(personDTO.lentMe))
+        
+        self.loanDetailView.loanDetailTableView.didSelectCard = { [weak self] card in
+            self?.navigateToCardDetailViewController(with: card)
         }
+        
+        self.loanDetailView.loanDetailTableView.didSelectAddItem = { [weak self] lentMe in
+            self?.navigateToAddCardViewController(lentMe: lentMe)
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func setupTableView() {
-        tableViewDatasource = LoansDetailDatasource(borrowedList: personDTO.borrowed, lentMeList: personDTO.lentMe)
-        tableViewDelegate = LoansDetailDelegate(self)
-        self.tableView?.dataSource = tableViewDatasource
-        self.tableView?.delegate = tableViewDelegate
-        self.tableView?.reloadData()
-    }
-
     @objc private func reloadTableView(_ notification: NSNotification) {
         if let person = notification.userInfo?["personDTO"] as? PersonDTO {
             personDTO = person
-            tableViewDatasource?.updateTableViewData(borrowedList: personDTO.borrowed, lentMeList: personDTO.lentMe)
-            self.tableView?.reloadData()
-        }
-    }
-
-    // MARK: - <LoansDetailViewDelegate>
-
-    internal func didSelectSet(at index: IndexPath) {
-        if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
-            navigateToAddCardViewController(lentMe: index.section == 0)
-        } else {
-            navigateToCardDetailViewController(with: tableViewDatasource?.getCard(at: index))
+            loanDetailView.loanDetailTableView.updateTableViewData(borrowedList: Array(personDTO.borrowed), lentMeList: Array(personDTO.lentMe))
         }
     }
 

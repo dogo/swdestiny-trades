@@ -73,7 +73,7 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
     }
 
     internal func didSelectSet(at index: IndexPath) {
-        performSegue(withIdentifier: "LoanDetailSegue", sender: tableViewDatasource?.getPersonAt(index: index))
+        navigateToLoansDetailViewController(person: (tableViewDatasource?.getPersonAt(index: index))!)
     }
 
     // MARK: - Segue
@@ -82,18 +82,6 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
 
         if self.isEditing {
             toggleTableViewEditable(editable: self.isEditing)
-        }
-
-        if segue.identifier == "NewPersonSegue" {
-            if let navController = segue.destination as? UINavigationController {
-                if let nextViewController = navController.topViewController as? NewPersonViewController {
-                    nextViewController.delegate = self
-                }
-            }
-        } else if segue.identifier == "LoanDetailSegue" {
-            if let nextViewController = segue.destination as? LoansDetailViewController {
-                nextViewController.personDTO = (sender as? PersonDTO)
-            }
         }
     }
 
@@ -106,11 +94,18 @@ class PeopleListViewController: UIViewController, PeopleListViewDelegate {
         navigationItem.leftBarButtonItem?.style = !editable ? .done : .plain
     }
 
-    // MARK: TEMP
+    // MARK: Navigation
 
     @IBAction func navigateToNextController(_ sender: Any) {
         let nextController = NewPersonViewController()
         nextController.delegate = self
         self.navigationController?.pushViewController(nextController, animated: true)
     }
+    
+    func navigateToLoansDetailViewController(person: PersonDTO) {
+        let nextController = LoansDetailViewController()
+        nextController.personDTO = person
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
+
 }

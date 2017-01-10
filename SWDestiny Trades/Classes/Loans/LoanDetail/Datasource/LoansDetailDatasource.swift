@@ -11,19 +11,22 @@ import RealmSwift
 
 class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
+    fileprivate var tableView: UITableView?
     var lentMe: [CardDTO] = []
     var borrowed: [CardDTO] = []
 
-    required init(borrowedList: List<CardDTO>, lentMeList: List<CardDTO>) {
+    required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
-        updateTableViewData(borrowedList: borrowedList, lentMeList: lentMeList)
+        self.tableView = tableView
+        tableView.register(cellType: LoanDetailCell.self)
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = delegate
+        self.tableView?.reloadData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LoanDetailCell.cellIdentifier(), for: indexPath) as? LoanDetailCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
+        
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
                 cell.textLabel?.text = "Add their card..."
@@ -101,9 +104,10 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    public func updateTableViewData(borrowedList: List<CardDTO>, lentMeList: List<CardDTO>) {
-        lentMe = Array(lentMeList)
-        borrowed = Array(borrowedList)
+    public func updateTableViewData(borrowedList: [CardDTO], lentMeList: [CardDTO]) {
+        lentMe = lentMeList
+        borrowed = borrowedList
+        tableView?.reloadData()
     }
 }
 
@@ -114,8 +118,12 @@ class LoansDetailDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: LoansDetailViewDelegate) {
         self.delegate = delegate
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectSet(at: indexPath)
+        delegate.didSelectItem(at: indexPath)
     }
 }

@@ -7,26 +7,51 @@
 //
 
 import UIKit
+import Reusable
 
-class LoanDetailCell: UITableViewCell {
-
-    @IBOutlet weak var cardNameLabel: UILabel!
-    @IBOutlet weak var cardSubtitleLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-
-    internal static func cellIdentifier() -> String {
-        return "LoanDetailCell"
+class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
+    
+    var baseViewCell = BaseViewCell()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        buildViewHierarchy()
+        setupConstraints()
+        configureViews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     internal func configureCell(cardDTO: CardDTO) {
-        cardNameLabel.text = cardDTO.name
-        cardSubtitleLabel.text = "\(cardDTO.rarityName) -- \(cardDTO.setName)"
-        priceLabel.text = ""//cardDTO.price
+        baseViewCell.titleLabel.text = cardDTO.name
+        baseViewCell.subtitleLabel.text = "\(cardDTO.rarityName) -- \(cardDTO.setName)"
+        baseViewCell.accessoryLabel.text = ""//cardDTO.price
     }
 
     override func prepareForReuse() {
-        cardNameLabel.text = nil
-        cardSubtitleLabel.text = nil
-        priceLabel.text = nil
+        baseViewCell.titleLabel.text = nil
+        baseViewCell.subtitleLabel.text = nil
+        baseViewCell.accessoryLabel.text = nil
+    }
+    
+    // MARK: <BaseViewConfiguration>
+    
+    internal func buildViewHierarchy() {
+        self.contentView.addSubview(baseViewCell)
+    }
+    
+    internal func setupConstraints() {
+        baseViewCell.snp.makeConstraints { make in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            make.bottom.equalTo(self)
+        }
+    }
+    
+    internal func configureViews() {
+        self.accessoryType = .disclosureIndicator
     }
 }
