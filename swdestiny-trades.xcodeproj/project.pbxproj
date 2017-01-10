@@ -40,7 +40,6 @@
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
-		DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E068D1E114E88004A5653 /* Main.storyboard */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
@@ -113,7 +112,6 @@
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD6E068E1E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD6E06931E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD6E06951E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -416,7 +414,6 @@
 				DD6E06951E114E88004A5653 /* Info.plist */,
 				DD6E06901E114E88004A5653 /* Assets.xcassets */,
 				DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */,
-				DD6E068D1E114E88004A5653 /* Main.storyboard */,
 			);
 			path = "SWDestiny Trades";
 			sourceTree = "<group>";
@@ -713,7 +710,6 @@
 				DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */,
 				DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */,
 				DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */,
-				DD6E068F1E114E88004A5653 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,14 +902,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		DD6E068D1E114E88004A5653 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DD6E068E1E114E88004A5653 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
