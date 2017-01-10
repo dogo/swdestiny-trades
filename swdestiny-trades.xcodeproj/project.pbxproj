@@ -27,6 +27,8 @@
 		DD0905531E24701D00D9EFB0 /* PeopleListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905411E24701D00D9EFB0 /* PeopleListDatasource.swift */; };
 		DD0905541E24701D00D9EFB0 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905431E24701D00D9EFB0 /* PersonDTO.swift */; };
 		DD0905551E24701D00D9EFB0 /* LoanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905451E24701D00D9EFB0 /* LoanCell.swift */; };
+		DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */; };
+		DD09055C1E24759000D9EFB0 /* ApperanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09055B1E24759000D9EFB0 /* ApperanceProxyHelper.swift */; };
 		DD0F80FF1E23C9980088BE43 /* SetsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */; };
 		DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */; };
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
@@ -95,6 +97,8 @@
 		DD0905411E24701D00D9EFB0 /* PeopleListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListDatasource.swift; sourceTree = "<group>"; };
 		DD0905431E24701D00D9EFB0 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD0905451E24701D00D9EFB0 /* LoanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanCell.swift; sourceTree = "<group>"; };
+		DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDTabBarViewController.swift; sourceTree = "<group>"; };
+		DD09055B1E24759000D9EFB0 /* ApperanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApperanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD0F80F71E23C9980088BE43 /* SetsAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsAPIClient.swift; sourceTree = "<group>"; };
 		DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
 		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
@@ -300,6 +304,30 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DD0905561E24729800D9EFB0 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				DD0905571E24729800D9EFB0 /* ViewController */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		DD0905571E24729800D9EFB0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DD09055A1E24757C00D9EFB0 /* Apperance */ = {
+			isa = PBXGroup;
+			children = (
+				DD09055B1E24759000D9EFB0 /* ApperanceProxyHelper.swift */,
+			);
+			path = Apperance;
+			sourceTree = "<group>";
+		};
 		DD0F80F51E23C9980088BE43 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				DD8E8A9B1E11610100C54FD9 /* AppDelegate */,
+				DD09055A1E24757C00D9EFB0 /* Apperance */,
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
 				DDCDE3861E1DFA2300B4BE18 /* Extensions */,
 				DD9289061E11933C00FDEC48 /* Rest */,
@@ -567,6 +596,7 @@
 				DD09053D1E24701D00D9EFB0 /* PeopleList */,
 				DD77FCE81E13DC3F0046EFCA /* Search */,
 				DD0F80F51E23C9980088BE43 /* Sets */,
+				DD0905561E24729800D9EFB0 /* TabBar */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -814,6 +844,7 @@
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD0905551E24701D00D9EFB0 /* LoanCell.swift in Sources */,
 				DD0905481E24701D00D9EFB0 /* CardListDatasource.swift in Sources */,
+				DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */,
 				DD0905471E24701D00D9EFB0 /* CardsAPIClient.swift in Sources */,
 				DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */,
 				DD0F80FF1E23C9980088BE43 /* SetsAPIClient.swift in Sources */,
@@ -831,6 +862,7 @@
 				DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */,
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
+				DD09055C1E24759000D9EFB0 /* ApperanceProxyHelper.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
