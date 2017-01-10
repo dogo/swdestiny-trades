@@ -10,93 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Expansions-->
-        <scene sceneID="hNz-n2-bh7">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="SetsListViewController" customModule="SWDestiny_Trades" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="53" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-6A-2eK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SetsTableCell" rowHeight="53" id="47l-df-LYV" customClass="SetsTableCell" customModule="SWDestiny_Trades" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="53"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="47l-df-LYV" id="F9W-33-jlt">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_awakenings" translatesAutoresizingMaskIntoConstraints="NO" id="Okp-Wg-UoC">
-                                                    <rect key="frame" x="20" y="9" width="35" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="pf0-96-KnF"/>
-                                                        <constraint firstAttribute="width" constant="35" id="zd3-dJ-B0d"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pJ-pc-gbK">
-                                                    <rect key="frame" x="67" y="16" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Okp-Wg-UoC" firstAttribute="leading" secondItem="F9W-33-jlt" secondAttribute="leadingMargin" constant="12" id="2Q9-Qj-uhb"/>
-                                                <constraint firstItem="8pJ-pc-gbK" firstAttribute="leading" secondItem="Okp-Wg-UoC" secondAttribute="trailing" constant="12" id="ETF-rn-qCS"/>
-                                                <constraint firstItem="8pJ-pc-gbK" firstAttribute="centerY" secondItem="F9W-33-jlt" secondAttribute="centerY" id="az2-Fw-hTZ"/>
-                                                <constraint firstItem="Okp-Wg-UoC" firstAttribute="centerY" secondItem="F9W-33-jlt" secondAttribute="centerY" id="tV7-bz-WNA"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="setIconImage" destination="Okp-Wg-UoC" id="CXz-M5-LhB"/>
-                                            <outlet property="setNameLabel" destination="8pJ-pc-gbK" id="OO5-xx-rF1"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LJm-Fp-Bhr">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="uRh-6A-2eK" secondAttribute="bottom" id="7Np-l9-AT4"/>
-                            <constraint firstItem="LJm-Fp-Bhr" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="7VY-13-oqa"/>
-                            <constraint firstItem="LJm-Fp-Bhr" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="8dG-53-OZk"/>
-                            <constraint firstItem="uRh-6A-2eK" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="ZBL-Z4-QWZ"/>
-                            <constraint firstAttribute="trailing" secondItem="uRh-6A-2eK" secondAttribute="trailing" id="lIq-BR-nHg"/>
-                            <constraint firstItem="uRh-6A-2eK" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="xFE-b2-uat"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Expansions" id="2xV-Y6-gLn">
-                        <barButtonItem key="leftBarButtonItem" image="ic_about" id="afW-8v-ClC">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="navigateToNextController:" destination="9pv-A4-QxB" id="dbO-vl-lUW"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="OJK-N4-vPB">
-                            <connections>
-                                <action selector="searchButtonTouched:" destination="9pv-A4-QxB" id="ac6-Qz-1PB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="activityIndicator" destination="LJm-Fp-Bhr" id="mdA-KC-AwK"/>
-                        <outlet property="tableView" destination="uRh-6A-2eK" id="c8G-li-qm0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1688.8" y="-320.68965517241384"/>
-        </scene>
         <!--People-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -117,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eRS-UF-VET" id="q3P-cg-oxb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mr Robot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5j-Yc-qf9">
@@ -190,34 +103,12 @@
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="mrQ-Pv-hRT" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="BuU-2p-M4w" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
-        </scene>
-        <!--Cards-->
-        <scene sceneID="ECU-D5-qCu">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mrQ-Pv-hRT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Cards" image="ic_cards" selectedImage="ic_cards_filled" id="acW-dT-cKf"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="gkv-hN-R1T">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="xsl-Wi-dpW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KXq-oH-BQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
         <!--Loans-->
         <scene sceneID="3z6-M7-1Th">
@@ -242,10 +133,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_about" width="20" height="20"/>
-        <image name="ic_awakenings" width="256" height="256"/>
-        <image name="ic_cards" width="33" height="33"/>
-        <image name="ic_cards_filled" width="33" height="33"/>
         <image name="ic_loans" width="33" height="33"/>
     </resources>
 </document>

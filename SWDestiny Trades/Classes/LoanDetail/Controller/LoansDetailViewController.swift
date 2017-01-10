@@ -37,7 +37,7 @@ class LoansDetailViewController: UIViewController {
 
         navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
 
-        loanDetailView.loanDetailTableView.updateTableViewData(borrowedList: Array(personDTO.borrowed), lentMeList: Array(personDTO.lentMe))
+        loadDataFromRealm()
         
         self.loanDetailView.loanDetailTableView.didSelectCard = { [weak self] card in
             self?.navigateToCardDetailViewController(with: card)
@@ -53,11 +53,15 @@ class LoansDetailViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    func loadDataFromRealm() {
+        loanDetailView.loanDetailTableView.updateTableViewData(borrowedList: Array(personDTO.borrowed), lentMeList: Array(personDTO.lentMe))
+    }
 
     @objc private func reloadTableView(_ notification: NSNotification) {
         if let person = notification.userInfo?["personDTO"] as? PersonDTO {
             personDTO = person
-            loanDetailView.loanDetailTableView.updateTableViewData(borrowedList: Array(personDTO.borrowed), lentMeList: Array(personDTO.lentMe))
+            loadDataFromRealm()
         }
     }
 

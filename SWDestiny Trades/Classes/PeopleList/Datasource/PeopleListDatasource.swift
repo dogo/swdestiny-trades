@@ -11,13 +11,20 @@ import RealmSwift
 
 class PeopleListDatasource: NSObject, UITableViewDataSource {
 
+    fileprivate var tableView: UITableView?
     fileprivate var persons: [PersonDTO] = []
+    
+    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+        super.init()
+        self.tableView = tableView
+        tableView.register(cellType: PersonCell.self)
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = delegate
+        self.tableView?.reloadData()
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LoanCell.cellIdentifier(), for: indexPath) as? LoanCell else {
-            //The impossible happened
-            fatalError("Wrong Cell Type")
-        }
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: PersonCell.self)
         cell.configureCell(personDTO: persons[indexPath.row])
         return cell
     }
@@ -44,12 +51,13 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
         return persons.count
     }
 
-    public func getPersonAt(index: IndexPath) -> PersonDTO? {
+    public func getPerson(at index: IndexPath) -> PersonDTO? {
         return persons[index.row]
     }
 
     public func insert(personArray: [PersonDTO]) {
         persons = personArray
+        tableView?.reloadData()
     }
 
     public func insert(person: PersonDTO) {
@@ -76,8 +84,12 @@ class PeopleListDelegate: NSObject, UITableViewDelegate {
     init(_ delegate: PeopleListViewDelegate) {
         self.delegate = delegate
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectSet(at: indexPath)
+        delegate.didSelectPerson(at: indexPath)
     }
 }
