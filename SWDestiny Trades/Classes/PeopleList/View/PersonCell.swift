@@ -59,10 +59,10 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func setupConstraints() {
         baseViewCell.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.right.equalTo(self)
-            make.bottom.equalTo(self)
+            make.top.equalTo(self.contentView)
+            make.left.equalTo(self.contentView)
+            make.right.equalTo(self.contentView)
+            make.bottom.equalTo(self.contentView)
         }
     }
 
