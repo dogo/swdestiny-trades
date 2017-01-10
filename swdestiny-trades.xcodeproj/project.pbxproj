@@ -159,8 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				DD09051D1E24594E00D9EFB0 /* Controller */,
-				DD09051F1E24594E00D9EFB0 /* Datasource */,
-				DD0905201E24594E00D9EFB0 /* View */,
 			);
 			path = AddCard;
 			sourceTree = "<group>";
@@ -171,20 +169,6 @@
 				DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		DD09051F1E24594E00D9EFB0 /* Datasource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Datasource;
-			sourceTree = "<group>";
-		};
-		DD0905201E24594E00D9EFB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		DD0F80F51E23C9980088BE43 /* Sets */ = {
