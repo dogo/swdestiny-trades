@@ -23,7 +23,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     }()
     
     static func height() -> CGFloat {
-        return 35
+        return 45
     }
     
     override init(reuseIdentifier: String?) {
