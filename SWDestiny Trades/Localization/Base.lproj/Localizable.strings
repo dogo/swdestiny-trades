@@ -25,4 +25,5 @@
 "ALL_CARDS" = "All Cards";
 "LOANS" = "Loans";
 "CARDS" = "Cards";
+"VERSION" = "version %@ (%@)";
 "ABOUT_TEXT" = "By Diogo Autilio\n\nAPI Data by Paco http://swdestinydb.com\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.";

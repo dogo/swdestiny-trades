@@ -42,6 +42,7 @@
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
+		DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
@@ -121,6 +122,7 @@
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utils.swift"; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD6E06931E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 			children = (
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
 				DDCDE3871E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift */,
+				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -897,6 +900,7 @@
 				DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */,
 				DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */,
 				DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */,
+				DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */,
 				DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */,
