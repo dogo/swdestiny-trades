@@ -44,7 +44,9 @@ class CardListDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
-        cell.configureCell(card: getCard(at: indexPath), useIndex: currentPresentationState == .number)
+        if let card = getCard(at: indexPath) {
+            cell.configureCell(card: card, useIndex: currentPresentationState == .number)
+        }
         return cell
     }
 
@@ -90,12 +92,12 @@ class CardListDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    public func getCard(at index: IndexPath) -> CardDTO {
+    public func getCard(at index: IndexPath) -> CardDTO? {
         switch self.currentPresentationState {
         case .alphabet:
-            return (alphabeticallyCards[sections[index.section]]?[index.row])!
+            return (alphabeticallyCards[sections[index.section]]?[index.row])
         case .color:
-            return (colorCards[sections[index.section]]?[index.row])!
+            return (colorCards[sections[index.section]]?[index.row])
         case .number:
             return numberCards[index.row]
         }
