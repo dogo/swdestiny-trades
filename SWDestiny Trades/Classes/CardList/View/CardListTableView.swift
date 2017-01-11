@@ -42,7 +42,6 @@ final class CardListTableView: UITableView, CardListViewDelegate, FilterHeaderVi
     // MARK: <FilterHeaderViewDelegate>
     
     internal func didSelectSegment(index: Int) {
-        print("Selected index \(index)")
         switch index {
         case 0:
             tableViewDatasource?.sortAlphabetically()

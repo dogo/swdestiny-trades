@@ -17,15 +17,15 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     fileprivate var currentPresentationState = PresentationState.alphabet
 
     var originalCards: [CardDTO] = []
+    fileprivate var sections: [String] = []
     
     fileprivate var tableView: UITableView?
     
     // Alphabetical
     fileprivate var alphabeticallyCards: [String : [CardDTO]] = [ : ]
-    fileprivate var sectionLetters: [String] = []
     
     // Color
-    fileprivate var colorCards: [CardDTO] = []
+    fileprivate var colorCards: [String : [CardDTO]] = [ : ]
     
     // Number
     fileprivate var numberCards: [CardDTO] = []
@@ -44,14 +44,15 @@ class CardListDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
-        cell.configureCell(cardDTO: getCard(at: indexPath))
+        cell.configureCell(card: getCard(at: indexPath), useIndex: currentPresentationState == .number)
         return cell
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch self.currentPresentationState {
-        case .alphabet:
-            return String(sectionLetters[section])
+        case .alphabet,
+             .color:
+            return String(sections[section])
         default:
             return nil
         }
@@ -59,8 +60,9 @@ class CardListDatasource: NSObject, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         switch self.currentPresentationState {
-        case .alphabet:
-            return sectionLetters.count
+        case .alphabet,
+             .color:
+            return sections.count
         default:
             return 2
         }
@@ -69,9 +71,9 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.currentPresentationState {
         case .alphabet:
-            return alphabeticallyCards[sectionLetters[section]]!.count
+            return alphabeticallyCards[sections[section]]!.count
         case .color:
-            return colorCards.count
+            return colorCards[sections[section]]!.count
         case .number:
             return numberCards.count
         }
@@ -80,8 +82,9 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         
         switch self.currentPresentationState {
-        case .alphabet:
-            return sectionLetters
+        case .alphabet,
+             .color:
+            return sections
         default:
             return nil
         }
@@ -90,62 +93,28 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     public func getCard(at index: IndexPath) -> CardDTO {
         switch self.currentPresentationState {
         case .alphabet:
-            return (alphabeticallyCards[sectionLetters[index.section]]?[index.row])!
+            return (alphabeticallyCards[sections[index.section]]?[index.row])!
         case .color:
-            return colorCards[index.row]
+            return (colorCards[sections[index.section]]?[index.row])!
         case .number:
             return numberCards[index.row]
         }
     }
 
-    // MARK: - Sort UITableView source
-
-    func sortAndSplitTableData(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
-
-        // Build Character Set
-        var letters = Set<String>()
-
-        func getFirstLetter(cardDTO: CardDTO) -> String {
-            return String(cardDTO.name[cardDTO.name.startIndex])
-        }
-
-        cardList.forEach {_ = letters.insert(getFirstLetter(cardDTO: $0)) }
-
-        // Build tableSource array
-        var tableViewSource = [String: [CardDTO]]()
-
-        for symbol in letters {
-
-            var cardsDTO = [CardDTO]()
-
-            for card in cardList {
-                if symbol == getFirstLetter(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
-            }
-            tableViewSource[symbol] = cardsDTO.sorted {
-                $0.name < $1.name
-            }
-        }
-
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
-    }
+    //Mark: Sort options
 
     public func sortAlphabetically(cardList: [CardDTO]) {
         currentPresentationState = .alphabet
-        alphabeticallyCards = sortAndSplitTableData(cardList: cardList).source
-        sectionLetters = sortAndSplitTableData(cardList: cardList).firstLetters
-        insertHackToDataSource()
+        alphabeticallyCards = Sort.splitDataAlphabetically(cardList: cardList).source
+        sections = Sort.splitDataAlphabetically(cardList: cardList).firstLetters
+        insertHeaderToDataSource()
         tableView?.reloadData()
     }
     
-    fileprivate func insertHackToDataSource() {
+    fileprivate func insertHeaderToDataSource() {
         alphabeticallyCards[" "] = [CardDTO]()
-        sectionLetters.insert(" ", at: 0)
+        colorCards[" "] = [CardDTO]()
+        sections.insert(" ", at: 0)
     }
     
     public func sortAlphabetically() {
@@ -154,9 +123,9 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     
     public func sortByColor() {
         currentPresentationState = .color
-        colorCards = originalCards.sorted {
-            $0.factionCode < $1.factionCode
-        }
+        colorCards = Sort.splitDataByColor(cardList: originalCards).source
+        sections = Sort.splitDataByColor(cardList: originalCards).sections
+        insertHeaderToDataSource()
         tableView?.reloadData()
     }
     
@@ -173,6 +142,7 @@ class CardListDelegate: NSObject, UITableViewDelegate {
 
     private let cardListViewDelegate: CardListViewDelegate
     private let filterHeaderViewDelegate: FilterHeaderViewDelegate
+    private var header: FilterHeaderView?
 
     init(_ cardListDelegate: CardListViewDelegate, headerDelegate: FilterHeaderViewDelegate) {
         self.cardListViewDelegate = cardListDelegate
@@ -189,9 +159,11 @@ class CardListDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
-            header?.configureHeader()
-            header?.delegate = filterHeaderViewDelegate
+            if header == nil {
+                header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
+                header?.configureHeader()
+                header?.delegate = filterHeaderViewDelegate
+            }
             return header
         }
         return nil

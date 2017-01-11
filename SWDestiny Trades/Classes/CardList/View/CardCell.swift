@@ -24,10 +24,18 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(cardDTO: CardDTO) {
-        baseViewCell.titleLabel.text = cardDTO.name
-        baseViewCell.subtitleLabel.text = cardDTO.affiliationName
+    internal func configureCell(card: CardDTO, useIndex: Bool) {
+        baseViewCell.titleLabel.text = card.name
+        sdskd(card: card, useIndex: useIndex)
         baseViewCell.accessoryLabel.text = ""//cardDTO.price
+    }
+    
+    private func sdskd(card: CardDTO, useIndex: Bool) {
+        if useIndex {
+            baseViewCell.subtitleLabel.text = "#\(card.code.subString(from: 2)), \(card.affiliationName)"
+        } else {
+            baseViewCell.subtitleLabel.text = card.affiliationName
+        }
     }
 
     override func prepareForReuse() {

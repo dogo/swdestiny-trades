@@ -43,6 +43,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
         segmentControl.insertSegment(withTitle: "Color", at: 1, animated: false)
         //segmentControl.insertSegment(withTitle: "Price", at: 2, animated: false)
         segmentControl.insertSegment(withTitle: "Card #", at: 2, animated: false)
+        segmentControl.selectedSegmentIndex = 0
     }
     
     override func prepareForReuse() {
