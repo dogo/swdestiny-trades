@@ -9,10 +9,6 @@
 import UIKit
 import Alamofire
 
-protocol CardListViewDelegate {
-    func didSelectCard(at index: IndexPath)
-}
-
 class CardListViewController: UIViewController {
 
     fileprivate let cardListView = CardListView()

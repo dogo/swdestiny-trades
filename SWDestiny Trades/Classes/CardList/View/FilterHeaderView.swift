@@ -9,13 +9,9 @@
 import UIKit
 import Reusable
 
-protocol FilterHeaderViewDelegate {
-    func didSelectSegment(index: Int)
-}
-
 final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
     
-    var delegate: FilterHeaderViewDelegate?
+    var delegate: CardListViewDelegate?
     
     var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
