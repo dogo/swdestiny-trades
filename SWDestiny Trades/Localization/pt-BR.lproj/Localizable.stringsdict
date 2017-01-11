@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LENT_ME_AND_BORROWED_ME_CARD</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>Me emprestou %#@card@ &amp; pegou emprestado %#@card@</string>
+		<key>card</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d carta</string>
+			<key>other</key>
+			<string>%d cartas</string>
+		</dict>
+	</dict>
+	<key>LENT_ME_CARD</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>Me emprestou %#@card@</string>
+		<key>card</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d carta</string>
+			<key>other</key>
+			<string>%d cartas</string>
+		</dict>
+	</dict>
+	<key>BORROWED_ME_CARD</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>Pegou emprestado %#@card@</string>
+		<key>card</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d carta</string>
+			<key>other</key>
+			<string>%d cartas</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

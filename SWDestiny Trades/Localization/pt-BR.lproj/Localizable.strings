@@ -6,16 +6,13 @@
   Copyright © 2017 Diogo Autilio. All rights reserved.
 */
 
-"ADD_THEIR_CARD" = "Adicionar card...";
-"ADD_MY_CARD" = "Adiconar meu card...";
+"ADD_THEIR_CARD" = "Adicionar carta...";
+"ADD_MY_CARD" = "Adicionar minha carta...";
 "HAS_LENT_ME" = "Me emprestou:";
 "HAS_BORROWED_MY" = "Pegou emprestado:";
 "NO_LOANS" = "Sem empréstimos";
-"LENT_ME_AND_BORROWED_ME_CARD" = "Me emprestou %d card & pegou emprestado %d card";
-"LENT_ME_CARD"= "Me emprestou %d card";
-"BORROWED_ME_CARD" = "Pegou emprestado %d card";
 "ABOUT" = "Sobre";
-"ADD_CARD"= "Adicionar Card";
+"ADD_CARD"= "Adicionar Carta";
 "ADDED" = "Adicionado";
 "NEW_PERSON" = "Nova Pessoa";
 "PEOPLE" = "Pessoas";
@@ -25,6 +22,7 @@
 "EXPANSIONS" = "Expansões";
 "FIRST_NAME" = "Primeiro Nome";
 "LAST_NAME" = "Sobrenome";
-"ALL_CARDS" = "Todos os cards";
+"ALL_CARDS" = "Todos as cartas";
 "LOANS" = "Empréstimos";
+"CARDS" = "Cartas";
 "ABOUT_TEXT" = "Por Diogo Autilio\n\nInformação de API por Paco http://swdestinydb.com\n\nAs informações apresentadas neste aplicativo sobre Star Wars Destiny, tanto literal quanto gráfica, são protegidas por direitos autorais por Fantasy Flight Games. Este aplicativo não é produzido, endossado, apoiado ou afiliado a Fantasy Flight Games.";
