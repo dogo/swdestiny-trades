@@ -9,10 +9,26 @@
 import UIKit
 
 class CardListDatasource: NSObject, UITableViewDataSource {
+    
+    fileprivate enum PresentationState {
+        case color, number, alphabet
+    }
+    
+    fileprivate var currentPresentationState = PresentationState.alphabet
 
+    var originalCards: [CardDTO] = []
+    
     fileprivate var tableView: UITableView?
-    fileprivate var swdCards: [String : [CardDTO]] = [ : ]
+    
+    // Alphabetical
+    fileprivate var alphabeticallyCards: [String : [CardDTO]] = [ : ]
     fileprivate var sectionLetters: [String] = []
+    
+    // Color
+    fileprivate var colorCards: [CardDTO] = []
+    
+    // Number
+    fileprivate var numberCards: [CardDTO] = []
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -33,28 +49,58 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(sectionLetters[section])
+        switch self.currentPresentationState {
+        case .alphabet:
+            return String(sectionLetters[section])
+        default:
+            return nil
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLetters.count
+        switch self.currentPresentationState {
+        case .alphabet:
+            return sectionLetters.count
+        default:
+            return 2
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return swdCards[sectionLetters[section]]!.count
+        switch self.currentPresentationState {
+        case .alphabet:
+            return alphabeticallyCards[sectionLetters[section]]!.count
+        case .color:
+            return colorCards.count
+        case .number:
+            return numberCards.count
+        }
     }
 
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return sectionLetters
+        
+        switch self.currentPresentationState {
+        case .alphabet:
+            return sectionLetters
+        default:
+            return nil
+        }
     }
 
     public func getCard(at index: IndexPath) -> CardDTO {
-        return (swdCards[sectionLetters[index.section]]?[index.row])!
+        switch self.currentPresentationState {
+        case .alphabet:
+            return (alphabeticallyCards[sectionLetters[index.section]]?[index.row])!
+        case .color:
+            return colorCards[index.row]
+        case .number:
+            return numberCards[index.row]
+        }
     }
 
-    // MARK: - Split and Sort UITableView source
+    // MARK: - Sort UITableView source
 
-    func createTableData(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
+    func sortAndSplitTableData(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
 
         // Build Character Set
         var letters = Set<String>()
@@ -89,25 +135,48 @@ class CardListDatasource: NSObject, UITableViewDataSource {
         return (sortedSymbols, tableViewSource)
     }
 
-    public func sortAndSplitTableData(cardList: [CardDTO]) {
-        swdCards = createTableData(cardList: cardList).source
-        sectionLetters = createTableData(cardList: cardList).firstLetters
+    public func sortAlphabetically(cardList: [CardDTO]) {
+        currentPresentationState = .alphabet
+        alphabeticallyCards = sortAndSplitTableData(cardList: cardList).source
+        sectionLetters = sortAndSplitTableData(cardList: cardList).firstLetters
         insertHackToDataSource()
         tableView?.reloadData()
     }
     
     fileprivate func insertHackToDataSource() {
-        swdCards[" "] = [CardDTO]()
+        alphabeticallyCards[" "] = [CardDTO]()
         sectionLetters.insert(" ", at: 0)
+    }
+    
+    public func sortAlphabetically() {
+        sortAlphabetically(cardList: originalCards)
+    }
+    
+    public func sortByColor() {
+        currentPresentationState = .color
+        colorCards = originalCards.sorted {
+            $0.factionCode < $1.factionCode
+        }
+        tableView?.reloadData()
+    }
+    
+    public func sortByCardNumber() {
+        currentPresentationState = .number
+        numberCards = originalCards.sorted {
+            $0.code < $1.code
+        }
+        tableView?.reloadData()
     }
 }
 
 class CardListDelegate: NSObject, UITableViewDelegate {
 
-    private let delegate: CardListViewDelegate
+    private let cardListViewDelegate: CardListViewDelegate
+    private let filterHeaderViewDelegate: FilterHeaderViewDelegate
 
-    init(_ delegate: CardListViewDelegate) {
-        self.delegate = delegate
+    init(_ cardListDelegate: CardListViewDelegate, headerDelegate: FilterHeaderViewDelegate) {
+        self.cardListViewDelegate = cardListDelegate
+        self.filterHeaderViewDelegate = headerDelegate
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -115,13 +184,14 @@ class CardListDelegate: NSObject, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectCard(at: indexPath)
+        cardListViewDelegate.didSelectCard(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
             header?.configureHeader()
+            header?.delegate = filterHeaderViewDelegate
             return header
         }
         return nil

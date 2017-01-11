@@ -9,7 +9,13 @@
 import UIKit
 import Reusable
 
+protocol FilterHeaderViewDelegate {
+    func didSelectSegment(index: Int)
+}
+
 final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
+    
+    var delegate: FilterHeaderViewDelegate?
     
     var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
@@ -25,6 +31,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
         buildViewHierarchy()
         setupConstraints()
         configureViews()
+        segmentControl.addTarget(self, action: #selector(FilterHeaderView.valueChanged(_:)), for: UIControlEvents.valueChanged)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,6 +47,10 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     
     override func prepareForReuse() {
         segmentControl.removeAllSegments()
+    }
+    
+    func valueChanged(_ sender: UISegmentedControl) {
+        self.delegate?.didSelectSegment(index: segmentControl.selectedSegmentIndex)
     }
     
     // MARK: <BaseViewConfiguration>

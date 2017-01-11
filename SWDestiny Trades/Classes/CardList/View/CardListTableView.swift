@@ -8,17 +8,17 @@
 
 import UIKit
 
-final class CardListTableView: UITableView, CardListViewDelegate {
+final class CardListTableView: UITableView, CardListViewDelegate, FilterHeaderViewDelegate {
 
     var didSelectCard: ((CardDTO) -> Void)?
 
-    fileprivate var cardListDatasource: CardListDatasource?
-    fileprivate var cardListDelegate: CardListDelegate?
+    fileprivate var tableViewDatasource: CardListDatasource?
+    fileprivate var tableViewDelegate: CardListDelegate?
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        cardListDelegate = CardListDelegate(self)
-        cardListDatasource = CardListDatasource(tableView: self, delegate: cardListDelegate!)
+        tableViewDelegate = CardListDelegate(self, headerDelegate: self)
+        tableViewDatasource = CardListDatasource(tableView: self, delegate: tableViewDelegate!)
         self.backgroundColor = UIColor.white
     }
 
@@ -27,14 +27,31 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     }
 
     func updateCardList(_ cards: [CardDTO]) {
-        cardListDatasource?.sortAndSplitTableData(cardList: cards)
+        tableViewDatasource?.originalCards = cards
+        tableViewDatasource?.sortAlphabetically(cardList: cards)
     }
 
     // MARK: <CardListViewDelegate>
 
     internal func didSelectCard(at index: IndexPath) {
-        if let card = cardListDatasource?.getCard(at: index) {
+        if let card = tableViewDatasource?.getCard(at: index) {
             didSelectCard?(card)
+        }
+    }
+    
+    // MARK: <FilterHeaderViewDelegate>
+    
+    internal func didSelectSegment(index: Int) {
+        print("Selected index \(index)")
+        switch index {
+        case 0:
+            tableViewDatasource?.sortAlphabetically()
+        case 1:
+            tableViewDatasource?.sortByColor()
+        case 2:
+            tableViewDatasource?.sortByCardNumber()
+        default:
+            break
         }
     }
 }
