@@ -16,10 +16,6 @@ class NumberListDatasource: NSObject, UITableViewDataSource {
     required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
-        tableView.register(cellType: CardCell.self)
-        tableView.register(headerFooterViewType: FilterHeaderView.self)
-        self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
-        self.tableView?.sectionIndexBackgroundColor = .clear
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

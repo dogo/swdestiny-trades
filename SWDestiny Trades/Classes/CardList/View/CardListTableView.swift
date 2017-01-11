@@ -9,9 +9,14 @@
 import UIKit
 
 final class CardListTableView: UITableView, CardListViewDelegate {
+    
+    fileprivate enum PresentationState {
+        case color, number, alphabet
+    }
 
     var didSelectCard: ((CardDTO) -> Void)?
 
+    fileprivate var currentPresentationState = PresentationState.alphabet
     fileprivate var alphabeticalDatasource: AlphabeticalListDatasource?
     fileprivate var colorDatasource: ColorListDatasource?
     fileprivate var numberDatasource: NumberListDatasource?
@@ -19,6 +24,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
+        
         tableViewDelegate = CardListDelegate(self)
         alphabeticalDatasource = AlphabeticalListDatasource(tableView: self)
         colorDatasource = ColorListDatasource(tableView: self)
@@ -26,9 +32,13 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         
         //Initial datasource and delegate
         self.dataSource = alphabeticalDatasource
-        self.delegate = tableViewDelegate
         
+        self.register(cellType: CardCell.self)
+        self.register(headerFooterViewType: FilterHeaderView.self)
         self.backgroundColor = UIColor.white
+        self.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.sectionIndexBackgroundColor = .clear
+        self.delegate = tableViewDelegate
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -44,15 +54,16 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     // MARK: <CardListViewDelegate>
 
     internal func didSelectCard(at index: IndexPath) {
-        if let s = self.dataSource?.isKind(of: AlphabeticalListDatasource.self) {
+        switch self.currentPresentationState {
+        case .alphabet:
             if let card = alphabeticalDatasource?.getCard(at: index) {
                 didSelectCard?(card)
             }
-        } else if let s2 = self.dataSource?.isKind(of: ColorListDatasource.self) {
+        case .color:
             if let card = colorDatasource?.getCard(at: index) {
                 didSelectCard?(card)
             }
-        } else if let s1 = self.dataSource?.isKind(of: NumberListDatasource.self) {
+        case .number:
             if let card = numberDatasource?.getCard(at: index) {
                 didSelectCard?(card)
             }
@@ -64,14 +75,17 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:
+            currentPresentationState = .alphabet
             self.dataSource = alphabeticalDatasource
             self.delegate = tableViewDelegate
             self.reloadData()
         case 1:
+            currentPresentationState = .color
             self.dataSource = colorDatasource
             self.delegate = tableViewDelegate
             self.reloadData()
         case 2:
+            currentPresentationState = .number
             self.dataSource = numberDatasource
             self.delegate = tableViewDelegate
             self.reloadData()
