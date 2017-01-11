@@ -18,6 +18,7 @@ class CardListDatasource: NSObject, UITableViewDataSource {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: CardCell.self)
+        tableView.register(headerFooterViewType: FilterHeaderView.self)
         self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
@@ -90,7 +91,13 @@ class CardListDatasource: NSObject, UITableViewDataSource {
     public func sortAndSplitTableData(cardList: [CardDTO]) {
         swdCards = createTableData(cardList: cardList).source
         sectionLetters = createTableData(cardList: cardList).firstLetters
+        insertHackToDataSource()
         tableView?.reloadData()
+    }
+    
+    fileprivate func insertHackToDataSource() {
+        swdCards[" "] = [CardDTO]()
+        sectionLetters.insert(" ", at: 0)
     }
 }
 
@@ -108,5 +115,18 @@ class CardListDelegate: NSObject, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate.didSelectCard(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
+            header?.configureHeader()
+            return header
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return FilterHeaderView.height()
     }
 }
