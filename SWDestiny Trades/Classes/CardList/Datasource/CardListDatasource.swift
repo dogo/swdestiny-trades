@@ -64,7 +64,7 @@ class CardListDatasource: NSObject, UITableViewDataSource {
              .color:
             return sections.count
         default:
-            return 2
+            return 1
         }
     }
 
