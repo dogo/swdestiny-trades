@@ -20,9 +20,14 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         tableViewDelegate = CardListDelegate(self)
-        alphabeticalDatasource = AlphabeticalListDatasource(tableView: self, delegate: tableViewDelegate!)
-        numberDatasource = NumberListDatasource(tableView: self/*, delegate: tableViewDelegate!*/)
-        colorDatasource = ColorListDatasource(tableView: self/*, delegate: tableViewDelegate!*/)
+        alphabeticalDatasource = AlphabeticalListDatasource(tableView: self)
+        colorDatasource = ColorListDatasource(tableView: self)
+        numberDatasource = NumberListDatasource(tableView: self)
+        
+        //Initial datasource and delegate
+        self.dataSource = alphabeticalDatasource
+        self.delegate = tableViewDelegate
+        
         self.backgroundColor = UIColor.white
     }
 
@@ -39,9 +44,19 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     // MARK: <CardListViewDelegate>
 
     internal func didSelectCard(at index: IndexPath) {
-//        if let card = tableViewDatasource?.getCard(at: index) {
-//            didSelectCard?(card)
-//        }
+        if let s = self.dataSource?.isKind(of: AlphabeticalListDatasource.self) {
+            if let card = alphabeticalDatasource?.getCard(at: index) {
+                didSelectCard?(card)
+            }
+        } else if let s2 = self.dataSource?.isKind(of: ColorListDatasource.self) {
+            if let card = colorDatasource?.getCard(at: index) {
+                didSelectCard?(card)
+            }
+        } else if let s1 = self.dataSource?.isKind(of: NumberListDatasource.self) {
+            if let card = numberDatasource?.getCard(at: index) {
+                didSelectCard?(card)
+            }
+        }
     }
     
     // MARK: <FilterHeaderViewDelegate>
@@ -49,11 +64,17 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:
-            alphabeticalDatasource?.sortAlphabetically()
+            self.dataSource = alphabeticalDatasource
+            self.delegate = tableViewDelegate
+            self.reloadData()
         case 1:
-            colorDatasource?.sortByColor()
+            self.dataSource = colorDatasource
+            self.delegate = tableViewDelegate
+            self.reloadData()
         case 2:
-            numberDatasource?.sortByCardNumber()
+            self.dataSource = numberDatasource
+            self.delegate = tableViewDelegate
+            self.reloadData()
         default:
             break
         }

@@ -17,16 +17,13 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource {
     // Alphabetical
     fileprivate var alphabeticallyCards: [String : [CardDTO]] = [ : ]
 
-    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: CardCell.self)
         tableView.register(headerFooterViewType: FilterHeaderView.self)
         self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
         self.tableView?.sectionIndexBackgroundColor = .clear
-        self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
-        self.tableView?.reloadData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,11 +62,6 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource {
         insertHeaderToDataSource()
         tableView?.reloadData()
     }
-    
-    public func sortAlphabetically() {
-        tableView?.reloadData()
-    }
-
     
     fileprivate func insertHeaderToDataSource() {
         alphabeticallyCards[" "] = [CardDTO]()

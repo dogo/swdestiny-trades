@@ -13,16 +13,13 @@ class NumberListDatasource: NSObject, UITableViewDataSource {
     fileprivate var tableView: UITableView?
     fileprivate var numberCards: [CardDTO] = []
 
-    required init(tableView: UITableView/*, delegate: UITableViewDelegate*/) {
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: CardCell.self)
         tableView.register(headerFooterViewType: FilterHeaderView.self)
         self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
         self.tableView?.sectionIndexBackgroundColor = .clear
-        self.tableView?.dataSource = self
-        //self.tableView?.delegate = delegate
-        self.tableView?.reloadData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,10 +48,6 @@ class NumberListDatasource: NSObject, UITableViewDataSource {
         numberCards = cardList.sorted {
             $0.code < $1.code
         }
-        tableView?.reloadData()
-    }
-    
-    public func sortByCardNumber() {
         tableView?.reloadData()
     }
 }
