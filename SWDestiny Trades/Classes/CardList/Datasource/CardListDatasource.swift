@@ -20,6 +20,7 @@ class CardListDatasource: NSObject, UITableViewDataSource {
         tableView.register(cellType: CardCell.self)
         tableView.register(headerFooterViewType: FilterHeaderView.self)
         self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.tableView?.sectionIndexBackgroundColor = .clear
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()
