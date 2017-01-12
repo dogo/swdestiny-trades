@@ -22,7 +22,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
         if let card = getCard(at: indexPath) {
-            cell.configureCell(card: card, useIndex: true)
+            cell.configureCell(card: card, useIndex: false)
         }
         return cell
     }
