@@ -1,3 +1,6 @@
-Initial version.
+• Sort the card list alphabetically, by color or by collection number.
+• Share cards with your friends.
+• Translated the user interface to Brazilian Portuguese.
+• Minor fixes
 
-Thanks for reading. This app will never interrupt you with 'Rate this App' messages. However, it would be great if you could take a minute to rate this new version of the app on the App Store. This makes a big difference to the app's success. Thanks!
+This app will never interrupt you with 'Rate this App' messages. However, it would be great if you could take a minute to rate this new version of the app on the App Store. This makes a big difference to the app's success. Thanks!
