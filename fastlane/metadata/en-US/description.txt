@@ -3,6 +3,8 @@ SWD Trades gives you the tools you need for Star Wars Destiny, right at your fin
 Features:
 • The most complete cards database.
 • Track cards you have lent out or borrowed from other people.
+• Sort the card list alphabetically, by color or by collection number.
+• Share cards with your friends.
 • Universal app for iPhone and iPad.
 • Ready for iOS 10.
 
