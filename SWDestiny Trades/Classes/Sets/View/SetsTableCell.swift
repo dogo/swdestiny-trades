@@ -39,6 +39,10 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
         if setDTO.code.lowercased() == "aw" {
             expansionImageView.image = UIImage(named: "ic_awakenings")
+        } else if setDTO.code.lowercased() == "sor" {
+            expansionImageView.image = UIImage(named: "ic_spirit_of_rebellion")
+        } else {
+            expansionImageView.image = UIImage(named: "ic_not_found")
         }
     }
 
