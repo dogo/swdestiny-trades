@@ -34,7 +34,7 @@ class CardListViewController: UIViewController {
         navigationItem.title = setDTO?.name
 
         cardListView.activityIndicator.startAnimating()
-        CardsAPIClient.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: Array<CardDTO>) in
+        SWDestinyAPI.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: Array<CardDTO>) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
             self.cardListView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in

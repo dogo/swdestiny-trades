@@ -38,7 +38,7 @@ class SearchListViewController: UIViewController {
         self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
 
         searchView.activityIndicator.startAnimating()
-        CardsAPIClient.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
+        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.searchView.searchTableView.updateSearchList(cardsArray)
             self.searchView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
