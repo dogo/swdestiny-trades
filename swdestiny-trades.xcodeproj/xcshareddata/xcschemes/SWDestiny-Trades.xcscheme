@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DD6E06991E114E88004A5653"
-               BuildableName = "SWDestiny TradesTests.xctest"
-               BlueprintName = "SWDestiny TradesTests"
+               BuildableName = "SWDestiny-TradesTests.xctest"
+               BlueprintName = "SWDestiny-TradesTests"
                ReferencedContainer = "container:swdestiny-trades.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DD6E06991E114E88004A5653"
+               BuildableName = "SWDestiny-TradesTests.xctest"
+               BlueprintName = "SWDestiny-TradesTests"
+               ReferencedContainer = "container:swdestiny-trades.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
