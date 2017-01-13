@@ -82,7 +82,7 @@ class AddCardViewController: UIViewController {
 
     private func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
-        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 1.2)
+        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 0.4)
     }
 
     // MARK: Navigation
