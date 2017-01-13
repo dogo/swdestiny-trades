@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NumberListDatasource: NSObject, UITableViewDataSource {
+class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
     fileprivate var tableView: UITableView?
     fileprivate var numberCards: [CardDTO] = []
@@ -33,8 +33,10 @@ class NumberListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberCards.count
     }
+    
+    //Mark: <CardReturnable>
 
-    public func getCard(at index: IndexPath) -> CardDTO? {
+    internal func getCard(at index: IndexPath) -> CardDTO? {
         return numberCards[index.row]
     }
 

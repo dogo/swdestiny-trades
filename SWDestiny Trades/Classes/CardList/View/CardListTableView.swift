@@ -10,13 +10,8 @@ import UIKit
 
 final class CardListTableView: UITableView, CardListViewDelegate {
 
-    fileprivate enum PresentationState {
-        case color, number, alphabet
-    }
-
     var didSelectCard: ((CardDTO) -> Void)?
 
-    fileprivate var currentPresentationState = PresentationState.alphabet
     var alphabeticalDatasource: AlphabeticalListDatasource?
     var colorDatasource: ColorListDatasource?
     var numberDatasource: NumberListDatasource?
@@ -54,17 +49,8 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     // MARK: <CardListViewDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
-        switch self.currentPresentationState {
-        case .alphabet:
-            if let card = alphabeticalDatasource?.getCard(at: index) {
-                didSelectCard?(card)
-            }
-        case .color:
-            if let card = colorDatasource?.getCard(at: index) {
-                didSelectCard?(card)
-            }
-        case .number:
-            if let card = numberDatasource?.getCard(at: index) {
+        if let currentDatasource: CardReturnable = self.dataSource as? CardReturnable {
+            if let card = currentDatasource.getCard(at: index) {
                 didSelectCard?(card)
             }
         }
@@ -75,17 +61,14 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:
-            currentPresentationState = .alphabet
             self.dataSource = alphabeticalDatasource
             self.delegate = cardList
             self.reloadData()
         case 1:
-            currentPresentationState = .color
             self.dataSource = colorDatasource
             self.delegate = cardList
             self.reloadData()
         case 2:
-            currentPresentationState = .number
             self.dataSource = numberDatasource
             self.delegate = cardList
             self.reloadData()
