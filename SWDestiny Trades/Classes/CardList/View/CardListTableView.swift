@@ -53,7 +53,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
 
     // MARK: <CardListViewDelegate>
 
-    internal func didSelectCard(at index: IndexPath) {
+    internal func didSelectRow(at index: IndexPath) {
         switch self.currentPresentationState {
         case .alphabet:
             if let card = alphabeticalDatasource?.getCard(at: index) {

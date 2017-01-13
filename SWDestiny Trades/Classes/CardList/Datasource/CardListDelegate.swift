@@ -8,8 +8,7 @@
 
 import UIKit
 
-protocol CardListViewDelegate: class {
-    func didSelectCard(at index: IndexPath)
+protocol CardListViewDelegate: class, BaseDelegate {
     func didSelectSegment(index: Int)
 }
 
@@ -23,7 +22,7 @@ class CardList: NSObject, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectCard(at: indexPath)
+        delegate?.didSelectRow(at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
