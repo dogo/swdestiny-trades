@@ -61,21 +61,17 @@ final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDeleg
 
 class AddCardTableDelegate: NSObject, UITableViewDelegate {
 
-    let delegate: SearchDelegate
-
-    init(_ delegate: SearchDelegate) {
-        self.delegate = delegate
-    }
+    weak var delegate: SearchDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectCard(at: indexPath)
+        delegate?.didSelectCard(at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        delegate.didSelectAccessory?(at: indexPath)
+        delegate?.didSelectAccessory?(at: indexPath)
     }
 }

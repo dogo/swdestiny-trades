@@ -13,12 +13,12 @@ final class SetsTableView: UITableView, SetsListViewDelegate {
     var didSelectSet: ((SetDTO) -> Void)?
 
     fileprivate var tableViewDatasource: SetsListDatasource?
-    fileprivate var tableViewDelegate: SetsListDelegate?
+    let setsList = SetsList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        tableViewDelegate = SetsListDelegate(self)
-        tableViewDatasource = SetsListDatasource(tableView: self, delegate: tableViewDelegate!)
+        setsList.delegate = self
+        tableViewDatasource = SetsListDatasource(tableView: self, delegate: setsList)
         self.backgroundColor = UIColor.white
     }
 

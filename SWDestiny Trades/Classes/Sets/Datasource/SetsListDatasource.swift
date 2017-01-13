@@ -90,19 +90,15 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     }
 }
 
-class SetsListDelegate: NSObject, UITableViewDelegate {
+class SetsList: NSObject, UITableViewDelegate {
 
-    private let delegate: SetsListViewDelegate
-
-    init(_ delegate: SetsListViewDelegate) {
-        self.delegate = delegate
-    }
+    weak var delegate: SetsListViewDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectSet(at: indexPath)
+        delegate?.didSelectSet(at: indexPath)
     }
 }

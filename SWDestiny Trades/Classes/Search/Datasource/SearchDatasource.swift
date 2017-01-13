@@ -59,19 +59,15 @@ final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelega
     }
 }
 
-class SearchTableDelegate: NSObject, UITableViewDelegate {
+class Search: NSObject, UITableViewDelegate {
 
-    let delegate: SearchDelegate
-
-    init(_ delegate: SearchDelegate) {
-        self.delegate = delegate
-    }
+    weak var delegate: SearchDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectCard(at: indexPath)
+        delegate?.didSelectCard(at: indexPath)
     }
 }

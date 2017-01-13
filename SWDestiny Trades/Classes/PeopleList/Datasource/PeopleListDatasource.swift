@@ -78,19 +78,15 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
     }
 }
 
-class PeopleListDelegate: NSObject, UITableViewDelegate {
+class PeopleList: NSObject, UITableViewDelegate {
 
-    private let delegate: PeopleListViewDelegate
-
-    init(_ delegate: PeopleListViewDelegate) {
-        self.delegate = delegate
-    }
+    weak var delegate: PeopleListViewDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.didSelectPerson(at: indexPath)
+        delegate?.didSelectPerson(at: indexPath)
     }
 }

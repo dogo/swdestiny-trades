@@ -8,26 +8,22 @@
 
 import UIKit
 
-protocol CardListViewDelegate {
+protocol CardListViewDelegate: class {
     func didSelectCard(at index: IndexPath)
     func didSelectSegment(index: Int)
 }
 
-class CardListDelegate: NSObject, UITableViewDelegate {
+class CardList: NSObject, UITableViewDelegate {
 
-    private let cardListViewDelegate: CardListViewDelegate
+    weak var delegate: CardListViewDelegate?
     private var header: FilterHeaderView?
-
-    init(_ cardListDelegate: CardListViewDelegate) {
-        self.cardListViewDelegate = cardListDelegate
-    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        cardListViewDelegate.didSelectCard(at: indexPath)
+        delegate?.didSelectCard(at: indexPath)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -35,7 +31,7 @@ class CardListDelegate: NSObject, UITableViewDelegate {
             if header == nil {
                 header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
                 header?.configureHeader()
-                header?.delegate = cardListViewDelegate
+                header?.delegate = delegate
             }
             return header
         }

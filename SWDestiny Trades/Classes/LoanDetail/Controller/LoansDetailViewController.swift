@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LoansDetailViewDelegate {
+protocol LoansDetailViewDelegate: class {
     func didSelectItem(at: IndexPath)
 }
 

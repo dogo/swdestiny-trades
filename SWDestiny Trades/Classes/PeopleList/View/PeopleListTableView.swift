@@ -13,12 +13,12 @@ final class PeopleListTableView: UITableView, PeopleListViewDelegate {
     var didSelectPerson: ((PersonDTO) -> Void)?
 
     fileprivate var tableViewDatasource: PeopleListDatasource?
-    fileprivate var tableViewDelegate: PeopleListDelegate?
+    let peopleList = PeopleList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        tableViewDelegate = PeopleListDelegate(self)
-        tableViewDatasource = PeopleListDatasource(tableView: self, delegate: tableViewDelegate!)
+        peopleList.delegate = self
+        tableViewDatasource = PeopleListDatasource(tableView: self, delegate: peopleList)
         self.backgroundColor = UIColor.white
     }
 

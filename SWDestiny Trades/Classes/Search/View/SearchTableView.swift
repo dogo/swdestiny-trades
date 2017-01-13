@@ -14,12 +14,12 @@ final class SearchTableView: UITableView, SearchDelegate {
     var doingSearch: ((String) -> Void)?
 
     fileprivate var searchDatasource: SearchDatasource?
-    fileprivate var searchDelegate: SearchTableDelegate?
+    let search = Search()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        searchDelegate = SearchTableDelegate(self)
-        searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: searchDelegate!)
+        search.delegate = self
+        searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: search)
         self.backgroundColor = UIColor.white
     }
 

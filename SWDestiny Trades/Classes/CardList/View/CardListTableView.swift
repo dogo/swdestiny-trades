@@ -17,15 +17,15 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     var didSelectCard: ((CardDTO) -> Void)?
 
     fileprivate var currentPresentationState = PresentationState.alphabet
-    fileprivate var alphabeticalDatasource: AlphabeticalListDatasource?
-    fileprivate var colorDatasource: ColorListDatasource?
-    fileprivate var numberDatasource: NumberListDatasource?
-    fileprivate var tableViewDelegate: CardListDelegate?
+    var alphabeticalDatasource: AlphabeticalListDatasource?
+    var colorDatasource: ColorListDatasource?
+    var numberDatasource: NumberListDatasource?
+    let cardList = CardList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
 
-        tableViewDelegate = CardListDelegate(self)
+        cardList.delegate = self
         alphabeticalDatasource = AlphabeticalListDatasource(tableView: self)
         colorDatasource = ColorListDatasource(tableView: self)
         numberDatasource = NumberListDatasource(tableView: self)
@@ -38,7 +38,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         self.backgroundColor = UIColor.white
         self.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
         self.sectionIndexBackgroundColor = .clear
-        self.delegate = tableViewDelegate
+        self.delegate = cardList
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -77,17 +77,17 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         case 0:
             currentPresentationState = .alphabet
             self.dataSource = alphabeticalDatasource
-            self.delegate = tableViewDelegate
+            self.delegate = cardList
             self.reloadData()
         case 1:
             currentPresentationState = .color
             self.dataSource = colorDatasource
-            self.delegate = tableViewDelegate
+            self.delegate = cardList
             self.reloadData()
         case 2:
             currentPresentationState = .number
             self.dataSource = numberDatasource
-            self.delegate = tableViewDelegate
+            self.delegate = cardList
             self.reloadData()
         default:
             break

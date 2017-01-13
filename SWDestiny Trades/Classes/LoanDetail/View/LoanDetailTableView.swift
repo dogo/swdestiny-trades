@@ -14,12 +14,12 @@ final class LoanDetailTableView: UITableView, LoansDetailViewDelegate {
     var didSelectAddItem: ((Bool) -> Void)?
 
     fileprivate var tableViewDatasource: LoansDetailDatasource?
-    fileprivate var tableViewDelegate: LoansDetailDelegate?
+    let loanDetail = LoansDetail()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        tableViewDelegate = LoansDetailDelegate(self)
-        tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: tableViewDelegate!)
+        loanDetail.delegate = self
+        tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: loanDetail)
         self.backgroundColor = UIColor.white
     }
 

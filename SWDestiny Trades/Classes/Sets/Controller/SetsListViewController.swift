@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-protocol SetsListViewDelegate {
+protocol SetsListViewDelegate: class {
     func didSelectSet(at index: IndexPath)
 }
 

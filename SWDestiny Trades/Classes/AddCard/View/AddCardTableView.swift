@@ -14,13 +14,13 @@ final class AddCardTableView: UITableView, SearchDelegate {
     var didSelectAccessory: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
 
-    fileprivate var tableDatasource: AddCardDatasource?
-    fileprivate var tableDelegate: AddCardTableDelegate?
+    var tableDatasource: AddCardDatasource?
+    let addCardTable = AddCardTableDelegate()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        tableDelegate = AddCardTableDelegate(self)
-        tableDatasource = AddCardDatasource(cards: [], tableView: self, delegate: tableDelegate!)
+        addCardTable.delegate = self
+        tableDatasource = AddCardDatasource(cards: [], tableView: self, delegate: addCardTable)
         self.backgroundColor = UIColor.white
     }
 

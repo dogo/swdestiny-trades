@@ -11,7 +11,7 @@ import Reusable
 
 final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
 
-    var delegate: CardListViewDelegate?
+    weak var delegate: CardListViewDelegate?
 
     var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)

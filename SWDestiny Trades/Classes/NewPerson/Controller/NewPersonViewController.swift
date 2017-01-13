@@ -12,7 +12,7 @@ import RealmSwift
 class NewPersonViewController: UIViewController {
 
     fileprivate let newPersonView = NewPersonView()
-    var delegate: UpdateTableDataDelegate?
+    weak var delegate: UpdateTableDataDelegate?
 
     // MARK: - Life Cycle
 

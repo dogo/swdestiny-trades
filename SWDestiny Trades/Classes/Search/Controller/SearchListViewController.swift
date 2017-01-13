@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-@objc protocol SearchDelegate {
+@objc protocol SearchDelegate: class {
     func didSelectCard(at index: IndexPath)
     @objc optional func didSelectAccessory(at index: IndexPath)
 }
