@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import RealmSwift
-import SwiftMessages
+import PKHUD
 
 class AddCardViewController: UIViewController {
 
@@ -81,17 +81,8 @@ class AddCardViewController: UIViewController {
     }
 
     private func showSuccessMessage(card: CardDTO) {
-        let success: MessageView
-        if #available(iOS 9.0, *) {
-            success = MessageView.viewFromNib(layout: .CardView)
-        } else {
-            success = MessageView.viewFromNib(layout: .MessageViewIOS8)
-        }
-        success.configureTheme(.success)
-        success.configureDropShadow()
-        success.configureContent(title: NSLocalizedString("ADDED", comment: ""), body: card.name)
-        success.button?.isHidden = true
-        SwiftMessages.show(view: success)
+        PKHUD.sharedHUD.dimsBackground = false
+        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 1.2)
     }
 
     // MARK: Navigation

@@ -11,10 +11,10 @@ target 'SWDestiny Trades' do
   pod 'Firebase/Crash'
   pod 'Kingfisher'
   pod 'ObjectMapper'
+  pod 'PKHUD'
   pod 'RealmSwift'
   pod 'Reusable'
   pod 'SnapKit'
-  pod 'SwiftMessages'
   pod 'TextFieldEffects'
 
   target 'SWDestiny-TradesTests' do
