@@ -11,9 +11,9 @@ import Alamofire
 import ObjectMapper
 
 class SWDestinyAPI: BaseAPIClient {
-    
+
     static let baseAPIClient = BaseAPIClient.sharedInstance
-    
+
     static func retrieveSetList(successBlock: @escaping (_ setsDTO: Array<SetDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/sets/"
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
@@ -25,7 +25,7 @@ class SWDestinyAPI: BaseAPIClient {
             }
         }
     }
-    
+
     static func retrieveSetCardList(setCode: String, successBlock: @escaping (_ setsDTO: Array<CardDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/cards/\(setCode)"
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
@@ -37,7 +37,7 @@ class SWDestinyAPI: BaseAPIClient {
             }
         }
     }
-    
+
     static func retrieveAllCards(successBlock: @escaping (_ setsDTO: Array<CardDTO>) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/cards/"
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
@@ -49,7 +49,7 @@ class SWDestinyAPI: BaseAPIClient {
             }
         }
     }
-    
+
     static func retrieveCard(cardId: String, successBlock: @escaping (_ cardDTO: CardDTO) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
         let path = "/api/public/card/\(cardId)"
         baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in

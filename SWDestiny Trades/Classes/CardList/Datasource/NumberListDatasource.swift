@@ -9,7 +9,7 @@
 import UIKit
 
 class NumberListDatasource: NSObject, UITableViewDataSource {
-    
+
     fileprivate var tableView: UITableView?
     fileprivate var numberCards: [CardDTO] = []
 
@@ -39,7 +39,7 @@ class NumberListDatasource: NSObject, UITableViewDataSource {
     }
 
     //Mark: Sort options  
-    
+
     public func sortByCardNumber(cardList: [CardDTO]) {
         numberCards = cardList.sorted {
             $0.code < $1.code

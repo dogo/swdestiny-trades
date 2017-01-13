@@ -14,20 +14,20 @@ extension String {
     func trim() -> String {
         return self.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
     }
-    
+
     func subString(start: Int, end: Int) -> String {
         let startIndex = self.index(self.startIndex, offsetBy: start)
         let endIndex = self.index(startIndex, offsetBy: end)
-        
+
         let finalString = self.substring(from: startIndex)
         return finalString.substring(to: endIndex)
     }
-    
+
     func subString(from: Int) -> String {
         let startIndex = self.index(self.startIndex, offsetBy: from)
         return self.substring(from: startIndex)
     }
-    
+
     var length: Int {
         return self.characters.count
     }

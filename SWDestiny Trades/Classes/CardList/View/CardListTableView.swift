@@ -9,7 +9,7 @@
 import UIKit
 
 final class CardListTableView: UITableView, CardListViewDelegate {
-    
+
     fileprivate enum PresentationState {
         case color, number, alphabet
     }
@@ -24,15 +24,15 @@ final class CardListTableView: UITableView, CardListViewDelegate {
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        
+
         tableViewDelegate = CardListDelegate(self)
         alphabeticalDatasource = AlphabeticalListDatasource(tableView: self)
         colorDatasource = ColorListDatasource(tableView: self)
         numberDatasource = NumberListDatasource(tableView: self)
-        
+
         //Initial datasource and delegate
         self.dataSource = alphabeticalDatasource
-        
+
         self.register(cellType: CardCell.self)
         self.register(headerFooterViewType: FilterHeaderView.self)
         self.backgroundColor = UIColor.white
@@ -69,9 +69,9 @@ final class CardListTableView: UITableView, CardListViewDelegate {
             }
         }
     }
-    
+
     // MARK: <FilterHeaderViewDelegate>
-    
+
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:

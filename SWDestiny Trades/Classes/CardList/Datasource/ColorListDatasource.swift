@@ -9,7 +9,7 @@
 import UIKit
 
 class ColorListDatasource: NSObject, UITableViewDataSource {
-    
+
     fileprivate var tableView: UITableView?
     fileprivate var colorCards: [String : [CardDTO]] = [ : ]
     fileprivate var sections: [String] = []
@@ -26,7 +26,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource {
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(sections[section])
     }
@@ -38,7 +38,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return colorCards[sections[section]]!.count
     }
-    
+
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sections
     }
@@ -48,14 +48,14 @@ class ColorListDatasource: NSObject, UITableViewDataSource {
     }
 
     //Mark: Sort options  
-    
+
     public func sortByColor(cardList: [CardDTO]) {
         colorCards = Sort.splitDataByColor(cardList: cardList).source
         sections = Sort.splitDataByColor(cardList: cardList).sections
         insertHeaderToDataSource()
         tableView?.reloadData()
     }
-        
+
     fileprivate func insertHeaderToDataSource() {
         colorCards[" "] = [CardDTO]()
         sections.insert(" ", at: 0)

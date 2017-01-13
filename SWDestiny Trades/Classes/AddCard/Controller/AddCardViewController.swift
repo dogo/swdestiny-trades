@@ -48,7 +48,7 @@ class AddCardViewController: UIViewController {
         addCardView.addCardTableView.didSelectCard = { [weak self] card in
             self?.insert(card: card)
         }
-        
+
         addCardView.addCardTableView.didSelectAccessory = { [weak self] card in
             self?.navigateToNextController(with: card)
         }

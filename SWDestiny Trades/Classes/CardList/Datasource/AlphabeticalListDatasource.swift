@@ -9,11 +9,11 @@
 import UIKit
 
 class AlphabeticalListDatasource: NSObject, UITableViewDataSource {
-    
+
     fileprivate var sections: [String] = []
-    
+
     fileprivate var tableView: UITableView?
-    
+
     // Alphabetical
     fileprivate var alphabeticallyCards: [String : [CardDTO]] = [ : ]
 
@@ -58,7 +58,7 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource {
         insertHeaderToDataSource()
         tableView?.reloadData()
     }
-    
+
     fileprivate func insertHeaderToDataSource() {
         alphabeticallyCards[" "] = [CardDTO]()
         sections.insert(" ", at: 0)

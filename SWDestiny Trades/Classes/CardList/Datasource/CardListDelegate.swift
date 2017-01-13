@@ -14,22 +14,22 @@ protocol CardListViewDelegate {
 }
 
 class CardListDelegate: NSObject, UITableViewDelegate {
-    
+
     private let cardListViewDelegate: CardListViewDelegate
     private var header: FilterHeaderView?
-    
+
     init(_ cardListDelegate: CardListViewDelegate) {
         self.cardListViewDelegate = cardListDelegate
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cardListViewDelegate.didSelectCard(at: indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             if header == nil {
@@ -41,7 +41,7 @@ class CardListDelegate: NSObject, UITableViewDelegate {
         }
         return nil
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return FilterHeaderView.height()
     }

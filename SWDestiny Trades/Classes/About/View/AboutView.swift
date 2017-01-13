@@ -15,7 +15,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         image.contentMode = .scaleAspectFill
         return image
     }()
-    
+
     var versionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 13)
@@ -53,7 +53,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
             make.width.equalTo(280)
             make.height.equalTo(150)
         }
-        
+
         versionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoImage.snp.bottom)
             make.left.equalTo(logoImage.snp.right).offset(-56)
@@ -75,7 +75,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
         aboutTextView.delegate = self
         aboutTextView.isEditable = false
-        
+
         versionLabel.text = String.localizedStringWithFormat(NSLocalizedString("VERSION", comment: ""),
                                                              Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber)
 

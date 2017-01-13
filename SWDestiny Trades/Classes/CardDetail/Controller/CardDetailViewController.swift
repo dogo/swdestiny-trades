@@ -34,19 +34,19 @@ class CardDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(CardDetailViewController.share(_:)))
         cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
     }
-    
+
     func share(_ sender: UIBarButtonItem) {
-    
+
         if let shareImage = cardView.cardImageView.image {
-        
+
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
-            
+
             if #available(iOS 9.0, *) {
                 activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
             } else {
                 activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
             }
-            
+
             activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
             DispatchQueue.global(qos: .userInteractive).async {
                 DispatchQueue.main.async {

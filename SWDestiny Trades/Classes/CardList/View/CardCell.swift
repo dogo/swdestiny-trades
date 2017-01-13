@@ -29,7 +29,7 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         setSubtitle(card: card, useIndex: useIndex)
         baseViewCell.accessoryLabel.text = ""//cardDTO.price
     }
-    
+
     private func setSubtitle(card: CardDTO, useIndex: Bool) {
         if useIndex {
             baseViewCell.subtitleLabel.text = "#\(card.code.subString(from: 2)), \(card.affiliationName)"
