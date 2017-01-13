@@ -9,10 +9,6 @@
 import UIKit
 import Alamofire
 
-protocol SetsListViewDelegate: class {
-    func didSelectSet(at index: IndexPath)
-}
-
 class SetsListViewController: UIViewController {
 
     fileprivate let setsView = SetsView()

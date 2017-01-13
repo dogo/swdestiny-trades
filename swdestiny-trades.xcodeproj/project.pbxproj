@@ -68,6 +68,7 @@
 		DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */; };
 		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
 		DDFB0C8F1E285F0C00442E1B /* SWDestinyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */; };
+		DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C921E286E5800442E1B /* BaseDelegate.swift */; };
 		DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */; };
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
 		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
@@ -156,6 +157,7 @@
 		DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 		DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDestinyAPI.swift; sourceTree = "<group>"; };
+		DDFB0C921E286E5800442E1B /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardDatasource.swift; sourceTree = "<group>"; };
 		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
 		DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardTableView.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 			children = (
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
+				DDFB0C921E286E5800442E1B /* BaseDelegate.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */,
+				DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,

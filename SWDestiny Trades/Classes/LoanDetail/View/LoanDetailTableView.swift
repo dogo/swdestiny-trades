@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LoanDetailTableView: UITableView, LoansDetailViewDelegate {
+final class LoanDetailTableView: UITableView, BaseDelegate {
 
     var didSelectCard: ((CardDTO) -> Void)?
     var didSelectAddItem: ((Bool) -> Void)?
@@ -31,9 +31,9 @@ final class LoanDetailTableView: UITableView, LoansDetailViewDelegate {
         tableViewDatasource?.updateTableViewData(borrowedList: borrowedList, lentMeList: lentMeList)
     }
 
-    // Mark: <LoansDetailViewDelegate>
+    // Mark: <BaseDelegate>
 
-    internal func didSelectItem(at index: IndexPath) {
+    internal func didSelectRow(at index: IndexPath) {
         if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
             didSelectAddItem?(index.section == 0)
         } else if let card = tableViewDatasource?.getCard(at: index) {

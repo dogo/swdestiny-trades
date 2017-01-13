@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PeopleListTableView: UITableView, PeopleListViewDelegate {
+final class PeopleListTableView: UITableView, BaseDelegate {
 
     var didSelectPerson: ((PersonDTO) -> Void)?
 
@@ -38,9 +38,9 @@ final class PeopleListTableView: UITableView, PeopleListViewDelegate {
         self.setEditing(!editable, animated: true)
     }
 
-    // MARK: <PeopleListViewDelegate>
+    // MARK: <BaseDelegate>
 
-    internal func didSelectPerson(at index: IndexPath) {
+    internal func didSelectRow(at index: IndexPath) {
         if let person = tableViewDatasource?.getPerson(at: index) {
             didSelectPerson?(person)
         }

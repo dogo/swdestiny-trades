@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol LoansDetailViewDelegate: class {
-    func didSelectItem(at: IndexPath)
-}
-
 class LoansDetailViewController: UIViewController {
 
     fileprivate let loanDetailView = LoanDetailView()

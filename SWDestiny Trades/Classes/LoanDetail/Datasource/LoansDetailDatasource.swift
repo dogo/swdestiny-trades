@@ -113,13 +113,13 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
 class LoansDetail: NSObject, UITableViewDelegate {
 
-    weak var delegate: LoansDetailViewDelegate?
+    weak var delegate: BaseDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectItem(at: indexPath)
+        delegate?.didSelectRow(at: indexPath)
     }
 }

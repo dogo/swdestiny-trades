@@ -9,10 +9,6 @@
 import UIKit
 import RealmSwift
 
-protocol PeopleListViewDelegate: class {
-    func didSelectPerson(at: IndexPath)
-}
-
 protocol UpdateTableDataDelegate: class {
     func insertNew(person: PersonDTO)
 }

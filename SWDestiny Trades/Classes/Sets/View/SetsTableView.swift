@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SetsTableView: UITableView, SetsListViewDelegate {
+final class SetsTableView: UITableView, BaseDelegate {
 
     var didSelectSet: ((SetDTO) -> Void)?
 
@@ -30,9 +30,9 @@ final class SetsTableView: UITableView, SetsListViewDelegate {
         tableViewDatasource?.sortAndSplitTableData(setList: sets)
     }
 
-    // Mark: <SetsListViewDelegate>
+    // Mark: <BaseDelegate>
 
-    internal func didSelectSet(at index: IndexPath) {
+    internal func didSelectRow(at index: IndexPath) {
         if let set = tableViewDatasource?.getSet(at: index) {
             didSelectSet?(set)
         }
