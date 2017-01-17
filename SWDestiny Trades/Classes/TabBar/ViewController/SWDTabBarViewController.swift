@@ -13,14 +13,18 @@ final class SWDTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Create Tab one
-        let tabOne = UINavigationController(rootViewController: SetsListViewController())
-        tabOne.tabBarItem = UITabBarItem(title: NSLocalizedString("CARDS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
+        // Create SetsListViewController Tab
+        let setsTab = UINavigationController(rootViewController: SetsListViewController())
+        setsTab.tabBarItem = UITabBarItem(title: NSLocalizedString("CARDS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
+        
+        // Create DeckListViewController Tab
+        let decktab = UINavigationController(rootViewController: DeckListViewController())
+        decktab.tabBarItem = UITabBarItem(title: NSLocalizedString("DECKS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
 
-        // Create Tab two
-        let tabTwo = UINavigationController(rootViewController: PeopleListViewController())
-        tabTwo.tabBarItem = UITabBarItem(title: NSLocalizedString("LOANS", comment: ""), image: UIImage(named: "ic_loans"), selectedImage: nil)
+        // Create PeopleListViewController Tab
+        let loansTab = UINavigationController(rootViewController: PeopleListViewController())
+        loansTab.tabBarItem = UITabBarItem(title: NSLocalizedString("LOANS", comment: ""), image: UIImage(named: "ic_loans"), selectedImage: nil)
 
-        self.viewControllers = [tabOne, tabTwo]
+        self.viewControllers = [setsTab, decktab, loansTab]
     }
 }
