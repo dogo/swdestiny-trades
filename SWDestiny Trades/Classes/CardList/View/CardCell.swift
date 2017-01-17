@@ -32,9 +32,9 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     private func setSubtitle(card: CardDTO, useIndex: Bool) {
         if useIndex {
-            baseViewCell.subtitleLabel.text = "#\(card.code.subString(from: 2)), \(card.affiliationName)"
+            baseViewCell.subtitleLabel.text = "#\(card.code.subString(from: 2)), \(card.affiliationName) - \(card.typeName)"
         } else {
-            baseViewCell.subtitleLabel.text = card.affiliationName
+            baseViewCell.subtitleLabel.text = "\(card.affiliationName) - \(card.typeName)"
         }
     }
 
