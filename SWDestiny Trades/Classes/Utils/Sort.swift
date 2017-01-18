@@ -79,4 +79,39 @@ final class Sort {
 
         return (sortedSymbols, tableViewSource)
     }
+    
+    static func splitCardsByType(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
+        
+        // Build types Array
+        var types = Set<String>()
+        
+        func getType(cardDTO: CardDTO) -> String {
+            return cardDTO.typeName.capitalized
+        }
+        
+        cardList.forEach {_ = types.insert(getType(cardDTO: $0)) }
+        
+        // Build tableSource array
+        var tableViewSource = [String: [CardDTO]]()
+        
+        for symbol in types {
+            
+            var cardsDTO = [CardDTO]()
+            
+            for card in cardList {
+                if symbol == getType(cardDTO: card) {
+                    cardsDTO.append(card)
+                }
+            }
+            tableViewSource[symbol] = cardsDTO.sorted {
+                $0.name < $1.name
+            }
+        }
+        
+        let sortedSymbols = types.sorted {
+            $0 < $1
+        }
+        
+        return (sortedSymbols, tableViewSource)
+    }
 }
