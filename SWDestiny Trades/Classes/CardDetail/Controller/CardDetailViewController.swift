@@ -31,7 +31,7 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.title = cardDTO?.name
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(CardDetailViewController.share(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
     }
 

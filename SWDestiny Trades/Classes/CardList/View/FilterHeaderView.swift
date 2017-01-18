@@ -27,7 +27,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
         buildViewHierarchy()
         setupConstraints()
         configureViews()
-        segmentControl.addTarget(self, action: #selector(FilterHeaderView.valueChanged(_:)), for: UIControlEvents.valueChanged)
+        segmentControl.addTarget(self, action: #selector(valueChanged(_:)), for: UIControlEvents.valueChanged)
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -43,7 +43,7 @@ class LoansDetailViewController: UIViewController {
             self?.navigateToAddCardViewController(lentMe: lentMe)
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(LoansDetailViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
