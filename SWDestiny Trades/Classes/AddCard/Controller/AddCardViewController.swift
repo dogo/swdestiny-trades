@@ -94,6 +94,7 @@ class AddCardViewController: UIViewController {
         try! realm.write {
             deckDTO.list.append(card)
             showSuccessMessage(card: card)
+            realm.add(deckDTO, update: true)
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         }

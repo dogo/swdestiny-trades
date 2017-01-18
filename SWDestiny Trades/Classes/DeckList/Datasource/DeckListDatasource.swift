@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DeckListDatasource: NSObject, UITableViewDataSource {
     
@@ -16,17 +17,23 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
-        tableView.register(cellType: SetsTableCell.self)
+        tableView.register(cellType: DeckListCell.self)
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SetsTableCell.self)
-        //cell.configureCell(setDTO: getDeck(at: indexPath))
-        cell.titleLabel.text = "getDeck(at: indexPath)"
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckListCell.self)
+        cell.configureCell(deck: getDeck(at: indexPath))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            remove(at: indexPath)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,6 +42,14 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return deckList.count
+    }
+    
+    private func remove(at indexPath: IndexPath) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(deckList[indexPath.row])
+            deckList.remove(at: indexPath.row)
+        }
     }
     
     public func getDeck(at index: IndexPath) -> DeckDTO {
@@ -57,5 +72,9 @@ class DeckList: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectRow(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        delegate?.didSelectAccessory?(at: indexPath)
     }
 }

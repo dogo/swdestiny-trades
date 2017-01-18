@@ -37,6 +37,10 @@ final class DeckListViewController: UIViewController {
         deckListView.deckListTableView.didSelectDeck = { [weak self] deck in
             self?.navigateToNextController(with: deck)
         }
+        
+        deckListView.deckListTableView.didSelectAccessory = { [weak self] card in
+            //self?.navigateToNextController(with: card)
+        }
     }
     
     func loadDataFromRealm() {
@@ -61,7 +65,7 @@ final class DeckListViewController: UIViewController {
     
     // MARK: - Navigation
     
-    func navigateToNextController(with deck: DeckDTO) {
+    func navigateToNextController(with deck: DeckDTO?) {
         let nextController = DeckBuilderViewController()
         nextController.deckDTO = deck
         self.navigationController?.pushViewController(nextController, animated: true)
@@ -74,6 +78,6 @@ final class DeckListViewController: UIViewController {
     }
     
     func addButtonTouched(_ sender: Any) {
-        
+        self.navigateToNextController(with: nil)
     }
 }

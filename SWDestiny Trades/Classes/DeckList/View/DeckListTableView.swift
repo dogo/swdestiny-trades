@@ -11,6 +11,7 @@ import UIKit
 final class DeckListTableView: UITableView, BaseDelegate {
     
     var didSelectDeck: ((DeckDTO) -> Void)?
+    var didSelectAccessory: ((CardDTO) -> Void)?
     
     fileprivate var tableViewDatasource: DeckListDatasource?
     let deckList = DeckList()
