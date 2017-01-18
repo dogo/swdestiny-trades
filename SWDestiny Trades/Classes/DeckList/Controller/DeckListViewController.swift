@@ -36,6 +36,14 @@ final class DeckListViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = deckListView.deckListTableView.indexPathForSelectedRow {
+            deckListView.deckListTableView.deselectRow(at: path, animated: animated)
+        }
+    }
+    
     func setupNavigationItem() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_account"), style: .plain, target: self, action: #selector(loginButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))

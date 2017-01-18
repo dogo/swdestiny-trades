@@ -68,6 +68,7 @@
 		DDCA97B71E2FA72A0098FFB5 /* DeckBuilderDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCA97B21E2FA72A0098FFB5 /* DeckBuilderDatasource.swift */; };
 		DDCA97B81E2FA72A0098FFB5 /* DeckBuilderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCA97B41E2FA72A0098FFB5 /* DeckBuilderTableView.swift */; };
 		DDCA97B91E2FA72A0098FFB5 /* DeckBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCA97B51E2FA72A0098FFB5 /* DeckBuilderView.swift */; };
+		DDCA97BC1E2FB0370098FFB5 /* DeckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCA97BB1E2FB0370098FFB5 /* DeckDTO.swift */; };
 		DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */; };
 		DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3841E1DF7BD00B4BE18 /* CardView.swift */; };
 		DDCDE3881E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3871E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift */; };
@@ -169,6 +170,7 @@
 		DDCA97B21E2FA72A0098FFB5 /* DeckBuilderDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderDatasource.swift; sourceTree = "<group>"; };
 		DDCA97B41E2FA72A0098FFB5 /* DeckBuilderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderTableView.swift; sourceTree = "<group>"; };
 		DDCA97B51E2FA72A0098FFB5 /* DeckBuilderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderView.swift; sourceTree = "<group>"; };
+		DDCA97BB1E2FB0370098FFB5 /* DeckDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckDTO.swift; sourceTree = "<group>"; };
 		DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		DDCDE3841E1DF7BD00B4BE18 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		DDCDE3871E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
@@ -676,6 +678,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DDCA97BA1E2FB0370098FFB5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDCA97BB1E2FB0370098FFB5 /* DeckDTO.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DDCDE37F1E1DF7A600B4BE18 /* CardDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +745,7 @@
 			children = (
 				DDF5D95D1E2EA7A8007C8A4B /* Controller */,
 				DDF5D95E1E2EA7A8007C8A4B /* Datasource */,
+				DDCA97BA1E2FB0370098FFB5 /* Model */,
 				DDF5D95F1E2EA7A8007C8A4B /* View */,
 			);
 			path = DeckList;
@@ -1029,6 +1040,7 @@
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,
 				DDB8A2251E266DFF0086FC01 /* Sort.swift in Sources */,
 				DD09054A1E24701D00D9EFB0 /* CardCell.swift in Sources */,
+				DDCA97BC1E2FB0370098FFB5 /* DeckDTO.swift in Sources */,
 				DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */,
 				DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */,
 				DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */,
