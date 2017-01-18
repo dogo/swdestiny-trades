@@ -36,11 +36,11 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
         let lentMeCount = personDTO.lentMe.count
         let borrowedCount = personDTO.borrowed.count
         if lentMeCount > 0 && borrowedCount > 0 {
-            loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_AND_BORROWED_ME_CARD", comment: ""), lentMeCount, borrowedCount)
+            loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_AND_BORROWED_CARDS", comment: ""), lentMeCount, borrowedCount)
         } else if lentMeCount > 0 {
             loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_CARD", comment: ""), lentMeCount)
         } else if borrowedCount > 0 {
-            loanState = String.localizedStringWithFormat(NSLocalizedString("BORROWED_ME_CARD", comment: ""), borrowedCount)
+            loanState = String.localizedStringWithFormat(NSLocalizedString("BORROWED_CARD", comment: ""), borrowedCount)
         }
 
         return loanState
