@@ -26,7 +26,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AddCardCell.self)
         if indexPath.row == deckList.count {
             cell.accessoryType = .none
-            cell.textLabel?.text = NSLocalizedString("ADD_MY_CARD", comment: "")
+            cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "")
             cell.textLabel?.textColor = UIColor.darkGray
         } else {
             cell.textLabel?.text = nil

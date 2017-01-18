@@ -29,7 +29,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
-                cell.textLabel?.text = NSLocalizedString("ADD_THEIR_CARD", comment: "")
+                cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "")
                 cell.textLabel?.textColor = UIColor.darkGray
             } else {
                 cell.textLabel?.text = nil
