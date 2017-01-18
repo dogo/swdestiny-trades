@@ -37,7 +37,7 @@ final class SearchTableView: UITableView, SearchDelegate {
 
     // Mark: <SearchDelegate>
 
-    internal func didSelectCard(at index: IndexPath) {
+    internal func didSelectRow(at index: IndexPath) {
         if let card = searchDatasource?.getCard(at: index) {
             didSelectCard?(card)
         }

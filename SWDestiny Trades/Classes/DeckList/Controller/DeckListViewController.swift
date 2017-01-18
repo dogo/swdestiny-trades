@@ -38,8 +38,8 @@ final class DeckListViewController: UIViewController {
             self?.navigateToNextController(with: deck)
         }
         
-        deckListView.deckListTableView.didSelectAccessory = { [weak self] card in
-            //self?.navigateToNextController(with: card)
+        deckListView.deckListTableView.didSelectAccessory = { [weak self] deck in
+            self?.toggleDeckEdit(with: deck)
         }
     }
     
@@ -57,15 +57,19 @@ final class DeckListViewController: UIViewController {
         }
     }
     
-    func setupNavigationItem() {
+    private func setupNavigationItem() {
         self.navigationItem.title = NSLocalizedString("DECK_LIST", comment: "")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_account"), style: .plain, target: self, action: #selector(loginButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
     }
     
+    private func toggleDeckEdit(with deck: DeckDTO) {
+        deckListView.deckListTableView.toggleDeckEdit(with: deck)
+    }
+    
     // MARK: - Navigation
     
-    func navigateToNextController(with deck: DeckDTO?) {
+    func navigateToNextController(with deck: DeckDTO) {
         let nextController = DeckBuilderViewController()
         nextController.deckDTO = deck
         self.navigationController?.pushViewController(nextController, animated: true)
@@ -78,6 +82,6 @@ final class DeckListViewController: UIViewController {
     }
     
     func addButtonTouched(_ sender: Any) {
-        self.navigateToNextController(with: nil)
+        deckListView.deckListTableView.insert(deck: DeckDTO())
     }
 }

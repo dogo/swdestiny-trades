@@ -68,6 +68,6 @@ class Search: NSObject, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectCard(at: indexPath)
+        delegate?.didSelectRow(at: indexPath)
     }
 }

@@ -13,7 +13,6 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration {
     
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
-        textField.text = "New Deck"
         textField.textColor = UIColor.black
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.isUserInteractionEnabled = false
@@ -32,7 +31,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
     
     internal func configureCell(deck: DeckDTO) {
-        //titleEditText.text = deck.name
+        titleEditText.text = deck.name
     }
     
     override func prepareForReuse() {

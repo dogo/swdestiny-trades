@@ -60,11 +60,24 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
         deckList = list
         tableView?.reloadData()
     }
+    
+    public func insert(deck: DeckDTO) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(deck)
+            deckList.append(deck)
+            tableView?.reloadData()
+        }
+    }
+    
+    public func toggleDeckEdit(with deck: DeckDTO) {
+        
+    }
 }
 
 class DeckList: NSObject, UITableViewDelegate {
     
-    weak var delegate: BaseDelegate?
+    weak var delegate: SearchDelegate?
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()

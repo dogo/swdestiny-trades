@@ -38,7 +38,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
 
     // Mark: <SearchDelegate>
 
-    internal func didSelectCard(at index: IndexPath) {
+    internal func didSelectRow(at index: IndexPath) {
         if let card = tableDatasource?.getCard(at: index) {
             didSelectCard?(card)
         }

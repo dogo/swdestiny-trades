@@ -8,10 +8,10 @@
 
 import UIKit
 
-final class DeckListTableView: UITableView, BaseDelegate {
+final class DeckListTableView: UITableView, SearchDelegate {
     
     var didSelectDeck: ((DeckDTO) -> Void)?
-    var didSelectAccessory: ((CardDTO) -> Void)?
+    var didSelectAccessory: ((DeckDTO) -> Void)?
     
     fileprivate var tableViewDatasource: DeckListDatasource?
     let deckList = DeckList()
@@ -31,11 +31,25 @@ final class DeckListTableView: UITableView, BaseDelegate {
         tableViewDatasource?.updateTableViewData(list: decksList)
     }
     
+    func toggleDeckEdit(with deck: DeckDTO) {
+        tableViewDatasource?.toggleDeckEdit(with: deck)
+    }
+    
+    func insert(deck: DeckDTO) {
+        tableViewDatasource?.insert(deck: deck)
+    }
+    
     // Mark: <BaseDelegate>
     
     internal func didSelectRow(at index: IndexPath) {
         if let deck = tableViewDatasource?.getDeck(at: index) {
             didSelectDeck?(deck)
+        }
+    }
+    
+    internal func didSelectAccessory(at index: IndexPath) {
+        if let deck = tableViewDatasource?.getDeck(at: index) {
+            didSelectAccessory?(deck)
         }
     }
 }

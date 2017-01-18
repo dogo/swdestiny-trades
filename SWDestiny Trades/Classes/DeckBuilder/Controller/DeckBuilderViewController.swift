@@ -11,7 +11,7 @@ import RealmSwift
 
 final class DeckBuilderViewController: UIViewController {
     
-    var deckDTO: DeckDTO?
+    var deckDTO: DeckDTO!
     fileprivate let deckBuilderView = DeckBuilderView()
     
     // MARK: - Life Cycle
@@ -31,11 +31,7 @@ final class DeckBuilderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if deckDTO == nil {
-            deckDTO = DeckDTO()
-        }
-        
-        loadData(list: deckDTO!.list)
+        loadData(list: deckDTO.list)
         
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in
             self?.navigateToAddCardViewController()
