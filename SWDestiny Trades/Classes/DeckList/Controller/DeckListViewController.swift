@@ -30,11 +30,23 @@ final class DeckListViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigationItem()
+        
+        deckListView.deckListTableView.didSelectDeck = { [weak self] deck in
+            self?.navigateToNextController(with: deck)
+        }
     }
     
     func setupNavigationItem() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_account"), style: .plain, target: self, action: #selector(loginButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
+    }
+    
+    // MARK: - <SetsListViewDelegate>
+    
+    func navigateToNextController(with deck: String) {
+        let nextController = DeckBuilderViewController()
+        //nextController.setDTO = set
+        self.navigationController?.pushViewController(nextController, animated: true)
     }
     
     // MARK: - UIBarButton Actions

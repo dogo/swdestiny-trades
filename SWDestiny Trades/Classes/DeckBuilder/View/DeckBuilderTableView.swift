@@ -1,5 +1,5 @@
 //
-//  DeckListTableView.swift
+//  DeckBuilderTableView.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 18/01/17.
@@ -8,17 +8,15 @@
 
 import UIKit
 
-final class DeckListTableView: UITableView, BaseDelegate {
+final class DeckBuilderTableView: UITableView, BaseDelegate {
     
-    var didSelectDeck: ((String) -> Void)?
-    
-    fileprivate var tableViewDatasource: DeckListDatasource?
-    let deckList = DeckList()
+    fileprivate var tableViewDatasource: DeckBuilderDatasource?
+    let deckBuilder = DeckBuilder()
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        deckList.delegate = self
-        tableViewDatasource = DeckListDatasource(tableView: self, delegate: deckList)
+        deckBuilder.delegate = self
+        tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: deckBuilder)
         self.backgroundColor = UIColor.white
     }
     
@@ -33,8 +31,8 @@ final class DeckListTableView: UITableView, BaseDelegate {
     // Mark: <BaseDelegate>
     
     internal func didSelectRow(at index: IndexPath) {
-        if let deck = tableViewDatasource?.getDeck(at: index) {
-            didSelectDeck?(deck)
-        }
+//        let card = tableViewDatasource?.getCard(at: index) {
+//            didSelectCard?(card)
+//        }
     }
 }
