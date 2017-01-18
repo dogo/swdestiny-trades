@@ -10,8 +10,7 @@ import UIKit
 
 final class DeckListView: UIView, BaseViewConfiguration {
     
-    //let cardListTableView = CardListTableView()
-    //let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let deckListTableView = DeckListTableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,22 +26,16 @@ final class DeckListView: UIView, BaseViewConfiguration {
     // MARK: <BaseViewConfiguration>
     
     internal func buildViewHierarchy() {
-       // self.addSubview(cardListTableView)
-        //cardListTableView.addSubview(activityIndicator)
+        self.addSubview(deckListTableView)
     }
     
     internal func setupConstraints() {
-//        cardListTableView.snp.makeConstraints { make in
-//            make.top.equalTo(self)
-//            make.left.equalTo(self)
-//            make.bottom.equalTo(self)
-//            make.right.equalTo(self)
-//        }
-//        
-//        activityIndicator.snp.makeConstraints { make in
-//            make.centerX.equalTo(self)
-//            make.centerY.equalTo(self)
-//        }
+        deckListTableView.snp.makeConstraints { make in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.bottom.equalTo(self)
+            make.right.equalTo(self)
+        }
     }
     
     internal func configureViews() {
