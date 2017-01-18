@@ -11,22 +11,35 @@ import UIKit
 class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     
     fileprivate var tableView: UITableView?
-    fileprivate var deckList: [String] = ["PANDA"]
+    var deckList: [String] = []
     
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
-        tableView.register(cellType: SetsTableCell.self)
+        tableView.register(cellType: AddCardCell.self)
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SetsTableCell.self)
-        //cell.configureCell(setDTO: getDeck(at: indexPath))
-        cell.titleLabel.text = getDeck(at: indexPath)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AddCardCell.self)
+        if indexPath.row == deckList.count {
+            cell.accessoryType = .none
+            cell.textLabel?.text = NSLocalizedString("ADD_MY_CARD", comment: "")
+            cell.textLabel?.textColor = UIColor.darkGray
+        } else {
+            cell.textLabel?.text = nil
+//            cell.configureCell(cardDTO: borrowed[indexPath.row])
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row == deckList.count {
+            return false
+        }
+        return true
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -34,14 +47,14 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return deckList.count
+        return deckList.count + 1
     }
     
     public func getDeck(at index: IndexPath) -> String {
         return deckList[index.row]
     }
     
-    public func sortAndSplitTableData(setList: [SetDTO]) {
+    public func updateTableViewData(setList: [SetDTO]) {
         //deckList =
         tableView?.reloadData()
     }

@@ -30,6 +30,10 @@ final class DeckBuilderViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigationItem()
+        
+        deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] lentMe in
+            self?.navigateToAddCardViewController()
+        }
     }
     
     func setupNavigationItem() {
@@ -40,5 +44,18 @@ final class DeckBuilderViewController: UIViewController {
     
     func saveButtonTouched(_ sender: Any) {
         
+    }
+    
+    // MARK: Navigation
+    
+    func navigateToCardDetailViewController(with card: CardDTO?) {
+        let nextController = CardDetailViewController()
+        nextController.cardDTO = card
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
+    
+    func navigateToAddCardViewController() {
+        let nextController = AddCardViewController()
+        self.navigationController?.pushViewController(nextController, animated: true)
     }
 }
