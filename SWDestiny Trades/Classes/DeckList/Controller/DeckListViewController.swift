@@ -37,10 +37,6 @@ final class DeckListViewController: UIViewController {
         deckListView.deckListTableView.didSelectDeck = { [weak self] deck in
             self?.navigateToNextController(with: deck)
         }
-        
-        deckListView.deckListTableView.didSelectAccessory = { [weak self] deck in
-            self?.toggleDeckEdit(with: deck)
-        }
     }
     
     func loadDataFromRealm() {
@@ -61,10 +57,6 @@ final class DeckListViewController: UIViewController {
         self.navigationItem.title = NSLocalizedString("DECK_LIST", comment: "")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_account"), style: .plain, target: self, action: #selector(loginButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
-    }
-    
-    private func toggleDeckEdit(with deck: DeckDTO) {
-        deckListView.deckListTableView.toggleDeckEdit(with: deck)
     }
     
     // MARK: - Navigation

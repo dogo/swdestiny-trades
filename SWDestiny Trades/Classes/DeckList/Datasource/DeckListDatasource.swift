@@ -69,10 +69,6 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
             tableView?.reloadData()
         }
     }
-    
-    public func toggleDeckEdit(with deck: DeckDTO) {
-        
-    }
 }
 
 class DeckList: NSObject, UITableViewDelegate {
@@ -85,9 +81,5 @@ class DeckList: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectRow(at: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        delegate?.didSelectAccessory?(at: indexPath)
     }
 }

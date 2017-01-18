@@ -31,6 +31,8 @@ final class DeckBuilderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = deckDTO.name
+        
         loadData(list: deckDTO.list)
         
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in

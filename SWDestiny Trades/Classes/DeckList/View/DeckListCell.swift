@@ -8,17 +8,27 @@
 
 import UIKit
 import Reusable
+import RealmSwift
 
-class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration {
+class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFieldDelegate {
+    
+    private var deckDTO: DeckDTO?
     
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.textColor = UIColor.black
+        textField.tintColor = UIColor.black
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.isUserInteractionEnabled = false
         return textField
     }()
-        
+    
+    var accessoryButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        button.setImage(UIImage(named: "ic_edit"), for: .normal)
+        return button
+    }()
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         buildViewHierarchy()
@@ -31,7 +41,9 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
     
     internal func configureCell(deck: DeckDTO) {
-        titleEditText.text = deck.name
+        deckDTO = deck
+        titleEditText.text = deckDTO?.name
+        accessoryButton.addTarget(self, action: #selector(accessoryButtonTouched(sender:)), for: .touchUpInside)
     }
     
     override func prepareForReuse() {
@@ -46,12 +58,38 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration {
     
     internal func setupConstraints() {
         titleEditText.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(12)
+            make.centerY.equalTo(self.contentView)
+            make.left.equalTo(self.contentView).offset(12)
+            make.right.equalTo(self.contentView).offset(-12)
         }
     }
     
     internal func configureViews() {
-        self.accessoryView = UIImageView(image: UIImage(named: "ic_edit"))
+        self.accessoryView = accessoryButton
+        titleEditText.delegate = self
+    }
+    
+    // MARK: - Actions
+    
+    func accessoryButtonTouched(sender : Any?) {
+        titleEditText.isUserInteractionEnabled = !titleEditText.isUserInteractionEnabled
+        if titleEditText.isUserInteractionEnabled {
+            titleEditText.becomeFirstResponder()
+        } else {
+            let realm = try! Realm()
+            try! realm.write {
+                deckDTO?.name = titleEditText.text!
+                realm.add(deckDTO!, update: true)
+            }
+        }
+    }
+    
+    // MARK: - <UITextFieldDelegate>
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if titleEditText == textField {
+            accessoryButtonTouched(sender: nil)
+        }
+        return true
     }
 }

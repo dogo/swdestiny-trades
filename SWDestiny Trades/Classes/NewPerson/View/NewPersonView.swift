@@ -78,7 +78,7 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
         firstNameTextField.delegate = self
     }
 
-    // MARK: - UITextFieldDelegate
+    // MARK: - <UITextFieldDelegate>
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if firstNameTextField == textField {
