@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class DeckListViewController: UIViewController {
     
@@ -31,9 +32,17 @@ final class DeckListViewController: UIViewController {
         
         setupNavigationItem()
         
+        loadDataFromRealm()
+        
         deckListView.deckListTableView.didSelectDeck = { [weak self] deck in
             self?.navigateToNextController(with: deck)
         }
+    }
+    
+    func loadDataFromRealm() {
+        let realm = try! Realm()
+        let decks = Array(realm.objects(DeckDTO.self))
+        deckListView.deckListTableView.updateTableViewData(decksList: decks)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +59,7 @@ final class DeckListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
     }
     
-    // MARK: - <SetsListViewDelegate>
+    // MARK: - Navigation
     
     func navigateToNextController(with deck: DeckDTO) {
         let nextController = DeckBuilderViewController()

@@ -10,7 +10,8 @@ import UIKit
 
 final class DeckBuilderTableView: UITableView, BaseDelegate {
     
-    var didSelectAddItem: ((Bool) -> Void)?
+    var didSelectCard: ((CardDTO) -> Void)?
+    var didSelectAddItem: ((Void) -> Void)?
     
     fileprivate var tableViewDatasource: DeckBuilderDatasource?
     let deckBuilder = DeckBuilder()
@@ -26,18 +27,17 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateTableViewData(borrowedList: [CardDTO], lentMeList: [CardDTO]) {
-        //DeckListDatasource?.updateTableViewData(borrowedList: borrowedList, lentMeList: lentMeList)
+    func updateTableViewData(deckList: [CardDTO]) {
+        tableViewDatasource?.updateTableViewData(list: deckList)
     }
     
     // Mark: <BaseDelegate>
     
     internal func didSelectRow(at index: IndexPath) {
         if index.row == tableViewDatasource?.deckList.count {
-            didSelectAddItem?(index.section == 0)
+            didSelectAddItem?()
+        } else if let card = tableViewDatasource?.getCard(at: index) {
+            didSelectCard?(card)
         }
-//        if let card = tableViewDatasource?.getCard(at: index) {
-//            didSelectCard?(card)
-//        }
     }
 }

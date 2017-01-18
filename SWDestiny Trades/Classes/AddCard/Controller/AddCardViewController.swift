@@ -16,7 +16,7 @@ class AddCardViewController: UIViewController {
     fileprivate let addCardView = AddCardView()
     var isLentMe: Bool!
     var personDTO: PersonDTO!
-    var deckDTO: DeckDTO!
+    var array = [CardDTO]()
     var isDeckBuilder = false
 
     // MARK: - Life Cycle
@@ -90,15 +90,15 @@ class AddCardViewController: UIViewController {
     }
     
     private func insertToDeckBuilder(card: CardDTO) {
-        deckDTO.list.append(card)
         showSuccessMessage(card: card)
-        let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO]
+        array.append(card)
+        let deckDataDict: [String: [CardDTO]] = ["deckDTO": array]
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
     }
 
     private func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
-        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 0.4)
+        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 0.2)
     }
 
     // MARK: Navigation

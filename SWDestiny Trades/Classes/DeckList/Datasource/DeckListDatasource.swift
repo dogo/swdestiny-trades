@@ -11,7 +11,7 @@ import UIKit
 class DeckListDatasource: NSObject, UITableViewDataSource {
     
     fileprivate var tableView: UITableView?
-    fileprivate var deckList: [DeckDTO] = [DeckDTO()]
+    fileprivate var deckList: [DeckDTO] = []
     
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -41,8 +41,8 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
         return deckList[index.row]
     }
     
-    public func sortAndSplitTableData(setList: [SetDTO]) {
-        //deckList =
+    public func updateTableViewData(list: [DeckDTO]) {
+        deckList = list
         tableView?.reloadData()
     }
 }

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 final class DeckBuilderViewController: UIViewController {
     
     var deckDTO: DeckDTO?
+    fileprivate var deckList = [CardDTO]()
     fileprivate let deckBuilderView = DeckBuilderView()
     
     // MARK: - Life Cycle
@@ -36,27 +38,54 @@ final class DeckBuilderViewController: UIViewController {
             deckDTO = DeckDTO()
         }
         
-        deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] lentMe in
+        loadData(list: Array(deckDTO!.list))
+        
+        deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in
             self?.navigateToAddCardViewController()
         }
         
+        deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] card in
+            self?.navigateToCardDetailViewController(with: card)
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(DeckBuilderViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let path = deckBuilderView.deckBuilderTableView.indexPathForSelectedRow {
+            deckBuilderView.deckBuilderTableView.deselectRow(at: path, animated: animated)
+        }
     }
     
     func setupNavigationItem() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTouched(_:)))
     }
     
+    func loadData(list: [CardDTO]) {
+        deckList = list
+        deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: list)
+    }
+    
     @objc private func reloadTableView(_ notification: NSNotification) {
-        if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
-            deckDTO = deck
+        if let deckList = notification.userInfo?["deckDTO"] as? [CardDTO] {
+            loadData(list: deckList)
         }
     }
     
     // MARK: - UIBarButton Actions
     
     func saveButtonTouched(_ sender: Any) {
-        
+        if deckList.count > 0 {
+            let realm = try! Realm()
+            try! realm.write {
+                for card in deckList {
+                    deckDTO?.list.append(card)
+                }
+                realm.add(deckDTO!, update: true)
+            }
+        }
     }
     
     // MARK: Navigation
@@ -70,7 +99,6 @@ final class DeckBuilderViewController: UIViewController {
     func navigateToAddCardViewController() {
         let nextController = AddCardViewController()
         nextController.isDeckBuilder = true
-        nextController.deckDTO = deckDTO
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

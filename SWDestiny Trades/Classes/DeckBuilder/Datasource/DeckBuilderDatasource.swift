@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     
@@ -16,24 +17,38 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
-        tableView.register(cellType: AddCardCell.self)
+        tableView.register(cellType: CardCell.self)
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AddCardCell.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
         if indexPath.row == deckList.count {
             cell.accessoryType = .none
             cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "")
             cell.textLabel?.textColor = UIColor.darkGray
         } else {
             cell.textLabel?.text = nil
-//            cell.configureCell(cardDTO: borrowed[indexPath.row])
+            cell.configureCell(card: deckList[indexPath.row], useIndex: false)
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            remove(at: indexPath)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        if tableView.isEditing {
+//            return UITableViewCellEditingStyle.delete
+//        }
+//        return UITableViewCellEditingStyle.none
+//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.row == deckList.count {
@@ -57,6 +72,14 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     public func updateTableViewData(list: [CardDTO]) {
         deckList = list
         tableView?.reloadData()
+    }
+    
+    private func remove(at indexPath: IndexPath) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(deckList[indexPath.row])
+            deckList.remove(at: indexPath.row)
+        }
     }
 }
 
