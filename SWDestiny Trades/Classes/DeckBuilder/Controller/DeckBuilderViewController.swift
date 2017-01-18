@@ -10,6 +10,7 @@ import UIKit
 
 final class DeckBuilderViewController: UIViewController {
     
+    var deckDTO: DeckDTO?
     fileprivate let deckBuilderView = DeckBuilderView()
     
     // MARK: - Life Cycle
@@ -31,13 +32,25 @@ final class DeckBuilderViewController: UIViewController {
         
         setupNavigationItem()
         
+        if deckDTO == nil {
+            deckDTO = DeckDTO()
+        }
+        
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] lentMe in
             self?.navigateToAddCardViewController()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(DeckBuilderViewController.reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
     }
     
     func setupNavigationItem() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTouched(_:)))
+    }
+    
+    @objc private func reloadTableView(_ notification: NSNotification) {
+        if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
+            deckDTO = deck
+        }
     }
     
     // MARK: - UIBarButton Actions
@@ -56,6 +69,8 @@ final class DeckBuilderViewController: UIViewController {
     
     func navigateToAddCardViewController() {
         let nextController = AddCardViewController()
+        nextController.isDeckBuilder = true
+        nextController.deckDTO = deckDTO
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

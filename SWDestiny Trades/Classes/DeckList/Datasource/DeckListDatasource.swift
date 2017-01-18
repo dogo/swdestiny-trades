@@ -11,7 +11,7 @@ import UIKit
 class DeckListDatasource: NSObject, UITableViewDataSource {
     
     fileprivate var tableView: UITableView?
-    fileprivate var deckList: [String] = ["PANDA"]
+    fileprivate var deckList: [DeckDTO] = [DeckDTO()]
     
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -25,7 +25,7 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SetsTableCell.self)
         //cell.configureCell(setDTO: getDeck(at: indexPath))
-        cell.titleLabel.text = getDeck(at: indexPath)
+        cell.titleLabel.text = "getDeck(at: indexPath)"
         return cell
     }
     
@@ -37,7 +37,7 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
         return deckList.count
     }
     
-    public func getDeck(at index: IndexPath) -> String {
+    public func getDeck(at index: IndexPath) -> DeckDTO {
         return deckList[index.row]
     }
     

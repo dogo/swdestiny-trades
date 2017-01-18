@@ -11,7 +11,7 @@ import UIKit
 class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     
     fileprivate var tableView: UITableView?
-    var deckList: [String] = []
+    var deckList: [CardDTO] = []
     
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -50,12 +50,12 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         return deckList.count + 1
     }
     
-    public func getDeck(at index: IndexPath) -> String {
+    public func getCard(at index: IndexPath) -> CardDTO {
         return deckList[index.row]
     }
     
-    public func updateTableViewData(setList: [SetDTO]) {
-        //deckList =
+    public func updateTableViewData(list: [CardDTO]) {
+        deckList = list
         tableView?.reloadData()
     }
 }

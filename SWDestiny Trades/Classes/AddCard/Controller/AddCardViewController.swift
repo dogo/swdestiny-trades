@@ -16,6 +16,8 @@ class AddCardViewController: UIViewController {
     fileprivate let addCardView = AddCardView()
     var isLentMe: Bool!
     var personDTO: PersonDTO!
+    var deckDTO: DeckDTO!
+    var isDeckBuilder = false
 
     // MARK: - Life Cycle
 
@@ -64,8 +66,15 @@ class AddCardViewController: UIViewController {
     }
 
     // MARK: - Helpers
-
     private func insert(card: CardDTO) {
+        if self.isDeckBuilder {
+            self.insertToDeckBuilder(card: card)
+        } else {
+            self.insertToLoan(card: card)
+        }
+    }
+
+    private func insertToLoan(card: CardDTO) {
         let realm = try! Realm()
         try! realm.write {
             if isLentMe! {
@@ -78,6 +87,13 @@ class AddCardViewController: UIViewController {
             let personDataDict: [String: PersonDTO] = ["personDTO": personDTO]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         }
+    }
+    
+    private func insertToDeckBuilder(card: CardDTO) {
+        deckDTO.list.append(card)
+        showSuccessMessage(card: card)
+        let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO]
+        NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
     }
 
     private func showSuccessMessage(card: CardDTO) {

@@ -10,7 +10,7 @@ import UIKit
 
 final class DeckListTableView: UITableView, BaseDelegate {
     
-    var didSelectDeck: ((String) -> Void)?
+    var didSelectDeck: ((DeckDTO) -> Void)?
     
     fileprivate var tableViewDatasource: DeckListDatasource?
     let deckList = DeckList()
