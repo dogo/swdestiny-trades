@@ -12,7 +12,6 @@ import RealmSwift
 final class DeckBuilderViewController: UIViewController {
     
     var deckDTO: DeckDTO?
-    fileprivate var deckList = [CardDTO]()
     fileprivate let deckBuilderView = DeckBuilderView()
     
     // MARK: - Life Cycle
@@ -32,13 +31,11 @@ final class DeckBuilderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationItem()
-        
         if deckDTO == nil {
             deckDTO = DeckDTO()
         }
         
-        loadData(list: Array(deckDTO!.list))
+        loadData(list: deckDTO!.list)
         
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in
             self?.navigateToAddCardViewController()
@@ -59,32 +56,13 @@ final class DeckBuilderViewController: UIViewController {
         }
     }
     
-    func setupNavigationItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTouched(_:)))
-    }
-    
-    func loadData(list: [CardDTO]) {
-        deckList = list
-        deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: list)
+    func loadData(list: List<CardDTO>) {
+        deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: Array(list))
     }
     
     @objc private func reloadTableView(_ notification: NSNotification) {
-        if let deckList = notification.userInfo?["deckDTO"] as? [CardDTO] {
-            loadData(list: deckList)
-        }
-    }
-    
-    // MARK: - UIBarButton Actions
-    
-    func saveButtonTouched(_ sender: Any) {
-        if deckList.count > 0 {
-            let realm = try! Realm()
-            try! realm.write {
-                for card in deckList {
-                    deckDTO?.list.append(card)
-                }
-                realm.add(deckDTO!, update: true)
-            }
+        if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
+            loadData(list: deck.list)
         }
     }
     
@@ -99,6 +77,7 @@ final class DeckBuilderViewController: UIViewController {
     func navigateToAddCardViewController() {
         let nextController = AddCardViewController()
         nextController.isDeckBuilder = true
+        nextController.deckDTO = deckDTO
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

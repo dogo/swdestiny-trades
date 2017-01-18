@@ -42,14 +42,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        if tableView.isEditing {
-//            return UITableViewCellEditingStyle.delete
-//        }
-//        return UITableViewCellEditingStyle.none
-//    }
-    
+        
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.row == deckList.count {
             return false
