@@ -46,46 +46,9 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
         return (swdSets[sectionLetters[index.section]]?[index.row])!
     }
 
-    // MARK: - Split and Sort UITableView source
-
-    func createTableData(setList: [SetDTO]) -> (firstLetters: [Character], source: [Character : [SetDTO]]) {
-
-        // Build Character Set
-        var letters = Set<Character>()
-
-        func getFirstLetter(setDTO: SetDTO) -> Character {
-            return setDTO.name[setDTO.name.startIndex]
-        }
-
-        setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
-
-        // Build tableSource array
-        var tableViewSource = [Character: [SetDTO]]()
-
-        for symbol in letters {
-
-            var setsDTO = [SetDTO]()
-
-            for set in setList {
-                if symbol == getFirstLetter(setDTO: set) {
-                    setsDTO.append(set)
-                }
-            }
-            tableViewSource[symbol] = setsDTO.sorted {
-                $0.name < $1.name
-            }
-        }
-
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
-    }
-
     public func sortAndSplitTableData(setList: [SetDTO]) {
-        swdSets = createTableData(setList: setList).source
-        sectionLetters = createTableData(setList: setList).firstLetters
+        swdSets = Sort.splitSetsByAlphabetically(setList: setList).source
+        sectionLetters = Sort.splitSetsByAlphabetically(setList: setList).firstLetters
         tableView?.reloadData()
     }
 }

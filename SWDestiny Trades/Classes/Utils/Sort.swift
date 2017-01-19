@@ -10,7 +10,7 @@ import Foundation
 
 final class Sort {
 
-    static func splitDataAlphabetically(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
+    static func splitCardsAlphabetically(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
 
         // Build Character Set
         var letters = Set<String>()
@@ -45,9 +45,9 @@ final class Sort {
         return (sortedSymbols, tableViewSource)
     }
 
-    static func splitDataByColor(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
+    static func splitCardsByColor(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
 
-        // Build color Array
+        // Build color Set
         var colors = Set<String>()
 
         func getColor(cardDTO: CardDTO) -> String {
@@ -82,7 +82,7 @@ final class Sort {
 
     static func splitCardsByType(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
 
-        // Build types Array
+        // Build types Set
         var types = Set<String>()
 
         func getType(cardDTO: CardDTO) -> String {
@@ -112,6 +112,41 @@ final class Sort {
             $0 < $1
         }
 
+        return (sortedSymbols, tableViewSource)
+    }
+    
+    static func splitSetsByAlphabetically(setList: [SetDTO]) -> (firstLetters: [Character], source: [Character : [SetDTO]]) {
+        
+        // Build Character Set
+        var letters = Set<Character>()
+        
+        func getFirstLetter(setDTO: SetDTO) -> Character {
+            return setDTO.name[setDTO.name.startIndex]
+        }
+        
+        setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
+        
+        // Build tableSource array
+        var tableViewSource = [Character: [SetDTO]]()
+        
+        for symbol in letters {
+            
+            var setsDTO = [SetDTO]()
+            
+            for set in setList {
+                if symbol == getFirstLetter(setDTO: set) {
+                    setsDTO.append(set)
+                }
+            }
+            tableViewSource[symbol] = setsDTO.sorted {
+                $0.name < $1.name
+            }
+        }
+        
+        let sortedSymbols = letters.sorted {
+            $0 < $1
+        }
+        
         return (sortedSymbols, tableViewSource)
     }
 }
