@@ -11,8 +11,8 @@ import UIKit
 class SetsListDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
-    fileprivate var swdSets: [Character : [SetDTO]] = [ : ]
-    fileprivate var sectionLetters: [Character] = []
+    fileprivate var swdSets: [String : [SetDTO]] = [ : ]
+    fileprivate var sectionLetters: [String] = []
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()

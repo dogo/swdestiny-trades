@@ -10,12 +10,9 @@ import UIKit
 
 class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
-    fileprivate var sections: [String] = []
-
     fileprivate var tableView: UITableView?
-
-    // Alphabetical
     fileprivate var alphabeticallyCards: [String : [CardDTO]] = [ : ]
+    fileprivate var sections: [String] = []
 
     required init(tableView: UITableView) {
         super.init()
@@ -31,7 +28,7 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(sections[section])
+        return sections[section]
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

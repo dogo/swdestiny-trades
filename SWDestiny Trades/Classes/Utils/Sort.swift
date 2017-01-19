@@ -115,19 +115,19 @@ final class Sort {
         return (sortedSymbols, tableViewSource)
     }
     
-    static func splitSetsByAlphabetically(setList: [SetDTO]) -> (firstLetters: [Character], source: [Character : [SetDTO]]) {
+    static func splitSetsByAlphabetically(setList: [SetDTO]) -> (firstLetters: [String], source: [String : [SetDTO]]) {
         
         // Build Character Set
-        var letters = Set<Character>()
+        var letters = Set<String>()
         
-        func getFirstLetter(setDTO: SetDTO) -> Character {
-            return setDTO.name[setDTO.name.startIndex]
+        func getFirstLetter(setDTO: SetDTO) -> String {
+            return String(setDTO.name.characters.prefix(1))
         }
         
         setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
         
         // Build tableSource array
-        var tableViewSource = [Character: [SetDTO]]()
+        var tableViewSource = [String: [SetDTO]]()
         
         for symbol in letters {
             
