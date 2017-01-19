@@ -51,7 +51,7 @@ final class Sort {
         var colors = Set<String>()
 
         func getColor(cardDTO: CardDTO) -> String {
-            return cardDTO.factionCode.capitalized
+            return NSLocalizedString(cardDTO.factionCode.uppercased(), comment: "").capitalized
         }
 
         cardList.forEach {_ = colors.insert(getColor(cardDTO: $0)) }

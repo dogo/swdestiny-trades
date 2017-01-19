@@ -28,7 +28,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(sections[section])
+        return sections[section]
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

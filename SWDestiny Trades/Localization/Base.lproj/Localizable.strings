@@ -31,3 +31,7 @@
 "PEOPLE" = "People";
 "SEARCH" = "Search";
 "VERSION" = "version %@ (%@)";
+"BLUE" = "Blue";
+"YELLOW" = "Yellow";
+"GRAY" = "Gray";
+"RED" = "Red";
