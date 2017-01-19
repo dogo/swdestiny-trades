@@ -23,8 +23,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     }()
 
     var accessoryButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        button.setImage(UIImage(named: "ic_edit"), for: .normal)
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         return button
     }()
 
@@ -47,6 +46,8 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
 
     override func prepareForReuse() {
         titleEditText.text = nil
+        titleEditText.isUserInteractionEnabled = false
+        toggleEditButton()
     }
 
     // MARK: <BaseViewConfiguration>
@@ -66,12 +67,19 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     internal func configureViews() {
         self.accessoryView = accessoryButton
         titleEditText.delegate = self
+        toggleEditButton()
+    }
+    
+    private func toggleEditButton() {
+        let isEditing = titleEditText.isUserInteractionEnabled
+        accessoryButton.setImage(UIImage(named: isEditing ? "ic_done_edit" : "ic_edit"), for: .normal)
     }
 
     // MARK: - Actions
 
     func accessoryButtonTouched(sender : Any?) {
         titleEditText.isUserInteractionEnabled = !titleEditText.isUserInteractionEnabled
+        toggleEditButton()
         if titleEditText.isUserInteractionEnabled {
             titleEditText.becomeFirstResponder()
         } else {
