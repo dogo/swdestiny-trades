@@ -9,7 +9,7 @@
 import UIKit
 
 class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnable {
-    
+
     fileprivate var sections: [String] = []
 
     fileprivate var tableView: UITableView?
@@ -45,7 +45,7 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sections
     }
-    
+
     //Mark: <CardReturnable>
 
     internal func getCard(at index: IndexPath) -> CardDTO? {

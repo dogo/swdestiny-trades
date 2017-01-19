@@ -33,7 +33,7 @@ class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberCards.count
     }
-    
+
     //Mark: <CardReturnable>
 
     internal func getCard(at index: IndexPath) -> CardDTO? {

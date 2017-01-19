@@ -88,7 +88,7 @@ class AddCardViewController: UIViewController {
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         }
     }
-    
+
     private func insertToDeckBuilder(card: CardDTO) {
         let realm = try! Realm()
         try! realm.write {

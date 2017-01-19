@@ -9,7 +9,7 @@
 import UIKit
 
 class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
-    
+
     fileprivate var tableView: UITableView?
     fileprivate var colorCards: [String : [CardDTO]] = [ : ]
     fileprivate var sections: [String] = []
@@ -38,11 +38,11 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sections
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return colorCards[sections[section]]!.count
     }
-    
+
     //Mark: <CardReturnable>
 
     internal func getCard(at index: IndexPath) -> CardDTO? {

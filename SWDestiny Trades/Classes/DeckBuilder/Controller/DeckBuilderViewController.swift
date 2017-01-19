@@ -10,68 +10,68 @@ import UIKit
 import RealmSwift
 
 final class DeckBuilderViewController: UIViewController {
-    
+
     var deckDTO: DeckDTO!
     fileprivate let deckBuilderView = DeckBuilderView()
-    
+
     // MARK: - Life Cycle
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         self.view = deckBuilderView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigationItem.title = deckDTO.name
-        
+
         loadData(list: deckDTO.list)
-        
+
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in
             self?.navigateToAddCardViewController()
         }
-        
+
         deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] card in
             self?.navigateToCardDetailViewController(with: card)
         }
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let path = deckBuilderView.deckBuilderTableView.indexPathForSelectedRow {
             deckBuilderView.deckBuilderTableView.deselectRow(at: path, animated: animated)
         }
     }
-    
+
     func loadData(list: List<CardDTO>) {
         deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: Array(list))
     }
-    
+
     @objc private func reloadTableView(_ notification: NSNotification) {
         if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
             loadData(list: deck.list)
         }
     }
-    
+
     // MARK: Navigation
-    
+
     func navigateToCardDetailViewController(with card: CardDTO?) {
         let nextController = CardDetailViewController()
         nextController.cardDTO = card
         self.navigationController?.pushViewController(nextController, animated: true)
     }
-    
+
     func navigateToAddCardViewController() {
         let nextController = AddCardViewController()
         nextController.isDeckBuilder = true

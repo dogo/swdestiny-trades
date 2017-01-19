@@ -16,7 +16,7 @@ final class SWDTabBarViewController: UITabBarController {
         // Create SetsListViewController Tab
         let setsTab = UINavigationController(rootViewController: SetsListViewController())
         setsTab.tabBarItem = UITabBarItem(title: NSLocalizedString("CARDS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
-        
+
         // Create DeckListViewController Tab
         let decktab = UINavigationController(rootViewController: DeckListViewController())
         decktab.tabBarItem = UITabBarItem(title: NSLocalizedString("DECKS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
