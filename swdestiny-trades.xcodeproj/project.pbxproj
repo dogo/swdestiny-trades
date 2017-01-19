@@ -263,11 +263,11 @@
 		DD09052C1E24701D00D9EFB0 /* Datasource */ = {
 			isa = PBXGroup;
 			children = (
-				DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */,
-				DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */,
 				DD09052D1E24701D00D9EFB0 /* AlphabeticalListDatasource.swift */,
 				DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */,
 				DDAB3DA91E27BD14006A603D /* CardReturnable.swift */,
+				DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */,
+				DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */,
 			);
 			path = Datasource;
 			sourceTree = "<group>";
@@ -365,9 +365,9 @@
 		DD0905441E24701D00D9EFB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DD0905451E24701D00D9EFB0 /* PersonCell.swift */,
 				DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */,
 				DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */,
+				DD0905451E24701D00D9EFB0 /* PersonCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -522,9 +522,9 @@
 			isa = PBXGroup;
 			children = (
 				DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */,
+				DD61B9421E1FCE8C00F38482 /* SearchBar.swift */,
 				DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */,
 				DD61B9401E1FC59600F38482 /* SearchView.swift */,
-				DD61B9421E1FCE8C00F38482 /* SearchBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,9 +532,9 @@
 		DD7FF0F41E1DCD4B004FC6CF /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				DDFB0C921E286E5800442E1B /* BaseDelegate.swift */,
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
-				DDFB0C921E286E5800442E1B /* BaseDelegate.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -719,9 +719,9 @@
 		DDCDE3861E1DFA2300B4BE18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
 				DDCDE3871E1DFA2300B4BE18 /* UIImageView+Kingfisher.swift */,
-				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
