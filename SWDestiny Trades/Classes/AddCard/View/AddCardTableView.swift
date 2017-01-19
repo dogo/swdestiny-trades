@@ -71,7 +71,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
                 let intersect: CGRect = keyboardFrame.intersection(self.bounds)
                 if !intersect.isNull {
                     UIView.animate(withDuration: 0.3, animations: {
-                        let edgeInset = UIEdgeInsetsMake(64, 0, keyboardFrame.size.height, 0)
+                        let edgeInset = UIEdgeInsetsMake(0, 0, keyboardFrame.size.height, 0)
                         self.contentInset = edgeInset
                         self.scrollIndicatorInsets = edgeInset
                     })
