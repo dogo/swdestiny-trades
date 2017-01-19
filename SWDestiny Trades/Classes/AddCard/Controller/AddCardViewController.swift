@@ -63,11 +63,6 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        addCardView.searchBar.becomeFirstResponder()
-    }
-
     // MARK: - Helpers
     private func insert(card: CardDTO) {
         if self.isDeckBuilder {

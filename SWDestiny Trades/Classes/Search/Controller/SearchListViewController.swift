@@ -66,11 +66,6 @@ class SearchListViewController: UIViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        searchView.searchBar.becomeFirstResponder()
-    }
-
     // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO?) {
