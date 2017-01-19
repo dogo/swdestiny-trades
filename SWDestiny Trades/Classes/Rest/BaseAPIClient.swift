@@ -52,3 +52,47 @@ class BaseAPIClient {
             }
     }
 }
+
+extension DataResponse {
+    
+    func failureReason() -> String {
+        
+        var errorDescription: String = ""
+        
+        if let error = self.result.error as? AFError {
+            switch error {
+            case .invalidURL(let url):
+                errorDescription.append("Invalid URL: \(url) - \(error.localizedDescription)")
+            case .parameterEncodingFailed(let reason):
+                errorDescription.append("Parameter encoding failed: \(error.localizedDescription)")
+                errorDescription.append("Failure Reason: \(reason)")
+            case .multipartEncodingFailed(let reason):
+                errorDescription.append("Multipart encoding failed: \(error.localizedDescription)")
+                errorDescription.append("Failure Reason: \(reason)")
+            case .responseValidationFailed(let reason):
+                errorDescription.append("Response validation failed: \(error.localizedDescription)")
+                errorDescription.append("Failure Reason: \(reason)")
+                
+                switch reason {
+                case .dataFileNil, .dataFileReadFailed:
+                    errorDescription.append("Downloaded file could not be read")
+                case .missingContentType(let acceptableContentTypes):
+                    errorDescription.append("Content Type Missing: \(acceptableContentTypes)")
+                case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                    errorDescription.append("Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)")
+                case .unacceptableStatusCode(let code):
+                    errorDescription.append("Response status code was unacceptable: \(code)")
+                }
+            case .responseSerializationFailed(let reason):
+                errorDescription.append("Response serialization failed: \(error.localizedDescription)")
+                errorDescription.append("Failure Reason: \(reason)")
+            }
+            errorDescription.append("Underlying error: \(error.underlyingError)")
+        } else if let error = self.result.error as? URLError {
+            errorDescription.append("URLError occurred: \(error)")
+        } else {
+            errorDescription.append("Unknown error: \(self.result.error)")
+        }
+        return errorDescription
+    }
+}

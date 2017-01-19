@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import FirebaseAnalytics
 
 class SetsListViewController: UIViewController {
 
@@ -38,7 +39,9 @@ class SetsListViewController: UIViewController {
             self.setsView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
             self.setsView.activityIndicator.stopAnimating()
-            print(error)
+            let failureReason = error.failureReason()
+            print(failureReason)
+            FIRAnalytics.logEvent(withName: "[Error] retrieveSetList", parameters: ["error": failureReason as NSObject])
         }
 
         setsView.setsTableView.didSelectSet = { [weak self] set in

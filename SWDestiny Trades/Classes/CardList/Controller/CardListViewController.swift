@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import FirebaseAnalytics
 
 class CardListViewController: UIViewController {
 
@@ -39,7 +40,9 @@ class CardListViewController: UIViewController {
             self.cardListView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
             self.cardListView.activityIndicator.stopAnimating()
-            print(error)
+            let failureReason = error.failureReason()
+            print(failureReason)
+            FIRAnalytics.logEvent(withName: "[Error] retrieveSetCardList", parameters: ["error": failureReason as NSObject])
         }
 
         self.cardListView.cardListTableView.didSelectCard = { [weak self] card in

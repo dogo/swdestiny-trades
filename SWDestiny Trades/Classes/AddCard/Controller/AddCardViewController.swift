@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import RealmSwift
 import PKHUD
+import FirebaseAnalytics
 
 class AddCardViewController: UIViewController {
 
@@ -44,7 +45,9 @@ class AddCardViewController: UIViewController {
             self.addCardView.addCardTableView.updateSearchList(cardsArray)
         }) { (error: DataResponse<Any>) in
             self.addCardView.activityIndicator.stopAnimating()
-            print(error)
+            let failureReason = error.failureReason()
+            print(failureReason)
+            FIRAnalytics.logEvent(withName: "[Error] retrieveAllCards", parameters: ["error": failureReason as NSObject])
         }
 
         addCardView.addCardTableView.didSelectCard = { [weak self] card in

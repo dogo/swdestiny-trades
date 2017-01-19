@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import FirebaseAnalytics
 
 @objc protocol SearchDelegate: class {
     func didSelectRow(at index: IndexPath)
@@ -43,7 +44,9 @@ class SearchListViewController: UIViewController {
             self.searchView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
             self.searchView.activityIndicator.stopAnimating()
-            print(error)
+            let failureReason = error.failureReason()
+            print(failureReason)
+            FIRAnalytics.logEvent(withName: "[Error] retrieveAllCards", parameters: ["error": failureReason as NSObject])
         }
 
         searchView.searchTableView.didSelectCard = { [weak self] card in
