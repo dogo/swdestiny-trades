@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
@@ -70,10 +69,9 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        let realm = try! Realm()
-        try! realm.write {
+        try! RealmManager.shared.realm.write {
             if let card = getCard(at: indexPath) {
-                realm.delete(card)
+                RealmManager.shared.realm.delete(card)
                 deckList.remove(at: indexPath.row)
             }
         }

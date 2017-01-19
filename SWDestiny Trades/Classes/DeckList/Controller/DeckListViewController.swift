@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 final class DeckListViewController: UIViewController {
 
@@ -40,8 +39,7 @@ final class DeckListViewController: UIViewController {
     }
 
     func loadDataFromRealm() {
-        let realm = try! Realm()
-        let decks = Array(realm.objects(DeckDTO.self))
+        let decks = Array(RealmManager.shared.realm.objects(DeckDTO.self))
         deckListView.deckListTableView.updateTableViewData(decksList: decks)
     }
 

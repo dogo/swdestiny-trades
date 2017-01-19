@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
@@ -84,9 +83,8 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.delete(getCard(at: indexPath))
+        try! RealmManager.shared.realm.write {
+            RealmManager.shared.realm.delete(getCard(at: indexPath))
             if indexPath.section == 0 {
                 lentMe.remove(at: indexPath.row)
             } else {

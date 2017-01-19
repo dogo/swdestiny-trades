@@ -34,6 +34,7 @@
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
+		DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */; };
 		DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */; };
 		DD4BBCDF1E26CC7E009929C4 /* NumberListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */; };
 		DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */; };
@@ -133,6 +134,7 @@
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
+		DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 		DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberListDatasource.swift; sourceTree = "<group>"; };
 		DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
+				DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */,
 				DDB8A2241E266DFF0086FC01 /* Sort.swift */,
 			);
 			path = Utils;
@@ -1038,6 +1041,7 @@
 				DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
+				DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class DeckListDatasource: NSObject, UITableViewDataSource {
 
@@ -45,9 +44,8 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.delete(deckList[indexPath.row])
+        try! RealmManager.shared.realm.write {
+            RealmManager.shared.realm.delete(deckList[indexPath.row])
             deckList.remove(at: indexPath.row)
         }
     }
@@ -62,9 +60,8 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(deck: DeckDTO) {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(deck)
+        try! RealmManager.shared.realm.write {
+            RealmManager.shared.realm.add(deck)
             deckList.append(deck)
             tableView?.reloadData()
         }

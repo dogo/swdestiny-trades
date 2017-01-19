@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import RealmSwift
 import PKHUD
 import FirebaseAnalytics
 
@@ -73,26 +72,24 @@ class AddCardViewController: UIViewController {
     }
 
     private func insertToLoan(card: CardDTO) {
-        let realm = try! Realm()
-        try! realm.write {
+        try! RealmManager.shared.realm.write {
             if isLentMe! {
                 personDTO.lentMe.append(card)
             } else {
                 personDTO.borrowed.append(card)
             }
             showSuccessMessage(card: card)
-            realm.add(personDTO, update: true)
+            RealmManager.shared.realm.add(personDTO, update: true)
             let personDataDict: [String: PersonDTO] = ["personDTO": personDTO]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         }
     }
 
     private func insertToDeckBuilder(card: CardDTO) {
-        let realm = try! Realm()
-        try! realm.write {
+        try! RealmManager.shared.realm.write {
             deckDTO.list.append(card)
             showSuccessMessage(card: card)
-            realm.add(deckDTO, update: true)
+            RealmManager.shared.realm.add(deckDTO, update: true)
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         }

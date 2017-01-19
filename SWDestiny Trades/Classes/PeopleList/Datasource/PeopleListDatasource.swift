@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class PeopleListDatasource: NSObject, UITableViewDataSource {
 
@@ -61,18 +60,16 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(person: PersonDTO) {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(person, update: true)
+        try! RealmManager.shared.realm.write {
+            RealmManager.shared.realm.add(person, update: true)
             persons.append(person)
         }
         tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.delete(persons[indexPath.row])
+        try! RealmManager.shared.realm.write {
+            RealmManager.shared.realm.delete(persons[indexPath.row])
             persons.remove(at: indexPath.row)
         }
     }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 final class DeckBuilderViewController: UIViewController {
 
@@ -33,7 +32,7 @@ final class DeckBuilderViewController: UIViewController {
 
         self.navigationItem.title = deckDTO.name
 
-        loadData(list: deckDTO.list)
+        loadData(list: Array(deckDTO.list))
 
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in
             self?.navigateToAddCardViewController()
@@ -54,13 +53,13 @@ final class DeckBuilderViewController: UIViewController {
         }
     }
 
-    func loadData(list: List<CardDTO>) {
-        deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: Array(list))
+    func loadData(list: [CardDTO]) {
+        deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: list)
     }
 
     @objc private func reloadTableView(_ notification: NSNotification) {
         if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
-            loadData(list: deck.list)
+            loadData(list: Array(deck.list))
         }
     }
 

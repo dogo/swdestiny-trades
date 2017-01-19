@@ -8,7 +8,6 @@
 
 import UIKit
 import Reusable
-import RealmSwift
 
 class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFieldDelegate {
 
@@ -76,10 +75,9 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         if titleEditText.isUserInteractionEnabled {
             titleEditText.becomeFirstResponder()
         } else {
-            let realm = try! Realm()
-            try! realm.write {
+            try! RealmManager.shared.realm.write {
                 deckDTO?.name = titleEditText.text!
-                realm.add(deckDTO!, update: true)
+                RealmManager.shared.realm.add(deckDTO!, update: true)
             }
         }
     }

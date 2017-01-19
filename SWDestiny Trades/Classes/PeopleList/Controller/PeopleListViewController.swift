@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 protocol UpdateTableDataDelegate: class {
     func insertNew(person: PersonDTO)
@@ -64,8 +63,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     }
 
     func loadDataFromRealm() {
-        let realm = try! Realm()
-        let persons = Array(realm.objects(PersonDTO.self))
+        let persons = Array(RealmManager.shared.realm.objects(PersonDTO.self))
         peopleListView.peopleListTableView.updatePeopleList(persons)
     }
 
