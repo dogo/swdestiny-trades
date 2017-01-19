@@ -35,12 +35,12 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
         return sections.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return colorCards[sections[section]]!.count
-    }
-
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sections
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return colorCards[sections[section]]!.count
     }
     
     //Mark: <CardReturnable>

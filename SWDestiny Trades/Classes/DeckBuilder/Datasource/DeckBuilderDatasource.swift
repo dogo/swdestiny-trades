@@ -31,7 +31,9 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
             cell.textLabel?.textColor = UIColor.darkGray
         } else {
             cell.textLabel?.text = nil
-            cell.configureCell(card: deckList[indexPath.row], useIndex: false)
+            if let card = getCard(at: indexPath) {
+                cell.configureCell(card: card, useIndex: false)
+            }
         }
         return cell
     }
@@ -58,7 +60,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         return deckList.count + 1
     }
     
-    public func getCard(at index: IndexPath) -> CardDTO {
+    public func getCard(at index: IndexPath) -> CardDTO? {
         return deckList[index.row]
     }
     
@@ -70,8 +72,10 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     private func remove(at indexPath: IndexPath) {
         let realm = try! Realm()
         try! realm.write {
-            realm.delete(deckList[indexPath.row])
-            deckList.remove(at: indexPath.row)
+            if let card = getCard(at: indexPath) {
+                realm.delete(card)
+                deckList.remove(at: indexPath.row)
+            }
         }
     }
 }
