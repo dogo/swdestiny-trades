@@ -19,7 +19,7 @@ final class SWDTabBarViewController: UITabBarController {
 
         // Create DeckListViewController Tab
         let decktab = UINavigationController(rootViewController: DeckListViewController())
-        decktab.tabBarItem = UITabBarItem(title: NSLocalizedString("DECKS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
+        decktab.tabBarItem = UITabBarItem(title: NSLocalizedString("DECKS", comment: ""), image: UIImage(named: "ic_decks"), selectedImage: nil)
 
         // Create PeopleListViewController Tab
         let loansTab = UINavigationController(rootViewController: PeopleListViewController())
