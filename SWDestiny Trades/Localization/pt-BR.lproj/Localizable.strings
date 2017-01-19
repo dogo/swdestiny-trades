@@ -6,26 +6,28 @@
   Copyright © 2017 Diogo Autilio. All rights reserved.
 */
 
-"ADD_CARD" = "Adicionar carta...";
-"ADD_MY_CARD" = "Adicionar minha carta...";
-"HAS_LENT_ME" = "Me emprestou:";
-"HAS_BORROWED_MY" = "Pegou emprestado:";
-"NO_LOANS" = "Sem empréstimos";
 "ABOUT" = "Sobre";
+"ABOUT_TEXT" = "Por Diogo Autilio\n\nInformação de API por Paco http://swdestinydb.com\n\nAs informações apresentadas neste aplicativo sobre Star Wars Destiny, tanto literal quanto gráfica, são protegidas por direitos autorais por Fantasy Flight Games. Este aplicativo não é produzido, endossado, apoiado ou afiliado a Fantasy Flight Games.";
+"ADD_CARD" = "Adicionar carta...";
 "ADD_CARD"= "Adicionar Carta";
+"ADD_MY_CARD" = "Adicionar minha carta...";
 "ADDED" = "Adicionado";
-"NEW_PERSON" = "Nova Pessoa";
-"PEOPLE" = "Pessoas";
+"ALL_CARDS" = "Todas as cartas";
+"CARD_NUMBER" = "Carta #";
+"CARDS" = "Cartas";
+"COLOR" = "Cor";
+"DECKS" = "Baralhos";
 "DONE" = "Feito";
 "EDIT" = "Editar";
-"SEARCH" = "Procurar";
 "EXPANSIONS" = "Expansões";
 "FIRST_NAME" = "Primeiro Nome";
+"HAS_BORROWED_MY" = "Pegou emprestado:";
+"HAS_LENT_ME" = "Me emprestou:";
 "LAST_NAME" = "Sobrenome";
-"ALL_CARDS" = "Todas as cartas";
 "LOANS" = "Empréstimos";
-"CARDS" = "Cartas";
+"NEW_DECK" = "Novo baralho";
+"NEW_PERSON" = "Nova Pessoa";
+"NO_LOANS" = "Sem empréstimos";
+"PEOPLE" = "Pessoas";
+"SEARCH" = "Procurar";
 "VERSION" = "versão %@ (%@)";
-"COLOR" = "Cor";
-"CARD_NUMBER" = "Carta #";
-"ABOUT_TEXT" = "Por Diogo Autilio\n\nInformação de API por Paco http://swdestinydb.com\n\nAs informações apresentadas neste aplicativo sobre Star Wars Destiny, tanto literal quanto gráfica, são protegidas por direitos autorais por Fantasy Flight Games. Este aplicativo não é produzido, endossado, apoiado ou afiliado a Fantasy Flight Games.";
