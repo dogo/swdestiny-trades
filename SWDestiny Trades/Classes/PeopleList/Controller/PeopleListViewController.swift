@@ -46,7 +46,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationItem.title = NSLocalizedString("PEOPLE", comment: "")
 
         if let path = peopleListView.peopleListTableView.indexPathForSelectedRow {

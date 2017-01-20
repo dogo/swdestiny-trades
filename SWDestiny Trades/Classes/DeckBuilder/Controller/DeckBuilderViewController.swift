@@ -29,7 +29,7 @@ final class DeckBuilderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
 
         loadData(list: Array(deckDTO.list))
@@ -43,7 +43,7 @@ final class DeckBuilderViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationItem.title = deckDTO.name
 
         if let path = deckBuilderView.deckBuilderTableView.indexPathForSelectedRow {

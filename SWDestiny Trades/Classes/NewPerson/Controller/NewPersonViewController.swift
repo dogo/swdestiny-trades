@@ -32,7 +32,7 @@ class NewPersonViewController: UIViewController {
 
         setupNavigationItem()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = NSLocalizedString("NEW_PERSON", comment: "")

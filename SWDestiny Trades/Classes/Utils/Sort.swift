@@ -114,25 +114,25 @@ final class Sort {
 
         return (sortedSymbols, tableViewSource)
     }
-    
+
     static func splitSetsByAlphabetically(setList: [SetDTO]) -> (firstLetters: [String], source: [String : [SetDTO]]) {
-        
+
         // Build Character Set
         var letters = Set<String>()
-        
+
         func getFirstLetter(setDTO: SetDTO) -> String {
             return String(setDTO.name.characters.prefix(1))
         }
-        
+
         setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
-        
+
         // Build tableSource array
         var tableViewSource = [String: [SetDTO]]()
-        
+
         for symbol in letters {
-            
+
             var setsDTO = [SetDTO]()
-            
+
             for set in setList {
                 if symbol == getFirstLetter(setDTO: set) {
                     setsDTO.append(set)
@@ -142,11 +142,11 @@ final class Sort {
                 $0.name < $1.name
             }
         }
-        
+
         let sortedSymbols = letters.sorted {
             $0 < $1
         }
-        
+
         return (sortedSymbols, tableViewSource)
     }
 }

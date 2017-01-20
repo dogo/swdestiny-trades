@@ -58,7 +58,7 @@ class SearchListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
 
         if let path = searchView.searchTableView.indexPathForSelectedRow {

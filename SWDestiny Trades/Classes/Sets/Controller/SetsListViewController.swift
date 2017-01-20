@@ -51,7 +51,7 @@ class SetsListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationItem.title = NSLocalizedString("EXPANSIONS", comment: "")
 
         if let path = setsView.setsTableView.indexPathForSelectedRow {

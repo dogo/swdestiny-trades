@@ -44,7 +44,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         }
         return sections[section]
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }

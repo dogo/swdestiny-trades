@@ -45,7 +45,7 @@ final class DeckListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationItem.title = NSLocalizedString("DECKS", comment: "")
 
         if let path = deckListView.deckListTableView.indexPathForSelectedRow {

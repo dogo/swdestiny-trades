@@ -33,7 +33,7 @@ class CardDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = cardDTO?.name

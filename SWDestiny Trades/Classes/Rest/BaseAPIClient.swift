@@ -54,11 +54,11 @@ class BaseAPIClient {
 }
 
 extension DataResponse {
-    
+
     func failureReason() -> String {
-        
+
         var errorDescription: String = ""
-        
+
         if let error = self.result.error as? AFError {
             switch error {
             case .invalidURL(let url):
@@ -72,7 +72,7 @@ extension DataResponse {
             case .responseValidationFailed(let reason):
                 errorDescription.append("Response validation failed: \(error.localizedDescription)")
                 errorDescription.append("Failure Reason: \(reason)")
-                
+
                 switch reason {
                 case .dataFileNil, .dataFileReadFailed:
                     errorDescription.append("Downloaded file could not be read")

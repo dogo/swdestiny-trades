@@ -59,7 +59,7 @@ class AddCardViewController: UIViewController {
             self?.addCardView.addCardTableView.doingSearch(query)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = NSLocalizedString("ADD_CARD", comment: "")

@@ -22,7 +22,7 @@ final class SearchTableView: UITableView, SearchDelegate {
         search.delegate = self
         searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: search)
         self.backgroundColor = UIColor.white
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: .UIKeyboardWillHide, object: nil)
     }
@@ -30,7 +30,7 @@ final class SearchTableView: UITableView, SearchDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
@@ -51,13 +51,13 @@ final class SearchTableView: UITableView, SearchDelegate {
             didSelectCard?(card)
         }
     }
-    
+
     // MARK: Keyboard handling
-    
+
     @objc private func keyboardDidShow(notification: Notification) {
-        
+
         initialEdgeInsets = self.contentInset
-        
+
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 let keyboardFrame = self.convert(keyboardSize, to: nil)
@@ -72,7 +72,7 @@ final class SearchTableView: UITableView, SearchDelegate {
             }
         }
     }
-    
+
     @objc private func keyboardDidHide(notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.contentInset = self.initialEdgeInsets

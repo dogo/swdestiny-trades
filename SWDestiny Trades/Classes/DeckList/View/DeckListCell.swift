@@ -21,7 +21,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         textField.isUserInteractionEnabled = false
         return textField
     }()
-    
+
     var subTitle: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = UIColor.darkGray
@@ -93,7 +93,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         titleEditText.delegate = self
         toggleEditButton()
     }
-    
+
     private func toggleEditButton() {
         let isEditing = titleEditText.isUserInteractionEnabled
         accessoryButton.setImage(UIImage(named: isEditing ? "ic_done_edit" : "ic_edit"), for: .normal)
