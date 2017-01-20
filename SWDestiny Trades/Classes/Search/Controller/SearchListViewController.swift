@@ -37,7 +37,7 @@ class SearchListViewController: UIViewController {
         super.viewDidLoad()
 
         searchView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
+        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: [CardDTO]) in
             self.searchView.searchTableView.updateSearchList(cardsArray)
             self.searchView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in

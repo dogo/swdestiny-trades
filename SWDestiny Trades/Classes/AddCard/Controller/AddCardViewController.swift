@@ -37,7 +37,7 @@ class AddCardViewController: UIViewController {
         super.viewDidLoad()
 
         addCardView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
+        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: [CardDTO]) in
             self.addCardView.activityIndicator.stopAnimating()
             self.addCardView.addCardTableView.updateSearchList(cardsArray)
         }) { (error: DataResponse<Any>) in

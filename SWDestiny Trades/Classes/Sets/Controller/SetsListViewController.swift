@@ -34,7 +34,7 @@ class SetsListViewController: UIViewController {
         setupNavigationItem()
 
         setsView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: Array<SetDTO>) in
+        SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
             self.setsView.setsTableView.updateSetList(setsArray)
             self.setsView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
