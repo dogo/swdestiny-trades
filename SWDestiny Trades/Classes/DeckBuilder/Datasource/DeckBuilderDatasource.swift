@@ -11,7 +11,8 @@ import UIKit
 class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
-    var deckList: [CardDTO] = []
+    fileprivate var deckList: [String : [CardDTO]] = [ : ]
+    fileprivate var sections: [String] = []
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -24,16 +25,8 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
-        if indexPath.row == deckList.count {
-            cell.accessoryType = .none
-            cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "")
-            cell.textLabel?.textColor = UIColor.darkGray
-        } else {
-            cell.textLabel?.text = nil
-            cell.accessoryType = .disclosureIndicator
-            if let card = getCard(at: indexPath) {
-                cell.configureCell(card: card, useIndex: false)
-            }
+        if let card = getCard(at: indexPath) {
+            cell.configureCell(card: card, useIndex: false)
         }
         return cell
     }
@@ -45,27 +38,33 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == deckList.count {
-            return false
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard deckList[sections[section]] != nil else {
+            return nil
         }
-        return true
+        return sections[section]
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return deckList.count + 1
+        guard let rows = deckList[sections[section]] else {
+            return 0
+        }
+        return rows.count
     }
 
     public func getCard(at index: IndexPath) -> CardDTO? {
-        return deckList[index.row]
+        return (deckList[sections[index.section]]?[index.row])!
     }
 
     public func updateTableViewData(list: [CardDTO]) {
-        deckList = list
+        if !list.isEmpty {
+            deckList = Sort.splitCardsByType(cardList: list).source
+            sections = Sort.splitCardsByType(cardList: list).sections
+        }
         tableView?.reloadData()
     }
 
@@ -73,7 +72,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         try! RealmManager.shared.realm.write {
             if let card = getCard(at: indexPath) {
                 RealmManager.shared.realm.delete(card)
-                deckList.remove(at: indexPath.row)
+                deckList[sections[indexPath.section]]?.remove(at: indexPath.row)
             }
         }
     }

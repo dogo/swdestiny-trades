@@ -11,7 +11,6 @@ import UIKit
 final class DeckBuilderTableView: UITableView, BaseDelegate {
 
     var didSelectCard: ((CardDTO) -> Void)?
-    var didSelectAddItem: ((Void) -> Void)?
 
     fileprivate var tableViewDatasource: DeckBuilderDatasource?
     let deckBuilder = DeckBuilder()
@@ -34,9 +33,7 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
     // Mark: <BaseDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
-        if index.row == tableViewDatasource?.deckList.count {
-            didSelectAddItem?()
-        } else if let card = tableViewDatasource?.getCard(at: index) {
+        if let card = tableViewDatasource?.getCard(at: index) {
             didSelectCard?(card)
         }
     }
