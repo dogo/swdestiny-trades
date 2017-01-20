@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DeckListTableView: UITableView, SearchDelegate {
+final class DeckListTableView: UITableView, BaseDelegate {
 
     var didSelectDeck: ((DeckDTO) -> Void)?
 

@@ -70,7 +70,7 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
 
 class DeckList: NSObject, UITableViewDelegate {
 
-    weak var delegate: SearchDelegate?
+    weak var delegate: BaseDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
