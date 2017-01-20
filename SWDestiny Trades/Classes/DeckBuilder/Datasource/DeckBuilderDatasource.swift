@@ -30,6 +30,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
             cell.textLabel?.textColor = UIColor.darkGray
         } else {
             cell.textLabel?.text = nil
+            cell.accessoryType = .disclosureIndicator
             if let card = getCard(at: indexPath) {
                 cell.configureCell(card: card, useIndex: false)
             }
