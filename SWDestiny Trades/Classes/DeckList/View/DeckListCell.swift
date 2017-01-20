@@ -30,7 +30,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     }()
 
     var accessoryButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let button = UIButton(frame: .zero)
         return button
     }()
 
@@ -67,24 +67,29 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     internal func buildViewHierarchy() {
         self.contentView.addSubview(titleEditText)
         self.contentView.addSubview(subTitle)
+        self.contentView.addSubview(accessoryButton)
     }
 
     internal func setupConstraints() {
         titleEditText.snp.makeConstraints { make in
             make.top.equalTo(self.contentView).offset(8)
             make.left.equalTo(self.contentView).offset(12)
-            make.right.equalTo(self.contentView).offset(-12)
         }
         subTitle.snp.makeConstraints { make in
             make.top.equalTo(titleEditText.snp.bottom)
             make.left.equalTo(self.contentView).offset(12)
-            make.right.equalTo(self.contentView).offset(-12)
             make.bottom.equalTo(self.contentView).offset(-8)
+        }
+        accessoryButton.snp.makeConstraints { make in
+            make.centerY.equalTo(self.contentView)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+            make.left.equalTo(titleEditText.snp.right)
+            make.right.equalTo(self.contentView.snp.right)
         }
     }
 
     internal func configureViews() {
-        self.accessoryView = accessoryButton
         titleEditText.delegate = self
         toggleEditButton()
     }
