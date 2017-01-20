@@ -30,8 +30,6 @@ final class DeckBuilderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = deckDTO.name
-
         loadData(list: Array(deckDTO.list))
 
         deckBuilderView.deckBuilderTableView.didSelectAddItem = { [weak self] in
@@ -47,6 +45,8 @@ final class DeckBuilderViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationItem.title = deckDTO.name
 
         if let path = deckBuilderView.deckBuilderTableView.indexPathForSelectedRow {
             deckBuilderView.deckBuilderTableView.deselectRow(at: path, animated: animated)

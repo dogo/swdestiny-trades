@@ -36,8 +36,6 @@ class AddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = NSLocalizedString("ADD_CARD", comment: "")
-
         addCardView.activityIndicator.startAnimating()
         SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.addCardView.activityIndicator.stopAnimating()
@@ -60,6 +58,11 @@ class AddCardViewController: UIViewController {
         addCardView.searchBar.doingSearch = { [weak self] query in
             self?.addCardView.addCardTableView.doingSearch(query)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = NSLocalizedString("ADD_CARD", comment: "")
     }
 
     // MARK: - Helpers

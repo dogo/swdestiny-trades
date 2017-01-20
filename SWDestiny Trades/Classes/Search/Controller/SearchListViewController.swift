@@ -36,8 +36,6 @@ class SearchListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
-
         searchView.activityIndicator.startAnimating()
         SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: Array<CardDTO>) in
             self.searchView.searchTableView.updateSearchList(cardsArray)
@@ -60,6 +58,8 @@ class SearchListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
 
         if let path = searchView.searchTableView.indexPathForSelectedRow {
             searchView.searchTableView.deselectRow(at: path, animated: animated)

@@ -46,6 +46,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationItem.title = NSLocalizedString("PEOPLE", comment: "")
 
         if let path = peopleListView.peopleListTableView.indexPathForSelectedRow {
             peopleListView.peopleListTableView.deselectRow(at: path, animated: animated)
@@ -57,7 +59,6 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     }
 
     func setupNavigationItem() {
-        self.navigationItem.title = NSLocalizedString("PEOPLE", comment: "")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("EDIT", comment: ""), style: .plain, target: self, action: #selector(editButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToNextController(_:)))
     }

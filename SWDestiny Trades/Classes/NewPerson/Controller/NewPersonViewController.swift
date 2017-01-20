@@ -32,9 +32,13 @@ class NewPersonViewController: UIViewController {
 
         setupNavigationItem()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = NSLocalizedString("NEW_PERSON", comment: "")
+    }
 
     func setupNavigationItem() {
-        self.navigationItem.title = NSLocalizedString("NEW_PERSON", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTouched(_:)))
     }
 

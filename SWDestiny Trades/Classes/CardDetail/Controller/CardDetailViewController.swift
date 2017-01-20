@@ -30,9 +30,13 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = cardDTO?.name
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = cardDTO?.name
     }
 
     func share(_ sender: UIBarButtonItem) {
