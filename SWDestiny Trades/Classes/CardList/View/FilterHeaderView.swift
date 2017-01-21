@@ -58,10 +58,10 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
 
     internal func setupConstraints() {
         segmentControl.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView).offset(8)
-            make.left.equalTo(self.contentView).offset(18)
-            make.bottom.equalTo(self.contentView).offset(-8)
-            make.right.equalTo(self.contentView).offset(-18)
+            make.top.equalTo(self).offset(8)
+            make.left.equalTo(self).offset(18)
+            make.bottom.equalTo(self).offset(-8)
+            make.right.equalTo(self).offset(-18)
         }
     }
 
