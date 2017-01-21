@@ -35,9 +35,9 @@ final class CardView: UIView, BaseViewConfiguration {
 
     internal func setupConstraints() {
         cardImageView.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(20)
+            make.top.equalTo(self).offset(64)
             make.left.equalTo(self)
-            make.bottom.equalTo(self)
+            make.bottom.equalTo(self).offset(-49)
             make.right.equalTo(self)
         }
     }
