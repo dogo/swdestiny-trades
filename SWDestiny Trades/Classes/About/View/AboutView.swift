@@ -69,7 +69,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     internal func configureViews() {
 
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
 
         logoImage.image = UIImage(named: "LargeIconBlack")
 

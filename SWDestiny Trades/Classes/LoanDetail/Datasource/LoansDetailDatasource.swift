@@ -29,7 +29,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
                 cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "")
-                cell.textLabel?.textColor = UIColor.darkGray
+                cell.textLabel?.textColor = .darkGray
             } else {
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: lentMe[indexPath.row])
@@ -37,7 +37,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         } else if indexPath.section == 1 {
             if indexPath.row == borrowed.count {
                 cell.textLabel?.text = NSLocalizedString("ADD_MY_CARD", comment: "")
-                cell.textLabel?.textColor = UIColor.darkGray
+                cell.textLabel?.textColor = .darkGray
             } else {
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: borrowed[indexPath.row])

@@ -19,7 +19,7 @@ final class SetsTableView: UITableView, BaseDelegate {
         super.init(frame: frame, style: style)
         setsList.delegate = self
         tableViewDatasource = SetsListDatasource(tableView: self, delegate: setsList)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -57,6 +57,7 @@
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
+		DD94E6F31E365FB90070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F21E365FB90070735B /* ColorPalette.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
 		DDB8A2251E266DFF0086FC01 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8A2241E266DFF0086FC01 /* Sort.swift */; };
 		DDC60FAD1E26B9AC00473F6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDC60FA41E26B9AC00473F6E /* Localizable.strings */; };
@@ -161,6 +162,7 @@
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
+		DD94E6F21E365FB90070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
 		DDB8A2241E266DFF0086FC01 /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		DDC60FA51E26B9AC00473F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 		DD888C3D1E1947820093B3BF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DD94E6F21E365FB90070735B /* ColorPalette.swift */,
 				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
 				DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */,
 				DDB8A2241E266DFF0086FC01 /* Sort.swift */,
@@ -1071,6 +1074,7 @@
 				DD0905511E24701D00D9EFB0 /* LoanDetailView.swift in Sources */,
 				DD09054E1E24701D00D9EFB0 /* LoansDetailDatasource.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
+				DD94E6F31E365FB90070735B /* ColorPalette.swift in Sources */,
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,

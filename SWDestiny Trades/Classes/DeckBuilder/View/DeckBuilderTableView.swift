@@ -19,7 +19,7 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
         super.init(frame: frame, style: style)
         deckBuilder.delegate = self
         tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: deckBuilder)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -57,23 +57,23 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
 
     internal func configureViews() {
 
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
 
-        firstNameTextField.textColor = UIColor.black
+        firstNameTextField.textColor = .black
         firstNameTextField.autocapitalizationType = .sentences
         firstNameTextField.font = UIFont.systemFont(ofSize: 17)
         firstNameTextField.placeholder = NSLocalizedString("FIRST_NAME", comment: "")
-        firstNameTextField.placeholderColor = UIColor.darkGray
-        firstNameTextField.borderInactiveColor = UIColor.black
-        firstNameTextField.borderActiveColor = UIColor.black
+        firstNameTextField.placeholderColor = .darkGray
+        firstNameTextField.borderInactiveColor = .black
+        firstNameTextField.borderActiveColor = .black
 
-        lastNameTextField.textColor = UIColor.black
+        lastNameTextField.textColor = .black
         lastNameTextField.autocapitalizationType = .sentences
         lastNameTextField.font = UIFont.systemFont(ofSize: 17)
         lastNameTextField.placeholder = NSLocalizedString("LAST_NAME", comment: "")
-        lastNameTextField.placeholderColor = UIColor.darkGray
-        lastNameTextField.borderInactiveColor = UIColor.black
-        lastNameTextField.borderActiveColor = UIColor.black
+        lastNameTextField.placeholderColor = .darkGray
+        lastNameTextField.borderInactiveColor = .black
+        lastNameTextField.borderActiveColor = .black
 
         firstNameTextField.delegate = self
     }

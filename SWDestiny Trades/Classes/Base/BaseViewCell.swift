@@ -18,7 +18,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
 
     var subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.textColor = UIColor.darkGray
+        label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -36,7 +36,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
     
     var highlightBackgroundView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = .lightGray
+        view.backgroundColor = ColorPalette.lightLightGray
         return view
     }()
 

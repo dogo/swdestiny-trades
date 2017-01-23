@@ -18,7 +18,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: SetsTableCell.self)
-        self.tableView?.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.tableView?.sectionIndexColor = ColorPalette.appTheme
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()

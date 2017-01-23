@@ -46,6 +46,6 @@ final class LoanDetailView: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
     }
 }

@@ -12,15 +12,15 @@ struct ApperanceProxyHelper {
 
     static func customizeTabBar() {
         let tabBarAppearance = UITabBar.appearance()
-        tabBarAppearance.tintColor = UIColor.white
-        tabBarAppearance.barTintColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        tabBarAppearance.tintColor = .white
+        tabBarAppearance.barTintColor = ColorPalette.appTheme
     }
 
     static func customizeNavigationBar() {
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = UIColor.white
+        navigationBarAppearance.tintColor = .white
         navigationBarAppearance.barStyle = .blackTranslucent
-        navigationBarAppearance.barTintColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        navigationBarAppearance.barTintColor = ColorPalette.appTheme
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     }
 }

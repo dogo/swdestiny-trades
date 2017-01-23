@@ -30,8 +30,8 @@ final class CardListTableView: UITableView, CardListViewDelegate {
 
         self.register(cellType: CardCell.self)
         self.register(headerFooterViewType: FilterHeaderView.self)
-        self.backgroundColor = UIColor.white
-        self.sectionIndexColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.backgroundColor = .white
+        self.sectionIndexColor = ColorPalette.appTheme
         self.sectionIndexBackgroundColor = .clear
         self.delegate = cardList
     }

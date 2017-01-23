@@ -20,7 +20,7 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
         super.init(frame: frame, style: style)
         loanDetail.delegate = self
         tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: loanDetail)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -57,6 +57,6 @@ class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         self.accessoryType = .detailButton
         self.selectedBackgroundView = baseViewCell.highlightBackgroundView
         self.selectionStyle = .none
-        self.tintColor = UIColor(red: 21/255, green: 21/255, blue: 21/255, alpha: 1)
+        self.tintColor = ColorPalette.appTheme
     }
 }

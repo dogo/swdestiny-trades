@@ -21,7 +21,7 @@ final class SearchTableView: UITableView, SearchDelegate {
         super.init(frame: frame, style: style)
         search.delegate = self
         searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: search)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: .UIKeyboardWillHide, object: nil)

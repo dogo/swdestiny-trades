@@ -22,7 +22,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
         super.init(frame: frame, style: style)
         addCardTable.delegate = self
         tableDatasource = AddCardDatasource(cards: [], tableView: self, delegate: addCardTable)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: .UIKeyboardWillHide, object: nil)

@@ -36,7 +36,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     
     var highlightBackgroundView: UIView = {
         let view = UIView(frame: .zero)
-        view.backgroundColor = .lightGray
+        view.backgroundColor = ColorPalette.lightLightGray
         return view
     }()
 

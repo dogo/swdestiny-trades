@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApperanceProxyHelper.customizeNavigationBar()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.backgroundColor = UIColor.white
+        self.window?.backgroundColor = .white
         self.window?.rootViewController = SWDTabBarViewController()
         self.window?.makeKeyAndVisible()
 

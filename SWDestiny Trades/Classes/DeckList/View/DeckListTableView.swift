@@ -20,7 +20,7 @@ final class DeckListTableView: UITableView, BaseDelegate {
         super.init(frame: frame, style: style)
         deckList.delegate = self
         tableViewDatasource = DeckListDatasource(tableView: self, delegate: deckList)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: .UIKeyboardWillHide, object: nil)

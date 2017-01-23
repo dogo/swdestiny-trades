@@ -19,7 +19,7 @@ final class PeopleListTableView: UITableView, BaseDelegate {
         super.init(frame: frame, style: style)
         peopleList.delegate = self
         tableViewDatasource = PeopleListDatasource(tableView: self, delegate: peopleList)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .white
     }
 
     required init?(coder aDecoder: NSCoder) {
