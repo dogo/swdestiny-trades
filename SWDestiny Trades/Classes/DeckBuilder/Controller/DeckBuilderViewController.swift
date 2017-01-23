@@ -31,7 +31,7 @@ final class DeckBuilderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
+        setupNavigationItem()
 
         loadData(deck: deckDTO)
 
@@ -46,6 +46,12 @@ final class DeckBuilderViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = deckDTO.name
+    }
+
+    private func setupNavigationItem() {
+        let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
+        let deckGraphBarItem = UIBarButtonItem(image: UIImage(named: "ic_chart"), style: .plain, target: self, action: #selector(navigateToDeckGraphViewController))
+        self.navigationItem.rightBarButtonItems = [addCardBarItem, deckGraphBarItem]
     }
 
     func loadData(deck: DeckDTO) {
@@ -67,6 +73,11 @@ final class DeckBuilderViewController: UIViewController {
 
     func navigateToAddCardViewController() {
         let nextController = AddCardViewController(deck: deckDTO, isDeckBuilder: true)
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
+
+    func navigateToDeckGraphViewController() {
+        let nextController = DeckGraphViewController(deck: deckDTO)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

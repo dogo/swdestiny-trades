@@ -34,3 +34,7 @@
 "YELLOW" = "Amarillo";
 "GRAY" = "Gris";
 "RED" = "Rojo";
+"DECK_STATISTICS" = "Estatísticas de la baraja";
+"CARD_TYPES" = "Tipo de cartas";
+"CARD_COST" = "Custo das cartas";
+"DICE_SYMBOLS" = "Símbolos de los datos";

@@ -14,7 +14,7 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
     var didSelectAddItem: ((Bool) -> Void)?
 
     fileprivate var tableViewDatasource: LoansDetailDatasource?
-    let loanDetail = LoansDetail()
+    fileprivate let loanDetail = LoansDetail()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)

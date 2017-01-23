@@ -68,5 +68,23 @@
 			<string>%d cards</string>
 		</dict>
 	</dict>
+	<key>SIDES_COUNT</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@side@</string>
+		<key>side</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d sides</string>
+			<key>one</key>
+			<string>%d side</string>
+			<key>other</key>
+			<string>%d sides</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

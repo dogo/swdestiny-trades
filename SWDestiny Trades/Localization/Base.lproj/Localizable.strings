@@ -34,3 +34,7 @@
 "YELLOW" = "Yellow";
 "GRAY" = "Gray";
 "RED" = "Red";
+"DECK_STATISTICS" = "Deck Statistics";
+"CARD_TYPES" = "Card types";
+"CARD_COST" = "Card cost";
+"DICE_SYMBOLS" = "Dice symbols";

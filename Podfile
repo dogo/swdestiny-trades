@@ -7,6 +7,7 @@ target 'SWDestiny Trades' do
   
   # Pods for SWDestiny Trades
   pod 'Alamofire'
+  pod 'Charts'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
   pod 'ImageSlideshow'

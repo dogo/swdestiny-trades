@@ -12,7 +12,7 @@ import RealmSwift
 
 class CardDTO: Object, Mappable {
 
-    dynamic var sides: String = ""
+    let dieFaces = List<StringObject>()
     dynamic var setCode: String = ""
     dynamic var setName: String = ""
     dynamic var typeCode: String = ""
@@ -28,7 +28,7 @@ class CardDTO: Object, Mappable {
     dynamic var ttscardid: String = ""
     dynamic var name: String = ""
     dynamic var subtitle: String = ""
-    dynamic var cost: Float = 0.0
+    dynamic var cost: Int = 0
     dynamic var health: Int = 0
     dynamic var points: String = ""
     dynamic var text: String = ""
@@ -48,7 +48,19 @@ class CardDTO: Object, Mappable {
     }
 
     func mapping(map: Map) {
-        sides <- map["sides"]
+        // Dogo : Realm Hack
+        var sides: [String]? = nil
+        sides <- map["sides"] // Maps to local variable
+
+        dieFaces.removeAll()
+
+        sides?.forEach { side in // Then fill sides to `List`
+            let string = StringObject()
+            string.value = side
+            dieFaces.append(string)
+        }
+        // End hack
+
         setCode <- map["set_code"]
         setName <- map["set_name"]
         typeCode <- map["type_code"]
@@ -77,4 +89,8 @@ class CardDTO: Object, Mappable {
         imageUrl <- map["imagesrc"]
         cp <- map["cp"]
     }
+}
+
+class StringObject: Object {
+    dynamic var value: String?
 }
