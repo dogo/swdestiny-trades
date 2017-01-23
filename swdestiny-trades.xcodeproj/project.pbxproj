@@ -28,7 +28,6 @@
 		DD0905541E24701D00D9EFB0 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905431E24701D00D9EFB0 /* PersonDTO.swift */; };
 		DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905451E24701D00D9EFB0 /* PersonCell.swift */; };
 		DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */; };
-		DD09055C1E24759000D9EFB0 /* ApperanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09055B1E24759000D9EFB0 /* ApperanceProxyHelper.swift */; };
 		DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */; };
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
@@ -57,7 +56,8 @@
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
-		DD94E6F51E3665360070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F41E3665360070735B /* ColorPalette.swift */; };
+		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
+		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
 		DDB8A2251E266DFF0086FC01 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8A2241E266DFF0086FC01 /* Sort.swift */; };
 		DDC60FAD1E26B9AC00473F6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDC60FA41E26B9AC00473F6E /* Localizable.strings */; };
@@ -129,7 +129,6 @@
 		DD0905431E24701D00D9EFB0 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD0905451E24701D00D9EFB0 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDTabBarViewController.swift; sourceTree = "<group>"; };
-		DD09055B1E24759000D9EFB0 /* ApperanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApperanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
 		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
@@ -162,7 +161,8 @@
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
-		DD94E6F41E3665360070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
+		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
 		DDB8A2241E266DFF0086FC01 /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		DDC60FA51E26B9AC00473F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
@@ -390,15 +390,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		DD09055A1E24757C00D9EFB0 /* Apperance */ = {
-			isa = PBXGroup;
-			children = (
-				DD09055B1E24759000D9EFB0 /* ApperanceProxyHelper.swift */,
-				DD94E6F41E3665360070735B /* ColorPalette.swift */,
-			);
-			path = Apperance;
-			sourceTree = "<group>";
-		};
 		DD0F80F51E23C9980088BE43 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,7 +597,7 @@
 			isa = PBXGroup;
 			children = (
 				DD8E8A9B1E11610100C54FD9 /* AppDelegate */,
-				DD09055A1E24757C00D9EFB0 /* Apperance */,
+				DD94E6F61E36658A0070735B /* Appearance */,
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
 				DDCDE3861E1DFA2300B4BE18 /* Extensions */,
 				DD9289061E11933C00FDEC48 /* Rest */,
@@ -631,6 +622,15 @@
 				DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */,
 			);
 			path = Rest;
+			sourceTree = "<group>";
+		};
+		DD94E6F61E36658A0070735B /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */,
+				DD94E6F81E36658A0070735B /* ColorPalette.swift */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		DDC60FA31E26B9AC00473F6E /* Base.lproj */ = {
@@ -1074,7 +1074,7 @@
 				DD0905511E24701D00D9EFB0 /* LoanDetailView.swift in Sources */,
 				DD09054E1E24701D00D9EFB0 /* LoansDetailDatasource.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
-				DD94E6F51E3665360070735B /* ColorPalette.swift in Sources */,
+				DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */,
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
@@ -1087,7 +1087,6 @@
 				DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */,
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
-				DD09055C1E24759000D9EFB0 /* ApperanceProxyHelper.swift in Sources */,
 				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
 				DDFB0C8F1E285F0C00442E1B /* SWDestinyAPI.swift in Sources */,
@@ -1099,6 +1098,7 @@
 				DD09054C1E24701D00D9EFB0 /* CardListView.swift in Sources */,
 				DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */,
 				DD0905531E24701D00D9EFB0 /* PeopleListDatasource.swift in Sources */,
+				DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */,
 				DDF5D9631E2EA820007C8A4B /* DeckListView.swift in Sources */,
 				DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */,
 				DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */,

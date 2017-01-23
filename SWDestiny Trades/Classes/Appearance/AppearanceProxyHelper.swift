@@ -1,5 +1,5 @@
 //
-//  ApperanceProxyHelper.swift
+//  AppearanceProxyHelper.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 09/01/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ApperanceProxyHelper {
+struct AppearanceProxyHelper {
 
     static func customizeTabBar() {
         let tabBarAppearance = UITabBar.appearance()
