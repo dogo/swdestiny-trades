@@ -31,8 +31,6 @@ class LoansDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
-
         loadDataFromRealm()
 
         self.loanDetailView.loanDetailTableView.didSelectCard = { [weak self] card in
@@ -49,6 +47,7 @@ class LoansDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
     }
 
     deinit {

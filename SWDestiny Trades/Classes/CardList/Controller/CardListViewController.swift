@@ -32,8 +32,6 @@ class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = setDTO?.name
-
         cardListView.activityIndicator.startAnimating()
         SWDestinyAPI.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
@@ -53,6 +51,7 @@ class CardListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.navigationItem.title = setDTO?.name
     }
 
     // MARK: Navigation
