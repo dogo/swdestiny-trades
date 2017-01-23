@@ -50,7 +50,7 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.titleLabel.text = nil
         baseViewCell.titleLabel.text = nil
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }

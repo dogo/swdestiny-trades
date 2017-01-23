@@ -33,7 +33,7 @@ class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.titleLabel.text = nil
         baseViewCell.subtitleLabel.text = nil
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }

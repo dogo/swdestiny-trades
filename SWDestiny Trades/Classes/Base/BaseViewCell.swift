@@ -33,7 +33,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         let view = UIView(frame: .zero)
         return view
     }()
-    
+
     var highlightBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = ColorPalette.lightLightGray

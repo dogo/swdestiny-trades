@@ -35,7 +35,7 @@ class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.subtitleLabel.text = nil
         baseViewCell.accessoryLabel.text = nil
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }

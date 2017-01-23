@@ -33,7 +33,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         let button = UIButton(frame: .zero)
         return button
     }()
-    
+
     var highlightBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = ColorPalette.lightLightGray
@@ -67,7 +67,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         titleEditText.isUserInteractionEnabled = false
         toggleEditButton()
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }

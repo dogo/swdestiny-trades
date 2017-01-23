@@ -22,7 +22,7 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
         image.contentMode = .scaleAspectFit
         return image
     }()
-    
+
     var highlightBackgroundView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = ColorPalette.lightLightGray
@@ -56,7 +56,7 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
         titleLabel.text = nil
         expansionImageView.image = nil
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }
