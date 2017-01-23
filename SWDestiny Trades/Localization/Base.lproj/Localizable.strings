@@ -25,7 +25,7 @@
 "HAS_LENT_ME" = "Has lent me:";
 "LAST_NAME" = "Last Name";
 "LOANS" = "Loans";
-"NEW_DECK" = "New Deck";
+"DECK_NAME" = "Deck Name";
 "NEW_PERSON" = "New Person";
 "NO_LOANS" = "No loans";
 "PEOPLE" = "People";

@@ -25,7 +25,7 @@
 "HAS_LENT_ME" = "Me emprestou:";
 "LAST_NAME" = "Sobrenome";
 "LOANS" = "Empréstimos";
-"NEW_DECK" = "Novo baralho";
+"DECK_NAME" = "Nome do baralho";
 "NEW_PERSON" = "Nova Pessoa";
 "NO_LOANS" = "Sem empréstimos";
 "PEOPLE" = "Pessoas";

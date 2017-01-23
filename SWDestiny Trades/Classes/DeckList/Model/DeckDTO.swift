@@ -11,7 +11,7 @@ import RealmSwift
 
 class DeckDTO: Object {
     dynamic var id = NSUUID().uuidString
-    dynamic var name = NSLocalizedString("NEW_DECK", comment: "")
+    dynamic var name = ""
     var list = List<CardDTO>()
 
     override class func primaryKey() -> String {
