@@ -45,10 +45,6 @@ final class DeckBuilderViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = deckDTO.name
-
-        if let path = deckBuilderView.deckBuilderTableView.indexPathForSelectedRow {
-            deckBuilderView.deckBuilderTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     func loadData(list: [CardDTO]) {

@@ -22,6 +22,12 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
         image.contentMode = .scaleAspectFit
         return image
     }()
+    
+    var highlightBackgroundView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .lightGray
+        return view
+    }()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -50,6 +56,10 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
         titleLabel.text = nil
         expansionImageView.image = nil
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        // just hightlight
+    }
 
     // MARK: <BaseViewConfiguration>
 
@@ -73,6 +83,7 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func configureViews() {
+        self.selectedBackgroundView = highlightBackgroundView
         self.accessoryType = .disclosureIndicator
     }
 }

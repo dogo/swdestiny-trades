@@ -50,6 +50,10 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.titleLabel.text = nil
         baseViewCell.titleLabel.text = nil
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        // just hightlight
+    }
 
     // MARK: <BaseViewConfiguration>
 
@@ -68,6 +72,7 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func configureViews() {
         self.accessoryType = .disclosureIndicator
+        self.selectedBackgroundView = baseViewCell.highlightBackgroundView
         baseViewCell.subtitleLabel.adjustsFontSizeToFitWidth = true
     }
 }

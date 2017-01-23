@@ -48,10 +48,6 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("PEOPLE", comment: "")
-
-        if let path = peopleListView.peopleListTableView.indexPathForSelectedRow {
-            peopleListView.peopleListTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     deinit {

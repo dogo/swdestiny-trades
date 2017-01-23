@@ -33,6 +33,12 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         let view = UIView(frame: .zero)
         return view
     }()
+    
+    var highlightBackgroundView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .lightGray
+        return view
+    }()
 
     static func height() -> CGFloat {
         return 53
@@ -80,6 +86,6 @@ class BaseViewCell: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = .white
     }
 }

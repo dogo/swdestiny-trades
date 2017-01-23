@@ -15,8 +15,8 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
 
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
-        textField.textColor = UIColor.black
-        textField.tintColor = UIColor.black
+        textField.textColor = .black
+        textField.tintColor = .black
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.isUserInteractionEnabled = false
         return textField
@@ -24,7 +24,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
 
     var subTitle: UILabel = {
         let label = UILabel(frame: .zero)
-        label.textColor = UIColor.darkGray
+        label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -32,6 +32,12 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     var accessoryButton: UIButton = {
         let button = UIButton(frame: .zero)
         return button
+    }()
+    
+    var highlightBackgroundView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .lightGray
+        return view
     }()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -60,6 +66,10 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         titleEditText.text = nil
         titleEditText.isUserInteractionEnabled = false
         toggleEditButton()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        // just hightlight
     }
 
     // MARK: <BaseViewConfiguration>
@@ -90,6 +100,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     }
 
     internal func configureViews() {
+        self.selectedBackgroundView = highlightBackgroundView
         titleEditText.delegate = self
         toggleEditButton()
     }

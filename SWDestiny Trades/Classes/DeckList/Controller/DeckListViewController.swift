@@ -47,10 +47,6 @@ final class DeckListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("DECKS", comment: "")
-
-        if let path = deckListView.deckListTableView.indexPathForSelectedRow {
-            deckListView.deckListTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     private func setupNavigationItem() {

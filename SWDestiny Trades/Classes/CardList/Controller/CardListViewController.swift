@@ -53,9 +53,6 @@ class CardListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let path = cardListView.cardListTableView.indexPathForSelectedRow {
-            cardListView.cardListTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     // MARK: Navigation

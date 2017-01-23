@@ -53,10 +53,6 @@ class SetsListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("EXPANSIONS", comment: "")
-
-        if let path = setsView.setsTableView.indexPathForSelectedRow {
-            setsView.setsTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     func setupNavigationItem() {

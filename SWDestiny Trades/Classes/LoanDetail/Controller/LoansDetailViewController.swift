@@ -49,9 +49,6 @@ class LoansDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let path = loanDetailView.loanDetailTableView.indexPathForSelectedRow {
-            loanDetailView.loanDetailTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     deinit {

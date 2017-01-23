@@ -60,10 +60,6 @@ class SearchListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
-
-        if let path = searchView.searchTableView.indexPathForSelectedRow {
-            searchView.searchTableView.deselectRow(at: path, animated: animated)
-        }
     }
 
     // MARK: Navigation

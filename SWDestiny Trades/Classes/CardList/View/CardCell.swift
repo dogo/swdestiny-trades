@@ -43,6 +43,10 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.subtitleLabel.text = nil
         baseViewCell.accessoryLabel.text = nil
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        // just hightlight
+    }
 
     // MARK: <BaseViewConfiguration>
 
@@ -61,5 +65,6 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func configureViews() {
         self.accessoryType = .disclosureIndicator
+        self.selectedBackgroundView =  baseViewCell.highlightBackgroundView
     }
 }
