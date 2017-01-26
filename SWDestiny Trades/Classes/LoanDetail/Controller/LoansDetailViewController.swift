@@ -55,7 +55,7 @@ class LoansDetailViewController: UIViewController {
     }
 
     func loadDataFromRealm() {
-        loanDetailView.loanDetailTableView.updateTableViewData(borrowedList: Array(personDTO.borrowed), lentMeList: Array(personDTO.lentMe))
+        loanDetailView.loanDetailTableView.updateTableViewData(person: personDTO)
     }
 
     @objc private func reloadTableView(_ notification: NSNotification) {

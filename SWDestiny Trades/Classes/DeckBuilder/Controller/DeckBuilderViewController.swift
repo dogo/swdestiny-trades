@@ -32,7 +32,7 @@ final class DeckBuilderViewController: UIViewController {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
 
-        loadData(list: Array(deckDTO.list))
+        loadData(deck: deckDTO)
 
         deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] card in
             self?.navigateToCardDetailViewController(with: card)
@@ -47,13 +47,13 @@ final class DeckBuilderViewController: UIViewController {
         self.navigationItem.title = deckDTO.name
     }
 
-    func loadData(list: [CardDTO]) {
-        deckBuilderView.deckBuilderTableView.updateTableViewData(deckList: list)
+    func loadData(deck: DeckDTO) {
+        deckBuilderView.deckBuilderTableView.updateTableViewData(deck: deck)
     }
 
     @objc private func reloadTableView(_ notification: NSNotification) {
         if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
-            loadData(list: Array(deck.list))
+            loadData(deck: deck)
         }
     }
 

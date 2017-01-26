@@ -13,6 +13,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     fileprivate var tableView: UITableView?
     fileprivate var deckList: [String : [CardDTO]] = [ : ]
     fileprivate var sections: [String] = []
+    fileprivate var currentDeck: DeckDTO!
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -60,20 +61,19 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         return (deckList[sections[index.section]]?[index.row])!
     }
 
-    public func updateTableViewData(list: [CardDTO]) {
-        if !list.isEmpty {
-            deckList = Sort.splitCardsByType(cardList: list).source
-            sections = Sort.splitCardsByType(cardList: list).sections
+    public func updateTableViewData(deck: DeckDTO) {
+        currentDeck = deck
+        if !currentDeck.list.isEmpty {
+            deckList = Sort.splitCardsByType(cardList: Array(currentDeck.list)).source
+            sections = Sort.splitCardsByType(cardList: Array(currentDeck.list)).sections
         }
         tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
         try! RealmManager.shared.realm.write {
-            if let card = getCard(at: indexPath) {
-                RealmManager.shared.realm.delete(card)
-                deckList[sections[indexPath.section]]?.remove(at: indexPath.row)
-            }
+            currentDeck.list.remove(objectAtIndex: indexPath.row)
+            deckList[sections[indexPath.section]]?.remove(at: indexPath.row)
         }
     }
 }

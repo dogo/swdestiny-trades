@@ -26,8 +26,8 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateTableViewData(deckList: [CardDTO]) {
-        tableViewDatasource?.updateTableViewData(list: deckList)
+    func updateTableViewData(deck: DeckDTO) {
+        tableViewDatasource?.updateTableViewData(deck: deck)
     }
 
     // Mark: <BaseDelegate>

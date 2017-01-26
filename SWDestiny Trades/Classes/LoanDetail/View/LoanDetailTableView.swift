@@ -27,8 +27,8 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateTableViewData(borrowedList: [CardDTO], lentMeList: [CardDTO]) {
-        tableViewDatasource?.updateTableViewData(borrowedList: borrowedList, lentMeList: lentMeList)
+    func updateTableViewData(person: PersonDTO) {
+        tableViewDatasource?.updateTableViewData(person: person)
     }
 
     // Mark: <BaseDelegate>
