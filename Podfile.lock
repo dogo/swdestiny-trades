@@ -33,15 +33,15 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - Kingfisher (3.3.2)
-  - Nimble (5.1.1)
+  - Nimble (6.0.0)
   - ObjectMapper (2.2.2)
   - PKHUD (4.2.0)
   - Quick (1.0.0)
-  - Realm (2.3.0):
-    - Realm/Headers (= 2.3.0)
-  - Realm/Headers (2.3.0)
-  - RealmSwift (2.3.0):
-    - Realm (= 2.3.0)
+  - Realm (2.4.0):
+    - Realm/Headers (= 2.4.0)
+  - Realm/Headers (2.4.0)
+  - RealmSwift (2.4.0):
+    - Realm (= 2.4.0)
   - Reusable (3.0.1):
     - Reusable/Storyboard (= 3.0.1)
     - Reusable/View (= 3.0.1)
@@ -75,12 +75,12 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Kingfisher: 8e60094454aeb4746eb588eb57f794d891c6ea88
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  Nimble: 8fb9b4b34c535b2f32f52c6b9852d6f02d48610b
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  Realm: 69d7de9aa569a11eed490aaabc8f2109e3985ecf
-  RealmSwift: dc6f99ea55e59490cec69c860f91932b6bf7efb6
+  Realm: ee18a466779d058e525e79b3db76a20541f82eb6
+  RealmSwift: 9f77d226585c5d0c6fe02cb432b8230ad826f9cc
   Reusable: 5362d10271ca8316b104698a21e90498f47e8339
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
