@@ -35,12 +35,6 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         return button
     }()
 
-    var highlightBackgroundView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = ColorPalette.lightLightGray
-        return view
-    }()
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         buildViewHierarchy()
@@ -101,7 +95,6 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     }
 
     internal func configureViews() {
-        self.selectedBackgroundView = highlightBackgroundView
         titleEditText.delegate = self
         toggleEditButton()
     }

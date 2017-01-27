@@ -33,8 +33,24 @@ class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func configureCell(cardDTO: CardDTO) {
         baseViewCell.titleLabel.text = cardDTO.name
+        setIconImage(card: cardDTO)
         baseViewCell.subtitleLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
         baseViewCell.accessoryLabel.text = ""//cardDTO.price
+    }
+    
+    private func setIconImage(card: CardDTO) {
+        let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
+        baseViewCell.iconImageView.image = imageForRendering
+        
+        if card.factionCode == "red" {
+            baseViewCell.iconImageView.tintColor = ColorPalette.red
+        } else if card.factionCode == "yellow" {
+            baseViewCell.iconImageView.tintColor = ColorPalette.yellow
+        } else if card.factionCode == "blue" {
+            baseViewCell.iconImageView.tintColor = ColorPalette.blue
+        } else if card.factionCode == "gray" {
+            baseViewCell.iconImageView.tintColor = ColorPalette.gray
+        }
     }
 
     override func prepareForReuse() {
@@ -63,7 +79,6 @@ class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.selectedBackgroundView = baseViewCell.highlightBackgroundView
         self.accessoryType = .disclosureIndicator
     }
 }

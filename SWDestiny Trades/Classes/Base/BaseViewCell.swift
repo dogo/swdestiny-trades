@@ -33,11 +33,11 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         let view = UIView(frame: .zero)
         return view
     }()
-
-    var highlightBackgroundView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = ColorPalette.lightLightGray
-        return view
+    
+    var iconImageView: UIImageView = {
+        let image = UIImageView(frame: .zero)
+        image.contentMode = .scaleAspectFit
+        return image
     }()
 
     static func height() -> CGFloat {
@@ -57,6 +57,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(contentView)
+        contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
         contentView.addSubview(accessoryLabel)
@@ -66,15 +67,22 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         }
+        
+        iconImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(contentView)
+            make.left.equalTo(contentView).offset(12)
+            make.height.equalTo(25)
+            make.width.equalTo(25)
+        }
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView)
-            make.left.equalTo(contentView).offset(12)
+            make.left.equalTo(iconImageView.snp.right).offset(12)
         }
 
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(contentView).offset(12)
+            make.left.equalTo(iconImageView.snp.right).offset(12)
             make.bottom.equalTo(contentView)
             make.right.equalTo(accessoryLabel.snp.left)
         }

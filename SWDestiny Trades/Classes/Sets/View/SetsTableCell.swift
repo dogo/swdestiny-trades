@@ -23,12 +23,6 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
         return image
     }()
 
-    var highlightBackgroundView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = ColorPalette.lightLightGray
-        return view
-    }()
-
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         buildViewHierarchy()
@@ -70,20 +64,19 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func setupConstraints() {
         expansionImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(12)
+            make.centerY.equalTo(self.contentView)
+            make.left.equalTo(self.contentView).offset(12)
             make.height.equalTo(35)
             make.width.equalTo(35)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
+            make.centerY.equalTo(self.contentView)
             make.left.equalTo(expansionImageView.snp.right).offset(12)
         }
     }
 
     internal func configureViews() {
-        self.selectedBackgroundView = highlightBackgroundView
         self.accessoryType = .disclosureIndicator
     }
 }

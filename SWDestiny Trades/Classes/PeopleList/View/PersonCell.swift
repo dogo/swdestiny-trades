@@ -9,15 +9,12 @@
 import UIKit
 import Reusable
 
-class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
-
-    var baseViewCell = BaseViewCell()
+class PersonCell: UITableViewCell, Reusable {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.detailTextLabel?.textColor = .darkGray
+        self.accessoryType = .disclosureIndicator
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -25,8 +22,9 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func configureCell(personDTO: PersonDTO) {
-        baseViewCell.titleLabel.text = "\(personDTO.name) \(personDTO.lastName)"
-        baseViewCell.subtitleLabel.text = getLoanState(personDTO: personDTO)
+        textLabel?.text = "\(personDTO.name) \(personDTO.lastName)"
+        detailTextLabel?.text = getLoanState(personDTO: personDTO)
+        detailTextLabel?.adjustsFontSizeToFitWidth = true
     }
 
     private func getLoanState(personDTO: PersonDTO) -> String {
@@ -47,32 +45,11 @@ class PersonCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     override func prepareForReuse() {
-        baseViewCell.titleLabel.text = nil
-        baseViewCell.titleLabel.text = nil
+        textLabel?.text = nil
+        detailTextLabel?.text = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
-    }
-
-    // MARK: <BaseViewConfiguration>
-
-    internal func buildViewHierarchy() {
-        self.contentView.addSubview(baseViewCell)
-    }
-
-    internal func setupConstraints() {
-        baseViewCell.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
-    }
-
-    internal func configureViews() {
-        self.accessoryType = .disclosureIndicator
-        self.selectedBackgroundView = baseViewCell.highlightBackgroundView
-        baseViewCell.subtitleLabel.adjustsFontSizeToFitWidth = true
     }
 }
