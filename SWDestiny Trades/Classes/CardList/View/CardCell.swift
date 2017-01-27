@@ -41,16 +41,13 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
             baseViewCell.subtitleLabel.text = "\(card.subtitle)"
         }
         
-        guard baseViewCell.subtitleLabel.text?.trim() == "" else {
-            baseViewCell.titleLabel.snp.remakeConstraints { make in
-                make.top.equalTo(baseViewCell.contentView)
-                make.left.equalTo(baseViewCell.iconImageView.snp.right).offset(12)
-            }
-            return
-        }
         baseViewCell.titleLabel.snp.remakeConstraints { make in
-            make.centerY.equalTo(baseViewCell.contentView)
             make.left.equalTo(baseViewCell.iconImageView.snp.right).offset(12)
+            guard let subtitle = baseViewCell.subtitleLabel.text, subtitle.isNotEmpty else {
+                make.centerY.equalTo(baseViewCell.contentView)
+                return
+            }
+            make.top.equalTo(baseViewCell.contentView)
         }
     }
     
