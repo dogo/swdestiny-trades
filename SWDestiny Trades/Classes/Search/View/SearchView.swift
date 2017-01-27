@@ -12,7 +12,7 @@ final class SearchView: UIView, BaseViewConfiguration {
 
     let searchBar = SearchBar()
     let searchTableView = SearchTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +35,7 @@ final class SearchView: UIView, BaseViewConfiguration {
 
     internal func setupConstraints() {
         searchBar.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(44+20)
+            make.top.equalTo(self).offset(64)
             make.left.equalTo(self)
             make.right.equalTo(self)
             make.height.equalTo(44)
@@ -44,7 +44,7 @@ final class SearchView: UIView, BaseViewConfiguration {
         searchTableView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.left.equalTo(self)
-            make.bottom.equalTo(self)
+            make.bottom.equalTo(self).offset(-49)
             make.right.equalTo(self)
         }
 
