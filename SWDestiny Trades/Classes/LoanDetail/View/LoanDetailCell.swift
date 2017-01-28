@@ -30,11 +30,11 @@ class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
         baseViewCell.subtitleLabel.text = "\(cardDTO.rarityName) -- \(cardDTO.setName)"
         baseViewCell.accessoryLabel.text = ""//cardDTO.price
     }
-    
+
     private func setIconImage(card: CardDTO) {
         let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
         baseViewCell.iconImageView.image = imageForRendering
-        
+
         if card.factionCode == "red" {
             baseViewCell.iconImageView.tintColor = ColorPalette.red
         } else if card.factionCode == "yellow" {

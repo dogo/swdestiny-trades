@@ -33,7 +33,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         let view = UIView(frame: .zero)
         return view
     }()
-    
+
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
@@ -67,7 +67,7 @@ class BaseViewCell: UIView, BaseViewConfiguration {
         contentView.snp.makeConstraints { make in
             make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         }
-        
+
         iconImageView.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.left.equalTo(contentView).offset(12)

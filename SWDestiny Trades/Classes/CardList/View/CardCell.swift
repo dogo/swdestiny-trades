@@ -40,7 +40,7 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         } else {
             baseViewCell.subtitleLabel.text = "\(card.subtitle)"
         }
-        
+
         baseViewCell.titleLabel.snp.remakeConstraints { make in
             make.left.equalTo(baseViewCell.iconImageView.snp.right).offset(12)
             guard let subtitle = baseViewCell.subtitleLabel.text, subtitle.isNotEmpty else {
@@ -50,11 +50,11 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
             make.top.equalTo(baseViewCell.contentView)
         }
     }
-    
+
     private func setIconImage(card: CardDTO) {
         let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
         baseViewCell.iconImageView.image = imageForRendering
-        
+
         if card.factionCode == "red" {
             baseViewCell.iconImageView.tintColor = ColorPalette.red
         } else if card.factionCode == "yellow" {

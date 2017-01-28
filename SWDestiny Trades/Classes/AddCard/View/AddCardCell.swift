@@ -29,11 +29,11 @@ class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         setIconImage(card: cardDTO)
         baseViewCell.subtitleLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
     }
-    
+
     private func setIconImage(card: CardDTO) {
         let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
         baseViewCell.iconImageView.image = imageForRendering
-        
+
         if card.factionCode == "red" {
             baseViewCell.iconImageView.tintColor = ColorPalette.red
         } else if card.factionCode == "yellow" {
