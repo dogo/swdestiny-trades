@@ -33,6 +33,8 @@
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
+		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
+		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */; };
 		DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */; };
 		DD4BBCDF1E26CC7E009929C4 /* NumberListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */; };
@@ -134,6 +136,8 @@
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
+		DD4103D71E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
+		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 		DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberListDatasource.swift; sourceTree = "<group>"; };
@@ -435,10 +439,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DD4103D51E3FC70F00B13F85 /* es.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				DD4103D61E3FC70F00B13F85 /* Localizable.strings */,
+				DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */,
+			);
+			path = es.lproj;
+			sourceTree = "<group>";
+		};
 		DD4B0ABE1E25951E0042D4EB /* Localization */ = {
 			isa = PBXGroup;
 			children = (
 				DDC60FA31E26B9AC00473F6E /* Base.lproj */,
+				DD4103D51E3FC70F00B13F85 /* es.lproj */,
 				DDC60FA81E26B9AC00473F6E /* pt-BR.lproj */,
 			);
 			path = Localization;
@@ -892,6 +906,7 @@
 				en,
 				Base,
 				"pt-BR",
+				es,
 			);
 			mainGroup = DD6E067B1E114E88004A5653;
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
@@ -911,9 +926,11 @@
 			files = (
 				DDC60FAD1E26B9AC00473F6E /* Localizable.strings in Resources */,
 				DDC60FB01E26B9AC00473F6E /* Localizable.stringsdict in Resources */,
+				DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */,
 				DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */,
 				DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */,
 				DDC60FAF1E26B9AC00473F6E /* Localizable.strings in Resources */,
+				DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */,
 				DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */,
 				DDC60FAE1E26B9AC00473F6E /* Localizable.stringsdict in Resources */,
 			);
@@ -1131,6 +1148,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DD4103D61E3FC70F00B13F85 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD4103D71E3FC70F00B13F85 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD4103D91E3FC70F00B13F85 /* es */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
