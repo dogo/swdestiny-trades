@@ -58,7 +58,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
 
     public func getCard(at index: IndexPath) -> CardDTO? {
-        return (deckList[sections[index.section]]?[index.row])!
+        return (deckList[sections[index.section]]?[index.row])
     }
 
     public func updateTableViewData(deck: DeckDTO) {
