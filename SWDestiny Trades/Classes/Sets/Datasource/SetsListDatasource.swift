@@ -26,7 +26,9 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SetsTableCell.self)
-        cell.configureCell(setDTO: getSet(at: indexPath))
+        if let set = getSet(at: indexPath) {
+            cell.configureCell(setDTO: set)
+        }
         return cell
     }
 
@@ -45,8 +47,8 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
         return rows.count
     }
 
-    public func getSet(at index: IndexPath) -> SetDTO {
-        return (swdSets[sections[index.section]]?[index.row])!
+    public func getSet(at index: IndexPath) -> SetDTO? {
+        return (swdSets[sections[index.section]]?[index.row])
     }
 
     public func sortAndSplitTableData(setList: [SetDTO]) {
