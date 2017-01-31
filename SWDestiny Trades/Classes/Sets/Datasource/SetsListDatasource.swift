@@ -12,7 +12,7 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
     fileprivate var swdSets: [String : [SetDTO]] = [ : ]
-    fileprivate var sectionLetters: [String] = []
+    fileprivate var sections: [String] = []
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -31,24 +31,27 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(sectionLetters[section])
+        return String(sections[section])
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionLetters.count
+        return sections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return swdSets[sectionLetters[section]]!.count
+        guard let rows = swdSets[sections[section]] else {
+            return 0
+        }
+        return rows.count
     }
 
     public func getSet(at index: IndexPath) -> SetDTO {
-        return (swdSets[sectionLetters[index.section]]?[index.row])!
+        return (swdSets[sections[index.section]]?[index.row])!
     }
 
     public func sortAndSplitTableData(setList: [SetDTO]) {
         swdSets = Sort.splitSetsByAlphabetically(setList: setList).source
-        sectionLetters = Sort.splitSetsByAlphabetically(setList: setList).firstLetters
+        sections = Sort.splitSetsByAlphabetically(setList: setList).firstLetters
         tableView?.reloadData()
     }
 }

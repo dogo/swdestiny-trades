@@ -36,7 +36,10 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alphabeticallyCards[sections[section]]!.count
+        guard let rows = alphabeticallyCards[sections[section]] else {
+            return 0
+        }
+        return rows.count
     }
 
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
