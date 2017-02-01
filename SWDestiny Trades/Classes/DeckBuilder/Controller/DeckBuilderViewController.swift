@@ -59,9 +59,8 @@ final class DeckBuilderViewController: UIViewController {
 
     // MARK: Navigation
 
-    func navigateToCardDetailViewController(with card: CardDTO?) {
-        let nextController = CardDetailViewController()
-        nextController.cardDTO = card
+    func navigateToCardDetailViewController(with card: CardDTO) {
+        let nextController = CardDetailViewController(cardList: Array(deckDTO.list), selected: card)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 

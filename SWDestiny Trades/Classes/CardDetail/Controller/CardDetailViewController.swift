@@ -13,28 +13,24 @@ class CardDetailViewController: UIViewController {
 
     fileprivate let cardView = CardView()
     fileprivate var cards = [CardDTO]()
-    var cardDTO: CardDTO?
+    fileprivate var cardDTO: CardDTO
 
     var kingfisherSource = [KingfisherSource]()
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    convenience init(cardList: [CardDTO], selected: CardDTO) {
-        self.init()
-        cards = cardList
+    init(cardList: [CardDTO], selected: CardDTO) {
         cardDTO = selected
+        cards = cardList
+        super.init(nibName: nil, bundle: nil)
 
         for card in cardList {
             kingfisherSource.append(KingfisherSource(urlString: card.imageUrl)!)
         }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func loadView() {
@@ -48,7 +44,7 @@ class CardDetailViewController: UIViewController {
 
         cardView.slideshow.setImageInputs(kingfisherSource)
 
-        if let card = cardDTO, let index = cards.index(of: card) {
+        if let index = cards.index(of: cardDTO) {
             cardView.slideshow.setCurrentPage(index, animated: true)
         }
 
@@ -59,7 +55,7 @@ class CardDetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = cardDTO?.name
+        self.navigationItem.title = cardDTO.name
     }
 
     func share(_ sender: UIBarButtonItem) {

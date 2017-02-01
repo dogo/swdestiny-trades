@@ -18,6 +18,7 @@ import FirebaseAnalytics
 class SearchListViewController: UIViewController {
 
     fileprivate let searchView = SearchView()
+    fileprivate var cards = [CardDTO]()
 
     // MARK: - Life Cycle
 
@@ -39,6 +40,7 @@ class SearchListViewController: UIViewController {
         searchView.activityIndicator.startAnimating()
         SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: [CardDTO]) in
             self.searchView.searchTableView.updateSearchList(cardsArray)
+            self.cards = cardsArray
             self.searchView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
             self.searchView.activityIndicator.stopAnimating()
@@ -64,9 +66,8 @@ class SearchListViewController: UIViewController {
 
     // MARK: Navigation
 
-    func navigateToNextController(with card: CardDTO?) {
-        let nextController = CardDetailViewController()
-        nextController.cardDTO = card
+    func navigateToNextController(with card: CardDTO) {
+        let nextController = CardDetailViewController(cardList: cards, selected: card)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

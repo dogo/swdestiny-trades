@@ -14,6 +14,7 @@ import FirebaseAnalytics
 class AddCardViewController: UIViewController {
 
     fileprivate let addCardView = AddCardView()
+    fileprivate var cards = [CardDTO]()
     var isLentMe: Bool!
     var personDTO: PersonDTO!
     var deckDTO: DeckDTO!
@@ -40,6 +41,7 @@ class AddCardViewController: UIViewController {
         SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: [CardDTO]) in
             self.addCardView.activityIndicator.stopAnimating()
             self.addCardView.addCardTableView.updateSearchList(cardsArray)
+            self.cards = cardsArray
         }) { (error: DataResponse<Any>) in
             self.addCardView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
@@ -105,9 +107,8 @@ class AddCardViewController: UIViewController {
 
     // MARK: Navigation
 
-    func navigateToNextController(with card: CardDTO?) {
-        let nextController = CardDetailViewController()
-        nextController.cardDTO = card
+    func navigateToNextController(with card: CardDTO) {
+        let nextController = CardDetailViewController(cardList: cards, selected: card)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

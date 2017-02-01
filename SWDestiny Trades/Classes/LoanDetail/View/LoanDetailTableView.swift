@@ -10,7 +10,7 @@ import UIKit
 
 final class LoanDetailTableView: UITableView, BaseDelegate {
 
-    var didSelectCard: ((CardDTO) -> Void)?
+    var didSelectCard: ((CardDTO, Bool) -> Void)?
     var didSelectAddItem: ((Bool) -> Void)?
 
     fileprivate var tableViewDatasource: LoansDetailDatasource?
@@ -37,7 +37,7 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
         if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
             didSelectAddItem?(index.section == 0)
         } else if let card = tableViewDatasource?.getCard(at: index) {
-            didSelectCard?(card)
+            didSelectCard?(card, index.section == 0)
         }
     }
 }

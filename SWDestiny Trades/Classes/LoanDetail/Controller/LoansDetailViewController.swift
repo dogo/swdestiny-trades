@@ -33,8 +33,8 @@ class LoansDetailViewController: UIViewController {
 
         loadDataFromRealm()
 
-        self.loanDetailView.loanDetailTableView.didSelectCard = { [weak self] card in
-            self?.navigateToCardDetailViewController(with: card)
+        self.loanDetailView.loanDetailTableView.didSelectCard = { [weak self] card, lentMe in
+            self?.navigateToCardDetailViewController(with: card, lentMe: lentMe)
         }
 
         self.loanDetailView.loanDetailTableView.didSelectAddItem = { [weak self] lentMe in
@@ -67,9 +67,9 @@ class LoansDetailViewController: UIViewController {
 
     // MARK: Navigation
 
-    func navigateToCardDetailViewController(with card: CardDTO?) {
-        let nextController = CardDetailViewController()
-        nextController.cardDTO = card
+    func navigateToCardDetailViewController(with card: CardDTO, lentMe: Bool) {
+        let source = lentMe ? personDTO.lentMe : personDTO.borrowed
+        let nextController = CardDetailViewController(cardList: Array(source), selected: card)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
