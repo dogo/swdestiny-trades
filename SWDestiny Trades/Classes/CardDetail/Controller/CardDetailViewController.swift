@@ -46,13 +46,13 @@ class CardDetailViewController: UIViewController {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
 
-        cardView.cardImageView.setImageInputs(kingfisherSource)
+        cardView.slideshow.setImageInputs(kingfisherSource)
 
         if let card = cardDTO, let index = cards.index(of: card) {
-            cardView.cardImageView.setCurrentPage(index, animated: true)
+            cardView.slideshow.setCurrentPage(index, animated: true)
         }
 
-        cardView.cardImageView.currentPageChanged = { page in
+        cardView.slideshow.currentPageChanged = { page in
             self.navigationItem.title = self.cards[page].name
         }
     }
@@ -64,7 +64,7 @@ class CardDetailViewController: UIViewController {
 
     func share(_ sender: UIBarButtonItem) {
 
-        if let shareImage = cardView.cardImageView.currentSlideshowItem?.imageView.image {
+        if let shareImage = cardView.slideshow.currentSlideshowItem?.imageView.image {
 
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
 

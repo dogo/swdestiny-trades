@@ -11,12 +11,13 @@ import ImageSlideshow
 
 final class CardView: UIView, BaseViewConfiguration {
 
-    var cardImageView: ImageSlideshow = {
+    var slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow(frame: .zero)
         slideshow.backgroundColor = UIColor.white
         slideshow.contentScaleMode = .scaleAspectFit
         slideshow.pageControlPosition = .hidden
         slideshow.circular = false
+        slideshow.preload = .fixed(offset: 1)
         return slideshow
     }()
 
@@ -34,11 +35,11 @@ final class CardView: UIView, BaseViewConfiguration {
     // MARK: <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
-        self.addSubview(cardImageView)
+        self.addSubview(slideshow)
     }
 
     internal func setupConstraints() {
-        cardImageView.snp.makeConstraints { make in
+        slideshow.snp.makeConstraints { make in
             make.top.equalTo(self).offset(64)
             make.left.equalTo(self)
             make.bottom.equalTo(self).offset(-49)
