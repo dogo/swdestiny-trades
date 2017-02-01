@@ -41,6 +41,19 @@ public class KingfisherSource: NSObject, InputSource {
         }
     }
 
+    /// Initializes a new source with a URL string
+    /// - parameter urlString: a string url to be loaded
+    /// - parameter placeholder: a placeholder used before image is loaded
+    public init?(urlString: String, placeholder: UIImage) {
+        if let validUrl = URL(string: urlString) {
+            self.url = validUrl
+            self.placeholder = placeholder
+            super.init()
+        } else {
+            return nil
+        }
+    }
+
     @objc public func load(to imageView: UIImageView, with callback: @escaping (UIImage) -> Void) {
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: self.url, placeholder: self.placeholder, options: nil, progressBlock: nil) { (image, _, _, _) in

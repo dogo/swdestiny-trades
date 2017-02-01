@@ -25,7 +25,7 @@ class CardDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         for card in cardList {
-            kingfisherSource.append(KingfisherSource(urlString: card.imageUrl)!)
+            kingfisherSource.append(KingfisherSource(urlString: card.imageUrl, placeholder: UIImage(named: "ic_cardback")!)!)
         }
     }
 
