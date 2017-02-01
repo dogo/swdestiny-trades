@@ -10,12 +10,17 @@ import UIKit
 
 final class CardListTableView: UITableView, CardListViewDelegate {
 
-    var didSelectCard: ((CardDTO) -> Void)?
+    var didSelectCard: ((Int, CardDTO) -> Void)?
 
-    var alphabeticalDatasource: AlphabeticalListDatasource?
-    var colorDatasource: ColorListDatasource?
-    var numberDatasource: NumberListDatasource?
-    let cardList = CardList()
+    private var alphabeticalDatasource: AlphabeticalListDatasource?
+    private var colorDatasource: ColorListDatasource?
+    private var numberDatasource: NumberListDatasource?
+    private let cardList = CardList()
+    private var currentSegment = Segment.alphabetical
+
+    public enum Segment: Int {
+        case alphabetical, color, number
+    }
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
@@ -51,7 +56,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectRow(at index: IndexPath) {
         if let currentDatasource: CardReturnable = self.dataSource as? CardReturnable {
             if let card = currentDatasource.getCard(at: index) {
-                didSelectCard?(card)
+                didSelectCard?(currentSegment.rawValue, card)
             }
         }
     }
@@ -61,14 +66,17 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:
+            currentSegment = .alphabetical
             self.dataSource = alphabeticalDatasource
             self.delegate = cardList
             self.reloadData()
         case 1:
+            currentSegment = .color
             self.dataSource = colorDatasource
             self.delegate = cardList
             self.reloadData()
         case 2:
+            currentSegment = .number
             self.dataSource = numberDatasource
             self.delegate = cardList
             self.reloadData()

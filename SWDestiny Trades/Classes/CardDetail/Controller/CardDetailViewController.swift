@@ -12,7 +12,7 @@ import ImageSlideshow
 class CardDetailViewController: UIViewController {
 
     fileprivate let cardView = CardView()
-    var cards = [CardDTO]()
+    fileprivate var cards = [CardDTO]()
     var cardDTO: CardDTO?
 
     var kingfisherSource = [KingfisherSource]()

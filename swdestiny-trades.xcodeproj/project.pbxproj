@@ -577,10 +577,10 @@
 		DD888C3D1E1947820093B3BF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DD4D988F1E4182FB006412AD /* KingfisherSource.swift */,
 				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
 				DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */,
 				DDB8A2241E266DFF0086FC01 /* Sort.swift */,
-				DD4D988F1E4182FB006412AD /* KingfisherSource.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
