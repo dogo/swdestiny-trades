@@ -18,7 +18,7 @@ target 'SWDestiny Trades' do
   pod 'TextFieldEffects'
 
   target 'SWDestiny-TradesTests' do
-    inherit! :search_paths
+    inherit! :complete
     pod 'Quick'
     pod 'Nimble'
   end

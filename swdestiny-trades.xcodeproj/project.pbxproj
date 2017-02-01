@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6EEB8E59A7CCF724CAD4D6C3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */; };
+		76EB78CA09637614226FCC31 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535C4B90E43323F930BBC6F1 /* Pods_SWDestiny_Trades.framework */; };
+		8F65BD03E5A71109B3970034 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E70324A9E24EFFE454E8EF05 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */; };
@@ -88,7 +89,6 @@
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
 		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
 		DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95B1E253A04004EADE9 /* AddCardView.swift */; };
-		F728BD09DF3536056693B01E /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,12 +102,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1CBA029A8D87653D1E2BD9EE /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
-		3D77F28AE8E466AF3C1A62D0 /* Pods-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
-		4DB84A888BE92ACC6F1E9E4E /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
-		552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AF5BE14F290A4086F9F26EA /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		316B8185672BD17C05BB315F /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
+		440FC39397F3D0809FC4E17D /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
+		535C4B90E43323F930BBC6F1 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD5C99A7B5045CADE04DD4F0 /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
 		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
 		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +167,7 @@
 		DDC60FA71E26B9AC00473F6E /* Base */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = Base; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DDC60FAA1E26B9AC00473F6E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = Localizable.strings; sourceTree = "<group>"; };
 		DDC60FAC1E26B9AC00473F6E /* pt-BR */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = "pt-BR"; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		DDC8523C507C8F1FC8126B9C /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DDCA97AA1E2FA2A20098FFB5 /* DeckListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListTableView.swift; sourceTree = "<group>"; };
 		DDCA97AC1E2FA35A0098FFB5 /* DeckListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListDatasource.swift; sourceTree = "<group>"; };
 		DDCA97B01E2FA72A0098FFB5 /* DeckBuilderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +191,7 @@
 		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
 		DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardTableView.swift; sourceTree = "<group>"; };
 		DDFEB95B1E253A04004EADE9 /* AddCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
+		E70324A9E24EFFE454E8EF05 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,7 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F728BD09DF3536056693B01E /* Pods_SWDestiny_Trades.framework in Frameworks */,
+				76EB78CA09637614226FCC31 /* Pods_SWDestiny_Trades.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EEB8E59A7CCF724CAD4D6C3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */,
+				8F65BD03E5A71109B3970034 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +217,8 @@
 		2E1C88C8670E809E04AFB282 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				552BDCFC5FDA256A1F6D7C76 /* Pods_SWDestiny_Trades.framework */,
-				05BA23E165219E258E61F16F /* Pods_SWDestiny_TradesTests.framework */,
+				535C4B90E43323F930BBC6F1 /* Pods_SWDestiny_Trades.framework */,
+				E70324A9E24EFFE454E8EF05 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -814,10 +814,10 @@
 		F0F79EAA73208C4792AE7D85 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4DB84A888BE92ACC6F1E9E4E /* Pods-SWDestiny Trades.debug.xcconfig */,
-				1CBA029A8D87653D1E2BD9EE /* Pods-SWDestiny Trades.release.xcconfig */,
-				7AF5BE14F290A4086F9F26EA /* Pods-SWDestiny-TradesTests.debug.xcconfig */,
-				3D77F28AE8E466AF3C1A62D0 /* Pods-SWDestiny-TradesTests.release.xcconfig */,
+				440FC39397F3D0809FC4E17D /* Pods-SWDestiny Trades.debug.xcconfig */,
+				AD5C99A7B5045CADE04DD4F0 /* Pods-SWDestiny Trades.release.xcconfig */,
+				DDC8523C507C8F1FC8126B9C /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */,
+				316B8185672BD17C05BB315F /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -950,7 +950,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		04785EC24B4319764468F3D1 /* [CP] Check Pods Manifest.lock */ = {
@@ -995,7 +995,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DA16890DEF523551F598506B /* [CP] Embed Pods Frameworks */ = {
@@ -1294,7 +1294,7 @@
 		};
 		DD6E06A41E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DB84A888BE92ACC6F1E9E4E /* Pods-SWDestiny Trades.debug.xcconfig */;
+			baseConfigurationReference = 440FC39397F3D0809FC4E17D /* Pods-SWDestiny Trades.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -1308,7 +1308,7 @@
 		};
 		DD6E06A51E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CBA029A8D87653D1E2BD9EE /* Pods-SWDestiny Trades.release.xcconfig */;
+			baseConfigurationReference = AD5C99A7B5045CADE04DD4F0 /* Pods-SWDestiny Trades.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -1322,7 +1322,7 @@
 		};
 		DD6E06A71E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AF5BE14F290A4086F9F26EA /* Pods-SWDestiny-TradesTests.debug.xcconfig */;
+			baseConfigurationReference = DDC8523C507C8F1FC8126B9C /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -1337,7 +1337,7 @@
 		};
 		DD6E06A81E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D77F28AE8E466AF3C1A62D0 /* Pods-SWDestiny-TradesTests.release.xcconfig */;
+			baseConfigurationReference = 316B8185672BD17C05BB315F /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
