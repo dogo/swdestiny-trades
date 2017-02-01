@@ -35,9 +35,6 @@ PODS:
   - ImageSlideshow (1.0.0):
     - ImageSlideshow/Core (= 1.0.0)
   - ImageSlideshow/Core (1.0.0)
-  - ImageSlideshow/Kingfisher (1.0.0):
-    - ImageSlideshow/Core
-    - Kingfisher (~> 3.0)
   - Kingfisher (3.3.3)
   - Nimble (6.0.1)
   - ObjectMapper (2.2.2)
@@ -61,7 +58,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Crash
   - ImageSlideshow
-  - ImageSlideshow/Kingfisher
+  - Kingfisher
   - Nimble
   - ObjectMapper
   - PKHUD
@@ -93,6 +90,6 @@ SPEC CHECKSUMS:
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
 
-PODFILE CHECKSUM: abff7df2aa0bc9725444be7ccd327692d342a404
+PODFILE CHECKSUM: e4b6d047bd5404cae36f7703edeed62e11495e63
 
 COCOAPODS: 1.2.0

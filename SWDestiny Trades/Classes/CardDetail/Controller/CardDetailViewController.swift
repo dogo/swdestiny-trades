@@ -47,7 +47,10 @@ class CardDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
 
         cardView.cardImageView.setImageInputs(kingfisherSource)
-        cardView.cardImageView.setCurrentPage(cards.index(of: cardDTO!)!, animated: true)
+
+        if let card = cardDTO, let index = cards.index(of: card) {
+            cardView.cardImageView.setCurrentPage(index, animated: true)
+        }
 
         cardView.cardImageView.currentPageChanged = { page in
             self.navigationItem.title = self.cards[page].name
