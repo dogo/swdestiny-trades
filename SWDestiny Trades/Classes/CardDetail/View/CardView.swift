@@ -13,9 +13,9 @@ final class CardView: UIView, BaseViewConfiguration {
 
     var cardImageView: ImageSlideshow = {
         let slideshow = ImageSlideshow(frame: .zero)
-        slideshow.backgroundColor = UIColor.red
+        slideshow.backgroundColor = UIColor.white
         slideshow.contentScaleMode = .scaleAspectFit
-        slideshow.isHidden = true
+        slideshow.pageControlPosition = .hidden
         slideshow.circular = false
         return slideshow
     }()
@@ -47,6 +47,6 @@ final class CardView: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor =  .white
+        self.backgroundColor = .white
     }
 }
