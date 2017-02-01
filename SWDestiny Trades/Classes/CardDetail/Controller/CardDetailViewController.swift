@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import ImageSlideshow
 
 class CardDetailViewController: UIViewController {
 
     fileprivate let cardView = CardView()
     var cardDTO: CardDTO?
+    
+    let kingfisherSource = [KingfisherSource(urlString: "http://s3.amazonaws.com/swdestinydb-prod/01037.jpg")!, KingfisherSource(urlString: "http://s3.amazonaws.com/swdestinydb-prod/01038.jpg")!, KingfisherSource(urlString: "http://s3.amazonaws.com/swdestinydb-prod/01039.jpg")!]
 
     // MARK: - Life Cycle
 
@@ -31,7 +34,8 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
+        //cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
+        cardView.cardImageView.setImageInputs(kingfisherSource)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,22 +45,22 @@ class CardDetailViewController: UIViewController {
 
     func share(_ sender: UIBarButtonItem) {
 
-        if let shareImage = cardView.cardImageView.image {
-
-            let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
-
-            if #available(iOS 9.0, *) {
-                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
-            } else {
-                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
-            }
-
-            activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-            DispatchQueue.global(qos: .userInteractive).async {
-                DispatchQueue.main.async {
-                    self.present(activityVC, animated: true, completion: nil)
-                }
-            }
-        }
+//        if let shareImage = cardView.cardImageView.image {
+//
+//            let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+//
+//            if #available(iOS 9.0, *) {
+//                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
+//            } else {
+//                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
+//            }
+//
+//            activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+//            DispatchQueue.global(qos: .userInteractive).async {
+//                DispatchQueue.main.async {
+//                    self.present(activityVC, animated: true, completion: nil)
+//                }
+//            }
+//        }
     }
 }

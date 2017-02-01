@@ -9,13 +9,14 @@ target 'SWDestiny Trades' do
   pod 'Alamofire'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
-  pod 'Kingfisher'
   pod 'ObjectMapper'
   pod 'PKHUD'
   pod 'RealmSwift'
   pod 'Reusable'
   pod 'SnapKit'
   pod 'TextFieldEffects'
+  pod 'ImageSlideshow'
+  pod 'ImageSlideshow/Kingfisher'
 
   target 'SWDestiny-TradesTests' do
     inherit! :complete

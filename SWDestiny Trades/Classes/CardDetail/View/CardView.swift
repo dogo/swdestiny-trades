@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import ImageSlideshow
 
 final class CardView: UIView, BaseViewConfiguration {
 
-    var cardImageView: UIImageView = {
-        let image = UIImageView(frame: .zero)
-        image.contentMode = .scaleAspectFit
-        return image
+    var cardImageView: ImageSlideshow = {
+        let slideshow = ImageSlideshow(frame: .zero)
+        slideshow.backgroundColor = UIColor.red
+        slideshow.contentScaleMode = .scaleAspectFit
+        slideshow.isHidden = true
+        slideshow.circular = false
+        return slideshow
     }()
 
     override init(frame: CGRect) {
