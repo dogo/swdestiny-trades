@@ -13,6 +13,7 @@ import FirebaseAnalytics
 class CardListViewController: UIViewController {
 
     fileprivate let cardListView = CardListView()
+    fileprivate var source = [CardDTO]()
     var setDTO: SetDTO?
 
     // MARK: - Life Cycle
@@ -36,6 +37,11 @@ class CardListViewController: UIViewController {
         SWDestinyAPI.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
             self.cardListView.activityIndicator.stopAnimating()
+            
+            self.source = cardsArray.sorted {
+                $0.name < $1.name
+            }
+
         }) { (error: DataResponse<Any>) in
             self.cardListView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
@@ -57,8 +63,7 @@ class CardListViewController: UIViewController {
     // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO?) {
-        let nextController = CardDetailViewController()
-        nextController.cardDTO = card
+        let nextController = CardDetailViewController(cardList: source, selected: card!)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

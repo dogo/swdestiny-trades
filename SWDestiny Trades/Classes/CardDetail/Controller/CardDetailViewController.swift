@@ -12,9 +12,10 @@ import ImageSlideshow
 class CardDetailViewController: UIViewController {
 
     fileprivate let cardView = CardView()
+    var cards = [CardDTO]()
     var cardDTO: CardDTO?
     
-    let kingfisherSource = [KingfisherSource(urlString: "http://s3.amazonaws.com/swdestinydb-prod/01037.jpg")!, KingfisherSource(urlString: "http://s3.amazonaws.com/swdestinydb-prod/01038.jpg")!, KingfisherSource(urlString: "http://s3.amazonaws.com/swdestinydb-prod/01039.jpg")!]
+    var kingfisherSource = [KingfisherSource]()
 
     // MARK: - Life Cycle
 
@@ -25,6 +26,17 @@ class CardDetailViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    convenience init(cardList: [CardDTO], selected: CardDTO) {
+        self.init()
+        cards = cardList
+        cardDTO = selected
+        
+        for card in cardList {
+            kingfisherSource.append(KingfisherSource(urlString: card.imageUrl)!)
+        }
+    }
+
 
     override func loadView() {
         self.view = cardView
@@ -34,8 +46,11 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        //cardView.cardImageView.download(image: cardDTO?.imageUrl ?? "")
         cardView.cardImageView.setImageInputs(kingfisherSource)
+        
+        cardView.cardImageView.currentPageChanged = { page in
+            self.navigationItem.title = self.cards[page].name
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,22 +60,22 @@ class CardDetailViewController: UIViewController {
 
     func share(_ sender: UIBarButtonItem) {
 
-//        if let shareImage = cardView.cardImageView.image {
-//
-//            let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
-//
-//            if #available(iOS 9.0, *) {
-//                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
-//            } else {
-//                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
-//            }
-//
-//            activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-//            DispatchQueue.global(qos: .userInteractive).async {
-//                DispatchQueue.main.async {
-//                    self.present(activityVC, animated: true, completion: nil)
-//                }
-//            }
-//        }
+        if let shareImage = cardView.cardImageView.currentSlideshowItem?.image {
+
+            let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+
+            if #available(iOS 9.0, *) {
+                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
+            } else {
+                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
+            }
+
+            activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+            DispatchQueue.global(qos: .userInteractive).async {
+                DispatchQueue.main.async {
+                    self.present(activityVC, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
