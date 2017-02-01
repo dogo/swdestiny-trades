@@ -14,8 +14,7 @@ class CardDetailViewController: UIViewController {
     fileprivate let cardView = CardView()
     fileprivate var cards = [CardDTO]()
     fileprivate var cardDTO: CardDTO
-
-    var kingfisherSource = [KingfisherSource]()
+    fileprivate var kingfisherSource = [KingfisherSource]()
 
     // MARK: - Life Cycle
 
@@ -25,7 +24,7 @@ class CardDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         for card in cardList {
-            kingfisherSource.append(KingfisherSource(urlString: card.imageUrl, placeholder: UIImage(named: "ic_cardback")!)!)
+            kingfisherSource.append(KingfisherSource(urlString: card.imageUrl, placeholder: UIImage(named: "ic_cardback"))!)
         }
     }
 

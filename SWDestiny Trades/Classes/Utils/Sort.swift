@@ -2,7 +2,7 @@
 //  Sort.swift
 //  swdestiny-trades
 //
-//  Created by Diogo Autilio on 11/01/17.
+//  Created by Diogo Autilio on 01/02/17.
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
@@ -10,143 +10,37 @@ import Foundation
 
 final class Sort {
 
-    static func splitCardsAlphabetically(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
-
-        // Build Character Set
-        var letters = Set<String>()
-
-        func getFirstLetter(cardDTO: CardDTO) -> String {
-            return String(cardDTO.name[cardDTO.name.startIndex])
+    static func cardsByNumber(cardsArray: [CardDTO]) -> [CardDTO] {
+        let source = cardsArray.sorted {
+            $0.code < $1.code
         }
-
-        cardList.forEach {_ = letters.insert(getFirstLetter(cardDTO: $0)) }
-
-        // Build tableSource array
-        var tableViewSource = [String: [CardDTO]]()
-
-        for symbol in letters {
-
-            var cardsDTO = [CardDTO]()
-
-            for card in cardList {
-                if symbol == getFirstLetter(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
-            }
-            tableViewSource[symbol] = cardsDTO.sorted {
-                $0.name < $1.name
-            }
-        }
-
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
+        return source
     }
 
-    static func splitCardsByColor(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
+    static func cardsAlphabetically(cardsArray: [CardDTO]) -> [CardDTO] {
+        let source = cardsArray.sorted {
+            $0.name < $1.name
+        }
+        return source
+    }
 
-        // Build color Set
+    static func cardsByColor(cardsArray: [CardDTO]) -> [CardDTO] {
         var colors = Set<String>()
-
-        func getColor(cardDTO: CardDTO) -> String {
-            return NSLocalizedString(cardDTO.factionCode.uppercased(), comment: "").capitalized
-        }
-
-        cardList.forEach {_ = colors.insert(getColor(cardDTO: $0)) }
-
-        // Build tableSource array
-        var tableViewSource = [String: [CardDTO]]()
-
-        for symbol in colors {
-
-            var cardsDTO = [CardDTO]()
-
-            for card in cardList {
-                if symbol == getColor(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
-            }
-            tableViewSource[symbol] = cardsDTO.sorted {
-                $0.name < $1.name
-            }
-        }
-
-        let sortedSymbols = colors.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
-    }
-
-    static func splitCardsByType(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
-
-        // Build types Set
-        var types = Set<String>()
+        var source = [CardDTO]()
 
         func getType(cardDTO: CardDTO) -> String {
-            return cardDTO.typeName.capitalized
+            return cardDTO.factionCode
         }
 
-        cardList.forEach {_ = types.insert(getType(cardDTO: $0)) }
+        cardsArray.forEach {_ = colors.insert(getType(cardDTO: $0)) }
 
-        // Build tableSource array
-        var tableViewSource = [String: [CardDTO]]()
-
-        for symbol in types {
-
-            var cardsDTO = [CardDTO]()
-
-            for card in cardList {
-                if symbol == getType(cardDTO: card) {
-                    cardsDTO.append(card)
+        for symbol in colors {
+            for card in cardsArray {
+                if symbol == card.factionCode {
+                    source.append(card)
                 }
             }
-            tableViewSource[symbol] = cardsDTO.sorted {
-                $0.name < $1.name
-            }
         }
-
-        let sortedSymbols = types.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
-    }
-
-    static func splitSetsByAlphabetically(setList: [SetDTO]) -> (firstLetters: [String], source: [String : [SetDTO]]) {
-
-        // Build Character Set
-        var letters = Set<String>()
-
-        func getFirstLetter(setDTO: SetDTO) -> String {
-            return String(setDTO.name.characters.prefix(1))
-        }
-
-        setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
-
-        // Build tableSource array
-        var tableViewSource = [String: [SetDTO]]()
-
-        for symbol in letters {
-
-            var setsDTO = [SetDTO]()
-
-            for set in setList {
-                if symbol == getFirstLetter(setDTO: set) {
-                    setsDTO.append(set)
-                }
-            }
-            tableViewSource[symbol] = setsDTO.sorted {
-                $0.name < $1.name
-            }
-        }
-
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
+        return Sort.cardsAlphabetically(cardsArray: source)
     }
 }

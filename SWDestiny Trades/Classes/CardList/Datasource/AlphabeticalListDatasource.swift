@@ -55,8 +55,8 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
     //Mark: Sort options
 
     public func sortAlphabetically(cardList: [CardDTO]) {
-        alphabeticallyCards = Sort.splitCardsAlphabetically(cardList: cardList).source
-        sections = Sort.splitCardsAlphabetically(cardList: cardList).firstLetters
+        alphabeticallyCards = Split.cardsAlphabetically(cardList: cardList).source
+        sections = Split.cardsAlphabetically(cardList: cardList).firstLetters
         insertHeaderToDataSource()
         tableView?.reloadData()
     }

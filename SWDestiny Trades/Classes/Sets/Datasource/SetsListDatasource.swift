@@ -52,8 +52,8 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func sortAndSplitTableData(setList: [SetDTO]) {
-        swdSets = Sort.splitSetsByAlphabetically(setList: setList).source
-        sections = Sort.splitSetsByAlphabetically(setList: setList).firstLetters
+        swdSets = Split.setsByAlphabetically(setList: setList).source
+        sections = Split.setsByAlphabetically(setList: setList).firstLetters
         tableView?.reloadData()
     }
 }

@@ -64,8 +64,8 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     public func updateTableViewData(deck: DeckDTO) {
         currentDeck = deck
         if !currentDeck.list.isEmpty {
-            deckList = Sort.splitCardsByType(cardList: Array(currentDeck.list)).source
-            sections = Sort.splitCardsByType(cardList: Array(currentDeck.list)).sections
+            deckList = Split.cardsByType(cardList: Array(currentDeck.list)).source
+            sections = Split.cardsByType(cardList: Array(currentDeck.list)).sections
         }
         tableView?.reloadData()
     }
