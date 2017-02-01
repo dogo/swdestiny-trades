@@ -37,7 +37,7 @@ class CardListViewController: UIViewController {
         SWDestinyAPI.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
             self.cardListView.activityIndicator.stopAnimating()
-            
+
             self.source = cardsArray.sorted {
                 $0.name < $1.name
             }

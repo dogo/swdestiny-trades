@@ -14,7 +14,7 @@ class CardDetailViewController: UIViewController {
     fileprivate let cardView = CardView()
     var cards = [CardDTO]()
     var cardDTO: CardDTO?
-    
+
     var kingfisherSource = [KingfisherSource]()
 
     // MARK: - Life Cycle
@@ -26,17 +26,16 @@ class CardDetailViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     convenience init(cardList: [CardDTO], selected: CardDTO) {
         self.init()
         cards = cardList
         cardDTO = selected
-        
+
         for card in cardList {
             kingfisherSource.append(KingfisherSource(urlString: card.imageUrl)!)
         }
     }
-
 
     override func loadView() {
         self.view = cardView
@@ -46,8 +45,10 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
+
         cardView.cardImageView.setImageInputs(kingfisherSource)
-        
+        cardView.cardImageView.setCurrentPage(cards.index(of: cardDTO!)!, animated: true)
+
         cardView.cardImageView.currentPageChanged = { page in
             self.navigationItem.title = self.cards[page].name
         }
@@ -60,7 +61,7 @@ class CardDetailViewController: UIViewController {
 
     func share(_ sender: UIBarButtonItem) {
 
-        if let shareImage = cardView.cardImageView.currentSlideshowItem?.image {
+        if let shareImage = cardView.cardImageView.currentSlideshowItem?.imageView.image {
 
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
 
