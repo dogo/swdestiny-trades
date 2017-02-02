@@ -43,4 +43,24 @@ final class Sort {
         }
         return Sort.cardsAlphabetically(cardsArray: source)
     }
+
+    static func cardsByType(cardsArray: [CardDTO]) -> [CardDTO] {
+        var types = Set<String>()
+        var source = [CardDTO]()
+
+        func getType(cardDTO: CardDTO) -> String {
+            return cardDTO.typeName.capitalized
+        }
+
+        cardsArray.forEach {_ = types.insert(getType(cardDTO: $0)) }
+
+        for symbol in types {
+            for card in cardsArray {
+                if symbol == getType(cardDTO: card) {
+                    source.append(card)
+                }
+            }
+        }
+        return Sort.cardsAlphabetically(cardsArray: source)
+    }
 }
