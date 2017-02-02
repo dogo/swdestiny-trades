@@ -48,7 +48,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     internal func setupConstraints() {
         logoImage.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(34+44+20)
+            make.top.equalTo(self).offset(34+64)
             make.centerX.equalTo(self)
             make.width.equalTo(280)
             make.height.equalTo(150)
@@ -56,7 +56,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
         versionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoImage.snp.bottom)
-            make.left.equalTo(self.snp.right).offset(-100)
+            make.right.equalTo(self.snp.right).offset(-15)
         }
 
         aboutTextView.snp.makeConstraints { make in
