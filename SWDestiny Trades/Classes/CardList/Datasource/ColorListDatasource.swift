@@ -28,7 +28,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        return sections[section].capitalized
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,6 +50,14 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return (colorCards[sections[index.section]]?[index.row])
+    }
+    
+    internal func getCardList() -> [CardDTO] {
+        var list = [CardDTO]()
+        for cardList in colorCards.values {
+            list.append(contentsOf: Array(cardList))
+        }
+        return list
     }
 
     // MARK: Sort options

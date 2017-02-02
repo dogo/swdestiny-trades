@@ -13,9 +13,6 @@ import FirebaseAnalytics
 class CardListViewController: UIViewController {
 
     fileprivate let cardListView = CardListView()
-    fileprivate var alphabeticallSource = [CardDTO]()
-    fileprivate var colorSource = [CardDTO]()
-    fileprivate var numberSource = [CardDTO]()
     fileprivate var setDTO: SetDTO
 
     // MARK: - Life Cycle
@@ -40,10 +37,6 @@ class CardListViewController: UIViewController {
         SWDestinyAPI.retrieveSetCardList(setCode: setDTO.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
             self.cardListView.activityIndicator.stopAnimating()
-
-            self.numberSource = Sort.cardsByNumber(cardsArray: cardsArray)
-            self.colorSource = Sort.cardsByColor(cardsArray: cardsArray)
-            self.alphabeticallSource = Sort.cardsAlphabetically(cardsArray: cardsArray)
         }) { (error: DataResponse<Any>) in
             self.cardListView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
@@ -51,8 +44,8 @@ class CardListViewController: UIViewController {
             FIRAnalytics.logEvent(withName: "[Error] retrieveSetCardList", parameters: ["error": failureReason as NSObject])
         }
 
-        self.cardListView.cardListTableView.didSelectCard = { [weak self] segment, card in
-            self?.navigateToNextController(segment: segment, card: card)
+        self.cardListView.cardListTableView.didSelectCard = { [weak self] list, card in
+            self?.navigateToNextController(cardList: list, card: card)
         }
     }
 
@@ -64,19 +57,8 @@ class CardListViewController: UIViewController {
 
     // MARK: Navigation
 
-    func navigateToNextController(segment: Int, card: CardDTO) {
-
-        var currentSource: [CardDTO] {
-            switch segment {
-            case 0: return alphabeticallSource
-            case 1: return colorSource
-            case 2: return numberSource
-            default:
-                return alphabeticallSource
-            }
-        }
-
-        let nextController = CardDetailViewController(cardList: currentSource, selected: card)
+    func navigateToNextController(cardList: [CardDTO], card: CardDTO) {
+        let nextController = CardDetailViewController(cardList: cardList, selected: card)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

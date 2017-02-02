@@ -39,6 +39,10 @@ class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return numberCards[index.row]
     }
+    
+    internal func getCardList() -> [CardDTO] {
+        return numberCards
+    }
 
     // MARK: Sort options
 

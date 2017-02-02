@@ -10,4 +10,5 @@ import Foundation
 
 protocol CardReturnable {
     func getCard(at index: IndexPath) -> CardDTO?
+    func getCardList() -> [CardDTO]
 }

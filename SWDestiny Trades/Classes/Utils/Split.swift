@@ -51,7 +51,7 @@ final class Split {
         var colors = Set<String>()
 
         func getColor(cardDTO: CardDTO) -> String {
-            return NSLocalizedString(cardDTO.factionCode.uppercased(), comment: "").capitalized
+            return cardDTO.factionCode
         }
 
         cardList.forEach {_ = colors.insert(getColor(cardDTO: $0)) }
@@ -72,12 +72,7 @@ final class Split {
                 $0.name < $1.name
             }
         }
-
-        let sortedSymbols = colors.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
+        return (Array(colors), tableViewSource)
     }
 
     static func cardsByType(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {

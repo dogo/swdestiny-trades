@@ -51,6 +51,14 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return (alphabeticallyCards[sections[index.section]]?[index.row])
     }
+    
+    internal func getCardList() -> [CardDTO] {
+        var list = [CardDTO]()
+        for cardList in alphabeticallyCards.values {
+            list.append(contentsOf: Array(cardList))
+        }
+        return Sort.cardsAlphabetically(cardsArray: list)
+    }
 
     // MARK: Sort options
 

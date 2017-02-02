@@ -10,7 +10,7 @@ import UIKit
 
 final class CardListTableView: UITableView, CardListViewDelegate {
 
-    var didSelectCard: ((Int, CardDTO) -> Void)?
+    var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     private var alphabeticalDatasource: AlphabeticalListDatasource?
     private var colorDatasource: ColorListDatasource?
@@ -56,7 +56,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectRow(at index: IndexPath) {
         if let currentDatasource: CardReturnable = self.dataSource as? CardReturnable {
             if let card = currentDatasource.getCard(at: index) {
-                didSelectCard?(currentSegment.rawValue, card)
+                didSelectCard?(currentDatasource.getCardList(), card)
             }
         }
     }
