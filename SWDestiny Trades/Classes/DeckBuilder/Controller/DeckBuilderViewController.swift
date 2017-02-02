@@ -10,13 +10,14 @@ import UIKit
 
 final class DeckBuilderViewController: UIViewController {
 
-    var deckDTO: DeckDTO!
     fileprivate let deckBuilderView = DeckBuilderView()
+    fileprivate var deckDTO: DeckDTO
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(with deck: DeckDTO) {
+        deckDTO = deck
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {

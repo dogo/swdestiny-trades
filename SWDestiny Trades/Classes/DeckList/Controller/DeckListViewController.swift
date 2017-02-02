@@ -58,8 +58,7 @@ final class DeckListViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with deck: DeckDTO) {
-        let nextController = DeckBuilderViewController()
-        nextController.deckDTO = deck
+        let nextController = DeckBuilderViewController(with: deck)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 

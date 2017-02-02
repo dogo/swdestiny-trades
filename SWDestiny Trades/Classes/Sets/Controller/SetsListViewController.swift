@@ -63,8 +63,7 @@ class SetsListViewController: UIViewController {
     // MARK: - <SetsListViewDelegate>
 
     func navigateToNextController(with set: SetDTO) {
-        let nextController = CardListViewController()
-        nextController.setDTO = set
+        let nextController = CardListViewController(with: set)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 

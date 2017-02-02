@@ -16,12 +16,13 @@ class CardListViewController: UIViewController {
     fileprivate var alphabeticallSource = [CardDTO]()
     fileprivate var colorSource = [CardDTO]()
     fileprivate var numberSource = [CardDTO]()
-    var setDTO: SetDTO?
+    fileprivate var setDTO: SetDTO
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(with set: SetDTO) {
+        setDTO = set
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +37,7 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
 
         cardListView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveSetCardList(setCode: setDTO!.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
+        SWDestinyAPI.retrieveSetCardList(setCode: setDTO.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
             self.cardListView.cardListTableView.updateCardList(cardsArray)
             self.cardListView.activityIndicator.stopAnimating()
 
@@ -58,7 +59,7 @@ class CardListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = setDTO?.name
+        self.navigationItem.title = setDTO.name
     }
 
     // MARK: Navigation
