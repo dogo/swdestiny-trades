@@ -114,6 +114,7 @@ class AddCardViewController: UIViewController {
 
     private func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 0.2)
     }
 
