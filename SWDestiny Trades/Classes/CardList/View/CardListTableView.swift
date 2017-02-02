@@ -16,11 +16,6 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     private var colorDatasource: ColorListDatasource?
     private var numberDatasource: NumberListDatasource?
     private let cardList = CardList()
-    private var currentSegment = Segment.alphabetical
-
-    public enum Segment: Int {
-        case alphabetical, color, number
-    }
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
@@ -66,17 +61,14 @@ final class CardListTableView: UITableView, CardListViewDelegate {
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:
-            currentSegment = .alphabetical
             self.dataSource = alphabeticalDatasource
             self.delegate = cardList
             self.reloadData()
         case 1:
-            currentSegment = .color
             self.dataSource = colorDatasource
             self.delegate = cardList
             self.reloadData()
         case 2:
-            currentSegment = .number
             self.dataSource = numberDatasource
             self.delegate = cardList
             self.reloadData()
