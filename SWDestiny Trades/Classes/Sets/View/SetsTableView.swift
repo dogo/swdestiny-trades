@@ -30,7 +30,7 @@ final class SetsTableView: UITableView, BaseDelegate {
         tableViewDatasource?.sortAndSplitTableData(setList: sets)
     }
 
-    // Mark: <BaseDelegate>
+    // MARK: <BaseDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
         if let set = tableViewDatasource?.getSet(at: index) {

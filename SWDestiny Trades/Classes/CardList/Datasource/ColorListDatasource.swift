@@ -46,13 +46,13 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
         return rows.count
     }
 
-    //Mark: <CardReturnable>
+    // MARK: <CardReturnable>
 
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return (colorCards[sections[index.section]]?[index.row])
     }
 
-    //Mark: Sort options  
+    // MARK: Sort options
 
     public func sortByColor(cardList: [CardDTO]) {
         colorCards = Split.cardsByColor(cardList: cardList).source

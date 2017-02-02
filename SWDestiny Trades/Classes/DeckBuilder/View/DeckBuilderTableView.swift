@@ -30,7 +30,7 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
         tableViewDatasource?.updateTableViewData(deck: deck)
     }
 
-    // Mark: <BaseDelegate>
+    // MARK: <BaseDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
         if let card = tableViewDatasource?.getCard(at: index) {

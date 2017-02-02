@@ -31,7 +31,7 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
         tableViewDatasource?.updateTableViewData(person: person)
     }
 
-    // Mark: <BaseDelegate>
+    // MARK: <BaseDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
         if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {

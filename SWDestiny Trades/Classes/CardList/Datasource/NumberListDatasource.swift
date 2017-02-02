@@ -34,13 +34,13 @@ class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
         return numberCards.count
     }
 
-    //Mark: <CardReturnable>
+    // MARK: <CardReturnable>
 
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return numberCards[index.row]
     }
 
-    //Mark: Sort options  
+    // MARK: Sort options
 
     public func sortByCardNumber(cardList: [CardDTO]) {
         numberCards = cardList.sorted {
