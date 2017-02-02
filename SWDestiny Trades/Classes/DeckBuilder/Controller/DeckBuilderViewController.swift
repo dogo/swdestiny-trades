@@ -66,9 +66,7 @@ final class DeckBuilderViewController: UIViewController {
     }
 
     func navigateToAddCardViewController() {
-        let nextController = AddCardViewController()
-        nextController.isDeckBuilder = true
-        nextController.deckDTO = deckDTO
+        let nextController = AddCardViewController(deck: deckDTO, isDeckBuilder: true)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }

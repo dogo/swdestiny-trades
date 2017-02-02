@@ -15,13 +15,25 @@ class AddCardViewController: UIViewController {
 
     fileprivate let addCardView = AddCardView()
     fileprivate var cards = [CardDTO]()
-    var isLentMe: Bool!
-    var personDTO: PersonDTO!
-    var deckDTO: DeckDTO!
-    var isDeckBuilder = false
+    fileprivate var personDTO: PersonDTO?
+    fileprivate var deckDTO: DeckDTO?
+    fileprivate var isDeckBuilder = false
+    fileprivate var isLentMe = false
 
     // MARK: - Life Cycle
 
+    convenience init(deck: DeckDTO?, isDeckBuilder deckBuilder: Bool) {
+        self.init(nibName: nil, bundle: nil)
+        deckDTO = deck
+        isDeckBuilder = deckBuilder
+    }
+    
+    convenience init(person: PersonDTO?, isLentMe lentMe: Bool) {
+        self.init(nibName: nil, bundle: nil)
+        personDTO = person
+        isLentMe = lentMe
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -78,24 +90,24 @@ class AddCardViewController: UIViewController {
 
     private func insertToLoan(card: CardDTO) {
         try! RealmManager.shared.realm.write {
-            if isLentMe! {
-                personDTO.lentMe.append(card)
+            if isLentMe {
+                personDTO?.lentMe.append(card)
             } else {
-                personDTO.borrowed.append(card)
+                personDTO?.borrowed.append(card)
             }
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(personDTO, update: true)
-            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO]
+            RealmManager.shared.realm.add(personDTO!, update: true)
+            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         }
     }
 
     private func insertToDeckBuilder(card: CardDTO) {
         try! RealmManager.shared.realm.write {
-            deckDTO.list.append(card)
+            deckDTO?.list.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(deckDTO, update: true)
-            let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO]
+            RealmManager.shared.realm.add(deckDTO!, update: true)
+            let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         }
     }

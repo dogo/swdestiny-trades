@@ -74,9 +74,7 @@ class LoansDetailViewController: UIViewController {
     }
 
     func navigateToAddCardViewController(lentMe: Bool) {
-        let nextController = AddCardViewController()
-        nextController.isLentMe = lentMe
-        nextController.personDTO = personDTO
+        let nextController = AddCardViewController(person: personDTO, isLentMe: lentMe)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 }
