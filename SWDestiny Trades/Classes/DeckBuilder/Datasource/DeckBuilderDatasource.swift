@@ -35,7 +35,12 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             remove(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            if let rows = deckList[sections[indexPath.section]], rows.count == 0 {
+                deckList.removeValue(forKey: sections[indexPath.section])
+                tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+            } else {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
         }
     }
 
