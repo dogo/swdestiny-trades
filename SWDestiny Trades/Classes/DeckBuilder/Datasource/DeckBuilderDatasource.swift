@@ -37,9 +37,9 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
             remove(at: indexPath)
             if let rows = deckList[sections[indexPath.section]], rows.count == 0 {
                 deckList.removeValue(forKey: sections[indexPath.section])
-                tableView.reloadSections(IndexSet(integer: indexPath.section), with: .automatic)
+                tableView.reloadSections(IndexSet(integer: indexPath.section), with: .left)
             } else {
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [indexPath], with: .left)
             }
         }
     }
