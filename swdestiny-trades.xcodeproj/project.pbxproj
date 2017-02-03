@@ -81,6 +81,7 @@
 		DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */; };
 		DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */; };
 		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
+		DDEEC6231E440C0F00341E1F /* SectionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEEC6221E440C0F00341E1F /* SectionsBuilder.swift */; };
 		DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF2DD2A1E429EF50090519E /* Sort.swift */; };
 		DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF5D9601E2EA7C0007C8A4B /* DeckListViewController.swift */; };
 		DDF5D9631E2EA820007C8A4B /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF5D9621E2EA820007C8A4B /* DeckListView.swift */; };
@@ -184,6 +185,7 @@
 		DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListTableView.swift; sourceTree = "<group>"; };
 		DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
+		DDEEC6221E440C0F00341E1F /* SectionsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsBuilder.swift; sourceTree = "<group>"; };
 		DDF2DD2A1E429EF50090519E /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		DDF5D9601E2EA7C0007C8A4B /* DeckListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListViewController.swift; sourceTree = "<group>"; };
 		DDF5D9621E2EA820007C8A4B /* DeckListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				DD4D988F1E4182FB006412AD /* KingfisherSource.swift */,
 				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
 				DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */,
+				DDEEC6221E440C0F00341E1F /* SectionsBuilder.swift */,
 				DDF2DD2A1E429EF50090519E /* Sort.swift */,
 				DDB8A2241E266DFF0086FC01 /* Split.swift */,
 			);
@@ -1122,6 +1125,7 @@
 				DDCA97B91E2FA72A0098FFB5 /* DeckBuilderView.swift in Sources */,
 				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
 				DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */,
+				DDEEC6231E440C0F00341E1F /* SectionsBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

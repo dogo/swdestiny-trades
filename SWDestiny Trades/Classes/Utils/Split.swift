@@ -10,21 +10,16 @@ import Foundation
 
 final class Split {
 
-    static func cardsAlphabetically(cardList: [CardDTO]) -> (firstLetters: [String], source: [String : [CardDTO]]) {
-
-        // Build Character Set
-        var letters = Set<String>()
+    static func cardsAlphabetically(cardList: [CardDTO], sections: [String]) -> [String : [CardDTO]] {
 
         func getFirstLetter(cardDTO: CardDTO) -> String {
             return String(cardDTO.name[cardDTO.name.startIndex])
         }
 
-        cardList.forEach {_ = letters.insert(getFirstLetter(cardDTO: $0)) }
-
         // Build tableSource array
         var tableViewSource = [String: [CardDTO]]()
 
-        for symbol in letters {
+        for symbol in sections {
 
             var cardsDTO = [CardDTO]()
 
@@ -38,28 +33,19 @@ final class Split {
             }
         }
 
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
+        return tableViewSource
     }
 
-    static func cardsByColor(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
-
-        // Build color Set
-        var colors = Set<String>()
+    static func cardsByColor(cardList: [CardDTO], sections: [String]) -> [String : [CardDTO]] {
 
         func getColor(cardDTO: CardDTO) -> String {
             return cardDTO.factionCode
         }
 
-        cardList.forEach {_ = colors.insert(getColor(cardDTO: $0)) }
-
         // Build tableSource array
         var tableViewSource = [String: [CardDTO]]()
 
-        for symbol in colors {
+        for symbol in sections {
 
             var cardsDTO = [CardDTO]()
 
@@ -72,24 +58,19 @@ final class Split {
                 $0.name < $1.name
             }
         }
-        return (Array(colors), tableViewSource)
+        return tableViewSource
     }
 
-    static func cardsByType(cardList: [CardDTO]) -> (sections: [String], source: [String : [CardDTO]]) {
-
-        // Build types Set
-        var types = Set<String>()
+    static func cardsByType(cardList: [CardDTO], sections: [String]) -> [String : [CardDTO]] {
 
         func getType(cardDTO: CardDTO) -> String {
-            return cardDTO.typeName.capitalized
+            return cardDTO.typeName
         }
-
-        cardList.forEach {_ = types.insert(getType(cardDTO: $0)) }
 
         // Build tableSource array
         var tableViewSource = [String: [CardDTO]]()
 
-        for symbol in types {
+        for symbol in sections {
 
             var cardsDTO = [CardDTO]()
 
@@ -103,28 +84,19 @@ final class Split {
             }
         }
 
-        let sortedSymbols = types.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
+        return tableViewSource
     }
 
-    static func setsByAlphabetically(setList: [SetDTO]) -> (firstLetters: [String], source: [String : [SetDTO]]) {
-
-        // Build Character Set
-        var letters = Set<String>()
+    static func setsByAlphabetically(setList: [SetDTO], sections: [String]) -> [String : [SetDTO]] {
 
         func getFirstLetter(setDTO: SetDTO) -> String {
             return String(setDTO.name.characters.prefix(1))
         }
 
-        setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
-
         // Build tableSource array
         var tableViewSource = [String: [SetDTO]]()
 
-        for symbol in letters {
+        for symbol in sections {
 
             var setsDTO = [SetDTO]()
 
@@ -138,10 +110,6 @@ final class Split {
             }
         }
 
-        let sortedSymbols = letters.sorted {
-            $0 < $1
-        }
-
-        return (sortedSymbols, tableViewSource)
+        return tableViewSource
     }
 }

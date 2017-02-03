@@ -59,8 +59,8 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     // MARK: Sort options
 
     public func sortByColor(cardList: [CardDTO]) {
-        colorCards = Split.cardsByColor(cardList: cardList).source
-        sections = Split.cardsByColor(cardList: cardList).sections
+        sections = SectionsBuilder.byColor(cardList: cardList)
+        colorCards = Split.cardsByColor(cardList: cardList, sections: sections)
         insertHeaderToDataSource()
         tableView?.reloadData()
     }

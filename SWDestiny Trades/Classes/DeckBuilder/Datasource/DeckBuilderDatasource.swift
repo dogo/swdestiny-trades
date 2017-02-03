@@ -48,7 +48,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         guard deckList[sections[section]] != nil else {
             return nil
         }
-        return sections[section]
+        return sections[section].capitalized
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,8 +77,8 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     public func updateTableViewData(deck: DeckDTO) {
         currentDeck = deck
         if !currentDeck.list.isEmpty {
-            deckList = Split.cardsByType(cardList: Array(currentDeck.list)).source
-            sections = Split.cardsByType(cardList: Array(currentDeck.list)).sections
+            sections = SectionsBuilder.byType(cardList: Array(currentDeck.list))
+            deckList = Split.cardsByType(cardList: Array(currentDeck.list), sections: sections)
         }
         tableView?.reloadData()
     }
