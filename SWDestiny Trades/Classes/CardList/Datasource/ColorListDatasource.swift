@@ -47,7 +47,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return (colorCards[sections[index.section]]?[index.row])
     }
-    
+
     internal func getCardList() -> [CardDTO] {
         var list = [CardDTO]()
         for cardList in colorCards.values {

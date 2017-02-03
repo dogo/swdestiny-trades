@@ -35,8 +35,8 @@ final class DeckBuilderViewController: UIViewController {
 
         loadData(deck: deckDTO)
 
-        deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] card in
-            self?.navigateToCardDetailViewController(with: card)
+        deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] list, card in
+            self?.navigateToCardDetailViewController(cardList: list, card: card)
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
@@ -60,8 +60,8 @@ final class DeckBuilderViewController: UIViewController {
 
     // MARK: Navigation
 
-    func navigateToCardDetailViewController(with card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: Array(deckDTO.list), selected: card)
+    func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
+        let nextController = CardDetailViewController(cardList: cardList, selected: card)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 

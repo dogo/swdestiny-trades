@@ -66,6 +66,14 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         return (deckList[sections[index.section]]?[index.row])
     }
 
+    public func getCardList() -> [CardDTO] {
+        var list = [CardDTO]()
+        for cardList in deckList.values {
+            list.append(contentsOf: Array(cardList))
+        }
+        return list
+    }
+
     public func updateTableViewData(deck: DeckDTO) {
         currentDeck = deck
         if !currentDeck.list.isEmpty {

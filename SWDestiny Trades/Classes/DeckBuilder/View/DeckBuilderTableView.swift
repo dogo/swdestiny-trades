@@ -10,7 +10,7 @@ import UIKit
 
 final class DeckBuilderTableView: UITableView, BaseDelegate {
 
-    var didSelectCard: ((CardDTO) -> Void)?
+    var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     fileprivate var tableViewDatasource: DeckBuilderDatasource?
     let deckBuilder = DeckBuilder()
@@ -33,8 +33,10 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
     // MARK: <BaseDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
-        if let card = tableViewDatasource?.getCard(at: index) {
-            didSelectCard?(card)
+        if let currentDatasource = tableViewDatasource {
+            if let card = currentDatasource.getCard(at: index) {
+                didSelectCard?(currentDatasource.getCardList(), card)
+            }
         }
     }
 }

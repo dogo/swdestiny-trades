@@ -51,7 +51,7 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
     internal func getCard(at index: IndexPath) -> CardDTO? {
         return (alphabeticallyCards[sections[index.section]]?[index.row])
     }
-    
+
     internal func getCardList() -> [CardDTO] {
         var list = [CardDTO]()
         for cardList in alphabeticallyCards.values {

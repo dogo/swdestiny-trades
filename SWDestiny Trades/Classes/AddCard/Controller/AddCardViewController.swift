@@ -27,13 +27,13 @@ class AddCardViewController: UIViewController {
         deckDTO = deck
         isDeckBuilder = deckBuilder
     }
-    
+
     convenience init(person: PersonDTO?, isLentMe lentMe: Bool) {
         self.init(nibName: nil, bundle: nil)
         personDTO = person
         isLentMe = lentMe
     }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
