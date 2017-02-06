@@ -8,7 +8,7 @@
 
 "ABOUT" = "About";
 "ABOUT_TEXT" = "By Diogo Autilio\n\nAPI Data by Paco http://swdestinydb.com\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.";
-"ADD_CARD" = "Add card...";
+"ADD_CARD" = "Add card";
 "ADD_MY_CARD" = "Add my card...";
 "ADDED" = "Added";
 "ALL_CARDS" = "All Cards";
