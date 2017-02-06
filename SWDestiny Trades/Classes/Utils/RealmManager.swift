@@ -13,7 +13,7 @@ final class RealmManager: NSObject {
     static let shared = RealmManager()
 
 #if (arch(i386) || arch(x86_64)) && os(iOS)
-    let realm = try! Realm(fileURL: URL(fileURLWithPath: "/Users/diogoautilio/Desktop/TestRealm.realm"))
+    let realm = try! Realm(fileURL: URL(fileURLWithPath: "/Users/diogoautilio/Desktop/default.realm"))
 #else
     let realm = try! Realm()
 #endif
