@@ -12,7 +12,8 @@ import RealmSwift
 
 class CardDTO: Object, Mappable {
 
-    let dieFaces = List<StringObject>()
+    var dieFaces = List<StringObject>()
+    dynamic var id = NSUUID().uuidString
     dynamic var setCode: String = ""
     dynamic var setName: String = ""
     dynamic var typeCode: String = ""
@@ -88,6 +89,10 @@ class CardDTO: Object, Mappable {
         externalUrl <- map["url"]
         imageUrl <- map["imagesrc"]
         cp <- map["cp"]
+    }
+
+    override class func primaryKey() -> String {
+        return "id"
     }
 }
 

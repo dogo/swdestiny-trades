@@ -12,7 +12,11 @@ final class RealmManager: NSObject {
 
     static let shared = RealmManager()
 
+#if (arch(i386) || arch(x86_64)) && os(iOS)
+    let realm = try! Realm(fileURL: URL(fileURLWithPath: "/Users/diogoautilio/Desktop/TestRealm.realm"))
+#else
     let realm = try! Realm()
+#endif
 
     func performInBackground(_ backgroundAction: @escaping (_ backgroundRealm: Realm) -> Void) {
         DispatchQueue.global(qos: .background).async {
