@@ -18,10 +18,10 @@ final class RealmMigrations {
                 if (oldSchemaVersion < 1) {
                     migration.enumerateObjects(ofType: CardDTO.className()) { oldObject, newObject in
                         newObject!["id"] = NSUUID().uuidString
-                        
+
                         let oldCost = oldObject!["cost"] as! Float
                         newObject!["cost"] = Int(oldCost)
-                        
+
                         let id = oldObject!["code"] as! String
                         if dices[id] != nil {
                             let dieFaces = List<StringObject>()
