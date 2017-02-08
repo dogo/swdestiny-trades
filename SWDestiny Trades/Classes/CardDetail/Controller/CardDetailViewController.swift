@@ -14,7 +14,7 @@ class CardDetailViewController: UIViewController {
     fileprivate let cardView = CardView()
     fileprivate var cards = [CardDTO]()
     fileprivate var cardDTO: CardDTO
-    fileprivate var kingfisherSource = [KingfisherSource]()
+    fileprivate var imageSource = [InputSource]()
 
     // MARK: - Life Cycle
 
@@ -24,7 +24,12 @@ class CardDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         for card in cardList {
-            kingfisherSource.append(KingfisherSource(urlString: card.imageUrl, placeholder: UIImage(named: "ic_cardback"))!)
+            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: UIImage(named: "ic_cardback")) {
+                imageSource.append(remoteSource)
+            } else {
+                let localSource = ImageSource(imageString: "ic_404")!
+                imageSource.append(localSource)
+            }
         }
     }
 
@@ -41,7 +46,7 @@ class CardDetailViewController: UIViewController {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
 
-        cardView.slideshow.setImageInputs(kingfisherSource)
+        cardView.slideshow.setImageInputs(imageSource)
 
         if let index = cards.index(of: cardDTO) {
             cardView.slideshow.setCurrentPage(index, animated: true)
