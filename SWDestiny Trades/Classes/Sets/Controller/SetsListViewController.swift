@@ -30,19 +30,13 @@ class SetsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = .white
 
         setupNavigationItem()
+        setsView.pullToRefresh.addTarget(self, action: #selector(retriveSets), for: .valueChanged)
 
-        setsView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
-            self.setsView.setsTableView.updateSetList(setsArray)
-            self.setsView.activityIndicator.stopAnimating()
-        }) { (error: DataResponse<Any>) in
-            self.setsView.activityIndicator.stopAnimating()
-            let failureReason = error.failureReason()
-            print(failureReason)
-            FIRAnalytics.logEvent(withName: "[Error] retrieveSetList", parameters: ["error": failureReason as NSObject])
-        }
+        retriveSets()
 
         setsView.setsTableView.didSelectSet = { [weak self] set in
             self?.navigateToNextController(with: set)
@@ -58,6 +52,23 @@ class SetsListViewController: UIViewController {
     func setupNavigationItem() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_about"), style: .plain, target: self, action: #selector(aboutButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
+    }
+
+    func retriveSets() {
+        if !setsView.pullToRefresh.isRefreshing {
+            setsView.activityIndicator.startAnimating()
+        }
+        SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
+            self.setsView.setsTableView.updateSetList(setsArray)
+            self.setsView.activityIndicator.stopAnimating()
+            self.setsView.endRefreshControl()
+        }) { (error: DataResponse<Any>) in
+            self.setsView.activityIndicator.stopAnimating()
+            self.setsView.endRefreshControl()
+            let failureReason = error.failureReason()
+            print(failureReason)
+            FIRAnalytics.logEvent(withName: "[Error] retrieveSetList", parameters: ["error": failureReason as NSObject])
+        }
     }
 
     // MARK: - <SetsListViewDelegate>

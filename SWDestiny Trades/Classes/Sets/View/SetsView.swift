@@ -12,6 +12,12 @@ final class SetsView: UIView, BaseViewConfiguration {
 
     let setsTableView = SetsTableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    
+    var pullToRefresh: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = UIColor.black
+        return refresh
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,12 +29,23 @@ final class SetsView: UIView, BaseViewConfiguration {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func endRefreshControl() {
+        self.pullToRefresh.endRefreshing()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        let title = "Last update: \(formatter.string(from: Date()))"
+        let attrsDictionary = [NSForegroundColorAttributeName: UIColor.black]
+        let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
+        self.pullToRefresh.attributedTitle = attributedTitle
+    }
 
     // MARK: <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.addSubview(setsTableView)
         setsTableView.addSubview(activityIndicator)
+        setsTableView.addSubview(pullToRefresh)
     }
 
     internal func setupConstraints() {
