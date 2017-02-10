@@ -30,13 +30,13 @@ class SetsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.view.backgroundColor = .white
 
         setupNavigationItem()
-        setsView.pullToRefresh.addTarget(self, action: #selector(retriveSets), for: .valueChanged)
+        setsView.pullToRefresh.addTarget(self, action: #selector(retriveSets(sender:)), for: .valueChanged)
 
-        retriveSets()
+        retriveSets(sender: nil)
 
         setsView.setsTableView.didSelectSet = { [weak self] set in
             self?.navigateToNextController(with: set)
@@ -54,9 +54,9 @@ class SetsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
     }
 
-    func retriveSets() {
-        if !setsView.pullToRefresh.isRefreshing {
-            setsView.activityIndicator.startAnimating()
+    func retriveSets(sender: UIRefreshControl?) {
+        if let refreshControl = sender, refreshControl.isRefreshing {
+            self.setsView.activityIndicator.startAnimating()
         }
         SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
             self.setsView.setsTableView.updateSetList(setsArray)
