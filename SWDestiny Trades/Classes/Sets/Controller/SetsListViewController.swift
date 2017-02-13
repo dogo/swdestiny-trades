@@ -55,7 +55,7 @@ class SetsListViewController: UIViewController {
     }
 
     func retriveSets(sender: UIRefreshControl?) {
-        if let refreshControl = sender, refreshControl.isRefreshing {
+        if let refreshControl = sender, !refreshControl.isRefreshing {
             self.setsView.activityIndicator.startAnimating()
         }
         SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
