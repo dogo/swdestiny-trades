@@ -38,11 +38,11 @@ PODS:
   - ImageSlideshow (1.0.0):
     - ImageSlideshow/Core (= 1.0.0)
   - ImageSlideshow/Core (1.0.0)
-  - Kingfisher (3.3.4)
+  - Kingfisher (3.4.0)
   - Nimble (6.0.1)
   - ObjectMapper (2.2.2)
   - PKHUD (4.2.0)
-  - Quick (1.0.0)
+  - Quick (1.1.0)
   - Realm (2.4.2):
     - Realm/Headers (= 2.4.2)
   - Realm/Headers (2.4.2)
@@ -54,7 +54,7 @@ PODS:
   - Reusable/Storyboard (3.0.1)
   - Reusable/View (3.0.1)
   - SnapKit (3.1.2)
-  - TextFieldEffects (1.3.0)
+  - TextFieldEffects (1.3.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -84,16 +84,16 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: 2787e10e202b79ecf5348a205c539fcc5bb8e62b
-  Kingfisher: 35f289f015d26e81ea6c85048718c6205f3933c6
+  Kingfisher: 5690cfb3d1bddf3a98d679a3a34d0b7294974ed2
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   Reusable: 5362d10271ca8316b104698a21e90498f47e8339
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
-  TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
+  TextFieldEffects: faa47d428ee8eafb781a8413ac4345420d2328c4
 
 PODFILE CHECKSUM: ea3973a46612ba3a17833d4bf6a522d970ef85d0
 
