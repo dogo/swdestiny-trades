@@ -1,0 +1,13 @@
+# .slather.yml
+
+workspace: swdestiny-trades.xcworkspace
+xcodeproj: swdestiny-trades.xcodeproj
+scheme: ItauNotificationKit-Example
+coverage_service: html
+source_directory: "SWDestiny Trades/Classes"
+output_directory: coverage_report
+ignore:
+  - ../**/*/Xcode*
+  - ../core/*  
+  - Pods/*
+  
