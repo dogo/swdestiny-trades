@@ -31,13 +31,13 @@ final class SetsView: UIView, BaseViewConfiguration {
     }
 
     func endRefreshControl() {
-        self.pullToRefresh.endRefreshing()
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         let title = "Last update: \(formatter.string(from: Date()))"
         let attrsDictionary = [NSForegroundColorAttributeName: UIColor.black]
         let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
         self.pullToRefresh.attributedTitle = attributedTitle
+        self.pullToRefresh.endRefreshing()
     }
 
     // MARK: <BaseViewConfiguration>
@@ -49,6 +49,7 @@ final class SetsView: UIView, BaseViewConfiguration {
             setsTableView.refreshControl = pullToRefresh
         } else {
             setsTableView.addSubview(pullToRefresh)
+            setsTableView.sendSubview(toBack: pullToRefresh)
         }
     }
 
