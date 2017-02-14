@@ -49,7 +49,6 @@
 		DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
-		DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */; };
 		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
 		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
 		DD7FF0F61E1DCD69004FC6CF /* BaseViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */; };
@@ -62,6 +61,7 @@
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
+		DDB6DE6C1E539443003558E4 /* AboutViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB6DE6B1E539443003558E4 /* AboutViewControllerSpec.swift */; };
 		DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764AF1E43639E007758D5 /* DeckGraphViewController.swift */; };
 		DDB764BD1E43639E007758D5 /* DeckGraphDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764B11E43639E007758D5 /* DeckGraphDatasource.swift */; };
 		DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764B31E43639E007758D5 /* CardCostLineChartCell.swift */; };
@@ -162,7 +162,6 @@
 		DD6E06931E114E88004A5653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD6E06951E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6E069A1E114E88004A5653 /* SWDestiny-TradesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDestiny-TradesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestiny_TradesTests.swift; sourceTree = "<group>"; };
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
+		DDB6DE6B1E539443003558E4 /* AboutViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSpec.swift; sourceTree = "<group>"; };
 		DDB764AF1E43639E007758D5 /* DeckGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckGraphViewController.swift; sourceTree = "<group>"; };
 		DDB764B11E43639E007758D5 /* DeckGraphDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckGraphDatasource.swift; sourceTree = "<group>"; };
 		DDB764B31E43639E007758D5 /* CardCostLineChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCostLineChartCell.swift; sourceTree = "<group>"; };
@@ -522,7 +522,7 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
-				DD6E069E1E114E88004A5653 /* SWDestiny_TradesTests.swift */,
+				DDB6DE6A1E539443003558E4 /* Controllers */,
 				DD6E06A01E114E88004A5653 /* Info.plist */,
 			);
 			path = "SWDestiny TradesTests";
@@ -669,6 +669,14 @@
 				DD94E6F81E36658A0070735B /* ColorPalette.swift */,
 			);
 			path = Appearance;
+			sourceTree = "<group>";
+		};
+		DDB6DE6A1E539443003558E4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDB6DE6B1E539443003558E4 /* AboutViewControllerSpec.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		DDB764AD1E43639E007758D5 /* DeckGraph */ = {
@@ -1217,7 +1225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD6E069F1E114E88004A5653 /* SWDestiny_TradesTests.swift in Sources */,
+				DDB6DE6C1E539443003558E4 /* AboutViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
