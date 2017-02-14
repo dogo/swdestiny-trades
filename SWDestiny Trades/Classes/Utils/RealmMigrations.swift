@@ -15,7 +15,7 @@ final class RealmMigrations {
         let config = Realm.Configuration(
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
+                if oldSchemaVersion < 1 {
                     migration.enumerateObjects(ofType: CardDTO.className()) { oldObject, newObject in
                         newObject!["id"] = NSUUID().uuidString
 
