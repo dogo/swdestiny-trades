@@ -53,7 +53,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     // MARK: <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(segmentControl)
+        self.addSubview(segmentControl)
     }
 
     internal func setupConstraints() {
