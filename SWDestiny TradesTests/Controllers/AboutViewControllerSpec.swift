@@ -13,9 +13,10 @@ import Nimble
 class AboutViewControllerSpec: QuickSpec {
 
     override func spec() {
-        describe("a about view controller") {
+        describe("About view controller") {
 
             var controller: AboutViewController!
+
             beforeEach {
                 controller = AboutViewController()
             }
