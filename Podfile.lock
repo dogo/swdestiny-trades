@@ -3,57 +3,50 @@ PODS:
   - Charts (3.0.1):
     - Charts/Core (= 3.0.1)
   - Charts/Core (3.0.1)
-  - Firebase/Core (3.12.0):
-    - FirebaseAnalytics (= 3.6.0)
-    - FirebaseCore (= 3.4.7)
-  - Firebase/Crash (3.12.0):
+  - Firebase/Core (3.13.0):
+    - FirebaseAnalytics (= 3.7.0)
+    - FirebaseCore (= 3.5.0)
+  - Firebase/Crash (3.13.0):
     - Firebase/Core
-    - FirebaseCrash (= 1.1.5)
-  - FirebaseAnalytics (3.6.0):
-    - FirebaseCore (~> 3.4)
+    - FirebaseCrash (= 1.1.6)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.4.7):
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
+  - FirebaseCore (3.5.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCrash (1.1.5):
-    - FirebaseAnalytics (~> 3.6)
+  - FirebaseCrash (1.1.6):
+    - FirebaseAnalytics (~> 3.7)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseInstanceID (1.0.8)
-  - GoogleInterchangeUtilities (1.2.2):
-    - GoogleSymbolUtilities (~> 1.1)
-  - GoogleSymbolUtilities (1.1.2)
+    - Protobuf (~> 3.1)
+  - FirebaseInstanceID (1.0.9)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - ImageSlideshow (1.0.0):
-    - ImageSlideshow/Core (= 1.0.0)
-  - ImageSlideshow/Core (1.0.0)
+  - ImageSlideshow (1.1.0):
+    - ImageSlideshow/Core (= 1.1.0)
+  - ImageSlideshow/Core (1.1.0)
   - Kingfisher (3.4.0)
   - Nimble (6.0.1)
-  - ObjectMapper (2.2.2)
+  - ObjectMapper (2.2.3)
   - PKHUD (4.2.0)
+  - Protobuf (3.2.0)
   - Quick (1.1.0)
   - Realm (2.4.2):
     - Realm/Headers (= 2.4.2)
   - Realm/Headers (2.4.2)
   - RealmSwift (2.4.2):
     - Realm (= 2.4.2)
-  - Reusable (3.0.1):
-    - Reusable/Storyboard (= 3.0.1)
-    - Reusable/View (= 3.0.1)
-  - Reusable/Storyboard (3.0.1)
-  - Reusable/View (3.0.1)
-  - SnapKit (3.1.2)
+  - Reusable (4.0.0):
+    - Reusable/Storyboard (= 4.0.0)
+    - Reusable/View (= 4.0.0)
+  - Reusable/Storyboard (4.0.0)
+  - Reusable/View (4.0.0)
+  - SnapKit (3.2.0)
   - TextFieldEffects (1.3.1)
 
 DEPENDENCIES:
@@ -75,24 +68,23 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
-  Firebase: 8e99eb1ff553ad5bcc6072cc3d925bb89c1244d6
-  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
-  FirebaseCore: 46afaf2c2e0419ea7d3acfb08cf26a461a75fe85
-  FirebaseCrash: 30cf0e3a8b676a2d96e5157d9fb361039fcb2a46
-  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
-  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
-  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
+  Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseCrash: db4c05d9c75baa050744d31b36357c8f1efba481
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  ImageSlideshow: 2787e10e202b79ecf5348a205c539fcc5bb8e62b
+  ImageSlideshow: 99addbef1b718272598a07036270e819d03abc17
   Kingfisher: 5690cfb3d1bddf3a98d679a3a34d0b7294974ed2
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
-  ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
+  ObjectMapper: d3b3de11267f5d971f390eb8d63dd509116a4329
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
+  Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
-  Reusable: 5362d10271ca8316b104698a21e90498f47e8339
-  SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
+  Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   TextFieldEffects: faa47d428ee8eafb781a8413ac4345420d2328c4
 
 PODFILE CHECKSUM: ea3973a46612ba3a17833d4bf6a522d970ef85d0
