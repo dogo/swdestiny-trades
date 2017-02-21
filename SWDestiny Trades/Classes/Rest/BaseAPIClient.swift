@@ -18,7 +18,7 @@ class BaseAPIClient {
     // MARK: - RESTFull Request
 
     func GET(url: String, headers: [String: String], parameters: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers)
+        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers)
             .responseJSON { response in
                 completionHandler(response)
             }
@@ -46,7 +46,7 @@ class BaseAPIClient {
     }
 
     func DELETE(url: String, headers: [String: String], completionHandler: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: .delete, parameters: ["": ""], encoding: JSONEncoding.default, headers: headers)
+        Alamofire.request(url, method: .delete, parameters: ["": ""], encoding: URLEncoding.queryString, headers: headers)
             .responseJSON { response in
                 completionHandler(response)
             }
