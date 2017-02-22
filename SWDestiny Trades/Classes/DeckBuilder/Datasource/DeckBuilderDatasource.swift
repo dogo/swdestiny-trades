@@ -18,16 +18,16 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
-        tableView.register(cellType: CardCell.self)
+        tableView.register(cellType: DeckBuilderCell.self)
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardCell.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckBuilderCell.self)
         if let card = getCard(at: indexPath) {
-            cell.configureCell(card: card, useIndex: false)
+            cell.configureCell(card: card)
         }
         return cell
     }

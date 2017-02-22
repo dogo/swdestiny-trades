@@ -61,6 +61,7 @@
 		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
+		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
 		DDB6DE6C1E539443003558E4 /* AboutViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB6DE6B1E539443003558E4 /* AboutViewControllerSpec.swift */; };
 		DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764AF1E43639E007758D5 /* DeckGraphViewController.swift */; };
@@ -176,6 +177,7 @@
 		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderCell.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
 		DDB6DE6B1E539443003558E4 /* AboutViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSpec.swift; sourceTree = "<group>"; };
 		DDB764AF1E43639E007758D5 /* DeckGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckGraphViewController.swift; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 			children = (
 				DDCA97B41E2FA72A0098FFB5 /* DeckBuilderTableView.swift */,
 				DDCA97B51E2FA72A0098FFB5 /* DeckBuilderView.swift */,
+				DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1160,6 +1163,7 @@
 				DD4BBCDF1E26CC7E009929C4 /* NumberListDatasource.swift in Sources */,
 				DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */,
 				DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */,
+				DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */,
 				DDB764C11E43639E007758D5 /* DiceRadarChartCell.swift in Sources */,
 				DDCA97B71E2FA72A0098FFB5 /* DeckBuilderDatasource.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,

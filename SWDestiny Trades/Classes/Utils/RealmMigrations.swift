@@ -12,31 +12,64 @@ import RealmSwift
 final class RealmMigrations {
 
     static func performMigrations() {
-        let config = Realm.Configuration(
-            schemaVersion: 1,
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 1 {
-                    migration.enumerateObjects(ofType: CardDTO.className()) { oldObject, newObject in
-                        newObject!["id"] = NSUUID().uuidString
+        var config = Realm.Configuration.defaultConfiguration
+        config.schemaVersion = 2
+        var needsMigrationToV2 = false
 
-                        let oldCost = oldObject!["cost"] as! Float
-                        newObject!["cost"] = Int(oldCost)
+        config.migrationBlock = { migration, oldSchemaVersion in
+            if oldSchemaVersion < 1 {
+                migration.enumerateObjects(ofType: CardDTO.className()) { oldObject, newObject in
+                    newObject!["id"] = NSUUID().uuidString
 
-                        let id = oldObject!["code"] as! String
-                        if dices[id] != nil {
-                            let dieFaces = List<StringObject>()
-                            dices[id]?.forEach { side in
-                                let string = StringObject()
-                                string.value = side
-                                dieFaces.append(string)
-                            }
-                            newObject!["dieFaces"] = dieFaces
+                    let oldCost = oldObject!["cost"] as! Float
+                    newObject!["cost"] = Int(oldCost)
+
+                    let id = oldObject!["code"] as! String
+                    if dices[id] != nil {
+                        let dieFaces = List<StringObject>()
+                        dices[id]?.forEach { side in
+                            let string = StringObject()
+                            string.value = side
+                            dieFaces.append(string)
                         }
+                        newObject!["dieFaces"] = dieFaces
                     }
                 }
-        })
+            }
+            if oldSchemaVersion < 2 {
+                migration.enumerateObjects(ofType: CardDTO.className()) { _, newObject in
+                    newObject!["quantity"] = 1
+                }
+                needsMigrationToV2 = true
+            }
+        }
+
         Realm.Configuration.defaultConfiguration = config
         _ = RealmManager.shared.realm
+
+        migrateCardQuantity(needsMigrationToV2)
+    }
+
+    fileprivate static func migrateCardQuantity(_ needsMigration: Bool) {
+        let realm = RealmManager.shared.realm
+
+        if needsMigration {
+            let allDecks = realm.objects(DeckDTO.self)
+            try! realm.write {
+                for deck in allDecks {
+                    var uniqueCards: [CardDTO] = []
+                    for card in deck.list {
+                        if uniqueCards.contains(card) {
+                            card.quantity += 1
+                        } else {
+                            uniqueCards.append(card)
+                        }
+                    }
+                    deck.list.removeAll()
+                    deck.list.append(objectsIn: uniqueCards)
+                }
+            }
+        }
     }
 }
 

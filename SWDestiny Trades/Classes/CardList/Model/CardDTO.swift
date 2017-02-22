@@ -42,6 +42,7 @@ class CardDTO: Object, Mappable {
     dynamic var imageUrl: String = ""
     dynamic var label: String = ""
     dynamic var cp: Int = 0
+    dynamic var quantity: Int = 1
 
     required convenience public init?(map: Map) {
         self.init()

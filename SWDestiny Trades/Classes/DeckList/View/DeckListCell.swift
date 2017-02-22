@@ -49,10 +49,14 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     internal func configureCell(deck: DeckDTO) {
         deckDTO = deck
         titleEditText.text = deckDTO?.name
-        if let count = deckDTO?.list.count {
-            subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), count)
-        } else {
-            subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), 0)
+
+        if let deckList = deckDTO?.list {
+            let count = deckList.sum(ofProperty: "quantity") as Int
+            if count > 0 {
+                subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), count)
+            } else {
+                subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), 0)
+            }
         }
         accessoryButton.addTarget(self, action: #selector(accessoryButtonTouched(sender:)), for: .touchUpInside)
     }
