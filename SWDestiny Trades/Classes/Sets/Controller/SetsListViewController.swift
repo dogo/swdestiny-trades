@@ -36,6 +36,7 @@ class SetsListViewController: UIViewController {
         setupNavigationItem()
         setsView.pullToRefresh.addTarget(self, action: #selector(retriveSets(sender:)), for: .valueChanged)
 
+        setsView.beginRefreshing()
         retriveSets(sender: setsView.pullToRefresh)
 
         setsView.setsTableView.didSelectSet = { [weak self] set in
@@ -55,15 +56,10 @@ class SetsListViewController: UIViewController {
     }
 
     func retriveSets(sender: UIRefreshControl) {
-        if !sender.isRefreshing {
-            self.setsView.activityIndicator.startAnimating()
-        }
         SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
             self.setsView.setsTableView.updateSetList(setsArray)
-            self.setsView.activityIndicator.stopAnimating()
             self.setsView.endRefreshControl()
         }) { (error: DataResponse<Any>) in
-            self.setsView.activityIndicator.stopAnimating()
             self.setsView.endRefreshControl()
             let failureReason = error.failureReason()
             print(failureReason)

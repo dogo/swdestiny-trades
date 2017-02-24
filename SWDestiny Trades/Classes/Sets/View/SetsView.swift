@@ -11,7 +11,6 @@ import UIKit
 final class SetsView: UIView, BaseViewConfiguration {
 
     let setsTableView = SetsTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
 
     var pullToRefresh: UIRefreshControl = {
         let refresh = UIRefreshControl()
@@ -30,6 +29,10 @@ final class SetsView: UIView, BaseViewConfiguration {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func beginRefreshing() {
+        pullToRefresh.beginRefreshing()
+    }
+
     func endRefreshControl() {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
@@ -44,7 +47,6 @@ final class SetsView: UIView, BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(setsTableView)
-        setsTableView.addSubview(activityIndicator)
         if #available(iOS 10.0, *) {
             setsTableView.refreshControl = pullToRefresh
         } else {
@@ -59,11 +61,6 @@ final class SetsView: UIView, BaseViewConfiguration {
             make.left.equalTo(self)
             make.bottom.equalTo(self)
             make.right.equalTo(self)
-        }
-
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self)
         }
     }
 
