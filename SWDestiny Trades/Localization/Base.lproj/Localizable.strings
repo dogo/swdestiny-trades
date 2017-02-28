@@ -38,3 +38,5 @@
 "CARD_TYPES" = "Card types";
 "CARD_COST" = "Card cost";
 "DICE_SYMBOLS" = "Dice symbols";
+"CLOSE" = "Close";
+"ERROR_MESSAGE" = "Something is horribly wrong! Tap here to check if swdestinydb.com is online";

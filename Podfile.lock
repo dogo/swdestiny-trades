@@ -47,6 +47,7 @@ PODS:
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
   - SnapKit (3.2.0)
+  - SwiftMessages (3.1.5)
   - TextFieldEffects (1.3.1)
 
 DEPENDENCIES:
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - RealmSwift
   - Reusable
   - SnapKit
+  - SwiftMessages
   - TextFieldEffects
 
 SPEC CHECKSUMS:
@@ -85,8 +87,9 @@ SPEC CHECKSUMS:
   RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwiftMessages: bb85d7c30e85256f9367214b0907e1f409e1870a
   TextFieldEffects: faa47d428ee8eafb781a8413ac4345420d2328c4
 
-PODFILE CHECKSUM: ea3973a46612ba3a17833d4bf6a522d970ef85d0
+PODFILE CHECKSUM: d5d2cc721f1eebcb7e86cc689cdcc2961f1590ef
 
 COCOAPODS: 1.2.0

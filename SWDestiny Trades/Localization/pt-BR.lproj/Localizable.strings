@@ -38,3 +38,5 @@
 "CARD_TYPES" = "Tipo de cartas";
 "CARD_COST" = "Custo das cartas";
 "DICE_SYMBOLS" = "Símbolos dos dados";
+"CLOSE" = "Fechar";
+"ERROR_MESSAGE" = "Algo está horrivelmente errado! Toque aqui para verificar se swdestinydb.com está on-line";

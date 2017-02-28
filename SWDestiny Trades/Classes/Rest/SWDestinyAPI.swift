@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import SwiftMessages
 
 class SWDestinyAPI: BaseAPIClient {
 
@@ -21,6 +22,7 @@ class SWDestinyAPI: BaseAPIClient {
             case .success(let data):
                 successBlock(Mapper<SetDTO>().mapArray(JSONObject: data)!)
             case .failure(_):
+                showErrorMessage()
                 failureBlock(response)
             }
         }
@@ -33,6 +35,7 @@ class SWDestinyAPI: BaseAPIClient {
             case .success(let data):
                 successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
             case .failure(_):
+                showErrorMessage()
                 failureBlock(response)
             }
         }
@@ -45,6 +48,7 @@ class SWDestinyAPI: BaseAPIClient {
             case .success(let data):
                 successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
             case .failure(_):
+                showErrorMessage()
                 failureBlock(response)
             }
         }
@@ -57,8 +61,36 @@ class SWDestinyAPI: BaseAPIClient {
             case .success(let data):
                 successBlock(Mapper<CardDTO>().map(JSONObject: data)!)
             case .failure(_):
+                showErrorMessage()
                 failureBlock(response)
             }
         }
+    }
+
+    private static func showErrorMessage() {
+        let errorView: MessageView
+        if #available(iOS 9.0, *) {
+            errorView = MessageView.viewFromNib(layout: .CardView)
+        } else {
+            errorView = MessageView.viewFromNib(layout: .MessageViewIOS8)
+        }
+        var config = SwiftMessages.defaultConfig
+        config.duration = .forever
+
+        errorView.configureTheme(.error)
+        errorView.button?.setTitle(NSLocalizedString("CLOSE", comment: ""), for: .normal)
+        errorView.buttonTapHandler = { _ in
+            SwiftMessages.hide()
+        }
+        errorView.tapHandler = { _ in
+            let url = URL(string: "http://www.swdestinydb.com")!
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+        errorView.configureContent(title: "", body: NSLocalizedString("ERROR_MESSAGE", comment: ""))
+        SwiftMessages.show(config: config, view: errorView)
     }
 }
