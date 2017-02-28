@@ -82,7 +82,9 @@ class AddCardViewController: UIViewController {
     // MARK: - Helpers
     private func insert(card: CardDTO) {
         if self.isDeckBuilder {
-            self.insertToDeckBuilder(card: card)
+            if let deckList = deckDTO?.list, !deckList.contains(card) {
+                self.insertToDeckBuilder(card: card)
+            }
         } else {
             self.insertToLoan(card: card)
         }

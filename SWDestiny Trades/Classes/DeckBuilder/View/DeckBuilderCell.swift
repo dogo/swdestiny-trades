@@ -94,8 +94,9 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     func valueChanged(_ sender: UIStepper) {
+        let value = Int(sender.value)
+        quantityLabel.text = String(value)
         //self.delegate?.didSelectSegment(index: sender.selectedSegmentIndex)
-        quantityLabel.text = String(Int(sender.value))
     }
 
     override func prepareForReuse() {
