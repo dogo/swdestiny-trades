@@ -23,6 +23,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
 
@@ -127,7 +129,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     internal func setupConstraints() {
         iconImageView.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(12)
+            make.left.equalTo(contentView).offset(8)
             make.height.equalTo(25)
             make.width.equalTo(25)
         }
