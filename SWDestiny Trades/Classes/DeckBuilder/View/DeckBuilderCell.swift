@@ -42,7 +42,6 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     var quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
         stepper.minimumValue = 1
-        stepper.maximumValue = 2
         stepper.tintColor = ColorPalette.appTheme
         return stepper
     }()
@@ -65,7 +64,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         setIconImage(card: card)
         quantityLabel.text = String(card.quantity)
         quantityStepper.value = Double(card.quantity)
-        quantityStepper.isHidden = card.typeCode == "character" || card.typeCode == "battlefield"
+        quantityStepper.maximumValue = Double(card.deckLimit)
+        quantityStepper.isHidden = (card.typeCode == "character" && card.isUnique) || card.typeCode == "battlefield"
     }
 
     private func setSubtitle(card: CardDTO) {
