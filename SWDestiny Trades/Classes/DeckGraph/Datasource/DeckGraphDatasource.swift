@@ -70,17 +70,33 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
     func generateGraphData(deck: DeckDTO) {
         // BarChart
-        let upgrades = deck.list.filter("typeCode == 'upgrade'").count
-        let supports = deck.list.filter("typeCode == 'support'").count
-        let events = deck.list.filter("typeCode == 'event'").count
+        var upgrades = 0
+        var supports = 0
+        var events = 0
+        for card in deck.list {
+            if card.typeCode == "upgrade" {
+                upgrades += card.quantity
+            } else if card.typeCode == "support" {
+                supports += card.quantity
+            } else if card.typeCode == "event" {
+                events += card.quantity
+            }
+        }
+
         if !(events == 0 && supports == 0 && upgrades == 0) {
             cardTypes = [upgrades, supports, events]
         }
 
         // LineChart
-        if let id = deck.list.max(ofProperty: "cost") as Int? {
-            for i in 0...id {
-                cardCosts.append(deck.list.filter("cost == \(i) AND typeCode != 'character' AND typeCode != 'battlefield'").count)
+        if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
+            for i in 0...maxCost {
+                var cardCost = 0
+                for card in deck.list {
+                    if card.cost == i && card.typeCode != "character" && card.typeCode != "battlefield" {
+                        cardCost += card.quantity
+                    }
+                }
+                cardCosts.append(cardCost)
             }
         }
 
@@ -88,15 +104,15 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         var specialFace = 0, blankFace = 0, meleeFace = 0, rangedFace = 0, focusFace = 0
         var disruptFace = 0, shieldFace = 0, discardFace = 0, resourceFace = 0
         for card in deck.list {
-            specialFace += card.dieFaces.filter("value LIKE 'Sp'").count
-            blankFace += card.dieFaces.filter("value == '-'").count
-            meleeFace += card.dieFaces.filter("value LIKE '*MD*'").count
-            rangedFace += card.dieFaces.filter("value LIKE '*RD*'").count
-            focusFace += card.dieFaces.filter("value LIKE '*F'").count
-            disruptFace += card.dieFaces.filter("value LIKE '*Dr*'").count
-            shieldFace += card.dieFaces.filter("value LIKE '*Sh'").count
-            discardFace += card.dieFaces.filter("value LIKE '*Dc*'").count
-            resourceFace += card.dieFaces.filter("value LIKE '*R'").count
+            specialFace += (card.dieFaces.filter("value LIKE 'Sp'").count * card.quantity)
+            blankFace += (card.dieFaces.filter("value == '-'").count * card.quantity)
+            meleeFace += (card.dieFaces.filter("value LIKE '*MD*'").count * card.quantity)
+            rangedFace += (card.dieFaces.filter("value LIKE '*RD*'").count * card.quantity)
+            focusFace += (card.dieFaces.filter("value LIKE '*F'").count * card.quantity)
+            disruptFace += (card.dieFaces.filter("value LIKE '*Dr*'").count * card.quantity)
+            shieldFace += (card.dieFaces.filter("value LIKE '*Sh'").count * card.quantity)
+            discardFace += (card.dieFaces.filter("value LIKE '*Dc*'").count * card.quantity)
+            resourceFace += (card.dieFaces.filter("value LIKE '*R'").count * card.quantity)
         }
         dieFaces = [specialFace, blankFace, meleeFace, rangedFace, focusFace, disruptFace, shieldFace, discardFace, resourceFace]
     }
