@@ -11,6 +11,8 @@ import Reusable
 
 class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
+    var stepperValueChanged: ((Int, DeckBuilderCell) -> Void)?
+
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
@@ -62,6 +64,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         setSubtitle(card: card)
         setIconImage(card: card)
         quantityLabel.text = String(card.quantity)
+        quantityStepper.value = Double(card.quantity)
+        quantityStepper.isHidden = card.typeCode == "character" || card.typeCode == "battlefield"
     }
 
     private func setSubtitle(card: CardDTO) {
@@ -96,7 +100,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
-        //self.delegate?.didSelectSegment(index: sender.selectedSegmentIndex)
+        self.stepperValueChanged?(value, self)
     }
 
     override func prepareForReuse() {
