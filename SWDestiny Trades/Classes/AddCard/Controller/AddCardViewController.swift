@@ -81,12 +81,21 @@ class AddCardViewController: UIViewController {
 
     // MARK: - Helpers
     private func insert(card: CardDTO) {
+        let predicate = NSPredicate(format: "code == %@", card.code)
         if self.isDeckBuilder {
-            if let deckList = deckDTO?.list, !deckList.contains(card) {
+            if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
                 self.insertToDeckBuilder(card: card)
             }
         } else {
-            self.insertToLoan(card: card)
+            if isLentMe {
+                if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
+                    self.insertToLoan(card: card)
+                }
+            } else {
+                if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
+                    self.insertToLoan(card: card)
+                }
+            }
         }
     }
 

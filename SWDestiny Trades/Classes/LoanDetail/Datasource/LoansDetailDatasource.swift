@@ -35,6 +35,14 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             } else {
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: lentMe[indexPath.row])
+                cell.stepperValueChanged = { (value, cell) in
+                    guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
+                    if let card = self.getCard(at: indexPath) {
+                        try! RealmManager.shared.realm.write {
+                            card.quantity = value
+                        }
+                    }
+                }
             }
         } else if indexPath.section == 1 {
             if indexPath.row == borrowed.count {
@@ -43,6 +51,14 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             } else {
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: borrowed[indexPath.row])
+                cell.stepperValueChanged = { (value, cell) in
+                    guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
+                    if let card = self.getCard(at: indexPath) {
+                        try! RealmManager.shared.realm.write {
+                            card.quantity = value
+                        }
+                    }
+                }
             }
         }
         return cell
@@ -97,7 +113,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
     }
 
-    public func getCard(at index: IndexPath) -> CardDTO {
+    public func getCard(at index: IndexPath) -> CardDTO? {
         if index.section == 0 {
             return lentMe[index.row]
         } else {

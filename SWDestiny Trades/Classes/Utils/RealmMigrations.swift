@@ -69,6 +69,31 @@ final class RealmMigrations {
                     deck.list.append(objectsIn: uniqueCards)
                 }
             }
+            let allPersons = realm.objects(PersonDTO.self)
+            try! realm.write {
+                for person in allPersons {
+                    var borrowedCards: [CardDTO] = []
+                    var lentMeCards: [CardDTO] = []
+                    for card in person.borrowed {
+                        if borrowedCards.contains(card) {
+                            card.quantity += 1
+                        } else {
+                            borrowedCards.append(card)
+                        }
+                    }
+                    for card in person.lentMe {
+                        if lentMeCards.contains(card) {
+                            card.quantity += 1
+                        } else {
+                            lentMeCards.append(card)
+                        }
+                    }
+                    person.borrowed.removeAll()
+                    person.lentMe.removeAll()
+                    person.borrowed.append(objectsIn: borrowedCards)
+                    person.lentMe.append(objectsIn: lentMeCards)
+                }
+            }
         }
     }
 }
