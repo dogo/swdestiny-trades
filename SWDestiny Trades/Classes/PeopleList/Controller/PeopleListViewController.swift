@@ -48,6 +48,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("PEOPLE", comment: "")
+        peopleListView.peopleListTableView.reloadData()
     }
 
     deinit {

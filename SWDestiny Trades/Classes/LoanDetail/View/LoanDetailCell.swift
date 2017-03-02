@@ -126,8 +126,8 @@ class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView).offset(8)
-            make.left.equalTo(quantityLabel.snp.right).offset(8)
             make.right.equalTo(quantityStepper.snp.left).offset(-1)
+            make.left.equalTo(quantityLabel.snp.right).offset(8)
         }
 
         subtitleLabel.snp.makeConstraints { make in

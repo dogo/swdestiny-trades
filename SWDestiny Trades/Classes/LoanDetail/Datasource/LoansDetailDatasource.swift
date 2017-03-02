@@ -29,10 +29,11 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
-                let addCardText = NSLocalizedString("ADD_CARD", comment: "")
-                cell.textLabel?.text = addCardText.appending("...")
+                cell.quantityStepper.isHidden = true
+                cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "").appending("...")
                 cell.textLabel?.textColor = .darkGray
             } else {
+                cell.quantityStepper.isHidden = false
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: lentMe[indexPath.row])
                 cell.stepperValueChanged = { (value, cell) in
@@ -46,9 +47,11 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             }
         } else if indexPath.section == 1 {
             if indexPath.row == borrowed.count {
+                cell.quantityStepper.isHidden = true
                 cell.textLabel?.text = NSLocalizedString("ADD_MY_CARD", comment: "")
                 cell.textLabel?.textColor = .darkGray
             } else {
+                cell.quantityStepper.isHidden = false
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: borrowed[indexPath.row])
                 cell.stepperValueChanged = { (value, cell) in
