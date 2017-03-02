@@ -28,6 +28,7 @@
 		DD0905541E24701D00D9EFB0 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905431E24701D00D9EFB0 /* PersonDTO.swift */; };
 		DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905451E24701D00D9EFB0 /* PersonCell.swift */; };
 		DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */; };
+		DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */; };
 		DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */; };
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
@@ -140,6 +141,7 @@
 		DD0905431E24701D00D9EFB0 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD0905451E24701D00D9EFB0 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDTabBarViewController.swift; sourceTree = "<group>"; };
+		DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastMessages.swift; sourceTree = "<group>"; };
 		DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
 		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				DDF678A61E441C6E00390878 /* SectionsBuilder.swift */,
 				DDF2DD2A1E429EF50090519E /* Sort.swift */,
 				DDB8A2241E266DFF0086FC01 /* Split.swift */,
+				DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,
 				DDB8A2251E266DFF0086FC01 /* Split.swift in Sources */,
+				DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */,
 				DD09054A1E24701D00D9EFB0 /* CardCell.swift in Sources */,
 				DDCA97BC1E2FB0370098FFB5 /* DeckDTO.swift in Sources */,
 				DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */,

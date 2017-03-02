@@ -40,3 +40,4 @@
 "DICE_SYMBOLS" = "Dice symbols";
 "CLOSE" = "Close";
 "ERROR_MESSAGE" = "Something is horribly wrong! Tap here to check if swdestinydb.com is online";
+"ALREADY_ADDED" = "This card has already been added, please use the quantity control on the previous screen";

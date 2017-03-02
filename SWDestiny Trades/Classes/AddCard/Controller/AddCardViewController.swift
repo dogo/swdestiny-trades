@@ -85,15 +85,21 @@ class AddCardViewController: UIViewController {
         if self.isDeckBuilder {
             if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
                 self.insertToDeckBuilder(card: card)
+            } else {
+                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
             }
         } else {
             if isLentMe {
                 if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
                     self.insertToLoan(card: card)
+                } else {
+                    ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
                 }
             } else {
                 if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
                     self.insertToLoan(card: card)
+                } else {
+                    ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
                 }
             }
         }

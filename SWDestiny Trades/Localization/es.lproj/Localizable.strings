@@ -40,3 +40,4 @@
 "DICE_SYMBOLS" = "Símbolos de los datos";
 "CLOSE" = "Cerrar";
 "ERROR_MESSAGE" = "¡Algo está horriblemente mal! Toca aquí para comprobar si swdestinydb.com está en línea";
+"ALREADY_ADDED" = "Esta carta ya se ha añadido, por favor, utilice el control de la cantidad en la pantalla anterior";
