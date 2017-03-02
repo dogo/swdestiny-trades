@@ -30,9 +30,9 @@ PODS:
   - ImageSlideshow (1.1.0):
     - ImageSlideshow/Core (= 1.1.0)
   - ImageSlideshow/Core (1.1.0)
-  - Kingfisher (3.5.0)
+  - Kingfisher (3.5.1)
   - Nimble (6.0.1)
-  - ObjectMapper (2.2.4)
+  - ObjectMapper (2.2.5)
   - PKHUD (4.2.0)
   - Protobuf (3.2.0)
   - Quick (1.1.0)
@@ -77,9 +77,9 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: 99addbef1b718272598a07036270e819d03abc17
-  Kingfisher: 7c62087039d93d26c54c8dd9b0b588d2ce55cef6
+  Kingfisher: 12eeffeef42ea45b68c5e5acfe8ba9005b713ab4
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
-  ObjectMapper: 81d0e5d7c57129e3e93f29a04bdf9669542b37d2
+  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
