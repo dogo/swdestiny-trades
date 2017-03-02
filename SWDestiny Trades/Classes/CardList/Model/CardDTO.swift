@@ -12,7 +12,7 @@ import RealmSwift
 
 class CardDTO: Object, Mappable {
 
-    var dieFaces = List<StringObject>()
+    let dieFaces = List<StringObject>()
     dynamic var id = NSUUID().uuidString
     dynamic var setCode: String = ""
     dynamic var setName: String = ""

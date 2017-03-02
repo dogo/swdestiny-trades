@@ -12,7 +12,7 @@ import RealmSwift
 class DeckDTO: Object {
     dynamic var id = NSUUID().uuidString
     dynamic var name = ""
-    var list = List<CardDTO>()
+    let list = List<CardDTO>()
 
     override class func primaryKey() -> String {
         return "id"
