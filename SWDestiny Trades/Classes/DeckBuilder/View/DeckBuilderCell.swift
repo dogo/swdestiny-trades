@@ -25,6 +25,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
+        label.setContentCompressionResistancePriority(749.0, for: .horizontal)
         return label
     }()
 
@@ -76,11 +77,14 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
         titleLabel.snp.remakeConstraints { make in
             make.left.equalTo(quantityLabel.snp.right).offset(8)
+            make.right.equalTo(quantityStepper.snp.left).offset(-1)
             guard let subtitle = subtitleLabel.text, subtitle.isNotEmpty else {
                 make.centerY.equalTo(self.contentView)
+                self.layoutIfNeeded()
                 return
             }
             make.top.equalTo(self.contentView).offset(8)
+            self.layoutIfNeeded()
         }
     }
 
@@ -142,6 +146,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView).offset(8)
             make.left.equalTo(quantityLabel.snp.right).offset(8)
+            make.right.equalTo(quantityStepper.snp.left).offset(-1)
         }
 
         subtitleLabel.snp.makeConstraints { make in
