@@ -36,18 +36,18 @@ PODS:
   - PKHUD (4.2.0)
   - Protobuf (3.2.0)
   - Quick (1.1.0)
-  - Realm (2.4.3):
-    - Realm/Headers (= 2.4.3)
-  - Realm/Headers (2.4.3)
-  - RealmSwift (2.4.3):
-    - Realm (= 2.4.3)
+  - Realm (2.4.4):
+    - Realm/Headers (= 2.4.4)
+  - Realm/Headers (2.4.4)
+  - RealmSwift (2.4.4):
+    - Realm (= 2.4.4)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
     - Reusable/View (= 4.0.0)
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
   - SnapKit (3.2.0)
-  - SwiftMessages (3.2.1)
+  - SwiftMessages (3.3.1)
   - TextFieldEffects (1.3.1)
 
 DEPENDENCIES:
@@ -83,11 +83,11 @@ SPEC CHECKSUMS:
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
-  RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
+  Realm: 5a280a1f5a9a3c267bebf4f41ee47911137703d7
+  RealmSwift: 0c02b9f2d4be4301c497ed10e53a0580584eb1dd
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftMessages: d114d273978678c0dce036f30273865af7303a35
+  SwiftMessages: 31e27e35c2f11b116ad7ec3232b56ca9bd242475
   TextFieldEffects: faa47d428ee8eafb781a8413ac4345420d2328c4
 
 PODFILE CHECKSUM: d5d2cc721f1eebcb7e86cc689cdcc2961f1590ef
