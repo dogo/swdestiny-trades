@@ -26,8 +26,8 @@ final class UserCollectionTableView: UITableView, BaseDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateTableViewData(deck: DeckDTO) {
-        tableViewDatasource?.updateTableViewData(deck: deck)
+    func updateTableViewData(collection: [CardDTO]) {
+        //tableViewDatasource?.updateTableViewData(deck: collection)
     }
 
     // MARK: <BaseDelegate>

@@ -44,6 +44,8 @@
 		DD3AFB7B1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB7C1E79E28A00BF2001 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */; };
 		DD3AFB7D1E79E28A00BF2001 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */; };
+		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
+		DD3AFB811E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerSpec.swift */; };
@@ -162,6 +164,7 @@
 		DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDatasource.swift; sourceTree = "<group>"; };
 		DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionTableView.swift; sourceTree = "<group>"; };
 		DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionView.swift; sourceTree = "<group>"; };
+		DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDTO.swift; sourceTree = "<group>"; };
 		DD4103D71E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerSpec.swift; sourceTree = "<group>"; };
@@ -485,6 +488,7 @@
 			children = (
 				DD3AFB6F1E79E28A00BF2001 /* Controller */,
 				DD3AFB711E79E28A00BF2001 /* Datasource */,
+				DD3AFB7E1E79E63200BF2001 /* Model */,
 				DD3AFB731E79E28A00BF2001 /* View */,
 			);
 			path = UserCollection;
@@ -513,6 +517,14 @@
 				DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DD3AFB7E1E79E63200BF2001 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DD4103D51E3FC70F00B13F85 /* es.lproj */ = {
@@ -1208,6 +1220,7 @@
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,
+				DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */,
 				DDB8A2251E266DFF0086FC01 /* Split.swift in Sources */,
 				DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */,
 				DD09054A1E24701D00D9EFB0 /* CardCell.swift in Sources */,
@@ -1297,6 +1310,7 @@
 				DD3AFB7B1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerSpec.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerSpec.swift in Sources */,
+				DD3AFB811E79E63200BF2001 /* UserCollectionDTO.swift in Sources */,
 				DD3AFB5A1E79CF6900BF2001 /* SwdShareProvider.swift in Sources */,
 				DD3AFB791E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */,
 				DD3AFB771E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */,

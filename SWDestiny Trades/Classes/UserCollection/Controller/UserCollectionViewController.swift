@@ -31,7 +31,7 @@ final class UserCollectionViewController: UIViewController {
 
         setupNavigationItem()
 
-        //loadDataFromRealm()
+        loadDataFromRealm()
 
         userCollectionView.userCollectionTableView.didSelectCard = { [weak self] list, card in
             self?.navigateToCardDetailViewController(cardList: list, card: card)
@@ -50,7 +50,8 @@ final class UserCollectionViewController: UIViewController {
     }
 
     func loadDataFromRealm() {
-        //userCollectionView.userCollectionTableView.updateTableViewData(deck: deck)
+        let user = RealmManager.shared.realm.objects(UserCollectionDTO.self)
+        //userCollectionView.userCollectionTableView.updateTableViewData(collection: Array(user.myCollection))
     }
 
     // MARK: Navigation
