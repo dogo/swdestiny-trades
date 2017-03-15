@@ -49,9 +49,10 @@ final class DeckBuilderViewController: UIViewController {
     }
 
     private func setupNavigationItem() {
+        let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
         let deckGraphBarItem = UIBarButtonItem(image: UIImage(named: "ic_chart"), style: .plain, target: self, action: #selector(navigateToDeckGraphViewController))
-        self.navigationItem.rightBarButtonItems = [addCardBarItem, deckGraphBarItem]
+        self.navigationItem.rightBarButtonItems = [addCardBarItem, deckGraphBarItem, shareBarItem]
     }
 
     func loadData(deck: DeckDTO) {
@@ -79,5 +80,30 @@ final class DeckBuilderViewController: UIViewController {
     func navigateToDeckGraphViewController() {
         let nextController = DeckGraphViewController(deck: deckDTO)
         self.navigationController?.pushViewController(nextController, animated: true)
+    }
+
+    func share(_ sender: UIBarButtonItem) {
+
+        var deckList: String = "\(deckDTO.name)\n\n"
+
+        if let deckObject = deckBuilderView.deckBuilderTableView.tableViewDatasource?.deckList {
+            for section in deckObject {
+                deckList.append(String(format: "%@ (%d)\n", section.key, section.value.count))
+                for card in section.value {
+                    deckList.append(String(format: "%d %@\n", card.quantity, card.name))
+                }
+                deckList.append("\n")
+            }
+        }
+
+        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: deckDTO.name, text: deckList), "Shared with SWD Trades for iOS"], applicationActivities: nil)
+            activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList]
+
+        activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+        DispatchQueue.global(qos: .userInteractive).async {
+            DispatchQueue.main.async {
+                self.present(activityVC, animated: true, completion: nil)
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
 
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
-    fileprivate var tableViewDatasource: DeckBuilderDatasource?
+    var tableViewDatasource: DeckBuilderDatasource?
     let deckBuilder = DeckBuilder()
 
     override init(frame: CGRect, style: UITableViewStyle) {
