@@ -44,7 +44,7 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
+        setupNavigationItem()
 
         cardView.slideshow.setImageInputs(imageSource)
 
@@ -60,6 +60,12 @@ class CardDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = cardDTO.name
+    }
+
+    private func setupNavigationItem() {
+        let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
+        let addToCollectionBarItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(share(_:)))
+        self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
 
     func share(_ sender: UIBarButtonItem) {
