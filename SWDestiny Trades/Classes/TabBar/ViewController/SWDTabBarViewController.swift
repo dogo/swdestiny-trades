@@ -25,6 +25,10 @@ final class SWDTabBarViewController: UITabBarController {
         let loansTab = UINavigationController(rootViewController: PeopleListViewController())
         loansTab.tabBarItem = UITabBarItem(title: NSLocalizedString("LOANS", comment: ""), image: UIImage(named: "ic_loans"), selectedImage: nil)
 
-        self.viewControllers = [setsTab, decktab, loansTab]
+        // Create UserCollectionViewController Tab
+        let collectionTab = UINavigationController(rootViewController: UserCollectionViewController())
+        collectionTab.tabBarItem = UITabBarItem(title: NSLocalizedString("Collection", comment: ""), image: UIImage(named: "ic_loans"), selectedImage: nil)
+
+        self.viewControllers = [setsTab, decktab, loansTab, collectionTab]
     }
 }
