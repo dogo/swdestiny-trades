@@ -619,8 +619,8 @@
 				DDF678A61E441C6E00390878 /* SectionsBuilder.swift */,
 				DDF2DD2A1E429EF50090519E /* Sort.swift */,
 				DDB8A2241E266DFF0086FC01 /* Split.swift */,
-				DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */,
 				DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */,
+				DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
