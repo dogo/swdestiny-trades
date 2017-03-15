@@ -99,7 +99,7 @@ final class DeckBuilderViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: deckDTO.name, text: deckList), "Shared with SWD Trades for iOS"], applicationActivities: nil)
             activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList]
 
-        activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+        activityVC.popoverPresentationController?.barButtonItem = sender
         DispatchQueue.global(qos: .userInteractive).async {
             DispatchQueue.main.async {
                 self.present(activityVC, animated: true, completion: nil)

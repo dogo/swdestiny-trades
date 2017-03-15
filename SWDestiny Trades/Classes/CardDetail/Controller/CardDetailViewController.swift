@@ -74,7 +74,7 @@ class CardDetailViewController: UIViewController {
                 activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
             }
 
-            activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+            activityVC.popoverPresentationController?.barButtonItem = sender
             DispatchQueue.global(qos: .userInteractive).async {
                 DispatchQueue.main.async {
                     self.present(activityVC, animated: true, completion: nil)
