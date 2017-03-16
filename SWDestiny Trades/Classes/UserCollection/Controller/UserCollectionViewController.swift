@@ -31,8 +31,6 @@ final class UserCollectionViewController: UIViewController {
 
         setupNavigationItem()
 
-        loadDataFromRealm()
-
         userCollectionView.userCollectionTableView.didSelectCard = { [weak self] list, card in
             self?.navigateToCardDetailViewController(cardList: list, card: card)
         }
@@ -42,6 +40,8 @@ final class UserCollectionViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("My Collection", comment: "")
+        
+        loadDataFromRealm()
     }
 
     private func setupNavigationItem() {
@@ -50,8 +50,31 @@ final class UserCollectionViewController: UIViewController {
     }
 
     func loadDataFromRealm() {
-        let user = RealmManager.shared.realm.objects(UserCollectionDTO.self)
-        //userCollectionView.userCollectionTableView.updateTableViewData(collection: Array(user.myCollection))
+        var user = UserCollectionDTO()
+        let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
+        if let userCollection = result.first {
+            user = userCollection
+        }
+        userCollectionView.userCollectionTableView.updateTableViewData(collection: Array(user.myCollection))
+    }
+    
+    static func addToCollection(card: CardDTO) {
+        var user = UserCollectionDTO()
+        let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
+        if let userCollection = result.first {
+            user = userCollection
+        }
+        try! RealmManager.shared.realm.write {
+            let predicate = NSPredicate(format: "code == %@", card.code)
+            let index = user.myCollection.index(matching: predicate)
+            if index == nil {
+                user.myCollection.append(card)
+            } else {
+                let newCard = user.myCollection[index!]
+                newCard.quantity += 1
+            }
+            RealmManager.shared.realm.add(user, update: true)
+        }
     }
 
     // MARK: Navigation

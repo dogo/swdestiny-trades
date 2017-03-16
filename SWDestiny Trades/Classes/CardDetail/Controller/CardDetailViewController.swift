@@ -64,8 +64,12 @@ class CardDetailViewController: UIViewController {
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        let addToCollectionBarItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(share(_:)))
+        let addToCollectionBarItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(addToCollection))
         self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
+    }
+    
+    func addToCollection() {
+        UserCollectionViewController.addToCollection(card: self.cards[cardView.slideshow.currentPage])
     }
 
     func share(_ sender: UIBarButtonItem) {

@@ -27,7 +27,7 @@ final class UserCollectionTableView: UITableView, BaseDelegate {
     }
 
     func updateTableViewData(collection: [CardDTO]) {
-        //tableViewDatasource?.updateTableViewData(deck: collection)
+        tableViewDatasource?.updateTableViewData(collection: collection)
     }
 
     // MARK: <BaseDelegate>

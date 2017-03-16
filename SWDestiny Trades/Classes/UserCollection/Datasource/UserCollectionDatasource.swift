@@ -62,18 +62,15 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         return collectionList
     }
 
-    public func updateTableViewData(deck: DeckDTO) {
-        currentDeck = deck
-        collectionList = Array(currentDeck.list)
+    public func updateTableViewData(collection: [CardDTO]) {
+        collectionList = collection
         tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
         try! RealmManager.shared.realm.write {
-            if let card = getCard(at: indexPath), let realmIndex = currentDeck.list.index(of: card) {
-                currentDeck.list.remove(objectAtIndex: realmIndex)
-                collectionList.remove(at: indexPath.row)
-            }
+            RealmManager.shared.realm.delete(collectionList[indexPath.row])
+            collectionList.remove(at: indexPath.row)
         }
     }
 }
