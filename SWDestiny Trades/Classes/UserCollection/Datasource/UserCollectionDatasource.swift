@@ -55,7 +55,7 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
     }
 
     public func getCard(at index: IndexPath) -> CardDTO? {
-        return (collectionList[index.row])
+        return collectionList[index.row]
     }
 
     public func getCardList() -> [CardDTO] {
