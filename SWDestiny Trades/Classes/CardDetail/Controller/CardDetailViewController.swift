@@ -64,7 +64,7 @@ class CardDetailViewController: UIViewController {
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        let addToCollectionBarItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(addToCollection))
+        let addToCollectionBarItem = UIBarButtonItem(image: UIImage(named: "ic_add_collection"), style: .plain, target: self, action: #selector(addToCollection))
         self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
 
