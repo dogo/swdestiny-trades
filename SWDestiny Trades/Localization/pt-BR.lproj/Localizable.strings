@@ -41,5 +41,6 @@
 "CLOSE" = "Fechar";
 "ERROR_MESSAGE" = "Algo está horrivelmente errado! Toque aqui para verificar se swdestinydb.com está on-line";
 "ALREADY_ADDED" = "Esta carta já foi adicionada, por favor, use o controle de quantidade na tela anterior";
-"MY_COLLECTION" = "Minha coleção";
+"MY_COLLECTION" = "Minha Coleção";
 "SHARE_TEXT" = "Compartilhado com SWD Trades para iOS";
+"COLLECTION" = "Coleção";
