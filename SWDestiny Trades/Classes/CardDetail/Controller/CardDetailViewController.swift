@@ -67,7 +67,7 @@ class CardDetailViewController: UIViewController {
         let addToCollectionBarItem = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(addToCollection))
         self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
-    
+
     func addToCollection() {
         UserCollectionViewController.addToCollection(card: self.cards[cardView.slideshow.currentPage])
     }

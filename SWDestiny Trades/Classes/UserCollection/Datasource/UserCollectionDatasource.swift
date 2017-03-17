@@ -17,16 +17,16 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         self.tableView = tableView
-        tableView.register(cellType: DeckBuilderCell.self)
+        tableView.register(cellType: LoanDetailCell.self)
         self.tableView?.dataSource = self
         self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckBuilderCell.self)
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
         if let card = getCard(at: indexPath) {
-            cell.configureCell(card: card)
+            cell.configureCell(cardDTO: card)
             cell.stepperValueChanged = { (value, cell) in
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {

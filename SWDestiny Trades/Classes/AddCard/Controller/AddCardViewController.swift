@@ -17,8 +17,10 @@ class AddCardViewController: UIViewController {
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
     fileprivate var deckDTO: DeckDTO?
+    fileprivate var userCollectionDTO: UserCollectionDTO?
     fileprivate var isDeckBuilder = false
     fileprivate var isLentMe = false
+    fileprivate var isUserCollection = false
 
     // MARK: - Life Cycle
 
@@ -32,6 +34,12 @@ class AddCardViewController: UIViewController {
         self.init(nibName: nil, bundle: nil)
         personDTO = person
         isLentMe = lentMe
+    }
+
+    convenience init(userCollection: UserCollectionDTO?, isUserCollection collection: Bool) {
+        self.init(nibName: nil, bundle: nil)
+        userCollectionDTO = userCollection
+        isUserCollection = collection
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -88,8 +96,14 @@ class AddCardViewController: UIViewController {
             } else {
                 ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
             }
+        } else if self.isUserCollection {
+            if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
+                self.insertToCollection(card: card)
+            } else {
+                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            }
         } else {
-            if isLentMe {
+            if self.isLentMe {
                 if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
                     self.insertToLoan(card: card)
                 } else {
@@ -126,6 +140,14 @@ class AddCardViewController: UIViewController {
             RealmManager.shared.realm.add(deckDTO!, update: true)
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
+        }
+    }
+
+    private func insertToCollection(card: CardDTO) {
+        try! RealmManager.shared.realm.write {
+            userCollectionDTO?.myCollection.append(card)
+            showSuccessMessage(card: card)
+            RealmManager.shared.realm.add(userCollectionDTO!, update: true)
         }
     }
 

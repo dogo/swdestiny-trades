@@ -40,30 +40,23 @@ final class UserCollectionViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = NSLocalizedString("My Collection", comment: "")
-        
+
         loadDataFromRealm()
     }
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        self.navigationItem.rightBarButtonItems = [shareBarItem]
+        let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
+        self.navigationItem.rightBarButtonItems = [addCardBarItem, shareBarItem]
     }
 
     func loadDataFromRealm() {
-        var user = UserCollectionDTO()
-        let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
-        if let userCollection = result.first {
-            user = userCollection
-        }
+        let user = UserCollectionViewController.getUserCollection()
         userCollectionView.userCollectionTableView.updateTableViewData(collection: Array(user.myCollection))
     }
-    
+
     static func addToCollection(card: CardDTO) {
-        var user = UserCollectionDTO()
-        let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
-        if let userCollection = result.first {
-            user = userCollection
-        }
+        let user = getUserCollection()
         try! RealmManager.shared.realm.write {
             let predicate = NSPredicate(format: "code == %@", card.code)
             let index = user.myCollection.index(matching: predicate)
@@ -77,10 +70,24 @@ final class UserCollectionViewController: UIViewController {
         }
     }
 
+    static func getUserCollection() -> UserCollectionDTO {
+        var user = UserCollectionDTO()
+        let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
+        if let userCollection = result.first {
+            user = userCollection
+        }
+        return user
+    }
+
     // MARK: Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
         let nextController = CardDetailViewController(cardList: cardList, selected: card)
+        self.navigationController?.pushViewController(nextController, animated: true)
+    }
+
+    func navigateToAddCardViewController() {
+        let nextController = AddCardViewController(userCollection: UserCollectionViewController.getUserCollection(), isUserCollection: true)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
