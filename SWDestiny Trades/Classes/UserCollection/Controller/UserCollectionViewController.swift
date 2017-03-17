@@ -39,7 +39,7 @@ final class UserCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = NSLocalizedString("My Collection", comment: "")
+        self.navigationItem.title = NSLocalizedString("MY_COLLECTION", comment: "")
 
         loadDataFromRealm()
     }
@@ -93,14 +93,21 @@ final class UserCollectionViewController: UIViewController {
 
     func share(_ sender: UIBarButtonItem) {
 
-        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: "", text: ""), "Shared with SWD Trades for iOS"], applicationActivities: nil)
-            activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList, .postToFacebook]
+        var collectionList: String = ""
+
+        if let cardList = userCollectionView.userCollectionTableView.tableViewDatasource?.getCardList() {
+            for card in cardList {
+                collectionList.append(String(format: "%d %@\n", card.quantity, card.name))
+            }
+        }
+
+        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: NSLocalizedString("MY_COLLECTION", comment: ""), text: collectionList), NSLocalizedString("SHARE_TEXT", comment: "")], applicationActivities: nil)
+        activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList, .postToFacebook]
 
         activityVC.popoverPresentationController?.barButtonItem = sender
         DispatchQueue.global(qos: .userInteractive).async {
             DispatchQueue.main.async {
                 self.present(activityVC, animated: true, completion: nil)
             }
-        }
-    }
+        }    }
 }
