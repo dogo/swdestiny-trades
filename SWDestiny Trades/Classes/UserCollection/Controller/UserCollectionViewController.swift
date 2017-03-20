@@ -52,7 +52,7 @@ final class UserCollectionViewController: UIViewController {
 
     func loadDataFromRealm() {
         let user = UserCollectionViewController.getUserCollection()
-        userCollectionView.userCollectionTableView.updateTableViewData(collection: Array(user.myCollection))
+        userCollectionView.userCollectionTableView.updateTableViewData(collection: user)
     }
 
     static func addToCollection(card: CardDTO) {

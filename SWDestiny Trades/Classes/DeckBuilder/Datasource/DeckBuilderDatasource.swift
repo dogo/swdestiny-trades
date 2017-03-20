@@ -11,9 +11,9 @@ import UIKit
 class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
-    var deckList: [String : [CardDTO]] = [ : ]
     fileprivate var sections: [String] = []
     fileprivate var currentDeck: DeckDTO!
+    var deckList: [String : [CardDTO]] = [ : ]
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()

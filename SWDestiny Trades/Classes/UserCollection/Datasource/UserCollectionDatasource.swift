@@ -11,8 +11,8 @@ import UIKit
 class UserCollectionDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
+    fileprivate var userCollection: UserCollectionDTO!
     var collectionList: [CardDTO] = []
-    fileprivate var currentDeck: DeckDTO!
 
     required init(tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -62,15 +62,18 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         return collectionList
     }
 
-    public func updateTableViewData(collection: [CardDTO]) {
-        collectionList = collection
+    public func updateTableViewData(collection: UserCollectionDTO) {
+        userCollection = collection
+        collectionList = Array(userCollection.myCollection)
         tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
         try! RealmManager.shared.realm.write {
-            RealmManager.shared.realm.delete(collectionList[indexPath.row])
-            collectionList.remove(at: indexPath.row)
+            if let card = getCard(at: indexPath), let realmIndex = userCollection.myCollection.index(of: card) {
+                userCollection.myCollection.remove(objectAtIndex: realmIndex)
+                collectionList.remove(at: indexPath.row)
+            }
         }
     }
 }
