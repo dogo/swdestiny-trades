@@ -8,6 +8,7 @@
 
 import UIKit
 import ImageSlideshow
+import PKHUD
 
 class CardDetailViewController: UIViewController {
 
@@ -69,7 +70,15 @@ class CardDetailViewController: UIViewController {
     }
 
     func addToCollection() {
-        UserCollectionViewController.addToCollection(card: self.cards[cardView.slideshow.currentPage])
+        let card = self.cards[cardView.slideshow.currentPage]
+        UserCollectionViewController.addToCollection(carDTO: card)
+        showSuccessMessage(cardDTO: card)
+    }
+    
+    private func showSuccessMessage(cardDTO: CardDTO) {
+        PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
+        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: cardDTO.name), delay: 0.2)
     }
 
     func share(_ sender: UIBarButtonItem) {

@@ -55,13 +55,13 @@ final class UserCollectionViewController: UIViewController {
         userCollectionView.userCollectionTableView.updateTableViewData(collection: user)
     }
 
-    static func addToCollection(card: CardDTO) {
+    static func addToCollection(carDTO: CardDTO) {
         let user = getUserCollection()
         try! RealmManager.shared.realm.write {
-            let predicate = NSPredicate(format: "code == %@", card.code)
+            let predicate = NSPredicate(format: "code == %@", carDTO.code)
             let index = user.myCollection.index(matching: predicate)
             if index == nil {
-                user.myCollection.append(card)
+                user.myCollection.append(carDTO)
             } else {
                 let newCard = user.myCollection[index!]
                 newCard.quantity += 1
