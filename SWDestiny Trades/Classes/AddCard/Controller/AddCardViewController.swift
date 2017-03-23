@@ -91,40 +91,28 @@ class AddCardViewController: UIViewController {
     private func insert(card: CardDTO) {
         let predicate = NSPredicate(format: "code == %@", card.code)
         if self.isDeckBuilder {
-            if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
-                self.insertToDeckBuilder(card: card)
-            } else {
-                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-            }
+            self.insertToDeckBuilder(card: card, predicate: predicate)
         } else if self.isUserCollection {
-            if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
-                self.insertToCollection(card: card)
-            } else {
-                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-            }
+            self.insertToCollection(card: card, predicate: predicate)
         } else {
-            if self.isLentMe {
+            self.insertToLoan(card: card, predicate: predicate)
+        }
+    }
+
+    private func insertToLoan(card: CardDTO, predicate: NSPredicate) {
+        try! RealmManager.shared.realm.write {
+            if isLentMe {
                 if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
-                    self.insertToLoan(card: card)
+                    personDTO?.lentMe.append(card)
                 } else {
                     ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
                 }
             } else {
                 if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
-                    self.insertToLoan(card: card)
+                    personDTO?.borrowed.append(card)
                 } else {
                     ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
                 }
-            }
-        }
-    }
-
-    private func insertToLoan(card: CardDTO) {
-        try! RealmManager.shared.realm.write {
-            if isLentMe {
-                personDTO?.lentMe.append(card)
-            } else {
-                personDTO?.borrowed.append(card)
             }
             showSuccessMessage(card: card)
             RealmManager.shared.realm.add(personDTO!, update: true)
@@ -133,21 +121,29 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    private func insertToDeckBuilder(card: CardDTO) {
+    private func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
         try! RealmManager.shared.realm.write {
-            deckDTO?.list.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(deckDTO!, update: true)
-            let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
+            if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
+                deckDTO?.list.append(card)
+                showSuccessMessage(card: card)
+                RealmManager.shared.realm.add(deckDTO!, update: true)
+                let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
+                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
+            } else {
+                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            }
         }
     }
 
-    private func insertToCollection(card: CardDTO) {
+    private func insertToCollection(card: CardDTO, predicate: NSPredicate) {
         try! RealmManager.shared.realm.write {
-            userCollectionDTO?.myCollection.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(userCollectionDTO!, update: true)
+            if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
+                userCollectionDTO?.myCollection.append(card)
+                showSuccessMessage(card: card)
+                RealmManager.shared.realm.add(userCollectionDTO!, update: true)
+            } else {
+                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            }
         }
     }
 

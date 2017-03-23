@@ -76,6 +76,9 @@ final class UserCollectionViewController: UIViewController {
         if let userCollection = result.first {
             user = userCollection
         }
+        try! RealmManager.shared.realm.write {
+            RealmManager.shared.realm.add(user, update: true)
+        }
         return user
     }
 
