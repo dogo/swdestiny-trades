@@ -74,7 +74,7 @@ class CardDetailViewController: UIViewController {
         UserCollectionViewController.addToCollection(carDTO: card)
         showSuccessMessage(cardDTO: card)
     }
-    
+
     private func showSuccessMessage(cardDTO: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
