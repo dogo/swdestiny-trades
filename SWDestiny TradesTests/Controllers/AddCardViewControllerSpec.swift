@@ -30,7 +30,7 @@ class AddCardViewControllerSpec: QuickSpec {
             }
 
             it("should have the expected navigation title") {
-                let _ = UINavigationController(rootViewController: controller)
+                _ = UINavigationController(rootViewController: controller)
                 controller.viewWillAppear(true)
                 expect(controller.navigationItem.title).to(equal(NSLocalizedString("ADD_CARD", comment: "")))
             }
@@ -38,7 +38,7 @@ class AddCardViewControllerSpec: QuickSpec {
             #if arch(x86_64) && os(iOS)
                 it("should trigger fatal error if init with coder") {
                     expect { () -> Void in
-                        let _ = AddCardViewController(coder: NSCoder())
+                        _ = AddCardViewController(coder: NSCoder())
                         }.to(throwAssertion())
                 }
             #endif
