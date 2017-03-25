@@ -32,7 +32,7 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
 
     // MARK: <BaseDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    internal func didSelectRowAt(index: IndexPath) {
         if let currentDatasource = tableViewDatasource {
             if let card = currentDatasource.getCard(at: index) {
                 didSelectCard?(currentDatasource.getCardList(), card)

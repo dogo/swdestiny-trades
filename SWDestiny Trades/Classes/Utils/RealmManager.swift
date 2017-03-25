@@ -13,7 +13,7 @@ final class RealmManager: NSObject {
     static let shared = RealmManager()
 
 #if (arch(i386) || arch(x86_64)) && os(iOS)
-    let realm = try! Realm(fileURL: URL(fileURLWithPath: "\(RealmManager.RealHomeDirectory())/Desktop/default.realm"))
+    let realm = try! Realm(fileURL: URL(fileURLWithPath: "\(RealmManager.realHomeDirectory())/Desktop/default.realm"))
 #else
     let realm = try! Realm()
 #endif
@@ -25,7 +25,7 @@ final class RealmManager: NSObject {
         }
     }
 
-    private static func RealHomeDirectory() -> String {
+    private static func realHomeDirectory() -> String {
         let homeDirectory = NSHomeDirectory()
         let pathComponents = homeDirectory.components(separatedBy: "/")
         return "/\(pathComponents[1])/\(pathComponents[2])"

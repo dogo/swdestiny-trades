@@ -32,7 +32,7 @@ final class UserCollectionTableView: UITableView, BaseDelegate {
 
     // MARK: <BaseDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    internal func didSelectRowAt(index: IndexPath) {
         if let datasource = tableViewDatasource {
             if let card = datasource.getCard(at: index) {
                 didSelectCard?(datasource.getCardList(), card)

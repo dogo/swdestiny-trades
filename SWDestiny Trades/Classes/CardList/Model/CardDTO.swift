@@ -13,7 +13,7 @@ import RealmSwift
 class CardDTO: Object, Mappable {
 
     let dieFaces = List<StringObject>()
-    dynamic var id = NSUUID().uuidString
+    dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
     dynamic var setCode: String = ""
     dynamic var setName: String = ""
     dynamic var typeCode: String = ""
@@ -41,7 +41,7 @@ class CardDTO: Object, Mappable {
     dynamic var externalUrl: String = ""
     dynamic var imageUrl: String = ""
     dynamic var label: String = ""
-    dynamic var cp: Int = 0
+    dynamic var cp: Int = 0 // swiftlint:disable:this identifier_name
     dynamic var quantity: Int = 1
 
     required convenience public init?(map: Map) {

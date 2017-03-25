@@ -17,9 +17,9 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
     enum GraphType: Int {
         case
-        BarGraph,
-        LineGraph,
-        RadarGraph
+        barGraph,
+        lineGraph,
+        radarGraph
 
         static func count() -> Int {
             return 3
@@ -40,15 +40,15 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         switch GraphType(rawValue: indexPath.row)! {
-        case .BarGraph:
+        case .barGraph:
                 let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardTypeBarChartCell.self)
                 cell.configureCell(dataValues: cardTypes)
                 return cell
-        case .LineGraph:
+        case .lineGraph:
                 let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardCostLineChartCell.self)
                 cell.configureCell(dataValues: cardCosts)
                 return cell
-        case .RadarGraph:
+        case .radarGraph:
                 let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DiceRadarChartCell.self)
                 cell.configureCell(dataValues: dieFaces)
                 return cell
@@ -91,10 +91,8 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
             for i in 0...maxCost {
                 var cardCost = 0
-                for card in deck.list {
-                    if card.cost == i && card.typeCode != "character" && card.typeCode != "battlefield" {
-                        cardCost += card.quantity
-                    }
+                for card in deck.list where card.cost == i && card.typeCode != "character" && card.typeCode != "battlefield" {
+                    cardCost += card.quantity
                 }
                 cardCosts.append(cardCost)
             }
@@ -123,7 +121,7 @@ class DeckGraph: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlo
     weak var delegate: BaseDelegate?
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectRow(at: indexPath)
+        delegate?.didSelectRowAt(index: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

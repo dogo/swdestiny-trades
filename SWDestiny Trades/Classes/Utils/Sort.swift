@@ -35,10 +35,8 @@ final class Sort {
         cardsArray.forEach {_ = colors.insert(getType(cardDTO: $0)) }
 
         for symbol in colors {
-            for card in cardsArray {
-                if symbol == card.factionCode {
-                    source.append(card)
-                }
+            for card in cardsArray where symbol == card.factionCode {
+                source.append(card)
             }
         }
         return Sort.cardsAlphabetically(cardsArray: source)

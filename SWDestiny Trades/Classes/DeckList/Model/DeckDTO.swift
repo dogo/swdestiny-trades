@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class DeckDTO: Object {
-    dynamic var id = NSUUID().uuidString
+    dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
     dynamic var name = ""
     let list = List<CardDTO>()
 

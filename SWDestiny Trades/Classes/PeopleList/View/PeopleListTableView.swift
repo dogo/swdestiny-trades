@@ -40,7 +40,7 @@ final class PeopleListTableView: UITableView, BaseDelegate {
 
     // MARK: <BaseDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    internal func didSelectRowAt(index: IndexPath) {
         if let person = tableViewDatasource?.getPerson(at: index) {
             didSelectPerson?(person)
         }

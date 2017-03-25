@@ -9,5 +9,5 @@
 import Foundation
 
 protocol BaseDelegate: class {
-    func didSelectRow(at: IndexPath)
+    func didSelectRowAt(index: IndexPath)
 }

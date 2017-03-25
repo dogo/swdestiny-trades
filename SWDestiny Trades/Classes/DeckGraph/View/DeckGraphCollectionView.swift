@@ -34,6 +34,6 @@ final class DeckGraphCollectionView: UICollectionView, BaseDelegate {
 
     // MARK: <BaseDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    internal func didSelectRowAt(index: IndexPath) {
     }
 }

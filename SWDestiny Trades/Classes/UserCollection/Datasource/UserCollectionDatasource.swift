@@ -87,6 +87,6 @@ class UserCollection: NSObject, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRow(at: indexPath)
+        delegate?.didSelectRowAt(index: indexPath)
     }
 }

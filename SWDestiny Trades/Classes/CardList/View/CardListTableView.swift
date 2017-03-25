@@ -48,7 +48,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
 
     // MARK: <CardListViewDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    internal func didSelectRowAt(index: IndexPath) {
         if let currentDatasource: CardReturnable = self.dataSource as? CardReturnable {
             if let card = currentDatasource.getCard(at: index) {
                 didSelectCard?(currentDatasource.getCardList(), card)

@@ -32,7 +32,7 @@ final class SetsTableView: UITableView, BaseDelegate {
 
     // MARK: <BaseDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    internal func didSelectRowAt(index: IndexPath) {
         if let set = tableViewDatasource?.getSet(at: index) {
             didSelectSet?(set)
         }
