@@ -19,26 +19,34 @@ final class RealmMigrations {
         config.migrationBlock = { migration, oldSchemaVersion in
             if oldSchemaVersion < 1 {
                 migration.enumerateObjects(ofType: CardDTO.className()) { oldObject, newObject in
-                    newObject!["id"] = NSUUID().uuidString
+                    if let newObject = newObject {
+                        if let oldObject = oldObject {
+                            newObject["id"] = NSUUID().uuidString
 
-                    let oldCost = oldObject!["cost"] as! Float
-                    newObject!["cost"] = Int(oldCost)
+                            if let oldCost = oldObject["cost"] as? Float {
+                                newObject["cost"] = Int(oldCost)
+                            }
 
-                    let id = oldObject!["code"] as! String
-                    if dices[id] != nil {
-                        let dieFaces = List<StringObject>()
-                        dices[id]?.forEach { side in
-                            let string = StringObject()
-                            string.value = side
-                            dieFaces.append(string)
+                            if let id = oldObject["code"] as? String {
+                                if dices[id] != nil {
+                                    let dieFaces = List<StringObject>()
+                                    dices[id]?.forEach { side in
+                                        let string = StringObject()
+                                        string.value = side
+                                        dieFaces.append(string)
+                                    }
+                                    newObject["dieFaces"] = dieFaces
+                                }
+                            }
                         }
-                        newObject!["dieFaces"] = dieFaces
                     }
                 }
             }
             if oldSchemaVersion < 2 {
                 migration.enumerateObjects(ofType: CardDTO.className()) { _, newObject in
-                    newObject!["quantity"] = 1
+                    if let newObject = newObject {
+                        newObject["quantity"] = 1
+                    }
                 }
                 needsMigrationToV2 = true
             }

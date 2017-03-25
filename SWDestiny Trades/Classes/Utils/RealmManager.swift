@@ -20,8 +20,12 @@ final class RealmManager: NSObject {
 
     func performInBackground(_ backgroundAction: @escaping (_ backgroundRealm: Realm) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            let backgroundRealm = try! Realm()
-            backgroundAction(backgroundRealm)
+            do {
+                let backgroundRealm = try Realm()
+                backgroundAction(backgroundRealm)
+            } catch let error as NSError {
+                fatalError("Error opening realm: \(error)")
+            }
         }
     }
 
