@@ -71,13 +71,17 @@ final class UserCollectionViewController: UIViewController {
     }
 
     static func getUserCollection() -> UserCollectionDTO {
-        var user = UserCollectionDTO()
+        var user: UserCollectionDTO
+
         let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
+
         if let userCollection = result.first {
             user = userCollection
-        }
-        try! RealmManager.shared.realm.write {
-            RealmManager.shared.realm.add(user, update: true)
+        } else {
+            user = UserCollectionDTO()
+            try! RealmManager.shared.realm.write {
+                RealmManager.shared.realm.add(user, update: true)
+            }
         }
         return user
     }
