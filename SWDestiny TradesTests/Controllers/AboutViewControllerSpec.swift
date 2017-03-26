@@ -1,9 +1,9 @@
 //
 //  AboutViewControllerSpec.swift
-//  SWDestiny TradesTests
+//  swdestiny-trades
 //
 //  Created by Diogo Autilio on 26/12/16.
-//  Copyright © 2016 Diogo Autilio. All rights reserved.
+//  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
 import Quick

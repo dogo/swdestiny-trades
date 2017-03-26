@@ -33,19 +33,15 @@
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
+		DD1DA42A1E873648001E76C4 /* CardDetailViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerSpec.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB5A1E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
-		DD3AFB771E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
-		DD3AFB791E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
-		DD3AFB7B1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB7C1E79E28A00BF2001 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */; };
-		DD3AFB7D1E79E28A00BF2001 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */; };
 		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
-		DD3AFB811E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerSpec.swift */; };
@@ -158,6 +154,7 @@
 		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
+		DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewControllerSpec.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
 		DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwdShareProvider.swift; sourceTree = "<group>"; };
 		DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
@@ -746,6 +743,7 @@
 			children = (
 				DDB6DE6B1E539443003558E4 /* AboutViewControllerSpec.swift */,
 				DD440D111E5399140037C048 /* AddCardViewControllerSpec.swift */,
+				DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerSpec.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1306,14 +1304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD3AFB7D1E79E28A00BF2001 /* UserCollectionView.swift in Sources */,
-				DD3AFB7B1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */,
+				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerSpec.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerSpec.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerSpec.swift in Sources */,
-				DD3AFB811E79E63200BF2001 /* UserCollectionDTO.swift in Sources */,
 				DD3AFB5A1E79CF6900BF2001 /* SwdShareProvider.swift in Sources */,
-				DD3AFB791E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */,
-				DD3AFB771E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
