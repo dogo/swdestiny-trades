@@ -66,7 +66,7 @@ class AddCardViewController: UIViewController {
             self.addCardView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
             print(failureReason)
-            FIRAnalytics.logEvent(withName: "[Error] retrieveAllCards", parameters: ["error": failureReason as NSObject])
+            FIRAnalytics.logEvent(withName: "retrieveAllCards", parameters: ["error": failureReason as NSObject])
         }
 
         addCardView.addCardTableView.didSelectCard = { [weak self] card in
