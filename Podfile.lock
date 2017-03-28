@@ -31,7 +31,7 @@ PODS:
     - ImageSlideshow/Core (= 1.2.0)
   - ImageSlideshow/Core (1.2.0)
   - Kingfisher (3.6.0)
-  - Nimble (6.0.1)
+  - Nimble (6.1.0)
   - ObjectMapper (2.2.5)
   - PKHUD (4.2.0)
   - Protobuf (3.2.0)
@@ -78,7 +78,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: c1395dcf33f7dba407fd21df0e8c315e8941e209
   Kingfisher: 300035f9a40634dc9b452d946c9f22250688fecd
-  Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
   PKHUD: 48af884cf00c2213b0313b739d914e6cab1c0f5e
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
