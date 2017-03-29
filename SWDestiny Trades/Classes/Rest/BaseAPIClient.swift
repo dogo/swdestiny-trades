@@ -87,11 +87,11 @@ extension DataResponse {
                 errorDescription.append("Response serialization failed: \(error.localizedDescription)")
                 errorDescription.append("Failure Reason: \(reason)")
             }
-            errorDescription.append("Underlying error: \(error.underlyingError)")
+            errorDescription.append("Underlying error: \(String(describing: error.underlyingError))")
         } else if let error = self.result.error as? URLError {
             errorDescription.append("URLError occurred: \(error)")
         } else {
-            errorDescription.append("Unknown error: \(self.result.error)")
+            errorDescription.append("Unknown error: \(String(describing: self.result.error))")
         }
         return errorDescription
     }
