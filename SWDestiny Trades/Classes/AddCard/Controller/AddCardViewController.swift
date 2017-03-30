@@ -94,30 +94,38 @@ class AddCardViewController: UIViewController {
             self.insertToDeckBuilder(card: card, predicate: predicate)
         } else if self.isUserCollection {
             self.insertToCollection(card: card, predicate: predicate)
+        } else if self.isLentMe {
+            self.insertToLentMe(card: card, predicate: predicate)
         } else {
-            self.insertToLoan(card: card, predicate: predicate)
+            self.insertToBorrowed(card: card, predicate: predicate)
         }
     }
 
-    private func insertToLoan(card: CardDTO, predicate: NSPredicate) {
+    private func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
         try! RealmManager.shared.realm.write {
-            if isLentMe {
-                if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
-                    personDTO?.lentMe.append(card)
-                } else {
-                    ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-                }
+            if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
+                personDTO?.borrowed.append(card)
+                showSuccessMessage(card: card)
+                RealmManager.shared.realm.add(personDTO!, update: true)
+                let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
+                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
             } else {
-                if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
-                    personDTO?.borrowed.append(card)
-                } else {
-                    ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-                }
+                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
             }
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(personDTO!, update: true)
-            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
+        }
+    }
+
+    private func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
+        try! RealmManager.shared.realm.write {
+            if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
+                personDTO?.lentMe.append(card)
+                showSuccessMessage(card: card)
+                RealmManager.shared.realm.add(personDTO!, update: true)
+                let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
+                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
+            } else {
+                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            }
         }
     }
 
