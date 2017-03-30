@@ -90,68 +90,62 @@ class AddCardViewController: UIViewController {
     // MARK: - Helpers
     private func insert(card: CardDTO) {
         let predicate = NSPredicate(format: "code == %@", card.code)
-        if self.isDeckBuilder {
-            self.insertToDeckBuilder(card: card, predicate: predicate)
-        } else if self.isUserCollection {
-            self.insertToCollection(card: card, predicate: predicate)
-        } else if self.isLentMe {
-            self.insertToLentMe(card: card, predicate: predicate)
-        } else {
-            self.insertToBorrowed(card: card, predicate: predicate)
+        try! RealmManager.shared.realm.write {
+            if self.isDeckBuilder {
+                self.insertToDeckBuilder(card: card, predicate: predicate)
+            } else if self.isUserCollection {
+                self.insertToCollection(card: card, predicate: predicate)
+            } else if self.isLentMe {
+                self.insertToLentMe(card: card, predicate: predicate)
+            } else {
+                self.insertToBorrowed(card: card, predicate: predicate)
+            }
         }
     }
 
     private func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
-        try! RealmManager.shared.realm.write {
-            if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
-                personDTO?.borrowed.append(card)
-                showSuccessMessage(card: card)
-                RealmManager.shared.realm.add(personDTO!, update: true)
-                let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
-                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
-            } else {
-                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-            }
+        if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
+            personDTO?.borrowed.append(card)
+            showSuccessMessage(card: card)
+            RealmManager.shared.realm.add(personDTO!, update: true)
+            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
+            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
+        } else {
+            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
         }
     }
 
     private func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
-        try! RealmManager.shared.realm.write {
-            if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
-                personDTO?.lentMe.append(card)
-                showSuccessMessage(card: card)
-                RealmManager.shared.realm.add(personDTO!, update: true)
-                let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
-                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
-            } else {
-                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-            }
+        if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
+            personDTO?.lentMe.append(card)
+            showSuccessMessage(card: card)
+            RealmManager.shared.realm.add(personDTO!, update: true)
+            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
+            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
+        } else {
+            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
         }
     }
 
     private func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
-        try! RealmManager.shared.realm.write {
-            if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
-                deckDTO?.list.append(card)
-                showSuccessMessage(card: card)
-                RealmManager.shared.realm.add(deckDTO!, update: true)
-                let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
-                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
-            } else {
-                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-            }
+        if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
+            deckDTO?.list.append(card)
+            showSuccessMessage(card: card)
+            RealmManager.shared.realm.add(deckDTO!, update: true)
+            let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
+            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
+        } else {
+            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
         }
     }
 
     private func insertToCollection(card: CardDTO, predicate: NSPredicate) {
-        try! RealmManager.shared.realm.write {
-            if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
-                userCollectionDTO?.myCollection.append(card)
-                showSuccessMessage(card: card)
-                RealmManager.shared.realm.add(userCollectionDTO!, update: true)
-            } else {
-                ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
-            }
+        if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
+            userCollectionDTO?.myCollection.append(card)
+            showSuccessMessage(card: card)
+            RealmManager.shared.realm.add(userCollectionDTO!, update: true)
+        } else {
+            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
         }
     }
 
