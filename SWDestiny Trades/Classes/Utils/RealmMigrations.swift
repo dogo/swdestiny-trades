@@ -63,44 +63,52 @@ final class RealmMigrations {
 
         if needsMigration {
             let allDecks = realm.objects(DeckDTO.self)
-            try! realm.write {
-                for deck in allDecks {
-                    var uniqueCards: [CardDTO] = []
-                    for card in deck.list {
-                        if uniqueCards.contains(card) {
-                            card.quantity += 1
-                        } else {
-                            uniqueCards.append(card)
+            do {
+                try realm.write {
+                    for deck in allDecks {
+                        var uniqueCards: [CardDTO] = []
+                        for card in deck.list {
+                            if uniqueCards.contains(card) {
+                                card.quantity += 1
+                            } else {
+                                uniqueCards.append(card)
+                            }
                         }
+                        deck.list.removeAll()
+                        deck.list.append(objectsIn: uniqueCards)
                     }
-                    deck.list.removeAll()
-                    deck.list.append(objectsIn: uniqueCards)
                 }
+            } catch let error as NSError {
+                print("Error opening realm: \(error)")
             }
             let allPersons = realm.objects(PersonDTO.self)
-            try! realm.write {
-                for person in allPersons {
-                    var borrowedCards: [CardDTO] = []
-                    var lentMeCards: [CardDTO] = []
-                    for card in person.borrowed {
-                        if borrowedCards.contains(card) {
-                            card.quantity += 1
-                        } else {
-                            borrowedCards.append(card)
+            do {
+                try realm.write {
+                    for person in allPersons {
+                        var borrowedCards: [CardDTO] = []
+                        var lentMeCards: [CardDTO] = []
+                        for card in person.borrowed {
+                            if borrowedCards.contains(card) {
+                                card.quantity += 1
+                            } else {
+                                borrowedCards.append(card)
+                            }
                         }
-                    }
-                    for card in person.lentMe {
-                        if lentMeCards.contains(card) {
-                            card.quantity += 1
-                        } else {
-                            lentMeCards.append(card)
+                        for card in person.lentMe {
+                            if lentMeCards.contains(card) {
+                                card.quantity += 1
+                            } else {
+                                lentMeCards.append(card)
+                            }
                         }
+                        person.borrowed.removeAll()
+                        person.lentMe.removeAll()
+                        person.borrowed.append(objectsIn: borrowedCards)
+                        person.lentMe.append(objectsIn: lentMeCards)
                     }
-                    person.borrowed.removeAll()
-                    person.lentMe.removeAll()
-                    person.borrowed.append(objectsIn: borrowedCards)
-                    person.lentMe.append(objectsIn: lentMeCards)
                 }
+            } catch let error as NSError {
+                print("Error opening realm: \(error)")
             }
         }
     }

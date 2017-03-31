@@ -60,17 +60,25 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(person: PersonDTO) {
-        try! RealmManager.shared.realm.write {
-            RealmManager.shared.realm.add(person, update: true)
-            persons.append(person)
+        do {
+            try RealmManager.shared.realm.write {
+                RealmManager.shared.realm.add(person, update: true)
+                persons.append(person)
+            }
+            tableView?.reloadData()
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
-        tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
-        try! RealmManager.shared.realm.write {
-            RealmManager.shared.realm.delete(persons[indexPath.row])
-            persons.remove(at: indexPath.row)
+        do {
+            try RealmManager.shared.realm.write {
+                RealmManager.shared.realm.delete(persons[indexPath.row])
+                persons.remove(at: indexPath.row)
+            }
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
     }
 }

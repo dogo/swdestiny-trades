@@ -90,16 +90,20 @@ class AddCardViewController: UIViewController {
     // MARK: - Helpers
     private func insert(card: CardDTO) {
         let predicate = NSPredicate(format: "code == %@", card.code)
-        try! RealmManager.shared.realm.write {
-            if self.isDeckBuilder {
-                self.insertToDeckBuilder(card: card, predicate: predicate)
-            } else if self.isUserCollection {
-                self.insertToCollection(card: card, predicate: predicate)
-            } else if self.isLentMe {
-                self.insertToLentMe(card: card, predicate: predicate)
-            } else {
-                self.insertToBorrowed(card: card, predicate: predicate)
+        do {
+            try RealmManager.shared.realm.write {
+                if self.isDeckBuilder {
+                    self.insertToDeckBuilder(card: card, predicate: predicate)
+                } else if self.isUserCollection {
+                    self.insertToCollection(card: card, predicate: predicate)
+                } else if self.isLentMe {
+                    self.insertToLentMe(card: card, predicate: predicate)
+                } else {
+                    self.insertToBorrowed(card: card, predicate: predicate)
+                }
             }
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
     }
 

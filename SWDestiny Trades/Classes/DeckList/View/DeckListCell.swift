@@ -116,9 +116,13 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         if titleEditText.isUserInteractionEnabled {
             titleEditText.becomeFirstResponder()
         } else {
-            try! RealmManager.shared.realm.write {
+            do {
+            try RealmManager.shared.realm.write {
                 deckDTO?.name = titleEditText.text!
                 RealmManager.shared.realm.add(deckDTO!, update: true)
+            }
+            } catch let error as NSError {
+                print("Error opening realm: \(error)")
             }
         }
     }

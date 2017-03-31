@@ -39,8 +39,12 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
                 cell.stepperValueChanged = { (value, cell) in
                     guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                     if let card = self.getCard(at: indexPath) {
-                        try! RealmManager.shared.realm.write {
-                            card.quantity = value
+                        do {
+                            try RealmManager.shared.realm.write {
+                                card.quantity = value
+                            }
+                        } catch let error as NSError {
+                            print("Error opening realm: \(error)")
                         }
                     }
                 }
@@ -57,8 +61,12 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
                 cell.stepperValueChanged = { (value, cell) in
                     guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                     if let card = self.getCard(at: indexPath) {
-                        try! RealmManager.shared.realm.write {
-                            card.quantity = value
+                        do {
+                            try RealmManager.shared.realm.write {
+                                card.quantity = value
+                            }
+                        } catch let error as NSError {
+                            print("Error opening realm: \(error)")
                         }
                     }
                 }
@@ -104,16 +112,20 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        try! RealmManager.shared.realm.write {
-            if indexPath.section == 0 {
-                lentMe.remove(at: indexPath.row)
-                currentPerson.lentMe.remove(objectAtIndex: indexPath.row)
-            } else {
-                borrowed.remove(at: indexPath.row)
-                currentPerson.borrowed.remove(objectAtIndex: indexPath.row)
+        do {
+            try RealmManager.shared.realm.write {
+                if indexPath.section == 0 {
+                    lentMe.remove(at: indexPath.row)
+                    currentPerson.lentMe.remove(objectAtIndex: indexPath.row)
+                } else {
+                    borrowed.remove(at: indexPath.row)
+                    currentPerson.borrowed.remove(objectAtIndex: indexPath.row)
+                }
             }
+            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
-        NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
     }
 
     public func getCard(at index: IndexPath) -> CardDTO? {

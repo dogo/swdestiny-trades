@@ -57,16 +57,20 @@ final class UserCollectionViewController: UIViewController {
 
     static func addToCollection(carDTO: CardDTO) {
         let user = getUserCollection()
-        try! RealmManager.shared.realm.write {
-            let predicate = NSPredicate(format: "code == %@", carDTO.code)
-            let index = user.myCollection.index(matching: predicate)
-            if index == nil {
-                user.myCollection.append(carDTO)
-            } else {
-                let newCard = user.myCollection[index!]
-                newCard.quantity += 1
+        do {
+            try RealmManager.shared.realm.write {
+                let predicate = NSPredicate(format: "code == %@", carDTO.code)
+                let index = user.myCollection.index(matching: predicate)
+                if index == nil {
+                    user.myCollection.append(carDTO)
+                } else {
+                    let newCard = user.myCollection[index!]
+                    newCard.quantity += 1
+                }
+                RealmManager.shared.realm.add(user, update: true)
             }
-            RealmManager.shared.realm.add(user, update: true)
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
     }
 
@@ -79,8 +83,12 @@ final class UserCollectionViewController: UIViewController {
             user = userCollection
         } else {
             user = UserCollectionDTO()
-            try! RealmManager.shared.realm.write {
-                RealmManager.shared.realm.add(user, update: true)
+            do {
+                try RealmManager.shared.realm.write {
+                    RealmManager.shared.realm.add(user, update: true)
+                }
+            } catch let error as NSError {
+                print("Error opening realm: \(error)")
             }
         }
         return user

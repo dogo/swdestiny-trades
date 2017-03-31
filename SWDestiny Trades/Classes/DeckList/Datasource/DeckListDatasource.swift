@@ -44,9 +44,13 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        try! RealmManager.shared.realm.write {
-            RealmManager.shared.realm.delete(deckList[indexPath.row])
-            deckList.remove(at: indexPath.row)
+        do {
+            try RealmManager.shared.realm.write {
+                RealmManager.shared.realm.delete(deckList[indexPath.row])
+                deckList.remove(at: indexPath.row)
+            }
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
     }
 
@@ -60,10 +64,14 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(deck: DeckDTO) {
-        try! RealmManager.shared.realm.write {
-            RealmManager.shared.realm.add(deck)
-            deckList.append(deck)
-            tableView?.reloadData()
+        do {
+            try RealmManager.shared.realm.write {
+                RealmManager.shared.realm.add(deck)
+                deckList.append(deck)
+                tableView?.reloadData()
+            }
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
     }
 }

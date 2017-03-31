@@ -31,8 +31,12 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
             cell.stepperValueChanged = { (value, cell) in
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {
-                    try! RealmManager.shared.realm.write {
-                        card.quantity = value
+                    do {
+                        try RealmManager.shared.realm.write {
+                            card.quantity = value
+                        }
+                    } catch let error as NSError {
+                        print("Error opening realm: \(error)")
                     }
                 }
             }
@@ -92,11 +96,15 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        try! RealmManager.shared.realm.write {
-            if let card = getCard(at: indexPath), let realmIndex = currentDeck.list.index(of: card) {
-                currentDeck.list.remove(objectAtIndex: realmIndex)
-                deckList[sections[indexPath.section]]?.remove(at: indexPath.row)
+        do {
+            try RealmManager.shared.realm.write {
+                if let card = getCard(at: indexPath), let realmIndex = currentDeck.list.index(of: card) {
+                    currentDeck.list.remove(objectAtIndex: realmIndex)
+                    deckList[sections[indexPath.section]]?.remove(at: indexPath.row)
+                }
             }
+        } catch let error as NSError {
+            print("Error opening realm: \(error)")
         }
     }
 }
