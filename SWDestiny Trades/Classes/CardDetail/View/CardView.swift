@@ -21,6 +21,11 @@ final class CardView: UIView {
         return slideshow
     }()
 
+    lazy var backView = BackCardView(frame: CGRect(x: 0,
+                                                   y: 0,
+                                                   width: slideshow.bounds.width,
+                                                   height: slideshow.bounds.height))
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBaseView()
