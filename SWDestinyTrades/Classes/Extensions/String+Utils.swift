@@ -30,6 +30,10 @@ extension String {
     var length: Int {
         return count
     }
+
+    func removeHTMLTag() -> String {
+        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    }
 }
 
 public extension NSMutableAttributedString {

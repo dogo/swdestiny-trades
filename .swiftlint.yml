@@ -75,8 +75,10 @@ function_body_length: 80
 line_length: 180
 
 identifier_name:
+  error: 3
   excluded:
     - id
+    - to
 
 excluded:
   - Pods

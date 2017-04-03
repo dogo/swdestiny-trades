@@ -16,6 +16,7 @@ final class CardDetailViewController: UIViewController {
     private var cards = [CardDTO]()
     private var cardDTO: CardDTO
     private var imageSource = [InputSource]()
+    private var showingBack = false
 
     // MARK: - Life Cycle
 
@@ -48,8 +49,21 @@ final class CardDetailViewController: UIViewController {
         }
 
         cardView.slideshow.currentPageChanged = { [weak self] page in
-            self?.navigationItem.title = self?.cards[page].name
+            if let card = self?.cards[page] {
+                self?.navigationItem.title = card.name
+                self?.cardDTO = card
+            }
         }
+
+        cardView.slideshow.willBeginDragging = {
+            if self.showingBack {
+                self.didTap()
+            }
+        }
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CardDetailViewController.didTap))
+        // gestureRecognizer.numberOfTapsRequired = 2
+        cardView.slideshow.addGestureRecognizer(gestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -127,5 +141,16 @@ final class CardDetailViewController: UIViewController {
                 }
             }
         }
+    }
+
+    @objc
+    func didTap() {
+        let toView = showingBack ? cardView.slideshow.currentSlideshowItem?.imageView : cardView.backView
+        let fromView = showingBack ? cardView.backView : cardView.slideshow.currentSlideshowItem?.imageView
+        cardView.backView.configureCardView(cardDTO: cardDTO)
+        if let fromView = fromView, let toView = toView {
+            UIView.transition(from: fromView, to: toView, duration: 1, options: .transitionFlipFromRight, completion: nil)
+        }
+        showingBack.toggle()
     }
 }
