@@ -3,5 +3,5 @@ source "https://www.rubygems.org"
 ruby '2.3.1'
 gem 'slather'
 gem 'cocoapods', '~> 1.2.0'
-gem 'fastlane', '~> 2.19.1'
+gem 'fastlane', '~> 2.25.0'
 gem 'xcpretty', '~> 0.2.3'
