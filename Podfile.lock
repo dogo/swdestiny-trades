@@ -34,13 +34,13 @@ PODS:
   - Nimble (6.1.0)
   - ObjectMapper (2.2.5)
   - PKHUD (4.2.1)
-  - Protobuf (3.2.0)
+  - Protobuf (3.2.1)
   - Quick (1.1.0)
-  - Realm (2.5.0):
-    - Realm/Headers (= 2.5.0)
-  - Realm/Headers (2.5.0)
-  - RealmSwift (2.5.0):
-    - Realm (= 2.5.0)
+  - Realm (2.5.1):
+    - Realm/Headers (= 2.5.1)
+  - Realm/Headers (2.5.1)
+  - RealmSwift (2.5.1):
+    - Realm (= 2.5.1)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
     - Reusable/View (= 4.0.0)
@@ -81,10 +81,10 @@ SPEC CHECKSUMS:
   Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
   PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
-  Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
+  Protobuf: 2ccbaf193f6c65adc67745453ca0c13234c32796
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
-  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  Realm: 32f86104d37c8521f864d4274050b38ba6190733
+  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftMessages: 09cea3336e3fb63c3578983c8aac65acaa6d884a
