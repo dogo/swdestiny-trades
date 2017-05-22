@@ -63,7 +63,7 @@ class SetsListViewController: UIViewController {
             self.setsView.endRefreshControl()
             let failureReason = error.failureReason()
             print(failureReason)
-            FIRAnalytics.logEvent(withName: "retrieveSetList", parameters: ["error": failureReason as NSObject])
+            Analytics.logEvent("retrieveSetList", parameters: ["error": failureReason as NSObject])
         }
     }
 

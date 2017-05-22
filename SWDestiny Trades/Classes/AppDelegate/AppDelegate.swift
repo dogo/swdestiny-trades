@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = SWDTabBarViewController()
         self.window?.makeKeyAndVisible()
 
-        FIRApp.configure()
+        FirebaseApp.configure()
         return true
     }
 

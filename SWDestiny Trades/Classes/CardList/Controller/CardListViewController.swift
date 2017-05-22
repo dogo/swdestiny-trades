@@ -41,7 +41,7 @@ class CardListViewController: UIViewController {
             self.cardListView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
             print(failureReason)
-            FIRAnalytics.logEvent(withName: "retrieveSetCardList", parameters: ["error": failureReason as NSObject])
+            Analytics.logEvent("retrieveSetCardList", parameters: ["error": failureReason as NSObject])
         }
 
         self.cardListView.cardListTableView.didSelectCard = { [weak self] list, card in
