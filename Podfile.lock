@@ -33,7 +33,7 @@ PODS:
   - ImageSlideshow/Core (1.3.1)
   - Kingfisher (3.9.1)
   - Nimble (7.0.0)
-  - ObjectMapper (2.2.6)
+  - ObjectMapper (2.2.7)
   - PKHUD (4.2.2)
   - Protobuf (3.3.0)
   - Quick (1.1.0)
@@ -80,7 +80,7 @@ SPEC CHECKSUMS:
   ImageSlideshow: bef84bd0bda0bdf8ef6dfc6da42ed1703bea2070
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   Nimble: 874982b605d4d752fcac6be695d13c502de84b1b
-  ObjectMapper: 042708195cc46c20871cbcbec0453826398273fd
+  ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   PKHUD: 9a3599e04d57676ec14746c40e423a52fb6588c0
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
@@ -88,7 +88,7 @@ SPEC CHECKSUMS:
   RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftMessages: 09cea3336e3fb63c3578983c8aac65acaa6d884a
+  SwiftMessages: '09cea3336e3fb63c3578983c8aac65acaa6d884a'
   TextFieldEffects: 9e5cce561ea39c75b86e9d3637601727a67e8b23
 
 PODFILE CHECKSUM: 4eb8d4808bb832d2948e39ff7e7ba425737b0148
