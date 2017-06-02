@@ -28,18 +28,18 @@ final class Sort {
         var colors = Set<String>()
         var source = [CardDTO]()
 
-        func getType(cardDTO: CardDTO) -> String {
+        func getColor(cardDTO: CardDTO) -> String {
             return cardDTO.factionCode
         }
 
-        cardsArray.forEach {_ = colors.insert(getType(cardDTO: $0)) }
+        cardsArray.forEach {_ = colors.insert(getColor(cardDTO: $0)) }
 
         for symbol in colors {
             for card in cardsArray where symbol == card.factionCode {
                 source.append(card)
             }
         }
-        return Sort.cardsAlphabetically(cardsArray: source)
+        return source
     }
 
     static func cardsByType(cardsArray: [CardDTO]) -> [CardDTO] {
@@ -60,5 +60,23 @@ final class Sort {
             }
         }
         return Sort.cardsAlphabetically(cardsArray: source)
+    }
+
+    static func cardsByAffiliation(cardsArray: [CardDTO]) -> [CardDTO] {
+        var affiliations = Set<String>()
+        var source = [CardDTO]()
+
+        func getAffiliation(cardDTO: CardDTO) -> String {
+            return cardDTO.affiliationCode
+        }
+
+        cardsArray.forEach {_ = affiliations.insert(getAffiliation(cardDTO: $0)) }
+
+        for symbol in affiliations {
+            for card in cardsArray where symbol == card.affiliationCode {
+                source.append(card)
+            }
+        }
+        return source
     }
 }

@@ -72,6 +72,23 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         tableView?.reloadData()
     }
 
+    // MARK: Sort options
+
+    public func sortAlphabetically() {
+        collectionList = Sort.cardsAlphabetically(cardsArray: collectionList)
+        tableView?.reloadData()
+    }
+
+    public func sortNumerically() {
+        collectionList = Sort.cardsByNumber(cardsArray: collectionList)
+        tableView?.reloadData()
+    }
+
+    public func sortByColor() {
+        collectionList = Sort.cardsByColor(cardsArray: collectionList)
+        tableView?.reloadData()
+    }
+
     private func remove(at indexPath: IndexPath) {
         do {
             try RealmManager.shared.realm.write {

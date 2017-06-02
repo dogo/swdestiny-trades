@@ -39,4 +39,21 @@ final class UserCollectionTableView: UITableView, BaseDelegate {
             }
         }
     }
+
+    // MARK: Sort
+
+    func sort(_ selectedIndex: Int) {
+        switch selectedIndex {
+        case 0:
+            tableViewDatasource?.sortAlphabetically()
+
+        case 1:
+            tableViewDatasource?.sortNumerically()
+
+        case 2:
+            tableViewDatasource?.sortByColor()
+
+        default: break
+        }
+    }
 }

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import FTPopOverMenu_Swift
 
 final class UserCollectionViewController: UIViewController {
 
     fileprivate let userCollectionView = UserCollectionView()
+    fileprivate var currentSortIndex = 0
 
     // MARK: - Life Cycle
 
@@ -42,17 +44,30 @@ final class UserCollectionViewController: UIViewController {
         self.navigationItem.title = NSLocalizedString("MY_COLLECTION", comment: "")
 
         loadDataFromRealm()
+
+        configureFTPopOverMenu()
     }
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
         self.navigationItem.rightBarButtonItems = [addCardBarItem, shareBarItem]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort"), style: .plain, target: self, action: #selector(sort(_:event:)))
     }
 
     func loadDataFromRealm() {
         let user = UserCollectionViewController.getUserCollection()
         userCollectionView.userCollectionTableView.updateTableViewData(collection: user)
+        userCollectionView.userCollectionTableView.sort(currentSortIndex)
+    }
+
+    func configureFTPopOverMenu() {
+        let config = FTConfiguration.shared
+        config.textColor = UIColor.white
+        config.backgoundTintColor = ColorPalette.appTheme
+        config.borderColor = ColorPalette.appTheme
+        config.menuSeparatorColor = UIColor.lightGray
+        config.textAlignment = .center
     }
 
     static func addToCollection(carDTO: CardDTO) {
@@ -124,5 +139,14 @@ final class UserCollectionViewController: UIViewController {
             DispatchQueue.main.async {
                 self.present(activityVC, animated: true, completion: nil)
             }
-        }    }
+        }
+    }
+
+    func sort(_ sender: UIBarButtonItem, event: UIEvent) {
+        FTPopOverMenu.showForEvent(event: event, with: ["A-Z", NSLocalizedString("CARD_NUMBER", comment: ""), NSLocalizedString("COLOR", comment: "")], done: { (selectedIndex) -> Void in
+            self.userCollectionView.userCollectionTableView.sort(selectedIndex)
+            self.currentSortIndex = selectedIndex
+        }) {
+        }
+    }
 }

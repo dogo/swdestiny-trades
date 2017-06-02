@@ -23,6 +23,7 @@ PODS:
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
+  - FTPopOverMenu_Swift (0.0.7)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - Charts
   - Firebase/Core
   - Firebase/Crash
+  - FTPopOverMenu_Swift
   - ImageSlideshow
   - Kingfisher
   - Nimble
@@ -76,6 +78,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseCrash: 600ec2cbd8e10c3064a42de2c6ee7687bd02a076
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  FTPopOverMenu_Swift: 8939e3c98a72217c761e806c915101227ed7c8fc
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: a68a76fc618ebd2b7481ce355ad67d7097203976
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
@@ -91,6 +94,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 09cea3336e3fb63c3578983c8aac65acaa6d884a
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
-PODFILE CHECKSUM: 4eb8d4808bb832d2948e39ff7e7ba425737b0148
+PODFILE CHECKSUM: 824789c8777631de2cd6ad3c9b0b55667da6b924
 
 COCOAPODS: 1.2.1

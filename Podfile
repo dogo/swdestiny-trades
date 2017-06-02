@@ -10,6 +10,7 @@ target 'SWDestiny Trades' do
   pod 'Charts'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
+  pod 'FTPopOverMenu_Swift'
   pod 'ImageSlideshow'
   pod 'Kingfisher'
   pod 'ObjectMapper'
