@@ -8,17 +8,17 @@
 
 import UIKit
 
-final class DeckBuilderTableView: UITableView, BaseDelegate {
+final class DeckBuilderTableView: UITableView, BaseDelegate, CollapsibleTableViewHeaderDelegate {
 
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     var tableViewDatasource: DeckBuilderDatasource?
-    let deckBuilder = DeckBuilder()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        deckBuilder.delegate = self
-        tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: deckBuilder)
+        tableViewDatasource = DeckBuilderDatasource(tableView: self)
+        tableViewDatasource?.delegate = self
+        tableViewDatasource?.collapsibleDelegate = self
         self.backgroundColor = .white
     }
 
@@ -38,5 +38,11 @@ final class DeckBuilderTableView: UITableView, BaseDelegate {
                 didSelectCard?(currentDatasource.getCardList(), card)
             }
         }
+    }
+
+    // MARK: <CollapsibleTableViewHeaderDelegate>
+
+    func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
+        tableViewDatasource?.toggleSection(header: header, section: section)
     }
 }

@@ -88,8 +88,8 @@ final class DeckBuilderViewController: UIViewController {
 
         if let deckObject = deckBuilderView.deckBuilderTableView.tableViewDatasource?.deckList {
             for section in deckObject {
-                deckList.append(String(format: "%@ (%d)\n", section.key, section.value.count))
-                for card in section.value {
+                deckList.append(String(format: "%@ (%d)\n", section.name, section.items.count))
+                for card in section.items {
                     deckList.append(String(format: "%d %@\n", card.quantity, card.name))
                 }
                 deckList.append("\n")

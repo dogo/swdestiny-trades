@@ -61,6 +61,8 @@
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
 		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
+		DD7B108A1EE99E99003CA48D /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */; };
+		DD7B108C1EE9EBA7003CA48D /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */; };
 		DD7FF0F61E1DCD69004FC6CF /* BaseViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */; };
 		DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */; };
 		DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */; };
@@ -185,6 +187,8 @@
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
+		DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewConfiguration.swift; sourceTree = "<group>"; };
 		DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
@@ -628,6 +632,7 @@
 				DDFB0C921E286E5800442E1B /* BaseDelegate.swift */,
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
+				DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -889,6 +894,7 @@
 			children = (
 				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
+				DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1212,6 +1218,7 @@
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */,
+				DD7B108A1EE99E99003CA48D /* CollapsibleTableViewHeader.swift in Sources */,
 				DDB764BD1E43639E007758D5 /* DeckGraphDatasource.swift in Sources */,
 				DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */,
 				DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */,
@@ -1272,6 +1279,7 @@
 				DDB764C31E43639E007758D5 /* RadarMarkerView.swift in Sources */,
 				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
+				DD7B108C1EE9EBA7003CA48D /* UIView+Utils.swift in Sources */,
 				DDFB0C8F1E285F0C00442E1B /* SWDestinyAPI.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,

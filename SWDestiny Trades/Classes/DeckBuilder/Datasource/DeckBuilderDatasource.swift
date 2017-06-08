@@ -8,19 +8,34 @@
 
 import UIKit
 
-class DeckBuilderDatasource: NSObject, UITableViewDataSource {
+class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegate {
+
+    struct Section {
+        var name: String
+        var items: [CardDTO]
+        var collapsed: Bool
+
+        init(name: String, items: [CardDTO], collapsed: Bool = false) {
+            self.name = name
+            self.items = items
+            self.collapsed = collapsed
+        }
+    }
 
     fileprivate var tableView: UITableView?
-    fileprivate var sections: [String] = []
     fileprivate var currentDeck: DeckDTO!
-    var deckList: [String : [CardDTO]] = [ : ]
+    var deckList = [Section]()
 
-    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+    weak var delegate: BaseDelegate?
+    var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
+
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: DeckBuilderCell.self)
+        tableView.register(headerFooterViewType: CollapsibleTableViewHeader.self)
         self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
+        self.tableView?.delegate = self
         self.tableView?.reloadData()
     }
 
@@ -47,50 +62,56 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             remove(at: indexPath)
-            if let rows = deckList[sections[indexPath.section]], rows.count == 0 {
-                deckList.removeValue(forKey: sections[indexPath.section])
-                tableView.reloadSections(IndexSet(integer: indexPath.section), with: .left)
+            if deckList[indexPath.section].items.count == 0 {
+                deckList.remove(at: indexPath.section)
+                tableView.reloadData()
             } else {
                 tableView.deleteRows(at: [indexPath], with: .left)
             }
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard deckList[sections[section]] != nil else {
-            return nil
-        }
-        return sections[section].capitalized
-    }
-
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return deckList.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rows = deckList[sections[section]] else {
-            return 0
-        }
-        return rows.count
+        return deckList[section].collapsed ? 0 : deckList[section].items.count
     }
 
     public func getCard(at index: IndexPath) -> CardDTO? {
-        return (deckList[sections[index.section]]?[index.row])
+        return deckList[index.section].items[index.row]
     }
 
     public func getCardList() -> [CardDTO] {
         var list = [CardDTO]()
-        for cardList in deckList.values {
-            list.append(contentsOf: Array(cardList))
+        for cardList in deckList {
+            for card in cardList.items {
+                list.append(card)
+            }
         }
         return list
+    }
+
+    public func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
+        let collapsed = !deckList[section].collapsed
+
+        // Toggle collapse
+        deckList[section].collapsed = collapsed
+        header.setCollapsed(collapsed)
+
+        // Adjust the height of the rows inside the section
+        tableView?.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 
     public func updateTableViewData(deck: DeckDTO) {
         currentDeck = deck
         if !currentDeck.list.isEmpty {
-            sections = SectionsBuilder.byType(cardList: Array(currentDeck.list))
-            deckList = Split.cardsByType(cardList: Array(currentDeck.list), sections: sections)
+            let local = Split.cardsByType(cardList: Array(currentDeck.list), sections: SectionsBuilder.byType(cardList: Array(currentDeck.list)))
+            deckList.removeAll()
+            for card in local {
+                deckList.append(Section(name: card.key, items: card.value))
+            }
         }
         tableView?.reloadData()
     }
@@ -100,24 +121,40 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
             try RealmManager.shared.realm.write {
                 if let card = getCard(at: indexPath), let realmIndex = currentDeck.list.index(of: card) {
                     currentDeck.list.remove(objectAtIndex: realmIndex)
-                    deckList[sections[indexPath.section]]?.remove(at: indexPath.row)
+                    deckList[indexPath.section].items.remove(at: indexPath.row)
                 }
             }
         } catch let error as NSError {
             print("Error opening realm: \(error)")
         }
     }
-}
 
-class DeckBuilder: NSObject, UITableViewDelegate {
-
-    weak var delegate: BaseDelegate?
+    // MARK: <UITableViewDelegate>
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BaseViewCell.height()
+        return deckList[indexPath.section].collapsed ? 0 : BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectRowAt(index: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var header: CollapsibleTableViewHeader?
+        if header == nil {
+            header = tableView.dequeueReusableHeaderFooterView(CollapsibleTableViewHeader.self)
+        }
+
+        header?.titleLabel.text = deckList[section].name
+        header?.setCollapsed(deckList[section].collapsed)
+
+        header?.section = section
+        header?.delegate = collapsibleDelegate
+
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CollapsibleTableViewHeader.height()
     }
 }
