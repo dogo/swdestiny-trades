@@ -51,9 +51,12 @@ final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelega
     }
 
     func doingSearch(_ searchText: String) {
-        filtered = cardsData.filter({ (card) -> Bool in
-            return card.name.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
-        })
+
+        let predicate = NSPredicate(format: "name CONTAINS[cd] %@ OR code CONTAINS[cd] %@", searchText, searchText)
+        filtered = cardsData.filter {
+            predicate.evaluate(with: $0)
+        }
+
         searchIsActive = !searchText.trim().isEmpty
         tableView?.reloadData()
     }
