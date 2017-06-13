@@ -20,7 +20,7 @@ class SWDestinyAPI: BaseAPIClient {
             switch response.result {
             case .success(let data):
                 successBlock(Mapper<SetDTO>().mapArray(JSONObject: data)!)
-            case .failure(_):
+            case .failure:
                 ToastMessages.showNetworkErrorMessage()
                 failureBlock(response)
             }
@@ -33,7 +33,7 @@ class SWDestinyAPI: BaseAPIClient {
             switch response.result {
             case .success(let data):
                 successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
-            case .failure(_):
+            case .failure:
                 ToastMessages.showNetworkErrorMessage()
                 failureBlock(response)
             }
@@ -46,7 +46,7 @@ class SWDestinyAPI: BaseAPIClient {
             switch response.result {
             case .success(let data):
                 successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
-            case .failure(_):
+            case .failure:
                 ToastMessages.showNetworkErrorMessage()
                 failureBlock(response)
             }
@@ -59,7 +59,7 @@ class SWDestinyAPI: BaseAPIClient {
             switch response.result {
             case .success(let data):
                 successBlock(Mapper<CardDTO>().map(JSONObject: data)!)
-            case .failure(_):
+            case .failure:
                 ToastMessages.showNetworkErrorMessage()
                 failureBlock(response)
             }

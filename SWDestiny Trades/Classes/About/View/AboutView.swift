@@ -85,7 +85,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         aboutTextView.attributedText = attributedString
     }
 
-    // MARK : <UITextViewDelegate>
+    // MARK: <UITextViewDelegate>
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         UIApplication.shared.openURL(URL)

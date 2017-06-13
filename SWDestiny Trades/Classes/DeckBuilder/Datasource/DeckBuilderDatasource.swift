@@ -27,7 +27,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
     var deckList = [Section]()
 
     weak var delegate: BaseDelegate?
-    var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
+    weak var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
 
     required init(tableView: UITableView) {
         super.init()

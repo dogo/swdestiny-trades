@@ -55,6 +55,7 @@ class BaseAPIClient {
 
 extension DataResponse {
 
+    // swiftlint:disable:next cyclomatic_complexity
     func failureReason() -> String {
 
         var errorDescription: String = ""

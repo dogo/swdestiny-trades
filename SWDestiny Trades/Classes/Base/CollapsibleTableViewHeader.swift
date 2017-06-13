@@ -9,13 +9,13 @@
 import UIKit
 import Reusable
 
-protocol CollapsibleTableViewHeaderDelegate {
+protocol CollapsibleTableViewHeaderDelegate: class {
     func toggleSection(header: CollapsibleTableViewHeader, section: Int)
 }
 
 class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
 
-    var delegate: CollapsibleTableViewHeaderDelegate?
+    weak var delegate: CollapsibleTableViewHeaderDelegate?
     var section = 0
 
     var titleLabel: UILabel = {
