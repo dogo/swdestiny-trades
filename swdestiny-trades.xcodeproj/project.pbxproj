@@ -36,7 +36,6 @@
 		DD1DA42A1E873648001E76C4 /* CardDetailViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerSpec.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
-		DD3AFB5A1E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
@@ -1315,7 +1314,6 @@
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerSpec.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerSpec.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerSpec.swift in Sources */,
-				DD3AFB5A1E79CF6900BF2001 /* SwdShareProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
