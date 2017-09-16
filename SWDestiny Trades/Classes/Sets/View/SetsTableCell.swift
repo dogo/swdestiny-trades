@@ -41,6 +41,10 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
             expansionImageView.image = UIImage(named: "ic_awakenings")
         } else if setDTO.code.lowercased() == "sor" {
             expansionImageView.image = UIImage(named: "ic_spirit_of_rebellion")
+        } else if setDTO.code.lowercased() == "eaw" {
+            expansionImageView.image = UIImage(named: "ic_empire_at_war")
+        } else if setDTO.code.lowercased() == "tpg" {
+            expansionImageView.image = UIImage(named: "ic_two_player_game")
         } else {
             expansionImageView.image = UIImage(named: "ic_not_found")
         }
