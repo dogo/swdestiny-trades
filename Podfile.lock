@@ -1,12 +1,12 @@
 PODS:
-  - Alamofire (4.5.0)
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
-  - Firebase/Core (4.1.0):
+  - Alamofire (4.5.1)
+  - Charts (3.0.3):
+    - Charts/Core (= 3.0.3)
+  - Charts/Core (3.0.3)
+  - Firebase/Core (4.1.1):
     - FirebaseAnalytics (= 4.0.3)
-    - FirebaseCore (= 4.0.5)
-  - Firebase/Crash (4.1.0):
+    - FirebaseCore (= 4.0.6)
+  - Firebase/Crash (4.1.1):
     - Firebase/Core
     - FirebaseCrash (= 2.0.1)
   - FirebaseAnalytics (4.0.3):
@@ -14,7 +14,7 @@ PODS:
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.5):
+  - FirebaseCore (4.0.6):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
   - FirebaseCrash (2.0.1):
@@ -23,9 +23,9 @@ PODS:
     - GoogleToolboxForMac/Logger (~> 2.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - Protobuf (~> 3.1)
-  - FirebaseInstanceID (2.0.1):
+  - FirebaseInstanceID (2.0.2):
     - FirebaseCore (~> 4.0)
-  - FTPopOverMenu_Swift (0.0.8)
+  - FTPopOverMenu_Swift (0.0.9)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -34,7 +34,7 @@ PODS:
   - ImageSlideshow (1.3.2):
     - ImageSlideshow/Core (= 1.3.2)
   - ImageSlideshow/Core (1.3.2)
-  - Kingfisher (3.11.0)
+  - Kingfisher (4.0.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -45,18 +45,18 @@ PODS:
   - PKHUD (4.2.3)
   - Protobuf (3.4.0)
   - Quick (1.1.0)
-  - Realm (2.9.1):
-    - Realm/Headers (= 2.9.1)
-  - Realm/Headers (2.9.1)
-  - RealmSwift (2.9.1):
-    - Realm (= 2.9.1)
+  - Realm (2.10.1):
+    - Realm/Headers (= 2.10.1)
+  - Realm/Headers (2.10.1)
+  - RealmSwift (2.10.1):
+    - Realm (= 2.10.1)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
     - Reusable/View (= 4.0.0)
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
   - SnapKit (3.2.0)
-  - SwiftMessages (3.4.0)
+  - SwiftMessages (3.5.1)
   - TextFieldEffects (1.3.3)
 
 DEPENDENCIES:
@@ -78,30 +78,30 @@ DEPENDENCIES:
   - TextFieldEffects
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
-  Firebase: ebebf41db7f10e0c7668b6eaaa857fbe599aa478
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Charts: bcde37724c161958c1438dd4883971fcb2d50c06
+  Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
   FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
-  FirebaseCore: 7d876ea97a830cbe62ba7fbbe7670c833a324ba0
+  FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
   FirebaseCrash: bce9fbfb7dd6cc850a41fe39740a2292e6b61f2e
-  FirebaseInstanceID: 0500e3cb54a1a4e01a8cffcc09323b8bb8fc7e1e
-  FTPopOverMenu_Swift: '08f9a712c63811f675fe0b604c792e46246e00d9'
+  FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
+  FTPopOverMenu_Swift: 3c1c01a5005a06230ea4b7b9f4a96300f5748bd7
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: a68a76fc618ebd2b7481ce355ad67d7097203976
-  Kingfisher: c8911a7672c6217dec8c0520fb6e76ec4b7e0780
+  Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: f91fb43bd474c4f731a116ebf7392c75dd015920
-  RealmSwift: 207f12a4a36b696c5183c60a1c06d70234a23e56
+  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
+  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftMessages: e20aa1557fde1525ea369361bec4943cc0d08e7c
+  SwiftMessages: ea0184c801030e52674c603896812c392c129248
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
 PODFILE CHECKSUM: 824789c8777631de2cd6ad3c9b0b55667da6b924
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
