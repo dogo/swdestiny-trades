@@ -12,7 +12,7 @@ target 'SWDestiny Trades' do
   pod 'Firebase/Crash'
   pod 'FTPopOverMenu_Swift'
   pod 'ImageSlideshow'
-  pod 'Kingfisher'
+  pod 'Kingfisher', '3.13.1'
   pod 'ObjectMapper'
   pod 'PKHUD'
   pod 'RealmSwift'

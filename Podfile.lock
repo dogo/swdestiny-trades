@@ -34,7 +34,7 @@ PODS:
   - ImageSlideshow (1.3.2):
     - ImageSlideshow/Core (= 1.3.2)
   - ImageSlideshow/Core (1.3.2)
-  - Kingfisher (4.0.1)
+  - Kingfisher (3.13.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -66,7 +66,7 @@ DEPENDENCIES:
   - Firebase/Crash
   - FTPopOverMenu_Swift
   - ImageSlideshow
-  - Kingfisher
+  - Kingfisher (= 3.13.1)
   - Nimble
   - ObjectMapper
   - PKHUD
@@ -88,7 +88,7 @@ SPEC CHECKSUMS:
   FTPopOverMenu_Swift: 3c1c01a5005a06230ea4b7b9f4a96300f5748bd7
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: a68a76fc618ebd2b7481ce355ad67d7097203976
-  Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
+  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
@@ -102,6 +102,6 @@ SPEC CHECKSUMS:
   SwiftMessages: ea0184c801030e52674c603896812c392c129248
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
-PODFILE CHECKSUM: 824789c8777631de2cd6ad3c9b0b55667da6b924
+PODFILE CHECKSUM: f303077f071beae05994de5667a1dcb7399561ca
 
 COCOAPODS: 1.3.1
