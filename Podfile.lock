@@ -34,14 +34,14 @@ PODS:
   - ImageSlideshow (1.3.2):
     - ImageSlideshow/Core (= 1.3.2)
   - ImageSlideshow/Core (1.3.2)
-  - Kingfisher (3.13.1)
+  - Kingfisher (4.0.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Nimble (7.0.1)
-  - ObjectMapper (2.2.8)
+  - ObjectMapper (2.2.9)
   - PKHUD (4.2.3)
   - Protobuf (3.4.0)
   - Quick (1.1.0)
@@ -55,7 +55,7 @@ PODS:
     - Reusable/View (= 4.0.0)
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
-  - SnapKit (3.2.0)
+  - SnapKit (4.0.0)
   - SwiftMessages (3.5.1)
   - TextFieldEffects (1.3.3)
 
@@ -66,7 +66,7 @@ DEPENDENCIES:
   - Firebase/Crash
   - FTPopOverMenu_Swift
   - ImageSlideshow
-  - Kingfisher (= 3.13.1)
+  - Kingfisher
   - Nimble
   - ObjectMapper
   - PKHUD
@@ -88,20 +88,20 @@ SPEC CHECKSUMS:
   FTPopOverMenu_Swift: 3c1c01a5005a06230ea4b7b9f4a96300f5748bd7
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: a68a76fc618ebd2b7481ce355ad67d7097203976
-  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
+  Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
-  ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
+  ObjectMapper: 63cfe41bc6f8e7c8f44344c49901b8ae7de14c52
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
   RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
-  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftMessages: ea0184c801030e52674c603896812c392c129248
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
-PODFILE CHECKSUM: f303077f071beae05994de5667a1dcb7399561ca
+PODFILE CHECKSUM: 824789c8777631de2cd6ad3c9b0b55667da6b924
 
 COCOAPODS: 1.3.1
