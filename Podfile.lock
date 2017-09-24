@@ -1,39 +1,38 @@
 PODS:
   - Alamofire (4.5.1)
-  - Charts (3.0.3):
-    - Charts/Core (= 3.0.3)
-  - Charts/Core (3.0.3)
-  - Firebase/Core (4.1.1):
+  - Charts (3.0.4):
+    - Charts/Core (= 3.0.4)
+  - Charts/Core (3.0.4)
+  - Firebase/Core (4.2.0):
     - FirebaseAnalytics (= 4.0.3)
-    - FirebaseCore (= 4.0.6)
-  - Firebase/Crash (4.1.1):
+    - FirebaseCore (= 4.0.7)
+  - Firebase/Crash (4.2.0):
     - Firebase/Core
-    - FirebaseCrash (= 2.0.1)
+    - FirebaseCrash (= 2.0.2)
   - FirebaseAnalytics (4.0.3):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.6):
+  - FirebaseCore (4.0.7):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCrash (2.0.1):
+  - FirebaseCrash (2.0.2):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - Protobuf (~> 3.1)
-  - FirebaseInstanceID (2.0.2):
-    - FirebaseCore (~> 4.0)
+  - FirebaseInstanceID (2.0.3)
   - FTPopOverMenu_Swift (0.0.9)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/Logger (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - ImageSlideshow (1.3.2):
-    - ImageSlideshow/Core (= 1.3.2)
-  - ImageSlideshow/Core (1.3.2)
+  - ImageSlideshow (1.4.0):
+    - ImageSlideshow/Core (= 1.4.0)
+  - ImageSlideshow/Core (1.4.0)
   - Kingfisher (4.0.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -41,7 +40,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Nimble (7.0.1)
-  - ObjectMapper (2.2.9)
+  - ObjectMapper (3.0.0)
   - PKHUD (4.2.3)
   - Protobuf (3.4.0)
   - Quick (1.1.0)
@@ -56,7 +55,7 @@ PODS:
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
   - SnapKit (4.0.0)
-  - SwiftMessages (3.5.1)
+  - SwiftMessages (4.0.0)
   - TextFieldEffects (1.3.3)
 
 DEPENDENCIES:
@@ -79,19 +78,19 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Charts: bcde37724c161958c1438dd4883971fcb2d50c06
-  Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
+  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
+  Firebase: 9548cae14d69718add12d75a5b312893f7ef89c7
   FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
-  FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
-  FirebaseCrash: bce9fbfb7dd6cc850a41fe39740a2292e6b61f2e
-  FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
+  FirebaseCore: 9a6cc1e3eaf75905390f9220596ad4fd8f92faee
+  FirebaseCrash: cded0fc566c03651aea606a101bc156085f333ca
+  FirebaseInstanceID: a4fc702b5a026f7322964376047f1a3f1f7cc6ff
   FTPopOverMenu_Swift: 3c1c01a5005a06230ea4b7b9f4a96300f5748bd7
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  ImageSlideshow: a68a76fc618ebd2b7481ce355ad67d7097203976
+  ImageSlideshow: 2c4de19eae796a46f1c827f9d3520d3193079613
   Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
-  ObjectMapper: 63cfe41bc6f8e7c8f44344c49901b8ae7de14c52
+  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
@@ -99,7 +98,7 @@ SPEC CHECKSUMS:
   RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SwiftMessages: ea0184c801030e52674c603896812c392c129248
+  SwiftMessages: cd565e0e7d095584be1770c012c6b5be4183b5ee
   TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
 
 PODFILE CHECKSUM: 824789c8777631de2cd6ad3c9b0b55667da6b924
