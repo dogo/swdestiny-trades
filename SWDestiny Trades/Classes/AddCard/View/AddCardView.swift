@@ -35,7 +35,11 @@ final class AddCardView: UIView, BaseViewConfiguration {
 
     internal func setupConstraints() {
         searchBar.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(64)
+            if #available(iOS 11, *) {
+                make.top.equalTo(safeAreaLayoutGuide.snp.topMargin)
+            } else {
+                make.top.equalTo(self).offset(64)
+            }
             make.left.equalTo(self)
             make.right.equalTo(self)
             make.height.equalTo(44)
