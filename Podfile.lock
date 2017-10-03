@@ -39,16 +39,16 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - Nimble (7.0.1)
+  - Nimble (7.0.2)
   - ObjectMapper (3.0.0)
   - PKHUD (4.2.3)
   - Protobuf (3.4.0)
-  - Quick (1.1.0)
-  - Realm (2.10.1):
-    - Realm/Headers (= 2.10.1)
-  - Realm/Headers (2.10.1)
-  - RealmSwift (2.10.1):
-    - Realm (= 2.10.1)
+  - Quick (1.2.0)
+  - Realm (2.10.2):
+    - Realm/Headers (= 2.10.2)
+  - Realm/Headers (2.10.2)
+  - RealmSwift (2.10.2):
+    - Realm (= 2.10.2)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
     - Reusable/View (= 4.0.0)
@@ -89,13 +89,13 @@ SPEC CHECKSUMS:
   ImageSlideshow: 2c4de19eae796a46f1c827f9d3520d3193079613
   Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
+  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
   PKHUD: c7692163a09875cbf15827dc581df3c5cf7f1015
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
-  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
-  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
+  RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftMessages: cd565e0e7d095584be1770c012c6b5be4183b5ee
