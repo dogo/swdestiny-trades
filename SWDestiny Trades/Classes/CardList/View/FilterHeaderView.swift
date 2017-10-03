@@ -46,7 +46,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
         segmentControl.removeAllSegments()
     }
 
-    func valueChanged(_ sender: UISegmentedControl) {
+    @objc func valueChanged(_ sender: UISegmentedControl) {
         self.delegate?.didSelectSegment(index: sender.selectedSegmentIndex)
     }
 

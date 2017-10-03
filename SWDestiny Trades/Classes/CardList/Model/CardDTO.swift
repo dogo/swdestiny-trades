@@ -13,36 +13,36 @@ import RealmSwift
 class CardDTO: Object, Mappable {
 
     let dieFaces = List<StringObject>()
-    dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
-    dynamic var setCode: String = ""
-    dynamic var setName: String = ""
-    dynamic var typeCode: String = ""
-    dynamic var typeName: String = ""
-    dynamic var factionCode: String = ""
-    dynamic var factionName: String = ""
-    dynamic var affiliationCode: String = ""
-    dynamic var affiliationName: String = ""
-    dynamic var rarityCode: String = ""
-    dynamic var rarityName: String = ""
-    dynamic var position: Int = 0
-    dynamic var code: String = ""
-    dynamic var ttscardid: String = ""
-    dynamic var name: String = ""
-    dynamic var subtitle: String = ""
-    dynamic var cost: Int = 0
-    dynamic var health: Int = 0
-    dynamic var points: String = ""
-    dynamic var text: String = ""
-    dynamic var deckLimit: Int = 0
-    dynamic var flavor: String = ""
-    dynamic var illustrator: String = ""
-    dynamic var isUnique: Bool = false
-    dynamic var hasDie: Bool = false
-    dynamic var externalUrl: String = ""
-    dynamic var imageUrl: String = ""
-    dynamic var label: String = ""
-    dynamic var cp: Int = 0 // swiftlint:disable:this identifier_name
-    dynamic var quantity: Int = 1
+    @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
+    @objc dynamic var setCode: String = ""
+    @objc dynamic var setName: String = ""
+    @objc dynamic var typeCode: String = ""
+    @objc dynamic var typeName: String = ""
+    @objc dynamic var factionCode: String = ""
+    @objc dynamic var factionName: String = ""
+    @objc dynamic var affiliationCode: String = ""
+    @objc dynamic var affiliationName: String = ""
+    @objc dynamic var rarityCode: String = ""
+    @objc dynamic var rarityName: String = ""
+    @objc dynamic var position: Int = 0
+    @objc dynamic var code: String = ""
+    @objc dynamic var ttscardid: String = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var subtitle: String = ""
+    @objc dynamic var cost: Int = 0
+    @objc dynamic var health: Int = 0
+    @objc dynamic var points: String = ""
+    @objc dynamic var text: String = ""
+    @objc dynamic var deckLimit: Int = 0
+    @objc dynamic var flavor: String = ""
+    @objc dynamic var illustrator: String = ""
+    @objc dynamic var isUnique: Bool = false
+    @objc dynamic var hasDie: Bool = false
+    @objc dynamic var externalUrl: String = ""
+    @objc dynamic var imageUrl: String = ""
+    @objc dynamic var label: String = ""
+    @objc dynamic var cp: Int = 0 // swiftlint:disable:this identifier_name
+    @objc dynamic var quantity: Int = 1
 
     required convenience public init?(map: Map) {
         self.init()
@@ -98,5 +98,5 @@ class CardDTO: Object, Mappable {
 }
 
 class StringObject: Object {
-    dynamic var value: String?
+    @objc dynamic var value: String?
 }

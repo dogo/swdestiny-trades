@@ -37,7 +37,7 @@ final class SetsView: UIView, BaseViewConfiguration {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         let title = "Last update: \(formatter.string(from: Date()))"
-        let attrsDictionary = [NSForegroundColorAttributeName: UIColor.black]
+        let attrsDictionary = [NSAttributedStringKey.foregroundColor: UIColor.black]
         let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
         self.pullToRefresh.attributedTitle = attributedTitle
         self.pullToRefresh.endRefreshing()

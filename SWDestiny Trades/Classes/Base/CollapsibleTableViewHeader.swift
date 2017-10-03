@@ -40,14 +40,14 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseVie
         setupConstraints()
         configureViews()
 
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CollapsibleTableViewHeader.tapHeader(_:))))
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHeader(_:))))
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func tapHeader(_ gestureRecognizer: UITapGestureRecognizer) {
+    @objc func tapHeader(_ gestureRecognizer: UITapGestureRecognizer) {
         guard let cell = gestureRecognizer.view as? CollapsibleTableViewHeader else {
             return
         }

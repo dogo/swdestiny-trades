@@ -25,7 +25,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.setContentCompressionResistancePriority(749.0, for: .horizontal)
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 749.0), for: .horizontal)
         return label
     }()
 
@@ -103,7 +103,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         }
     }
 
-    func valueChanged(_ sender: UIStepper) {
+    @objc func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
         self.stepperValueChanged?(value, self)

@@ -69,7 +69,7 @@ class CardDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
 
-    func addToCollection() {
+    @objc func addToCollection() {
         let card = self.cards[cardView.slideshow.currentPage]
         UserCollectionViewController.addToCollection(carDTO: card)
         showSuccessMessage(cardDTO: card)
@@ -81,7 +81,7 @@ class CardDetailViewController: UIViewController {
         HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: cardDTO.name), delay: 0.2)
     }
 
-    func share(_ sender: UIBarButtonItem) {
+    @objc func share(_ sender: UIBarButtonItem) {
 
         if let shareImage = cardView.slideshow.currentSlideshowItem?.imageView.image {
 

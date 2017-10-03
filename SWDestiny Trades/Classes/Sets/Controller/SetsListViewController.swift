@@ -55,7 +55,7 @@ class SetsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
     }
 
-    func retriveSets(sender: UIRefreshControl) {
+    @objc func retriveSets(sender: UIRefreshControl) {
         SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
             self.setsView.setsTableView.updateSetList(setsArray)
             self.setsView.endRefreshControl()
@@ -76,12 +76,12 @@ class SetsListViewController: UIViewController {
 
     // MARK: - UIBarButton Actions
 
-    func aboutButtonTouched(_ sender: Any) {
+    @objc func aboutButtonTouched(_ sender: Any) {
         let nextController = AboutViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    func searchButtonTouched(_ sender: Any) {
+    @objc func searchButtonTouched(_ sender: Any) {
         let nextController = SearchListViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }

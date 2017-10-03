@@ -21,6 +21,6 @@ struct AppearanceProxyHelper {
         navigationBarAppearance.tintColor = .white
         navigationBarAppearance.barStyle = .blackTranslucent
         navigationBarAppearance.barTintColor = ColorPalette.appTheme
-        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 }

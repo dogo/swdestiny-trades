@@ -72,17 +72,17 @@ final class DeckBuilderViewController: UIViewController {
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    func navigateToAddCardViewController() {
+    @objc func navigateToAddCardViewController() {
         let nextController = AddCardViewController(deck: deckDTO, isDeckBuilder: true)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    func navigateToDeckGraphViewController() {
+    @objc func navigateToDeckGraphViewController() {
         let nextController = DeckGraphViewController(deck: deckDTO)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    func share(_ sender: UIBarButtonItem) {
+    @objc func share(_ sender: UIBarButtonItem) {
 
         var deckList: String = "\(deckDTO.name)\n\n"
 

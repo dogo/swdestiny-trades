@@ -116,12 +116,12 @@ final class UserCollectionViewController: UIViewController {
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    func navigateToAddCardViewController() {
+    @objc func navigateToAddCardViewController() {
         let nextController = AddCardViewController(userCollection: UserCollectionViewController.getUserCollection(), isUserCollection: true)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    func share(_ sender: UIBarButtonItem) {
+    @objc func share(_ sender: UIBarButtonItem) {
 
         var collectionList: String = ""
 
@@ -142,7 +142,7 @@ final class UserCollectionViewController: UIViewController {
         }
     }
 
-    func sort(_ sender: UIBarButtonItem, event: UIEvent) {
+    @objc func sort(_ sender: UIBarButtonItem, event: UIEvent) {
         FTPopOverMenu.showForEvent(event: event, with: ["A-Z", NSLocalizedString("CARD_NUMBER", comment: ""), NSLocalizedString("COLOR", comment: "")], done: { (selectedIndex) -> Void in
             self.userCollectionView.userCollectionTableView.sort(selectedIndex)
             self.currentSortIndex = selectedIndex

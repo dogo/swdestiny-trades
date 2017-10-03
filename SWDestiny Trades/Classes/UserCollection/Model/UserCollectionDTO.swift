@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class UserCollectionDTO: Object {
-    dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
+    @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
     let myCollection = List<CardDTO>()
 
     override class func primaryKey() -> String {

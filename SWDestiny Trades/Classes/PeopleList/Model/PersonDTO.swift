@@ -10,9 +10,9 @@ import Foundation
 import RealmSwift
 
 class PersonDTO: Object {
-    dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
-    dynamic var name = ""
-    dynamic var lastName = ""
+    @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
+    @objc dynamic var name = ""
+    @objc dynamic var lastName = ""
     let lentMe = List<CardDTO>()
     let borrowed = List<CardDTO>()
 
