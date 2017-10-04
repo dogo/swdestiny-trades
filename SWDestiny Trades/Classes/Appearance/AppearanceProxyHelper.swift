@@ -22,5 +22,9 @@ struct AppearanceProxyHelper {
         navigationBarAppearance.barStyle = .blackTranslucent
         navigationBarAppearance.barTintColor = ColorPalette.appTheme
         navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        if #available(iOS 11.0, *) {
+            navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navigationBarAppearance.prefersLargeTitles = true
+        }
     }
 }
