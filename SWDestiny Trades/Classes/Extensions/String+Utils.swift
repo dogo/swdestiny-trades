@@ -19,13 +19,13 @@ extension String {
         let startIndex = self.index(self.startIndex, offsetBy: start)
         let endIndex = self.index(startIndex, offsetBy: end)
 
-        let finalString = self.substring(from: startIndex)
-        return finalString.substring(to: endIndex)
+        let finalString = self[startIndex...]
+        return String(finalString[..<endIndex])
     }
 
     func subString(from: Int) -> String {
         let startIndex = self.index(self.startIndex, offsetBy: from)
-        return self.substring(from: startIndex)
+        return String(self[startIndex...])
     }
 
     var length: Int {
