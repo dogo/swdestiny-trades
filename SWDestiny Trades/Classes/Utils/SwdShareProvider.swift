@@ -25,9 +25,6 @@ class SwdShareProvider: UIActivityItemProvider {
     }
 
     override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
-        if let activityType = activityType, activityType.rawValue.contains("whatsapp") {
-            return self.text.replacingOccurrences(of: "\n", with: "</br>")
-        }
         return text
     }
 }
