@@ -66,7 +66,7 @@ class AddCardViewController: UIViewController {
             self.addCardView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
             print(failureReason)
-            Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as NSObject])
+            Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as String])
         }
 
         addCardView.addCardTableView.didSelectCard = { [weak self] card in

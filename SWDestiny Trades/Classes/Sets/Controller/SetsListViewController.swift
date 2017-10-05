@@ -66,7 +66,7 @@ class SetsListViewController: UIViewController {
             self.setsView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
             print(failureReason)
-            Analytics.logEvent("retrieveSetList", parameters: ["error": failureReason as NSObject])
+            Analytics.logEvent("retrieveSetList", parameters: ["error": failureReason as String])
         }
     }
 

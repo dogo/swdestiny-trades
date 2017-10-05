@@ -46,7 +46,7 @@ class SearchListViewController: UIViewController {
             self.searchView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
             print(failureReason)
-            Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as NSObject])
+            Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as String])
         }
 
         searchView.searchTableView.didSelectCard = { [weak self] card in
