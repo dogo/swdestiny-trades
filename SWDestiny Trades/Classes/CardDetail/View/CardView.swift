@@ -41,7 +41,11 @@ final class CardView: UIView, BaseViewConfiguration {
 
     internal func setupConstraints() {
         slideshow.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(64)
+            if #available(iOS 11, *) {
+                make.top.equalTo(safeAreaLayoutGuide.snp.topMargin)
+            } else {
+                make.top.equalTo(self).offset(64)
+            }
             make.left.equalTo(self)
             make.bottom.equalTo(self).offset(-49)
             make.right.equalTo(self)
