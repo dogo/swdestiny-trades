@@ -34,9 +34,10 @@ class SetsListViewController: UIViewController {
         self.view.backgroundColor = .white
 
         setupNavigationItem()
+
         setsView.pullToRefresh.addTarget(self, action: #selector(retriveSets(sender:)), for: .valueChanged)
 
-        setsView.beginRefreshing()
+        setsView.activityIndicator.startAnimating()
         retriveSets(sender: setsView.pullToRefresh)
 
         setsView.setsTableView.didSelectSet = { [weak self] set in
@@ -59,8 +60,10 @@ class SetsListViewController: UIViewController {
         SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
             self.setsView.setsTableView.updateSetList(setsArray)
             self.setsView.endRefreshControl()
+            self.setsView.activityIndicator.stopAnimating()
         }) { (error: DataResponse<Any>) in
             self.setsView.endRefreshControl()
+            self.setsView.activityIndicator.stopAnimating()
             let failureReason = error.failureReason()
             print(failureReason)
             Analytics.logEvent("retrieveSetList", parameters: ["error": failureReason as NSObject])

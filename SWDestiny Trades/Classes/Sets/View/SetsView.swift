@@ -12,11 +12,11 @@ final class SetsView: UIView, BaseViewConfiguration {
 
     let setsTableView = SetsTableView()
 
-    var pullToRefresh: UIRefreshControl = {
-        let refresh = UIRefreshControl()
-        refresh.tintColor = UIColor.black
-        return refresh
-    }()
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+    let pullToRefresh = UIRefreshControl()
+
+    var textColor: UIColor = .black
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +37,7 @@ final class SetsView: UIView, BaseViewConfiguration {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         let title = "Last update: \(formatter.string(from: Date()))"
-        let attrsDictionary = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        let attrsDictionary = [NSAttributedStringKey.foregroundColor: textColor]
         let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
         self.pullToRefresh.attributedTitle = attributedTitle
         self.pullToRefresh.endRefreshing()
@@ -47,6 +47,7 @@ final class SetsView: UIView, BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(setsTableView)
+        setsTableView.addSubview(activityIndicator)
         if #available(iOS 10.0, *) {
             setsTableView.refreshControl = pullToRefresh
         } else {
@@ -62,9 +63,18 @@ final class SetsView: UIView, BaseViewConfiguration {
             make.bottom.equalTo(self)
             make.right.equalTo(self)
         }
+
+        activityIndicator.snp.makeConstraints { make in
+            make.centerX.equalTo(self)
+            make.centerY.equalTo(self)
+        }
     }
 
     internal func configureViews() {
         self.backgroundColor = .white
+        if #available(iOS 11, *) {
+            textColor = .white
+        }
+        self.pullToRefresh.tintColor = textColor
     }
 }
