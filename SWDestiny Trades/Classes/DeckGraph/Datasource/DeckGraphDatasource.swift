@@ -73,6 +73,7 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         var upgrades = 0
         var supports = 0
         var events = 0
+        var plots = 0
         for card in deck.list {
             if card.typeCode == "upgrade" {
                 upgrades += card.quantity
@@ -80,18 +81,23 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
                 supports += card.quantity
             } else if card.typeCode == "event" {
                 events += card.quantity
+            } else if card.typeCode == "plot" {
+                plots += card.quantity
             }
         }
 
-        if !(events == 0 && supports == 0 && upgrades == 0) {
-            cardTypes = [upgrades, supports, events]
+        if !(events == 0 && supports == 0 && upgrades == 0 && plots == 0) {
+            cardTypes = [upgrades, supports, events, plots]
         }
 
         // LineChart
         if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
             for i in 0...maxCost {
                 var cardCost = 0
-                for card in deck.list where card.cost == i && card.typeCode != "character" && card.typeCode != "battlefield" {
+                for card in deck.list where card.cost == i &&
+                    card.typeCode != "character" &&
+                    card.typeCode != "battlefield" &&
+                    card.typeCode != "plot" {
                     cardCost += card.quantity
                 }
                 cardCosts.append(cardCost)
@@ -100,7 +106,7 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
         // RadarChart
         var specialFace = 0, blankFace = 0, meleeFace = 0, rangedFace = 0, focusFace = 0
-        var disruptFace = 0, shieldFace = 0, discardFace = 0, resourceFace = 0
+        var disruptFace = 0, shieldFace = 0, discardFace = 0, resourceFace = 0, indirectFace = 0
         for card in deck.list {
             specialFace += (card.dieFaces.filter("value LIKE 'Sp'").count * card.quantity)
             blankFace += (card.dieFaces.filter("value == '-'").count * card.quantity)
@@ -111,8 +117,9 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
             shieldFace += (card.dieFaces.filter("value LIKE '*Sh'").count * card.quantity)
             discardFace += (card.dieFaces.filter("value LIKE '*Dc*'").count * card.quantity)
             resourceFace += (card.dieFaces.filter("value LIKE '*R'").count * card.quantity)
+            indirectFace += (card.dieFaces.filter("value LIKE '*ID*'").count * card.quantity)
         }
-        dieFaces = [specialFace, blankFace, meleeFace, rangedFace, focusFace, disruptFace, shieldFace, discardFace, resourceFace]
+        dieFaces = [specialFace, blankFace, meleeFace, rangedFace, focusFace, disruptFace, shieldFace, discardFace, resourceFace, indirectFace]
     }
 }
 

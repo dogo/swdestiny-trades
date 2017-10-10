@@ -12,7 +12,7 @@ import Charts
 
 final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfiguration, IAxisValueFormatter {
 
-    let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus", "Disrupt", "Shield", "Discard", "Resource"]
+    let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus", "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
 
     var diceRadarView: RadarChartView = {
         let view = RadarChartView(frame: .zero)
