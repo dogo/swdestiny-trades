@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1500px"
+   height="1500px"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="tw.svg">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1351"
+     inkscape:window-height="775"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.15733333"
+     inkscape:cx="-842.16103"
+     inkscape:cy="750"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     inkscape:snap-center="true" />
+     <path unicode="&#xe912;" glyph-name="plot" d="M217.805-29.030c15.718 50.278 39.424 121.037 71.219 223.334 138.598 21.965 195.942-17.459 283.955 139.725-71.424-21.862-157.542 40.55-152.934 67.635 4.659 27.034 200.346-19.507 328.499 162.458-161.536-35.635-213.197 42.803-192.358 54.63 48.077 27.341 190.771 11.366 266.854 85.453 39.219 38.144 57.6 130.867 41.626 163.942-19.149 39.987-135.987 99.635-200.397 94.003-64.41-5.581-165.427-245.248-195.43-243.405-29.901 1.894-35.994 107.418 16.333 205.466-55.142-24.422-156.211-100.301-187.904-165.171-59.034-120.678 5.53-397.619-15.155-407.45-20.736-9.882-90.419 127.027-111.206 189.133-28.416-95.181-29.082-190.515 53.914-317.133-31.283-83.098-48.384-178.739-50.995-227.379-1.229-38.861 37.069-47.206 43.981-25.242z"
+     id="path4"
+     inkscape:connector-curvature="0" />
+</svg>
