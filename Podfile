@@ -10,7 +10,7 @@ target 'SWDestiny Trades' do
   pod 'Charts'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
-  pod 'FTPopOverMenu_Swift'
+  pod 'FTPopOverMenu_Swift', :git => 'https://github.com/liufengting/FTPopOverMenu_Swift.git'
   pod 'ImageSlideshow'
   pod 'Kingfisher'
   pod 'ObjectMapper'
