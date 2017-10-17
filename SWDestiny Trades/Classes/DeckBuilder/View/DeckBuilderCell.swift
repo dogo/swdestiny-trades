@@ -78,7 +78,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         titleLabel.snp.remakeConstraints { make in
             make.left.equalTo(quantityLabel.snp.right).offset(8)
             make.right.equalTo(quantityStepper.snp.left).offset(-1)
-            guard let subtitle = subtitleLabel.text, subtitle.isNotEmpty else {
+            guard let subtitle = subtitleLabel.text, !subtitle.isEmpty else {
                 make.centerY.equalTo(self.contentView)
                 self.layoutIfNeeded()
                 return

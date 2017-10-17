@@ -34,7 +34,7 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
     private func setSubtitle(card: CardDTO, useIndex: Bool) {
         if useIndex {
             baseViewCell.subtitleLabel.text = "#\(card.code.subString(from: 2))"
-            if card.subtitle.isNotEmpty {
+            if !card.subtitle.isEmpty {
                 baseViewCell.subtitleLabel.text?.append(", \(card.subtitle)")
             }
         } else {
@@ -43,7 +43,7 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
         baseViewCell.titleLabel.snp.remakeConstraints { make in
             make.left.equalTo(baseViewCell.iconImageView.snp.right).offset(12)
-            guard let subtitle = baseViewCell.subtitleLabel.text, subtitle.isNotEmpty else {
+            guard let subtitle = baseViewCell.subtitleLabel.text, !subtitle.isEmpty else {
                 make.centerY.equalTo(baseViewCell.contentView)
                 return
             }

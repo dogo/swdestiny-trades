@@ -56,7 +56,7 @@ PODS:
   - Reusable/View (4.0.0)
   - SnapKit (4.0.0)
   - SwiftMessages (4.0.0)
-  - TextFieldEffects (1.3.3)
+  - TextFieldEffects (1.4.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -108,7 +108,7 @@ SPEC CHECKSUMS:
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftMessages: cd565e0e7d095584be1770c012c6b5be4183b5ee
-  TextFieldEffects: 8706f53525f1ce51c8921b7af32237caab50c467
+  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
 PODFILE CHECKSUM: 43488272b60e76538d2860560c4092d04449aa9c
 
