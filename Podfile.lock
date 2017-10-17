@@ -33,7 +33,7 @@ PODS:
   - ImageSlideshow (1.4.1):
     - ImageSlideshow/Core (= 1.4.1)
   - ImageSlideshow/Core (1.4.1)
-  - Kingfisher (4.1.0)
+  - Kingfisher (4.1.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -96,7 +96,7 @@ SPEC CHECKSUMS:
   FTPopOverMenu_Swift: 406ee2df3fbebba581d3734a3f204ddc1ce5f01a
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   ImageSlideshow: 1bb0e610e28a71e8936d57265d882f61714a470b
-  Kingfisher: f14df8cbe576bf55f211fa589e9869bceb4ea87d
+  Kingfisher: 6793a473357b5dbee42b0068ef203fe8325f259e
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
