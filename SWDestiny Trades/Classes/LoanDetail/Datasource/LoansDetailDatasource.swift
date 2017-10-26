@@ -116,10 +116,10 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             try RealmManager.shared.realm.write {
                 if indexPath.section == 0 {
                     lentMe.remove(at: indexPath.row)
-                    currentPerson.lentMe.remove(objectAtIndex: indexPath.row)
+                    currentPerson.lentMe.remove(at: indexPath.row)
                 } else {
                     borrowed.remove(at: indexPath.row)
-                    currentPerson.borrowed.remove(objectAtIndex: indexPath.row)
+                    currentPerson.borrowed.remove(at: indexPath.row)
                 }
             }
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)

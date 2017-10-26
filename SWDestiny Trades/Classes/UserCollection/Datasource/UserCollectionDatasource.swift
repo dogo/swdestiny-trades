@@ -93,7 +93,7 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         do {
             try RealmManager.shared.realm.write {
                 if let card = getCard(at: indexPath), let realmIndex = userCollection.myCollection.index(of: card) {
-                    userCollection.myCollection.remove(objectAtIndex: realmIndex)
+                    userCollection.myCollection.remove(at: realmIndex)
                     collectionList.remove(at: indexPath.row)
                 }
             }

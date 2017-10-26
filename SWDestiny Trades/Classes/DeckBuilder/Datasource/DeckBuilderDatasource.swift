@@ -120,7 +120,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         do {
             try RealmManager.shared.realm.write {
                 if let card = getCard(at: indexPath), let realmIndex = currentDeck.list.index(of: card) {
-                    currentDeck.list.remove(objectAtIndex: realmIndex)
+                    currentDeck.list.remove(at: realmIndex)
                     deckList[indexPath.section].items.remove(at: indexPath.row)
                 }
             }
