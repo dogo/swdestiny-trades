@@ -11,7 +11,7 @@ import UIKit
 class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
     fileprivate var tableView: UITableView?
-    fileprivate var colorCards: [String : [CardDTO]] = [ : ]
+    fileprivate var colorCards: [String: [CardDTO]] = [ : ]
     fileprivate var sections: [String] = []
 
     required init(tableView: UITableView) {

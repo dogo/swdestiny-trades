@@ -10,7 +10,7 @@ import Foundation
 
 final class Split {
 
-    static func cardsAlphabetically(cardList: [CardDTO], sections: [String]) -> [String : [CardDTO]] {
+    static func cardsAlphabetically(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
 
         func getFirstLetter(cardDTO: CardDTO) -> String {
             return String(cardDTO.name[cardDTO.name.startIndex])
@@ -36,7 +36,7 @@ final class Split {
         return tableViewSource
     }
 
-    static func cardsByColor(cardList: [CardDTO], sections: [String]) -> [String : [CardDTO]] {
+    static func cardsByColor(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
 
         func getColor(cardDTO: CardDTO) -> String {
             return cardDTO.factionCode
@@ -61,7 +61,7 @@ final class Split {
         return tableViewSource
     }
 
-    static func cardsByType(cardList: [CardDTO], sections: [String]) -> [String : [CardDTO]] {
+    static func cardsByType(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
 
         func getType(cardDTO: CardDTO) -> String {
             return cardDTO.typeName
@@ -87,7 +87,7 @@ final class Split {
         return tableViewSource
     }
 
-    static func setsByAlphabetically(setList: [SetDTO], sections: [String]) -> [String : [SetDTO]] {
+    static func setsByAlphabetically(setList: [SetDTO], sections: [String]) -> [String: [SetDTO]] {
 
         func getFirstLetter(setDTO: SetDTO) -> String {
             return String(setDTO.name.characters.prefix(1))

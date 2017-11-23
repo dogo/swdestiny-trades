@@ -11,7 +11,7 @@ import UIKit
 class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
     fileprivate var tableView: UITableView?
-    fileprivate var alphabeticallyCards: [String : [CardDTO]] = [ : ]
+    fileprivate var alphabeticallyCards: [String: [CardDTO]] = [ : ]
     fileprivate var sections: [String] = []
 
     required init(tableView: UITableView) {
