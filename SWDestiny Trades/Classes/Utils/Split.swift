@@ -90,7 +90,7 @@ final class Split {
     static func setsByAlphabetically(setList: [SetDTO], sections: [String]) -> [String: [SetDTO]] {
 
         func getFirstLetter(setDTO: SetDTO) -> String {
-            return String(setDTO.name.characters.prefix(1))
+            return String(setDTO.name.prefix(1))
         }
 
         // Build tableSource array
