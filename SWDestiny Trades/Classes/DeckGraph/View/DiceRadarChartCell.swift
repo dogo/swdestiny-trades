@@ -69,7 +69,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
             dataEntries.append(dataEntry)
         }
 
-        let chartDataSet = RadarChartDataSet(values: dataEntries, label: NSLocalizedString("DICE_SYMBOLS", comment: ""))
+        let chartDataSet = RadarChartDataSet(values: dataEntries, label: L10n.diceSymbols)
         chartDataSet.drawFilledEnabled = true
         chartDataSet.fillAlpha = 0.7
         chartDataSet.lineWidth = 2.0

@@ -29,7 +29,7 @@ class PersonCell: UITableViewCell, Reusable {
 
     private func getLoanState(personDTO: PersonDTO) -> String {
 
-        var loanState = NSLocalizedString("NO_LOANS", comment: "")
+        var loanState = L10n.noLoans
         let lentMeCount = personDTO.lentMe.sum(ofProperty: "quantity") as Int
         let borrowedCount = personDTO.borrowed.sum(ofProperty: "quantity") as Int
         if lentMeCount > 0 && borrowedCount > 0 {

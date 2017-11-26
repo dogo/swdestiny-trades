@@ -84,7 +84,7 @@ class AddCardViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = NSLocalizedString("ADD_CARD", comment: "")
+        self.navigationItem.title = L10n.addCard
     }
 
     // MARK: - Helpers
@@ -115,7 +115,7 @@ class AddCardViewController: UIViewController {
             let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }
     }
 
@@ -127,7 +127,7 @@ class AddCardViewController: UIViewController {
             let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }
     }
 
@@ -139,7 +139,7 @@ class AddCardViewController: UIViewController {
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }
     }
 
@@ -149,14 +149,14 @@ class AddCardViewController: UIViewController {
             showSuccessMessage(card: card)
             RealmManager.shared.realm.add(userCollectionDTO!, update: true)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: NSLocalizedString("ALREADY_ADDED", comment: ""))
+            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }
     }
 
     private func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
-        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: card.name), delay: 0.2)
+        HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)
     }
 
     // MARK: Navigation

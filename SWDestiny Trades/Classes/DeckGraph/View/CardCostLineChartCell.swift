@@ -61,7 +61,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
                 dataEntries.append(dataEntry)
             }
 
-            let chartDataSet = LineChartDataSet(values: dataEntries, label: NSLocalizedString("CARD_COST", comment: ""))
+            let chartDataSet = LineChartDataSet(values: dataEntries, label: L10n.cardCost)
             chartDataSet.drawValuesEnabled = false
             chartDataSet.setColor(.lightGray)
             chartDataSet.setCircleColor(.lightGray)

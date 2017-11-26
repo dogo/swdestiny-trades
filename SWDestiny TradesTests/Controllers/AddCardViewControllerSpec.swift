@@ -32,7 +32,7 @@ class AddCardViewControllerSpec: QuickSpec {
             it("should have the expected navigation title") {
                 _ = UINavigationController(rootViewController: controller)
                 controller.viewWillAppear(true)
-                expect(controller.navigationItem.title).to(equal(NSLocalizedString("ADD_CARD", comment: "")))
+                expect(controller.navigationItem.title).to(equal(L10n.addCard))
             }
 
             #if arch(x86_64) && os(iOS)

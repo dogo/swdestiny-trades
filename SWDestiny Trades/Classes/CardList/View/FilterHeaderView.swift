@@ -35,10 +35,10 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     }
 
     internal func configureHeader() {
-        segmentControl.insertSegment(withTitle: "A-Z", at: 0, animated: false)
-        segmentControl.insertSegment(withTitle: NSLocalizedString("COLOR", comment: ""), at: 1, animated: false)
+        segmentControl.insertSegment(withTitle: L10n.aToZ, at: 0, animated: false)
+        segmentControl.insertSegment(withTitle: L10n.color, at: 1, animated: false)
         //segmentControl.insertSegment(withTitle: "Price", at: 2, animated: false)
-        segmentControl.insertSegment(withTitle: NSLocalizedString("CARD_NUMBER", comment: ""), at: 2, animated: false)
+        segmentControl.insertSegment(withTitle: L10n.cardNumber, at: 2, animated: false)
         segmentControl.selectedSegmentIndex = 0
     }
 

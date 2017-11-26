@@ -96,7 +96,7 @@ final class DeckBuilderViewController: UIViewController {
             }
         }
 
-        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: deckDTO.name, text: deckList), NSLocalizedString("SHARE_TEXT", comment: "")], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: deckDTO.name, text: deckList), L10n.shareText], applicationActivities: nil)
             activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList, .postToFacebook]
 
         activityVC.popoverPresentationController?.barButtonItem = sender

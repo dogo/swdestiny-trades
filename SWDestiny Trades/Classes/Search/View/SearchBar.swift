@@ -16,7 +16,7 @@ class SearchBar: UISearchBar, UISearchBarDelegate {
         super.init(frame: frame)
         self.delegate = self
         self.searchBarStyle = .minimal
-        self.placeholder = NSLocalizedString("ALL_CARDS", comment: "")
+        self.placeholder = L10n.allCards
     }
 
     required init?(coder aDecoder: NSCoder) {

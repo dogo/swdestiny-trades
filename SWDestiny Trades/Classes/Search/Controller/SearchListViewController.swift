@@ -61,7 +61,7 @@ class SearchListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = NSLocalizedString("SEARCH", comment: "")
+        self.navigationItem.title = L10n.search
     }
 
     // MARK: Navigation

@@ -15,19 +15,19 @@ final class SWDTabBarViewController: UITabBarController {
 
         // Create SetsListViewController Tab
         let setsTab = UINavigationController(rootViewController: SetsListViewController())
-        setsTab.tabBarItem = UITabBarItem(title: NSLocalizedString("CARDS", comment: ""), image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
+        setsTab.tabBarItem = UITabBarItem(title: L10n.cards, image: UIImage(named: "ic_cards"), selectedImage: UIImage(named: "ic_cards_filled"))
 
         // Create DeckListViewController Tab
         let decktab = UINavigationController(rootViewController: DeckListViewController())
-        decktab.tabBarItem = UITabBarItem(title: NSLocalizedString("DECKS", comment: ""), image: UIImage(named: "ic_decks"), selectedImage: nil)
+        decktab.tabBarItem = UITabBarItem(title: L10n.decks, image: UIImage(named: "ic_decks"), selectedImage: nil)
 
         // Create PeopleListViewController Tab
         let loansTab = UINavigationController(rootViewController: PeopleListViewController())
-        loansTab.tabBarItem = UITabBarItem(title: NSLocalizedString("LOANS", comment: ""), image: UIImage(named: "ic_loans"), selectedImage: nil)
+        loansTab.tabBarItem = UITabBarItem(title: L10n.loans, image: UIImage(named: "ic_loans"), selectedImage: nil)
 
         // Create UserCollectionViewController Tab
         let collectionTab = UINavigationController(rootViewController: UserCollectionViewController())
-        collectionTab.tabBarItem = UITabBarItem(title: NSLocalizedString("COLLECTION", comment: ""), image: UIImage(named: "ic_collection"), selectedImage: nil)
+        collectionTab.tabBarItem = UITabBarItem(title: L10n.collection, image: UIImage(named: "ic_collection"), selectedImage: nil)
 
         self.viewControllers = [setsTab, decktab, loansTab, collectionTab]
     }

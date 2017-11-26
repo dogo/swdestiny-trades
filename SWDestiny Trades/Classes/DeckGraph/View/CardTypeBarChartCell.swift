@@ -65,7 +65,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
                 dataEntries.append(dataEntry)
             }
 
-            let chartDataSet = BarChartDataSet(values: dataEntries, label: NSLocalizedString("CARD_TYPES", comment: ""))
+            let chartDataSet = BarChartDataSet(values: dataEntries, label: L10n.cardTypes)
             chartDataSet.drawValuesEnabled = false
             chartDataSet.setColor(.lightGray)
             let chartData = BarChartData(dataSet: chartDataSet)

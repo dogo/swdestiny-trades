@@ -48,7 +48,7 @@ class SetsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = NSLocalizedString("EXPANSIONS", comment: "")
+        self.navigationItem.title = L10n.expansions
     }
 
     func setupNavigationItem() {

@@ -78,7 +78,7 @@ class CardDetailViewController: UIViewController {
     private func showSuccessMessage(cardDTO: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
-        HUD.flash(.labeledSuccess(title: NSLocalizedString("ADDED", comment: ""), subtitle: cardDTO.name), delay: 0.2)
+        HUD.flash(.labeledSuccess(title: L10n.added, subtitle: cardDTO.name), delay: 0.2)
     }
 
     @objc func share(_ sender: UIBarButtonItem) {

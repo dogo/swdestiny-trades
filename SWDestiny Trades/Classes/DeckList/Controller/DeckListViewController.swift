@@ -46,7 +46,7 @@ final class DeckListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = NSLocalizedString("DECKS", comment: "")
+        self.navigationItem.title = L10n.decks
         deckListView.deckListTableView.reloadData()
     }
 

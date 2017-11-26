@@ -41,7 +41,7 @@ final class UserCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = NSLocalizedString("MY_COLLECTION", comment: "")
+        self.navigationItem.title = L10n.myCollection
 
         loadDataFromRealm()
 
@@ -131,7 +131,7 @@ final class UserCollectionViewController: UIViewController {
             }
         }
 
-        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: NSLocalizedString("MY_COLLECTION", comment: ""), text: collectionList), NSLocalizedString("SHARE_TEXT", comment: "")], applicationActivities: nil)
+        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: L10n.myCollection, text: collectionList), L10n.shareText], applicationActivities: nil)
         activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList, .postToFacebook]
 
         activityVC.popoverPresentationController?.barButtonItem = sender
@@ -143,7 +143,7 @@ final class UserCollectionViewController: UIViewController {
     }
 
     @objc func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        FTPopOverMenu.showForEvent(event: event, with: ["A-Z", NSLocalizedString("CARD_NUMBER", comment: ""), NSLocalizedString("COLOR", comment: "")], done: { (selectedIndex) -> Void in
+        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], done: { (selectedIndex) -> Void in
             self.userCollectionView.userCollectionTableView.sort(selectedIndex)
             self.currentSortIndex = selectedIndex
         }) {

@@ -37,6 +37,6 @@ class DeckGraphViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = NSLocalizedString("DECK_STATISTICS", comment: "")
+        self.navigationItem.title = L10n.deckStatistics
     }
 }

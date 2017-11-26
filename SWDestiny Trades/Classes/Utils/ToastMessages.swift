@@ -22,7 +22,7 @@ final class ToastMessages {
         config.duration = .forever
 
         errorView.configureTheme(.error)
-        errorView.button?.setTitle(NSLocalizedString("CLOSE", comment: ""), for: .normal)
+        errorView.button?.setTitle(L10n.close, for: .normal)
         errorView.buttonTapHandler = { _ in
             SwiftMessages.hide()
         }
@@ -34,7 +34,7 @@ final class ToastMessages {
                 UIApplication.shared.openURL(url)
             }
         }
-        errorView.configureContent(title: "", body: NSLocalizedString("ERROR_MESSAGE", comment: ""))
+        errorView.configureContent(title: "", body: L10n.errorMessage)
         SwiftMessages.show(config: config, view: errorView)
     }
 

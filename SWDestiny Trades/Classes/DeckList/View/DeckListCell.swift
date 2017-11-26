@@ -17,7 +17,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         let textField = UITextField(frame: .zero)
         textField.textColor = .black
         textField.tintColor = .black
-        textField.placeholder = NSLocalizedString("DECK_NAME", comment: "")
+        textField.placeholder = L10n.deckName
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.isUserInteractionEnabled = false
         return textField

@@ -7,6 +7,8 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
 enum L10n {
+  /// A-Z
+  static let aToZ = L10n.tr("Localizable", "A_TO_Z")
   /// About
   static let about = L10n.tr("Localizable", "ABOUT")
   /// By Diogo Autilio\n\nAPI Data by Paco http://swdestinydb.com\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.

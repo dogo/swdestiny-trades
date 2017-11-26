@@ -30,7 +30,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         if indexPath.section == 0 {
             if indexPath.row == lentMe.count {
                 cell.quantityStepper.isHidden = true
-                cell.textLabel?.text = NSLocalizedString("ADD_CARD", comment: "").appending("...")
+                cell.textLabel?.text = L10n.addCard.appending("...")
                 cell.textLabel?.textColor = .darkGray
             } else {
                 cell.quantityStepper.isHidden = false
@@ -52,7 +52,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         } else if indexPath.section == 1 {
             if indexPath.row == borrowed.count {
                 cell.quantityStepper.isHidden = true
-                cell.textLabel?.text = NSLocalizedString("ADD_MY_CARD", comment: "")
+                cell.textLabel?.text = L10n.addMyCard
                 cell.textLabel?.textColor = .darkGray
             } else {
                 cell.quantityStepper.isHidden = false
@@ -77,10 +77,9 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return NSLocalizedString("HAS_LENT_ME", comment: "")
-        } else {
-            return NSLocalizedString("HAS_BORROWED_MY", comment: "")
+            return L10n.hasLentMe
         }
+        return L10n.hasBorrowedMy
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
