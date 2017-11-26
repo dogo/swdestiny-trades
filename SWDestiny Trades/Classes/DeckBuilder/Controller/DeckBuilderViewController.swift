@@ -51,7 +51,7 @@ final class DeckBuilderViewController: UIViewController {
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
-        let deckGraphBarItem = UIBarButtonItem(image: UIImage(named: "ic_chart"), style: .plain, target: self, action: #selector(navigateToDeckGraphViewController))
+        let deckGraphBarItem = UIBarButtonItem(image: Asset.NavigationBar.icChart.image, style: .plain, target: self, action: #selector(navigateToDeckGraphViewController))
         self.navigationItem.rightBarButtonItems = [addCardBarItem, deckGraphBarItem, shareBarItem]
     }
 

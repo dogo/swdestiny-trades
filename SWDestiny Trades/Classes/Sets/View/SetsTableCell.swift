@@ -38,15 +38,15 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
         titleLabel.text = setDTO.name
 
         if setDTO.code.lowercased() == "aw" {
-            expansionImageView.image = UIImage(named: "ic_awakenings")
+            expansionImageView.image = Asset.Sets.icAwakenings.image
         } else if setDTO.code.lowercased() == "sor" {
-            expansionImageView.image = UIImage(named: "ic_spirit_of_rebellion")
+            expansionImageView.image = Asset.Sets.icSpiritOfRebellion.image
         } else if setDTO.code.lowercased() == "eaw" {
-            expansionImageView.image = UIImage(named: "ic_empire_at_war")
+            expansionImageView.image = Asset.Sets.icEmpireAtWar.image
         } else if setDTO.code.lowercased() == "tpg" {
-            expansionImageView.image = UIImage(named: "ic_two_player_game")
+            expansionImageView.image = Asset.Sets.icTwoPlayerGame.image
         } else {
-            expansionImageView.image = UIImage(named: "ic_not_found")
+            expansionImageView.image = Asset.Sets.icNotFound.image
         }
     }
 

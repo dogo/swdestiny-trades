@@ -25,7 +25,7 @@ class CardDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         for card in cardList {
-            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: UIImage(named: "ic_cardback")) {
+            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
                 imageSource.append(remoteSource)
             } else {
                 let localSource = ImageSource(imageString: "ic_404")!
@@ -65,7 +65,7 @@ class CardDetailViewController: UIViewController {
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        let addToCollectionBarItem = UIBarButtonItem(image: UIImage(named: "ic_add_collection"), style: .plain, target: self, action: #selector(addToCollection))
+        let addToCollectionBarItem = UIBarButtonItem(image: Asset.NavigationBar.icAddCollection.image, style: .plain, target: self, action: #selector(addToCollection))
         self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
 

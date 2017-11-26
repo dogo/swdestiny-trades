@@ -52,7 +52,7 @@ final class UserCollectionViewController: UIViewController {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
         self.navigationItem.rightBarButtonItems = [addCardBarItem, shareBarItem]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_sort"), style: .plain, target: self, action: #selector(sort(_:event:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icSort.image, style: .plain, target: self, action: #selector(sort(_:event:)))
     }
 
     func loadDataFromRealm() {

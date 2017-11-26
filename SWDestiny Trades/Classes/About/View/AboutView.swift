@@ -75,7 +75,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
         self.backgroundColor = .white
 
-        logoImage.image = UIImage(named: "LargeIconBlack")
+        logoImage.image = Asset.Logo.largeIconBlack.image
 
         aboutTextView.delegate = self
         aboutTextView.isEditable = false

@@ -105,7 +105,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
 
     private func toggleEditButton() {
         let isEditing = titleEditText.isUserInteractionEnabled
-        accessoryButton.setImage(UIImage(named: isEditing ? "ic_done_edit" : "ic_edit"), for: .normal)
+        accessoryButton.setImage(isEditing ? Asset.icDoneEdit.image : Asset.icEdit.image, for: .normal)
     }
 
     // MARK: - Actions
