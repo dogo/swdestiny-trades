@@ -58,6 +58,8 @@
 		DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
+		DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FBF191FCB159B00E62504 /* ImageAssets.swift */; };
+		DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */; };
 		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
 		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
 		DD7B108A1EE99E99003CA48D /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */; };
@@ -184,6 +186,8 @@
 		DD6E06951E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6E069A1E114E88004A5653 /* SWDestiny-TradesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDestiny-TradesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD6FBF191FCB159B00E62504 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
+		DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
 		DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
@@ -596,6 +600,15 @@
 			path = "SWDestiny TradesTests";
 			sourceTree = "<group>";
 		};
+		DD6FBF141FCB153400E62504 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DD6FBF191FCB159B00E62504 /* ImageAssets.swift */,
+				DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		DD77FCE81E13DC3F0046EFCA /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +722,7 @@
 				DD94E6F61E36658A0070735B /* Appearance */,
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
 				DDCDE3861E1DFA2300B4BE18 /* Extensions */,
+				DD6FBF141FCB153400E62504 /* Resources */,
 				DD9289061E11933C00FDEC48 /* Rest */,
 				DDCDE38B1E1DFED100B4BE18 /* Screens */,
 				DD888C3D1E1947820093B3BF /* Utils */,
@@ -1289,6 +1303,7 @@
 			files = (
 				DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */,
 				DDCA97B61E2FA72A0098FFB5 /* DeckBuilderViewController.swift in Sources */,
+				DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */,
 				DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
@@ -1379,6 +1394,7 @@
 				DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */,
 				DDCA97B91E2FA72A0098FFB5 /* DeckBuilderView.swift in Sources */,
 				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
+				DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */,
 				DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
