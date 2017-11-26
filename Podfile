@@ -18,6 +18,7 @@ target 'SWDestiny Trades' do
   pod 'RealmSwift'
   pod 'Reusable'
   pod 'SnapKit'
+  pod 'SwiftGen'
   pod 'SwiftMessages'
   pod 'TextFieldEffects'
 
