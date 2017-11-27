@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class AboutViewController: UIViewController {
 
@@ -24,6 +25,19 @@ class AboutViewController: UIViewController {
 
     override func loadView() {
         self.view = aboutView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        aboutView.didTouchHTTPLink = { [weak self] url in
+            if #available(iOS 9.0, *) {
+                let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                self?.present(safariViewController, animated: true)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

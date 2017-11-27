@@ -10,6 +10,8 @@ import UIKit
 
 final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
+    var didTouchHTTPLink: ((URL) -> Void)?
+
     var logoImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFill
@@ -91,7 +93,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
     // MARK: <UITextViewDelegate>
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openURL(URL)
+        didTouchHTTPLink?(URL)
         return false
     }
 }
