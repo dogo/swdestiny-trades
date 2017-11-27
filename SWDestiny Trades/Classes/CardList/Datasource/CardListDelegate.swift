@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CardListViewDelegate: class, BaseDelegate {
+protocol CardListViewDelegate: BaseDelegate {
     func didSelectSegment(index: Int)
 }
 
