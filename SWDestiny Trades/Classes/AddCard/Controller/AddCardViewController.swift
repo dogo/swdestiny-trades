@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Alamofire
 import PKHUD
 import FirebaseAnalytics
 
 class AddCardViewController: UIViewController {
 
+    fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate let addCardView = AddCardView()
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
@@ -58,15 +58,18 @@ class AddCardViewController: UIViewController {
         super.viewDidLoad()
 
         addCardView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: [CardDTO]) in
-            self.addCardView.activityIndicator.stopAnimating()
-            self.addCardView.addCardTableView.updateSearchList(cardsArray)
-            self.cards = cardsArray
-        }) { (error: DataResponse<Any>) in
-            self.addCardView.activityIndicator.stopAnimating()
-            let failureReason = error.failureReason()
-            print(failureReason)
-            Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as String])
+        destinyService.retrieveAllCards { result in
+            switch result {
+            case .success(let allCards):
+                self.addCardView.addCardTableView.updateSearchList(allCards)
+                self.addCardView.activityIndicator.stopAnimating()
+                self.cards = allCards
+            case .failure(let error):
+                self.addCardView.activityIndicator.stopAnimating()
+                let printableError = error as CustomStringConvertible
+                let errorMessage = printableError.description
+                Analytics.logEvent("retrieveAllCards", parameters: ["error": errorMessage])
+            }
         }
 
         addCardView.addCardTableView.didSelectCard = { [unowned self] card in

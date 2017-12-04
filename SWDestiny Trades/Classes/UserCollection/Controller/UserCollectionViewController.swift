@@ -143,10 +143,10 @@ final class UserCollectionViewController: UIViewController {
     }
 
     @objc func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], done: { (selectedIndex) -> Void in
+        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], done: { selectedIndex -> Void in
             self.userCollectionView.userCollectionTableView.sort(selectedIndex)
             self.currentSortIndex = selectedIndex
-        }) {
-        }
+        }, cancel: {
+        })
     }
 }

@@ -7,62 +7,56 @@
 //
 
 import Foundation
-import Alamofire
-import ObjectMapper
+import Moya
 
-class SWDestinyAPI: BaseAPIClient {
+enum SWDestinyAPI {
+    case setList()
+    case cardList(setCode: String)
+    case allCards()
+    case card(cardId: String)
+}
 
-    static let baseAPIClient = BaseAPIClient.sharedInstance
+extension SWDestinyAPI: TargetType {
 
-    static func retrieveSetList(successBlock: @escaping (_ setsDTO: [SetDTO]) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
-        let path = "/api/public/sets/"
-        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
-            switch response.result {
-            case .success(let data):
-                successBlock(Mapper<SetDTO>().mapArray(JSONObject: data)!)
-            case .failure:
-                ToastMessages.showNetworkErrorMessage()
-                failureBlock(response)
-            }
+    var baseURL: URL {
+        return URL(string: "http://swdestinydb.com")!
+    }
+
+    var path: String {
+        switch self {
+        case .setList:
+            return "/api/public/sets/"
+        case .cardList(let setCode):
+            return "/api/public/cards/\(setCode)"
+        case .allCards:
+            return "/api/public/cards/"
+        case .card(let cardId):
+            return "/api/public/card/\(cardId)"
         }
     }
 
-    static func retrieveSetCardList(setCode: String, successBlock: @escaping (_ setsDTO: [CardDTO]) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
-        let path = "/api/public/cards/\(setCode)"
-        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
-            switch response.result {
-            case .success(let data):
-                successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
-            case .failure:
-                ToastMessages.showNetworkErrorMessage()
-                failureBlock(response)
-            }
+    var method: Moya.Method {
+        switch self {
+        case .setList, .cardList, .allCards, .card:
+            return .get
         }
     }
 
-    static func retrieveAllCards(successBlock: @escaping (_ setsDTO: [CardDTO]) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
-        let path = "/api/public/cards/"
-        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
-            switch response.result {
-            case .success(let data):
-                successBlock(Mapper<CardDTO>().mapArray(JSONObject: data)!)
-            case .failure:
-                ToastMessages.showNetworkErrorMessage()
-                failureBlock(response)
-            }
+    var task: Task {
+        switch self {
+        default:
+            return .requestPlain
         }
     }
 
-    static func retrieveCard(cardId: String, successBlock: @escaping (_ cardDTO: CardDTO) -> Void, failureBlock: @escaping (DataResponse<Any>) -> Void) {
-        let path = "/api/public/card/\(cardId)"
-        baseAPIClient.GET(url: BaseAPIClient.baseUrl + path, headers: ["": ""], parameters: ["": ""]) { (response: DataResponse<Any>) in
-            switch response.result {
-            case .success(let data):
-                successBlock(Mapper<CardDTO>().map(JSONObject: data)!)
-            case .failure:
-                ToastMessages.showNetworkErrorMessage()
-                failureBlock(response)
-            }
+    var sampleData: Data {
+        switch self {
+        default:
+            return Data()
         }
+    }
+
+    var headers: [String: String]? {
+        return ["Content-type": "application/json"]
     }
 }

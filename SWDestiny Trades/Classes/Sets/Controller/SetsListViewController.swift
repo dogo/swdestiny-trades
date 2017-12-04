@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Alamofire
 import FirebaseAnalytics
 
 class SetsListViewController: UIViewController {
 
     fileprivate let setsView = SetsView()
+    fileprivate let destinyService = SWDestinyServiceImpl()
 
     // MARK: - Life Cycle
 
@@ -57,16 +57,19 @@ class SetsListViewController: UIViewController {
     }
 
     @objc func retriveSets(sender: UIRefreshControl) {
-        SWDestinyAPI.retrieveSetList(successBlock: { (setsArray: [SetDTO]) in
-            self.setsView.setsTableView.updateSetList(setsArray)
-            self.setsView.endRefreshControl()
-            self.setsView.activityIndicator.stopAnimating()
-        }) { (error: DataResponse<Any>) in
-            self.setsView.endRefreshControl()
-            self.setsView.activityIndicator.stopAnimating()
-            let failureReason = error.failureReason()
-            print(failureReason)
-            Analytics.logEvent("retrieveSetList", parameters: ["error": failureReason as String])
+        destinyService.retrieveSetList { result in
+            switch result {
+            case .success(let setList):
+                self.setsView.setsTableView.updateSetList(setList)
+                self.setsView.endRefreshControl()
+                self.setsView.activityIndicator.stopAnimating()
+            case .failure(let error):
+                self.setsView.endRefreshControl()
+                self.setsView.activityIndicator.stopAnimating()
+                let printableError = error as CustomStringConvertible
+                let errorMessage = printableError.description
+                Analytics.logEvent("retrieveSetList", parameters: ["error": errorMessage])
+            }
         }
     }
 

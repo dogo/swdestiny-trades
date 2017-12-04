@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import Alamofire
 import FirebaseAnalytics
 
 class CardListViewController: UIViewController {
 
     fileprivate let cardListView = CardListView()
+    fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate var setDTO: SetDTO
 
     // MARK: - Life Cycle
@@ -34,16 +34,18 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
 
         cardListView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveSetCardList(setCode: setDTO.code.lowercased(), successBlock: { (cardsArray: [CardDTO]) in
-            self.cardListView.cardListTableView.updateCardList(cardsArray)
-            self.cardListView.activityIndicator.stopAnimating()
-        }) { (error: DataResponse<Any>) in
-            self.cardListView.activityIndicator.stopAnimating()
-            let failureReason = error.failureReason()
-            print(failureReason)
-            Analytics.logEvent("retrieveSetCardList", parameters: ["error": failureReason as String])
+        destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased()) { result in
+            switch result {
+            case .success(let cardList):
+                self.cardListView.cardListTableView.updateCardList(cardList)
+                self.cardListView.activityIndicator.stopAnimating()
+            case .failure(let error):
+                self.cardListView.activityIndicator.stopAnimating()
+                let printableError = error as CustomStringConvertible
+                let errorMessage = printableError.description
+                Analytics.logEvent("retrieveSetCardList", parameters: ["error": errorMessage])
+            }
         }
-
         self.cardListView.cardListTableView.didSelectCard = { [unowned self] list, card in
             self.navigateToNextController(cardList: list, card: card)
         }

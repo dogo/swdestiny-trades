@@ -37,7 +37,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
         loadDataFromRealm()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)
 
         peopleListView.peopleListTableView.didSelectPerson = { [unowned self] person in
             self.navigateToLoansDetailViewController(person: person)

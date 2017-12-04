@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import FirebaseAnalytics
 
 @objc protocol SearchDelegate: class {
@@ -17,6 +16,7 @@ import FirebaseAnalytics
 
 class SearchListViewController: UIViewController {
 
+    fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate let searchView = SearchView()
     fileprivate var cards = [CardDTO]()
 
@@ -38,15 +38,18 @@ class SearchListViewController: UIViewController {
         super.viewDidLoad()
 
         searchView.activityIndicator.startAnimating()
-        SWDestinyAPI.retrieveAllCards(successBlock: { (cardsArray: [CardDTO]) in
-            self.searchView.searchTableView.updateSearchList(cardsArray)
-            self.cards = cardsArray
-            self.searchView.activityIndicator.stopAnimating()
-        }) { (error: DataResponse<Any>) in
-            self.searchView.activityIndicator.stopAnimating()
-            let failureReason = error.failureReason()
-            print(failureReason)
-            Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as String])
+        destinyService.retrieveAllCards { result in
+            switch result {
+            case .success(let allCards):
+                self.searchView.searchTableView.updateSearchList(allCards)
+                self.searchView.activityIndicator.stopAnimating()
+                self.cards = allCards
+            case .failure(let error):
+                self.searchView.activityIndicator.stopAnimating()
+                let printableError = error as CustomStringConvertible
+                let errorMessage = printableError.description
+                Analytics.logEvent("retrieveAllCards", parameters: ["error": errorMessage])
+            }
         }
 
         searchView.searchTableView.didSelectCard = { [unowned self] card in

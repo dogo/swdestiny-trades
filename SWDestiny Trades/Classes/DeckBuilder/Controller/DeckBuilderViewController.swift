@@ -39,7 +39,7 @@ final class DeckBuilderViewController: UIViewController {
             self.navigateToCardDetailViewController(cardList: list, card: card)
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name:NotificationKey.reloadTableViewNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {

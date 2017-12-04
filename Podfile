@@ -6,14 +6,15 @@ target 'SWDestiny Trades' do
   use_frameworks!
   
   # Pods for SWDestiny Trades
-  pod 'Alamofire'
   pod 'Charts'
   pod 'Firebase/Core'
   pod 'Firebase/Crash'
   pod 'FTPopOverMenu_Swift', :git => 'https://github.com/liufengting/FTPopOverMenu_Swift.git'
   pod 'ImageSlideshow'
   pod 'Kingfisher'
-  pod 'ObjectMapper'
+  pod 'Moya'
+  pod 'Moya-ObjectMapper'
+  pod 'ObjectMapper'  
   pod 'PKHUD'
   pod 'RealmSwift'
   pod 'Reusable'

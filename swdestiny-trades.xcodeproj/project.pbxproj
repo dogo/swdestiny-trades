@@ -34,6 +34,8 @@
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
 		DD1DA42A1E873648001E76C4 /* CardDetailViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerSpec.swift */; };
+		DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */; };
+		DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
@@ -70,7 +72,6 @@
 		DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */; };
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
-		DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */; };
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
@@ -158,6 +159,8 @@
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewControllerSpec.swift; sourceTree = "<group>"; };
+		DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyService.swift; sourceTree = "<group>"; };
+		DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImpl.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
 		DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwdShareProvider.swift; sourceTree = "<group>"; };
 		DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +201,6 @@
 		DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIClient.swift; sourceTree = "<group>"; };
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderCell.swift; sourceTree = "<group>"; };
@@ -741,8 +743,9 @@
 		DD9289061E11933C00FDEC48 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
-				DD9289071E11933C00FDEC48 /* BaseAPIClient.swift */,
 				DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */,
+				DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */,
+				DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */,
 			);
 			path = Rest;
 			sourceTree = "<group>";
@@ -1176,11 +1179,14 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
@@ -1197,11 +1203,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
@@ -1228,11 +1237,14 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
@@ -1247,11 +1259,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
@@ -1313,11 +1328,13 @@
 				DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */,
 				DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
+				DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,
 				DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */,
 				DDB8A2251E266DFF0086FC01 /* Split.swift in Sources */,
 				DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */,
+				DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */,
 				DD09054A1E24701D00D9EFB0 /* CardCell.swift in Sources */,
 				DDCA97BC1E2FB0370098FFB5 /* DeckDTO.swift in Sources */,
 				DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */,
@@ -1351,7 +1368,6 @@
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
-				DD9289081E11933C00FDEC48 /* BaseAPIClient.swift in Sources */,
 				DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
 				DDB764C51E43639E007758D5 /* GraphView.swift in Sources */,
