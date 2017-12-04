@@ -49,12 +49,12 @@ class SearchListViewController: UIViewController {
             Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as String])
         }
 
-        searchView.searchTableView.didSelectCard = { [weak self] card in
-            self?.navigateToNextController(with: card)
+        searchView.searchTableView.didSelectCard = { [unowned self] card in
+            self.navigateToNextController(with: card)
         }
 
-        searchView.searchBar.doingSearch = { [weak self] query in
-            self?.searchView.searchTableView.doingSearch(query)
+        searchView.searchBar.doingSearch = { [unowned self] query in
+            self.searchView.searchTableView.doingSearch(query)
         }
     }
 

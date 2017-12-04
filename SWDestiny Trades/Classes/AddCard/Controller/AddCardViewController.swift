@@ -69,16 +69,16 @@ class AddCardViewController: UIViewController {
             Analytics.logEvent("retrieveAllCards", parameters: ["error": failureReason as String])
         }
 
-        addCardView.addCardTableView.didSelectCard = { [weak self] card in
-            self?.insert(card: card)
+        addCardView.addCardTableView.didSelectCard = { [unowned self] card in
+            self.insert(card: card)
         }
 
-        addCardView.addCardTableView.didSelectAccessory = { [weak self] card in
-            self?.navigateToNextController(with: card)
+        addCardView.addCardTableView.didSelectAccessory = { [unowned self] card in
+            self.navigateToNextController(with: card)
         }
 
-        addCardView.searchBar.doingSearch = { [weak self] query in
-            self?.addCardView.addCardTableView.doingSearch(query)
+        addCardView.searchBar.doingSearch = { [unowned self] query in
+            self.addCardView.addCardTableView.doingSearch(query)
         }
     }
 

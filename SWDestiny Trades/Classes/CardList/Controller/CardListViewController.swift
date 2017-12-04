@@ -44,8 +44,8 @@ class CardListViewController: UIViewController {
             Analytics.logEvent("retrieveSetCardList", parameters: ["error": failureReason as String])
         }
 
-        self.cardListView.cardListTableView.didSelectCard = { [weak self] list, card in
-            self?.navigateToNextController(cardList: list, card: card)
+        self.cardListView.cardListTableView.didSelectCard = { [unowned self] list, card in
+            self.navigateToNextController(cardList: list, card: card)
         }
     }
 

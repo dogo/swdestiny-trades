@@ -40,8 +40,8 @@ class SetsListViewController: UIViewController {
         setsView.activityIndicator.startAnimating()
         retriveSets(sender: setsView.pullToRefresh)
 
-        setsView.setsTableView.didSelectSet = { [weak self] set in
-            self?.navigateToNextController(with: set)
+        setsView.setsTableView.didSelectSet = { [unowned self] set in
+            self.navigateToNextController(with: set)
         }
     }
 

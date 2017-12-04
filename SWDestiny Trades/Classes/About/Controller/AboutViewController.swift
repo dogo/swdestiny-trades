@@ -30,10 +30,10 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        aboutView.didTouchHTTPLink = { [weak self] url in
+        aboutView.didTouchHTTPLink = { [unowned self] url in
             if #available(iOS 9.0, *) {
                 let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                self?.present(safariViewController, animated: true)
+                self.present(safariViewController, animated: true)
             } else {
                 UIApplication.shared.openURL(url)
             }
