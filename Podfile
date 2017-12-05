@@ -14,7 +14,6 @@ target 'SWDestiny Trades' do
   pod 'Kingfisher'
   pod 'Moya'
   pod 'Moya-ObjectMapper'
-  pod 'ObjectMapper'  
   pod 'PKHUD'
   pod 'RealmSwift'
   pod 'Reusable'
