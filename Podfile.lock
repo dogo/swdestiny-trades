@@ -32,7 +32,7 @@ PODS:
   - ImageSlideshow (1.4.1):
     - ImageSlideshow/Core (= 1.4.1)
   - ImageSlideshow/Core (1.4.1)
-  - Kingfisher (4.4.0)
+  - Kingfisher (4.5.0)
   - Moya (10.0.1):
     - Moya/Core (= 10.0.1)
   - Moya-ObjectMapper (2.5):
@@ -108,7 +108,7 @@ SPEC CHECKSUMS:
   FTPopOverMenu_Swift: 406ee2df3fbebba581d3734a3f204ddc1ce5f01a
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   ImageSlideshow: 1bb0e610e28a71e8936d57265d882f61714a470b
-  Kingfisher: 62a43e03047a1ac5159d0be3ac62673ef4b99cc3
+  Kingfisher: 26ae0473102b77b575da51960c932431e3745407
   Moya: 9e621707ff754eeb51ff3ec51a3d54e517c0733a
   Moya-ObjectMapper: 167adf69db0298bf3a19ea05cb9a16ee117c8ef5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
