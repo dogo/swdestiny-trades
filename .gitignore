@@ -45,5 +45,9 @@ playground.xcworkspace
 ## CocoaPods
 Pods/
 
+## Carthage
+Carthage/Checkouts
+Carthage/Build
+
 ## Fastlane
 fastlane/report.xml

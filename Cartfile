@@ -1,0 +1,16 @@
+github "AliSoftware/Reusable"
+github "danielgindi/Charts"
+github "Hearst-DD/ObjectMapper"
+github "ivanbruel/Moya-ObjectMapper"
+github "Moya/Moya"
+github "onevcat/Kingfisher"
+github "pkluz/PKHUD"
+github "raulriera/TextFieldEffects"
+github "realm/realm-cocoa"
+github "SnapKit/SnapKit"
+github "SwiftKickMobile/SwiftMessages"
+github "zvonicek/ImageSlideshow"
+
+# Tests
+github "Quick/Quick"
+github "Quick/Nimble"

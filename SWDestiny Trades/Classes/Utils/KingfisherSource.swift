@@ -6,6 +6,7 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
+import UIKit
 import Kingfisher
 import ImageSlideshow
 

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		76EB78CA09637614226FCC31 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535C4B90E43323F930BBC6F1 /* Pods_SWDestiny_Trades.framework */; };
-		8F65BD03E5A71109B3970034 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E70324A9E24EFFE454E8EF05 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */; };
+		5D609625818242F24EFC3384 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E62ED7B05BB5E8CB8B35DD27 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */; };
@@ -37,6 +36,10 @@
 		DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */; };
 		DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
+		DD387BD81FDC558500F1DD34 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */; };
+		DD387BD91FDC558E00F1DD34 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DD387BDA1FDC8A0C00F1DD34 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */; };
+		DD387BDB1FDC8A1C00F1DD34 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
@@ -103,8 +106,40 @@
 		DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */; };
 		DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3841E1DF7BD00B4BE18 /* CardView.swift */; };
 		DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */; };
+		DDCEBD6B1FDC24D60067AAE0 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; };
+		DDCEBD6F1FDC24D60067AAE0 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD571FDC24D40067AAE0 /* Result.framework */; };
+		DDCEBD711FDC24D60067AAE0 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; };
+		DDCEBD721FDC24D60067AAE0 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; };
+		DDCEBD731FDC24D60067AAE0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; };
+		DDCEBD741FDC24D60067AAE0 /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
+		DDCEBD761FDC24D60067AAE0 /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
+		DDCEBD771FDC24D60067AAE0 /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
+		DDCEBD781FDC24D60067AAE0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
+		DDCEBD791FDC24D60067AAE0 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
+		DDCEBD7B1FDC24D60067AAE0 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD631FDC24D50067AAE0 /* Moya.framework */; };
+		DDCEBD7C1FDC24D60067AAE0 /* Moya_ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */; };
+		DDCEBD7D1FDC24D60067AAE0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */; };
+		DDCEBD7E1FDC24D60067AAE0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
+		DDCEBD841FDC256E0067AAE0 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD851FDC256E0067AAE0 /* Charts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD871FDC256E0067AAE0 /* ImageSlideshow.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD881FDC256E0067AAE0 /* Kingfisher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD891FDC256E0067AAE0 /* Moya_ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD8A1FDC256E0067AAE0 /* Moya.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD631FDC24D50067AAE0 /* Moya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD8C1FDC256E0067AAE0 /* PKHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD901FDC256E0067AAE0 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD911FDC256E0067AAE0 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD921FDC256E0067AAE0 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD571FDC24D40067AAE0 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD931FDC256E0067AAE0 /* Reusable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD991FDC256E0067AAE0 /* SnapKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD9A1FDC256E0067AAE0 /* SwiftMessages.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDCEBD9B1FDC256E0067AAE0 /* TextFieldEffects.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */; };
 		DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */; };
+		DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; };
+		DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; };
+		DDDC46AE1FDCD4BD00D79449 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDDC46AF1FDCD4BD00D79449 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
 		DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF2DD2A1E429EF50090519E /* Sort.swift */; };
 		DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF2DD2C1E42B27D0090519E /* RealmMigrations.swift */; };
@@ -117,6 +152,7 @@
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
 		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
 		DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95B1E253A04004EADE9 /* AddCardView.swift */; };
+		E04F4C11032F13EFFBC77CB3 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED731607178C55F6D5677216 /* Pods_SWDestiny_Trades.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,11 +165,49 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DDCEBD831FDC253C0067AAE0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DD387BDB1FDC8A1C00F1DD34 /* RxSwift.framework in CopyFiles */,
+				DD387BD91FDC558E00F1DD34 /* ObjectMapper.framework in CopyFiles */,
+				DDCEBD841FDC256E0067AAE0 /* Alamofire.framework in CopyFiles */,
+				DDCEBD851FDC256E0067AAE0 /* Charts.framework in CopyFiles */,
+				DDCEBD871FDC256E0067AAE0 /* ImageSlideshow.framework in CopyFiles */,
+				DDCEBD881FDC256E0067AAE0 /* Kingfisher.framework in CopyFiles */,
+				DDCEBD891FDC256E0067AAE0 /* Moya_ObjectMapper.framework in CopyFiles */,
+				DDCEBD8A1FDC256E0067AAE0 /* Moya.framework in CopyFiles */,
+				DDCEBD8C1FDC256E0067AAE0 /* PKHUD.framework in CopyFiles */,
+				DDCEBD901FDC256E0067AAE0 /* Realm.framework in CopyFiles */,
+				DDCEBD911FDC256E0067AAE0 /* RealmSwift.framework in CopyFiles */,
+				DDCEBD921FDC256E0067AAE0 /* Result.framework in CopyFiles */,
+				DDCEBD931FDC256E0067AAE0 /* Reusable.framework in CopyFiles */,
+				DDCEBD991FDC256E0067AAE0 /* SnapKit.framework in CopyFiles */,
+				DDCEBD9A1FDC256E0067AAE0 /* SwiftMessages.framework in CopyFiles */,
+				DDCEBD9B1FDC256E0067AAE0 /* TextFieldEffects.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDDC46AD1FDCD4AC00D79449 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DDDC46AE1FDCD4BD00D79449 /* Nimble.framework in CopyFiles */,
+				DDDC46AF1FDCD4BD00D79449 /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		316B8185672BD17C05BB315F /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
-		440FC39397F3D0809FC4E17D /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
-		535C4B90E43323F930BBC6F1 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD5C99A7B5045CADE04DD4F0 /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
+		0613B8121B1B14F541C467AB /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
+		22BDA69DD19B12AE8F8BBD8E /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
+		370E88174768498731F87375 /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
 		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +236,7 @@
 		DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyService.swift; sourceTree = "<group>"; };
 		DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImpl.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
+		DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwdShareProvider.swift; sourceTree = "<group>"; };
 		DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
 		DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDatasource.swift; sourceTree = "<group>"; };
@@ -221,7 +296,6 @@
 		DDC60FA71E26B9AC00473F6E /* Base */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = Base; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DDC60FAA1E26B9AC00473F6E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = Localizable.strings; sourceTree = "<group>"; };
 		DDC60FAC1E26B9AC00473F6E /* pt-BR */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = "pt-BR"; path = Localizable.stringsdict; sourceTree = "<group>"; };
-		DDC8523C507C8F1FC8126B9C /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DDCA97AA1E2FA2A20098FFB5 /* DeckListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListTableView.swift; sourceTree = "<group>"; };
 		DDCA97AC1E2FA35A0098FFB5 /* DeckListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListDatasource.swift; sourceTree = "<group>"; };
 		DDCA97B01E2FA72A0098FFB5 /* DeckBuilderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +307,30 @@
 		DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		DDCDE3841E1DF7BD00B4BE18 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		DDCEBD541FDC24D40067AAE0 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		DDCEBD551FDC24D40067AAE0 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		DDCEBD561FDC24D40067AAE0 /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
+		DDCEBD571FDC24D40067AAE0 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		DDCEBD581FDC24D40067AAE0 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		DDCEBD591FDC24D40067AAE0 /* Reusable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reusable.framework; path = Carthage/Build/iOS/Reusable.framework; sourceTree = "<group>"; };
+		DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
+		DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
+		DDCEBD5D1FDC24D50067AAE0 /* FTPopOverMenu_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FTPopOverMenu_Swift.framework; path = Carthage/Build/iOS/FTPopOverMenu_Swift.framework; sourceTree = "<group>"; };
+		DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TextFieldEffects.framework; path = Carthage/Build/iOS/TextFieldEffects.framework; sourceTree = "<group>"; };
+		DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageSlideshow.framework; path = Carthage/Build/iOS/ImageSlideshow.framework; sourceTree = "<group>"; };
+		DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = Carthage/Build/iOS/SwiftMessages.framework; sourceTree = "<group>"; };
+		DDCEBD621FDC24D50067AAE0 /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
+		DDCEBD631FDC24D50067AAE0 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
+		DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya_ObjectMapper.framework; path = Carthage/Build/iOS/Moya_ObjectMapper.framework; sourceTree = "<group>"; };
+		DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		DDCEBD661FDC24D60067AAE0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		DDCEBD671FDC24D60067AAE0 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		DDCEBD681FDC24D60067AAE0 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		DDCEBD6A1FDC24D60067AAE0 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListTableView.swift; sourceTree = "<group>"; };
 		DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
@@ -247,7 +345,9 @@
 		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
 		DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardTableView.swift; sourceTree = "<group>"; };
 		DDFEB95B1E253A04004EADE9 /* AddCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
-		E70324A9E24EFFE454E8EF05 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E62ED7B05BB5E8CB8B35DD27 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED731607178C55F6D5677216 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F890BAB80B125616526B0F86 /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +355,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76EB78CA09637614226FCC31 /* Pods_SWDestiny_Trades.framework in Frameworks */,
+				DDCEBD6B1FDC24D60067AAE0 /* SnapKit.framework in Frameworks */,
+				DDCEBD6F1FDC24D60067AAE0 /* Result.framework in Frameworks */,
+				DDCEBD711FDC24D60067AAE0 /* Reusable.framework in Frameworks */,
+				DDCEBD721FDC24D60067AAE0 /* Kingfisher.framework in Frameworks */,
+				DDCEBD731FDC24D60067AAE0 /* Charts.framework in Frameworks */,
+				DD387BD81FDC558500F1DD34 /* ObjectMapper.framework in Frameworks */,
+				DDCEBD741FDC24D60067AAE0 /* PKHUD.framework in Frameworks */,
+				DDCEBD761FDC24D60067AAE0 /* TextFieldEffects.framework in Frameworks */,
+				DDCEBD771FDC24D60067AAE0 /* ImageSlideshow.framework in Frameworks */,
+				DDCEBD781FDC24D60067AAE0 /* RealmSwift.framework in Frameworks */,
+				DDCEBD791FDC24D60067AAE0 /* SwiftMessages.framework in Frameworks */,
+				DDCEBD7B1FDC24D60067AAE0 /* Moya.framework in Frameworks */,
+				DDCEBD7C1FDC24D60067AAE0 /* Moya_ObjectMapper.framework in Frameworks */,
+				DDCEBD7D1FDC24D60067AAE0 /* Alamofire.framework in Frameworks */,
+				DDCEBD7E1FDC24D60067AAE0 /* Realm.framework in Frameworks */,
+				DD387BDA1FDC8A0C00F1DD34 /* RxSwift.framework in Frameworks */,
+				E04F4C11032F13EFFBC77CB3 /* Pods_SWDestiny_Trades.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,20 +379,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F65BD03E5A71109B3970034 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */,
+				DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */,
+				DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */,
+				5D609625818242F24EFC3384 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2E1C88C8670E809E04AFB282 /* Frameworks */ = {
+		470AB63646F6FFCF3AEAA23D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				535C4B90E43323F930BBC6F1 /* Pods_SWDestiny_Trades.framework */,
-				E70324A9E24EFFE454E8EF05 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */,
+				F890BAB80B125616526B0F86 /* Pods-SWDestiny Trades.debug.xcconfig */,
+				22BDA69DD19B12AE8F8BBD8E /* Pods-SWDestiny Trades.release.xcconfig */,
+				370E88174768498731F87375 /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */,
+				0613B8121B1B14F541C467AB /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		DD09051C1E24594E00D9EFB0 /* AddCard */ = {
@@ -566,8 +686,8 @@
 				DD6E06861E114E88004A5653 /* SWDestiny Trades */,
 				DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */,
 				DD6E06851E114E88004A5653 /* Products */,
-				F0F79EAA73208C4792AE7D85 /* Pods */,
-				2E1C88C8670E809E04AFB282 /* Frameworks */,
+				DDCEBD521FDC24D30067AAE0 /* Frameworks */,
+				470AB63646F6FFCF3AEAA23D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -936,6 +1056,40 @@
 			name = Screens;
 			sourceTree = "<group>";
 		};
+		DDCEBD521FDC24D30067AAE0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */,
+				DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */,
+				DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */,
+				DDCEBD5D1FDC24D50067AAE0 /* FTPopOverMenu_Swift.framework */,
+				DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */,
+				DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */,
+				DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */,
+				DDCEBD631FDC24D50067AAE0 /* Moya.framework */,
+				DDCEBD551FDC24D40067AAE0 /* Nimble.framework */,
+				DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */,
+				DDCEBD671FDC24D60067AAE0 /* Quick.framework */,
+				DDCEBD561FDC24D40067AAE0 /* ReactiveMoya.framework */,
+				DDCEBD541FDC24D40067AAE0 /* ReactiveSwift.framework */,
+				DDCEBD661FDC24D60067AAE0 /* Realm.framework */,
+				DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */,
+				DDCEBD571FDC24D40067AAE0 /* Result.framework */,
+				DDCEBD591FDC24D40067AAE0 /* Reusable.framework */,
+				DDCEBD681FDC24D60067AAE0 /* RxBlocking.framework */,
+				DDCEBD581FDC24D40067AAE0 /* RxCocoa.framework */,
+				DDCEBD621FDC24D50067AAE0 /* RxMoya.framework */,
+				DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */,
+				DDCEBD6A1FDC24D60067AAE0 /* RxTest.framework */,
+				DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */,
+				DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */,
+				DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */,
+				ED731607178C55F6D5677216 /* Pods_SWDestiny_Trades.framework */,
+				E62ED7B05BB5E8CB8B35DD27 /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DDF5D95C1E2EA7A8007C8A4B /* DeckList */ = {
 			isa = PBXGroup;
 			children = (
@@ -991,17 +1145,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		F0F79EAA73208C4792AE7D85 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				440FC39397F3D0809FC4E17D /* Pods-SWDestiny Trades.debug.xcconfig */,
-				AD5C99A7B5045CADE04DD4F0 /* Pods-SWDestiny Trades.release.xcconfig */,
-				DDC8523C507C8F1FC8126B9C /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */,
-				316B8185672BD17C05BB315F /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1009,13 +1152,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A31E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny Trades" */;
 			buildPhases = (
-				F87B7899856A98C73A54FC39 /* [CP] Check Pods Manifest.lock */,
+				75E6C92D495A499FC4D552B0 /* [CP] Check Pods Manifest.lock */,
 				DD6E06801E114E88004A5653 /* Sources */,
 				DD6E06811E114E88004A5653 /* Frameworks */,
 				DD6E06821E114E88004A5653 /* Resources */,
-				DA16890DEF523551F598506B /* [CP] Embed Pods Frameworks */,
-				3852F1E641A35C8CB3D91730 /* [CP] Copy Pods Resources */,
 				DD4D3A211E1D577900719E96 /* ShellScript */,
+				DDCEBD831FDC253C0067AAE0 /* CopyFiles */,
+				E474211E57B8197AF7795072 /* [CP] Embed Pods Frameworks */,
+				D05D22CCBB2F20DB5F72D87C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1030,12 +1174,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A61E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny-TradesTests" */;
 			buildPhases = (
-				04785EC24B4319764468F3D1 /* [CP] Check Pods Manifest.lock */,
+				F80587495793C6481CEE3075 /* [CP] Check Pods Manifest.lock */,
 				DD6E06961E114E88004A5653 /* Sources */,
 				DD6E06971E114E88004A5653 /* Frameworks */,
 				DD6E06981E114E88004A5653 /* Resources */,
-				CC13D69527CAD761362F2DC5 /* [CP] Embed Pods Frameworks */,
-				01ADA4C156D8771868FC7E29 /* [CP] Copy Pods Resources */,
+				DDDC46AD1FDCD4AC00D79449 /* CopyFiles */,
+				36BFFA0FD7CC0C3F2C6F9759 /* [CP] Embed Pods Frameworks */,
+				AA161D2032C67C2B3436E560 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1118,7 +1263,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01ADA4C156D8771868FC7E29 /* [CP] Copy Pods Resources */ = {
+		36BFFA0FD7CC0C3F2C6F9759 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu_Swift/FTPopOverMenu_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75E6C92D495A499FC4D552B0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA161D2032C67C2B3436E560 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1133,25 +1320,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		04785EC24B4319764468F3D1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-SWDestiny-TradesTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3852F1E641A35C8CB3D91730 /* [CP] Copy Pods Resources */ = {
+		D05D22CCBB2F20DB5F72D87C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1164,118 +1333,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CC13D69527CAD761362F2DC5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu_Swift/FTPopOverMenu_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
-				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA16890DEF523551F598506B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu_Swift/FTPopOverMenu_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
-				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD4D3A211E1D577900719E96 /* ShellScript */ = {
@@ -1291,7 +1348,31 @@
 			shellPath = /bin/sh;
 			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:264462743734:ios:55fa842f99fbef66\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"firebase-crashreporting.json\"\n\n# SwiftGen\n\"${PODS_ROOT}\"/SwiftGen/bin/swiftgen\n";
 		};
-		F87B7899856A98C73A54FC39 /* [CP] Check Pods Manifest.lock */ = {
+		E474211E57B8197AF7795072 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu_Swift/FTPopOverMenu_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F80587495793C6481CEE3075 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1302,7 +1383,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-SWDestiny-TradesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1604,10 +1685,14 @@
 		};
 		DD6E06A41E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 440FC39397F3D0809FC4E17D /* Pods-SWDestiny Trades.debug.xcconfig */;
+			baseConfigurationReference = F890BAB80B125616526B0F86 /* Pods-SWDestiny Trades.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SWDestiny Trades/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.anykey.SWDestiny-Trades";
@@ -1618,10 +1703,14 @@
 		};
 		DD6E06A51E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD5C99A7B5045CADE04DD4F0 /* Pods-SWDestiny Trades.release.xcconfig */;
+			baseConfigurationReference = 22BDA69DD19B12AE8F8BBD8E /* Pods-SWDestiny Trades.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SWDestiny Trades/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.anykey.SWDestiny-Trades";
@@ -1632,10 +1721,14 @@
 		};
 		DD6E06A71E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDC8523C507C8F1FC8126B9C /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */;
+			baseConfigurationReference = 370E88174768498731F87375 /* Pods-SWDestiny Trades-SWDestiny-TradesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SWDestiny TradesTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.anykey.SWDestiny-TradesTests";
@@ -1647,10 +1740,14 @@
 		};
 		DD6E06A81E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 316B8185672BD17C05BB315F /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */;
+			baseConfigurationReference = 0613B8121B1B14F541C467AB /* Pods-SWDestiny Trades-SWDestiny-TradesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "SWDestiny TradesTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.anykey.SWDestiny-TradesTests";
