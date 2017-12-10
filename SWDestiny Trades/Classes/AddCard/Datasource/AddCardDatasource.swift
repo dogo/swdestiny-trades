@@ -11,7 +11,7 @@ import UIKit
 final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
 
     fileprivate var tableView: UITableView?
-    fileprivate var searchIsActive: Bool = false
+    fileprivate var searchIsActive = false
     fileprivate var cardsData: [CardDTO] = []
     fileprivate var filtered: [CardDTO] = []
 
@@ -30,10 +30,6 @@ final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDeleg
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: AddCardCell.self)
         cell.configureCell(cardDTO: getCard(at: indexPath))
         return cell
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -1,5 +1,5 @@
 //
-//  SearchView.swift
+//  AddCardView.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 05/01/17.
@@ -12,7 +12,7 @@ final class AddCardView: UIView, BaseViewConfiguration {
 
     let searchBar = SearchBar()
     let addCardTableView = AddCardTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

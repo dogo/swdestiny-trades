@@ -16,19 +16,11 @@ class AddCardViewController: UIViewController {
     fileprivate let addCardView = AddCardView()
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
-    fileprivate var deckDTO: DeckDTO?
     fileprivate var userCollectionDTO: UserCollectionDTO?
-    fileprivate var isDeckBuilder = false
     fileprivate var isLentMe = false
     fileprivate var isUserCollection = false
 
     // MARK: - Life Cycle
-
-    convenience init(deck: DeckDTO?, isDeckBuilder deckBuilder: Bool) {
-        self.init(nibName: nil, bundle: nil)
-        deckDTO = deck
-        isDeckBuilder = deckBuilder
-    }
 
     convenience init(person: PersonDTO?, isLentMe lentMe: Bool) {
         self.init(nibName: nil, bundle: nil)
@@ -91,13 +83,12 @@ class AddCardViewController: UIViewController {
     }
 
     // MARK: - Helpers
-    private func insert(card: CardDTO) {
+
+    fileprivate func insert(card: CardDTO) {
         let predicate = NSPredicate(format: "code == %@", card.code)
         do {
             try RealmManager.shared.realm.write {
-                if self.isDeckBuilder {
-                    self.insertToDeckBuilder(card: card, predicate: predicate)
-                } else if self.isUserCollection {
+                if self.isUserCollection {
                     self.insertToCollection(card: card, predicate: predicate)
                 } else if self.isLentMe {
                     self.insertToLentMe(card: card, predicate: predicate)
@@ -110,7 +101,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    private func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
+    fileprivate func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
         if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
             personDTO?.borrowed.append(card)
             showSuccessMessage(card: card)
@@ -122,7 +113,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    private func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
+    fileprivate func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
         if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
             personDTO?.lentMe.append(card)
             showSuccessMessage(card: card)
@@ -134,19 +125,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    private func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
-        if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
-            deckDTO?.list.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(deckDTO!, update: true)
-            let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
-        } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
-        }
-    }
-
-    private func insertToCollection(card: CardDTO, predicate: NSPredicate) {
+    fileprivate func insertToCollection(card: CardDTO, predicate: NSPredicate) {
         if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
             userCollectionDTO?.myCollection.append(card)
             showSuccessMessage(card: card)
@@ -156,7 +135,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    private func showSuccessMessage(card: CardDTO) {
+    fileprivate func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)

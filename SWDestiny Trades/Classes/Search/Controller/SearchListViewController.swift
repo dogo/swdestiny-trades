@@ -12,6 +12,7 @@ import FirebaseAnalytics
 @objc protocol SearchDelegate: class {
     func didSelectRow(at index: IndexPath)
     @objc optional func didSelectAccessory(at index: IndexPath)
+    @objc optional func didSelectSegment(index: Int)
 }
 
 class SearchListViewController: UIViewController {

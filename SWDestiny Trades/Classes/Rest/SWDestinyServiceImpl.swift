@@ -12,7 +12,7 @@ import Moya
 
 class SWDestinyServiceImpl: SWDestinyService {
 
-    var moyaProvider = MoyaProvider<SWDestinyAPI>()
+    let moyaProvider = MoyaProvider<SWDestinyAPI>()
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) {
         moyaProvider.request(.setList()) { moyaResult in
@@ -27,10 +27,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             } catch {
                 result = .failure(error)
             }
-
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
 
@@ -47,10 +44,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             } catch {
                 result = .failure(error)
             }
-
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
 
@@ -67,10 +61,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             } catch {
                 result = .failure(error)
             }
-
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
 
@@ -87,10 +78,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             } catch {
                 result = .failure(error)
             }
-
-            DispatchQueue.main.async {
-                completion(result)
-            }
+            completion(result)
         }
     }
 }

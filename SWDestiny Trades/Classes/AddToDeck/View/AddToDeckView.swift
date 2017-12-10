@@ -1,16 +1,17 @@
 //
-//  CardListView.swift
+//  AddToDeckView.swift
 //  swdestiny-trades
 //
-//  Created by Diogo Autilio on 09/01/17.
+//  Created by Diogo Autilio on 05/01/17.
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
 import UIKit
 
-final class CardListView: UIView, BaseViewConfiguration {
+final class AddToDeckView: UIView, BaseViewConfiguration {
 
-    let cardListTableView = CardListTableView()
+    let searchBar = SearchBar()
+    let addToDeckTableView = AddToDeckTableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     override init(frame: CGRect) {
@@ -27,15 +28,27 @@ final class CardListView: UIView, BaseViewConfiguration {
     // MARK: <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
-        self.addSubview(cardListTableView)
-        cardListTableView.addSubview(activityIndicator)
+        self.addSubview(searchBar)
+        self.addSubview(addToDeckTableView)
+        addToDeckTableView.addSubview(activityIndicator)
     }
 
     internal func setupConstraints() {
-        cardListTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
+        searchBar.snp.makeConstraints { make in
+            if #available(iOS 11, *) {
+                make.top.equalTo(safeAreaLayoutGuide.snp.topMargin)
+            } else {
+                make.top.equalTo(self).offset(64)
+            }
             make.left.equalTo(self)
-            make.bottom.equalTo(self)
+            make.right.equalTo(self)
+            make.height.equalTo(44)
+        }
+
+        addToDeckTableView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
+            make.left.equalTo(self)
+            make.bottom.equalTo(self).offset(-49)
             make.right.equalTo(self)
         }
 

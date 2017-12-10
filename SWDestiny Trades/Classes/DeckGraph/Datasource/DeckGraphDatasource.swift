@@ -59,10 +59,6 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         return GraphType.count()
     }
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     public func updateCollecionViewData(deck: DeckDTO) {
         generateGraphData(deck: deck)
         collectionView?.reloadData()

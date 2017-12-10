@@ -25,7 +25,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         colorDatasource = ColorListDatasource(tableView: self)
         numberDatasource = NumberListDatasource(tableView: self)
 
-        //Initial datasource and delegate
+        // Initial datasource and delegate
         self.dataSource = alphabeticalDatasource
 
         self.register(cellType: CardCell.self)
@@ -62,15 +62,12 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         switch index {
         case 0:
             self.dataSource = alphabeticalDatasource
-            self.delegate = cardList
             self.reloadData()
         case 1:
             self.dataSource = colorDatasource
-            self.delegate = cardList
             self.reloadData()
         case 2:
             self.dataSource = numberDatasource
-            self.delegate = cardList
             self.reloadData()
         default:
             break
