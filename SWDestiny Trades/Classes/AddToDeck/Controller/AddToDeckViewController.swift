@@ -86,7 +86,8 @@ class AddToDeckViewController: UIViewController {
 
     fileprivate func loadDataFromRealm() {
         if let collection = Array(RealmManager.shared.realm.objects(UserCollectionDTO.self)).first {
-            addToDeckView.addToDeckTableView.updateSearchList(Array(collection.myCollection))
+            self.cards = Array(collection.myCollection)
+            addToDeckView.addToDeckTableView.updateSearchList(self.cards)
         }
     }
 
