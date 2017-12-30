@@ -36,16 +36,28 @@
 		DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */; };
 		DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
-		DD387BD81FDC558500F1DD34 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */; };
-		DD387BD91FDC558E00F1DD34 /* ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DD387BDA1FDC8A0C00F1DD34 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */; };
-		DD387BDB1FDC8A1C00F1DD34 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB7C1E79E28A00BF2001 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB751E79E28A00BF2001 /* UserCollectionView.swift */; };
 		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
+		DD3E23921FF70EC20033EF1B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */; };
+		DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; };
+		DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
+		DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; };
+		DD3E23961FF70EC20033EF1B /* Moya_ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */; };
+		DD3E23971FF70EC20033EF1B /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD631FDC24D50067AAE0 /* Moya.framework */; };
+		DD3E23981FF70EC20033EF1B /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */; };
+		DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
+		DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
+		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
+		DD3E239C1FF70EC20033EF1B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD571FDC24D40067AAE0 /* Result.framework */; };
+		DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; };
+		DD3E239E1FF70EC20033EF1B /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */; };
+		DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; };
+		DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
+		DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerSpec.swift */; };
@@ -111,34 +123,6 @@
 		DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3811E1DF7A600B4BE18 /* CardDetailViewController.swift */; };
 		DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3841E1DF7BD00B4BE18 /* CardView.swift */; };
 		DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */; };
-		DDCEBD6B1FDC24D60067AAE0 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; };
-		DDCEBD6F1FDC24D60067AAE0 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD571FDC24D40067AAE0 /* Result.framework */; };
-		DDCEBD711FDC24D60067AAE0 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; };
-		DDCEBD721FDC24D60067AAE0 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; };
-		DDCEBD731FDC24D60067AAE0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; };
-		DDCEBD741FDC24D60067AAE0 /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
-		DDCEBD761FDC24D60067AAE0 /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
-		DDCEBD771FDC24D60067AAE0 /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
-		DDCEBD781FDC24D60067AAE0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
-		DDCEBD791FDC24D60067AAE0 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
-		DDCEBD7B1FDC24D60067AAE0 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD631FDC24D50067AAE0 /* Moya.framework */; };
-		DDCEBD7C1FDC24D60067AAE0 /* Moya_ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */; };
-		DDCEBD7D1FDC24D60067AAE0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */; };
-		DDCEBD7E1FDC24D60067AAE0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
-		DDCEBD841FDC256E0067AAE0 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD851FDC256E0067AAE0 /* Charts.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD871FDC256E0067AAE0 /* ImageSlideshow.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD881FDC256E0067AAE0 /* Kingfisher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD891FDC256E0067AAE0 /* Moya_ObjectMapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD8A1FDC256E0067AAE0 /* Moya.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD631FDC24D50067AAE0 /* Moya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD8C1FDC256E0067AAE0 /* PKHUD.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD901FDC256E0067AAE0 /* Realm.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD911FDC256E0067AAE0 /* RealmSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD921FDC256E0067AAE0 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD571FDC24D40067AAE0 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD931FDC256E0067AAE0 /* Reusable.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD991FDC256E0067AAE0 /* SnapKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD9A1FDC256E0067AAE0 /* SwiftMessages.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DDCEBD9B1FDC256E0067AAE0 /* TextFieldEffects.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */; };
 		DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */; };
 		DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; };
@@ -171,31 +155,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		DDCEBD831FDC253C0067AAE0 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DD387BDB1FDC8A1C00F1DD34 /* RxSwift.framework in CopyFiles */,
-				DD387BD91FDC558E00F1DD34 /* ObjectMapper.framework in CopyFiles */,
-				DDCEBD841FDC256E0067AAE0 /* Alamofire.framework in CopyFiles */,
-				DDCEBD851FDC256E0067AAE0 /* Charts.framework in CopyFiles */,
-				DDCEBD871FDC256E0067AAE0 /* ImageSlideshow.framework in CopyFiles */,
-				DDCEBD881FDC256E0067AAE0 /* Kingfisher.framework in CopyFiles */,
-				DDCEBD891FDC256E0067AAE0 /* Moya_ObjectMapper.framework in CopyFiles */,
-				DDCEBD8A1FDC256E0067AAE0 /* Moya.framework in CopyFiles */,
-				DDCEBD8C1FDC256E0067AAE0 /* PKHUD.framework in CopyFiles */,
-				DDCEBD901FDC256E0067AAE0 /* Realm.framework in CopyFiles */,
-				DDCEBD911FDC256E0067AAE0 /* RealmSwift.framework in CopyFiles */,
-				DDCEBD921FDC256E0067AAE0 /* Result.framework in CopyFiles */,
-				DDCEBD931FDC256E0067AAE0 /* Reusable.framework in CopyFiles */,
-				DDCEBD991FDC256E0067AAE0 /* SnapKit.framework in CopyFiles */,
-				DDCEBD9A1FDC256E0067AAE0 /* SwiftMessages.framework in CopyFiles */,
-				DDCEBD9B1FDC256E0067AAE0 /* TextFieldEffects.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DDDC46AD1FDCD4AC00D79449 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -365,22 +324,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDCEBD6B1FDC24D60067AAE0 /* SnapKit.framework in Frameworks */,
-				DDCEBD6F1FDC24D60067AAE0 /* Result.framework in Frameworks */,
-				DDCEBD711FDC24D60067AAE0 /* Reusable.framework in Frameworks */,
-				DDCEBD721FDC24D60067AAE0 /* Kingfisher.framework in Frameworks */,
-				DDCEBD731FDC24D60067AAE0 /* Charts.framework in Frameworks */,
-				DD387BD81FDC558500F1DD34 /* ObjectMapper.framework in Frameworks */,
-				DDCEBD741FDC24D60067AAE0 /* PKHUD.framework in Frameworks */,
-				DDCEBD761FDC24D60067AAE0 /* TextFieldEffects.framework in Frameworks */,
-				DDCEBD771FDC24D60067AAE0 /* ImageSlideshow.framework in Frameworks */,
-				DDCEBD781FDC24D60067AAE0 /* RealmSwift.framework in Frameworks */,
-				DDCEBD791FDC24D60067AAE0 /* SwiftMessages.framework in Frameworks */,
-				DDCEBD7B1FDC24D60067AAE0 /* Moya.framework in Frameworks */,
-				DDCEBD7C1FDC24D60067AAE0 /* Moya_ObjectMapper.framework in Frameworks */,
-				DDCEBD7D1FDC24D60067AAE0 /* Alamofire.framework in Frameworks */,
-				DDCEBD7E1FDC24D60067AAE0 /* Realm.framework in Frameworks */,
-				DD387BDA1FDC8A0C00F1DD34 /* RxSwift.framework in Frameworks */,
+				DD3E23921FF70EC20033EF1B /* Alamofire.framework in Frameworks */,
+				DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */,
+				DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */,
+				DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */,
+				DD3E23961FF70EC20033EF1B /* Moya_ObjectMapper.framework in Frameworks */,
+				DD3E23971FF70EC20033EF1B /* Moya.framework in Frameworks */,
+				DD3E23981FF70EC20033EF1B /* ObjectMapper.framework in Frameworks */,
+				DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */,
+				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
+				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
+				DD3E239C1FF70EC20033EF1B /* Result.framework in Frameworks */,
+				DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */,
+				DD3E239E1FF70EC20033EF1B /* RxSwift.framework in Frameworks */,
+				DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */,
+				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
+				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
 				E04F4C11032F13EFFBC77CB3 /* Pods_SWDestiny_Trades.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1204,9 +1163,9 @@
 				DD6E06811E114E88004A5653 /* Frameworks */,
 				DD6E06821E114E88004A5653 /* Resources */,
 				DD4D3A211E1D577900719E96 /* ShellScript */,
-				DDCEBD831FDC253C0067AAE0 /* CopyFiles */,
 				E474211E57B8197AF7795072 /* [CP] Embed Pods Frameworks */,
 				D05D22CCBB2F20DB5F72D87C /* [CP] Copy Pods Resources */,
+				DD3E23A21FF70F4A0033EF1B /* [Carthage] Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1381,6 +1340,52 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DD3E23A21FF70F4A0033EF1B /* [Carthage] Embed Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ImageSlideshow.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Moya_ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TextFieldEffects.framework",
+			);
+			name = "[Carthage] Embed Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Charts.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImageSlideshow.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya_ObjectMapper.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjectMapper.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PKHUD.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftMessages.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TextFieldEffects.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		DD4D3A211E1D577900719E96 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
