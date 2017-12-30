@@ -33,7 +33,7 @@ platform :ios do
     # match(type: "appstore") # more information: https://codesigning.guide
     gym(scheme: "SWDestiny-Trades",
         export_options: "./fastlane/ExportOptions.plist")
-    pilot
+    pilot(skip_waiting_for_build_processing: true)
 
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
