@@ -47,6 +47,10 @@ final class DeckBuilderViewController: UIViewController {
 
         self.navigationItem.title = deckDTO.name
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
