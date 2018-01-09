@@ -47,7 +47,7 @@ final class DeckBuilderViewController: UIViewController {
 
         self.navigationItem.title = deckDTO.name
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
