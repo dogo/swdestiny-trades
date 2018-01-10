@@ -1,28 +1,31 @@
-opt_in_rules:                                                                                                              
-  - closure_end_indentation                                                                                                
-  - closure_spacing                                                                                                        
-  - discouraged_object_literal                                                                                             
-  - empty_count                                                                                                            
-  - explicit_init                                                                                                          
-  - fatal_error_message                                                                                                                                                                                                                
-  - file_length                                                                                                            
-  - first_where                                                                                                            
-  - force_cast                                                                                                             
-  - force_try                                                                                                              
-  - force_unwrapping                                                                                                       
-  - implicitly_unwrapped_optional                                                                                          
-  - joined_default_parameter                                                                                               
-  - multiline_parameters                                                                                                   
-  - operator_usage_whitespace                                                                                              
-  - overridden_super_call                                                                                                  
-  - prefixed_toplevel_constant 
-  - private_action                                                                                                         
-  - prohibited_super_call                                                                                                  
-  - redundant_nil_coalescing                                                                                               
-  - trailing_closure                                                                                                       
-  - unneeded_parentheses_in_closure_argument                                                                               
-  - vertical_parameter_alignment_on_call                                                                                   
-  - yoda_condition  
+opt_in_rules:
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - discouraged_object_literal
+  - empty_count
+  - explicit_init
+  - fatal_error_message
+  - file_length
+  - first_where
+  - force_cast
+  - force_try
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - joined_default_parameter
+  - multiline_parameters
+  - operator_usage_whitespace
+  - overridden_super_call
+  - prefixed_toplevel_constant
+  - private_action
+  - private_outlet
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - switch_case_on_newline
+  - trailing_closure
+  - unneeded_parentheses_in_closure_argument
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
@@ -34,4 +37,3 @@ quickspec_class_name:
   regex: "class\\s+(.*)[^Tests]:\\s+QuickSpec"
   message: "A test class name must end with 'Tests'"
   severity: error
-  
