@@ -27,6 +27,12 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - yoda_condition
 
+line_length: 160
+
+function_body_length: 80
+
+line_length: 180
+
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - Carthage
