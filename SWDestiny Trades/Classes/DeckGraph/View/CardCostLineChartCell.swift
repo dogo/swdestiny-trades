@@ -54,7 +54,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
     // MARK: - Setup
 
     func setDataCount(dataValues: [Int]) {
-        if dataValues.count > 0 {
+        if !dataValues.isEmpty {
             var dataEntries: [ChartDataEntry] = []
             for i in 0..<dataValues.count {
                 let dataEntry = ChartDataEntry(x: Double(i), y: Double(dataValues[i]))

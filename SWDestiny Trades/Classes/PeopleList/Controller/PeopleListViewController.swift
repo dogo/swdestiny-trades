@@ -65,7 +65,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
         peopleListView.peopleListTableView.updatePeopleList(persons)
     }
 
-    @objc private func reloadTableView(_ notification: NSNotification) {
+    @objc
+    private func reloadTableView(_ notification: NSNotification) {
         loadDataFromRealm()
     }
 

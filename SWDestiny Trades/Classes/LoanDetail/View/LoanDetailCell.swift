@@ -84,13 +84,15 @@ class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
         }
     }
 
-    @objc func valueChanged(_ sender: UIStepper) {
+    @objc
+    func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
         self.stepperValueChanged?(value, self)
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         iconImageView.image = nil
         titleLabel.text = nil
         subtitleLabel.text = nil

@@ -61,7 +61,8 @@ final class AddCardTableView: UITableView, SearchDelegate {
 
     // MARK: Keyboard handling
 
-    @objc private func keyboardDidShow(notification: Notification) {
+    @objc
+    private func keyboardDidShow(notification: Notification) {
 
         initialEdgeInsets = self.contentInset
 
@@ -78,7 +79,8 @@ final class AddCardTableView: UITableView, SearchDelegate {
         }
     }
 
-    @objc private func keyboardDidHide(notification: Notification) {
+    @objc
+    private func keyboardDidHide(notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.contentInset = self.initialEdgeInsets
             self.scrollIndicatorInsets = self.initialEdgeInsets

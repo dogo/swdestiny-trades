@@ -44,6 +44,7 @@ class PersonCell: UITableViewCell, Reusable {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         textLabel?.text = nil
         detailTextLabel?.text = nil
     }

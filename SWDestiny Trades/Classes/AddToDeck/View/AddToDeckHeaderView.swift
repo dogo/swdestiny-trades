@@ -41,10 +41,12 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         segmentControl.removeAllSegments()
     }
 
-    @objc func valueChanged(_ sender: UISegmentedControl) {
+    @objc
+    func valueChanged(_ sender: UISegmentedControl) {
         self.delegate?.didSelectSegment?(index: sender.selectedSegmentIndex)
     }
 

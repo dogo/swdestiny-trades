@@ -46,6 +46,7 @@ class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         baseViewCell.titleLabel.text = nil
         baseViewCell.subtitleLabel.text = nil
     }

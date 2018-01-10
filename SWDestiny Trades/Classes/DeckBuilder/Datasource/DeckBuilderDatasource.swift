@@ -62,7 +62,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             remove(at: indexPath)
-            if deckList[indexPath.section].items.count == 0 {
+            if deckList[indexPath.section].items.isEmpty {
                 deckList.remove(at: indexPath.section)
                 tableView.reloadData()
             } else {

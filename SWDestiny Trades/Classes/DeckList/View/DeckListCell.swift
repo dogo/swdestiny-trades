@@ -62,6 +62,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         titleEditText.text = nil
         titleEditText.isUserInteractionEnabled = false
         toggleEditButton()

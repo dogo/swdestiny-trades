@@ -53,6 +53,7 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         titleLabel.text = nil
         expansionImageView.image = nil
     }

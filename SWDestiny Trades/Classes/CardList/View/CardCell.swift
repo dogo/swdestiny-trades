@@ -67,6 +67,7 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         baseViewCell.iconImageView.image = nil
         baseViewCell.titleLabel.text = nil
         baseViewCell.subtitleLabel.text = nil

@@ -110,6 +110,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         iconImageView.image = nil
         titleLabel.text = nil
         subtitleLabel.text = nil
