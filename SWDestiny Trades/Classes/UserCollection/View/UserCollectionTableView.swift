@@ -53,7 +53,8 @@ final class UserCollectionTableView: UITableView, BaseDelegate {
         case 2:
             tableViewDatasource?.sortByColor()
 
-        default: break
+        default:
+            break
         }
     }
 }

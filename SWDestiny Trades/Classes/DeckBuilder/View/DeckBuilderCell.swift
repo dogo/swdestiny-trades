@@ -103,7 +103,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         }
     }
 
-    @objc func valueChanged(_ sender: UIStepper) {
+    @objc
+    func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
         self.stepperValueChanged?(value, self)

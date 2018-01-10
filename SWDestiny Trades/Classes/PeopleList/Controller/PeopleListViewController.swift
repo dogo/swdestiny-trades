@@ -76,7 +76,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     // MARK: - UIBarButton Actions
 
-    @objc func editButtonTouched(_ sender: Any) {
+    @objc
+    func editButtonTouched(_ sender: Any) {
         toggleTableViewEditable(editable: self.isEditing)
     }
 
@@ -90,7 +91,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     // MARK: Navigation
 
-    @objc func navigateToNextController(_ sender: Any) {
+    @objc
+    func navigateToNextController(_ sender: Any) {
 
         if self.isEditing {
             toggleTableViewEditable(editable: self.isEditing)
@@ -102,8 +104,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     }
 
     func navigateToLoansDetailViewController(person: PersonDTO) {
-        let nextController = LoansDetailViewController()
-        nextController.personDTO = person
+        let nextController = LoansDetailViewController(person: person)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 

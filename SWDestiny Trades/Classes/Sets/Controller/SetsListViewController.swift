@@ -56,7 +56,8 @@ class SetsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
     }
 
-    @objc func retriveSets(sender: UIRefreshControl) {
+    @objc
+    func retriveSets(sender: UIRefreshControl) {
         destinyService.retrieveSetList { result in
             switch result {
             case .success(let setList):
@@ -82,12 +83,14 @@ class SetsListViewController: UIViewController {
 
     // MARK: - UIBarButton Actions
 
-    @objc func aboutButtonTouched(_ sender: Any) {
+    @objc
+    func aboutButtonTouched(_ sender: Any) {
         let nextController = AboutViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    @objc func searchButtonTouched(_ sender: Any) {
+    @objc
+    func searchButtonTouched(_ sender: Any) {
         let nextController = SearchListViewController()
         self.navigationController?.pushViewController(nextController, animated: true)
     }

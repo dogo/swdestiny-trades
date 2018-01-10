@@ -44,7 +44,8 @@ class NewPersonViewController: UIViewController {
 
     // MARK: - UIBarButton Actions
 
-    @objc func doneButtonTouched(_ sender: Any) {
+    @objc
+    func doneButtonTouched(_ sender: Any) {
         if !newPersonView.firstNameTextField.text!.isEmpty {
             let person = PersonDTO()
             person.name = newPersonView.firstNameTextField.text!

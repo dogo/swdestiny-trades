@@ -11,13 +11,13 @@ import UIKit
 class LoansDetailViewController: UIViewController {
 
     fileprivate let loanDetailView = LoanDetailView()
-
-    var personDTO: PersonDTO!
+    fileprivate var personDTO: PersonDTO
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(person: PersonDTO) {
+        self.personDTO = person
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -58,7 +58,8 @@ class LoansDetailViewController: UIViewController {
         loanDetailView.loanDetailTableView.updateTableViewData(person: personDTO)
     }
 
-    @objc private func reloadTableView(_ notification: NSNotification) {
+    @objc
+    private func reloadTableView(_ notification: NSNotification) {
         if let person = notification.userInfo?["personDTO"] as? PersonDTO {
             personDTO = person
             loadDataFromRealm()

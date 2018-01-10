@@ -111,7 +111,8 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
 
     // MARK: - Actions
 
-    @objc func accessoryButtonTouched(sender: Any?) {
+    @objc
+    func accessoryButtonTouched(sender: Any?) {
         titleEditText.isUserInteractionEnabled = !titleEditText.isUserInteractionEnabled
         toggleEditButton()
         if titleEditText.isUserInteractionEnabled {

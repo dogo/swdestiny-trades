@@ -63,7 +63,8 @@ final class DeckBuilderViewController: UIViewController {
         deckBuilderView.deckBuilderTableView.updateTableViewData(deck: deck)
     }
 
-    @objc private func reloadTableView(_ notification: NSNotification) {
+    @objc
+    private func reloadTableView(_ notification: NSNotification) {
         if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
             loadData(deck: deck)
         }
@@ -76,17 +77,20 @@ final class DeckBuilderViewController: UIViewController {
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    @objc func navigateToAddCardViewController() {
+    @objc
+    func navigateToAddCardViewController() {
         let nextController = AddToDeckViewController(deck: deckDTO)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    @objc func navigateToDeckGraphViewController() {
+    @objc
+    func navigateToDeckGraphViewController() {
         let nextController = DeckGraphViewController(deck: deckDTO)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    @objc func share(_ sender: UIBarButtonItem) {
+    @objc
+    func share(_ sender: UIBarButtonItem) {
 
         var deckList: String = "\(deckDTO.name)\n\n"
 

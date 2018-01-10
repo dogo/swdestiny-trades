@@ -102,7 +102,7 @@ class AddCardViewController: UIViewController {
     }
 
     fileprivate func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
-        if let exist = personDTO?.borrowed.filter(predicate), exist.count == 0 {
+        if let exist = personDTO?.borrowed.filter(predicate), exist.count {
             personDTO?.borrowed.append(card)
             showSuccessMessage(card: card)
             RealmManager.shared.realm.add(personDTO!, update: true)
