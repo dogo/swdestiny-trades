@@ -4,8 +4,7 @@ opt_in_rules:
   - discouraged_object_literal                                                                                             
   - empty_count                                                                                                            
   - explicit_init                                                                                                          
-  - fatal_error_message                                                                                                    
-  - file_header                                                                                                            
+  - fatal_error_message                                                                                                                                                                                                                
   - file_length                                                                                                            
   - first_where                                                                                                            
   - force_cast                                                                                                             
