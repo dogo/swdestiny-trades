@@ -47,7 +47,7 @@ final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDeleg
     }
 
     func doingSearch(_ searchText: String) {
-        filtered = cardsData.filter({ (card) -> Bool in
+        filtered = cardsData.filter({ card -> Bool in
             return card.name.range(of: searchText, options: String.CompareOptions.caseInsensitive) != nil
         })
         searchIsActive = !searchText.trim().isEmpty

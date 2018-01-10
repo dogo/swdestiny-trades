@@ -36,7 +36,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
                 cell.quantityStepper.isHidden = false
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: lentMe[indexPath.row])
-                cell.stepperValueChanged = { (value, cell) in
+                cell.stepperValueChanged = { value, cell in
                     guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                     if let card = self.getCard(at: indexPath) {
                         do {
@@ -58,7 +58,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
                 cell.quantityStepper.isHidden = false
                 cell.textLabel?.text = nil
                 cell.configureCell(cardDTO: borrowed[indexPath.row])
-                cell.stepperValueChanged = { (value, cell) in
+                cell.stepperValueChanged = { value, cell in
                     guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                     if let card = self.getCard(at: indexPath) {
                         do {

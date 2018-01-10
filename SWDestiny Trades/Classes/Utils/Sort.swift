@@ -32,7 +32,7 @@ final class Sort {
             return cardDTO.factionCode
         }
 
-        cardsArray.forEach {_ = colors.insert(getColor(cardDTO: $0)) }
+        cardsArray.forEach { _ = colors.insert(getColor(cardDTO: $0)) }
 
         for symbol in colors {
             for card in cardsArray where symbol == card.factionCode {
@@ -50,7 +50,7 @@ final class Sort {
             return cardDTO.typeName.capitalized
         }
 
-        cardsArray.forEach {_ = types.insert(getType(cardDTO: $0)) }
+        cardsArray.forEach { _ = types.insert(getType(cardDTO: $0)) }
 
         for symbol in types {
             for card in cardsArray {
@@ -70,7 +70,7 @@ final class Sort {
             return cardDTO.affiliationCode
         }
 
-        cardsArray.forEach {_ = affiliations.insert(getAffiliation(cardDTO: $0)) }
+        cardsArray.forEach { _ = affiliations.insert(getAffiliation(cardDTO: $0)) }
 
         for symbol in affiliations {
             for card in cardsArray where symbol == card.affiliationCode {

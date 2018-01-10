@@ -27,7 +27,7 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
         if let card = getCard(at: indexPath) {
             cell.configureCell(cardDTO: card)
-            cell.stepperValueChanged = { (value, cell) in
+            cell.stepperValueChanged = { value, cell in
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {
                     do {

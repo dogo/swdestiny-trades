@@ -21,7 +21,7 @@ final class SectionsBuilder {
         // Build Character Set
         var letters = Set<String>()
 
-        cardList.forEach {_ = letters.insert(getFirstLetter(cardDTO: $0)) }
+        cardList.forEach { _ = letters.insert(getFirstLetter(cardDTO: $0)) }
 
         let sortedSymbols = letters.sorted {
             $0 < $1
@@ -39,7 +39,7 @@ final class SectionsBuilder {
         // Build color Set
         var colors = Set<String>()
 
-        cardList.forEach {_ = colors.insert(getColor(cardDTO: $0)) }
+        cardList.forEach { _ = colors.insert(getColor(cardDTO: $0)) }
 
         return Array(colors)
     }
@@ -53,7 +53,7 @@ final class SectionsBuilder {
         // Build types Set
         var types = Set<String>()
 
-        cardList.forEach {_ = types.insert(getType(cardDTO: $0)) }
+        cardList.forEach { _ = types.insert(getType(cardDTO: $0)) }
 
         let sortedSymbols = types.sorted {
             $0 < $1
@@ -73,7 +73,7 @@ final class SectionsBuilder {
         // Build letters Set
         var letters = Set<String>()
 
-        setList.forEach {_ = letters.insert(getFirstLetter(setDTO: $0)) }
+        setList.forEach { _ = letters.insert(getFirstLetter(setDTO: $0)) }
 
         let sortedSymbols = letters.sorted {
             $0 < $1

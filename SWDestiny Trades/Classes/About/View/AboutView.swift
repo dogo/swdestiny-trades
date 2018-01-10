@@ -53,7 +53,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
             if #available(iOS 11, *) {
                 make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).offset(34)
             } else {
-                make.top.equalTo(self).offset(34+64)
+                make.top.equalTo(self).offset(34 + 64)
             }
             make.centerX.equalTo(self)
             make.width.equalTo(280)

@@ -43,7 +43,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckBuilderCell.self)
         if let card = getCard(at: indexPath) {
             cell.configureCell(card: card)
-            cell.stepperValueChanged = { (value, cell) in
+            cell.stepperValueChanged = { value, cell in
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {
                     do {

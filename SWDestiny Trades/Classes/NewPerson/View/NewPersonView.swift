@@ -41,7 +41,7 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
 
     internal func setupConstraints() {
         firstNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(65+44+20)
+            make.top.equalTo(self).offset(65 + 44 + 20)
             make.left.equalTo(self).offset(12)
             make.right.equalTo(self).offset(-12)
             make.height.equalTo(60)
