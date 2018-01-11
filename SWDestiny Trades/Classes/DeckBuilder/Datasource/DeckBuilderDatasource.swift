@@ -106,6 +106,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
 
     public func updateTableViewData(deck: DeckDTO?) {
         if let currentDeck = deck {
+            self.currentDeck = deck
             if !currentDeck.list.isEmpty {
                 let local = Split.cardsByType(cardList: Array(currentDeck.list), sections: SectionsBuilder.byType(cardList: Array(currentDeck.list)))
                 deckList.removeAll()
