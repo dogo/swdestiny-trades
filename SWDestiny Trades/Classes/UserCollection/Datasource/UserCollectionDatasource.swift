@@ -64,6 +64,7 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
 
     public func updateTableViewData(collection: UserCollectionDTO?) {
         if let userCollection = collection {
+            self.userCollection = userCollection
             collectionList = Array(userCollection.myCollection)
         }
         tableView?.reloadData()

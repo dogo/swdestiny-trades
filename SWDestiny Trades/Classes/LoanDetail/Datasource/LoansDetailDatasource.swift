@@ -136,6 +136,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     public func updateTableViewData(person: PersonDTO?) {
         if let currentPerson = person {
+            self.currentPerson = currentPerson
             lentMe = Array(currentPerson.lentMe)
             borrowed = Array(currentPerson.borrowed)
         }
