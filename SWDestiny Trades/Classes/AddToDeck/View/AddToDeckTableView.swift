@@ -88,12 +88,12 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 let keyboardFrame = self.convert(keyboardSize, to: nil)
-                UIView.animate(withDuration: 0.3, animations: {
+                UIView.animate(withDuration: 0.3) {
                     let tabBarHeight: CGFloat = 49.0
                     let edgeInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - tabBarHeight, right: 0)
                     self.contentInset = edgeInset
                     self.scrollIndicatorInsets = edgeInset
-                })
+                }
             }
         }
     }

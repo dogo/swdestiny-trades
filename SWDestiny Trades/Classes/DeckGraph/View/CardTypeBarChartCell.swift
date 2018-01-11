@@ -95,11 +95,11 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
         leftAxis.axisMaximum = 18
         leftAxis.granularity = 2.0
 
-        let marker = XYMarkerView(color: UIColor.lightGray,
+        let marker = XYMarkerView(color: .lightGray,
                                   font: UIFont.systemFont(ofSize: CGFloat(10.0)),
-                                  textColor: UIColor.white,
+                                  textColor: .white,
                                   insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0),
-                                  xAxisValueFormatter: chartView.xAxis.valueFormatter!)
+                                  xAxisValueFormatter: self)
         marker.chartView = chartView
         marker.minimumSize = CGSize(width: 80.0, height: 40.0)
         chartView.marker = marker

@@ -23,7 +23,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
     }
 
     fileprivate var tableView: UITableView?
-    fileprivate var currentDeck: DeckDTO!
+    fileprivate var currentDeck: DeckDTO?
     var deckList = [Section]()
 
     weak var delegate: BaseDelegate?
@@ -104,13 +104,14 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         tableView?.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 
-    public func updateTableViewData(deck: DeckDTO) {
-        currentDeck = deck
-        if !currentDeck.list.isEmpty {
-            let local = Split.cardsByType(cardList: Array(currentDeck.list), sections: SectionsBuilder.byType(cardList: Array(currentDeck.list)))
-            deckList.removeAll()
-            for card in local {
-                deckList.append(Section(name: card.key, items: card.value))
+    public func updateTableViewData(deck: DeckDTO?) {
+        if let currentDeck = deck {
+            if !currentDeck.list.isEmpty {
+                let local = Split.cardsByType(cardList: Array(currentDeck.list), sections: SectionsBuilder.byType(cardList: Array(currentDeck.list)))
+                deckList.removeAll()
+                for card in local {
+                    deckList.append(Section(name: card.key, items: card.value))
+                }
             }
         }
         tableView?.reloadData()
@@ -119,8 +120,8 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
     private func remove(at indexPath: IndexPath) {
         do {
             try RealmManager.shared.realm.write {
-                if let card = getCard(at: indexPath), let realmIndex = currentDeck.list.index(of: card) {
-                    currentDeck.list.remove(at: realmIndex)
+                if let card = getCard(at: indexPath), let realmIndex = currentDeck?.list.index(of: card) {
+                    currentDeck?.list.remove(at: realmIndex)
                     deckList[indexPath.section].items.remove(at: indexPath.row)
                 }
             }

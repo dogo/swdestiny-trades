@@ -28,9 +28,9 @@ final class RealmMigrations {
                             }
 
                             if let id = oldObject["code"] as? String {
-                                if dices[id] != nil {
+                                if kDices[id] != nil {
                                     let dieFaces = List<StringObject>()
-                                    dices[id]?.forEach { side in
+                                    kDices[id]?.forEach { side in
                                         let string = StringObject()
                                         string.value = side
                                         dieFaces.append(string)
@@ -114,7 +114,7 @@ final class RealmMigrations {
     }
 }
 
-let dices = [
+let kDices = [
     "01001": ["1RD", "2RD", "1F", "1Dc", "1R", "-"],
     "01002": ["1RD", "2RD", "2RD1", "1R", "-", "-"],
     "01003": ["2MD", "2MD", "3MD1", "1Dr", "1R", "-"],

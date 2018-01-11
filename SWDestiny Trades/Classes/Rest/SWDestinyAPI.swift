@@ -19,7 +19,7 @@ enum SWDestinyAPI {
 extension SWDestinyAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: "http://swdestinydb.com")!
+        return URL(string: "http://swdestinydb.com")! // swiftlint:disable:this force_unwrapping
     }
 
     var path: String {

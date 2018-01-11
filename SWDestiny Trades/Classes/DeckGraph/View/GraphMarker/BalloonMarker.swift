@@ -56,14 +56,14 @@ open class BalloonMarker: MarkerImage {
         origin.y -= height
         if origin.x + offset.x < 0.0 {
             offset.x = -origin.x + padding
-        } else if chart != nil && origin.x + width + offset.x > chart!.bounds.size.width {
-            offset.x = chart!.bounds.size.width - origin.x - width - padding
+        } else if let chart = chart, origin.x + width + offset.x > chart.bounds.size.width {
+            offset.x = chart.bounds.size.width - origin.x - width - padding
         }
 
         if origin.y + offset.y < 0 {
             offset.y = height + padding
-        } else if chart != nil && origin.y + height + offset.y > chart!.bounds.size.height {
-            offset.y = chart!.bounds.size.height - origin.y - height - padding
+        } else if let chart = chart, origin.y + height + offset.y > chart.bounds.size.height {
+            offset.y = chart.bounds.size.height - origin.y - height - padding
         }
 
         return offset

@@ -28,7 +28,7 @@ class CardDetailViewController: UIViewController {
             if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
                 imageSource.append(remoteSource)
             } else {
-                let localSource = ImageSource(imageString: "ic_404")!
+                let localSource = ImageSource(image: Asset.ic404.image)
                 imageSource.append(localSource)
             }
         }

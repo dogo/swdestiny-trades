@@ -53,7 +53,8 @@ final class DeckListTableView: UITableView, BaseDelegate {
 
     // MARK: Keyboard handling
 
-    @objc private func keyboardDidShow(notification: Notification) {
+    @objc
+    private func keyboardDidShow(notification: Notification) {
 
         initialEdgeInsets = self.contentInset
 
@@ -62,17 +63,18 @@ final class DeckListTableView: UITableView, BaseDelegate {
                 let keyboardFrame = self.convert(keyboardSize, to: nil)
                 let intersect: CGRect = keyboardFrame.intersection(self.bounds)
                 if !intersect.isNull {
-                    UIView.animate(withDuration: 0.3, animations: {
+                    UIView.animate(withDuration: 0.3) {
                         let edgeInset = UIEdgeInsets(top: 64, left: 0, bottom: keyboardFrame.size.height, right: 0)
                         self.contentInset = edgeInset
                         self.scrollIndicatorInsets = edgeInset
-                    })
+                    }
                 }
             }
         }
     }
 
-    @objc private func keyboardDidHide(notification: Notification) {
+    @objc
+    private func keyboardDidHide(notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.contentInset = self.initialEdgeInsets
             self.scrollIndicatorInsets = self.initialEdgeInsets

@@ -52,7 +52,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
 
         if let deckList = deckDTO?.list {
             let count = deckList.sum(ofProperty: "quantity") as Int
-            if count > 0 {
+            if count > 0 { // swiftlint:disable:this empty_count // false postive
                 subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), count)
             } else {
                 subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), 0)
@@ -120,8 +120,10 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         } else {
             do {
             try RealmManager.shared.realm.write {
-                deckDTO?.name = titleEditText.text!
-                RealmManager.shared.realm.add(deckDTO!, update: true)
+                if let deck = deckDTO {
+                    deck.name = titleEditText.text ?? ""
+                    RealmManager.shared.realm.add(deck, update: true)
+                }
             }
             } catch let error as NSError {
                 print("Error opening realm: \(error)")

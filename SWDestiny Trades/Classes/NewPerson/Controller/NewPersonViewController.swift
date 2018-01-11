@@ -46,10 +46,14 @@ class NewPersonViewController: UIViewController {
 
     @objc
     func doneButtonTouched(_ sender: Any) {
-        if !newPersonView.firstNameTextField.text!.isEmpty {
+
+        let name = newPersonView.firstNameTextField.text ?? ""
+        let lastName = newPersonView.lastNameTextField.text ?? ""
+
+        if !name.isEmpty {
             let person = PersonDTO()
-            person.name = newPersonView.firstNameTextField.text!
-            person.lastName = newPersonView.lastNameTextField.text!
+            person.name = name
+            person.lastName = lastName
             delegate?.insertNew(person: person)
         }
         _ = self.navigationController?.popViewController(animated: true)

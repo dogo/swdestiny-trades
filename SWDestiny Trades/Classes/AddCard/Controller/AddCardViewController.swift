@@ -102,11 +102,11 @@ class AddCardViewController: UIViewController {
     }
 
     fileprivate func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
-        if let exist = personDTO?.borrowed.filter(predicate), exist.count {
-            personDTO?.borrowed.append(card)
+        if let person = personDTO, person.borrowed.filter(predicate).isEmpty {
+            person.borrowed.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(personDTO!, update: true)
-            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
+            RealmManager.shared.realm.add(person, update: true)
+            let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
@@ -114,11 +114,11 @@ class AddCardViewController: UIViewController {
     }
 
     fileprivate func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
-        if let exist = personDTO?.lentMe.filter(predicate), exist.count == 0 {
-            personDTO?.lentMe.append(card)
+        if let person = personDTO, person.lentMe.filter(predicate).isEmpty {
+            person.lentMe.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(personDTO!, update: true)
-            let personDataDict: [String: PersonDTO] = ["personDTO": personDTO!]
+            RealmManager.shared.realm.add(person, update: true)
+            let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
@@ -126,10 +126,10 @@ class AddCardViewController: UIViewController {
     }
 
     fileprivate func insertToCollection(card: CardDTO, predicate: NSPredicate) {
-        if let exist = userCollectionDTO?.myCollection.filter(predicate), exist.count == 0 {
-            userCollectionDTO?.myCollection.append(card)
+        if let userCollection = userCollectionDTO, userCollection.myCollection.filter(predicate).isEmpty {
+            userCollection.myCollection.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(userCollectionDTO!, update: true)
+            RealmManager.shared.realm.add(userCollection, update: true)
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }

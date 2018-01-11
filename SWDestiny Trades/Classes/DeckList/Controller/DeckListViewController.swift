@@ -68,7 +68,8 @@ final class DeckListViewController: UIViewController {
 
     }
 
-    @objc func addButtonTouched(_ sender: Any) {
+    @objc
+    func addButtonTouched(_ sender: Any) {
         deckListView.deckListTableView.insert(deck: DeckDTO())
     }
 }

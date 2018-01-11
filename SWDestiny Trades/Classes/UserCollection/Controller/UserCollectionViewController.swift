@@ -63,10 +63,10 @@ final class UserCollectionViewController: UIViewController {
 
     func configureFTPopOverMenu() {
         let config = FTConfiguration.shared
-        config.textColor = UIColor.white
+        config.textColor = .white
         config.backgoundTintColor = ColorPalette.appTheme
         config.borderColor = ColorPalette.appTheme
-        config.menuSeparatorColor = UIColor.lightGray
+        config.menuSeparatorColor = .lightGray
         config.textAlignment = .center
     }
 
@@ -75,12 +75,11 @@ final class UserCollectionViewController: UIViewController {
         do {
             try RealmManager.shared.realm.write {
                 let predicate = NSPredicate(format: "code == %@", carDTO.code)
-                let index = user.myCollection.index(matching: predicate)
-                if index == nil {
-                    user.myCollection.append(carDTO)
-                } else {
-                    let newCard = user.myCollection[index!]
+                if let index = user.myCollection.index(matching: predicate) {
+                    let newCard = user.myCollection[index]
                     newCard.quantity += 1
+                } else {
+                    user.myCollection.append(carDTO)
                 }
                 RealmManager.shared.realm.add(user, update: true)
             }
@@ -116,12 +115,14 @@ final class UserCollectionViewController: UIViewController {
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    @objc func navigateToAddCardViewController() {
+    @objc
+    func navigateToAddCardViewController() {
         let nextController = AddCardViewController(userCollection: UserCollectionViewController.getUserCollection(), isUserCollection: true)
         self.navigationController?.pushViewController(nextController, animated: true)
     }
 
-    @objc func share(_ sender: UIBarButtonItem) {
+    @objc
+    func share(_ sender: UIBarButtonItem) {
 
         var collectionList: String = ""
 
@@ -142,7 +143,8 @@ final class UserCollectionViewController: UIViewController {
         }
     }
 
-    @objc func sort(_ sender: UIBarButtonItem, event: UIEvent) {
+    @objc
+    func sort(_ sender: UIBarButtonItem, event: UIEvent) {
         FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], done: { selectedIndex -> Void in
             self.userCollectionView.userCollectionTableView.sort(selectedIndex)
             self.currentSortIndex = selectedIndex

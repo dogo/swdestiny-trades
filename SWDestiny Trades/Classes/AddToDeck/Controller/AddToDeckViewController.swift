@@ -108,11 +108,11 @@ class AddToDeckViewController: UIViewController {
     }
 
     fileprivate func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
-        if let exist = deckDTO?.list.filter(predicate), exist.count == 0 {
-            deckDTO?.list.append(card)
+        if let deck = deckDTO, deck.list.filter(predicate).isEmpty {
+            deck.list.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(deckDTO!, update: true)
-            let deckDataDict: [String: DeckDTO] = ["deckDTO": deckDTO!]
+            RealmManager.shared.realm.add(deck, update: true)
+            let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)

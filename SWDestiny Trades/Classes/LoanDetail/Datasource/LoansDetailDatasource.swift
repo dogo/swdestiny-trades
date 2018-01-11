@@ -11,7 +11,7 @@ import UIKit
 class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     fileprivate var tableView: UITableView?
-    fileprivate var currentPerson: PersonDTO!
+    fileprivate var currentPerson: PersonDTO?
     var lentMe: [CardDTO] = []
     var borrowed: [CardDTO] = []
 
@@ -115,10 +115,10 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             try RealmManager.shared.realm.write {
                 if indexPath.section == 0 {
                     lentMe.remove(at: indexPath.row)
-                    currentPerson.lentMe.remove(at: indexPath.row)
+                    currentPerson?.lentMe.remove(at: indexPath.row)
                 } else {
                     borrowed.remove(at: indexPath.row)
-                    currentPerson.borrowed.remove(at: indexPath.row)
+                    currentPerson?.borrowed.remove(at: indexPath.row)
                 }
             }
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
@@ -130,15 +130,15 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     public func getCard(at index: IndexPath) -> CardDTO? {
         if index.section == 0 {
             return lentMe[index.row]
-        } else {
-            return borrowed[index.row]
         }
+        return borrowed[index.row]
     }
 
-    public func updateTableViewData(person: PersonDTO) {
-        currentPerson = person
-        lentMe = Array(currentPerson.lentMe)
-        borrowed = Array(currentPerson.borrowed)
+    public func updateTableViewData(person: PersonDTO?) {
+        if let currentPerson = person {
+            lentMe = Array(currentPerson.lentMe)
+            borrowed = Array(currentPerson.borrowed)
+        }
         tableView?.reloadData()
     }
 }

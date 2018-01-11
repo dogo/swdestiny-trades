@@ -39,20 +39,25 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        switch GraphType(rawValue: indexPath.row)! {
-        case .barGraph:
-                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardTypeBarChartCell.self)
-                cell.configureCell(dataValues: cardTypes)
-                return cell
-        case .lineGraph:
-                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardCostLineChartCell.self)
-                cell.configureCell(dataValues: cardCosts)
-                return cell
-        case .radarGraph:
-                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DiceRadarChartCell.self)
-                cell.configureCell(dataValues: dieFaces)
-                return cell
+        if let graphType = GraphType(rawValue: indexPath.row) {
+
+            switch graphType {
+            case .barGraph:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardTypeBarChartCell.self)
+                    cell.configureCell(dataValues: cardTypes)
+                    return cell
+            case .lineGraph:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardCostLineChartCell.self)
+                    cell.configureCell(dataValues: cardCosts)
+                    return cell
+            case .radarGraph:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DiceRadarChartCell.self)
+                    cell.configureCell(dataValues: dieFaces)
+                    return cell
+            }
         }
+        // return the default cell if none of above succeed
+        return UICollectionViewCell()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
