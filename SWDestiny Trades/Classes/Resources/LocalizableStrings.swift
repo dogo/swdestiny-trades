@@ -51,6 +51,8 @@ enum L10n {
   static let done = L10n.tr("Localizable", "DONE")
   /// Edit
   static let edit = L10n.tr("Localizable", "EDIT")
+  /// Elite
+  static let elite = L10n.tr("Localizable", "ELITE")
   /// Something is horribly wrong! Tap here to check if swdestinydb.com is online
   static let errorMessage = L10n.tr("Localizable", "ERROR_MESSAGE")
   /// Expansions
@@ -73,6 +75,8 @@ enum L10n {
   static let newPerson = L10n.tr("Localizable", "NEW_PERSON")
   /// No loans
   static let noLoans = L10n.tr("Localizable", "NO_LOANS")
+  /// Non-Elite
+  static let nonElite = L10n.tr("Localizable", "NON_ELITE")
   /// People
   static let people = L10n.tr("Localizable", "PEOPLE")
   /// Red

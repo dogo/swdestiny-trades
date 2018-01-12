@@ -42,7 +42,9 @@ class CardDTO: Object, Mappable {
     @objc dynamic var imageUrl: String = ""
     @objc dynamic var label: String = ""
     @objc dynamic var cp: Int = 0 // swiftlint:disable:this identifier_name
+    // Non API properties
     @objc dynamic var quantity: Int = 1
+    @objc dynamic var isElite: Bool = false
 
     required convenience public init?(map: Map) {
         self.init()

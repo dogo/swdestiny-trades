@@ -12,6 +12,7 @@ import Reusable
 class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var stepperValueChanged: ((Int, DeckBuilderCell) -> Void)?
+    var eliteButtonTouched: ((Bool, DeckBuilderCell) -> Void)?
 
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
@@ -49,6 +50,13 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         return stepper
     }()
 
+    var eliteButton: ToggleButton = {
+        let button = ToggleButton(frame: .zero)
+        button.setTitle(L10n.nonElite, for: .normal)
+        button.setTitleColor(ColorPalette.appTheme, for: .normal)
+        return button
+    }()
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         buildViewHierarchy()
@@ -69,6 +77,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         quantityStepper.value = Double(card.quantity)
         quantityStepper.maximumValue = Double(card.deckLimit)
         quantityStepper.isHidden = (card.typeCode == "character" && card.isUnique) || card.typeCode == "battlefield"
+        eliteButton.isHidden = !(card.typeCode == "character" && card.isUnique)
+        eliteButton.isActivate = card.isElite
     }
 
     private func setSubtitle(card: CardDTO) {
@@ -130,6 +140,7 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         self.contentView.addSubview(subtitleLabel)
         self.contentView.addSubview(quantityLabel)
         self.contentView.addSubview(quantityStepper)
+        self.contentView.addSubview(eliteButton)
     }
 
     internal func setupConstraints() {
@@ -161,9 +172,19 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
             make.centerY.equalTo(self.contentView)
             make.right.equalTo(self.contentView.snp.right)
         }
+
+        eliteButton.snp.makeConstraints { make in
+            make.centerY.equalTo(self.contentView)
+            make.right.equalTo(self.contentView.snp.right)
+            make.width.equalTo(quantityStepper.snp.width)
+        }
     }
 
     internal func configureViews() {
         self.accessoryType = .disclosureIndicator
+
+        eliteButton.buttonTouched = { newVaue in
+            self.eliteButtonTouched?(newVaue, self)
+        }
     }
 }

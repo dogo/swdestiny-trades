@@ -33,8 +33,6 @@ final class DeckBuilderViewController: UIViewController {
 
         setupNavigationItem()
 
-        loadData(deck: deckDTO)
-
         deckBuilderView.deckBuilderTableView.didSelectCard = { [unowned self] list, card in
             self.navigateToCardDetailViewController(cardList: list, card: card)
         }
@@ -46,6 +44,8 @@ final class DeckBuilderViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = deckDTO.name
+
+        loadData(deck: deckDTO)
     }
 
     deinit {

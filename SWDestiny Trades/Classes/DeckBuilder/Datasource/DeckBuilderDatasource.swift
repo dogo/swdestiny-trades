@@ -44,16 +44,10 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         if let card = getCard(at: indexPath) {
             cell.configureCell(card: card)
             cell.stepperValueChanged = { value, cell in
-                guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-                if let card = self.getCard(at: indexPath) {
-                    do {
-                        try RealmManager.shared.realm.write {
-                            card.quantity = value
-                        }
-                    } catch let error as NSError {
-                        print("Error opening realm: \(error)")
-                    }
-                }
+                self.updateCardQuantity(newValue: value, cell: cell)
+            }
+            cell.eliteButtonTouched = { isElite, cell in
+                self.updateCharacterElite(newValue: isElite, cell: cell)
             }
         }
         return cell
@@ -118,7 +112,33 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         tableView?.reloadData()
     }
 
-    private func remove(at indexPath: IndexPath) {
+    fileprivate func updateCardQuantity(newValue: Int, cell: DeckBuilderCell) {
+        guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
+        if let card = self.getCard(at: indexPath) {
+            do {
+                try RealmManager.shared.realm.write {
+                    card.quantity = newValue
+                }
+            } catch let error as NSError {
+                print("Error opening realm: \(error)")
+            }
+        }
+    }
+
+    fileprivate func updateCharacterElite(newValue: Bool, cell: DeckBuilderCell) {
+        guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
+        if let card = self.getCard(at: indexPath) {
+            do {
+                try RealmManager.shared.realm.write {
+                    card.isElite = newValue
+                }
+            } catch let error as NSError {
+                print("Error opening realm: \(error)")
+            }
+        }
+    }
+
+    fileprivate func remove(at indexPath: IndexPath) {
         do {
             try RealmManager.shared.realm.write {
                 if let card = getCard(at: indexPath), let realmIndex = currentDeck?.list.index(of: card) {

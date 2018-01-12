@@ -13,7 +13,7 @@ final class RealmMigrations {
 
     static func performMigrations() {
         var config = Realm.Configuration.defaultConfiguration
-        config.schemaVersion = 2
+        config.schemaVersion = 3
         var needsMigrationToV2 = false
 
         config.migrationBlock = { migration, oldSchemaVersion in
@@ -49,6 +49,13 @@ final class RealmMigrations {
                     }
                 }
                 needsMigrationToV2 = true
+            }
+            if oldSchemaVersion < 3 {
+                migration.enumerateObjects(ofType: CardDTO.className()) { _, newObject in
+                    if let newObject = newObject {
+                        newObject["isElite"] = false
+                    }
+                }
             }
         }
 
