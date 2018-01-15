@@ -38,8 +38,8 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
 
 custom_rules:
-quickspec_class_name:
-  name: "Invalid Test Class Name"
-  regex: "class\\s+(.*)[^Tests]:\\s+QuickSpec"
-  message: "A test class name must end with 'Tests'"
-  severity: error
+  quickspec_class_name:
+    name: "Invalid Test Class Name"
+    regex: "class\\s+(.*)[^Tests]:\\s+QuickSpec"
+    message: "A test class name must end with 'Tests'"
+    severity: error
