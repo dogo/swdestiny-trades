@@ -67,6 +67,7 @@
 		DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */; };
 		DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */; };
 		DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4D988F1E4182FB006412AD /* KingfisherSource.swift */; };
+		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
 		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
@@ -217,6 +218,7 @@
 		DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
 		DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorListDatasource.swift; sourceTree = "<group>"; };
 		DD4D988F1E4182FB006412AD /* KingfisherSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherSource.swift; sourceTree = "<group>"; };
+		DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -1037,6 +1039,7 @@
 			isa = PBXGroup;
 			children = (
 				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
+				DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */,
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
 				DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */,
 			);
@@ -1500,6 +1503,7 @@
 				DDAFBF281FF6F3F500927875 /* AddToDeckHeaderView.swift in Sources */,
 				DDCA97B71E2FA72A0098FFB5 /* DeckBuilderDatasource.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
+				DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */,
 				DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */,
 				DD0905481E24701D00D9EFB0 /* AlphabeticalListDatasource.swift in Sources */,
 				DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */,

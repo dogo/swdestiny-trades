@@ -72,16 +72,7 @@ class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
     private func setIconImage(card: CardDTO) {
         let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
         iconImageView.image = imageForRendering
-
-        if card.factionCode == "red" {
-            iconImageView.tintColor = ColorPalette.red
-        } else if card.factionCode == "yellow" {
-            iconImageView.tintColor = ColorPalette.yellow
-        } else if card.factionCode == "blue" {
-            iconImageView.tintColor = ColorPalette.blue
-        } else if card.factionCode == "gray" {
-            iconImageView.tintColor = ColorPalette.gray
-        }
+        iconImageView.tintColor = card.factionColor()
     }
 
     @objc

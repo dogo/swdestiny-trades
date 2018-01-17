@@ -54,16 +54,7 @@ class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
     private func setIconImage(card: CardDTO) {
         let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
         baseViewCell.iconImageView.image = imageForRendering
-
-        if card.factionCode == "red" {
-            baseViewCell.iconImageView.tintColor = ColorPalette.red
-        } else if card.factionCode == "yellow" {
-            baseViewCell.iconImageView.tintColor = ColorPalette.yellow
-        } else if card.factionCode == "blue" {
-            baseViewCell.iconImageView.tintColor = ColorPalette.blue
-        } else if card.factionCode == "gray" {
-            baseViewCell.iconImageView.tintColor = ColorPalette.gray
-        }
+        baseViewCell.iconImageView.tintColor = card.factionColor()
     }
 
     override func prepareForReuse() {
