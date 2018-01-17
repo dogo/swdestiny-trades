@@ -9,7 +9,7 @@
 import UIKit
 
 extension CardDTO {
-    
+
     func factionColor() -> UIColor {
         if self.factionCode == "red" {
             return ColorPalette.red
