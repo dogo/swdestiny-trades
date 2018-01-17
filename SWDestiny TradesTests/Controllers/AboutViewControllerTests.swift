@@ -10,7 +10,7 @@ import Quick
 import Nimble
 @testable import SWDestiny_Trades
 
-class AboutViewControllerSpec: QuickSpec {
+class AboutViewControllerTests: QuickSpec {
 
     override func spec() {
         describe("About view controller") {

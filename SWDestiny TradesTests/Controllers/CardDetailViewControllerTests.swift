@@ -1,8 +1,8 @@
 //
-//  AddCardViewControllerSpec.swift
+//  CardDetailViewControllerSpec.swift
 //  swdestiny-trades
 //
-//  Created by Diogo Autilio on 14/02/17.
+//  Created by Diogo Autilio on 25/03/17.
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
@@ -10,15 +10,16 @@ import Quick
 import Nimble
 @testable import SWDestiny_Trades
 
-class AddCardViewControllerSpec: QuickSpec {
+class CardDetailViewControllerTests: QuickSpec {
 
     override func spec() {
-        describe("AddCard view controller") {
+        describe("CardDetail view controller") {
 
-            var controller: AddCardViewController!
+            var controller: CardDetailViewController!
+            let cardList = [CardDTO()]
 
             beforeEach {
-                controller = AddCardViewController()
+                controller = CardDetailViewController(cardList: cardList, selected: CardDTO())
             }
 
             it("should be able to create a controller") {
@@ -26,19 +27,19 @@ class AddCardViewControllerSpec: QuickSpec {
             }
 
             it("should have a view of type") {
-                expect(controller.view).to(beAKindOf(AddCardView.self))
+                expect(controller.view).to(beAKindOf(CardView.self))
             }
 
             it("should have the expected navigation title") {
                 _ = UINavigationController(rootViewController: controller)
                 controller.viewWillAppear(true)
-                expect(controller.navigationItem.title).to(equal(L10n.addCard))
+                expect(controller.navigationItem.title).to(equal(NSLocalizedString("", comment: "")))
             }
 
             #if arch(x86_64) && os(iOS)
                 it("should trigger fatal error if init with coder") {
                     expect { () -> Void in
-                        _ = AddCardViewController(coder: NSCoder())
+                        _ = CardDetailViewController(coder: NSCoder())
                     }.to(throwAssertion())
                 }
             #endif
