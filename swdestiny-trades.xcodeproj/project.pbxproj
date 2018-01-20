@@ -1164,8 +1164,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A31E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny Trades" */;
 			buildPhases = (
-				DD2026E5200AACFD006B17DD /* SwiftGen */,
 				75E6C92D495A499FC4D552B0 /* [CP] Check Pods Manifest.lock */,
+				DD2026E5200AACFD006B17DD /* SwiftGen */,
 				DD6E06801E114E88004A5653 /* Sources */,
 				DD6E06811E114E88004A5653 /* Frameworks */,
 				DD6E06821E114E88004A5653 /* Resources */,

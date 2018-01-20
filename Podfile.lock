@@ -1,16 +1,16 @@
 PODS:
-  - Firebase/Core (4.8.0):
-    - FirebaseAnalytics (= 4.0.5)
-    - FirebaseCore (= 4.0.13)
-  - Firebase/Crash (4.8.0):
+  - Firebase/Core (4.8.1):
+    - FirebaseAnalytics (= 4.0.7)
+    - FirebaseCore (= 4.0.14)
+  - Firebase/Crash (4.8.1):
     - Firebase/Core
     - FirebaseCrash (= 2.0.2)
-  - FirebaseAnalytics (4.0.5):
+  - FirebaseAnalytics (4.0.7):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.13):
+  - FirebaseCore (4.0.14):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseCrash (2.0.2):
     - FirebaseAnalytics (~> 4.0)
@@ -50,9 +50,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/liufengting/FTPopOverMenu_Swift.git
 
 SPEC CHECKSUMS:
-  Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
-  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
-  FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
+  Firebase: 2721056b8885eef90233b03f37be64358d35d262
+  FirebaseAnalytics: 617afa8c26b57a0c3f11361b248bc9e17bfd8dfd
+  FirebaseCore: 2e0b98fb2d64ca8140136beff15772bdd14d2dd7
   FirebaseCrash: cded0fc566c03651aea606a101bc156085f333ca
   FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
   FTPopOverMenu_Swift: 406ee2df3fbebba581d3734a3f204ddc1ce5f01a
