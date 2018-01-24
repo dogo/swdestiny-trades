@@ -1165,14 +1165,14 @@
 			buildConfigurationList = DD6E06A31E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny Trades" */;
 			buildPhases = (
 				75E6C92D495A499FC4D552B0 /* [CP] Check Pods Manifest.lock */,
-				DD2026E5200AACFD006B17DD /* SwiftGen */,
+				DD2026E5200AACFD006B17DD /* SwiftGen Run Script */,
 				DD6E06801E114E88004A5653 /* Sources */,
 				DD6E06811E114E88004A5653 /* Frameworks */,
 				DD6E06821E114E88004A5653 /* Resources */,
 				E474211E57B8197AF7795072 /* [CP] Embed Pods Frameworks */,
 				D05D22CCBB2F20DB5F72D87C /* [CP] Copy Pods Resources */,
 				DD3E23A21FF70F4A0033EF1B /* [Carthage] Embed Frameworks */,
-				DD4D3A211E1D577900719E96 /* ShellScript */,
+				DD4D3A211E1D577900719E96 /* Post Build Run Script */,
 			);
 			buildRules = (
 			);
@@ -1285,14 +1285,12 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades-SWDestiny-TradesTests/Pods-SWDestiny Trades-SWDestiny-TradesTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu_Swift/FTPopOverMenu_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1348,14 +1346,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DD2026E5200AACFD006B17DD /* SwiftGen */ = {
+		DD2026E5200AACFD006B17DD /* SwiftGen Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = SwiftGen;
+			name = "SwiftGen Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1408,18 +1406,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
-		DD4D3A211E1D577900719E96 /* ShellScript */ = {
+		DD4D3A211E1D577900719E96 /* Post Build Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Post Build Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:264462743734:ios:55fa842f99fbef66\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"firebase-crashreporting.json\"\n";
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:264462743734:ios:55fa842f99fbef66\n\n# Crashlytics\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		E474211E57B8197AF7795072 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1430,14 +1429,12 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FTPopOverMenu_Swift/FTPopOverMenu_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FTPopOverMenu_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
