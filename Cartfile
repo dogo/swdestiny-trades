@@ -9,7 +9,7 @@ github "raulriera/TextFieldEffects"
 github "realm/realm-cocoa"
 github "SnapKit/SnapKit"
 github "SwiftKickMobile/SwiftMessages"
-github "zvonicek/ImageSlideshow" == 1.4.1
+github "zvonicek/ImageSlideshow"
 
 # Tests
 github "Quick/Quick"
