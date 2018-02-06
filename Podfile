@@ -9,7 +9,6 @@ target 'SWDestiny Trades' do
   pod 'Crashlytics'
   pod 'Fabric'
   pod 'Firebase/Core'
-  pod 'FTPopOverMenu_Swift', :git => 'https://github.com/liufengting/FTPopOverMenu_Swift.git'
   pod 'SwiftGen'
 
   target 'SWDestiny-TradesTests' do
