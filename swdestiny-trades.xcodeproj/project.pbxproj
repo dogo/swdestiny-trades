@@ -47,9 +47,7 @@
 		DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; };
 		DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
 		DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; };
-		DD3E23961FF70EC20033EF1B /* Moya_ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */; };
 		DD3E23971FF70EC20033EF1B /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD631FDC24D50067AAE0 /* Moya.framework */; };
-		DD3E23981FF70EC20033EF1B /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */; };
 		DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
 		DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
 		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
@@ -87,6 +85,7 @@
 		DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */; };
 		DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */; };
 		DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */; };
+		DD88285D202A4E7F00F08C31 /* Decoder+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */; };
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93D3C72008EEAB00C2663D /* ToggleButton.swift */; };
@@ -242,6 +241,7 @@
 		DD7FF0F81E1DCEAB004FC6CF /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
 		DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
+		DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decoder+Utils.swift"; sourceTree = "<group>"; };
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD93D3C72008EEAB00C2663D /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
@@ -333,10 +333,8 @@
 				DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */,
 				DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */,
 				DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */,
-				DD3E23961FF70EC20033EF1B /* Moya_ObjectMapper.framework in Frameworks */,
 				DD3E23971FF70EC20033EF1B /* Moya.framework in Frameworks */,
 				DD18056E20215155007CD3A7 /* FTPopOverMenu_Swift.framework in Frameworks */,
-				DD3E23981FF70EC20033EF1B /* ObjectMapper.framework in Frameworks */,
 				DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */,
 				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
 				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
@@ -1042,6 +1040,7 @@
 			children = (
 				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
 				DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */,
+				DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */,
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
 				DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */,
 			);
@@ -1370,9 +1369,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Moya_ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
@@ -1390,9 +1387,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Charts.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImageSlideshow.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya_ObjectMapper.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ObjectMapper.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PKHUD.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
@@ -1523,6 +1518,7 @@
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
 				DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
+				DD88285D202A4E7F00F08C31 /* Decoder+Utils.swift in Sources */,
 				DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */,
 				DDB764C51E43639E007758D5 /* GraphView.swift in Sources */,
 				DD0905521E24701D00D9EFB0 /* PeopleListViewController.swift in Sources */,

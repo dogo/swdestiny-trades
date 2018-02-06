@@ -7,18 +7,9 @@
 //
 
 import Foundation
-import ObjectMapper
 
-class SetDTO: Mappable {
+class SetDTO: Codable {
 
     var name: String = ""
     var code: String = ""
-
-    required init?(map: Map) {
-    }
-
-    func mapping(map: Map) {
-        name <- map["name"]
-        code <- map["code"]
-    }
 }

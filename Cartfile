@@ -1,7 +1,5 @@
 github "AliSoftware/Reusable"
 github "danielgindi/Charts"
-github "Hearst-DD/ObjectMapper"
-github "ivanbruel/Moya-ObjectMapper"
 github "liufengting/FTPopOverMenu_Swift"
 github "Moya/Moya"
 github "onevcat/Kingfisher"

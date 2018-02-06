@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import ObjectMapper
 import RealmSwift
 
-class CardDTO: Object, Mappable {
+class CardDTO: Object, Decodable {
 
     let dieFaces = List<StringObject>()
     @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
@@ -46,15 +45,72 @@ class CardDTO: Object, Mappable {
     @objc dynamic var quantity: Int = 1
     @objc dynamic var isElite: Bool = false
 
-    required convenience public init?(map: Map) {
-        self.init()
-        mapping(map: map)
+    enum CodingKeys: String, CodingKey {
+        case dieFaces = "sides"
+        case setCode = "set_code"
+        case setName = "set_name"
+        case typeCode = "type_code"
+        case typeName = "type_name"
+        case factionCode = "faction_code"
+        case factionName = "faction_name"
+        case affiliationCode = "affiliation_code"
+        case affiliationName = "affiliation_name"
+        case rarityCode = "rarity_code"
+        case rarityName = "rarity_name"
+        case position = "position"
+        case code = "code"
+        case ttscardid = "ttscardid"
+        case name = "name"
+        case subtitle = "subtitle"
+        case cost = "cost"
+        case health = "health"
+        case points = "points"
+        case text = "text"
+        case deckLimit = "deck_limit"
+        case flavor = "flavor"
+        case illustrator = "illustrator"
+        case isUnique = "is_unique"
+        case hasDie = "has_die"
+        case externalUrl = "url"
+        case imageUrl = "imagesrc"
+        case label = "label"
+        case cp = "cp"
     }
 
-    func mapping(map: Map) {
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        setCode = try container.decode(String.self, forKey: .setCode)
+        setName = try container.decode(String.self, forKey: .setName)
+        typeCode = try container.decode(String.self, forKey: .typeCode)
+        typeName = try container.decode(String.self, forKey: .typeName)
+        factionCode = try container.decode(String.self, forKey: .factionCode)
+        factionName = try container.decode(String.self, forKey: .factionName)
+        affiliationCode = try container.decode(String.self, forKey: .affiliationCode)
+        affiliationName = try container.decode(String.self, forKey: .affiliationName)
+        rarityCode = try container.decode(String.self, forKey: .rarityCode)
+        rarityName = try container.decode(String.self, forKey: .rarityName)
+        position = try container.decode(Int.self, forKey: .position)
+        code = try container.decode(String.self, forKey: .code)
+        ttscardid = try container.decode(String.self, forKey: .ttscardid)
+        name = try container.decode(String.self, forKey: .name)
+        subtitle = try container.decodeSafely(key: .subtitle, defaultValue: "")
+        cost = try container.decodeSafely(key: .cost, defaultValue: 0)
+        health = try container.decodeSafely(key: .health, defaultValue: 0)
+        points = try container.decodeSafely(key: .points, defaultValue: "")
+        text = try container.decodeSafely(key: .text, defaultValue: "")
+        deckLimit = try container.decode(Int.self, forKey: .deckLimit)
+        flavor = try container.decodeSafely(key: .flavor, defaultValue: "")
+        illustrator = try container.decodeSafely(key: .illustrator, defaultValue: "")
+        isUnique = try container.decode(Bool.self, forKey: .isUnique)
+        hasDie = try container.decode(Bool.self, forKey: .hasDie)
+        externalUrl = try container.decode(String.self, forKey: .externalUrl)
+        imageUrl = try container.decodeSafely(key: .imageUrl, defaultValue: "")
+        label = try container.decode(String.self, forKey: .label)
+        cp = try container.decode(Int.self, forKey: .cp)
+
         // Dogo : Realm Hack
-        var sides: [String]? = nil
-        sides <- map["sides"] // Maps to local variable
+        let sides: [String]? = try? container.decode([String].self, forKey: .dieFaces) // Maps to local variable
 
         dieFaces.removeAll()
 
@@ -64,34 +120,6 @@ class CardDTO: Object, Mappable {
             dieFaces.append(string)
         }
         // End hack
-
-        setCode <- map["set_code"]
-        setName <- map["set_name"]
-        typeCode <- map["type_code"]
-        typeName <- map["type_name"]
-        factionCode <- map["faction_code"]
-        factionName <- map["faction_name"]
-        affiliationCode <- map["affiliation_code"]
-        affiliationName <- map["affiliation_name"]
-        rarityCode <- map["rarity_code"]
-        rarityName <- map["rarity_name"]
-        position <- map["position"]
-        code <- map["code"]
-        ttscardid <- map["ttscardid"]
-        name <- map["name"]
-        subtitle <- map["subtitle"]
-        cost <- map["cost"]
-        health <- map["health"]
-        points <- map["points"]
-        text <- map["text"]
-        deckLimit <- map["deck_limit"]
-        flavor <- map["flavor"]
-        illustrator <- map["illustrator"]
-        isUnique <- map["is_unique"]
-        hasDie <- map["has_die"]
-        externalUrl <- map["url"]
-        imageUrl <- map["imagesrc"]
-        cp <- map["cp"]
     }
 
     override class func primaryKey() -> String {

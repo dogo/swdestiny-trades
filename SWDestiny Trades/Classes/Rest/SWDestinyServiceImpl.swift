@@ -20,7 +20,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             do {
                 switch moyaResult {
                 case .success(let response):
-                    result = .success(try response.mapArray(SetDTO.self))
+                    result = .success(try JSONDecoder().decode([SetDTO].self, from: response.data))
                 case .failure(let error):
                     throw error
                 }
@@ -37,7 +37,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             do {
                 switch moyaResult {
                 case .success(let response):
-                    result = .success(try response.mapArray(CardDTO.self))
+                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
                 case .failure(let error):
                     throw error
                 }
@@ -54,7 +54,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             do {
                 switch moyaResult {
                 case .success(let response):
-                    result = .success(try response.mapArray(CardDTO.self))
+                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
                 case .failure(let error):
                     throw error
                 }
@@ -71,7 +71,7 @@ class SWDestinyServiceImpl: SWDestinyService {
             do {
                 switch moyaResult {
                 case .success(let response):
-                    result = .success(try response.mapObject(CardDTO.self))
+                    result = .success(try JSONDecoder().decode(CardDTO.self, from: response.data))
                 case .failure(let error):
                     throw error
                 }
