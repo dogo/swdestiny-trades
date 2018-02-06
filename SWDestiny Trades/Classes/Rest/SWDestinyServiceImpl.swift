@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Moya_ObjectMapper
 import Moya
 
 class SWDestinyServiceImpl: SWDestinyService {
