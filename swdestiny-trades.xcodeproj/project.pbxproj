@@ -1761,6 +1761,7 @@
 			baseConfigurationReference = F890BAB80B125616526B0F86 /* Pods-SWDestiny Trades.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
