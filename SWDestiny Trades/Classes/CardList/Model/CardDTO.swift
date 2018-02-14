@@ -74,7 +74,7 @@ class CardDTO: Object, Decodable {
         case externalUrl = "url"
         case imageUrl = "imagesrc"
         case label = "label"
-        case cp = "cp"
+        case cp = "cp" // swiftlint:disable:this identifier_name
     }
 
     required convenience init(from decoder: Decoder) throws {
