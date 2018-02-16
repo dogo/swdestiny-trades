@@ -47,6 +47,8 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
             expansionImageView.image = Asset.Sets.icTwoPlayerGame.image
         } else if setDTO.code.lowercased() == "leg" {
             expansionImageView.image = Asset.Sets.icLegacies.image
+        } else if setDTO.code.lowercased() == "riv" {
+            expansionImageView.image = Asset.Sets.icRivals.image
         } else {
             expansionImageView.image = Asset.Sets.icNotFound.image
         }

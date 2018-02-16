@@ -68,6 +68,7 @@ enum Asset {
     static let icEmpireAtWar = ImageAsset(name: "ic_empire_at_war")
     static let icLegacies = ImageAsset(name: "ic_legacies")
     static let icNotFound = ImageAsset(name: "ic_not_found")
+    static let icRivals = ImageAsset(name: "ic_rivals")
     static let icSpiritOfRebellion = ImageAsset(name: "ic_spirit_of_rebellion")
     static let icTwoPlayerGame = ImageAsset(name: "ic_two_player_game")
   }
@@ -104,6 +105,7 @@ enum Asset {
     Sets.icEmpireAtWar,
     Sets.icLegacies,
     Sets.icNotFound,
+    Sets.icRivals,
     Sets.icSpiritOfRebellion,
     Sets.icTwoPlayerGame,
     Tabbar.icCards,
