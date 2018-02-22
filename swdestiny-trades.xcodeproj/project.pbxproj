@@ -53,7 +53,6 @@
 		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
 		DD3E239C1FF70EC20033EF1B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD571FDC24D40067AAE0 /* Result.framework */; };
 		DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; };
-		DD3E239E1FF70EC20033EF1B /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */; };
 		DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; };
 		DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
 		DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
@@ -340,7 +339,6 @@
 				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
 				DD3E239C1FF70EC20033EF1B /* Result.framework in Frameworks */,
 				DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */,
-				DD3E239E1FF70EC20033EF1B /* RxSwift.framework in Frameworks */,
 				DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
@@ -1375,7 +1373,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TextFieldEffects.framework",
@@ -1393,7 +1390,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftMessages.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TextFieldEffects.framework",
