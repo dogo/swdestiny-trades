@@ -70,6 +70,7 @@
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
+		DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A5F492049BAA800B3D8D7 /* main.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
 		DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
@@ -222,6 +223,7 @@
 		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		DD6A5F492049BAA800B3D8D7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utils.swift"; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -826,6 +828,7 @@
 		DD8E8A9B1E11610100C54FD9 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				DD6A5F492049BAA800B3D8D7 /* main.swift */,
 				DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -1529,6 +1532,7 @@
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,
+				DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */,
 				DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */,
 				DDB764C31E43639E007758D5 /* RadarMarkerView.swift in Sources */,
 				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
