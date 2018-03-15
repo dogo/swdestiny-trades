@@ -92,7 +92,7 @@ class CardDTO: Object, Decodable {
         rarityName = try container.decode(String.self, forKey: .rarityName)
         position = try container.decode(Int.self, forKey: .position)
         code = try container.decode(String.self, forKey: .code)
-        ttscardid = try container.decode(String.self, forKey: .ttscardid)
+        ttscardid = try container.decodeSafely(key: .ttscardid, defaultValue: "")
         name = try container.decode(String.self, forKey: .name)
         subtitle = try container.decodeSafely(key: .subtitle, defaultValue: "")
         cost = try container.decodeSafely(key: .cost, defaultValue: 0)
