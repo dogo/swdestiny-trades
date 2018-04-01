@@ -2,24 +2,24 @@
 
 #if os(OSX)
   import AppKit.NSImage
-  typealias AssetColorTypeAlias = NSColor
-  typealias Image = NSImage
+  internal typealias AssetColorTypeAlias = NSColor
+  internal typealias Image = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIImage
-  typealias AssetColorTypeAlias = UIColor
-  typealias Image = UIImage
+  internal typealias AssetColorTypeAlias = UIColor
+  internal typealias Image = UIImage
 #endif
 
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
 @available(*, deprecated, renamed: "ImageAsset")
-typealias AssetType = ImageAsset
+internal typealias AssetType = ImageAsset
 
-struct ImageAsset {
-  fileprivate var name: String
+internal struct ImageAsset {
+  internal fileprivate(set) var name: String
 
-  var image: Image {
+  internal var image: Image {
     let bundle = Bundle(for: BundleToken.self)
     #if os(iOS) || os(tvOS)
     let image = Image(named: name, in: bundle, compatibleWith: nil)
@@ -33,61 +33,61 @@ struct ImageAsset {
   }
 }
 
-struct ColorAsset {
-  fileprivate var name: String
+internal struct ColorAsset {
+  internal fileprivate(set) var name: String
 
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
-  var color: AssetColorTypeAlias {
+  internal var color: AssetColorTypeAlias {
     return AssetColorTypeAlias(asset: self)
   }
 }
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
-enum Asset {
-  enum CardTypes {
-    static let icBattlefield = ImageAsset(name: "ic_battlefield")
-    static let icCharacter = ImageAsset(name: "ic_character")
-    static let icEvent = ImageAsset(name: "ic_event")
-    static let icPlot = ImageAsset(name: "ic_plot")
-    static let icSupport = ImageAsset(name: "ic_support")
-    static let icUpgrade = ImageAsset(name: "ic_upgrade")
+internal enum Asset {
+  internal enum CardTypes {
+    internal static let icBattlefield = ImageAsset(name: "ic_battlefield")
+    internal static let icCharacter = ImageAsset(name: "ic_character")
+    internal static let icEvent = ImageAsset(name: "ic_event")
+    internal static let icPlot = ImageAsset(name: "ic_plot")
+    internal static let icSupport = ImageAsset(name: "ic_support")
+    internal static let icUpgrade = ImageAsset(name: "ic_upgrade")
   }
-  enum Logo {
-    static let largeIconBlack = ImageAsset(name: "LargeIconBlack")
-    static let largeIconTransparent = ImageAsset(name: "LargeIconTransparent")
+  internal enum Logo {
+    internal static let largeIconBlack = ImageAsset(name: "LargeIconBlack")
+    internal static let largeIconTransparent = ImageAsset(name: "LargeIconTransparent")
   }
-  enum NavigationBar {
-    static let icAbout = ImageAsset(name: "ic_about")
-    static let icAccount = ImageAsset(name: "ic_account")
-    static let icAddCollection = ImageAsset(name: "ic_add_collection")
-    static let icChart = ImageAsset(name: "ic_chart")
-    static let icSort = ImageAsset(name: "ic_sort")
+  internal enum NavigationBar {
+    internal static let icAbout = ImageAsset(name: "ic_about")
+    internal static let icAccount = ImageAsset(name: "ic_account")
+    internal static let icAddCollection = ImageAsset(name: "ic_add_collection")
+    internal static let icChart = ImageAsset(name: "ic_chart")
+    internal static let icSort = ImageAsset(name: "ic_sort")
   }
-  enum Sets {
-    static let icAwakenings = ImageAsset(name: "ic_awakenings")
-    static let icEmpireAtWar = ImageAsset(name: "ic_empire_at_war")
-    static let icLegacies = ImageAsset(name: "ic_legacies")
-    static let icNotFound = ImageAsset(name: "ic_not_found")
-    static let icRivals = ImageAsset(name: "ic_rivals")
-    static let icSpiritOfRebellion = ImageAsset(name: "ic_spirit_of_rebellion")
-    static let icTwoPlayerGame = ImageAsset(name: "ic_two_player_game")
+  internal enum Sets {
+    internal static let icAwakenings = ImageAsset(name: "ic_awakenings")
+    internal static let icEmpireAtWar = ImageAsset(name: "ic_empire_at_war")
+    internal static let icLegacies = ImageAsset(name: "ic_legacies")
+    internal static let icNotFound = ImageAsset(name: "ic_not_found")
+    internal static let icRivals = ImageAsset(name: "ic_rivals")
+    internal static let icSpiritOfRebellion = ImageAsset(name: "ic_spirit_of_rebellion")
+    internal static let icTwoPlayerGame = ImageAsset(name: "ic_two_player_game")
   }
-  enum Tabbar {
-    static let icCards = ImageAsset(name: "ic_cards")
-    static let icCardsFilled = ImageAsset(name: "ic_cards_filled")
-    static let icCollection = ImageAsset(name: "ic_collection")
-    static let icDecks = ImageAsset(name: "ic_decks")
-    static let icLoans = ImageAsset(name: "ic_loans")
+  internal enum Tabbar {
+    internal static let icCards = ImageAsset(name: "ic_cards")
+    internal static let icCardsFilled = ImageAsset(name: "ic_cards_filled")
+    internal static let icCollection = ImageAsset(name: "ic_collection")
+    internal static let icDecks = ImageAsset(name: "ic_decks")
+    internal static let icLoans = ImageAsset(name: "ic_loans")
   }
-  static let ic404 = ImageAsset(name: "ic_404")
-  static let icCardback = ImageAsset(name: "ic_cardback")
-  static let icDoneEdit = ImageAsset(name: "ic_done_edit")
-  static let icEdit = ImageAsset(name: "ic_edit")
+  internal static let ic404 = ImageAsset(name: "ic_404")
+  internal static let icCardback = ImageAsset(name: "ic_cardback")
+  internal static let icDoneEdit = ImageAsset(name: "ic_done_edit")
+  internal static let icEdit = ImageAsset(name: "ic_edit")
 
   // swiftlint:disable trailing_comma
-  static let allColors: [ColorAsset] = [
+  internal static let allColors: [ColorAsset] = [
   ]
-  static let allImages: [ImageAsset] = [
+  internal static let allImages: [ImageAsset] = [
     CardTypes.icBattlefield,
     CardTypes.icCharacter,
     CardTypes.icEvent,
@@ -120,11 +120,11 @@ enum Asset {
   ]
   // swiftlint:enable trailing_comma
   @available(*, deprecated, renamed: "allImages")
-  static let allValues: [AssetType] = allImages
+  internal static let allValues: [AssetType] = allImages
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
-extension Image {
+internal extension Image {
   @available(iOS 1.0, tvOS 1.0, watchOS 1.0, *)
   @available(OSX, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageAsset.image property")
@@ -140,7 +140,7 @@ extension Image {
   }
 }
 
-extension AssetColorTypeAlias {
+internal extension AssetColorTypeAlias {
   @available(iOS 11.0, tvOS 11.0, watchOS 4.0, OSX 10.13, *)
   convenience init!(asset: ColorAsset) {
     let bundle = Bundle(for: BundleToken.self)
