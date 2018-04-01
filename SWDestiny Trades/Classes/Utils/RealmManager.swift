@@ -14,7 +14,7 @@ final class RealmManager: NSObject {
     static let shared = RealmManager()
 
 // swiftlint:disable force_try
-#if (arch(i386) || arch(x86_64)) && os(iOS)
+#if targetEnvironment(simulator)
     let realm = try! Realm(fileURL: URL(fileURLWithPath: "\(RealmManager.realHomeDirectory())/Desktop/default.realm"))
 #else
     let realm = try! Realm()
