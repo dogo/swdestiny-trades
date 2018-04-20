@@ -25,7 +25,7 @@ final class AddCardView: UIView, BaseViewConfiguration {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: <BaseViewConfiguration>
+    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.addSubview(searchBar)

@@ -14,6 +14,7 @@ class CardListViewController: UIViewController {
     fileprivate let cardListView = CardListView()
     fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate var setDTO: SetDTO
+    fileprivate var navigator: CardListNavigator?
 
     // MARK: - Life Cycle
 
@@ -32,6 +33,8 @@ class CardListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigator = CardListNavigator(self.navigationController)
 
         cardListView.activityIndicator.startAnimating()
         destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased()) { result in
@@ -57,10 +60,9 @@ class CardListViewController: UIViewController {
         self.navigationItem.title = setDTO.name
     }
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     func navigateToNextController(cardList: [CardDTO], card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: cardList, selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: cardList, card: card))
     }
 }

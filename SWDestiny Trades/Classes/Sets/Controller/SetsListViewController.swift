@@ -33,7 +33,7 @@ class SetsListViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
-        self.navigator = SetsListNavigator(navigationController: self.navigationController)
+        self.navigator = SetsListNavigator(self.navigationController)
 
         setupNavigationItem()
 

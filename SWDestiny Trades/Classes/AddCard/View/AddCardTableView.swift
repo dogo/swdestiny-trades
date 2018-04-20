@@ -45,7 +45,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
         tableDatasource?.updateSearchList(cards)
     }
 
-    // MARK: <SearchDelegate>
+    // MARK: - <SearchDelegate>
 
     internal func didSelectRow(at index: IndexPath) {
         if let card = tableDatasource?.getCard(at: index) {
@@ -59,7 +59,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
         }
     }
 
-    // MARK: Keyboard handling
+    // MARK: - Keyboard handling
 
     @objc
     private func keyboardDidShow(notification: Notification) {

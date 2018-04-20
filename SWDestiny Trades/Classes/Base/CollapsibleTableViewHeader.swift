@@ -60,7 +60,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseVie
         arrowLabel.rotate(toValue: collapsed ? 0.0 : CGFloat(Double.pi / 2))
     }
 
-    // MARK: <BaseViewConfiguration>
+    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         contentView.addSubview(titleLabel)

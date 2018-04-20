@@ -141,7 +141,7 @@ class AddCardViewController: UIViewController {
         HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)
     }
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
         let nextController = CardDetailViewController(cardList: cards, selected: card)

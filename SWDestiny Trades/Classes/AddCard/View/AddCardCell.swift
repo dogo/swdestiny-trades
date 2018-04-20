@@ -46,7 +46,7 @@ class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         // just hightlight
     }
 
-    // MARK: <BaseViewConfiguration>
+    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(baseViewCell)

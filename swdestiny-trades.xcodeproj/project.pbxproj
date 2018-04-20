@@ -61,6 +61,7 @@
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
 		DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */; };
+		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
 		DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */; };
 		DD4BBCDF1E26CC7E009929C4 /* NumberListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */; };
 		DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */; };
@@ -218,6 +219,7 @@
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
 		DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
 		DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 		DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberListDatasource.swift; sourceTree = "<group>"; };
 		DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				DD0905291E24701D00D9EFB0 /* Controller */,
 				DD09052C1E24701D00D9EFB0 /* Datasource */,
 				DD09052E1E24701D00D9EFB0 /* Model */,
+				DD47BBFC208AA10600B886CD /* Navigator */,
 				DD0905301E24701D00D9EFB0 /* View */,
 			);
 			path = CardList;
@@ -638,6 +641,14 @@
 				DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */,
 			);
 			path = es.lproj;
+			sourceTree = "<group>";
+		};
+		DD47BBFC208AA10600B886CD /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD47BBFD208AA10600B886CD /* CardListNavigator.swift */,
+			);
+			path = Navigator;
 			sourceTree = "<group>";
 		};
 		DD4B0ABE1E25951E0042D4EB /* Localization */ = {
@@ -1515,6 +1526,7 @@
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,
+				DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */,
 				DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */,
 				DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */,
 				DD6AE3772089988B00289193 /* Navigator.swift in Sources */,

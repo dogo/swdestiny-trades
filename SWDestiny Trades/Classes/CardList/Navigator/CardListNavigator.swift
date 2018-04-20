@@ -1,5 +1,5 @@
 //
-//  SetsListNavigator.swift
+//  CardListNavigator.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 20/04/18.
@@ -8,12 +8,10 @@
 
 import UIKit
 
-class SetsListNavigator: Navigator {
+final class CardListNavigator: Navigator {
 
     enum Destination {
-        case about
-        case cardList(with: SetDTO)
-        case search
+        case cardDetail(with: [CardDTO], card: CardDTO)
     }
 
     private weak var navigationController: UINavigationController?
@@ -35,12 +33,8 @@ class SetsListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .about:
-            return AboutViewController()
-        case .cardList(let set):
-            return CardListViewController(with: set)
-        case .search:
-            return SearchListViewController()
+        case .cardDetail(let cardList, let card):
+            return CardDetailViewController(cardList: cardList, selected: card)
         }
     }
 }
