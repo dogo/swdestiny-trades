@@ -73,6 +73,8 @@
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
 		DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A5F492049BAA800B3D8D7 /* main.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
+		DD6AE3772089988B00289193 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AE3762089988B00289193 /* Navigator.swift */; };
+		DD6AE37A2089991300289193 /* SetsListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AE3792089991300289193 /* SetsListNavigator.swift */; };
 		DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
@@ -228,6 +230,8 @@
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		DD6A5F492049BAA800B3D8D7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD6AE3762089988B00289193 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		DD6AE3792089991300289193 /* SetsListNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsListNavigator.swift; sourceTree = "<group>"; };
 		DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utils.swift"; sourceTree = "<group>"; };
 		DD6E06841E114E88004A5653 /* SWDestiny Trades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SWDestiny Trades.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E06901E114E88004A5653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -543,6 +547,7 @@
 				DD0F80F61E23C9980088BE43 /* Controller */,
 				DD0F80F91E23C9980088BE43 /* Datasource */,
 				DD0F80FB1E23C9980088BE43 /* Model */,
+				DD6AE378208998FB00289193 /* Navigator */,
 				DD0F80FD1E23C9980088BE43 /* View */,
 			);
 			path = Sets;
@@ -653,6 +658,14 @@
 			path = Datasource;
 			sourceTree = "<group>";
 		};
+		DD6AE378208998FB00289193 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AE3792089991300289193 /* SetsListNavigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 		DD6E067B1E114E88004A5653 = {
 			isa = PBXGroup;
 			children = (
@@ -740,6 +753,7 @@
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
 				DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */,
+				DD6AE3762089988B00289193 /* Navigator.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1476,6 +1490,7 @@
 				DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */,
 				DDCA97B81E2FA72A0098FFB5 /* DeckBuilderTableView.swift in Sources */,
 				DD3AFB7C1E79E28A00BF2001 /* UserCollectionView.swift in Sources */,
+				DD6AE37A2089991300289193 /* SetsListNavigator.swift in Sources */,
 				DD0905511E24701D00D9EFB0 /* LoanDetailView.swift in Sources */,
 				DD09054E1E24701D00D9EFB0 /* LoansDetailDatasource.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
@@ -1502,6 +1517,7 @@
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,
 				DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */,
 				DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */,
+				DD6AE3772089988B00289193 /* Navigator.swift in Sources */,
 				DDB764C31E43639E007758D5 /* RadarMarkerView.swift in Sources */,
 				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,

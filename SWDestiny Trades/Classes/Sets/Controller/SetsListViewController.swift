@@ -13,6 +13,7 @@ class SetsListViewController: UIViewController {
 
     fileprivate let setsView = SetsView()
     fileprivate let destinyService = SWDestinyServiceImpl()
+    fileprivate var navigator: SetsListNavigator?
 
     // MARK: - Life Cycle
 
@@ -32,6 +33,7 @@ class SetsListViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+        self.navigator = SetsListNavigator(navigationController: self.navigationController)
 
         setupNavigationItem()
 
@@ -77,21 +79,18 @@ class SetsListViewController: UIViewController {
     // MARK: - <SetsListViewDelegate>
 
     func navigateToNextController(with set: SetDTO) {
-        let nextController = CardListViewController(with: set)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardList(with: set))
     }
 
     // MARK: - UIBarButton Actions
 
     @objc
     func aboutButtonTouched(_ sender: Any) {
-        let nextController = AboutViewController()
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .about)
     }
 
     @objc
     func searchButtonTouched(_ sender: Any) {
-        let nextController = SearchListViewController()
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .search)
     }
 }
