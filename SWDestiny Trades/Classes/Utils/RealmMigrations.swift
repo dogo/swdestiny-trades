@@ -27,7 +27,7 @@ final class RealmMigrations {
                                 newObject["cost"] = Int(oldCost)
                             }
 
-                            if let id = oldObject["code"] as? String {
+                            if let id = oldObject["code"] as? String { // swiftlint:disable:this identifier_name
                                 if kDices[id] != nil {
                                     let dieFaces = List<StringObject>()
                                     kDices[id]?.forEach { side in

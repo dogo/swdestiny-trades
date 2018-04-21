@@ -60,8 +60,8 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
     func setDataCount(values: [Int]) {
         if !values.isEmpty {
             var dataEntries: [BarChartDataEntry] = []
-            for i in 0..<cardTypes.count {
-                let dataEntry = BarChartDataEntry(x: Double(i), y: Double(values[i]))
+            for cardType in 0..<cardTypes.count {
+                let dataEntry = BarChartDataEntry(x: Double(cardType), y: Double(values[cardType]))
                 dataEntries.append(dataEntry)
             }
 

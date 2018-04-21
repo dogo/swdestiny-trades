@@ -93,9 +93,9 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
         // LineChart
         if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
-            for i in 0...maxCost {
+            for cost in 0...maxCost {
                 var cardCost = 0
-                for card in deck.list where card.cost == i &&
+                for card in deck.list where card.cost == cost &&
                     card.typeCode != "character" &&
                     card.typeCode != "battlefield" &&
                     card.typeCode != "plot" {

@@ -9,6 +9,6 @@
 import UIKit
 
 let kIsRunningTests = NSClassFromString("XCTestCase") != nil
-let appDelegateClass = kIsRunningTests ? nil : NSStringFromClass(AppDelegate.self)
-let args = UnsafeMutableRawPointer(CommandLine.unsafeArgv).bindMemory(to: UnsafeMutablePointer<Int8>.self, capacity: Int(CommandLine.argc))
-UIApplicationMain(CommandLine.argc, args, nil, appDelegateClass)
+let kAppDelegateClass = kIsRunningTests ? nil : NSStringFromClass(AppDelegate.self)
+let kArgs = UnsafeMutableRawPointer(CommandLine.unsafeArgv).bindMemory(to: UnsafeMutablePointer<Int8>.self, capacity: Int(CommandLine.argc))
+UIApplicationMain(CommandLine.argc, kArgs, nil, kAppDelegateClass)

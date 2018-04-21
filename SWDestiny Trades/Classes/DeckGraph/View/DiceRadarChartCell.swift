@@ -64,8 +64,8 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
     func setDataCount(values: [Int]) {
 
         var dataEntries: [RadarChartDataEntry] = []
-        for i in 0..<dieFaces.count {
-            let dataEntry = RadarChartDataEntry(value: Double(values[i]))
+        for dieFace in 0..<dieFaces.count {
+            let dataEntry = RadarChartDataEntry(value: Double(values[dieFace]))
             dataEntries.append(dataEntry)
         }
 
