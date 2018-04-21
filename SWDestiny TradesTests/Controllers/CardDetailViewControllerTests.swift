@@ -36,13 +36,13 @@ class CardDetailViewControllerTests: QuickSpec {
                 expect(controller.navigationItem.title).to(equal(NSLocalizedString("", comment: "")))
             }
 
-            #if arch(x86_64) && os(iOS)
+#if targetEnvironment(simulator)
                 it("should trigger fatal error if init with coder") {
                     expect { () -> Void in
                         _ = CardDetailViewController(coder: NSCoder())
                     }.to(throwAssertion())
                 }
-            #endif
+#endif
         }
     }
 }

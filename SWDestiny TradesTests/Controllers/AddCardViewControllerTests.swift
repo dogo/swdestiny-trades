@@ -35,13 +35,13 @@ class AddCardViewControllerTests: QuickSpec {
                 expect(controller.navigationItem.title).to(equal(L10n.addCard))
             }
 
-            #if targetEnvironment(simulator)
+#if targetEnvironment(simulator)
                 it("should trigger fatal error if init with coder") {
                     expect { () -> Void in
                         _ = AddCardViewController(coder: NSCoder())
                     }.to(throwAssertion())
                 }
-            #endif
+#endif
         }
     }
 }
