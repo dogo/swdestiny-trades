@@ -1,9 +1,12 @@
 opt_in_rules:
+  - array_init
   - attributes
   - closure_end_indentation
   - closure_spacing
   - discouraged_object_literal
+  - discouraged_optional_boolean
   - empty_count
+  - empty_string  
   - explicit_init
   - fatal_error_message
   - file_length
@@ -11,16 +14,19 @@ opt_in_rules:
   - force_cast
   - force_try
   - force_unwrapping
+  - implicit_return  
   - implicitly_unwrapped_optional
   - joined_default_parameter
   - multiline_parameters
   - operator_usage_whitespace
   - overridden_super_call
+  - override_in_extension  
   - prefixed_toplevel_constant
   - private_action
   - private_outlet
   - prohibited_super_call
   - redundant_nil_coalescing
+  - sorted_first_last
   - switch_case_on_newline
   - trailing_closure
   - unneeded_parentheses_in_closure_argument
