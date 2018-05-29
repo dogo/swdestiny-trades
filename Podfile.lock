@@ -1,22 +1,24 @@
 PODS:
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
-  - Fabric (1.7.6)
-  - Firebase/Core (4.13.0):
-    - FirebaseAnalytics (= 4.2.0)
-    - FirebaseCore (= 4.0.20)
-  - FirebaseAnalytics (4.2.0):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
+  - Crashlytics (3.10.2):
+    - Fabric (~> 1.7.7)
+  - Fabric (1.7.7)
+  - Firebase/Core (5.0.1):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.0)
+  - Firebase/CoreOnly (5.0.1):
+    - FirebaseCore (= 5.0.1)
+  - FirebaseAnalytics (5.0.0):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.20):
+  - FirebaseCore (5.0.1):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (2.0.10):
-    - FirebaseCore (~> 4.0)
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
-    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - FirebaseInstanceID (3.0.0):
+    - FirebaseCore (~> 5.0)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -43,13 +45,13 @@ SPEC REPOS:
     - SwiftGen
 
 SPEC CHECKSUMS:
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
-  Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
-  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
-  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
-  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
+  Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
+  Firebase: d6861c2059d8c32d1e6dd8932e22ada346d90a3a
+  FirebaseAnalytics: 19812b49fa5f283dd6b23edf8a14b5d477029ab8
+  FirebaseCore: cafc814b2d84fc8733f09e653041cc2165332ad7
+  FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
 
