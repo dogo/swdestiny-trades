@@ -36,22 +36,7 @@ class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func configureCell(setDTO: SetDTO) {
         titleLabel.text = setDTO.name
-
-        if setDTO.code.lowercased() == "aw" {
-            expansionImageView.image = Asset.Sets.icAwakenings.image
-        } else if setDTO.code.lowercased() == "sor" {
-            expansionImageView.image = Asset.Sets.icSpiritOfRebellion.image
-        } else if setDTO.code.lowercased() == "eaw" {
-            expansionImageView.image = Asset.Sets.icEmpireAtWar.image
-        } else if setDTO.code.lowercased() == "tpg" {
-            expansionImageView.image = Asset.Sets.icTwoPlayerGame.image
-        } else if setDTO.code.lowercased() == "leg" {
-            expansionImageView.image = Asset.Sets.icLegacies.image
-        } else if setDTO.code.lowercased() == "riv" {
-            expansionImageView.image = Asset.Sets.icRivals.image
-        } else {
-            expansionImageView.image = Asset.Sets.icNotFound.image
-        }
+        expansionImageView.image = setDTO.setIcon()
     }
 
     override func prepareForReuse() {
