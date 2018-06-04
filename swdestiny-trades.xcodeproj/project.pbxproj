@@ -73,6 +73,7 @@
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
+		DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */; };
 		DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A5F492049BAA800B3D8D7 /* main.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
 		DD6AE3772089988B00289193 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AE3762089988B00289193 /* Navigator.swift */; };
@@ -232,6 +233,7 @@
 		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardNavigator.swift; sourceTree = "<group>"; };
 		DD6A5F492049BAA800B3D8D7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD6AE3762089988B00289193 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			children = (
 				DD09051D1E24594E00D9EFB0 /* Controller */,
 				DDFEB9551E253A04004EADE9 /* Datasource */,
+				DD6A3D1E20C5E0E600C2F817 /* Navigator */,
 				DDFEB9571E253A04004EADE9 /* View */,
 			);
 			path = AddCard;
@@ -669,6 +672,14 @@
 				DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */,
 			);
 			path = Datasource;
+			sourceTree = "<group>";
+		};
+		DD6A3D1E20C5E0E600C2F817 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */,
+			);
+			path = Navigator;
 			sourceTree = "<group>";
 		};
 		DD6AE378208998FB00289193 /* Navigator */ = {
@@ -1519,6 +1530,7 @@
 				DDB764C51E43639E007758D5 /* GraphView.swift in Sources */,
 				DD0905521E24701D00D9EFB0 /* PeopleListViewController.swift in Sources */,
 				DDCA97AB1E2FA2A20098FFB5 /* DeckListTableView.swift in Sources */,
+				DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */,
 				DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */,
 				DDB764C41E43639E007758D5 /* XYMarkerView.swift in Sources */,
 				DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */,

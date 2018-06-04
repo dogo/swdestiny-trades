@@ -14,6 +14,7 @@ class AddCardViewController: UIViewController {
 
     fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate let addCardView = AddCardView()
+    fileprivate var navigator: AddCardNavigator?
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
     fileprivate var userCollectionDTO: UserCollectionDTO?
@@ -48,6 +49,8 @@ class AddCardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigator = AddCardNavigator(self.navigationController)
 
         addCardView.activityIndicator.startAnimating()
         destinyService.retrieveAllCards { result in
@@ -144,7 +147,6 @@ class AddCardViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: cards, selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: cards, card: card))
     }
 }
