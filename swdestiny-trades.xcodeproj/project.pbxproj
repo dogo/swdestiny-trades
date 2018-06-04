@@ -75,6 +75,7 @@
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
 		DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */; };
 		DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */; };
+		DD6A3D2620C5E60500C2F817 /* DeckListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D2520C5E60500C2F817 /* DeckListNavigator.swift */; };
 		DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A5F492049BAA800B3D8D7 /* main.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
 		DD6AE3772089988B00289193 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AE3762089988B00289193 /* Navigator.swift */; };
@@ -236,6 +237,7 @@
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardNavigator.swift; sourceTree = "<group>"; };
 		DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigator.swift; sourceTree = "<group>"; };
+		DD6A3D2520C5E60500C2F817 /* DeckListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListNavigator.swift; sourceTree = "<group>"; };
 		DD6A5F492049BAA800B3D8D7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD6AE3762089988B00289193 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -688,6 +690,14 @@
 			isa = PBXGroup;
 			children = (
 				DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
+		DD6A3D2420C5E60500C2F817 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD6A3D2520C5E60500C2F817 /* DeckListNavigator.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -1160,6 +1170,7 @@
 				DDF5D95D1E2EA7A8007C8A4B /* Controller */,
 				DDF5D95E1E2EA7A8007C8A4B /* Datasource */,
 				DDCA97BA1E2FB0370098FFB5 /* Model */,
+				DD6A3D2420C5E60500C2F817 /* Navigator */,
 				DDF5D95F1E2EA7A8007C8A4B /* View */,
 			);
 			path = DeckList;
@@ -1576,6 +1587,7 @@
 				DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */,
 				DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */,
 				DDB764BF1E43639E007758D5 /* CardTypeBarChartCell.swift in Sources */,
+				DD6A3D2620C5E60500C2F817 /* DeckListNavigator.swift in Sources */,
 				DDF5D9631E2EA820007C8A4B /* DeckListView.swift in Sources */,
 				DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */,
 				DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */,

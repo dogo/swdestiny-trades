@@ -11,6 +11,7 @@ import UIKit
 final class DeckListViewController: UIViewController {
 
     fileprivate let deckListView = DeckListView()
+    fileprivate var navigator: DeckListNavigator?
 
     // MARK: - Life Cycle
 
@@ -29,6 +30,8 @@ final class DeckListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigator = DeckListNavigator(self.navigationController)
+        
         setupNavigationItem()
 
         loadDataFromRealm()
@@ -58,8 +61,7 @@ final class DeckListViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with deck: DeckDTO) {
-        let nextController = DeckBuilderViewController(with: deck)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .deckBuilder(with: deck))
     }
 
     // MARK: - UIBarButton Actions
