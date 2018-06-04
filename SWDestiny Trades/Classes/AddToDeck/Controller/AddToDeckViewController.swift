@@ -14,6 +14,7 @@ class AddToDeckViewController: UIViewController {
 
     fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate let addToDeckView = AddToDeckView()
+    fileprivate var navigator: AddCardNavigator?
     fileprivate var cards = [CardDTO]()
     fileprivate var deckDTO: DeckDTO?
 
@@ -38,6 +39,8 @@ class AddToDeckViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigator = AddCardNavigator(self.navigationController)
 
         retrieveAllCards()
 
@@ -128,7 +131,6 @@ class AddToDeckViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: cards, selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: cards, card: card))
     }
 }

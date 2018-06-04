@@ -74,6 +74,7 @@
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
 		DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */; };
+		DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */; };
 		DD6A5F4A2049BAA800B3D8D7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A5F492049BAA800B3D8D7 /* main.swift */; };
 		DD6ADEE11E1ADB75008E04CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */; };
 		DD6AE3772089988B00289193 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AE3762089988B00289193 /* Navigator.swift */; };
@@ -234,6 +235,7 @@
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardNavigator.swift; sourceTree = "<group>"; };
+		DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigator.swift; sourceTree = "<group>"; };
 		DD6A5F492049BAA800B3D8D7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DD6ADEE01E1ADB75008E04CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD6AE3762089988B00289193 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
@@ -682,6 +684,14 @@
 			path = Navigator;
 			sourceTree = "<group>";
 		};
+		DD6A3D2120C5E4A900C2F817 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 		DD6AE378208998FB00289193 /* Navigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +756,7 @@
 			children = (
 				DD77FCE91E13DC3F0046EFCA /* Controller */,
 				DD61B93D1E1FBC5400F38482 /* Datasource */,
+				DD6A3D2120C5E4A900C2F817 /* Navigator */,
 				DD77FCEB1E13DC3F0046EFCA /* View */,
 			);
 			path = Search;
@@ -1479,6 +1490,7 @@
 				DDB764BD1E43639E007758D5 /* DeckGraphDatasource.swift in Sources */,
 				DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */,
 				DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */,
+				DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
 				DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,

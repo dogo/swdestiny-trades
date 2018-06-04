@@ -24,6 +24,7 @@ class SearchListViewController: UIViewController {
 
     fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate let searchView = SearchView()
+    fileprivate var navigator: SearchNavigator?
     fileprivate var cards = [CardDTO]()
 
     // MARK: - Life Cycle
@@ -42,6 +43,8 @@ class SearchListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigator = SearchNavigator(self.navigationController)
 
         searchView.activityIndicator.startAnimating()
         destinyService.retrieveAllCards { result in
@@ -76,7 +79,6 @@ class SearchListViewController: UIViewController {
     // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: cards, selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: cards, card: card))
     }
 }
