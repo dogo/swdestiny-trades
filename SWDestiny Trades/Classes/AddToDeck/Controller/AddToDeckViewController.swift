@@ -39,7 +39,7 @@ class AddToDeckViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigator = AddCardNavigator(self.navigationController)
 
         retrieveAllCards()

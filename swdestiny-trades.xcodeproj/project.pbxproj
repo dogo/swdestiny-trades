@@ -59,6 +59,7 @@
 		DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
+		DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
 		DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */; };
 		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
@@ -221,6 +222,7 @@
 		DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDTO.swift; sourceTree = "<group>"; };
 		DD4103D71E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckBuilderNavigator.swift; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
 		DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
@@ -652,6 +654,14 @@
 			path = es.lproj;
 			sourceTree = "<group>";
 		};
+		DD43B95B20C6F62A00CEBFE5 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 		DD47BBFC208AA10600B886CD /* Navigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1030,6 +1040,7 @@
 			children = (
 				DDCA97AF1E2FA72A0098FFB5 /* Controller */,
 				DDCA97B11E2FA72A0098FFB5 /* Datasource */,
+				DD43B95B20C6F62A00CEBFE5 /* Navigator */,
 				DDCA97B31E2FA72A0098FFB5 /* View */,
 			);
 			path = DeckBuilder;
@@ -1602,6 +1613,7 @@
 				DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */,
 				DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */,
 				DDAFBF2A1FF6F3F500927875 /* AddToDeckView.swift in Sources */,
+				DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

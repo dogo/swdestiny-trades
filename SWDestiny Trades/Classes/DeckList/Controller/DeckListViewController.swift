@@ -31,7 +31,7 @@ final class DeckListViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigator = DeckListNavigator(self.navigationController)
-        
+
         setupNavigationItem()
 
         loadDataFromRealm()

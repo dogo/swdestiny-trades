@@ -1,19 +1,19 @@
 //
-//  SetsListNavigator.swift
+//  DeckBuilderNavigator.swift
 //  SWDestiny Trades
 //
-//  Created by Diogo Autilio on 20/04/18.
+//  Created by Diogo Autilio on 05/06/18.
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
 import UIKit
 
-final class SetsListNavigator: Navigator {
+final class DeckBuilderNavigator: Navigator {
 
     enum Destination {
-        case about
-        case cardList(with: SetDTO)
-        case search
+        case addToDeck(with: DeckDTO)
+        case cardDetail(with: [CardDTO], card: CardDTO)
+        case deckGraph(with: DeckDTO)
     }
 
     private weak var navigationController: UINavigationController?
@@ -35,12 +35,12 @@ final class SetsListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .about:
-            return AboutViewController()
-        case .cardList(let set):
-            return CardListViewController(with: set)
-        case .search:
-            return SearchListViewController()
+        case .addToDeck(let deck):
+            return AddToDeckViewController(deck: deck)
+        case .cardDetail(let cardList, let card):
+            return CardDetailViewController(cardList: cardList, selected: card)
+        case .deckGraph(let deck):
+            return DeckGraphViewController(deck: deck)
         }
     }
 }

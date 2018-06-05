@@ -12,6 +12,7 @@ final class DeckBuilderViewController: UIViewController {
 
     fileprivate let deckBuilderView = DeckBuilderView()
     fileprivate var deckDTO: DeckDTO
+    fileprivate var navigator: DeckBuilderNavigator?
 
     // MARK: - Life Cycle
 
@@ -30,6 +31,8 @@ final class DeckBuilderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigator = DeckBuilderNavigator(self.navigationController)
 
         setupNavigationItem()
 
@@ -73,20 +76,17 @@ final class DeckBuilderViewController: UIViewController {
     // MARK: Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: cardList, selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: cardList, card: card))
     }
 
     @objc
     func navigateToAddToDeckViewController() {
-        let nextController = AddToDeckViewController(deck: deckDTO)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .addToDeck(with: deckDTO))
     }
 
     @objc
     func navigateToDeckGraphViewController() {
-        let nextController = DeckGraphViewController(deck: deckDTO)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .deckGraph(with: deckDTO))
     }
 
     @objc

@@ -49,7 +49,7 @@ class AddCardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigator = AddCardNavigator(self.navigationController)
 
         addCardView.activityIndicator.startAnimating()

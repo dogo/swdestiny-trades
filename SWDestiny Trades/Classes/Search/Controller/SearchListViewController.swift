@@ -43,7 +43,7 @@ class SearchListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigator = SearchNavigator(self.navigationController)
 
         searchView.activityIndicator.startAnimating()
