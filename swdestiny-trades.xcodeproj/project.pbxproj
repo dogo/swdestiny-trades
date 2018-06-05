@@ -60,7 +60,6 @@
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */; };
-		DD43B96020C6FB7600CEBFE5 /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95F20C6FB7600CEBFE5 /* LoanDetailNavigator.swift */; };
 		DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */; };
 		DD43B96620C7056300CEBFE5 /* UserCollectionNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
@@ -139,6 +138,7 @@
 		DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */; };
 		DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */; };
 		DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */; };
+		DDDA724D20C70E04002147CF /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */; };
 		DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; };
 		DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; };
 		DDDC46AE1FDCD4BD00D79449 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -226,7 +226,6 @@
 		DD4103D71E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckBuilderNavigator.swift; sourceTree = "<group>"; };
-		DD43B95F20C6FB7600CEBFE5 /* LoanDetailNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoanDetailNavigator.swift; path = "SWDestiny Trades/Classes/DeckBuilder/Navigator/LoanDetailNavigator.swift"; sourceTree = SOURCE_ROOT; };
 		DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListNavigator.swift; sourceTree = "<group>"; };
 		DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionNavigator.swift; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
@@ -333,6 +332,7 @@
 		DDCEBD6A1FDC24D60067AAE0 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListTableView.swift; sourceTree = "<group>"; };
 		DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
+		DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanDetailNavigator.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 		DDF2DD2A1E429EF50090519E /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		DDF2DD2C1E42B27D0090519E /* RealmMigrations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMigrations.swift; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 			children = (
 				DD0905351E24701D00D9EFB0 /* Controller */,
 				DD0905371E24701D00D9EFB0 /* Datasource */,
-				DD43B95E20C6FB2000CEBFE5 /* Navigator */,
+				DDDA724B20C70E04002147CF /* Navigator */,
 				DD0905391E24701D00D9EFB0 /* View */,
 			);
 			path = LoanDetail;
@@ -669,15 +669,6 @@
 				DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */,
 			);
 			path = Navigator;
-			sourceTree = "<group>";
-		};
-		DD43B95E20C6FB2000CEBFE5 /* Navigator */ = {
-			isa = PBXGroup;
-			children = (
-				DD43B95F20C6FB7600CEBFE5 /* LoanDetailNavigator.swift */,
-			);
-			name = Navigator;
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		DD43B96120C7028600CEBFE5 /* Navigator */ = {
@@ -1209,6 +1200,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DDDA724B20C70E04002147CF /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 		DDF5D95C1E2EA7A8007C8A4B /* DeckList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1604,7 +1603,6 @@
 				DDB764C41E43639E007758D5 /* XYMarkerView.swift in Sources */,
 				DDCEF4181E2484D8007EACC5 /* PeopleListView.swift in Sources */,
 				DDAFBF261FF6F3F500927875 /* AddToDeckViewController.swift in Sources */,
-				DD43B96020C6FB7600CEBFE5 /* LoanDetailNavigator.swift in Sources */,
 				DDB764C21E43639E007758D5 /* BalloonMarker.swift in Sources */,
 				DDAFBF251FF6F3F500927875 /* AddToDeckCardDatasource.swift in Sources */,
 				DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */,
@@ -1628,6 +1626,7 @@
 				DD09054C1E24701D00D9EFB0 /* CardListView.swift in Sources */,
 				DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */,
 				DDAFBF271FF6F3F500927875 /* AddToDeckTableView.swift in Sources */,
+				DDDA724D20C70E04002147CF /* LoanDetailNavigator.swift in Sources */,
 				DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */,
 				DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */,
 				DD0905531E24701D00D9EFB0 /* PeopleListDatasource.swift in Sources */,
