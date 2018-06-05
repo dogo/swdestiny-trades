@@ -1,5 +1,5 @@
 //
-//  PeopleListNavigator.swift
+//  UserCollectionNavigator.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 05/06/18.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-final class PeopleListNavigator: Navigator {
+final class UserCollectionNavigator: Navigator {
 
     enum Destination {
-        case loanDetail(with: PersonDTO)
+        case cardDetail(with: [CardDTO], card: CardDTO)
+        case addCard(with: UserCollectionDTO)
     }
 
     private weak var navigationController: UINavigationController?
@@ -33,8 +34,10 @@ final class PeopleListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .loanDetail(let person):
-            return LoansDetailViewController(person: person)
+        case .cardDetail(let cardList, let card):
+            return CardDetailViewController(cardList: cardList, selected: card)
+        case .addCard(let userCollection):
+            return AddCardViewController(userCollection: userCollection, isUserCollection: true)
         }
     }
 }

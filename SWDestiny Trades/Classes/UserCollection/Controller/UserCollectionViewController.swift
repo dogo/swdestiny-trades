@@ -13,6 +13,7 @@ final class UserCollectionViewController: UIViewController {
 
     fileprivate let userCollectionView = UserCollectionView()
     fileprivate var currentSortIndex = 0
+    fileprivate var navigator: UserCollectionNavigator?
 
     // MARK: - Life Cycle
 
@@ -31,6 +32,8 @@ final class UserCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigator = UserCollectionNavigator(self.navigationController)
+
         setupNavigationItem()
 
         userCollectionView.userCollectionTableView.didSelectCard = { [unowned self] list, card in
@@ -47,6 +50,8 @@ final class UserCollectionViewController: UIViewController {
 
         configureFTPopOverMenu()
     }
+
+    // MARK: - Private
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
@@ -108,17 +113,15 @@ final class UserCollectionViewController: UIViewController {
         return user
     }
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        let nextController = CardDetailViewController(cardList: cardList, selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: cardList, card: card))
     }
 
     @objc
     func navigateToAddCardViewController() {
-        let nextController = AddCardViewController(userCollection: UserCollectionViewController.getUserCollection(), isUserCollection: true)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .addCard(with: UserCollectionViewController.getUserCollection()))
     }
 
     @objc

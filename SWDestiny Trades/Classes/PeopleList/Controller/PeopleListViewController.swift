@@ -33,7 +33,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigator = PeopleListNavigator(self.navigationController)
 
         setupNavigationItem()
@@ -57,7 +57,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     // MARK: - Private
 
     func setupNavigationItem() {
@@ -74,7 +74,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     private func reloadTableView(_ notification: NSNotification) {
         loadDataFromRealm()
     }
-    
+
     // MARK: - <UpdateTableDataDelegate>
 
     internal func insertNew(person: PersonDTO) {
