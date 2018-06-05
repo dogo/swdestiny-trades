@@ -61,6 +61,7 @@
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */; };
 		DD43B96020C6FB7600CEBFE5 /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95F20C6FB7600CEBFE5 /* LoanDetailNavigator.swift */; };
+		DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
 		DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */; };
 		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
@@ -225,6 +226,7 @@
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckBuilderNavigator.swift; sourceTree = "<group>"; };
 		DD43B95F20C6FB7600CEBFE5 /* LoanDetailNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoanDetailNavigator.swift; path = "SWDestiny Trades/Classes/DeckBuilder/Navigator/LoanDetailNavigator.swift"; sourceTree = SOURCE_ROOT; };
+		DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListNavigator.swift; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
 		DD477EDC1E312ED4006FB4C5 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				DD09053E1E24701D00D9EFB0 /* Controller */,
 				DD0905401E24701D00D9EFB0 /* Datasource */,
 				DD0905421E24701D00D9EFB0 /* Model */,
+				DD43B96120C7028600CEBFE5 /* Navigator */,
 				DD0905441E24701D00D9EFB0 /* View */,
 			);
 			path = PeopleList;
@@ -672,6 +675,14 @@
 			);
 			name = Navigator;
 			path = "New Group";
+			sourceTree = "<group>";
+		};
+		DD43B96120C7028600CEBFE5 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */,
+			);
+			path = Navigator;
 			sourceTree = "<group>";
 		};
 		DD47BBFC208AA10600B886CD /* Navigator */ = {
@@ -1525,6 +1536,7 @@
 				DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */,
 				DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */,
 				DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */,
+				DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
 				DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,

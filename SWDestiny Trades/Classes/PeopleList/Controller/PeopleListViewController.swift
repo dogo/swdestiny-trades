@@ -15,6 +15,7 @@ protocol UpdateTableDataDelegate: class {
 class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     fileprivate let peopleListView = PeopleListView()
+    fileprivate var navigator: PeopleListNavigator?
 
     // MARK: - Life Cycle
 
@@ -32,6 +33,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigator = PeopleListNavigator(self.navigationController)
 
         setupNavigationItem()
 
@@ -54,6 +57,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    // MARK: - Private
 
     func setupNavigationItem() {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: L10n.edit, style: .plain, target: self, action: #selector(editButtonTouched(_:)))
@@ -69,6 +74,8 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     private func reloadTableView(_ notification: NSNotification) {
         loadDataFromRealm()
     }
+    
+    // MARK: - <UpdateTableDataDelegate>
 
     internal func insertNew(person: PersonDTO) {
         peopleListView.peopleListTableView.insert(person)
@@ -89,7 +96,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
         navigationItem.leftBarButtonItem?.title = !editable ? L10n.done : L10n.edit
     }
 
-    // MARK: Navigation
+    // MARK: - Navigation
 
     @objc
     func navigateToNextController(_ sender: Any) {
@@ -104,8 +111,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     }
 
     func navigateToLoansDetailViewController(person: PersonDTO) {
-        let nextController = LoansDetailViewController(person: person)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .loanDetail(with: person))
     }
 
 }
