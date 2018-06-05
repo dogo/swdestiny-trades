@@ -12,6 +12,7 @@ class LoansDetailViewController: UIViewController {
 
     fileprivate let loanDetailView = LoanDetailView()
     fileprivate var personDTO: PersonDTO
+    fileprivate var navigator: LoanDetailNavigator?
 
     // MARK: - Life Cycle
 
@@ -30,6 +31,8 @@ class LoansDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigator = LoanDetailNavigator(self.navigationController)
 
         loadDataFromRealm()
 
@@ -70,12 +73,10 @@ class LoansDetailViewController: UIViewController {
 
     func navigateToCardDetailViewController(with card: CardDTO, lentMe: Bool) {
         let source = lentMe ? personDTO.lentMe : personDTO.borrowed
-        let nextController = CardDetailViewController(cardList: Array(source), selected: card)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .cardDetail(with: Array(source), card: card))
     }
 
     func navigateToAddCardViewController(lentMe: Bool) {
-        let nextController = AddCardViewController(person: personDTO, isLentMe: lentMe)
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator?.navigate(to: .addCard(with: personDTO, isLentMe: lentMe))
     }
 }
