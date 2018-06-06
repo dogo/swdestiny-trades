@@ -64,7 +64,7 @@ class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
     internal func configureCell(cardDTO: CardDTO) {
         titleLabel.text = cardDTO.name
         setIconImage(card: cardDTO)
-        subtitleLabel.text = "\(cardDTO.rarityName) -- \(cardDTO.setName)"
+        subtitleLabel.text = cardDTO.setName
         quantityLabel.text = String(cardDTO.quantity)
         quantityStepper.value = Double(cardDTO.quantity)
     }

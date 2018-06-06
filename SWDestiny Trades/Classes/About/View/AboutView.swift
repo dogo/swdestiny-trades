@@ -64,7 +64,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         aboutTextView.snp.makeConstraints { make in
             make.top.equalTo(logoImage.snp.bottom).offset(22)
             make.left.equalTo(self).offset(12)
-            make.bottom.equalTo(self).offset(-34)
+            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
             make.right.equalTo(self).offset(-12)
         }
     }
