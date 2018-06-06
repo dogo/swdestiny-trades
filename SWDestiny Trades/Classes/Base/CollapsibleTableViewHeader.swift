@@ -13,7 +13,7 @@ protocol CollapsibleTableViewHeaderDelegate: class {
     func toggleSection(header: CollapsibleTableViewHeader, section: Int)
 }
 
-class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
+final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
 
     weak var delegate: CollapsibleTableViewHeaderDelegate?
     var section = 0
@@ -36,9 +36,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseVie
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHeader(_:))))
     }

@@ -59,9 +59,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
+
         quantityStepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 

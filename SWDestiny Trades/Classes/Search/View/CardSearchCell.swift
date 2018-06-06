@@ -9,15 +9,13 @@
 import UIKit
 import Reusable
 
-class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var baseViewCell = BaseViewCell()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
     }
 
     required init?(coder aDecoder: NSCoder) {

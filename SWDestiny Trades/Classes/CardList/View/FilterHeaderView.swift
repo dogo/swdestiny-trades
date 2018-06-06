@@ -24,9 +24,8 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
+
         segmentControl.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 

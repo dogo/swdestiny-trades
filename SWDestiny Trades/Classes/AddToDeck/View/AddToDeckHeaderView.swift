@@ -24,9 +24,8 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
+
         segmentControl.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 

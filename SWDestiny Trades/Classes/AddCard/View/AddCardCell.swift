@@ -15,9 +15,7 @@ class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
     }
 
     required init?(coder aDecoder: NSCoder) {

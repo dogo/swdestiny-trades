@@ -23,9 +23,7 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
     }
 
     required init?(coder aDecoder: NSCoder) {

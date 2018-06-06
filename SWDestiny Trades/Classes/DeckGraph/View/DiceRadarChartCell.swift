@@ -27,9 +27,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
     }
 
     required init?(coder aDecoder: NSCoder) {

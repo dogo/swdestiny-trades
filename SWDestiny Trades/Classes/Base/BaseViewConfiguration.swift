@@ -14,3 +14,15 @@ protocol BaseViewConfiguration {
     func setupConstraints()
     func configureViews()
 }
+
+extension BaseViewConfiguration {
+
+    func setupBaseView() {
+        buildViewHierarchy()
+        setupConstraints()
+        configureViews()
+    }
+
+    func configureViews() {
+    }
+}

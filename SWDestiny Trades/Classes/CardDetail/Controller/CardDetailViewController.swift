@@ -90,7 +90,7 @@ class CardDetailViewController: UIViewController {
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
             activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
             activityVC.popoverPresentationController?.barButtonItem = sender
-            
+
             DispatchQueue.global(qos: .userInteractive).async {
                 DispatchQueue.main.async {
                     self.present(activityVC, animated: true, completion: nil)

@@ -14,9 +14,7 @@ final class UserCollectionView: UIView, BaseViewConfiguration {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        buildViewHierarchy()
-        setupConstraints()
-        configureViews()
+        setupBaseView()
     }
 
     required init?(coder aDecoder: NSCoder) {
