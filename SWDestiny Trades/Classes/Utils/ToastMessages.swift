@@ -12,12 +12,7 @@ import SwiftMessages
 final class ToastMessages {
 
     static func showNetworkErrorMessage() {
-        let errorView: MessageView
-        if #available(iOS 9.0, *) {
-            errorView = MessageView.viewFromNib(layout: .cardView)
-        } else {
-            errorView = MessageView.viewFromNib(layout: .messageViewIOS8)
-        }
+        let errorView = MessageView.viewFromNib(layout: .cardView)
         var config = SwiftMessages.defaultConfig
         config.duration = .forever
 
@@ -39,12 +34,7 @@ final class ToastMessages {
     }
 
     static func showInfoMessage(title: String, message: String) {
-        let infoView: MessageView
-        if #available(iOS 9.0, *) {
-            infoView = MessageView.viewFromNib(layout: .cardView)
-        } else {
-            infoView = MessageView.viewFromNib(layout: .messageViewIOS8)
-        }
+        let infoView = MessageView.viewFromNib(layout: .cardView)
         var config = SwiftMessages.defaultConfig
         config.duration = .seconds(seconds: 2.0)
 

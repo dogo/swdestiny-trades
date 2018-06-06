@@ -31,12 +31,8 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
 
         aboutView.didTouchHTTPLink = { [unowned self] url in
-            if #available(iOS 9.0, *) {
-                let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-                self.present(safariViewController, animated: true)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
+            let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+            self.present(safariViewController, animated: true)
         }
     }
 

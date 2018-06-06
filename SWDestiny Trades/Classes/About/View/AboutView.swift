@@ -50,11 +50,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     internal func setupConstraints() {
         logoImage.snp.makeConstraints { make in
-            if #available(iOS 11, *) {
-                make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).offset(34)
-            } else {
-                make.top.equalTo(self).offset(34 + 64)
-            }
+            make.top.equalTo(self.safeArea.snp.topMargin).offset(34)
             make.centerX.equalTo(self)
             make.width.equalTo(280)
             make.height.equalTo(150)

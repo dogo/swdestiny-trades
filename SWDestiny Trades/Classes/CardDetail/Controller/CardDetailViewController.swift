@@ -88,14 +88,9 @@ class CardDetailViewController: UIViewController {
         if let shareImage = cardView.slideshow.currentSlideshowItem?.imageView.image {
 
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
-
-            if #available(iOS 9.0, *) {
-                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
-            } else {
-                activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
-            }
-
+            activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
             activityVC.popoverPresentationController?.barButtonItem = sender
+            
             DispatchQueue.global(qos: .userInteractive).async {
                 DispatchQueue.main.async {
                     self.present(activityVC, animated: true, completion: nil)

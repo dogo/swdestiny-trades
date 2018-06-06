@@ -33,7 +33,7 @@ final class GraphView: UIView, BaseViewConfiguration {
         deckGraphCollectionView.snp.makeConstraints { make in
             make.top.equalTo(64)
             make.left.equalTo(self)
-            make.bottom.equalTo(self).offset(-49)
+            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
             make.right.equalTo(self)
         }
     }

@@ -35,11 +35,7 @@ final class SearchView: UIView, BaseViewConfiguration {
 
     internal func setupConstraints() {
         searchBar.snp.makeConstraints { make in
-            if #available(iOS 11, *) {
-                make.top.equalTo(safeAreaLayoutGuide.snp.topMargin)
-            } else {
-                make.top.equalTo(self).offset(64)
-            }
+            make.top.equalTo(self.safeArea.snp.topMargin)
             make.left.equalTo(self)
             make.right.equalTo(self)
             make.height.equalTo(44)
@@ -48,7 +44,7 @@ final class SearchView: UIView, BaseViewConfiguration {
         searchTableView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.left.equalTo(self)
-            make.bottom.equalTo(self).offset(-49)
+            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
             make.right.equalTo(self)
         }
 
