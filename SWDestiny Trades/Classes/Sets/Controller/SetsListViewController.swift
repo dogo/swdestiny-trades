@@ -37,10 +37,10 @@ class SetsListViewController: UIViewController {
 
         setupNavigationItem()
 
-        setsView.pullToRefresh.addTarget(self, action: #selector(retriveSets(sender:)), for: .valueChanged)
+        setsView.pullToRefresh.addTarget(self, action: #selector(retrieveSets(sender:)), for: .valueChanged)
 
         setsView.activityIndicator.startAnimating()
-        retriveSets(sender: setsView.pullToRefresh)
+        retrieveSets(sender: setsView.pullToRefresh)
 
         setsView.setsTableView.didSelectSet = { [unowned self] set in
             self.navigateToNextController(with: set)
@@ -59,7 +59,7 @@ class SetsListViewController: UIViewController {
     }
 
     @objc
-    func retriveSets(sender: UIRefreshControl) {
+    func retrieveSets(sender: UIRefreshControl) {
         destinyService.retrieveSetList { result in
             switch result {
             case .success(let setList):
