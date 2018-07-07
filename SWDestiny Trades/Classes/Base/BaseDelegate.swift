@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol BaseDelegate: class {
+protocol BaseDelegate: AnyObject {
     func didSelectRowAt(index: IndexPath)
 }

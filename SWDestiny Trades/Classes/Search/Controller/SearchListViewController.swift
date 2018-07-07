@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAnalytics
 
 @objc
-protocol SearchDelegate: class {
+protocol SearchDelegate: AnyObject {
     func didSelectRow(at index: IndexPath)
 
     @objc

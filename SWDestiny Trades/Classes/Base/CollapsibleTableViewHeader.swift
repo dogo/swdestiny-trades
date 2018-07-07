@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-protocol CollapsibleTableViewHeaderDelegate: class {
+protocol CollapsibleTableViewHeaderDelegate: AnyObject {
     func toggleSection(header: CollapsibleTableViewHeader, section: Int)
 }
 

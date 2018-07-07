@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol UpdateTableDataDelegate: class {
+protocol UpdateTableDataDelegate: AnyObject {
     func insertNew(person: PersonDTO)
 }
 
