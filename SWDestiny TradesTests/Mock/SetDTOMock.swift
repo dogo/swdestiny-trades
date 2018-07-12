@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import SWDestiny_Trades
 
 final class SetDTOMock {
     

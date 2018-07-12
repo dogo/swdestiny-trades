@@ -15,7 +15,7 @@ class SWDestinyServiceMock: SWDestinyService {
     }
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) {
-
+        completion(CardDTOMock.mockedCardDTO())
     }
 
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) {
