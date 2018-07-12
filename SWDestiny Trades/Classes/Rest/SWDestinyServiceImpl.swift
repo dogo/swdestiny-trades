@@ -7,81 +7,28 @@
 //
 
 import Foundation
-import Moya
 
 class SWDestinyServiceImpl: SWDestinyService {
 
-    let moyaProvider: MoyaProvider<SWDestinyAPI>
+    let api: SWDestinyService
 
-    init(provider: MoyaProvider<SWDestinyAPI> = MoyaProvider<SWDestinyAPI>()) {
-        self.moyaProvider = provider
+    init(api: SWDestinyService = SWDestinyAPI()) {
+        self.api = api
     }
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) {
-        moyaProvider.request(.setList()) { moyaResult in
-            let result: Result<[SetDTO]>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode([SetDTO].self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+        self.api.retrieveSetList(completion: completion)
     }
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) {
-        moyaProvider.request(.cardList(setCode: setCode)) { moyaResult in
-            let result: Result<[CardDTO]>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+        self.api.retrieveSetCardList(setCode: setCode, completion: completion)
     }
 
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) {
-        moyaProvider.request(.allCards()) { moyaResult in
-            let result: Result<[CardDTO]>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+        self.api.retrieveAllCards(completion: completion)
     }
 
     func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) {
-        moyaProvider.request(.card(cardId: cardId)) { moyaResult in
-            let result: Result<CardDTO>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode(CardDTO.self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+        self.api.retrieveCard(cardId: cardId, completion: completion)
     }
 }

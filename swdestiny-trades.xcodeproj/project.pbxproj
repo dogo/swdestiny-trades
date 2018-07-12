@@ -144,13 +144,16 @@
 		DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; };
 		DDDC46AE1FDCD4BD00D79449 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDDC46AF1FDCD4BD00D79449 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */; };
+		DDDE91CB20F7260B00D48563 /* SWDestinyServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91CA20F7260B00D48563 /* SWDestinyServiceMock.swift */; };
+		DDDE91CD20F728AE00D48563 /* SWDestinyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */; };
 		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
 		DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF2DD2A1E429EF50090519E /* Sort.swift */; };
 		DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF2DD2C1E42B27D0090519E /* RealmMigrations.swift */; };
 		DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF5D9601E2EA7C0007C8A4B /* DeckListViewController.swift */; };
 		DDF5D9631E2EA820007C8A4B /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF5D9621E2EA820007C8A4B /* DeckListView.swift */; };
 		DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF678A61E441C6E00390878 /* SectionsBuilder.swift */; };
-		DDFB0C8F1E285F0C00442E1B /* SWDestinyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */; };
+		DDFB0C8F1E285F0C00442E1B /* SWDestinyRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C8E1E285F0C00442E1B /* SWDestinyRoute.swift */; };
 		DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C921E286E5800442E1B /* BaseDelegate.swift */; };
 		DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */; };
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
@@ -335,13 +338,16 @@
 		DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListTableView.swift; sourceTree = "<group>"; };
 		DDCEF4171E2484D8007EACC5 /* PeopleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListView.swift; sourceTree = "<group>"; };
 		DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanDetailNavigator.swift; sourceTree = "<group>"; };
+		DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImplTests.swift; sourceTree = "<group>"; };
+		DDDE91CA20F7260B00D48563 /* SWDestinyServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceMock.swift; sourceTree = "<group>"; };
+		DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyAPI.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 		DDF2DD2A1E429EF50090519E /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		DDF2DD2C1E42B27D0090519E /* RealmMigrations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmMigrations.swift; sourceTree = "<group>"; };
 		DDF5D9601E2EA7C0007C8A4B /* DeckListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListViewController.swift; sourceTree = "<group>"; };
 		DDF5D9621E2EA820007C8A4B /* DeckListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
 		DDF678A61E441C6E00390878 /* SectionsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsBuilder.swift; sourceTree = "<group>"; };
-		DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDestinyAPI.swift; sourceTree = "<group>"; };
+		DDFB0C8E1E285F0C00442E1B /* SWDestinyRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDestinyRoute.swift; sourceTree = "<group>"; };
 		DDFB0C921E286E5800442E1B /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardDatasource.swift; sourceTree = "<group>"; };
 		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
@@ -783,6 +789,7 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
+				DDDE91C720F7253C00D48563 /* Rest */,
 				DDB6DE6A1E539443003558E4 /* Controllers */,
 				DD6E06A01E114E88004A5653 /* Info.plist */,
 			);
@@ -933,7 +940,8 @@
 		DD9289061E11933C00FDEC48 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
-				DDFB0C8E1E285F0C00442E1B /* SWDestinyAPI.swift */,
+				DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */,
+				DDFB0C8E1E285F0C00442E1B /* SWDestinyRoute.swift */,
 				DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */,
 				DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */,
 			);
@@ -1209,6 +1217,15 @@
 				DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */,
 			);
 			path = Navigator;
+			sourceTree = "<group>";
+		};
+		DDDE91C720F7253C00D48563 /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */,
+				DDDE91CA20F7260B00D48563 /* SWDestinyServiceMock.swift */,
+			);
+			path = Rest;
 			sourceTree = "<group>";
 		};
 		DDF5D95C1E2EA7A8007C8A4B /* DeckList */ = {
@@ -1576,6 +1593,7 @@
 				DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */,
 				DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */,
 				DD0905481E24701D00D9EFB0 /* AlphabeticalListDatasource.swift in Sources */,
+				DDDE91CD20F728AE00D48563 /* SWDestinyAPI.swift in Sources */,
 				DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */,
 				DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */,
 				DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */,
@@ -1621,7 +1639,7 @@
 				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
 				DD7B108C1EE9EBA7003CA48D /* UIView+Utils.swift in Sources */,
-				DDFB0C8F1E285F0C00442E1B /* SWDestinyAPI.swift in Sources */,
+				DDFB0C8F1E285F0C00442E1B /* SWDestinyRoute.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
 				DDCA97BE1E2FD2580098FFB5 /* DeckListCell.swift in Sources */,
@@ -1663,7 +1681,9 @@
 			files = (
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
+				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
+				DDDE91CB20F7260B00D48563 /* SWDestinyServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

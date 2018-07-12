@@ -1,62 +1,87 @@
 //
 //  SWDestinyAPI.swift
-//  swdestiny-trades
+//  SWDestiny Trades
 //
-//  Created by Diogo Autilio on 12/01/17.
-//  Copyright © 2017 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 12/07/18.
+//  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
 import Moya
 
-enum SWDestinyAPI {
-    case setList()
-    case cardList(setCode: String)
-    case allCards()
-    case card(cardId: String)
-}
+class SWDestinyAPI: SWDestinyService {
 
-extension SWDestinyAPI: TargetType {
+    let provider: MoyaProvider<SWDestinyRoute>
 
-    var baseURL: URL {
-        return URL(string: "http://swdestinydb.com")! // swiftlint:disable:this force_unwrapping
+    init(provider: MoyaProvider<SWDestinyRoute> = MoyaProvider<SWDestinyRoute>()) {
+        self.provider = provider
     }
 
-    var path: String {
-        switch self {
-        case .setList:
-            return "/api/public/sets/"
-        case .cardList(let setCode):
-            return "/api/public/cards/\(setCode)"
-        case .allCards:
-            return "/api/public/cards/"
-        case .card(let cardId):
-            return "/api/public/card/\(cardId)"
+    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) {
+        provider.request(.setList()) { moyaResult in
+            let result: Result<[SetDTO]>
+            do {
+                switch moyaResult {
+                case .success(let response):
+                    result = .success(try JSONDecoder().decode([SetDTO].self, from: response.data))
+                case .failure(let error):
+                    throw error
+                }
+            } catch {
+                result = .failure(error)
+            }
+            completion(result)
         }
     }
 
-    var method: Moya.Method {
-        switch self {
-        case .setList, .cardList, .allCards, .card:
-            return .get
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) {
+        provider.request(.cardList(setCode: setCode)) { moyaResult in
+            let result: Result<[CardDTO]>
+            do {
+                switch moyaResult {
+                case .success(let response):
+                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
+                case .failure(let error):
+                    throw error
+                }
+            } catch {
+                result = .failure(error)
+            }
+            completion(result)
         }
     }
 
-    var task: Task {
-        switch self {
-        default:
-            return .requestPlain
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) {
+        provider.request(.allCards()) { moyaResult in
+            let result: Result<[CardDTO]>
+            do {
+                switch moyaResult {
+                case .success(let response):
+                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
+                case .failure(let error):
+                    throw error
+                }
+            } catch {
+                result = .failure(error)
+            }
+            completion(result)
         }
     }
 
-    var sampleData: Data {
-        switch self {
-        default:
-            return Data()
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) {
+        provider.request(.card(cardId: cardId)) { moyaResult in
+            let result: Result<CardDTO>
+            do {
+                switch moyaResult {
+                case .success(let response):
+                    result = .success(try JSONDecoder().decode(CardDTO.self, from: response.data))
+                case .failure(let error):
+                    throw error
+                }
+            } catch {
+                result = .failure(error)
+            }
+            completion(result)
         }
-    }
-
-    var headers: [String: String]? {
-        return ["Content-type": "application/json"]
     }
 }
