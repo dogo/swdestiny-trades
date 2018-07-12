@@ -34,14 +34,6 @@ class AboutViewControllerTests: QuickSpec {
                 controller.viewWillAppear(true)
                 expect(controller.navigationItem.title).to(equal(L10n.about))
             }
-
-#if targetEnvironment(simulator)
-            it("should trigger fatal error if init with coder") {
-                expect { () -> Void in
-                    _ = AboutViewController(coder: NSCoder())
-                }.to(throwAssertion())
-            }
-#endif
         }
     }
 }
