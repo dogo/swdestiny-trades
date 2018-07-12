@@ -98,6 +98,7 @@
 		DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */; };
 		DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */; };
 		DD88285D202A4E7F00F08C31 /* Decoder+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */; };
+		DD8CD48B20F7BCE20036CA8D /* SetDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */; };
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93D3C72008EEAB00C2663D /* ToggleButton.swift */; };
@@ -272,6 +273,7 @@
 		DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
 		DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
 		DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decoder+Utils.swift"; sourceTree = "<group>"; };
+		DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDTOMock.swift; sourceTree = "<group>"; };
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD93D3C72008EEAB00C2663D /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
@@ -789,6 +791,7 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
+				DD8CD48920F7BCD10036CA8D /* Mock */,
 				DDDE91C720F7253C00D48563 /* Rest */,
 				DDB6DE6A1E539443003558E4 /* Controllers */,
 				DD6E06A01E114E88004A5653 /* Info.plist */,
@@ -894,6 +897,14 @@
 				DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		DD8CD48920F7BCD10036CA8D /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		DD8CE7571E1C27FB00110B07 /* About */ = {
@@ -1568,6 +1579,7 @@
 				DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */,
 				DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
+				DD8CD48B20F7BCE20036CA8D /* SetDTOMock.swift in Sources */,
 				DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,

@@ -13,7 +13,8 @@ import Nimble
 class SWDestinyServiceImplTests: QuickSpec {
 
     override func spec() {
-        describe("About view controller") {
+        
+        describe("SWDestinyServiceImpl") {
 
             var sut: SWDestinyServiceImpl!
             var api: SWDestinyServiceMock!
@@ -25,6 +26,18 @@ class SWDestinyServiceImplTests: QuickSpec {
 
             it("instance") {
                 expect(sut.api) === api
+            }
+            
+            it("Retrieve set list with success") {
+                sut.retrieveSetList(completion: { result in
+                    switch result {
+                    case .success(let setList):
+                        expect(setList[0].name).to(equal("Awakenings"))
+                        expect(setList[0].code).to(equal("AW"))
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    }
+                })
             }
         }
     }
