@@ -11,7 +11,11 @@ import Moya
 
 class SWDestinyServiceImpl: SWDestinyService {
 
-    let moyaProvider = MoyaProvider<SWDestinyAPI>()
+    let moyaProvider: MoyaProvider<SWDestinyAPI>
+
+    init(provider: MoyaProvider<SWDestinyAPI> = MoyaProvider<SWDestinyAPI>()) {
+        self.moyaProvider = provider
+    }
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) {
         moyaProvider.request(.setList()) { moyaResult in
