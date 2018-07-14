@@ -13,7 +13,7 @@ import Nimble
 class SWDestinyServiceImplTests: QuickSpec {
 
     override func spec() {
-        
+
         describe("SWDestinyServiceImpl") {
 
             var sut: SWDestinyServiceImpl!
@@ -27,7 +27,7 @@ class SWDestinyServiceImplTests: QuickSpec {
             it("instance") {
                 expect(sut.api) === api
             }
-            
+
             it("Retrieve set list with success") {
                 sut.retrieveSetList(completion: { result in
                     switch result {
@@ -39,7 +39,7 @@ class SWDestinyServiceImplTests: QuickSpec {
                     }
                 })
             }
-            
+
             it("Retrieve card list with success") {
                 sut.retrieveSetCardList(setCode: "anyString", completion: { result in
                     switch result {
@@ -72,6 +72,44 @@ class SWDestinyServiceImplTests: QuickSpec {
                         expect(cardList[0].imageUrl).to(equal("http://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
                         expect(cardList[0].label).to(equal("Captain Phasma - Elite Trooper"))
                         expect(cardList[0].cp).to(equal(1215))
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                    }
+                })
+            }
+
+            it("Retrieve card list with success") {
+                sut.retrieveCard(cardId: "anyString", completion: { result in
+                    switch result {
+                    case .success(let card):
+                        expect(card.setCode).to(equal("AW"))
+                        expect(card.setName).to(equal("Awakenings"))
+                        expect(card.typeCode).to(equal("character"))
+                        expect(card.typeName).to(equal("Character"))
+                        expect(card.factionCode).to(equal("red"))
+                        expect(card.factionName).to(equal("Command"))
+                        expect(card.affiliationCode).to(equal("villain"))
+                        expect(card.affiliationName).to(equal("Villain"))
+                        expect(card.rarityCode).to(equal("L"))
+                        expect(card.rarityName).to(equal("Legendary"))
+                        expect(card.position).to(equal(1))
+                        expect(card.code).to(equal("01001"))
+                        expect(card.ttscardid).to(equal("1300"))
+                        expect(card.name).to(equal("Captain Phasma"))
+                        expect(card.subtitle).to(equal("Elite Trooper"))
+                        expect(card.cost).to(equal(0))
+                        expect(card.health).to(equal(11))
+                        expect(card.points).to(equal("12/15"))
+                        expect(card.text).to(equal("Your non-unique characters have the Guardian keyword."))
+                        expect(card.deckLimit).to(equal(1))
+                        expect(card.flavor).to(equal("Whatever you're planning, it won't work."))
+                        expect(card.illustrator).to(equal("Darren Tan"))
+                        expect(card.isUnique).to(equal(true))
+                        expect(card.hasDie).to(equal(true))
+                        expect(card.externalUrl).to(equal("http://swdestinydb.com/card/01001"))
+                        expect(card.imageUrl).to(equal("http://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
+                        expect(card.label).to(equal("Captain Phasma - Elite Trooper"))
+                        expect(card.cp).to(equal(1215))
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                     }
