@@ -71,6 +71,7 @@ internal enum Asset {
     internal static let icRivals = ImageAsset(name: "ic_rivals")
     internal static let icSpiritOfRebellion = ImageAsset(name: "ic_spirit_of_rebellion")
     internal static let icTwoPlayerGame = ImageAsset(name: "ic_two_player_game")
+    internal static let icWayOfTheForce = ImageAsset(name: "ic_way_of_the_force")
   }
   internal enum Tabbar {
     internal static let icCards = ImageAsset(name: "ic_cards")
@@ -108,6 +109,7 @@ internal enum Asset {
     Sets.icRivals,
     Sets.icSpiritOfRebellion,
     Sets.icTwoPlayerGame,
+    Sets.icWayOfTheForce,
     Tabbar.icCards,
     Tabbar.icCardsFilled,
     Tabbar.icCollection,
