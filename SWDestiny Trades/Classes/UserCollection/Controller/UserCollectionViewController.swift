@@ -68,11 +68,9 @@ final class UserCollectionViewController: UIViewController {
 
     func configureFTPopOverMenu() {
         let config = FTConfiguration.shared
-        config.textColor = .white
         config.backgoundTintColor = ColorPalette.appTheme
         config.borderColor = ColorPalette.appTheme
         config.menuSeparatorColor = .lightGray
-        config.textAlignment = .center
     }
 
     static func addToCollection(carDTO: CardDTO) {
@@ -148,7 +146,15 @@ final class UserCollectionViewController: UIViewController {
 
     @objc
     func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], done: { selectedIndex -> Void in
+
+        let cellConfi = FTCellConfiguration()
+        cellConfi.textColor = UIColor.white
+        cellConfi.textAlignment = .center
+
+        let cellConfis = Array(repeating: cellConfi, count: 3)
+
+        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], menuImageArray: nil,
+                                   cellConfigurationArray: cellConfis, done: { selectedIndex in
             self.userCollectionView.userCollectionTableView.sort(selectedIndex)
             self.currentSortIndex = selectedIndex
         }, cancel: {
