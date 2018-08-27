@@ -13,16 +13,16 @@ import Nimble
 @testable import SWDestiny_Trades
 
 class AboutViewControllerSnapshotTests: QuickSpec {
-    
+
     override func spec() {
-        
+
         var sut: AboutViewController!
         var window: UIWindow!
-        
+
         describe("AboutViewController layout") {
-            
+
             context("when it's initialized") {
-                
+
                 beforeEach {
                     sut = AboutViewController()
                     sut.view.backgroundColor = .white
@@ -30,12 +30,12 @@ class AboutViewControllerSnapshotTests: QuickSpec {
                     window.rootViewController = sut
                     window.makeKeyAndVisible()
                 }
-                
+
                 afterEach {
                     window.isHidden = true
                     window = nil
                 }
-                
+
                 it("should have valid layout") {
                     expect(sut).to(haveValidSnapshot(named: "About View Controller", tolerance: 0.02))
                 }
