@@ -44,7 +44,7 @@ class AboutViewTests: QuickSpec {
                         touched = true
                     }
 
-                    //sut.addButton.sendActions(for: .touchUpInside)
+                    _ = sut.aboutTextView.delegate?.textView!(sut.aboutTextView, shouldInteractWith: NSURL(string: "")! as URL, in: NSRange(location: 0, length: 0))
 
                     expect(touched) == true
                 }
