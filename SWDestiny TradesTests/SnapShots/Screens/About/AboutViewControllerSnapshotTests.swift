@@ -37,7 +37,7 @@ class AboutViewControllerSnapshotTests: QuickSpec {
                 }
 
                 it("should have valid layout") {
-                    expect(sut).to(haveValidSnapshot(named: "About View Controller", tolerance: 0.02))
+                    expect(sut) == snapshot("About View Controller")
                 }
             }
         }
