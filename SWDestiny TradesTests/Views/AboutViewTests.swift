@@ -1,5 +1,5 @@
 //
-//  AboutViewSnapshotTests.swift
+//  AboutViewTests.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 27/08/18.
@@ -12,7 +12,7 @@ import Nimble
 
 @testable import SWDestiny_Trades
 
-class AboutViewSnapshotTests: QuickSpec {
+class AboutViewTests: QuickSpec {
 
     override func spec() {
 
@@ -31,15 +31,23 @@ class AboutViewSnapshotTests: QuickSpec {
                 window = nil
             }
 
-            context("when it's initialized") {
+            context("when URL link it's touched") {
 
                 beforeEach {
                     sut = AboutView(frame: .zero)
                     sut.frame = window.frame
                 }
 
-                it("should have valid layout") {
-                    expect(sut) == snapshot("About View")
+                it("should call closure when the url link is touched") {
+
+                    var touched = false
+                    sut.didTouchHTTPLink = { url in
+                        touched = true
+                    }
+
+                    //sut.addButton.sendActions(for: .touchUpInside)
+
+                    expect(touched) == true
                 }
             }
         }

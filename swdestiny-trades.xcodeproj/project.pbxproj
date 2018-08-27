@@ -73,6 +73,7 @@
 		DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4D988F1E4182FB006412AD /* KingfisherSource.swift */; };
 		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
 		DD4EA5DE2133ABF700D85ADD /* AboutViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DD2133ABF700D85ADD /* AboutViewSnapshotTests.swift */; };
+		DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */; };
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
 		DD5DFAF920C79E5800F12325 /* SnapKit+SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */; };
@@ -250,6 +251,7 @@
 		DD4D988F1E4182FB006412AD /* KingfisherSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherSource.swift; sourceTree = "<group>"; };
 		DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		DD4EA5DD2133ABF700D85ADD /* AboutViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewSnapshotTests.swift; sourceTree = "<group>"; };
+		DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewTests.swift; sourceTree = "<group>"; };
 		DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SnapKit+SafeArea.swift"; sourceTree = "<group>"; };
@@ -751,6 +753,14 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		DD4EA5DF2133AF5D00D85ADD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DD61B93D1E1FBC5400F38482 /* Datasource */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,10 +837,11 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
-				DD4EA5D82133A98400D85ADD /* SnapShots */,
+				DDB6DE6A1E539443003558E4 /* Controllers */,
 				DD8CD48920F7BCD10036CA8D /* Mock */,
 				DDDE91C720F7253C00D48563 /* Rest */,
-				DDB6DE6A1E539443003558E4 /* Controllers */,
+				DD4EA5D82133A98400D85ADD /* SnapShots */,
+				DD4EA5DF2133AF5D00D85ADD /* Views */,
 				DD6E06A01E114E88004A5653 /* Info.plist */,
 			);
 			path = "SWDestiny TradesTests";
@@ -1729,6 +1740,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */,
 				DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */,
 				DD8CD48E20F7CC1C0036CA8D /* SetDTOMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
