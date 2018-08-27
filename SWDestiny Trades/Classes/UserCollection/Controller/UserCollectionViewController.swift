@@ -13,7 +13,7 @@ final class UserCollectionViewController: UIViewController {
 
     fileprivate let userCollectionView = UserCollectionView()
     fileprivate var currentSortIndex = 0
-    fileprivate var navigator: UserCollectionNavigator?
+    fileprivate lazy var navigator = UserCollectionNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -31,8 +31,6 @@ final class UserCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigator = UserCollectionNavigator(self.navigationController)
 
         setupNavigationItem()
 
@@ -114,12 +112,12 @@ final class UserCollectionViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        self.navigator?.navigate(to: .cardDetail(with: cardList, card: card))
+        self.navigator.navigate(to: .cardDetail(with: cardList, card: card))
     }
 
     @objc
     func navigateToAddCardViewController() {
-        self.navigator?.navigate(to: .addCard(with: UserCollectionViewController.getUserCollection()))
+        self.navigator.navigate(to: .addCard(with: UserCollectionViewController.getUserCollection()))
     }
 
     @objc

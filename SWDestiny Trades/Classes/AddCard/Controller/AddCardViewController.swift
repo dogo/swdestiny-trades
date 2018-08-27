@@ -21,10 +21,10 @@ class AddCardViewController: UIViewController {
     fileprivate let addCardView = AddCardView()
     fileprivate let destinyService: SWDestinyService
     fileprivate let addCardType: AddCardType
-    fileprivate var navigator: AddCardNavigator?
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
     fileprivate var userCollectionDTO: UserCollectionDTO?
+    fileprivate lazy var navigator = AddCardNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -47,8 +47,6 @@ class AddCardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigator = AddCardNavigator(self.navigationController)
 
         addCardView.activityIndicator.startAnimating()
         destinyService.retrieveAllCards { result in
@@ -146,6 +144,6 @@ class AddCardViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator?.navigate(to: .cardDetail(with: cards, card: card))
+        self.navigator.navigate(to: .cardDetail(with: cards, card: card))
     }
 }

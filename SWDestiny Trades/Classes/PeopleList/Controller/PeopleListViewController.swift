@@ -15,7 +15,7 @@ protocol UpdateTableDataDelegate: AnyObject {
 class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     fileprivate let peopleListView = PeopleListView()
-    fileprivate var navigator: PeopleListNavigator?
+    fileprivate lazy var navigator = PeopleListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -33,8 +33,6 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigator = PeopleListNavigator(self.navigationController)
 
         setupNavigationItem()
 
@@ -111,7 +109,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
     }
 
     func navigateToLoansDetailViewController(person: PersonDTO) {
-        self.navigator?.navigate(to: .loanDetail(with: person))
+        self.navigator.navigate(to: .loanDetail(with: person))
     }
 
 }
