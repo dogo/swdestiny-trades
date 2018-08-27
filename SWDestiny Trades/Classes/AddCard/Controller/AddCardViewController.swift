@@ -12,7 +12,7 @@ import FirebaseAnalytics
 
 public enum AddCardType {
     case lent
-    case Borrow
+    case borrow
     case collection
 }
 
@@ -92,7 +92,7 @@ class AddCardViewController: UIViewController {
                 switch self.addCardType {
                 case .lent:
                     self.insertToLentMe(card: card, predicate: predicate)
-                case .Borrow:
+                case .borrow:
                     self.insertToBorrowed(card: card, predicate: predicate)
                 case .collection:
                     self.insertToCollection(card: card, predicate: predicate)

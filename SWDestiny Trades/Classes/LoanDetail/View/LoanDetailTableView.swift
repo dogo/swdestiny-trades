@@ -35,7 +35,7 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
 
     internal func didSelectRowAt(index: IndexPath) {
         if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
-            didSelectAddItem?(index.section == 0 ? AddCardType.lent : AddCardType.Borrow)
+            didSelectAddItem?(index.section == 0 ? .lent : .borrow)
         } else if let card = tableViewDatasource?.getCard(at: index) {
             didSelectCard?(card, index.section == 0)
         }
