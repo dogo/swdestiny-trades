@@ -13,4 +13,5 @@ github "zvonicek/ImageSlideshow"
 # Tests
 github "Quick/Quick"
 github "Quick/Nimble"
+github "ashfurrow/Nimble-Snapshots"
 github "uber/ios-snapshot-test-case"
