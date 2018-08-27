@@ -93,6 +93,8 @@
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
 		DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FBF191FCB159B00E62504 /* ImageAssets.swift */; };
 		DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */; };
+		DD7571692133D19400C0CA45 /* Nimble_Snapshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7571682133D19400C0CA45 /* Nimble_Snapshots.framework */; };
+		DD75716A2133D1A200C0CA45 /* Nimble_Snapshots.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD7571682133D19400C0CA45 /* Nimble_Snapshots.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
 		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
 		DD7B108A1EE99E99003CA48D /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */; };
@@ -185,6 +187,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				DD75716A2133D1A200C0CA45 /* Nimble_Snapshots.framework in CopyFiles */,
 				DDF73A062130369700456ED2 /* FBSnapshotTestCase.framework in CopyFiles */,
 				DDDC46AE1FDCD4BD00D79449 /* Nimble.framework in CopyFiles */,
 				DDDC46AF1FDCD4BD00D79449 /* Quick.framework in CopyFiles */,
@@ -275,6 +278,7 @@
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6FBF191FCB159B00E62504 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
+		DD7571682133D19400C0CA45 /* Nimble_Snapshots.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble_Snapshots.framework; path = Carthage/Build/iOS/Nimble_Snapshots.framework; sourceTree = "<group>"; };
 		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
 		DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
@@ -397,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */,
+				DD7571692133D19400C0CA45 /* Nimble_Snapshots.framework in Frameworks */,
 				DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */,
 				DD38C2C2212FB0D300153D70 /* FBSnapshotTestCase.framework in Frameworks */,
 				19ACBBF08316A99E4B5D92FD /* Pods_SWDestiny_Trades_SWDestiny_TradesTests.framework in Frameworks */,
@@ -1241,6 +1246,7 @@
 		DDCEBD521FDC24D30067AAE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DD7571682133D19400C0CA45 /* Nimble_Snapshots.framework */,
 				DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */,
 				DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */,
 				DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */,
