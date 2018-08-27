@@ -12,7 +12,7 @@ final class LoanDetailNavigator: Navigator {
 
     enum Destination {
         case cardDetail(with: [CardDTO], card: CardDTO)
-        case addCard(with: PersonDTO, isLentMe: Bool)
+        case addCard(with: PersonDTO, type: AddCardType)
     }
 
     private weak var navigationController: UINavigationController?
@@ -36,8 +36,8 @@ final class LoanDetailNavigator: Navigator {
         switch destination {
         case .cardDetail(let cardList, let card):
             return CardDetailViewController(cardList: cardList, selected: card)
-        case .addCard(let person, let isLentMe):
-            return AddCardViewController(person: person, isLentMe: isLentMe)
+        case .addCard(let person, let type):
+            return AddCardViewController(person: person, type: type)
         }
     }
 }

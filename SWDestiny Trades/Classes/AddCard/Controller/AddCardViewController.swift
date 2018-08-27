@@ -10,35 +10,31 @@ import UIKit
 import PKHUD
 import FirebaseAnalytics
 
+public enum AddCardType {
+    case lent
+    case Borrow
+    case collection
+}
+
 class AddCardViewController: UIViewController {
 
     fileprivate let addCardView = AddCardView()
-    fileprivate var destinyService: SWDestinyService?
+    fileprivate let destinyService: SWDestinyService
+    fileprivate let addCardType: AddCardType
     fileprivate var navigator: AddCardNavigator?
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
     fileprivate var userCollectionDTO: UserCollectionDTO?
-    fileprivate var isLentMe = false
-    fileprivate var isUserCollection = false
 
     // MARK: - Life Cycle
 
-    convenience init(service: SWDestinyService = SWDestinyServiceImpl(), person: PersonDTO?, isLentMe lentMe: Bool) {
-        self.init(nibName: nil, bundle: nil)
+    init(service: SWDestinyService = SWDestinyServiceImpl(), person: PersonDTO? = nil,
+         userCollection: UserCollectionDTO? = nil, type: AddCardType) {
         destinyService = service
+        addCardType = type
+        super.init(nibName: nil, bundle: nil)
         personDTO = person
-        isLentMe = lentMe
-    }
-
-    convenience init(service: SWDestinyService = SWDestinyServiceImpl(), userCollection: UserCollectionDTO?, isUserCollection collection: Bool) {
-        self.init(nibName: nil, bundle: nil)
-        destinyService = service
         userCollectionDTO = userCollection
-        isUserCollection = collection
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -55,7 +51,7 @@ class AddCardViewController: UIViewController {
         self.navigator = AddCardNavigator(self.navigationController)
 
         addCardView.activityIndicator.startAnimating()
-        destinyService?.retrieveAllCards { result in
+        destinyService.retrieveAllCards { result in
             switch result {
             case .success(let allCards):
                 self.addCardView.addCardTableView.updateSearchList(allCards)
@@ -93,12 +89,13 @@ class AddCardViewController: UIViewController {
         let predicate = NSPredicate(format: "code == %@", card.code)
         do {
             try RealmManager.shared.realm.write {
-                if self.isUserCollection {
-                    self.insertToCollection(card: card, predicate: predicate)
-                } else if self.isLentMe {
+                switch self.addCardType {
+                case .lent:
                     self.insertToLentMe(card: card, predicate: predicate)
-                } else {
+                case .Borrow:
                     self.insertToBorrowed(card: card, predicate: predicate)
+                case .collection:
+                    self.insertToCollection(card: card, predicate: predicate)
                 }
             }
         } catch let error as NSError {

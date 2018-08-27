@@ -37,7 +37,7 @@ final class UserCollectionNavigator: Navigator {
         case .cardDetail(let cardList, let card):
             return CardDetailViewController(cardList: cardList, selected: card)
         case .addCard(let userCollection):
-            return AddCardViewController(userCollection: userCollection, isUserCollection: true)
+            return AddCardViewController(userCollection: userCollection, type: .collection)
         }
     }
 }

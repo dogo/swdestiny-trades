@@ -40,8 +40,8 @@ class LoansDetailViewController: UIViewController {
             self.navigateToCardDetailViewController(with: card, lentMe: lentMe)
         }
 
-        self.loanDetailView.loanDetailTableView.didSelectAddItem = { [unowned self] lentMe in
-            self.navigateToAddCardViewController(lentMe: lentMe)
+        self.loanDetailView.loanDetailTableView.didSelectAddItem = { [unowned self] type in
+            self.navigateToAddCardViewController(type: type)
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)
@@ -76,7 +76,7 @@ class LoansDetailViewController: UIViewController {
         self.navigator?.navigate(to: .cardDetail(with: Array(source), card: card))
     }
 
-    func navigateToAddCardViewController(lentMe: Bool) {
-        self.navigator?.navigate(to: .addCard(with: personDTO, isLentMe: lentMe))
+    func navigateToAddCardViewController(type: AddCardType) {
+        self.navigator?.navigate(to: .addCard(with: personDTO, type: type))
     }
 }
