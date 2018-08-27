@@ -71,6 +71,8 @@
 		DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */; };
 		DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */; };
 		DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4D988F1E4182FB006412AD /* KingfisherSource.swift */; };
+		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
+		DD4EA5DE2133ABF700D85ADD /* AboutViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DD2133ABF700D85ADD /* AboutViewSnapshotTests.swift */; };
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
 		DD5DFAF920C79E5800F12325 /* SnapKit+SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */; };
@@ -246,6 +248,8 @@
 		DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
 		DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorListDatasource.swift; sourceTree = "<group>"; };
 		DD4D988F1E4182FB006412AD /* KingfisherSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherSource.swift; sourceTree = "<group>"; };
+		DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		DD4EA5DD2133ABF700D85ADD /* AboutViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewSnapshotTests.swift; sourceTree = "<group>"; };
 		DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SnapKit+SafeArea.swift"; sourceTree = "<group>"; };
@@ -722,6 +726,31 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		DD4EA5D82133A98400D85ADD /* SnapShots */ = {
+			isa = PBXGroup;
+			children = (
+				DD4EA5D92133A9D100D85ADD /* Screens */,
+			);
+			path = SnapShots;
+			sourceTree = "<group>";
+		};
+		DD4EA5D92133A9D100D85ADD /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				DD4EA5DA2133A9E300D85ADD /* About */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		DD4EA5DA2133A9E300D85ADD /* About */ = {
+			isa = PBXGroup;
+			children = (
+				DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */,
+				DD4EA5DD2133ABF700D85ADD /* AboutViewSnapshotTests.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		DD61B93D1E1FBC5400F38482 /* Datasource */ = {
 			isa = PBXGroup;
 			children = (
@@ -798,6 +827,7 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
+				DD4EA5D82133A98400D85ADD /* SnapShots */,
 				DD8CD48920F7BCD10036CA8D /* Mock */,
 				DDDE91C720F7253C00D48563 /* Rest */,
 				DDB6DE6A1E539443003558E4 /* Controllers */,
@@ -1703,8 +1733,10 @@
 				DD8CD48E20F7CC1C0036CA8D /* SetDTOMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
+				DD4EA5DE2133ABF700D85ADD /* AboutViewSnapshotTests.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
+				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,
 				DD8CD48D20F7CC130036CA8D /* CardDTOMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
