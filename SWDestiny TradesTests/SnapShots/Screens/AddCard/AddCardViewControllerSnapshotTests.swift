@@ -18,7 +18,7 @@ class AddCardViewControllerSnapshotTests: QuickSpec {
 
         var sut: AddCardViewController!
         var service: SWDestinyServiceImpl!
-        var window: UIWindow!
+        let window = UIWindow.framed()
 
         describe("AddCardViewController layout") {
 
@@ -26,24 +26,21 @@ class AddCardViewControllerSnapshotTests: QuickSpec {
 
                 beforeEach {
                     service = SWDestinyServiceImpl(api: SWDestinyServiceMock())
-                    window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 564))
-                    window.makeKeyAndVisible()
                 }
 
                 afterEach {
-                    window.isHidden = true
-                    window = nil
+                    window.cleanTestWindow()
                 }
 
                 it("should have valid layout when isLentMe is True") {
                     sut = AddCardViewController(service: service, person: PersonDTOMock.mockedPersonDTO(), type: .lent)
-                    window.rootViewController = sut
+                    window.showTestWindow(controller: sut)
                     expect(sut) == snapshot()
                 }
 
                 it("should have valid layout when isLentMe is false") {
                     sut = AddCardViewController(service: service, person: PersonDTOMock.mockedPersonDTO(), type: .borrow)
-                    window.rootViewController = sut
+                    window.showTestWindow(controller: sut)
                     expect(sut) == snapshot()
                 }
             }

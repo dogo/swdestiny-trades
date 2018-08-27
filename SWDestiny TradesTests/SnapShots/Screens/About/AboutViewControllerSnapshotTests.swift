@@ -17,7 +17,7 @@ class AboutViewControllerSnapshotTests: QuickSpec {
     override func spec() {
 
         var sut: AboutViewController!
-        var window: UIWindow!
+        let window = UIWindow.framed()
 
         describe("AboutViewController layout") {
 
@@ -25,15 +25,11 @@ class AboutViewControllerSnapshotTests: QuickSpec {
 
                 beforeEach {
                     sut = AboutViewController()
-                    sut.view.backgroundColor = .white
-                    window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 564))
-                    window.rootViewController = sut
-                    window.makeKeyAndVisible()
+                    window.showTestWindow(controller: sut)
                 }
 
                 afterEach {
-                    window.isHidden = true
-                    window = nil
+                    window.cleanTestWindow()
                 }
 
                 it("should have valid layout") {
