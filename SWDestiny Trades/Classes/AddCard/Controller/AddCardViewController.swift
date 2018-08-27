@@ -12,8 +12,8 @@ import FirebaseAnalytics
 
 class AddCardViewController: UIViewController {
 
-    fileprivate let destinyService = SWDestinyServiceImpl()
     fileprivate let addCardView = AddCardView()
+    fileprivate var destinyService: SWDestinyService?
     fileprivate var navigator: AddCardNavigator?
     fileprivate var cards = [CardDTO]()
     fileprivate var personDTO: PersonDTO?
@@ -23,14 +23,16 @@ class AddCardViewController: UIViewController {
 
     // MARK: - Life Cycle
 
-    convenience init(person: PersonDTO?, isLentMe lentMe: Bool) {
+    convenience init(service: SWDestinyService = SWDestinyServiceImpl(), person: PersonDTO?, isLentMe lentMe: Bool) {
         self.init(nibName: nil, bundle: nil)
+        destinyService = service
         personDTO = person
         isLentMe = lentMe
     }
 
-    convenience init(userCollection: UserCollectionDTO?, isUserCollection collection: Bool) {
+    convenience init(service: SWDestinyService = SWDestinyServiceImpl(), userCollection: UserCollectionDTO?, isUserCollection collection: Bool) {
         self.init(nibName: nil, bundle: nil)
+        destinyService = service
         userCollectionDTO = userCollection
         isUserCollection = collection
     }
@@ -53,7 +55,7 @@ class AddCardViewController: UIViewController {
         self.navigator = AddCardNavigator(self.navigationController)
 
         addCardView.activityIndicator.startAnimating()
-        destinyService.retrieveAllCards { result in
+        destinyService?.retrieveAllCards { result in
             switch result {
             case .success(let allCards):
                 self.addCardView.addCardTableView.updateSearchList(allCards)

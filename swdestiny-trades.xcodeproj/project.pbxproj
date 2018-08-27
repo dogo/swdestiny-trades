@@ -113,6 +113,8 @@
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
+		DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */; };
+		DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF5452134340B005C536E /* PersonDTOMock.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
 		DDAFBF251FF6F3F500927875 /* AddToDeckCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF1C1FF6F3F500927875 /* AddToDeckCardDatasource.swift */; };
 		DDAFBF261FF6F3F500927875 /* AddToDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF1E1FF6F3F500927875 /* AddToDeckViewController.swift */; };
@@ -297,6 +299,8 @@
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderCell.swift; sourceTree = "<group>"; };
+		DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		DD9EF5452134340B005C536E /* PersonDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDTOMock.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
 		DDAFBF1C1FF6F3F500927875 /* AddToDeckCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckCardDatasource.swift; sourceTree = "<group>"; };
 		DDAFBF1E1FF6F3F500927875 /* AddToDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckViewController.swift; sourceTree = "<group>"; };
@@ -745,6 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				DD4EA5DA2133A9E300D85ADD /* About */,
+				DD9EF542213431EF005C536E /* AddCard */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -956,6 +961,7 @@
 			isa = PBXGroup;
 			children = (
 				DD8CD48C20F7CC130036CA8D /* CardDTOMock.swift */,
+				DD9EF5452134340B005C536E /* PersonDTOMock.swift */,
 				DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */,
 				DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */,
 			);
@@ -1021,6 +1027,14 @@
 				DD94E6F81E36658A0070735B /* ColorPalette.swift */,
 			);
 			path = Appearance;
+			sourceTree = "<group>";
+		};
+		DD9EF542213431EF005C536E /* AddCard */ = {
+			isa = PBXGroup;
+			children = (
+				DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */,
+			);
+			path = AddCard;
 			sourceTree = "<group>";
 		};
 		DDAFBF191FF6F3F500927875 /* AddToDeck */ = {
@@ -1751,10 +1765,12 @@
 				DD8CD48E20F7CC1C0036CA8D /* SetDTOMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
+				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
 				DD4EA5DE2133ABF700D85ADD /* AboutViewSnapshotTests.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
 				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,
+				DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */,
 				DD8CD48D20F7CC130036CA8D /* CardDTOMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
