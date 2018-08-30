@@ -8,17 +8,16 @@
 
 import UIKit
 
-final class SetsTableView: UITableView, BaseDelegate {
+final class SetsTableView: UITableView {
 
     var didSelectSet: ((SetDTO) -> Void)?
 
     fileprivate var tableViewDatasource: SetsListDatasource?
-    let setsList = SetsList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        setsList.delegate = self
-        tableViewDatasource = SetsListDatasource(tableView: self, delegate: setsList)
+        self.delegate = self
+        tableViewDatasource = SetsListDatasource(tableView: self)
         self.backgroundColor = .white
     }
 
@@ -36,5 +35,16 @@ final class SetsTableView: UITableView, BaseDelegate {
         if let set = tableViewDatasource?.getSet(at: index) {
             didSelectSet?(set)
         }
+    }
+}
+
+extension SetsTableView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
     }
 }

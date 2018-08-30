@@ -14,13 +14,12 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
     fileprivate var swdSets: [String: [SetDTO]] = [ : ]
     fileprivate var sections: [String] = []
 
-    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: SetsTableCell.self)
         self.tableView?.sectionIndexColor = ColorPalette.appTheme
         self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
 
@@ -55,18 +54,5 @@ class SetsListDatasource: NSObject, UITableViewDataSource {
         sections = SectionsBuilder.alphabetically(setList: setList)
         swdSets = Split.setsByAlphabetically(setList: setList, sections: sections)
         tableView?.reloadData()
-    }
-}
-
-class SetsList: NSObject, UITableViewDelegate {
-
-    weak var delegate: BaseDelegate?
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BaseViewCell.height()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(index: indexPath)
     }
 }
