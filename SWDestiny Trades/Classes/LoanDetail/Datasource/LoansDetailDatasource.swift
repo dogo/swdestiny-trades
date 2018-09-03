@@ -15,12 +15,11 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     var lentMe: [CardDTO] = []
     var borrowed: [CardDTO] = []
 
-    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: LoanDetailCell.self)
         self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
 
@@ -141,18 +140,5 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             borrowed = Array(currentPerson.borrowed)
         }
         tableView?.reloadData()
-    }
-}
-
-class LoansDetail: NSObject, UITableViewDelegate {
-
-    weak var delegate: BaseDelegate?
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BaseViewCell.height()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(index: indexPath)
     }
 }

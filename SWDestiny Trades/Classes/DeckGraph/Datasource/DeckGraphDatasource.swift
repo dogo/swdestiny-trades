@@ -26,14 +26,13 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         }
     }
 
-    required init(collectionView: UICollectionView, delegate: UICollectionViewDelegate) {
+    required init(collectionView: UICollectionView) {
         super.init()
         self.collectionView = collectionView
         collectionView.register(cellType: CardTypeBarChartCell.self)
         collectionView.register(cellType: CardCostLineChartCell.self)
         collectionView.register(cellType: DiceRadarChartCell.self)
         self.collectionView?.dataSource = self
-        self.collectionView?.delegate = delegate
         self.collectionView?.reloadData()
     }
 
@@ -121,19 +120,5 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
             indirectFace += (card.dieFaces.filter("value LIKE '*ID*'").count * card.quantity)
         }
         dieFaces = [specialFace, blankFace, meleeFace, rangedFace, focusFace, disruptFace, shieldFace, discardFace, resourceFace, indirectFace]
-    }
-}
-
-class DeckGraph: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-    weak var delegate: BaseDelegate?
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(index: indexPath)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.size.width - 16)
-        return CGSize(width: width, height: width * CGFloat(1.1))
     }
 }

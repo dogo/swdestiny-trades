@@ -13,12 +13,11 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
     fileprivate var tableView: UITableView?
     fileprivate var persons: [PersonDTO] = []
 
-    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: PersonCell.self)
         self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
 
@@ -76,18 +75,5 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
         } catch let error as NSError {
             print("Error opening realm: \(error)")
         }
-    }
-}
-
-class PeopleList: NSObject, UITableViewDelegate {
-
-    weak var delegate: BaseDelegate?
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BaseViewCell.height()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(index: indexPath)
     }
 }

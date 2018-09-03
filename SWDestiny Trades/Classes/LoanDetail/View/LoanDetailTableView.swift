@@ -8,18 +8,17 @@
 
 import UIKit
 
-final class LoanDetailTableView: UITableView, BaseDelegate {
+final class LoanDetailTableView: UITableView {
 
     var didSelectCard: ((CardDTO, Bool) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
 
     fileprivate var tableViewDatasource: LoansDetailDatasource?
-    fileprivate let loanDetail = LoansDetail()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        loanDetail.delegate = self
-        tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: loanDetail)
+        self.delegate = self
+        tableViewDatasource = LoansDetailDatasource(tableView: self)
         self.backgroundColor = .white
     }
 
@@ -39,5 +38,16 @@ final class LoanDetailTableView: UITableView, BaseDelegate {
         } else if let card = tableViewDatasource?.getCard(at: index) {
             didSelectCard?(card, index.section == 0)
         }
+    }
+}
+
+extension LoanDetailTableView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegate {
+class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     struct Section {
         var name: String
@@ -26,7 +26,6 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
     fileprivate var currentDeck: DeckDTO?
     var deckList = [Section]()
 
-    weak var delegate: BaseDelegate?
     weak var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
 
     required init(tableView: UITableView) {
@@ -35,7 +34,6 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         tableView.register(cellType: DeckBuilderCell.self)
         tableView.register(headerFooterViewType: CollapsibleTableViewHeader.self)
         self.tableView?.dataSource = self
-        self.tableView?.delegate = self
         self.tableView?.reloadData()
     }
 
@@ -149,34 +147,5 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource, UITableViewDelegat
         } catch let error as NSError {
             print("Error opening realm: \(error)")
         }
-    }
-
-    // MARK: <UITableViewDelegate>
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return deckList[indexPath.section].collapsed ? 0 : BaseViewCell.height()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(index: indexPath)
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var header: CollapsibleTableViewHeader?
-        if header == nil {
-            header = tableView.dequeueReusableHeaderFooterView(CollapsibleTableViewHeader.self)
-        }
-
-        header?.titleLabel.text = deckList[section].name
-        header?.setCollapsed(deckList[section].collapsed)
-
-        header?.section = section
-        header?.delegate = collapsibleDelegate
-
-        return header
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CollapsibleTableViewHeader.height()
     }
 }

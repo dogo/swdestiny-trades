@@ -8,18 +8,17 @@
 
 import UIKit
 
-final class DeckListTableView: UITableView, BaseDelegate {
+final class DeckListTableView: UITableView {
 
     var didSelectDeck: ((DeckDTO) -> Void)?
 
     fileprivate var initialEdgeInsets: UIEdgeInsets = .zero
     fileprivate var tableViewDatasource: DeckListDatasource?
-    let deckList = DeckList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        deckList.delegate = self
-        tableViewDatasource = DeckListDatasource(tableView: self, delegate: deckList)
+        self.delegate = self
+        tableViewDatasource = DeckListDatasource(tableView: self)
         self.backgroundColor = .white
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardWillShow, object: nil)
@@ -79,5 +78,16 @@ final class DeckListTableView: UITableView, BaseDelegate {
             self.contentInset = self.initialEdgeInsets
             self.scrollIndicatorInsets = self.initialEdgeInsets
         }
+    }
+}
+
+extension DeckListTableView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
     }
 }

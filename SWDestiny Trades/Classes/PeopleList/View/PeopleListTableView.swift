@@ -8,17 +8,16 @@
 
 import UIKit
 
-final class PeopleListTableView: UITableView, BaseDelegate {
+final class PeopleListTableView: UITableView {
 
     var didSelectPerson: ((PersonDTO) -> Void)?
 
     fileprivate var tableViewDatasource: PeopleListDatasource?
-    let peopleList = PeopleList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        peopleList.delegate = self
-        tableViewDatasource = PeopleListDatasource(tableView: self, delegate: peopleList)
+        self.delegate = self
+        tableViewDatasource = PeopleListDatasource(tableView: self)
         self.backgroundColor = .white
     }
 
@@ -44,5 +43,16 @@ final class PeopleListTableView: UITableView, BaseDelegate {
         if let person = tableViewDatasource?.getPerson(at: index) {
             didSelectPerson?(person)
         }
+    }
+}
+
+extension PeopleListTableView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
     }
 }

@@ -8,19 +8,17 @@
 
 import UIKit
 
-final class CardListTableView: UITableView, CardListViewDelegate {
+final class CardListTableView: UITableView {
 
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     private var alphabeticalDatasource: AlphabeticalListDatasource?
     private var colorDatasource: ColorListDatasource?
     private var numberDatasource: NumberListDatasource?
-    private let cardList = CardList()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
 
-        cardList.delegate = self
         alphabeticalDatasource = AlphabeticalListDatasource(tableView: self)
         colorDatasource = ColorListDatasource(tableView: self)
         numberDatasource = NumberListDatasource(tableView: self)
@@ -33,7 +31,7 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         self.backgroundColor = .white
         self.sectionIndexColor = ColorPalette.appTheme
         self.sectionIndexBackgroundColor = .clear
-        self.delegate = cardList
+        self.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -72,5 +70,37 @@ final class CardListTableView: UITableView, CardListViewDelegate {
         default:
             break
         }
+    }
+}
+
+protocol CardListViewDelegate {
+    func didSelectSegment(index: Int)
+}
+
+extension CardListTableView: UITableViewDelegate, CardListViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var header: FilterHeaderView?
+        if section == 0 {
+            if header == nil {
+                header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
+                header?.configureHeader()
+                //header?.delegate = self
+            }
+            return header
+        }
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return FilterHeaderView.height()
     }
 }

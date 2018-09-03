@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DeckBuilderTableView: UITableView, BaseDelegate, CollapsibleTableViewHeaderDelegate {
+final class DeckBuilderTableView: UITableView, CollapsibleTableViewHeaderDelegate {
 
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
@@ -17,7 +17,7 @@ final class DeckBuilderTableView: UITableView, BaseDelegate, CollapsibleTableVie
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         tableViewDatasource = DeckBuilderDatasource(tableView: self)
-        tableViewDatasource?.delegate = self
+        self.delegate = self
         tableViewDatasource?.collapsibleDelegate = self
         self.backgroundColor = .white
     }
@@ -44,5 +44,37 @@ final class DeckBuilderTableView: UITableView, BaseDelegate, CollapsibleTableVie
 
     func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
         tableViewDatasource?.toggleSection(header: header, section: section)
+    }
+}
+
+// MARK: <UITableViewDelegate>
+
+extension DeckBuilderTableView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.tableViewDatasource!.deckList[indexPath.section].collapsed ? 0 : BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var header: CollapsibleTableViewHeader?
+        if header == nil {
+            header = tableView.dequeueReusableHeaderFooterView(CollapsibleTableViewHeader.self)
+        }
+
+        header?.titleLabel.text = self.tableViewDatasource!.deckList[section].name
+        header?.setCollapsed(self.tableViewDatasource!.deckList[section].collapsed)
+
+        header?.section = section
+        header?.delegate = self
+
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CollapsibleTableViewHeader.height()
     }
 }

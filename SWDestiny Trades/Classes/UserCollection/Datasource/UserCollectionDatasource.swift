@@ -14,12 +14,11 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
     fileprivate var userCollection: UserCollectionDTO?
     var collectionList: [CardDTO] = []
 
-    required init(tableView: UITableView, delegate: UITableViewDelegate) {
+    required init(tableView: UITableView) {
         super.init()
         self.tableView = tableView
         tableView.register(cellType: LoanDetailCell.self)
         self.tableView?.dataSource = self
-        self.tableView?.delegate = delegate
         self.tableView?.reloadData()
     }
 
@@ -98,18 +97,5 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         } catch let error as NSError {
             print("Error opening realm: \(error)")
         }
-    }
-}
-
-class UserCollection: NSObject, UITableViewDelegate {
-
-    weak var delegate: BaseDelegate?
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return BaseViewCell.height()
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(index: indexPath)
     }
 }

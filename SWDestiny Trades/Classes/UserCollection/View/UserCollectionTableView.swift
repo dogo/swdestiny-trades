@@ -8,17 +8,16 @@
 
 import UIKit
 
-final class UserCollectionTableView: UITableView, BaseDelegate {
+final class UserCollectionTableView: UITableView {
 
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     var tableViewDatasource: UserCollectionDatasource?
-    let userCollection = UserCollection()
 
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
-        userCollection.delegate = self
-        tableViewDatasource = UserCollectionDatasource(tableView: self, delegate: userCollection)
+        self.delegate = self
+        tableViewDatasource = UserCollectionDatasource(tableView: self)
         self.backgroundColor = .white
     }
 
@@ -56,5 +55,16 @@ final class UserCollectionTableView: UITableView, BaseDelegate {
         default:
             break
         }
+    }
+}
+
+extension UserCollectionTableView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return BaseViewCell.height()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
     }
 }

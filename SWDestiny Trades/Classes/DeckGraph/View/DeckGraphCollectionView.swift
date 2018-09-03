@@ -8,10 +8,9 @@
 
 import UIKit
 
-final class DeckGraphCollectionView: UICollectionView, BaseDelegate {
+final class DeckGraphCollectionView: UICollectionView {
 
     fileprivate var collectionViewDatasource: DeckGraphDatasource?
-    fileprivate let deckGraph = DeckGraph()
 
     convenience init() {
         self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -19,8 +18,8 @@ final class DeckGraphCollectionView: UICollectionView, BaseDelegate {
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        deckGraph.delegate = self
-        collectionViewDatasource = DeckGraphDatasource(collectionView: self, delegate: deckGraph)
+        self.delegate = self
+        collectionViewDatasource = DeckGraphDatasource(collectionView: self)
         self.backgroundColor = .white
     }
 
@@ -35,5 +34,17 @@ final class DeckGraphCollectionView: UICollectionView, BaseDelegate {
     // MARK: <BaseDelegate>
 
     internal func didSelectRowAt(index: IndexPath) {
+    }
+}
+
+extension DeckGraphCollectionView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectRowAt(index: indexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.size.width - 16)
+        return CGSize(width: width, height: width * CGFloat(1.1))
     }
 }

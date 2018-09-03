@@ -69,7 +69,6 @@
 		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
 		DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */; };
 		DD4BBCDF1E26CC7E009929C4 /* NumberListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */; };
-		DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */; };
 		DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */; };
 		DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4D988F1E4182FB006412AD /* KingfisherSource.swift */; };
 		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
@@ -165,7 +164,6 @@
 		DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF678A61E441C6E00390878 /* SectionsBuilder.swift */; };
 		DDF73A062130369700456ED2 /* FBSnapshotTestCase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDFB0C8F1E285F0C00442E1B /* SWDestinyRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C8E1E285F0C00442E1B /* SWDestinyRoute.swift */; };
-		DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C921E286E5800442E1B /* BaseDelegate.swift */; };
 		DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */; };
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
 		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
@@ -252,7 +250,6 @@
 		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
 		DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 		DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberListDatasource.swift; sourceTree = "<group>"; };
-		DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListDelegate.swift; sourceTree = "<group>"; };
 		DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorListDatasource.swift; sourceTree = "<group>"; };
 		DD4D988F1E4182FB006412AD /* KingfisherSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherSource.swift; sourceTree = "<group>"; };
 		DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
@@ -370,7 +367,6 @@
 		DDF5D9621E2EA820007C8A4B /* DeckListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
 		DDF678A61E441C6E00390878 /* SectionsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsBuilder.swift; sourceTree = "<group>"; };
 		DDFB0C8E1E285F0C00442E1B /* SWDestinyRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDestinyRoute.swift; sourceTree = "<group>"; };
-		DDFB0C921E286E5800442E1B /* BaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDelegate.swift; sourceTree = "<group>"; };
 		DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardDatasource.swift; sourceTree = "<group>"; };
 		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
 		DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardTableView.swift; sourceTree = "<group>"; };
@@ -469,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				DD09052D1E24701D00D9EFB0 /* AlphabeticalListDatasource.swift */,
-				DD4BBCE01E26CC89009929C4 /* CardListDelegate.swift */,
 				DDAB3DA91E27BD14006A603D /* CardReturnable.swift */,
 				DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */,
 				DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */,
@@ -907,7 +902,6 @@
 		DD7FF0F41E1DCD4B004FC6CF /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				DDFB0C921E286E5800442E1B /* BaseDelegate.swift */,
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
 				DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */,
@@ -1646,7 +1640,6 @@
 				DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */,
 				DDCA97B61E2FA72A0098FFB5 /* DeckBuilderViewController.swift in Sources */,
 				DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */,
-				DDFB0C931E286E5800442E1B /* BaseDelegate.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DD477EDD1E312ED4006FB4C5 /* RealmManager.swift in Sources */,
@@ -1691,7 +1684,6 @@
 				DD7FF0F61E1DCD69004FC6CF /* BaseViewConfiguration.swift in Sources */,
 				DDB764C01E43639E007758D5 /* DeckGraphCollectionView.swift in Sources */,
 				DDCA97AD1E2FA35A0098FFB5 /* DeckListDatasource.swift in Sources */,
-				DD4BBCE11E26CC89009929C4 /* CardListDelegate.swift in Sources */,
 				DDCA97B81E2FA72A0098FFB5 /* DeckBuilderTableView.swift in Sources */,
 				DD3AFB7C1E79E28A00BF2001 /* UserCollectionView.swift in Sources */,
 				DD6AE37A2089991300289193 /* SetsListNavigator.swift in Sources */,
