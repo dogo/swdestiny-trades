@@ -88,13 +88,11 @@ extension CardListTableView: UITableViewDelegate, CardListViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var header: FilterHeaderView?
+
         if section == 0 {
-            if header == nil {
-                header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
-                header?.configureHeader()
-                header?.delegate = self
-            }
+            let header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
+            header?.configureHeader()
+            header?.delegate = self
             return header
         }
         return nil

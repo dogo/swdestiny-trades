@@ -12,6 +12,7 @@ import Reusable
 final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
 
     weak var delegate: CardListViewDelegate?
+    fileprivate var selectedIndex: Int = 0
 
     var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
@@ -38,7 +39,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
         segmentControl.insertSegment(withTitle: L10n.color, at: 1, animated: false)
         //segmentControl.insertSegment(withTitle: "Price", at: 2, animated: false)
         segmentControl.insertSegment(withTitle: L10n.cardNumber, at: 2, animated: false)
-        segmentControl.selectedSegmentIndex = 0
+        segmentControl.selectedSegmentIndex = selectedIndex
     }
 
     override func prepareForReuse() {
@@ -48,7 +49,8 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
 
     @objc
     func valueChanged(_ sender: UISegmentedControl) {
-       self.delegate?.didSelectSegment(index: sender.selectedSegmentIndex)
+        self.selectedIndex = sender.selectedSegmentIndex
+        self.delegate?.didSelectSegment(index: selectedIndex)
     }
 
     // MARK: <BaseViewConfiguration>
