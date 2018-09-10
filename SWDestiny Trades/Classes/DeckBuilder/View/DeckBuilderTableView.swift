@@ -52,7 +52,11 @@ final class DeckBuilderTableView: UITableView, CollapsibleTableViewHeaderDelegat
 extension DeckBuilderTableView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.tableViewDatasource!.deckList[indexPath.section].collapsed ? 0 : BaseViewCell.height()
+
+        guard let currentDatasource = self.tableViewDatasource else {
+            return 0
+        }
+        return currentDatasource.deckList[indexPath.section].collapsed ? 0 : BaseViewCell.height()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -65,8 +69,8 @@ extension DeckBuilderTableView: UITableViewDelegate {
             header = tableView.dequeueReusableHeaderFooterView(CollapsibleTableViewHeader.self)
         }
 
-        header?.titleLabel.text = self.tableViewDatasource!.deckList[section].name
-        header?.setCollapsed(self.tableViewDatasource!.deckList[section].collapsed)
+        header?.titleLabel.text = self.tableViewDatasource?.deckList[section].name
+        header?.setCollapsed(self.tableViewDatasource?.deckList[section].collapsed ?? true)
 
         header?.section = section
         header?.delegate = self

@@ -28,8 +28,10 @@ class AddCardViewController: UIViewController {
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyService = SWDestinyServiceImpl(), person: PersonDTO? = nil,
-         userCollection: UserCollectionDTO? = nil, type: AddCardType) {
+    init(service: SWDestinyService = SWDestinyServiceImpl(),
+         person: PersonDTO? = nil,
+         userCollection: UserCollectionDTO? = nil,
+         type: AddCardType) {
         destinyService = service
         addCardType = type
         super.init(nibName: nil, bundle: nil)

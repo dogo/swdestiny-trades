@@ -29,7 +29,7 @@ class SWDestinyServiceImplTests: QuickSpec {
             }
 
             it("Retrieve set list with success") {
-                sut.retrieveSetList(completion: { result in
+                sut.retrieveSetList { result in
                     switch result {
                     case .success(let setList):
                         expect(setList[0].name).to(equal("Awakenings"))
@@ -37,11 +37,11 @@ class SWDestinyServiceImplTests: QuickSpec {
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                     }
-                })
+                }
             }
 
             it("Retrieve card list with success") {
-                sut.retrieveSetCardList(setCode: "anyString", completion: { result in
+                sut.retrieveSetCardList(setCode: "anyString") { result in
                     switch result {
                     case .success(let cardList):
                         expect(cardList[0].setCode).to(equal("AW"))
@@ -75,11 +75,11 @@ class SWDestinyServiceImplTests: QuickSpec {
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                     }
-                })
+                }
             }
 
             it("Retrieve specific card with success") {
-                sut.retrieveCard(cardId: "anyString", completion: { result in
+                sut.retrieveCard(cardId: "anyString") { result in
                     switch result {
                     case .success(let card):
                         expect(card.setCode).to(equal("AW"))
@@ -113,11 +113,11 @@ class SWDestinyServiceImplTests: QuickSpec {
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                     }
-                })
+                }
             }
 
             it("Retrieve all cards with success") {
-                sut.retrieveAllCards(completion: { result in
+                sut.retrieveAllCards { result in
                     switch result {
                     case .success(let cardList):
                         expect(cardList[0].setCode).to(equal("AW"))
@@ -151,7 +151,7 @@ class SWDestinyServiceImplTests: QuickSpec {
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                     }
-                })
+                }
             }
         }
     }

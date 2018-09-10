@@ -73,7 +73,7 @@ final class CardListTableView: UITableView {
     }
 }
 
-protocol CardListViewDelegate {
+protocol CardListViewDelegate: AnyObject {
     func didSelectSegment(index: Int)
 }
 
