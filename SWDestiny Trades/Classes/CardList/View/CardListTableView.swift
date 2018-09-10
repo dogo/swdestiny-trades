@@ -93,7 +93,7 @@ extension CardListTableView: UITableViewDelegate, CardListViewDelegate {
             if header == nil {
                 header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
                 header?.configureHeader()
-                //header?.delegate = self
+                header?.delegate = self
             }
             return header
         }

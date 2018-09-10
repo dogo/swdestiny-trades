@@ -11,7 +11,7 @@ import Reusable
 
 final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
 
-//    weak var delegate: CardListViewDelegate?
+    weak var delegate: CardListViewDelegate?
 
     var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
@@ -48,7 +48,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
 
     @objc
     func valueChanged(_ sender: UISegmentedControl) {
-       // self.delegate?.didSelectSegment(index: sender.selectedSegmentIndex)
+       self.delegate?.didSelectSegment(index: sender.selectedSegmentIndex)
     }
 
     // MARK: <BaseViewConfiguration>
