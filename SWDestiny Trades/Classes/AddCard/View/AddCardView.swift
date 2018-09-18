@@ -12,7 +12,7 @@ final class AddCardView: UIView, BaseViewConfiguration {
 
     let searchBar = SearchBar()
     let addCardTableView = AddCardTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

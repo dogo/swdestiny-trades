@@ -12,7 +12,7 @@ final class AddToDeckView: UIView, BaseViewConfiguration {
 
     let searchBar = SearchBar()
     let addToDeckTableView = AddToDeckTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

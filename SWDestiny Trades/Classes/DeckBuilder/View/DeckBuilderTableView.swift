@@ -14,7 +14,7 @@ final class DeckBuilderTableView: UITableView, CollapsibleTableViewHeaderDelegat
 
     var tableViewDatasource: DeckBuilderDatasource?
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         tableViewDatasource = DeckBuilderDatasource(tableView: self)
         self.delegate = self

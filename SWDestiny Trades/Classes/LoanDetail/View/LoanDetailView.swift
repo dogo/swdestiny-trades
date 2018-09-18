@@ -11,7 +11,7 @@ import UIKit
 final class LoanDetailView: UIView, BaseViewConfiguration {
 
     let loanDetailTableView = LoanDetailTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

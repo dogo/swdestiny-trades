@@ -14,7 +14,7 @@ final class PeopleListTableView: UITableView {
 
     fileprivate var tableViewDatasource: PeopleListDatasource?
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = PeopleListDatasource(tableView: self)

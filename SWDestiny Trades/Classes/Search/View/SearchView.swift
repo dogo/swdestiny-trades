@@ -12,7 +12,7 @@ final class SearchView: UIView, BaseViewConfiguration {
 
     let searchBar = SearchBar()
     let searchTableView = SearchTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -17,14 +17,14 @@ final class SearchTableView: UITableView, SearchDelegate {
     fileprivate var searchDatasource: SearchDatasource?
     let search = Search()
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         search.delegate = self
         searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: search)
         self.backgroundColor = .white
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -32,8 +32,8 @@ final class SearchTableView: UITableView, SearchDelegate {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func doingSearch(_ query: String) {
@@ -60,7 +60,7 @@ final class SearchTableView: UITableView, SearchDelegate {
         initialEdgeInsets = self.contentInset
 
         if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 let keyboardFrame = self.convert(keyboardSize, to: nil)
                 UIView.animate(withDuration: 0.3) {
                     let tabBarHeight: CGFloat = 49.0

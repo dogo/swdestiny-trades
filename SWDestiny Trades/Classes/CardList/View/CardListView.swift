@@ -11,7 +11,7 @@ import UIKit
 final class CardListView: UIView, BaseViewConfiguration {
 
     let cardListTableView = CardListTableView()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

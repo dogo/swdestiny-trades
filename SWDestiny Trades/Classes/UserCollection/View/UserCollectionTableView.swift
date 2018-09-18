@@ -14,7 +14,7 @@ final class UserCollectionTableView: UITableView {
 
     var tableViewDatasource: UserCollectionDatasource?
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = UserCollectionDatasource(tableView: self)

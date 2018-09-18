@@ -12,7 +12,7 @@ final class SetsView: UIView, BaseViewConfiguration {
 
     let setsTableView = SetsTableView()
 
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     let pullToRefresh = UIRefreshControl()
 
@@ -35,7 +35,7 @@ final class SetsView: UIView, BaseViewConfiguration {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         let title = "Last update: \(formatter.string(from: Date()))"
-        let attrsDictionary = [NSAttributedStringKey.foregroundColor: textColor]
+        let attrsDictionary = [NSAttributedString.Key.foregroundColor: textColor]
         let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
         self.pullToRefresh.attributedTitle = attributedTitle
         self.pullToRefresh.endRefreshing()
@@ -50,7 +50,7 @@ final class SetsView: UIView, BaseViewConfiguration {
             setsTableView.refreshControl = pullToRefresh
         } else {
             setsTableView.addSubview(pullToRefresh)
-            setsTableView.sendSubview(toBack: pullToRefresh)
+            setsTableView.sendSubviewToBack(pullToRefresh)
         }
     }
 

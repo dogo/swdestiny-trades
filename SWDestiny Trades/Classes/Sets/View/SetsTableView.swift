@@ -14,7 +14,7 @@ final class SetsTableView: UITableView {
 
     fileprivate var tableViewDatasource: SetsListDatasource?
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = SetsListDatasource(tableView: self)

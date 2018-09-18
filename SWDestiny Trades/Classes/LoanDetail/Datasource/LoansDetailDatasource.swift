@@ -81,7 +81,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         return L10n.hasBorrowedMy
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             remove(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .left)

@@ -11,7 +11,7 @@ import Charts
 
 final class RadarMarkerView: BalloonMarker {
 
-    open var xAxisValueFormatter: IAxisValueFormatter?
+    public var xAxisValueFormatter: IAxisValueFormatter?
     fileprivate var yFormatter = NumberFormatter()
 
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets, xAxisValueFormatter: IAxisValueFormatter) {
@@ -21,7 +21,7 @@ final class RadarMarkerView: BalloonMarker {
         yFormatter.maximumFractionDigits = 1
     }
 
-    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+    public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         setLabel(String.localizedStringWithFormat(NSLocalizedString("SIDES_COUNT", comment: ""), Int(round(entry.y))))
     }
 }

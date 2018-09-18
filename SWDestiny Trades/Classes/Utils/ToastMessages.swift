@@ -24,7 +24,7 @@ final class ToastMessages {
         errorView.tapHandler = { _ in
             let url = URL(string: "http://www.swdestinydb.com")! // swiftlint:disable:this force_unwrapping
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             } else {
                 UIApplication.shared.openURL(url)
             }
@@ -47,4 +47,9 @@ final class ToastMessages {
         infoView.configureContent(title: title, body: message)
         SwiftMessages.show(config: config, view: infoView)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

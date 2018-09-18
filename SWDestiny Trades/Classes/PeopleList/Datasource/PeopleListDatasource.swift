@@ -27,14 +27,14 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             remove(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .left)
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if tableView.isEditing {
             return .delete
         }

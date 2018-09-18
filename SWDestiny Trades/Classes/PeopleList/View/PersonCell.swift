@@ -11,7 +11,7 @@ import Reusable
 
 class PersonCell: UITableViewCell, Reusable {
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         self.detailTextLabel?.textColor = .darkGray
         self.accessoryType = .disclosureIndicator

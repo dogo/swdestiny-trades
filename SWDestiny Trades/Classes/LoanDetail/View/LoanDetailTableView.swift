@@ -15,7 +15,7 @@ final class LoanDetailTableView: UITableView {
 
     fileprivate var tableViewDatasource: LoansDetailDatasource?
 
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = LoansDetailDatasource(tableView: self)
