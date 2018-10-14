@@ -1,10 +1,12 @@
 input_dir: 'SWDestiny Trades'
 output_dir: 'SWDestiny Trades/Classes/Resources/'
 strings:
-  paths: Localization/Base.lproj/Localizable.strings
-  templateName: structured-swift4
-  output: LocalizableStrings.swift
+  inputs: Localization/Base.lproj/Localizable.strings
+  outputs:
+    - templateName: structured-swift4
+    - output: LocalizableStrings.swift
 xcassets:
-  - paths: Assets.xcassets
-    templateName: swift4
-    output: ImageAssets.swift
+  inputs: Assets.xcassets
+  outputs:
+    - templateName: swift4
+    - output: ImageAssets.swift
