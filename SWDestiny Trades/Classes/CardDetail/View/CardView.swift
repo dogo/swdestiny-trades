@@ -14,9 +14,9 @@ final class CardView: UIView, BaseViewConfiguration {
     var slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow(frame: .zero)
         slideshow.activityIndicator = DefaultActivityIndicator()
-        slideshow.backgroundColor = UIColor.white
+        slideshow.backgroundColor = .white
         slideshow.contentScaleMode = .scaleAspectFit
-        slideshow.pageControlPosition = .hidden
+        slideshow.pageIndicator = nil
         slideshow.circular = false
         slideshow.preload = .fixed(offset: 1)
         return slideshow

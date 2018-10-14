@@ -1,3 +1,4 @@
+// swiftlint:disable all
 // Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
 
 import Foundation
@@ -5,7 +6,10 @@ import Foundation
 // swiftlint:disable superfluous_disable_command
 // swiftlint:disable file_length
 
-// swiftlint:disable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name
 internal enum L10n {
   /// A-Z
   internal static let aToZ = L10n.tr("Localizable", "A_TO_Z")
@@ -92,7 +96,10 @@ internal enum L10n {
   /// Yellow
   internal static let yellow = L10n.tr("Localizable", "YELLOW")
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length nesting type_body_length type_name
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name
+
+// MARK: - Implementation Details
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
