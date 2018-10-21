@@ -17,8 +17,8 @@ class SWDestinyAPI: SWDestinyService {
         self.provider = provider
     }
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) {
-        provider.request(.setList()) { moyaResult in
+    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable {
+        return provider.request(.setList()) { moyaResult in
             let result: Result<[SetDTO]>
             do {
                 switch moyaResult {
@@ -34,8 +34,8 @@ class SWDestinyAPI: SWDestinyService {
         }
     }
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) {
-        provider.request(.cardList(setCode: setCode)) { moyaResult in
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
+        return provider.request(.cardList(setCode: setCode)) { moyaResult in
             let result: Result<[CardDTO]>
             do {
                 switch moyaResult {
@@ -51,8 +51,8 @@ class SWDestinyAPI: SWDestinyService {
         }
     }
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) {
-        provider.request(.allCards()) { moyaResult in
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
+        return provider.request(.allCards()) { moyaResult in
             let result: Result<[CardDTO]>
             do {
                 switch moyaResult {
@@ -68,8 +68,8 @@ class SWDestinyAPI: SWDestinyService {
         }
     }
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) {
-        provider.request(.card(cardId: cardId)) { moyaResult in
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable {
+        return provider.request(.card(cardId: cardId)) { moyaResult in
             let result: Result<CardDTO>
             do {
                 switch moyaResult {

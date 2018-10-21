@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Moya
 
 enum Result<T> {
     case success(T)
@@ -14,8 +15,8 @@ enum Result<T> {
 }
 
 protocol SWDestinyService {
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void)
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void)
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void)
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void)
+    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable
 }

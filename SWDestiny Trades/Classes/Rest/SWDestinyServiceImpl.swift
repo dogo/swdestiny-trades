@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Moya
 
 class SWDestinyServiceImpl: SWDestinyService {
 
@@ -16,19 +17,23 @@ class SWDestinyServiceImpl: SWDestinyService {
         self.api = api
     }
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) {
-        self.api.retrieveSetList(completion: completion)
+    @discardableResult
+    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable {
+        return self.api.retrieveSetList(completion: completion)
     }
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) {
-        self.api.retrieveSetCardList(setCode: setCode, completion: completion)
+    @discardableResult
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
+        return self.api.retrieveSetCardList(setCode: setCode, completion: completion)
     }
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) {
-        self.api.retrieveAllCards(completion: completion)
+    @discardableResult
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
+        return self.api.retrieveAllCards(completion: completion)
     }
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) {
-        self.api.retrieveCard(cardId: cardId, completion: completion)
+    @discardableResult
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable {
+        return self.api.retrieveCard(cardId: cardId, completion: completion)
     }
 }

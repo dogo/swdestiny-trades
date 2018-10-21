@@ -9,10 +9,12 @@
 import UIKit
 import PKHUD
 import FirebaseAnalytics
+import Moya
 
 class AddToDeckViewController: UIViewController {
 
     fileprivate let destinyService = SWDestinyServiceImpl()
+    fileprivate var cancellableService: Cancellable?
     fileprivate let addToDeckView = AddToDeckView()
     fileprivate var cards = [CardDTO]()
     fileprivate var deckDTO: DeckDTO?
@@ -70,7 +72,7 @@ class AddToDeckViewController: UIViewController {
 
     fileprivate func retrieveAllCards() {
         addToDeckView.activityIndicator.startAnimating()
-        destinyService.retrieveAllCards { result in
+        cancellableService = destinyService.retrieveAllCards { result in
             switch result {
             case .success(let allCards):
                 self.addToDeckView.addToDeckTableView.updateSearchList(allCards)
@@ -86,6 +88,7 @@ class AddToDeckViewController: UIViewController {
     }
 
     fileprivate func loadDataFromRealm() {
+        cancellableService?.cancel()
         if let collection = Array(RealmManager.shared.realm.objects(UserCollectionDTO.self)).first {
             self.cards = Array(collection.myCollection)
             addToDeckView.addToDeckTableView.updateSearchList(self.cards)
