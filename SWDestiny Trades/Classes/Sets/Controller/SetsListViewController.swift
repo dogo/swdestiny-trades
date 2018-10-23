@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class SetsListViewController: UIViewController {
 
@@ -70,7 +69,7 @@ class SetsListViewController: UIViewController {
                 self.setsView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
-                Analytics.logEvent("retrieveSetList", parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .setsList, parameters: ["error": errorMessage])
             }
         }
     }

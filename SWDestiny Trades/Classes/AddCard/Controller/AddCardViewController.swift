@@ -8,7 +8,6 @@
 
 import UIKit
 import PKHUD
-import FirebaseAnalytics
 
 public enum AddCardType {
     case lent
@@ -61,7 +60,7 @@ class AddCardViewController: UIViewController {
                 self.addCardView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
-                Analytics.logEvent("retrieveAllCards", parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
             }
         }
 

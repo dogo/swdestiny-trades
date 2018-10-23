@@ -112,6 +112,9 @@
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
+		DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */; };
+		DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */; };
+		DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4C1217FE68900AE1301 /* LoggerManager.swift */; };
 		DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */; };
 		DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF5452134340B005C536E /* PersonDTOMock.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
@@ -296,6 +299,9 @@
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderCell.swift; sourceTree = "<group>"; };
+		DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
+		DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLogger.swift; sourceTree = "<group>"; };
+		DD99D4C1217FE68900AE1301 /* LoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
 		DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		DD9EF5452134340B005C536E /* PersonDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDTOMock.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
@@ -905,6 +911,7 @@
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
 				DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */,
+				DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */,
 				DD6AE3762089988B00289193 /* Navigator.swift */,
 			);
 			path = Base;
@@ -990,6 +997,7 @@
 		DD8E8A9A1E11610100C54FD9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DD99D4BE217FE5F000AE1301 /* Analytics */,
 				DD8E8A9B1E11610100C54FD9 /* AppDelegate */,
 				DD94E6F61E36658A0070735B /* Appearance */,
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
@@ -1029,6 +1037,15 @@
 				DD94E6F81E36658A0070735B /* ColorPalette.swift */,
 			);
 			path = Appearance;
+			sourceTree = "<group>";
+		};
+		DD99D4BE217FE5F000AE1301 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */,
+				DD99D4C1217FE68900AE1301 /* LoggerManager.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		DD9EF542213431EF005C536E /* AddCard */ = {
@@ -1690,6 +1707,7 @@
 				DD3AFB7C1E79E28A00BF2001 /* UserCollectionView.swift in Sources */,
 				DD6AE37A2089991300289193 /* SetsListNavigator.swift in Sources */,
 				DD0905511E24701D00D9EFB0 /* LoanDetailView.swift in Sources */,
+				DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */,
 				DD09054E1E24701D00D9EFB0 /* LoansDetailDatasource.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
 				DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */,
@@ -1711,6 +1729,7 @@
 				DDB764C21E43639E007758D5 /* BalloonMarker.swift in Sources */,
 				DDAFBF251FF6F3F500927875 /* AddToDeckCardDatasource.swift in Sources */,
 				DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */,
+				DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */,
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,
@@ -1724,6 +1743,7 @@
 				DD7B108C1EE9EBA7003CA48D /* UIView+Utils.swift in Sources */,
 				DDFB0C8F1E285F0C00442E1B /* SWDestinyRoute.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
+				DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
 				DDCA97BE1E2FD2580098FFB5 /* DeckListCell.swift in Sources */,
 				DD0905491E24701D00D9EFB0 /* CardDTO.swift in Sources */,

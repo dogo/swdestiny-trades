@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 @objc
 protocol SearchDelegate: AnyObject {
@@ -55,7 +54,7 @@ class SearchListViewController: UIViewController {
                 self.searchView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
-                Analytics.logEvent("retrieveAllCards", parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
             }
         }
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class CardListViewController: UIViewController {
 
@@ -44,7 +43,7 @@ class CardListViewController: UIViewController {
                 self.cardListView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
-                Analytics.logEvent("retrieveSetCardList", parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .cardsList, parameters: ["error": errorMessage])
             }
         }
         self.cardListView.cardListTableView.didSelectCard = { [unowned self] list, card in

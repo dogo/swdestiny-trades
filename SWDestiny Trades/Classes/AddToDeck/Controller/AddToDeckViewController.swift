@@ -8,7 +8,6 @@
 
 import UIKit
 import PKHUD
-import FirebaseAnalytics
 import Moya
 
 class AddToDeckViewController: UIViewController {
@@ -82,7 +81,7 @@ class AddToDeckViewController: UIViewController {
                 self.addToDeckView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
-                Analytics.logEvent("retrieveAllCards", parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
             }
         }
     }
