@@ -58,6 +58,7 @@ class AddCardViewController: UIViewController {
                 self.cards = allCards
             case .failure(let error):
                 self.addCardView.activityIndicator.stopAnimating()
+                ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])

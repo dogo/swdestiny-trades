@@ -67,6 +67,7 @@ class SetsListViewController: UIViewController {
             case .failure(let error):
                 self.setsView.endRefreshControl()
                 self.setsView.activityIndicator.stopAnimating()
+                ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
                 LoggerManager.shared.log(event: .setsList, parameters: ["error": errorMessage])

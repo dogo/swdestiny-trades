@@ -41,6 +41,7 @@ class CardListViewController: UIViewController {
                 self.cardListView.activityIndicator.stopAnimating()
             case .failure(let error):
                 self.cardListView.activityIndicator.stopAnimating()
+                ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
                 LoggerManager.shared.log(event: .cardsList, parameters: ["error": errorMessage])
