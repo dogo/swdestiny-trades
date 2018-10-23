@@ -20,10 +20,10 @@ class LoggerManager: LoggerProtocol {
     private var loggers: [LoggerProtocol] = []
 
     internal func setup() {
-        self.loggers.forEach({ $0.setup() })
+        self.loggers.forEach { $0.setup() }
     }
 
     func log(event: Events, parameters: [String: Any]? = nil) {
-        self.loggers.forEach({ $0.log(event: event, parameters: parameters) })
+        self.loggers.forEach { $0.log(event: event, parameters: parameters) }
     }
 }
