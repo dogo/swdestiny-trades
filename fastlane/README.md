@@ -16,11 +16,11 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios test
+### ios app_report
 ```
-fastlane ios test
+fastlane ios app_report
 ```
-Runs all the tests
+Runs all the tests and retrieve code coverage using Slather
 ### ios beta
 ```
 fastlane ios beta

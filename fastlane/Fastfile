@@ -22,9 +22,24 @@ platform :ios do
     
   end
 
-  desc "Runs all the tests"
-  lane :test do
-    scan
+  desc "Runs all the tests and retrieve code coverage using Slather"
+  lane :app_report do
+    scan(
+      workspace: "swdestiny-trades.xcworkspace",
+      scheme: "SWDestiny-Trades",
+      clean: true,
+      device: "iPhone X",
+      code_coverage: true)
+
+    slather(
+      html: true,
+      show: true,
+      use_bundle_exec: true,
+      ignore: ["SWDestiny Trades/Classes/Resources/*", "SWDestiny Trades/Classes/AppDelegate/main.swift", "Pods/*"],
+      output_directory: "CoverageReport",
+      scheme: "SWDestiny-Trades",
+      proj: "swdestiny-trades.xcodeproj",
+      workspace: "swdestiny-trades.xcworkspace")
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"

@@ -51,6 +51,7 @@ Carthage/Build
 
 ## Fastlane
 fastlane/report.xml
+fastlane/test_output/*
 
 ## Slather Code Coverage
-coverage_report
+CoverageReport
