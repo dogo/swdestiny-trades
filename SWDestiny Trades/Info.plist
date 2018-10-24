@@ -30,11 +30,11 @@
 		<true/>
 	</dict>
 	<key>NSContactsUsageDescription</key>
-	<string>This app requires access to the address book.</string>
+	<string>This app requires access to the address book, to assign the cards images to the profile picture.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>This app requires access to the photo library, to save the cards images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>This app requires access to the photo library, to save the cards images.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
