@@ -77,11 +77,11 @@ class AddToDeckViewController: UIViewController {
                 self.addToDeckView.addToDeckTableView.updateSearchList(allCards)
                 self.addToDeckView.activityIndicator.stopAnimating()
                 self.cards = allCards
-            case .failure(let error):
+            case .failure(let error as NSError):
                 self.addToDeckView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
-                if !errorMessage.contains("cancelled") {
+                if error.code != 6 {
                     ToastMessages.showNetworkErrorMessage()
                     LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
                 }
