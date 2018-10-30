@@ -12,7 +12,7 @@ target 'SWDestiny Trades' do
   pod 'SwiftGen'
 
   target 'SWDestiny-TradesTests' do
-    inherit! :complete
+    inherit! :search_paths
   end
 
 end
