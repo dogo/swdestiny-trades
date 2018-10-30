@@ -14,8 +14,9 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     weak var delegate: CardListViewDelegate?
     fileprivate var selectedIndex: Int = 0
 
-    var segmentControl: UISegmentedControl = {
+    lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
+        segment.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return segment
     }()
 
@@ -26,8 +27,6 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setupBaseView()
-
-        segmentControl.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 
     required init?(coder aDecoder: NSCoder) {

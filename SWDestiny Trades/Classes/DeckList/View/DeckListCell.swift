@@ -30,8 +30,9 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         return label
     }()
 
-    var accessoryButton: UIButton = {
+    lazy var accessoryButton: UIButton = {
         let button = UIButton(frame: .zero)
+        button.addTarget(self, action: #selector(accessoryButtonTouched(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -56,7 +57,6 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
                 subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), 0)
             }
         }
-        accessoryButton.addTarget(self, action: #selector(accessoryButtonTouched(sender:)), for: .touchUpInside)
     }
 
     override func prepareForReuse() {

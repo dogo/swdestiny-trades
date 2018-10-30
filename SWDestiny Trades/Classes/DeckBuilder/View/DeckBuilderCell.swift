@@ -43,10 +43,11 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         return label
     }()
 
-    var quantityStepper: UIStepper = {
+    lazy var quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
+        stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return stepper
     }()
 
@@ -60,8 +61,6 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupBaseView()
-
-        quantityStepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 
     required init?(coder aDecoder: NSCoder) {

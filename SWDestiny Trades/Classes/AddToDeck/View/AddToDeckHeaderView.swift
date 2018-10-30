@@ -13,8 +13,9 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
 
     weak var delegate: SearchDelegate?
 
-    var segmentControl: UISegmentedControl = {
+    lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
+        segment.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return segment
     }()
 
@@ -25,8 +26,6 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setupBaseView()
-
-        segmentControl.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 
     required init?(coder aDecoder: NSCoder) {
