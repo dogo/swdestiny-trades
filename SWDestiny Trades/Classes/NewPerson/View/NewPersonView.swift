@@ -9,15 +9,30 @@
 import UIKit
 import TextFieldEffects
 
-final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
+final class NewPersonView: UIView {
 
-    var firstNameTextField: HoshiTextField = {
+    lazy var firstNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
+        textField.textColor = .black
+        textField.autocapitalizationType = .sentences
+        textField.font = UIFont.systemFont(ofSize: 17)
+        textField.placeholder = L10n.firstName
+        textField.placeholderColor = .darkGray
+        textField.borderInactiveColor = .black
+        textField.borderActiveColor = .black
+        textField.delegate = self
         return textField
     }()
 
     var lastNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
+        textField.textColor = .black
+        textField.autocapitalizationType = .sentences
+        textField.font = UIFont.systemFont(ofSize: 17)
+        textField.placeholder = L10n.lastName
+        textField.placeholderColor = .darkGray
+        textField.borderInactiveColor = .black
+        textField.borderActiveColor = .black
         return textField
     }()
 
@@ -29,8 +44,11 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension NewPersonView: BaseViewConfiguration {
+
+    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.addSubview(firstNameTextField)
@@ -39,7 +57,7 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
 
     internal func setupConstraints() {
         firstNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(65 + 44 + 20)
+            make.top.equalTo(self.safeArea.snp.topMargin)
             make.left.equalTo(self).offset(12)
             make.right.equalTo(self).offset(-12)
             make.height.equalTo(60)
@@ -54,27 +72,11 @@ final class NewPersonView: UIView, BaseViewConfiguration, UITextFieldDelegate {
     }
 
     internal func configureViews() {
-
         self.backgroundColor = .white
-
-        firstNameTextField.textColor = .black
-        firstNameTextField.autocapitalizationType = .sentences
-        firstNameTextField.font = UIFont.systemFont(ofSize: 17)
-        firstNameTextField.placeholder = L10n.firstName
-        firstNameTextField.placeholderColor = .darkGray
-        firstNameTextField.borderInactiveColor = .black
-        firstNameTextField.borderActiveColor = .black
-
-        lastNameTextField.textColor = .black
-        lastNameTextField.autocapitalizationType = .sentences
-        lastNameTextField.font = UIFont.systemFont(ofSize: 17)
-        lastNameTextField.placeholder = L10n.lastName
-        lastNameTextField.placeholderColor = .darkGray
-        lastNameTextField.borderInactiveColor = .black
-        lastNameTextField.borderActiveColor = .black
-
-        firstNameTextField.delegate = self
     }
+}
+
+extension NewPersonView: UITextFieldDelegate {
 
     // MARK: - <UITextFieldDelegate>
 
