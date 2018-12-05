@@ -17,19 +17,19 @@ class RequestMock: Cancellable {
 }
 
 class SWDestinyServiceMock: SWDestinyService {
-    
+
     func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable {
         return RequestMock() //completion(SetDTOMock.mockedSetDTO())
     }
-    
+
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
         return RequestMock()//completion(CardDTOMock.mockedCardListDTO())
     }
-    
+
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
         return RequestMock()//completion(CardDTOMock.mockedCardListDTO())
     }
-    
+
     func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable {
         return RequestMock()//completion(CardDTOMock.mockedCardDTO())
     }
