@@ -52,6 +52,11 @@ Carthage/Build
 ## Fastlane
 fastlane/report.xml
 fastlane/test_output/*
+fastlane/Appfile
+fastlane/Deliverfile
 
 ## Slather Code Coverage
 CoverageReport
+
+## Firebase Config file
+firebase-crashreporting.json
