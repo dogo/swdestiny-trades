@@ -1,7 +1,7 @@
 SWDestiny Trades
 ============
 
-[![Build Status](https://travis-ci.org/dogo/swdestiny-trades.svg?branch=master)](https://travis-ci.org/dogo/swdestiny-trades)
+[![Build Status](https://travis-ci.org/dogo/swdestiny-trades.svg?branch=develop)](https://travis-ci.org/dogo/swdestiny-trades)
 
 ### About SWDTrades
 
