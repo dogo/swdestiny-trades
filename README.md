@@ -1,4 +1,9 @@
+SWDestiny Trades
+============
+
 [![Build Status](https://travis-ci.org/dogo/swdestiny-trades.svg?branch=master)](https://travis-ci.org/dogo/swdestiny-trades)
+
+### About SWDTrades
 
 SWD Trades gives you the tools you need for Star Wars Destiny, right at your fingertips. It includes card search by expansion or card name, allows you to track cards you have loaned or borrowed and manage your collection.
 
@@ -14,5 +19,11 @@ Features:
 
 This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
 
-<img src="https://github.com/dogo/swdestiny-trades/raw/master/fastlane/en-US/Screenshots/1_iphone6Plus.png" alt="SWDestiny Trades Screenshot" width="400" height="568" />
-<img src="https://github.com/dogo/swdestiny-trades/raw/master/fastlane/en-US/Screenshots/3_iphone6Plus.png" alt="SWDestiny Trades Screenshot" width="400" height="568" />
+<img src="https://github.com/dogo/swdestiny-trades/raw/develop/fastlane/screenshots/en-US/1_iphone6Plus.png" alt="SWDestiny Trades Screenshot" width="310" height="552" />
+<img src="https://github.com/dogo/swdestiny-trades/raw/develop/fastlane/screenshots/en-US/3_iphone6Plus.png" alt="SWDestiny Trades Screenshot" width="310" height="552" />
+
+### Building SWDTrades
+TODO
+
+### Collaboration
+TODO
