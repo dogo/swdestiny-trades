@@ -1,1 +1,1 @@
-Star Wars Destiny cards database - Trade utilities
+SWDestiny companion for SWD
