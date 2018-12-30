@@ -20,6 +20,7 @@
 internal enum Asset {
   internal static let icBattlefield = ImageAsset(name: "ic_battlefield")
   internal static let icCharacter = ImageAsset(name: "ic_character")
+  internal static let icDowngrade = ImageAsset(name: "ic_downgrade")
   internal static let icEvent = ImageAsset(name: "ic_event")
   internal static let icPlot = ImageAsset(name: "ic_plot")
   internal static let icSupport = ImageAsset(name: "ic_support")
@@ -39,7 +40,9 @@ internal enum Asset {
   }
   internal enum Sets {
 
+    internal static let icAcrossTheGalaxy = ImageAsset(name: "Sets/ic_across_the_galaxy")
     internal static let icAwakenings = ImageAsset(name: "Sets/ic_awakenings")
+    internal static let icConvergence = ImageAsset(name: "Sets/ic_convergence")
     internal static let icEmpireAtWar = ImageAsset(name: "Sets/ic_empire_at_war")
     internal static let icLegacies = ImageAsset(name: "Sets/ic_legacies")
     internal static let icNotFound = ImageAsset(name: "Sets/ic_not_found")

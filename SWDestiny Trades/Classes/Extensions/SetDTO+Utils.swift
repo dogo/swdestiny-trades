@@ -25,6 +25,10 @@ extension SetDTO {
             return Asset.Sets.icRivals.image
         } else if self.code.lowercased() == "wotf" {
             return Asset.Sets.icWayOfTheForce.image
+        } else if self.code.lowercased() == "atg" {
+            return Asset.Sets.icAcrossTheGalaxy.image
+        } else if self.code.lowercased() == "conv" {
+            return Asset.Sets.icConvergence.image
         } else {
             return Asset.Sets.icNotFound.image
         }
