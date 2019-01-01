@@ -17,13 +17,13 @@ enum Result<T> {
 protocol SWDestinyService {
     @discardableResult
     func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable
-    
+
     @discardableResult
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable
-    
+
     @discardableResult
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable
-    
+
     @discardableResult
     func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable
 }

@@ -12,7 +12,6 @@ final class DeckListTableView: UITableView {
 
     var didSelectDeck: ((DeckDTO) -> Void)?
 
-    fileprivate var initialEdgeInsets: UIEdgeInsets = .zero
     fileprivate var tableViewDatasource: DeckListDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
@@ -21,8 +20,8 @@ final class DeckListTableView: UITableView {
         tableViewDatasource = DeckListDatasource(tableView: self)
         self.backgroundColor = .white
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,7 +41,7 @@ final class DeckListTableView: UITableView {
         tableViewDatasource?.insert(deck: deck)
     }
 
-    // MARK: <BaseDelegate>
+    // MARK: - <BaseDelegate>
 
     internal func didSelectRowAt(index: IndexPath) {
         if let deck = tableViewDatasource?.getDeck(at: index) {
@@ -50,34 +49,24 @@ final class DeckListTableView: UITableView {
         }
     }
 
-    // MARK: Keyboard handling
+    // MARK: - Keyboard handling
 
     @objc
-    private func keyboardDidShow(notification: Notification) {
-
-        initialEdgeInsets = self.contentInset
-
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                let keyboardFrame = self.convert(keyboardSize, to: nil)
-                let intersect: CGRect = keyboardFrame.intersection(self.bounds)
-                if !intersect.isNull {
-                    UIView.animate(withDuration: 0.3) {
-                        let edgeInset = UIEdgeInsets(top: 64, left: 0, bottom: keyboardFrame.size.height, right: 0)
-                        self.contentInset = edgeInset
-                        self.scrollIndicatorInsets = edgeInset
-                    }
-                }
+    func keyboardWillShow(notification: NSNotification) {
+        if let userInfo: NSDictionary = notification.userInfo as NSDictionary? {
+            if let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardSize = keyboardInfo.cgRectValue.size
+                let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+                self.contentInset = contentInsets
+                self.scrollIndicatorInsets = contentInsets
             }
         }
     }
 
     @objc
-    private func keyboardDidHide(notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.contentInset = self.initialEdgeInsets
-            self.scrollIndicatorInsets = self.initialEdgeInsets
-        }
+    func keyboardWillHide(notification: NSNotification) {
+        self.contentInset = .zero
+        self.scrollIndicatorInsets = .zero
     }
 }
 

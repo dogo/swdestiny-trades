@@ -13,7 +13,6 @@ final class SearchTableView: UITableView, SearchDelegate {
     var didSelectCard: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
 
-    fileprivate var initialEdgeInsets: UIEdgeInsets = .zero
     fileprivate var searchDatasource: SearchDatasource?
     let search = Search()
 
@@ -23,8 +22,8 @@ final class SearchTableView: UITableView, SearchDelegate {
         searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: search)
         self.backgroundColor = .white
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -55,28 +54,20 @@ final class SearchTableView: UITableView, SearchDelegate {
     // MARK: Keyboard handling
 
     @objc
-    private func keyboardDidShow(notification: Notification) {
-
-        initialEdgeInsets = self.contentInset
-
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                let keyboardFrame = self.convert(keyboardSize, to: nil)
-                UIView.animate(withDuration: 0.3) {
-                    let tabBarHeight: CGFloat = 49.0
-                    let edgeInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height - tabBarHeight, right: 0)
-                    self.contentInset = edgeInset
-                    self.scrollIndicatorInsets = edgeInset
-                }
+    func keyboardWillShow(notification: NSNotification) {
+        if let userInfo: NSDictionary = notification.userInfo as NSDictionary? {
+            if let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardSize = keyboardInfo.cgRectValue.size
+                let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+                self.contentInset = contentInsets
+                self.scrollIndicatorInsets = contentInsets
             }
         }
     }
 
     @objc
-    private func keyboardDidHide(notification: Notification) {
-        UIView.animate(withDuration: 0.3) {
-            self.contentInset = self.initialEdgeInsets
-            self.scrollIndicatorInsets = self.initialEdgeInsets
-        }
+    func keyboardWillHide(notification: NSNotification) {
+        self.contentInset = .zero
+        self.scrollIndicatorInsets = .zero
     }
 }
