@@ -12,7 +12,7 @@ import Charts
 
 final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfiguration, IAxisValueFormatter {
 
-    let cardTypes = ["Upgrade", "Support", "Event", "Plot"]
+    let cardTypes = ["Upgrade", "Support", "Event", "Plot", "Downgrade"]
 
     var cardTypeChartView: BarChartView = {
         let view = BarChartView(frame: .zero)
@@ -83,7 +83,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
         xAxis.labelPosition = .bottom
         xAxis.labelFont = UIFont.systemFont(ofSize: CGFloat(12.0))
         xAxis.drawGridLinesEnabled = false
-        xAxis.labelCount = 3
+        xAxis.labelCount = cardTypes.count
         xAxis.valueFormatter = self
 
         let leftAxis: YAxis = chartView.leftAxis

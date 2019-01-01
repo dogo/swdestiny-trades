@@ -69,11 +69,14 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     }
 
     func generateGraphData(deck: DeckDTO) {
+
         // BarChart
         var upgrades = 0
         var supports = 0
         var events = 0
         var plots = 0
+        var downgrades = 0
+
         for card in deck.list {
             if card.typeCode == "upgrade" {
                 upgrades += card.quantity
@@ -83,11 +86,13 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
                 events += card.quantity
             } else if card.typeCode == "plot" {
                 plots += card.quantity
+            } else if card.typeCode == "downgrade" {
+                downgrades += card.quantity
             }
         }
 
-        if !(events == 0 && supports == 0 && upgrades == 0 && plots == 0) {
-            cardTypes = [upgrades, supports, events, plots]
+        if !(events == 0 && supports == 0 && upgrades == 0 && plots == 0 && downgrades == 0) {
+            cardTypes = [upgrades, supports, events, plots, downgrades]
         }
 
         // LineChart
