@@ -53,12 +53,16 @@ internal enum L10n {
   internal static let diceSymbols = L10n.tr("Localizable", "DICE_SYMBOLS")
   /// Done
   internal static let done = L10n.tr("Localizable", "DONE")
+  /// Downgrade
+  internal static let downgrade = L10n.tr("Localizable", "DOWNGRADE")
   /// Edit
   internal static let edit = L10n.tr("Localizable", "EDIT")
   /// Elite
   internal static let elite = L10n.tr("Localizable", "ELITE")
   /// Something is horribly wrong! Tap here to check if swdestinydb.com is online
   internal static let errorMessage = L10n.tr("Localizable", "ERROR_MESSAGE")
+  /// Event
+  internal static let event = L10n.tr("Localizable", "EVENT")
   /// Expansions
   internal static let expansions = L10n.tr("Localizable", "EXPANSIONS")
   /// First Name
@@ -83,12 +87,18 @@ internal enum L10n {
   internal static let nonElite = L10n.tr("Localizable", "NON_ELITE")
   /// People
   internal static let people = L10n.tr("Localizable", "PEOPLE")
+  /// Plot
+  internal static let plot = L10n.tr("Localizable", "PLOT")
   /// Red
   internal static let red = L10n.tr("Localizable", "RED")
   /// Search
   internal static let search = L10n.tr("Localizable", "SEARCH")
   /// Shared with SWD Trades for iOS
   internal static let shareText = L10n.tr("Localizable", "SHARE_TEXT")
+  /// Support
+  internal static let support = L10n.tr("Localizable", "SUPPORT")
+  /// Upgrade
+  internal static let upgrade = L10n.tr("Localizable", "UPGRADE")
   /// version %@ (%@)
   internal static func version(_ p1: String, _ p2: String) -> String {
     return L10n.tr("Localizable", "VERSION", p1, p2)

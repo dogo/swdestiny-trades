@@ -12,7 +12,7 @@ import Charts
 
 final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfiguration, IAxisValueFormatter {
 
-    let cardTypes = ["Upgrade", "Support", "Event", "Plot", "Downgrade"]
+    let cardTypes = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
 
     var cardTypeChartView: BarChartView = {
         let view = BarChartView(frame: .zero)

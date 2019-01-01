@@ -47,3 +47,8 @@
 "COLLECTION" = "Collection";
 "ELITE" = "Elite";
 "NON_ELITE" = "Non-Elite";
+"UPGRADE" = "Upgrade";
+"SUPPORT" = "Support";
+"EVENT" = "Event";
+"PLOT" = "Plot";
+"DOWNGRADE" = "Downgrade";
