@@ -6,6 +6,7 @@ rvm:
 
 cache:
   directories:
+  - $HOME/.cocoapods
   - Pods
   - Carthage
 
@@ -22,12 +23,13 @@ env:
 before_install:
   - brew install carthage || true
   - brew outdated carthage || brew upgrade carthage
+  - bundle install
   - bundle exec pod update
   - gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
 
 before_script:
   - carthage bootstrap --platform iOS --cache-builds
-  - bundle exec install
+  - bundle exec pod install
 
 script:
   - set -o pipefail
