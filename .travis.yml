@@ -15,19 +15,19 @@ env:
     - LC_ALL=en_US.UTF-8
     - PROJECT_WORKSPACE="swdestiny-trades.xcworkspace"
     - PROJECT_SCHEME="SWDestiny-Trades"
-    - IOS_SDK=iphonesimulator12.0
+    - IOS_SDK=iphonesimulator12.1
   matrix:
-    - DESTINATION="OS=12.0,name=iPhone X" SCHEME="$PROJECT_SCHEME" SDK="$IOS_SDK"
+    - DESTINATION="OS=12.1,name=iPhone X" SCHEME="$PROJECT_SCHEME" SDK="$IOS_SDK"
 
 before_install:
   - brew install carthage || true
   - brew outdated carthage || brew upgrade carthage
-  - pod update
+  - bundle exec pod update
   - gem install xcpretty-travis-formatter --no-rdoc --no-ri --no-document --quiet
 
 before_script:
   - carthage bootstrap --platform iOS --cache-builds
-  - pod install
+  - bundle exec install
 
 script:
   - set -o pipefail
