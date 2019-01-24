@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct AppearanceProxyHelper {
+enum AppearanceProxyHelper {
 
     static func customizeTabBar() {
         let tabBarAppearance = UITabBar.appearance()

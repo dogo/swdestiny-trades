@@ -71,6 +71,16 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     func generateGraphData(deck: DeckDTO) {
 
         // BarChart
+        self.buildBarChart(deck: deck)
+
+        // LineChart
+        self.buildLineChart(deck: deck)
+
+        // RadarChart
+        self.buildRadarChart(deck: deck)
+    }
+
+    private func buildBarChart(deck: DeckDTO) {
         var upgrades = 0
         var supports = 0
         var events = 0
@@ -94,8 +104,9 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         if !(events == 0 && supports == 0 && upgrades == 0 && plots == 0 && downgrades == 0) {
             cardTypes = [upgrades, supports, events, plots, downgrades]
         }
+    }
 
-        // LineChart
+    private func buildLineChart(deck: DeckDTO) {
         if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
             for cost in 0...maxCost {
                 var cardCost = 0
@@ -103,13 +114,14 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
                     card.typeCode != "character" &&
                     card.typeCode != "battlefield" &&
                     card.typeCode != "plot" {
-                    cardCost += card.quantity
+                        cardCost += card.quantity
                 }
                 cardCosts.append(cardCost)
             }
         }
+    }
 
-        // RadarChart
+    private func buildRadarChart(deck: DeckDTO) {
         var specialFace = 0, blankFace = 0, meleeFace = 0, rangedFace = 0, focusFace = 0
         var disruptFace = 0, shieldFace = 0, discardFace = 0, resourceFace = 0, indirectFace = 0
         for card in deck.list {

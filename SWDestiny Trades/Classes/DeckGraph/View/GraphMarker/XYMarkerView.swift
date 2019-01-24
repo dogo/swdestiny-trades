@@ -21,7 +21,7 @@ open class XYMarkerView: BalloonMarker {
         yFormatter.maximumFractionDigits = 1
     }
 
-    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+    override open func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         setLabel(String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), Int(round(entry.y))))
     }
 }

@@ -16,6 +16,7 @@ final class PeopleListView: UIView, BaseViewConfiguration {
         super.init(frame: frame)
         setupBaseView()    }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

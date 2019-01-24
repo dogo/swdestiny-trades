@@ -17,6 +17,7 @@ class PersonCell: UITableViewCell, Reusable {
         self.accessoryType = .disclosureIndicator
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

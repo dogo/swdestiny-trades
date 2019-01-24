@@ -21,7 +21,7 @@ final class RadarMarkerView: BalloonMarker {
         yFormatter.maximumFractionDigits = 1
     }
 
-    public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+    override public func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         setLabel(String.localizedStringWithFormat(NSLocalizedString("SIDES_COUNT", comment: ""), Int(round(entry.y))))
     }
 }

@@ -34,7 +34,7 @@ open class BalloonMarker: MarkerImage {
         _paragraphStyle?.alignment = .center
     }
 
-    open override func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
+    override open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
         var offset = self.offset
 
         let chart = self.chartView
@@ -69,7 +69,7 @@ open class BalloonMarker: MarkerImage {
         return offset
     }
 
-    open override func draw(context: CGContext, point: CGPoint) {
+    override open func draw(context: CGContext, point: CGPoint) {
         if labelns == nil {
             return
         }
@@ -161,7 +161,7 @@ open class BalloonMarker: MarkerImage {
         context.restoreGState()
     }
 
-    open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
+    override open func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         setLabel(String(entry.y))
     }
 

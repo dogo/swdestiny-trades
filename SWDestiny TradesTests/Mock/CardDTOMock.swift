@@ -9,7 +9,7 @@
 import Foundation
 @testable import SWDestiny_Trades
 
-final class CardDTOMock {
+enum CardDTOMock {
 
     static let mockInfo: [String: Any?] = ["sides": ["1RD", "2RD", "1F", "1Dc", "1R", "-"],
                                      "set_code": "AW",

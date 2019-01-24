@@ -23,6 +23,7 @@ class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

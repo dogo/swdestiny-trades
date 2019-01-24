@@ -9,7 +9,7 @@
 import Foundation
 @testable import SWDestiny_Trades
 
-final class SetDTOMock {
+enum SetDTOMock {
 
     static func mockedSetDTO() -> Result<[SetDTO]> {
 

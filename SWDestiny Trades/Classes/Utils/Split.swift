@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Split {
+enum Split {
 
     static func cardsAlphabetically(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
 

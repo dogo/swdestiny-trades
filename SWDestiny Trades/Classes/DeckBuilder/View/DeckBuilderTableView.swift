@@ -22,6 +22,7 @@ final class DeckBuilderTableView: UITableView, CollapsibleTableViewHeaderDelegat
         self.backgroundColor = .white
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

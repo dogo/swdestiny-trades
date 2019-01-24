@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class RealmMigrations {
+enum RealmMigrations {
 
     static func performMigrations() {
         var config = Realm.Configuration.defaultConfiguration

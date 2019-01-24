@@ -9,7 +9,7 @@
 import Foundation
 @testable import SWDestiny_Trades
 
-final class PersonDTOMock {
+enum PersonDTOMock {
 
     static func mockedPersonDTO() -> PersonDTO {
         let person = PersonDTO()

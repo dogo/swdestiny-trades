@@ -9,7 +9,7 @@
 import Foundation
 import SwiftMessages
 
-final class ToastMessages {
+enum ToastMessages {
 
     static func showNetworkErrorMessage() {
         let errorView = MessageView.viewFromNib(layout: .cardView)

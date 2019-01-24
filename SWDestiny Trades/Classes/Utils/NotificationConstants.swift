@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct NotificationKey {
+enum NotificationKey {
     static let reloadTableViewNotification = Notification.Name("ReloadTableViewNotification")
 }

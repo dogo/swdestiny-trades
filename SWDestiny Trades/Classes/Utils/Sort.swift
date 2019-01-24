@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Sort {
+enum Sort {
 
     static func cardsByNumber(cardsArray: [CardDTO]) -> [CardDTO] {
         let source = cardsArray.sorted {

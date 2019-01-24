@@ -8,9 +8,9 @@
 
 import Foundation
 
-final class SectionsBuilder {
+enum SectionsBuilder {
 
-    // MARK: CardDTO
+    // MARK: - CardDTO
 
     static func alphabetically(cardList: [CardDTO]) -> [String] {
 
@@ -62,7 +62,7 @@ final class SectionsBuilder {
         return sortedSymbols
     }
 
-    // MARK: SetDTO
+    // MARK: - AppearanceProxyHelper.swiftSetDTO
 
     static func alphabetically(setList: [SetDTO]) -> [String] {
 

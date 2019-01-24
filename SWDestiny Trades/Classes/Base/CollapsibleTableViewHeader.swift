@@ -41,6 +41,7 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHeader(_:))))
     }
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
