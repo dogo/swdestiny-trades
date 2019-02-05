@@ -29,6 +29,8 @@ extension SetDTO {
             return Asset.Sets.icAcrossTheGalaxy.image
         } else if self.code.lowercased() == "conv" {
             return Asset.Sets.icConvergence.image
+        } else if self.code.lowercased() == "aon" {
+            return Asset.Sets.icAlliesOfNecessity.image
         } else {
             return Asset.Sets.icNotFound.image
         }

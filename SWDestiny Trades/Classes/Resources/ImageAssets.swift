@@ -1,5 +1,5 @@
 // swiftlint:disable all
-// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(OSX)
   import AppKit.NSImage
@@ -41,6 +41,7 @@ internal enum Asset {
   internal enum Sets {
 
     internal static let icAcrossTheGalaxy = ImageAsset(name: "Sets/ic_across_the_galaxy")
+    internal static let icAlliesOfNecessity = ImageAsset(name: "Sets/ic_allies_of_necessity")
     internal static let icAwakenings = ImageAsset(name: "Sets/ic_awakenings")
     internal static let icConvergence = ImageAsset(name: "Sets/ic_convergence")
     internal static let icEmpireAtWar = ImageAsset(name: "Sets/ic_empire_at_war")
