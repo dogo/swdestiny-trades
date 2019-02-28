@@ -21,6 +21,7 @@ final class SearchTableView: UITableView, SearchDelegate {
         search.delegate = self
         searchDatasource = SearchDatasource(cards: [], tableView: self, delegate: search)
         self.backgroundColor = .white
+        self.keyboardDismissMode = .onDrag
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)

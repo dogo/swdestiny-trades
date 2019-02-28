@@ -27,49 +27,9 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
 
         if indexPath.section == 0 {
-            if indexPath.row == lentMe.count {
-                cell.quantityStepper.isHidden = true
-                cell.textLabel?.text = L10n.addCard.appending("...")
-                cell.textLabel?.textColor = .darkGray
-            } else {
-                cell.quantityStepper.isHidden = false
-                cell.textLabel?.text = nil
-                cell.configureCell(cardDTO: lentMe[indexPath.row])
-                cell.stepperValueChanged = { value, cell in
-                    guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-                    if let card = self.getCard(at: indexPath) {
-                        do {
-                            try RealmManager.shared.realm.write {
-                                card.quantity = value
-                            }
-                        } catch let error as NSError {
-                            print("Error opening realm: \(error)")
-                        }
-                    }
-                }
-            }
+            self.configureLentMe(indexPath: indexPath, cell: cell)
         } else if indexPath.section == 1 {
-            if indexPath.row == borrowed.count {
-                cell.quantityStepper.isHidden = true
-                cell.textLabel?.text = L10n.addMyCard
-                cell.textLabel?.textColor = .darkGray
-            } else {
-                cell.quantityStepper.isHidden = false
-                cell.textLabel?.text = nil
-                cell.configureCell(cardDTO: borrowed[indexPath.row])
-                cell.stepperValueChanged = { value, cell in
-                    guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-                    if let card = self.getCard(at: indexPath) {
-                        do {
-                            try RealmManager.shared.realm.write {
-                                card.quantity = value
-                            }
-                        } catch let error as NSError {
-                            print("Error opening realm: \(error)")
-                        }
-                    }
-                }
-            }
+            self.configureBorrowed(indexPath: indexPath, cell: cell)
         }
         return cell
     }
@@ -104,8 +64,55 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return lentMe.count + 1
+        }
+        return borrowed.count + 1
+    }
+    
+    private func configureLentMe(indexPath: IndexPath, cell: LoanDetailCell) {
+        if indexPath.row == lentMe.count {
+            cell.quantityStepper.isHidden = true
+            cell.textLabel?.text = L10n.addCard.appending("...")
+            cell.textLabel?.textColor = .darkGray
         } else {
-            return borrowed.count + 1
+            cell.quantityStepper.isHidden = false
+            cell.textLabel?.text = nil
+            cell.configureCell(cardDTO: lentMe[indexPath.row])
+            cell.stepperValueChanged = { value, cell in
+                guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
+                if let card = self.getCard(at: indexPath) {
+                    do {
+                        try RealmManager.shared.realm.write {
+                            card.quantity = value
+                        }
+                    } catch let error as NSError {
+                        print("Error opening realm: \(error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    private func configureBorrowed(indexPath: IndexPath, cell: LoanDetailCell) {
+        if indexPath.row == borrowed.count {
+            cell.quantityStepper.isHidden = true
+            cell.textLabel?.text = L10n.addMyCard
+            cell.textLabel?.textColor = .darkGray
+        } else {
+            cell.quantityStepper.isHidden = false
+            cell.textLabel?.text = nil
+            cell.configureCell(cardDTO: borrowed[indexPath.row])
+            cell.stepperValueChanged = { value, cell in
+                guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
+                if let card = self.getCard(at: indexPath) {
+                    do {
+                        try RealmManager.shared.realm.write {
+                            card.quantity = value
+                        }
+                    } catch let error as NSError {
+                        print("Error opening realm: \(error)")
+                    }
+                }
+            }
         }
     }
 
