@@ -50,10 +50,110 @@ extension SWDestinyRoute: TargetType {
     }
 
     var sampleData: Data {
+        var json = ""
         switch self {
-        default:
-            return Data()
+        case .allCards, .cardList:
+            json = """
+            [{
+            \"sides\": [
+            \"1RD\",
+            \"2RD\",
+            \"1F\",
+            \"1Dc\",
+            \"1R\",
+            \"-\"
+            ],
+            \"set_code\": \"AW\",
+            \"set_name\": \"Awakenings\",
+            \"type_code\": \"character\",
+            \"type_name\": \"Character\",
+            \"faction_code\": \"red\",
+            \"faction_name\": \"Command\",
+            \"affiliation_code\": \"villain\",
+            \"affiliation_name\": \"Villain\",
+            \"rarity_code\": \"L\",
+            \"rarity_name\": \"Legendary\",
+            \"position\": 1,
+            \"code\": \"01001\",
+            \"ttscardid\": \"1300\",
+            \"name\": \"Captain Phasma\",
+            \"subtitle\": \"Elite Trooper\",
+            \"cost\": null,
+            \"health\": 11,
+            \"points\": \"12/15\",
+            \"text\": \"Your non-unique characters have the Guardian keyword.\",
+            \"deck_limit\": 1,
+            \"flavor\": \"Whatever you're planning, it won't work.\",
+            \"illustrator\": \"Darren Tan\",
+            \"is_unique\": true,
+            \"has_die\": true,
+            \"has_errata\": false,
+            \"url\": \"https://swdestinydb.com/card/01001\",
+            \"imagesrc\": \"https://swdestinydb.com/bundles/cards/en/01/01001.jpg\",
+            \"label\": \"Captain Phasma - Elite Trooper\",
+            \"cp\": 1215
+            }]
+            """
+        case .card:
+            json = """
+            {
+            \"sides\": [
+            \"1RD\",
+            \"2RD\",
+            \"1F\",
+            \"1Dc\",
+            \"1R\",
+            \"-\"
+            ],
+            \"set_code\": \"AW\",
+            \"set_name\": \"Awakenings\",
+            \"type_code\": \"character\",
+            \"type_name\": \"Character\",
+            \"faction_code\": \"red\",
+            \"faction_name\": \"Command\",
+            \"affiliation_code\": \"villain\",
+            \"affiliation_name\": \"Villain\",
+            \"rarity_code\": \"L\",
+            \"rarity_name\": \"Legendary\",
+            \"position\": 1,
+            \"code\": \"01001\",
+            \"ttscardid\": \"1300\",
+            \"name\": \"Captain Phasma\",
+            \"subtitle\": \"Elite Trooper\",
+            \"cost\": null,
+            \"health\": 11,
+            \"points\": \"12/15\",
+            \"text\": \"Your non-unique characters have the Guardian keyword.\",
+            \"deck_limit\": 1,
+            \"flavor\": \"Whatever you're planning, it won't work.\",
+            \"illustrator\": \"Darren Tan\",
+            \"is_unique\": true,
+            \"has_die\": true,
+            \"has_errata\": false,
+            \"url\": \"https://swdestinydb.com/card/01001\",
+            \"imagesrc\": \"https://swdestinydb.com/bundles/cards/en/01/01001.jpg\",
+            \"label\": \"Captain Phasma - Elite Trooper\",
+            \"cp\": 1215
+            }
+            """
+        case .setList:
+            json = """
+            [{
+            \"name\": \"Awakenings\",
+            \"code\": \"AW\",
+            \"position\": 1,
+            \"available\": \"2016-12-01\",
+            \"known\": 174,
+            \"total\": 174,
+            \"url\": \"https://swdestinydb.com/set/AW\"
+            }]
+            """
         }
+
+        guard let data = json.data(using: .utf8) else {
+            fatalError("Error sample data JSON")
+        }
+        return data
     }
 
     var headers: [String: String]? {

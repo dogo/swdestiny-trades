@@ -103,8 +103,6 @@
 		DD7FF0FE1E1DE524004FC6CF /* NewPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */; };
 		DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */; };
 		DD88285D202A4E7F00F08C31 /* Decoder+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */; };
-		DD8CD48D20F7CC130036CA8D /* CardDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CD48C20F7CC130036CA8D /* CardDTOMock.swift */; };
-		DD8CD48E20F7CC1C0036CA8D /* SetDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */; };
 		DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */; };
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
@@ -290,8 +288,6 @@
 		DD7FF0FC1E1DE524004FC6CF /* NewPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonViewController.swift; sourceTree = "<group>"; };
 		DD7FF0FF1E1DE56C004FC6CF /* NewPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
 		DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decoder+Utils.swift"; sourceTree = "<group>"; };
-		DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDTOMock.swift; sourceTree = "<group>"; };
-		DD8CD48C20F7CC130036CA8D /* CardDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDTOMock.swift; sourceTree = "<group>"; };
 		DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceMock.swift; sourceTree = "<group>"; };
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -969,9 +965,7 @@
 		DD8CD48920F7BCD10036CA8D /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				DD8CD48C20F7CC130036CA8D /* CardDTOMock.swift */,
 				DD9EF5452134340B005C536E /* PersonDTOMock.swift */,
-				DD8CD48A20F7BCE20036CA8D /* SetDTOMock.swift */,
 				DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */,
 			);
 			path = Mock;
@@ -1794,7 +1788,6 @@
 			files = (
 				DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */,
 				DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */,
-				DD8CD48E20F7CC1C0036CA8D /* SetDTOMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
 				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
@@ -1803,7 +1796,6 @@
 				DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */,
 				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,
 				DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */,
-				DD8CD48D20F7CC130036CA8D /* CardDTOMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

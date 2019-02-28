@@ -68,8 +68,8 @@ class SWDestinyServiceImplTests: QuickSpec {
                         expect(cardList[0].illustrator).to(equal("Darren Tan"))
                         expect(cardList[0].isUnique).to(equal(true))
                         expect(cardList[0].hasDie).to(equal(true))
-                        expect(cardList[0].externalUrl).to(equal("http://swdestinydb.com/card/01001"))
-                        expect(cardList[0].imageUrl).to(equal("http://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
+                        expect(cardList[0].externalUrl).to(equal("https://swdestinydb.com/card/01001"))
+                        expect(cardList[0].imageUrl).to(equal("https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
                         expect(cardList[0].label).to(equal("Captain Phasma - Elite Trooper"))
                         expect(cardList[0].cp).to(equal(1215))
                     case .failure(let error):
@@ -106,8 +106,8 @@ class SWDestinyServiceImplTests: QuickSpec {
                         expect(card.illustrator).to(equal("Darren Tan"))
                         expect(card.isUnique).to(equal(true))
                         expect(card.hasDie).to(equal(true))
-                        expect(card.externalUrl).to(equal("http://swdestinydb.com/card/01001"))
-                        expect(card.imageUrl).to(equal("http://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
+                        expect(card.externalUrl).to(equal("https://swdestinydb.com/card/01001"))
+                        expect(card.imageUrl).to(equal("https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
                         expect(card.label).to(equal("Captain Phasma - Elite Trooper"))
                         expect(card.cp).to(equal(1215))
                     case .failure(let error):
@@ -144,8 +144,8 @@ class SWDestinyServiceImplTests: QuickSpec {
                         expect(cardList[0].illustrator).to(equal("Darren Tan"))
                         expect(cardList[0].isUnique).to(equal(true))
                         expect(cardList[0].hasDie).to(equal(true))
-                        expect(cardList[0].externalUrl).to(equal("http://swdestinydb.com/card/01001"))
-                        expect(cardList[0].imageUrl).to(equal("http://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
+                        expect(cardList[0].externalUrl).to(equal("https://swdestinydb.com/card/01001"))
+                        expect(cardList[0].imageUrl).to(equal("https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
                         expect(cardList[0].label).to(equal("Captain Phasma - Elite Trooper"))
                         expect(cardList[0].cp).to(equal(1215))
                     case .failure(let error):
