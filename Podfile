@@ -10,6 +10,7 @@ target 'SWDestiny Trades' do
   pod 'Fabric'
   pod 'Firebase/Core'
   pod 'SwiftGen'
+  pod 'SwiftLint'
 
   target 'SWDestiny-TradesTests' do
     inherit! :search_paths

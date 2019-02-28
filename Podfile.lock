@@ -52,12 +52,14 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - SwiftGen (6.1.0)
+  - SwiftLint (0.30.1)
 
 DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Firebase/Core
   - SwiftGen
+  - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -71,6 +73,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - SwiftGen
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
@@ -83,7 +86,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
+  SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
 
-PODFILE CHECKSUM: 571ff5388bab65db06d08ae2b3609d60d749f0b0
+PODFILE CHECKSUM: ae1f36d5d224acae41b6800d9d0ba5668e31a3ae
 
 COCOAPODS: 1.5.3

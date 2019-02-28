@@ -67,7 +67,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
         }
         return borrowed.count + 1
     }
-    
+
     private func configureLentMe(indexPath: IndexPath, cell: LoanDetailCell) {
         if indexPath.row == lentMe.count {
             cell.quantityStepper.isHidden = true
@@ -91,7 +91,7 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             }
         }
     }
-    
+
     private func configureBorrowed(indexPath: IndexPath, cell: LoanDetailCell) {
         if indexPath.row == borrowed.count {
             cell.quantityStepper.isHidden = true
