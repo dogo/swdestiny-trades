@@ -18,7 +18,7 @@ open class BalloonMarker: MarkerImage {
     open var minimumSize = CGSize()
 
     fileprivate var labelns: NSString?
-    fileprivate var _labelSize: CGSize = CGSize()
+    fileprivate var _labelSize = CGSize()
     fileprivate var _paragraphStyle: NSMutableParagraphStyle?
     fileprivate var _drawAttributes = [NSAttributedString.Key: Any]()
 

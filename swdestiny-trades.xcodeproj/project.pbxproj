@@ -233,7 +233,6 @@
 		DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImpl.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
 		DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Testable.swift"; sourceTree = "<group>"; };
-		DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwdShareProvider.swift; sourceTree = "<group>"; };
 		DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
@@ -350,7 +349,6 @@
 		DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = Carthage/Build/iOS/SwiftMessages.framework; sourceTree = "<group>"; };
 		DDCEBD621FDC24D50067AAE0 /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
 		DDCEBD631FDC24D50067AAE0 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
-		DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya_ObjectMapper.framework; path = Carthage/Build/iOS/Moya_ObjectMapper.framework; sourceTree = "<group>"; };
 		DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		DDCEBD661FDC24D60067AAE0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		DDCEBD671FDC24D60067AAE0 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -1275,13 +1273,11 @@
 			children = (
 				DD7571682133D19400C0CA45 /* Nimble_Snapshots.framework */,
 				DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */,
-				DD387BD71FDC558500F1DD34 /* ObjectMapper.framework */,
 				DDCEBD651FDC24D60067AAE0 /* Alamofire.framework */,
 				DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */,
 				DDCEBD5D1FDC24D50067AAE0 /* FTPopOverMenu_Swift.framework */,
 				DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */,
 				DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */,
-				DDCEBD641FDC24D60067AAE0 /* Moya_ObjectMapper.framework */,
 				DDCEBD631FDC24D50067AAE0 /* Moya.framework */,
 				DDCEBD551FDC24D40067AAE0 /* Nimble.framework */,
 				DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */,
