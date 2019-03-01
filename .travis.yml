@@ -18,7 +18,7 @@ env:
     - PROJECT_SCHEME="SWDestiny-Trades"
     - IOS_SDK=iphonesimulator12.1
   matrix:
-    - DESTINATION="OS=12.1,name=iPhone X" SCHEME="$PROJECT_SCHEME" SDK="$IOS_SDK"
+    - DESTINATION="platform=iOS Simulator,OS=12.1,name=iPhone X"
 
 before_install:
   - brew install carthage || true
@@ -33,4 +33,4 @@ before_script:
 
 script:
   - set -o pipefail
-  - xcodebuild clean test -workspace "$PROJECT_WORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -sdk "$SDK" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -f `xcpretty-travis-formatter`
+  - xcodebuild clean test -workspace "$PROJECT_WORKSPACE" -scheme "$PROJECT_SCHEME" -destination "$DESTINATION" -sdk "$IOS_SDK" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty -f `xcpretty-travis-formatter`
