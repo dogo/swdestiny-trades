@@ -52,3 +52,4 @@
 "EVENT" = "Evento";
 "PLOT" = "Trama";
 "DOWNGRADE" = "Desventaja";
+"LAST_UPDATE" = "Última actualización: %@";

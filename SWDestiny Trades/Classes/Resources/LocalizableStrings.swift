@@ -75,6 +75,10 @@ internal enum L10n {
   internal static let hasLentMe = L10n.tr("Localizable", "HAS_LENT_ME")
   /// Last Name
   internal static let lastName = L10n.tr("Localizable", "LAST_NAME")
+  /// Last update: %@
+  internal static func lastUpdate(_ p1: String) -> String {
+    return L10n.tr("Localizable", "LAST_UPDATE", p1)
+  }
   /// Loans
   internal static let loans = L10n.tr("Localizable", "LOANS")
   /// My Collection

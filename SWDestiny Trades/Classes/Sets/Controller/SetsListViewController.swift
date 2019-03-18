@@ -60,14 +60,12 @@ class SetsListViewController: UIViewController {
     @objc
     func retrieveSets(sender: UIRefreshControl) {
         destinyService.retrieveSetList { result in
+            self.setsView.endRefreshControl()
+            self.setsView.activityIndicator.stopAnimating()
             switch result {
             case .success(let setList):
                 self.setsView.setsTableView.updateSetList(setList)
-                self.setsView.endRefreshControl()
-                self.setsView.activityIndicator.stopAnimating()
             case .failure(let error):
-                self.setsView.endRefreshControl()
-                self.setsView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description

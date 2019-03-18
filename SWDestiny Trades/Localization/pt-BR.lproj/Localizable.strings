@@ -52,3 +52,4 @@
 "EVENT" = "Evento";
 "PLOT" = "Plot";
 "DOWNGRADE" = "Downgrade";
+"LAST_UPDATE" = "Última atualização: %@";
