@@ -19,7 +19,8 @@ enum AppearanceProxyHelper {
     static func customizeNavigationBar() {
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.tintColor = .white
-        navigationBarAppearance.barStyle = .blackTranslucent
+        navigationBarAppearance.barStyle = .black
+        navigationBarAppearance.isTranslucent = true
         navigationBarAppearance.barTintColor = ColorPalette.appTheme
         navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         if #available(iOS 11.0, *) {
