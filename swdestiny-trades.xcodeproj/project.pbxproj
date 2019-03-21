@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24056146E820B2F0E3281A41 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17611D202BDFE3B33BC5BCE8 /* Pods_SWDestiny_TradesTests.framework */; };
-		B1AC0BA356BBBDCFE4233A02 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8254897C3BF32D5BB8DFDDF4 /* Pods_SWDestiny_Trades.framework */; };
+		5D881C39D52EED9DE4B6B6F3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396FE6ED64D0057465910BC1 /* Pods_SWDestiny_TradesTests.framework */; };
+		5F7D23F6192684219D8F085E /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D43F17DA698A003E16DE1E4 /* Pods_SWDestiny_Trades.framework */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */; };
@@ -198,12 +198,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		17611D202BDFE3B33BC5BCE8 /* Pods_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1AAD9093CE68E5BA65E953C7 /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		554163AD9F21ED7A0A961AAF /* Pods-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
-		81FD8E09E82C950132F0AC3C /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
-		8254897C3BF32D5BB8DFDDF4 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE5C1FFEB011608BC1890E60 /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
+		119163A447E437DA9D5C3AC5 /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
+		396FE6ED64D0057465910BC1 /* Pods_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D43F17DA698A003E16DE1E4 /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7537782BE8C7973B7A2D46A6 /* Pods-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
+		9020BD4128C88160FF22A144 /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
+		AD5D9F015BBB240A78D62D20 /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
 		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
@@ -392,7 +392,7 @@
 				DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
-				B1AC0BA356BBBDCFE4233A02 /* Pods_SWDestiny_Trades.framework in Frameworks */,
+				5F7D23F6192684219D8F085E /* Pods_SWDestiny_Trades.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,20 +404,20 @@
 				DD7571692133D19400C0CA45 /* Nimble_Snapshots.framework in Frameworks */,
 				DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */,
 				DD38C2C2212FB0D300153D70 /* FBSnapshotTestCase.framework in Frameworks */,
-				24056146E820B2F0E3281A41 /* Pods_SWDestiny_TradesTests.framework in Frameworks */,
+				5D881C39D52EED9DE4B6B6F3 /* Pods_SWDestiny_TradesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50459C42B3B39C5A1848313D /* Pods */ = {
+		8D3FE394CDFFE678C59FA2FE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				81FD8E09E82C950132F0AC3C /* Pods-SWDestiny Trades.debug.xcconfig */,
-				CE5C1FFEB011608BC1890E60 /* Pods-SWDestiny Trades.release.xcconfig */,
-				1AAD9093CE68E5BA65E953C7 /* Pods-SWDestiny-TradesTests.debug.xcconfig */,
-				554163AD9F21ED7A0A961AAF /* Pods-SWDestiny-TradesTests.release.xcconfig */,
+				9020BD4128C88160FF22A144 /* Pods-SWDestiny Trades.debug.xcconfig */,
+				119163A447E437DA9D5C3AC5 /* Pods-SWDestiny Trades.release.xcconfig */,
+				AD5D9F015BBB240A78D62D20 /* Pods-SWDestiny-TradesTests.debug.xcconfig */,
+				7537782BE8C7973B7A2D46A6 /* Pods-SWDestiny-TradesTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -820,7 +820,7 @@
 				DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */,
 				DD6E06851E114E88004A5653 /* Products */,
 				DDCEBD521FDC24D30067AAE0 /* Frameworks */,
-				50459C42B3B39C5A1848313D /* Pods */,
+				8D3FE394CDFFE678C59FA2FE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1296,8 +1296,8 @@
 				DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */,
 				DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */,
 				DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */,
-				8254897C3BF32D5BB8DFDDF4 /* Pods_SWDestiny_Trades.framework */,
-				17611D202BDFE3B33BC5BCE8 /* Pods_SWDestiny_TradesTests.framework */,
+				4D43F17DA698A003E16DE1E4 /* Pods_SWDestiny_Trades.framework */,
+				396FE6ED64D0057465910BC1 /* Pods_SWDestiny_TradesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1381,7 +1381,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A31E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny Trades" */;
 			buildPhases = (
-				F5107D9B7AF181E4CB9A0704 /* [CP] Check Pods Manifest.lock */,
+				4249E74A7ADDF917B7C337C4 /* [CP] Check Pods Manifest.lock */,
 				DD2026E5200AACFD006B17DD /* [SwiftGen] Run Script */,
 				E3EA64F422284137009A142D /* [SwiftLint] Run Script */,
 				DD6E06801E114E88004A5653 /* Sources */,
@@ -1389,7 +1389,7 @@
 				DD6E06821E114E88004A5653 /* Resources */,
 				DD3E23A21FF70F4A0033EF1B /* [Carthage] Embed Frameworks */,
 				DD4D3A211E1D577900719E96 /* Post Build Run Script */,
-				D0D4479AC19F163B577C6F94 /* [CP] Embed Pods Frameworks */,
+				FBBA8DBD1E190AC7F4D89B50 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1404,7 +1404,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A61E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny-TradesTests" */;
 			buildPhases = (
-				BD31E0794A6426AACA81AE41 /* [CP] Check Pods Manifest.lock */,
+				F3CBC3027E23EB20667DA2BB /* [CP] Check Pods Manifest.lock */,
 				DD6E06961E114E88004A5653 /* Sources */,
 				DD6E06971E114E88004A5653 /* Frameworks */,
 				DD6E06981E114E88004A5653 /* Resources */,
@@ -1493,7 +1493,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BD31E0794A6426AACA81AE41 /* [CP] Check Pods Manifest.lock */ = {
+		4249E74A7ADDF917B7C337C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1508,35 +1508,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SWDestiny-TradesTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D0D4479AC19F163B577C6F94 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD2026E5200AACFD006B17DD /* [SwiftGen] Run Script */ = {
@@ -1627,7 +1603,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n    echo \"warning: SwiftLint not installed, install using pod install command\"\nfi\n";
 		};
-		F5107D9B7AF181E4CB9A0704 /* [CP] Check Pods Manifest.lock */ = {
+		F3CBC3027E23EB20667DA2BB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1642,11 +1618,35 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SWDestiny-TradesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBBA8DBD1E190AC7F4D89B50 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1978,7 +1978,7 @@
 		};
 		DD6E06A41E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81FD8E09E82C950132F0AC3C /* Pods-SWDestiny Trades.debug.xcconfig */;
+			baseConfigurationReference = 9020BD4128C88160FF22A144 /* Pods-SWDestiny Trades.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1997,7 +1997,7 @@
 		};
 		DD6E06A51E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE5C1FFEB011608BC1890E60 /* Pods-SWDestiny Trades.release.xcconfig */;
+			baseConfigurationReference = 119163A447E437DA9D5C3AC5 /* Pods-SWDestiny Trades.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -2015,7 +2015,7 @@
 		};
 		DD6E06A71E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AAD9093CE68E5BA65E953C7 /* Pods-SWDestiny-TradesTests.debug.xcconfig */;
+			baseConfigurationReference = AD5D9F015BBB240A78D62D20 /* Pods-SWDestiny-TradesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -2034,7 +2034,7 @@
 		};
 		DD6E06A81E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 554163AD9F21ED7A0A961AAF /* Pods-SWDestiny-TradesTests.release.xcconfig */;
+			baseConfigurationReference = 7537782BE8C7973B7A2D46A6 /* Pods-SWDestiny-TradesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
