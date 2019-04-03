@@ -51,9 +51,9 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
         titleEditText.text = deckDTO?.name
 
         if let deckList = deckDTO?.list {
-            let count = deckList.sum(ofProperty: "quantity") as Int
-            if count > 0 { // swiftlint:disable:this empty_count // false postive
-                subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), count)
+            let quantity = deckList.sum(ofProperty: "quantity") as Int
+            if quantity > 0 {
+                subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), quantity)
             } else {
                 subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), 0)
             }
