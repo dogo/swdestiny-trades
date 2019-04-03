@@ -2,6 +2,7 @@ SWDestiny Trades
 ============
 
 [![Build Status](https://travis-ci.org/dogo/swdestiny-trades.svg?branch=develop)](https://travis-ci.org/dogo/swdestiny-trades)
+[![Coverage Status](https://coveralls.io/repos/github/dogo/swdestiny-trades/badge.svg?branch=develop)](https://coveralls.io/github/dogo/swdestiny-trades?branch=develop)
 
 ### About SWDTrades
 
