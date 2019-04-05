@@ -50,7 +50,7 @@ class CardDetailViewController: UIViewController {
 
         cardView.slideshow.setImageInputs(imageSource)
 
-        if let index = cards.index(of: cardDTO) {
+        if let index = cards.firstIndex(of: cardDTO) {
             cardView.slideshow.setCurrentPage(index, animated: true)
         }
 

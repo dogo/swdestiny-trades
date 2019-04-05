@@ -19,7 +19,7 @@ class SWDestinyAPI: SWDestinyService {
 
     @discardableResult
     func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable {
-        return provider.request(.setList()) { moyaResult in
+        return provider.request(.setList) { moyaResult in
             let result: Result<[SetDTO]>
             do {
                 switch moyaResult {
@@ -55,7 +55,7 @@ class SWDestinyAPI: SWDestinyService {
 
     @discardableResult
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
-        return provider.request(.allCards()) { moyaResult in
+        return provider.request(.allCards) { moyaResult in
             let result: Result<[CardDTO]>
             do {
                 switch moyaResult {

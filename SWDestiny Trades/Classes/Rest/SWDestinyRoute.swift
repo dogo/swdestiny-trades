@@ -10,9 +10,9 @@ import Foundation
 import Moya
 
 enum SWDestinyRoute {
-    case setList()
+    case setList
     case cardList(setCode: String)
-    case allCards()
+    case allCards
     case card(cardId: String)
 }
 
