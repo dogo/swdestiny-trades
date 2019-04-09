@@ -2,7 +2,7 @@ language: swift
 osx_image: xcode10.2
 
 rvm:
-  - 2.3.1
+  - 2.3.5
 
 cache:
   directories:
