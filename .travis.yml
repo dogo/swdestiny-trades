@@ -16,9 +16,9 @@ env:
     - LC_ALL=en_US.UTF-8
     - PROJECT_WORKSPACE="swdestiny-trades.xcworkspace"
     - PROJECT_SCHEME="SWDestiny-Trades"
-    - IOS_SDK=iphonesimulator12.1
+    - IOS_SDK=iphonesimulator12.2
   matrix:
-    - DESTINATION="platform=iOS Simulator,OS=12.1,name=iPhone X"
+    - DESTINATION="platform=iOS Simulator,OS=12.2,name=iPhone X"
 
 before_install:
   - brew install carthage || true
