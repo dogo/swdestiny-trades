@@ -237,7 +237,7 @@ DEPENDENCIES
   slather
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.3.5p376
 
 BUNDLED WITH
-   1.16.0
+   2.0.1
