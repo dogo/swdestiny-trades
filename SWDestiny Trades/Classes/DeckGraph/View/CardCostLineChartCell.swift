@@ -60,7 +60,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
                 dataEntries.append(dataEntry)
             }
 
-            let chartDataSet = LineChartDataSet(values: dataEntries, label: L10n.cardCost)
+            let chartDataSet = LineChartDataSet(entries: dataEntries, label: L10n.cardCost)
             chartDataSet.drawValuesEnabled = false
             chartDataSet.setColor(.lightGray)
             chartDataSet.setCircleColor(.lightGray)
