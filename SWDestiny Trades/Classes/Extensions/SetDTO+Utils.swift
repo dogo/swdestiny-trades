@@ -9,7 +9,7 @@
 import UIKit
 
 extension SetDTO {
-    // swiftlint:disable:this cyclomatic_complexity
+    // swiftlint:disable:next cyclomatic_complexity
     func setIcon() -> UIImage {
         if self.code.lowercased() == "aw" {
             return Asset.Sets.icAwakenings.image
