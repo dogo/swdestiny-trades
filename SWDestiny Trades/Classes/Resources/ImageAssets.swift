@@ -48,6 +48,7 @@ internal enum Asset {
     internal static let icLegacies = ImageAsset(name: "Sets/ic_legacies")
     internal static let icNotFound = ImageAsset(name: "Sets/ic_not_found")
     internal static let icRivals = ImageAsset(name: "Sets/ic_rivals")
+    internal static let icSparkOfHope = ImageAsset(name: "Sets/ic_spark_of_hope")
     internal static let icSpiritOfRebellion = ImageAsset(name: "Sets/ic_spirit_of_rebellion")
     internal static let icTwoPlayerGame = ImageAsset(name: "Sets/ic_two_player_game")
     internal static let icWayOfTheForce = ImageAsset(name: "Sets/ic_way_of_the_force")

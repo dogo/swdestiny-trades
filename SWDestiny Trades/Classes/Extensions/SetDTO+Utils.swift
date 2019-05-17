@@ -9,7 +9,7 @@
 import UIKit
 
 extension SetDTO {
-
+    // swiftlint:disable:this cyclomatic_complexity
     func setIcon() -> UIImage {
         if self.code.lowercased() == "aw" {
             return Asset.Sets.icAwakenings.image
@@ -31,6 +31,8 @@ extension SetDTO {
             return Asset.Sets.icConvergence.image
         } else if self.code.lowercased() == "aon" {
             return Asset.Sets.icAlliesOfNecessity.image
+        } else if self.code.lowercased() == "soh" {
+            return Asset.Sets.icSparkOfHope.image
         } else {
             return Asset.Sets.icNotFound.image
         }
