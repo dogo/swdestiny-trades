@@ -60,8 +60,6 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>zero</key>
-			<string>%d cards</string>
 			<key>one</key>
 			<string>%d card</string>
 			<key>other</key>
@@ -78,8 +76,6 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>zero</key>
-			<string>%d sides</string>
 			<key>one</key>
 			<string>%d side</string>
 			<key>other</key>
