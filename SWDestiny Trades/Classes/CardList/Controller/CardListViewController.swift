@@ -48,8 +48,8 @@ class CardListViewController: UIViewController {
                 LoggerManager.shared.log(event: .cardsList, parameters: ["error": errorMessage])
             }
         }
-        self.cardListView.cardListTableView.didSelectCard = { [unowned self] list, card in
-            self.navigateToNextController(cardList: list, card: card)
+        self.cardListView.cardListTableView.didSelectCard = { [weak self] list, card in
+            self?.navigateToNextController(cardList: list, card: card)
         }
     }
 

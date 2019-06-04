@@ -35,12 +35,12 @@ class LoansDetailViewController: UIViewController {
 
         loadDataFromRealm()
 
-        self.loanDetailView.loanDetailTableView.didSelectCard = { [unowned self] card, lentMe in
-            self.navigateToCardDetailViewController(with: card, lentMe: lentMe)
+        self.loanDetailView.loanDetailTableView.didSelectCard = { [weak self] card, lentMe in
+            self?.navigateToCardDetailViewController(with: card, lentMe: lentMe)
         }
 
-        self.loanDetailView.loanDetailTableView.didSelectAddItem = { [unowned self] type in
-            self.navigateToAddCardViewController(type: type)
+        self.loanDetailView.loanDetailTableView.didSelectAddItem = { [weak self] type in
+            self?.navigateToAddCardViewController(type: type)
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)

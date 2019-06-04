@@ -66,16 +66,16 @@ class AddCardViewController: UIViewController {
             }
         }
 
-        addCardView.addCardTableView.didSelectCard = { [unowned self] card in
-            self.insert(card: card)
+        addCardView.addCardTableView.didSelectCard = { [weak self] card in
+            self?.insert(card: card)
         }
 
-        addCardView.addCardTableView.didSelectAccessory = { [unowned self] card in
-            self.navigateToNextController(with: card)
+        addCardView.addCardTableView.didSelectAccessory = { [weak self] card in
+            self?.navigateToNextController(with: card)
         }
 
-        addCardView.searchBar.doingSearch = { [unowned self] query in
-            self.addCardView.addCardTableView.doingSearch(query)
+        addCardView.searchBar.doingSearch = { [weak self] query in
+            self?.addCardView.addCardTableView.doingSearch(query)
         }
     }
 

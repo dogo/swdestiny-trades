@@ -35,8 +35,8 @@ final class DeckListViewController: UIViewController {
 
         loadDataFromRealm()
 
-        deckListView.deckListTableView.didSelectDeck = { [unowned self] deck in
-            self.navigateToNextController(with: deck)
+        deckListView.deckListTableView.didSelectDeck = { [weak self] deck in
+            self?.navigateToNextController(with: deck)
         }
     }
 

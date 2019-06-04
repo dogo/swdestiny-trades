@@ -60,12 +60,12 @@ class SearchListViewController: UIViewController {
             }
         }
 
-        searchView.searchTableView.didSelectCard = { [unowned self] card in
-            self.navigateToNextController(with: card)
+        searchView.searchTableView.didSelectCard = { [weak self] card in
+            self?.navigateToNextController(with: card)
         }
 
-        searchView.searchBar.doingSearch = { [unowned self] query in
-            self.searchView.searchTableView.doingSearch(query)
+        searchView.searchBar.doingSearch = { [weak self] query in
+            self?.searchView.searchTableView.doingSearch(query)
         }
     }
 

@@ -44,24 +44,24 @@ class AddToDeckViewController: UIViewController {
 
         retrieveAllCards()
 
-        addToDeckView.addToDeckTableView.didSelectCard = { [unowned self] card in
-            self.insert(card: card)
+        addToDeckView.addToDeckTableView.didSelectCard = { [weak self] card in
+            self?.insert(card: card)
         }
 
-        addToDeckView.addToDeckTableView.didSelectAccessory = { [unowned self] card in
-            self.navigateToNextController(with: card)
+        addToDeckView.addToDeckTableView.didSelectAccessory = { [weak self] card in
+            self?.navigateToNextController(with: card)
         }
 
-        addToDeckView.searchBar.doingSearch = { [unowned self] query in
-            self.addToDeckView.addToDeckTableView.doingSearch(query)
+        addToDeckView.searchBar.doingSearch = { [weak self] query in
+            self?.addToDeckView.addToDeckTableView.doingSearch(query)
         }
 
-        addToDeckView.addToDeckTableView.didSelectRemote = { [unowned self] in
-            self.retrieveAllCards()
+        addToDeckView.addToDeckTableView.didSelectRemote = { [weak self] in
+            self?.retrieveAllCards()
         }
 
-        addToDeckView.addToDeckTableView.didSelectLocal = { [unowned self] in
-            self.loadDataFromRealm()
+        addToDeckView.addToDeckTableView.didSelectLocal = { [weak self] in
+            self?.loadDataFromRealm()
         }
     }
 

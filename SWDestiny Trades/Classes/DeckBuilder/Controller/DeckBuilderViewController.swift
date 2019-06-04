@@ -35,8 +35,8 @@ final class DeckBuilderViewController: UIViewController {
 
         setupNavigationItem()
 
-        deckBuilderView.deckBuilderTableView.didSelectCard = { [unowned self] list, card in
-            self.navigateToCardDetailViewController(cardList: list, card: card)
+        deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] list, card in
+            self?.navigateToCardDetailViewController(cardList: list, card: card)
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)

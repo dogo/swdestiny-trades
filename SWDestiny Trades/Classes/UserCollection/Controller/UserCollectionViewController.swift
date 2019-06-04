@@ -35,8 +35,8 @@ final class UserCollectionViewController: UIViewController {
 
         setupNavigationItem()
 
-        userCollectionView.userCollectionTableView.didSelectCard = { [unowned self] list, card in
-            self.navigateToCardDetailViewController(cardList: list, card: card)
+        userCollectionView.userCollectionTableView.didSelectCard = { [weak self] list, card in
+            self?.navigateToCardDetailViewController(cardList: list, card: card)
         }
     }
 

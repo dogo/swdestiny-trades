@@ -31,9 +31,9 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        aboutView.didTouchHTTPLink = { [unowned self] url in
+        aboutView.didTouchHTTPLink = { [weak self] url in
             let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-            self.present(safariViewController, animated: true)
+            self?.present(safariViewController, animated: true)
         }
     }
 
