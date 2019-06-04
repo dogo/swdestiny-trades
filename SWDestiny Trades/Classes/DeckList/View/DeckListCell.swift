@@ -121,7 +121,7 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
             try RealmManager.shared.realm.write {
                 if let deck = deckDTO {
                     deck.name = titleEditText.text ?? ""
-                    RealmManager.shared.realm.add(deck, update: true)
+                    RealmManager.shared.realm.add(deck, update: .all)
                 }
             }
             } catch let error as NSError {

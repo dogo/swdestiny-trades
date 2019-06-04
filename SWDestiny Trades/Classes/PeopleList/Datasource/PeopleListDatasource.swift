@@ -57,7 +57,7 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
     public func insert(person: PersonDTO) {
         do {
             try RealmManager.shared.realm.write {
-                RealmManager.shared.realm.add(person, update: true)
+                RealmManager.shared.realm.add(person, update: .all)
                 persons.append(person)
             }
             tableView?.reloadData()

@@ -118,7 +118,7 @@ class AddToDeckViewController: UIViewController {
         if let deck = deckDTO, deck.list.filter(predicate).isEmpty {
             deck.list.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(deck, update: true)
+            RealmManager.shared.realm.add(deck, update: .all)
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         } else {

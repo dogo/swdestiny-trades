@@ -108,7 +108,7 @@ class AddCardViewController: UIViewController {
         if let person = personDTO, person.borrowed.filter(predicate).isEmpty {
             person.borrowed.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(person, update: true)
+            RealmManager.shared.realm.add(person, update: .all)
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
@@ -120,7 +120,7 @@ class AddCardViewController: UIViewController {
         if let person = personDTO, person.lentMe.filter(predicate).isEmpty {
             person.lentMe.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(person, update: true)
+            RealmManager.shared.realm.add(person, update: .all)
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
@@ -132,7 +132,7 @@ class AddCardViewController: UIViewController {
         if let userCollection = userCollectionDTO, userCollection.myCollection.filter(predicate).isEmpty {
             userCollection.myCollection.append(card)
             showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(userCollection, update: true)
+            RealmManager.shared.realm.add(userCollection, update: .all)
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }

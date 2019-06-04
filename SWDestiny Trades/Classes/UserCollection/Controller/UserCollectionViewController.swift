@@ -83,7 +83,7 @@ final class UserCollectionViewController: UIViewController {
                 } else {
                     user.myCollection.append(carDTO)
                 }
-                RealmManager.shared.realm.add(user, update: true)
+                RealmManager.shared.realm.add(user, update: .all)
             }
         } catch let error as NSError {
             print("Error opening realm: \(error)")
@@ -101,7 +101,7 @@ final class UserCollectionViewController: UIViewController {
             user = UserCollectionDTO()
             do {
                 try RealmManager.shared.realm.write {
-                    RealmManager.shared.realm.add(user, update: true)
+                    RealmManager.shared.realm.add(user, update: .all)
                 }
             } catch let error as NSError {
                 print("Error opening realm: \(error)")
