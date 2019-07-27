@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode10.2
+osx_image: xcode10.3
 
 rvm:
   - 2.3.5
@@ -16,9 +16,9 @@ env:
     - LC_ALL=en_US.UTF-8
     - PROJECT_WORKSPACE="swdestiny-trades.xcworkspace"
     - PROJECT_SCHEME="SWDestiny-Trades"
-    - IOS_SDK=iphonesimulator12.2
+    - IOS_SDK=iphonesimulator12.4
   matrix:
-    - DESTINATION="platform=iOS Simulator,OS=12.2,name=iPhone X"
+    - DESTINATION="platform=iOS Simulator,OS=12.4,name=iPhone X"
 
 before_install:
   - brew install carthage || true
