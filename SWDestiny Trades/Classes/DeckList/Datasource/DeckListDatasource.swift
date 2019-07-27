@@ -8,10 +8,10 @@
 
 import UIKit
 
-class DeckListDatasource: NSObject, UITableViewDataSource {
+final class DeckListDatasource: NSObject, UITableViewDataSource {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var deckList: [DeckDTO] = []
+    private var tableView: UITableView?
+    private var deckList: [DeckDTO] = []
 
     required init(tableView: UITableView) {
         super.init()
@@ -40,9 +40,10 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
 
     private func remove(at indexPath: IndexPath) {
         do {
-            try RealmManager.shared.realm.write {
-                RealmManager.shared.realm.delete(deckList[indexPath.row])
-                deckList.remove(at: indexPath.row)
+            try RealmManager.shared.realm.write { [weak self] in
+                guard let self = self else { return }
+                RealmManager.shared.realm.delete(self.deckList[indexPath.row])
+                self.deckList.remove(at: indexPath.row)
             }
         } catch let error as NSError {
             print("Error opening realm: \(error)")
@@ -60,10 +61,10 @@ class DeckListDatasource: NSObject, UITableViewDataSource {
 
     public func insert(deck: DeckDTO) {
         do {
-            try RealmManager.shared.realm.write {
+            try RealmManager.shared.realm.write { [weak self] in
                 RealmManager.shared.realm.add(deck)
-                deckList.append(deck)
-                tableView?.reloadData()
+                self?.deckList.append(deck)
+                self?.tableView?.reloadData()
             }
         } catch let error as NSError {
             print("Error opening realm: \(error)")

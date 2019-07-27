@@ -11,9 +11,9 @@ import FTPopOverMenu_Swift
 
 final class UserCollectionViewController: UIViewController {
 
-    fileprivate let userCollectionView = UserCollectionView()
-    fileprivate var currentSortIndex = 0
-    fileprivate lazy var navigator = UserCollectionNavigator(self.navigationController)
+    private let userCollectionView = UserCollectionView()
+    private var currentSortIndex = 0
+    private lazy var navigator = UserCollectionNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 

@@ -12,7 +12,7 @@ final class PeopleListTableView: UITableView {
 
     var didSelectPerson: ((PersonDTO) -> Void)?
 
-    fileprivate var tableViewDatasource: PeopleListDatasource?
+    private var tableViewDatasource: PeopleListDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

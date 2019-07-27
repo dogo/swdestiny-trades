@@ -9,9 +9,9 @@
 import UIKit
 import SafariServices
 
-class AboutViewController: UIViewController {
+final class AboutViewController: UIViewController {
 
-    fileprivate let aboutView = AboutView()
+    private let aboutView = AboutView()
 
     // MARK: - Life Cycle
 

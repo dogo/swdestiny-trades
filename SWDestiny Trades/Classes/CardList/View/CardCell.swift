@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var baseViewCell = BaseViewCell()
 

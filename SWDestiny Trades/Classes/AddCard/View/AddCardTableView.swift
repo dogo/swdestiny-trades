@@ -16,7 +16,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
 
     var tableDatasource: AddCardDatasource?
     let addCardTable = AddCardTableDelegate()
-    fileprivate var initialEdgeInsets: UIEdgeInsets = .zero
+    private var initialEdgeInsets: UIEdgeInsets = .zero
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

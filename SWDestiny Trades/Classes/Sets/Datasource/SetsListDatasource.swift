@@ -10,9 +10,9 @@ import UIKit
 
 class SetsListDatasource: NSObject, UITableViewDataSource {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var swdSets: [String: [SetDTO]] = [ : ]
-    fileprivate var sections: [String] = []
+    private var tableView: UITableView?
+    private var swdSets: [String: [SetDTO]] = [ : ]
+    private var sections: [String] = []
 
     required init(tableView: UITableView) {
         super.init()

@@ -10,10 +10,10 @@ import UIKit
 
 final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
-    fileprivate var cardCosts: [Int] = []
-    fileprivate var cardTypes: [Int] = []
-    fileprivate var dieFaces: [Int] = []
-    fileprivate var collectionView: UICollectionView?
+    private var cardCosts: [Int] = []
+    private var cardTypes: [Int] = []
+    private var dieFaces: [Int] = []
+    private var collectionView: UICollectionView?
 
     enum GraphType: Int {
         case

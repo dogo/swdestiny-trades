@@ -8,10 +8,10 @@
 
 import UIKit
 
-class UserCollectionDatasource: NSObject, UITableViewDataSource {
+final class UserCollectionDatasource: NSObject, UITableViewDataSource {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var userCollection: UserCollectionDTO?
+    private var tableView: UITableView?
+    private var userCollection: UserCollectionDTO?
     var collectionList: [CardDTO] = []
 
     required init(tableView: UITableView) {
@@ -26,7 +26,8 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
         if let card = getCard(at: indexPath) {
             cell.configureCell(cardDTO: card)
-            cell.stepperValueChanged = { value, cell in
+            cell.stepperValueChanged = { [weak self] value, cell in
+                guard let self = self else { return }
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {
                     do {
@@ -88,10 +89,10 @@ class UserCollectionDatasource: NSObject, UITableViewDataSource {
 
     private func remove(at indexPath: IndexPath) {
         do {
-            try RealmManager.shared.realm.write {
-                if let card = getCard(at: indexPath), let realmIndex = userCollection?.myCollection.index(of: card) {
-                    userCollection?.myCollection.remove(at: realmIndex)
-                    collectionList.remove(at: indexPath.row)
+            try RealmManager.shared.realm.write { [weak self] in
+                if let card = self?.getCard(at: indexPath), let realmIndex = self?.userCollection?.myCollection.index(of: card) {
+                    self?.userCollection?.myCollection.remove(at: realmIndex)
+                    self?.collectionList.remove(at: indexPath.row)
                 }
             }
         } catch let error as NSError {

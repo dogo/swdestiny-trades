@@ -10,7 +10,7 @@ import UIKit
 
 final class DeckGraphCollectionView: UICollectionView {
 
-    fileprivate var collectionViewDatasource: DeckGraphDatasource?
+    private var collectionViewDatasource: DeckGraphDatasource?
 
     convenience init() {
         self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

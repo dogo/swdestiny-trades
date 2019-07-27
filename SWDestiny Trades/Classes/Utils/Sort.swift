@@ -53,10 +53,8 @@ enum Sort {
         cardsArray.forEach { _ = types.insert(getType(cardDTO: $0)) }
 
         for symbol in types {
-            for card in cardsArray {
-                if symbol == getType(cardDTO: card) {
-                    source.append(card)
-                }
+            for card in cardsArray where symbol == getType(cardDTO: card) {
+                source.append(card)
             }
         }
         return Sort.cardsAlphabetically(cardsArray: source)

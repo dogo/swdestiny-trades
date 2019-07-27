@@ -10,8 +10,8 @@ import UIKit
 
 class PeopleListDatasource: NSObject, UITableViewDataSource {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var persons: [PersonDTO] = []
+    private var tableView: UITableView?
+    private var persons: [PersonDTO] = []
 
     required init(tableView: UITableView) {
         super.init()
@@ -56,9 +56,9 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     public func insert(person: PersonDTO) {
         do {
-            try RealmManager.shared.realm.write {
+            try RealmManager.shared.realm.write { [weak self] in
                 RealmManager.shared.realm.add(person, update: .all)
-                persons.append(person)
+                self?.persons.append(person)
             }
             tableView?.reloadData()
         } catch let error as NSError {
@@ -68,9 +68,9 @@ class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     private func remove(at indexPath: IndexPath) {
         do {
-            try RealmManager.shared.realm.write {
+            try RealmManager.shared.realm.write { [weak self] in
                 RealmManager.shared.realm.delete(persons[indexPath.row])
-                persons.remove(at: indexPath.row)
+                self?.persons.remove(at: indexPath.row)
             }
         } catch let error as NSError {
             print("Error opening realm: \(error)")

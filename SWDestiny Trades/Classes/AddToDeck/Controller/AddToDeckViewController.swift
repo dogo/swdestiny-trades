@@ -10,14 +10,14 @@ import UIKit
 import PKHUD
 import Moya
 
-class AddToDeckViewController: UIViewController {
+final class AddToDeckViewController: UIViewController {
 
-    fileprivate let destinyService = SWDestinyServiceImpl()
-    fileprivate var cancellableService: Cancellable?
-    fileprivate let addToDeckView = AddToDeckView()
-    fileprivate var cards = [CardDTO]()
-    fileprivate var deckDTO: DeckDTO?
-    fileprivate lazy var navigator = AddCardNavigator(self.navigationController)
+    private let destinyService = SWDestinyServiceImpl()
+    private var cancellableService: Cancellable?
+    private let addToDeckView = AddToDeckView()
+    private var cards = [CardDTO]()
+    private var deckDTO: DeckDTO?
+    private lazy var navigator = AddCardNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -70,16 +70,16 @@ class AddToDeckViewController: UIViewController {
         self.navigationItem.title = L10n.addCard
     }
 
-    fileprivate func retrieveAllCards() {
+    private func retrieveAllCards() {
         addToDeckView.activityIndicator.startAnimating()
-        cancellableService = destinyService.retrieveAllCards { result in
+        cancellableService = destinyService.retrieveAllCards { [weak self] result in
             switch result {
             case .success(let allCards):
-                self.addToDeckView.addToDeckTableView.updateSearchList(allCards)
-                self.addToDeckView.activityIndicator.stopAnimating()
-                self.cards = allCards
+                self?.addToDeckView.addToDeckTableView.updateSearchList(allCards)
+                self?.addToDeckView.activityIndicator.stopAnimating()
+                self?.cards = allCards
             case .failure(let error as NSError):
-                self.addToDeckView.activityIndicator.stopAnimating()
+                self?.addToDeckView.activityIndicator.stopAnimating()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
                 if error.code != 6 {
@@ -90,7 +90,7 @@ class AddToDeckViewController: UIViewController {
         }
     }
 
-    fileprivate func loadDataFromRealm() {
+    private func loadDataFromRealm() {
         cancellableService?.cancel()
         if let collection = Array(RealmManager.shared.realm.objects(UserCollectionDTO.self)).first {
             self.cards = Array(collection.myCollection)
@@ -100,21 +100,21 @@ class AddToDeckViewController: UIViewController {
 
     // MARK: - Helpers
 
-    fileprivate func insert(card: CardDTO) {
+    private func insert(card: CardDTO) {
         let predicate = NSPredicate(format: "code == %@", card.code)
         do {
-            try RealmManager.shared.realm.write {
+            try RealmManager.shared.realm.write { [weak self] in
                 let copy = CardDTO(value: card)
                 copy.id = NSUUID().uuidString
                 copy.quantity = 1
-                self.insertToDeckBuilder(card: copy, predicate: predicate)
+                self?.insertToDeckBuilder(card: copy, predicate: predicate)
             }
         } catch let error as NSError {
             print("Error opening realm: \(error)")
         }
     }
 
-    fileprivate func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
+    private func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
         if let deck = deckDTO, deck.list.filter(predicate).isEmpty {
             deck.list.append(card)
             showSuccessMessage(card: card)
@@ -126,7 +126,7 @@ class AddToDeckViewController: UIViewController {
         }
     }
 
-    fileprivate func showSuccessMessage(card: CardDTO) {
+    private func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)

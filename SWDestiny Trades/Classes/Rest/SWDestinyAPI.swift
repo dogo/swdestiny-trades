@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-class SWDestinyAPI: SWDestinyService {
+final class SWDestinyAPI: SWDestinyService {
 
     let provider: MoyaProvider<SWDestinyRoute>
 

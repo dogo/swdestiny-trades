@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnable {
+final class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var alphabeticallyCards: [String: [CardDTO]] = [ : ]
-    fileprivate var sections: [String] = []
+    private var tableView: UITableView?
+    private var alphabeticallyCards: [String: [CardDTO]] = [ : ]
+    private var sections: [String] = []
 
     required init(tableView: UITableView) {
         super.init()
@@ -69,7 +69,7 @@ class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnabl
         tableView?.reloadData()
     }
 
-    fileprivate func insertHeaderToDataSource() {
+    private func insertHeaderToDataSource() {
         alphabeticallyCards[" "] = [CardDTO]()
         sections.insert(" ", at: 0)
     }

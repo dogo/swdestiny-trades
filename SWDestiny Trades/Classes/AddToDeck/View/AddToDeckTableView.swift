@@ -16,8 +16,8 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
     var didSelectRemote: (() -> Void)?
     var didSelectLocal: (() -> Void)?
 
-    fileprivate let addCardToDeckTable = AddToDeckCardDelegate()
-    fileprivate var tableDatasource: AddToDeckCardDatasource?
+    private let addCardToDeckTable = AddToDeckCardDelegate()
+    private var tableDatasource: AddToDeckCardDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

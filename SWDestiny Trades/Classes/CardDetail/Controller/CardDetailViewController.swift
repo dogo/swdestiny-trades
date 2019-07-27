@@ -10,12 +10,12 @@ import UIKit
 import ImageSlideshow
 import PKHUD
 
-class CardDetailViewController: UIViewController {
+final class CardDetailViewController: UIViewController {
 
-    fileprivate let cardView = CardView()
-    fileprivate var cards = [CardDTO]()
-    fileprivate var cardDTO: CardDTO
-    fileprivate var imageSource = [InputSource]()
+    private let cardView = CardView()
+    private var cards = [CardDTO]()
+    private var cardDTO: CardDTO
+    private var imageSource = [InputSource]()
 
     // MARK: - Life Cycle
 
@@ -54,8 +54,8 @@ class CardDetailViewController: UIViewController {
             cardView.slideshow.setCurrentPage(index, animated: true)
         }
 
-        cardView.slideshow.currentPageChanged = { page in
-            self.navigationItem.title = self.cards[page].name
+        cardView.slideshow.currentPageChanged = { [weak self] page in
+            self?.navigationItem.title = self?.cards[page].name
         }
     }
 

@@ -12,7 +12,7 @@ import Reusable
 final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
 
     weak var delegate: CardListViewDelegate?
-    fileprivate var selectedIndex: Int = 0
+    private var selectedIndex: Int = 0
 
     lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)

@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var stepperValueChanged: ((Int, DeckBuilderCell) -> Void)?
     var eliteButtonTouched: ((Bool, DeckBuilderCell) -> Void)?
@@ -173,7 +173,8 @@ class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     internal func configureViews() {
         self.accessoryType = .disclosureIndicator
 
-        eliteButton.buttonTouched = { newVaue in
+        eliteButton.buttonTouched = { [weak self] newVaue in
+            guard let self = self else { return }
             self.eliteButtonTouched?(newVaue, self)
         }
     }

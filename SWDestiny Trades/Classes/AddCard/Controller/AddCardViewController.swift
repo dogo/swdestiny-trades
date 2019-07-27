@@ -15,15 +15,15 @@ public enum AddCardType {
     case collection
 }
 
-class AddCardViewController: UIViewController {
+final class AddCardViewController: UIViewController {
 
-    fileprivate let addCardView = AddCardView()
-    fileprivate let destinyService: SWDestinyService
-    fileprivate let addCardType: AddCardType
-    fileprivate var cards = [CardDTO]()
-    fileprivate var personDTO: PersonDTO?
-    fileprivate var userCollectionDTO: UserCollectionDTO?
-    fileprivate lazy var navigator = AddCardNavigator(self.navigationController)
+    private let addCardView = AddCardView()
+    private let destinyService: SWDestinyService
+    private let addCardType: AddCardType
+    private var cards = [CardDTO]()
+    private var personDTO: PersonDTO?
+    private var userCollectionDTO: UserCollectionDTO?
+    private lazy var navigator = AddCardNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -51,14 +51,14 @@ class AddCardViewController: UIViewController {
         super.viewDidLoad()
 
         addCardView.activityIndicator.startAnimating()
-        destinyService.retrieveAllCards { result in
+        destinyService.retrieveAllCards { [weak self] result in
             switch result {
             case .success(let allCards):
-                self.addCardView.addCardTableView.updateSearchList(allCards)
-                self.addCardView.activityIndicator.stopAnimating()
-                self.cards = allCards
+                self?.addCardView.addCardTableView.updateSearchList(allCards)
+                self?.addCardView.activityIndicator.stopAnimating()
+                self?.cards = allCards
             case .failure(let error):
-                self.addCardView.activityIndicator.stopAnimating()
+                self?.addCardView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description
@@ -86,10 +86,11 @@ class AddCardViewController: UIViewController {
 
     // MARK: - Helpers
 
-    fileprivate func insert(card: CardDTO) {
+    private func insert(card: CardDTO) {
         let predicate = NSPredicate(format: "code == %@", card.code)
         do {
-            try RealmManager.shared.realm.write {
+            try RealmManager.shared.realm.write { [weak self] in
+                guard let self = self else { return }
                 switch self.addCardType {
                 case .lent:
                     self.insertToLentMe(card: card, predicate: predicate)
@@ -104,7 +105,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    fileprivate func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
+    private func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
         if let person = personDTO, person.borrowed.filter(predicate).isEmpty {
             person.borrowed.append(card)
             showSuccessMessage(card: card)
@@ -116,7 +117,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    fileprivate func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
+    private func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
         if let person = personDTO, person.lentMe.filter(predicate).isEmpty {
             person.lentMe.append(card)
             showSuccessMessage(card: card)
@@ -128,7 +129,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    fileprivate func insertToCollection(card: CardDTO, predicate: NSPredicate) {
+    private func insertToCollection(card: CardDTO, predicate: NSPredicate) {
         if let userCollection = userCollectionDTO, userCollection.myCollection.filter(predicate).isEmpty {
             userCollection.myCollection.append(card)
             showSuccessMessage(card: card)
@@ -138,7 +139,7 @@ class AddCardViewController: UIViewController {
         }
     }
 
-    fileprivate func showSuccessMessage(card: CardDTO) {
+    private func showSuccessMessage(card: CardDTO) {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseViewCell: UIView, BaseViewConfiguration {
+final class BaseViewCell: UIView, BaseViewConfiguration {
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)

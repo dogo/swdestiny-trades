@@ -13,7 +13,7 @@ final class SearchTableView: UITableView, SearchDelegate {
     var didSelectCard: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
 
-    fileprivate var searchDatasource: SearchDatasource?
+    private var searchDatasource: SearchDatasource?
     let search = Search()
 
     override init(frame: CGRect, style: UITableView.Style) {

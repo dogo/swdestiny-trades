@@ -9,7 +9,7 @@
 import Foundation
 import Moya
 
-class SWDestinyServiceImpl: SWDestinyService {
+final class SWDestinyServiceImpl: SWDestinyService {
 
     let api: SWDestinyService
 

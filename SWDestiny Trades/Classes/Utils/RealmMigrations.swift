@@ -65,7 +65,7 @@ enum RealmMigrations {
         migrateCardQuantity(needsMigrationToV2)
     }
 
-    fileprivate static func migrateCardQuantity(_ needsMigration: Bool) {
+    private static func migrateCardQuantity(_ needsMigration: Bool) {
         let realm = RealmManager.shared.realm
 
         if needsMigration {

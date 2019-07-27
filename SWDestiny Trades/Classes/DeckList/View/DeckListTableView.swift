@@ -12,7 +12,7 @@ final class DeckListTableView: UITableView {
 
     var didSelectDeck: ((DeckDTO) -> Void)?
 
-    fileprivate var tableViewDatasource: DeckListDatasource?
+    private var tableViewDatasource: DeckListDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

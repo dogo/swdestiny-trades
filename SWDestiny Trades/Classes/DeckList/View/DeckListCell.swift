@@ -118,9 +118,9 @@ class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFiel
             titleEditText.becomeFirstResponder()
         } else {
             do {
-            try RealmManager.shared.realm.write {
-                if let deck = deckDTO {
-                    deck.name = titleEditText.text ?? ""
+            try RealmManager.shared.realm.write { [weak self] in
+                if let deck = self?.deckDTO {
+                    deck.name = self?.titleEditText.text ?? ""
                     RealmManager.shared.realm.add(deck, update: .all)
                 }
             }

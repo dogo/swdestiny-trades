@@ -8,10 +8,10 @@
 
 import UIKit
 
-class DeckGraphViewController: UIViewController {
+final class DeckGraphViewController: UIViewController {
 
-    fileprivate let deckDTO: DeckDTO
-    fileprivate let graphView = GraphView()
+    private let deckDTO: DeckDTO
+    private let graphView = GraphView()
 
     // MARK: - Life Cycle
 

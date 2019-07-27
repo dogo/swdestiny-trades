@@ -10,8 +10,8 @@ import UIKit
 
 class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var currentPerson: PersonDTO?
+    private var tableView: UITableView?
+    private var currentPerson: PersonDTO?
     var lentMe: [CardDTO] = []
     var borrowed: [CardDTO] = []
 
@@ -77,7 +77,8 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             cell.quantityStepper.isHidden = false
             cell.textLabel?.text = nil
             cell.configureCell(cardDTO: lentMe[indexPath.row])
-            cell.stepperValueChanged = { value, cell in
+            cell.stepperValueChanged = { [weak self] value, cell in
+                guard let self = self else { return }
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {
                     do {
@@ -101,7 +102,8 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
             cell.quantityStepper.isHidden = false
             cell.textLabel?.text = nil
             cell.configureCell(cardDTO: borrowed[indexPath.row])
-            cell.stepperValueChanged = { value, cell in
+            cell.stepperValueChanged = { [weak self] value, cell in
+                guard let self = self else { return }
                 guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
                 if let card = self.getCard(at: indexPath) {
                     do {
@@ -118,13 +120,13 @@ class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     private func remove(at indexPath: IndexPath) {
         do {
-            try RealmManager.shared.realm.write {
+            try RealmManager.shared.realm.write { [weak self] in
                 if indexPath.section == 0 {
-                    lentMe.remove(at: indexPath.row)
-                    currentPerson?.lentMe.remove(at: indexPath.row)
+                    self?.lentMe.remove(at: indexPath.row)
+                    self?.currentPerson?.lentMe.remove(at: indexPath.row)
                 } else {
-                    borrowed.remove(at: indexPath.row)
-                    currentPerson?.borrowed.remove(at: indexPath.row)
+                    self?.borrowed.remove(at: indexPath.row)
+                    self?.currentPerson?.borrowed.remove(at: indexPath.row)
                 }
             }
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LoggerManager: LoggerProtocol {
+final class LoggerManager: LoggerProtocol {
 
     static let shared: LoggerManager = {
         var manager = LoggerManager()
@@ -18,6 +18,8 @@ class LoggerManager: LoggerProtocol {
     }()
 
     private var loggers: [LoggerProtocol] = []
+
+    private init() {}
 
     internal func setup() {
         self.loggers.forEach { $0.setup() }

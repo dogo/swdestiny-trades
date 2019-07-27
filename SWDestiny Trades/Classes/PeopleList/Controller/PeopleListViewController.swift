@@ -14,8 +14,8 @@ protocol UpdateTableDataDelegate: AnyObject {
 
 class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
-    fileprivate let peopleListView = PeopleListView()
-    fileprivate lazy var navigator = PeopleListNavigator(self.navigationController)
+    private let peopleListView = PeopleListView()
+    private lazy var navigator = PeopleListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 

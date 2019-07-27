@@ -17,10 +17,10 @@ open class BalloonMarker: MarkerImage {
     open var insets = UIEdgeInsets()
     open var minimumSize = CGSize()
 
-    fileprivate var labelns: NSString?
-    fileprivate var _labelSize = CGSize()
-    fileprivate var _paragraphStyle: NSMutableParagraphStyle?
-    fileprivate var _drawAttributes = [NSAttributedString.Key: Any]()
+    private var labelns: NSString?
+    private var _labelSize = CGSize()
+    private var _paragraphStyle: NSMutableParagraphStyle?
+    private var _drawAttributes = [NSAttributedString.Key: Any]()
 
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets) {
         super.init()

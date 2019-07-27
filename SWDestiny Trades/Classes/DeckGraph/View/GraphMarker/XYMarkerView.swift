@@ -12,7 +12,7 @@ import Charts
 open class XYMarkerView: BalloonMarker {
 
     open var xAxisValueFormatter: IAxisValueFormatter?
-    fileprivate var yFormatter = NumberFormatter()
+    private var yFormatter = NumberFormatter()
 
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets, xAxisValueFormatter: IAxisValueFormatter) {
         super.init(color: color, font: font, textColor: textColor, insets: insets)

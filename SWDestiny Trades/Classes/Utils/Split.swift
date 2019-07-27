@@ -23,10 +23,8 @@ enum Split {
 
             var cardsDTO = [CardDTO]()
 
-            for card in cardList {
-                if symbol == getFirstLetter(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
+            for card in cardList where symbol == getFirstLetter(cardDTO: card) {
+                cardsDTO.append(card)
             }
             tableViewSource[symbol] = cardsDTO.sorted {
                 $0.name < $1.name
@@ -49,10 +47,8 @@ enum Split {
 
             var cardsDTO = [CardDTO]()
 
-            for card in cardList {
-                if symbol == getColor(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
+            for card in cardList where symbol == getColor(cardDTO: card) {
+                cardsDTO.append(card)
             }
             tableViewSource[symbol] = cardsDTO.sorted {
                 $0.name < $1.name
@@ -74,10 +70,8 @@ enum Split {
 
             var cardsDTO = [CardDTO]()
 
-            for card in cardList {
-                if symbol == getType(cardDTO: card) {
-                    cardsDTO.append(card)
-                }
+            for card in cardList where symbol == getType(cardDTO: card) {
+                cardsDTO.append(card)
             }
             tableViewSource[symbol] = cardsDTO.sorted {
                 $0.name < $1.name
@@ -100,10 +94,8 @@ enum Split {
 
             var setsDTO = [SetDTO]()
 
-            for set in setList {
-                if symbol == getFirstLetter(setDTO: set) {
-                    setsDTO.append(set)
-                }
+            for set in setList where symbol == getFirstLetter(setDTO: set) {
+                setsDTO.append(set)
             }
             tableViewSource[symbol] = setsDTO.sorted {
                 $0.name < $1.name

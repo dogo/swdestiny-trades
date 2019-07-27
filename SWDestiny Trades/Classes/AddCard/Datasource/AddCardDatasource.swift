@@ -10,10 +10,10 @@ import UIKit
 
 final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var searchIsActive = false
-    fileprivate var cardsData: [CardDTO] = []
-    fileprivate var filtered: [CardDTO] = []
+    private var tableView: UITableView?
+    private var searchIsActive = false
+    private var cardsData: [CardDTO] = []
+    private var filtered: [CardDTO] = []
 
     required init(cards: [CardDTO], tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -53,7 +53,7 @@ final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDeleg
     }
 }
 
-class AddCardTableDelegate: NSObject, UITableViewDelegate {
+final class AddCardTableDelegate: NSObject, UITableViewDelegate {
 
     weak var delegate: SearchDelegate?
 

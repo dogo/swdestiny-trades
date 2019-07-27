@@ -13,7 +13,7 @@ final class LoanDetailTableView: UITableView {
     var didSelectCard: ((CardDTO, Bool) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
 
-    fileprivate var tableViewDatasource: LoansDetailDatasource?
+    private var tableViewDatasource: LoansDetailDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

@@ -10,10 +10,10 @@ import UIKit
 
 final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var searchIsActive = false
-    fileprivate var cardsData: [CardDTO] = []
-    fileprivate var filtered: [CardDTO] = []
+    private var tableView: UITableView?
+    private var searchIsActive = false
+    private var cardsData: [CardDTO] = []
+    private var filtered: [CardDTO] = []
 
     required init(cards: [CardDTO], tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
@@ -54,10 +54,10 @@ final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBa
     }
 }
 
-class AddToDeckCardDelegate: NSObject, UITableViewDelegate {
+final class AddToDeckCardDelegate: NSObject, UITableViewDelegate {
 
     weak var delegate: SearchDelegate?
-    fileprivate var header: AddToDeckHeaderView?
+    private var header: AddToDeckHeaderView?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeckBuilderDatasource: NSObject, UITableViewDataSource {
+final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     struct Section {
         var name: String
@@ -22,8 +22,8 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    fileprivate var tableView: UITableView?
-    fileprivate var currentDeck: DeckDTO?
+    private var tableView: UITableView?
+    private var currentDeck: DeckDTO?
     var deckList = [Section]()
 
     weak var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
@@ -41,11 +41,11 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckBuilderCell.self)
         if let card = getCard(at: indexPath) {
             cell.configureCell(card: card)
-            cell.stepperValueChanged = { value, cell in
-                self.updateCardQuantity(newValue: value, cell: cell)
+            cell.stepperValueChanged = { [weak self] value, cell in
+                self?.updateCardQuantity(newValue: value, cell: cell)
             }
-            cell.eliteButtonTouched = { isElite, cell in
-                self.updateCharacterElite(newValue: isElite, cell: cell)
+            cell.eliteButtonTouched = { [weak self] isElite, cell in
+                self?.updateCharacterElite(newValue: isElite, cell: cell)
             }
         }
         return cell
@@ -110,7 +110,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         tableView?.reloadData()
     }
 
-    fileprivate func updateCardQuantity(newValue: Int, cell: DeckBuilderCell) {
+    private func updateCardQuantity(newValue: Int, cell: DeckBuilderCell) {
         guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
         if let card = self.getCard(at: indexPath) {
             do {
@@ -123,7 +123,7 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    fileprivate func updateCharacterElite(newValue: Bool, cell: DeckBuilderCell) {
+    private func updateCharacterElite(newValue: Bool, cell: DeckBuilderCell) {
         guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
         if let card = self.getCard(at: indexPath) {
             do {
@@ -136,12 +136,12 @@ class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         }
     }
 
-    fileprivate func remove(at indexPath: IndexPath) {
+    private func remove(at indexPath: IndexPath) {
         do {
-            try RealmManager.shared.realm.write {
-                if let card = getCard(at: indexPath), let realmIndex = currentDeck?.list.index(of: card) {
-                    currentDeck?.list.remove(at: realmIndex)
-                    deckList[indexPath.section].items.remove(at: indexPath.row)
+            try RealmManager.shared.realm.write { [weak self] in
+                if let card = self?.getCard(at: indexPath), let realmIndex = self?.currentDeck?.list.index(of: card) {
+                    self?.currentDeck?.list.remove(at: realmIndex)
+                    self?.deckList[indexPath.section].items.remove(at: indexPath.row)
                 }
             }
         } catch let error as NSError {

@@ -10,9 +10,9 @@ import UIKit
 
 final class DeckBuilderViewController: UIViewController {
 
-    fileprivate let deckBuilderView = DeckBuilderView()
-    fileprivate var deckDTO: DeckDTO
-    fileprivate lazy var navigator = DeckBuilderNavigator(self.navigationController)
+    private let deckBuilderView = DeckBuilderView()
+    private var deckDTO: DeckDTO
+    private lazy var navigator = DeckBuilderNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 

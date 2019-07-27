@@ -10,7 +10,7 @@ import UIKit
 
 class NewPersonViewController: UIViewController {
 
-    fileprivate let newPersonView = NewPersonView()
+    private let newPersonView = NewPersonView()
     weak var delegate: UpdateTableDataDelegate?
 
     // MARK: - Life Cycle

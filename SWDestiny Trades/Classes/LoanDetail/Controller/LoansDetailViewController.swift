@@ -10,9 +10,9 @@ import UIKit
 
 class LoansDetailViewController: UIViewController {
 
-    fileprivate let loanDetailView = LoanDetailView()
-    fileprivate var personDTO: PersonDTO
-    fileprivate lazy var navigator = LoanDetailNavigator(self.navigationController)
+    private let loanDetailView = LoanDetailView()
+    private var personDTO: PersonDTO
+    private lazy var navigator = LoanDetailNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 

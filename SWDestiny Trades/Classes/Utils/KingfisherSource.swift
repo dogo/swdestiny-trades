@@ -11,7 +11,7 @@ import Kingfisher
 import ImageSlideshow
 
 /// Input Source to image using Kingfisher
-public class KingfisherSource: NSObject, InputSource {
+public final class KingfisherSource: NSObject, InputSource {
     /// url to load
     public var url: URL
 

@@ -8,12 +8,12 @@
 
 import UIKit
 
-class CardListViewController: UIViewController {
+final class CardListViewController: UIViewController {
 
-    fileprivate let cardListView = CardListView()
-    fileprivate let destinyService = SWDestinyServiceImpl()
-    fileprivate var setDTO: SetDTO
-    fileprivate lazy var navigator = CardListNavigator(self.navigationController)
+    private let cardListView = CardListView()
+    private let destinyService = SWDestinyServiceImpl()
+    private var setDTO: SetDTO
+    private lazy var navigator = CardListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -35,13 +35,13 @@ class CardListViewController: UIViewController {
         super.viewDidLoad()
 
         cardListView.activityIndicator.startAnimating()
-        destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased()) { result in
+        destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased()) { [weak self] result in
             switch result {
             case .success(let cardList):
-                self.cardListView.cardListTableView.updateCardList(cardList)
-                self.cardListView.activityIndicator.stopAnimating()
+                self?.cardListView.cardListTableView.updateCardList(cardList)
+                self?.cardListView.activityIndicator.stopAnimating()
             case .failure(let error):
-                self.cardListView.activityIndicator.stopAnimating()
+                self?.cardListView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description

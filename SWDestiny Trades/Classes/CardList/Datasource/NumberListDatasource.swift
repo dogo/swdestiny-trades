@@ -8,10 +8,10 @@
 
 import UIKit
 
-class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
+final class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var numberCards: [CardDTO] = []
+    private var tableView: UITableView?
+    private var numberCards: [CardDTO] = []
 
     required init(tableView: UITableView) {
         super.init()

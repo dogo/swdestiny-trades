@@ -10,9 +10,9 @@ import UIKit
 
 class SetsListViewController: UIViewController {
 
-    fileprivate let setsView = SetsView()
-    fileprivate let destinyService = SWDestinyServiceImpl()
-    fileprivate lazy var navigator = SetsListNavigator(self.navigationController)
+    private let setsView = SetsView()
+    private let destinyService = SWDestinyServiceImpl()
+    private lazy var navigator = SetsListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -59,12 +59,12 @@ class SetsListViewController: UIViewController {
 
     @objc
     func retrieveSets(sender: UIRefreshControl) {
-        destinyService.retrieveSetList { result in
-            self.setsView.endRefreshControl()
-            self.setsView.activityIndicator.stopAnimating()
+        destinyService.retrieveSetList { [weak self] result in
+            self?.setsView.endRefreshControl()
+            self?.setsView.activityIndicator.stopAnimating()
             switch result {
             case .success(let setList):
-                self.setsView.setsTableView.updateSetList(setList)
+                self?.setsView.setsTableView.updateSetList(setList)
             case .failure(let error):
                 ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible

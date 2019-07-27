@@ -24,7 +24,7 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
         return label
     }()
 
-    fileprivate var arrowLabel: UILabel = {
+    private var arrowLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.text = ">"
         return label

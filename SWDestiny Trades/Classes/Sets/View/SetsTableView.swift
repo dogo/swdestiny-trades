@@ -12,7 +12,7 @@ final class SetsTableView: UITableView {
 
     var didSelectSet: ((SetDTO) -> Void)?
 
-    fileprivate var tableViewDatasource: SetsListDatasource?
+    private var tableViewDatasource: SetsListDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

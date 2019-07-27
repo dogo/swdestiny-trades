@@ -19,12 +19,12 @@ protocol SearchDelegate: AnyObject {
     optional func didSelectSegment(index: Int)
 }
 
-class SearchListViewController: UIViewController {
+final class SearchListViewController: UIViewController {
 
-    fileprivate let destinyService = SWDestinyServiceImpl()
-    fileprivate let searchView = SearchView()
-    fileprivate var cards = [CardDTO]()
-    fileprivate lazy var navigator = SearchNavigator(self.navigationController)
+    private let destinyService = SWDestinyServiceImpl()
+    private let searchView = SearchView()
+    private var cards = [CardDTO]()
+    private lazy var navigator = SearchNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
@@ -45,14 +45,14 @@ class SearchListViewController: UIViewController {
         super.viewDidLoad()
 
         searchView.activityIndicator.startAnimating()
-        destinyService.retrieveAllCards { result in
+        destinyService.retrieveAllCards { [weak self] result in
             switch result {
             case .success(let allCards):
-                self.searchView.searchTableView.updateSearchList(allCards)
-                self.searchView.activityIndicator.stopAnimating()
-                self.cards = allCards
+                self?.searchView.searchTableView.updateSearchList(allCards)
+                self?.searchView.activityIndicator.stopAnimating()
+                self?.cards = allCards
             case .failure(let error):
-                self.searchView.activityIndicator.stopAnimating()
+                self?.searchView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
                 let printableError = error as CustomStringConvertible
                 let errorMessage = printableError.description

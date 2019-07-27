@@ -10,10 +10,10 @@ import UIKit
 
 final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var searchIsActive: Bool = false
-    fileprivate var cardsData: [CardDTO] = []
-    fileprivate var filtered: [CardDTO] = []
+    private var tableView: UITableView?
+    private var searchIsActive: Bool = false
+    private var cardsData: [CardDTO] = []
+    private var filtered: [CardDTO] = []
 
     required init(cards: [CardDTO], tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()

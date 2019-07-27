@@ -21,6 +21,8 @@ final class RealmManager: NSObject {
 #endif
 // swiftlint:enable force_try
 
+    override private init () {}
+
     func performInBackground(_ backgroundAction: @escaping (_ backgroundRealm: Realm) -> Void) {
         DispatchQueue.global(qos: .background).async {
             do {

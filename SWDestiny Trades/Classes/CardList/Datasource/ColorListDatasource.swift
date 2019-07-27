@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
+final class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
 
-    fileprivate var tableView: UITableView?
-    fileprivate var colorCards: [String: [CardDTO]] = [ : ]
-    fileprivate var sections: [String] = []
+    private var tableView: UITableView?
+    private var colorCards: [String: [CardDTO]] = [ : ]
+    private var sections: [String] = []
 
     required init(tableView: UITableView) {
         super.init()
@@ -65,7 +65,7 @@ class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
         tableView?.reloadData()
     }
 
-    fileprivate func insertHeaderToDataSource() {
+    private func insertHeaderToDataSource() {
         colorCards[" "] = [CardDTO]()
         sections.insert(" ", at: 0)
     }

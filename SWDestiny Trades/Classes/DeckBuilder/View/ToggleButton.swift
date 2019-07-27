@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToggleButton: UIButton {
+final class ToggleButton: UIButton {
 
     var isActivate: Bool = false {
         didSet {
@@ -37,7 +37,7 @@ class ToggleButton: UIButton {
         layer.cornerRadius = frame.size.height / 2
     }
 
-    fileprivate func initButton() {
+    private func initButton() {
         layer.borderWidth = 1.0
         layer.borderColor = ColorPalette.appTheme.cgColor
 
@@ -45,7 +45,7 @@ class ToggleButton: UIButton {
     }
 
     @objc
-    fileprivate func buttonPressed() {
+    private func buttonPressed() {
         self.isActivate = !isActivate
         buttonTouched?(self.isActivate)
     }
