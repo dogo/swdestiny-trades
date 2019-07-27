@@ -53,7 +53,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - SwiftGen (6.1.0)
-  - SwiftLint (0.33.0)
+  - SwiftLint (0.34.0)
 
 DEPENDENCIES:
   - Crashlytics
@@ -87,8 +87,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
-  SwiftLint: fed9c66336e41fc74dc48a73678380718f0c8b0e
+  SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
 
 PODFILE CHECKSUM: 1244a6da84a187e3aa627f971dd4ece67dbad49a
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.7.5
