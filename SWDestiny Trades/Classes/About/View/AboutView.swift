@@ -80,7 +80,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         versionLabel.text = L10n.version(Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber)
 
         let attributedString = NSMutableAttributedString(string: L10n.aboutText)
-        attributedString.setAsLink(textToFind: "http://swdestinydb.com", linkURL: "http://swdestinydb.com")
+        attributedString.setAsLink(textToFind: "https://swdestinydb.com", linkURL: "https://swdestinydb.com")
 
         aboutTextView.attributedText = attributedString
     }

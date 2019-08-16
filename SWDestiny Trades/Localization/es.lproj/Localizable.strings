@@ -7,7 +7,7 @@
 */
 
 "ABOUT" = "Acerca de";
-"ABOUT_TEXT" = "Por Diogo Autilio\n\nAPI Datos de Paco http://swdestinydb.com\n\nLa información presentada en esta aplicación sobre Star Wars Destiny, tanto literal como gráfica, está protegida por derechos de autor por Fantasy Flight Games. No es producido, endosado, apoyado o afiliado a Fantasy Flight Games.";
+"ABOUT_TEXT" = "Por Diogo Autilio\n\nAPI Datos de Paco https://swdestinydb.com\n\nLa información presentada en esta aplicación sobre Star Wars Destiny, tanto literal como gráfica, está protegida por derechos de autor por Fantasy Flight Games. No es producido, endosado, apoyado o afiliado a Fantasy Flight Games.";
 "ADD_CARD" = "Añadir carta";
 "ADD_MY_CARD" = "Añadir mi carta...";
 "ADDED" = "Añadido";
