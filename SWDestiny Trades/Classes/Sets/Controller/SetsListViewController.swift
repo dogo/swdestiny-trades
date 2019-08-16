@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetsListViewController: UIViewController {
+final class SetsListViewController: UIViewController {
 
     private let setsView = SetsView()
     private let destinyService = SWDestinyServiceImpl()
@@ -64,12 +64,11 @@ class SetsListViewController: UIViewController {
             self?.setsView.activityIndicator.stopAnimating()
             switch result {
             case .success(let setList):
+                guard let setList = setList else { return }
                 self?.setsView.setsTableView.updateSetList(setList)
             case .failure(let error):
                 ToastMessages.showNetworkErrorMessage()
-                let printableError = error as CustomStringConvertible
-                let errorMessage = printableError.description
-                LoggerManager.shared.log(event: .setsList, parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
             }
         }
     }

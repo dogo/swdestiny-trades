@@ -46,17 +46,15 @@ final class SearchListViewController: UIViewController {
 
         searchView.activityIndicator.startAnimating()
         destinyService.retrieveAllCards { [weak self] result in
+            self?.searchView.activityIndicator.stopAnimating()
             switch result {
             case .success(let allCards):
+                guard let allCards = allCards else { return }
                 self?.searchView.searchTableView.updateSearchList(allCards)
-                self?.searchView.activityIndicator.stopAnimating()
                 self?.cards = allCards
             case .failure(let error):
-                self?.searchView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
-                let printableError = error as CustomStringConvertible
-                let errorMessage = printableError.description
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
 

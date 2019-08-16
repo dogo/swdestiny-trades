@@ -7,7 +7,14 @@
 //
 
 import Foundation
-import Moya
+
+protocol Endpoint {
+
+    var baseURL: String { get }
+    var path: String { get }
+    var method: HttpMethod { get }
+    var headers: [String: String]? { get }
+}
 
 enum SWDestinyRoute {
     case setList
@@ -16,12 +23,14 @@ enum SWDestinyRoute {
     case card(cardId: String)
 }
 
-extension SWDestinyRoute: TargetType {
+extension SWDestinyRoute: Endpoint {
 
-    var baseURL: URL {
-        return URL(string: "http://swdestinydb.com")! // swiftlint:disable:this force_unwrapping
+    /// The target's base `URL`.
+    var baseURL: String {
+        return "https://swdestinydb.com"
     }
 
+    /// The path to be appended to `baseURL` to form the full `URL`.
     var path: String {
         switch self {
         case .setList:
@@ -35,128 +44,31 @@ extension SWDestinyRoute: TargetType {
         }
     }
 
-    var method: Moya.Method {
+    /// The HTTP method used in the request.
+    var method: HttpMethod {
         switch self {
         case .setList, .cardList, .allCards, .card:
             return .get
         }
     }
 
-    var task: Task {
-        switch self {
-        default:
-            return .requestPlain
-        }
-    }
-
-    var sampleData: Data {
-        var json = ""
-        switch self {
-        case .allCards, .cardList:
-            json = """
-            [{
-            \"sides\": [
-            \"1RD\",
-            \"2RD\",
-            \"1F\",
-            \"1Dc\",
-            \"1R\",
-            \"-\"
-            ],
-            \"set_code\": \"AW\",
-            \"set_name\": \"Awakenings\",
-            \"type_code\": \"character\",
-            \"type_name\": \"Character\",
-            \"faction_code\": \"red\",
-            \"faction_name\": \"Command\",
-            \"affiliation_code\": \"villain\",
-            \"affiliation_name\": \"Villain\",
-            \"rarity_code\": \"L\",
-            \"rarity_name\": \"Legendary\",
-            \"position\": 1,
-            \"code\": \"01001\",
-            \"ttscardid\": \"1300\",
-            \"name\": \"Captain Phasma\",
-            \"subtitle\": \"Elite Trooper\",
-            \"cost\": null,
-            \"health\": 11,
-            \"points\": \"12/15\",
-            \"text\": \"Your non-unique characters have the Guardian keyword.\",
-            \"deck_limit\": 1,
-            \"flavor\": \"Whatever you're planning, it won't work.\",
-            \"illustrator\": \"Darren Tan\",
-            \"is_unique\": true,
-            \"has_die\": true,
-            \"has_errata\": false,
-            \"url\": \"https://swdestinydb.com/card/01001\",
-            \"imagesrc\": \"https://swdestinydb.com/bundles/cards/en/01/01001.jpg\",
-            \"label\": \"Captain Phasma - Elite Trooper\",
-            \"cp\": 1215
-            }]
-            """
-        case .card:
-            json = """
-            {
-            \"sides\": [
-            \"1RD\",
-            \"2RD\",
-            \"1F\",
-            \"1Dc\",
-            \"1R\",
-            \"-\"
-            ],
-            \"set_code\": \"AW\",
-            \"set_name\": \"Awakenings\",
-            \"type_code\": \"character\",
-            \"type_name\": \"Character\",
-            \"faction_code\": \"red\",
-            \"faction_name\": \"Command\",
-            \"affiliation_code\": \"villain\",
-            \"affiliation_name\": \"Villain\",
-            \"rarity_code\": \"L\",
-            \"rarity_name\": \"Legendary\",
-            \"position\": 1,
-            \"code\": \"01001\",
-            \"ttscardid\": \"1300\",
-            \"name\": \"Captain Phasma\",
-            \"subtitle\": \"Elite Trooper\",
-            \"cost\": null,
-            \"health\": 11,
-            \"points\": \"12/15\",
-            \"text\": \"Your non-unique characters have the Guardian keyword.\",
-            \"deck_limit\": 1,
-            \"flavor\": \"Whatever you're planning, it won't work.\",
-            \"illustrator\": \"Darren Tan\",
-            \"is_unique\": true,
-            \"has_die\": true,
-            \"has_errata\": false,
-            \"url\": \"https://swdestinydb.com/card/01001\",
-            \"imagesrc\": \"https://swdestinydb.com/bundles/cards/en/01/01001.jpg\",
-            \"label\": \"Captain Phasma - Elite Trooper\",
-            \"cp\": 1215
-            }
-            """
-        case .setList:
-            json = """
-            [{
-            \"name\": \"Awakenings\",
-            \"code\": \"AW\",
-            \"position\": 1,
-            \"available\": \"2016-12-01\",
-            \"known\": 174,
-            \"total\": 174,
-            \"url\": \"https://swdestinydb.com/set/AW\"
-            }]
-            """
-        }
-
-        guard let data = json.data(using: .utf8) else {
-            fatalError("Error sample data JSON")
-        }
-        return data
-    }
-
+    /// The headers to be used in the request.
     var headers: [String: String]? {
         return ["Content-type": "application/json"]
+    }
+
+    /// The components of a URL.
+    var urlComponents: URLComponents {
+        var components = URLComponents(string: baseURL)! // swiftlint:disable:this force_unwrapping
+        components.path = path
+        return components
+    }
+
+    /// The URLRequest with the given URL and httpMethod.
+    var request: URLRequest {
+        var request = URLRequest(url: urlComponents.url!) // swiftlint:disable:this force_unwrapping
+        request.httpMethod = method.toString()
+        request.allHTTPHeaderFields = headers
+        return request
     }
 }

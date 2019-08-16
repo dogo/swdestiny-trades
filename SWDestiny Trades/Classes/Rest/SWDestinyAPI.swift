@@ -7,85 +7,64 @@
 //
 
 import Foundation
-import Moya
 
-final class SWDestinyAPI: SWDestinyService {
+final class SWDestinyAPI: APIClient, SWDestinyService {
 
-    let provider: MoyaProvider<SWDestinyRoute>
+    let session: URLSession
 
-    init(provider: MoyaProvider<SWDestinyRoute> = MoyaProvider<SWDestinyRoute>()) {
-        self.provider = provider
+    init(configuration: URLSessionConfiguration) {
+        self.session = URLSession(configuration: configuration)
     }
 
-    @discardableResult
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable {
-        return provider.request(.setList) { moyaResult in
-            let result: Result<[SetDTO]>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode([SetDTO].self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+    convenience init() {
+        self.init(configuration: .default)
     }
 
-    @discardableResult
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
-        return provider.request(.cardList(setCode: setCode)) { moyaResult in
-            let result: Result<[CardDTO]>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+    func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void) {
+
+        let endpoint: SWDestinyRoute = .setList
+        let request = endpoint.request
+
+        self.request(request, decode: { json -> [SetDTO]? in
+            guard let result = json as? [SetDTO] else { return nil }
+            return result
+        }, completion: completion)
     }
 
-    @discardableResult
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable {
-        return provider.request(.allCards) { moyaResult in
-            let result: Result<[CardDTO]>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode([CardDTO].self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
+
+        let endpoint: SWDestinyRoute = .cardList(setCode: setCode)
+        let request = endpoint.request
+
+        self.request(request, decode: { json -> [CardDTO]? in
+            guard let result = json as? [CardDTO] else { return nil }
+            return result
+        }, completion: completion)
     }
 
-    @discardableResult
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable {
-        return provider.request(.card(cardId: cardId)) { moyaResult in
-            let result: Result<CardDTO>
-            do {
-                switch moyaResult {
-                case .success(let response):
-                    result = .success(try JSONDecoder().decode(CardDTO.self, from: response.data))
-                case .failure(let error):
-                    throw error
-                }
-            } catch {
-                result = .failure(error)
-            }
-            completion(result)
-        }
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
+
+        let endpoint: SWDestinyRoute = .allCards
+        let request = endpoint.request
+
+        self.request(request, decode: { json -> [CardDTO]? in
+            guard let result = json as? [CardDTO] else { return nil }
+            return result
+        }, completion: completion)
+    }
+
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO?, APIError>) -> Void) {
+
+        let endpoint: SWDestinyRoute = .card(cardId: cardId)
+        let request = endpoint.request
+
+        self.request(request, decode: { json -> CardDTO? in
+            guard let result = json as? CardDTO else { return nil }
+            return result
+        }, completion: completion)
+    }
+
+    func cancelAllRequests() {
+        self.cancel()
     }
 }

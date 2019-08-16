@@ -36,16 +36,14 @@ final class CardListViewController: UIViewController {
 
         cardListView.activityIndicator.startAnimating()
         destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased()) { [weak self] result in
+            self?.cardListView.activityIndicator.stopAnimating()
             switch result {
             case .success(let cardList):
+                guard let cardList = cardList else { return }
                 self?.cardListView.cardListTableView.updateCardList(cardList)
-                self?.cardListView.activityIndicator.stopAnimating()
             case .failure(let error):
-                self?.cardListView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
-                let printableError = error as CustomStringConvertible
-                let errorMessage = printableError.description
-                LoggerManager.shared.log(event: .cardsList, parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])
             }
         }
         self.cardListView.cardListTableView.didSelectCard = { [weak self] list, card in

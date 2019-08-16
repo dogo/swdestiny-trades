@@ -52,17 +52,15 @@ final class AddCardViewController: UIViewController {
 
         addCardView.activityIndicator.startAnimating()
         destinyService.retrieveAllCards { [weak self] result in
+            self?.addCardView.activityIndicator.stopAnimating()
             switch result {
             case .success(let allCards):
+                guard let allCards = allCards else { return }
                 self?.addCardView.addCardTableView.updateSearchList(allCards)
-                self?.addCardView.activityIndicator.stopAnimating()
                 self?.cards = allCards
             case .failure(let error):
-                self?.addCardView.activityIndicator.stopAnimating()
                 ToastMessages.showNetworkErrorMessage()
-                let printableError = error as CustomStringConvertible
-                let errorMessage = printableError.description
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
 

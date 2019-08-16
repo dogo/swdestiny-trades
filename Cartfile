@@ -1,7 +1,6 @@
 github "AliSoftware/Reusable"
 github "danielgindi/Charts"
 github "liufengting/FTPopOverMenu_Swift"
-github "Moya/Moya"
 github "onevcat/Kingfisher"
 github "pkluz/PKHUD"
 github "raulriera/TextFieldEffects"

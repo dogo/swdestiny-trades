@@ -7,23 +7,21 @@
 //
 
 import Foundation
-import Moya
 
-enum Result<T> {
+enum Result<T, U> where U: Error {
     case success(T)
-    case failure(Error)
+    case failure(U)
 }
 
 protocol SWDestinyService {
-    @discardableResult
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]>) -> Void) -> Cancellable
 
-    @discardableResult
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable
+    func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void)
 
-    @discardableResult
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]>) -> Void) -> Cancellable
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]?, APIError>) -> Void)
 
-    @discardableResult
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO>) -> Void) -> Cancellable
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void)
+
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO?, APIError>) -> Void)
+
+    func cancelAllRequests()
 }

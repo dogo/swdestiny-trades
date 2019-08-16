@@ -8,12 +8,10 @@
 
 import UIKit
 import PKHUD
-import Moya
 
 final class AddToDeckViewController: UIViewController {
 
     private let destinyService = SWDestinyServiceImpl()
-    private var cancellableService: Cancellable?
     private let addToDeckView = AddToDeckView()
     private var cards = [CardDTO]()
     private var deckDTO: DeckDTO?
@@ -72,26 +70,21 @@ final class AddToDeckViewController: UIViewController {
 
     private func retrieveAllCards() {
         addToDeckView.activityIndicator.startAnimating()
-        cancellableService = destinyService.retrieveAllCards { [weak self] result in
+        destinyService.retrieveAllCards { [weak self] result in
+            self?.addToDeckView.activityIndicator.stopAnimating()
             switch result {
             case .success(let allCards):
+                guard let allCards = allCards else { return }
                 self?.addToDeckView.addToDeckTableView.updateSearchList(allCards)
-                self?.addToDeckView.activityIndicator.stopAnimating()
                 self?.cards = allCards
-            case .failure(let error as NSError):
-                self?.addToDeckView.activityIndicator.stopAnimating()
-                let printableError = error as CustomStringConvertible
-                let errorMessage = printableError.description
-                if error.code != 6 {
-                    ToastMessages.showNetworkErrorMessage()
-                    LoggerManager.shared.log(event: .allCards, parameters: ["error": errorMessage])
-                }
+            case .failure(let error):
+                self?.handleFailure(error)
             }
         }
     }
 
     private func loadDataFromRealm() {
-        cancellableService?.cancel()
+        destinyService.cancelAllRequests()
         if let collection = Array(RealmManager.shared.realm.objects(UserCollectionDTO.self)).first {
             self.cards = Array(collection.myCollection)
             addToDeckView.addToDeckTableView.updateSearchList(self.cards)
@@ -130,6 +123,16 @@ final class AddToDeckViewController: UIViewController {
         PKHUD.sharedHUD.dimsBackground = false
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)
+    }
+
+    private func handleFailure(_ error: APIError) {
+        switch error {
+        case .requestCancelled:
+            break
+        default:
+            ToastMessages.showNetworkErrorMessage()
+            LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
+        }
     }
 
     // MARK: - Navigation
