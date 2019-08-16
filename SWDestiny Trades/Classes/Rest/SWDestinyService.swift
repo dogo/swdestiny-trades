@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum Result<T, U> where U: Error {
-    case success(T)
-    case failure(U)
-}
-
 protocol SWDestinyService {
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void)
