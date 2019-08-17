@@ -26,6 +26,9 @@ xcuserdata/
 ## Other
 *.moved-aside
 
+## Ruby
+.ruby-version
+
 ## Git
 *.orig
 
