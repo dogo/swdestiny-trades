@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoansDetailViewController: UIViewController {
+final class LoansDetailViewController: UIViewController {
 
     private let loanDetailView = LoanDetailView()
     private var personDTO: PersonDTO

@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)

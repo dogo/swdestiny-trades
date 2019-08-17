@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetsListDatasource: NSObject, UITableViewDataSource {
+final class SetsListDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var swdSets: [String: [SetDTO]] = [ : ]

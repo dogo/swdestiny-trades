@@ -12,7 +12,7 @@ protocol UpdateTableDataDelegate: AnyObject {
     func insertNew(person: PersonDTO)
 }
 
-class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
+final class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
     private let peopleListView = PeopleListView()
     private lazy var navigator = PeopleListNavigator(self.navigationController)

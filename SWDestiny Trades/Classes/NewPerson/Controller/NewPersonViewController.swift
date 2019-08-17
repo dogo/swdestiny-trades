@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewPersonViewController: UIViewController {
+final class NewPersonViewController: UIViewController {
 
     private let newPersonView = NewPersonView()
     weak var delegate: UpdateTableDataDelegate?

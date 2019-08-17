@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFieldDelegate {
+final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFieldDelegate {
 
     private var deckDTO: DeckDTO?
 

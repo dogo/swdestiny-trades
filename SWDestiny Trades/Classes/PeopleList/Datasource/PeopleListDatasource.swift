@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PeopleListDatasource: NSObject, UITableViewDataSource {
+final class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var persons: [PersonDTO] = []

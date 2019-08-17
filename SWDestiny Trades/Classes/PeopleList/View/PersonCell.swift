@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-class PersonCell: UITableViewCell, Reusable {
+final class PersonCell: UITableViewCell, Reusable {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

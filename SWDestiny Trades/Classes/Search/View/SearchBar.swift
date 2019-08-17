@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchBar: UISearchBar, UISearchBarDelegate {
+final class SearchBar: UISearchBar, UISearchBarDelegate {
 
     var doingSearch: ((String) -> Void)?
 

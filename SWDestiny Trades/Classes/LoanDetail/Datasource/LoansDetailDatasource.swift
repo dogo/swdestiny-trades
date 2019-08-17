@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoansDetailDatasource: NSObject, UITableViewDataSource {
+final class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var currentPerson: PersonDTO?
