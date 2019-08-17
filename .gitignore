@@ -53,6 +53,7 @@ Carthage/Build
 fastlane/report.xml
 fastlane/test_output/*
 fastlane/Appfile
+fastlane/Matchfile
 fastlane/Deliverfile
 
 ## Slather Code Coverage
