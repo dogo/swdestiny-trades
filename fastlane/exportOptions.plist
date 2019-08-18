@@ -7,7 +7,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>br.com.anykey.SWDestiny-Trades</key>
-		<string>SWDestiny Trades Store</string>
+		<string>match AppStore br.com.anykey.SWDestiny-Trades</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>iPhone Distribution</string>
