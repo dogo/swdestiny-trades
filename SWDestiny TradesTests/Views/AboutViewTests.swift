@@ -33,8 +33,8 @@ class AboutViewTests: QuickSpec {
                     sut.didTouchHTTPLink = { url in
                         touched = true
                     }
-
-                    _ = sut.aboutTextView.delegate?.textView!(sut.aboutTextView, shouldInteractWith: NSURL(string: "")! as URL, in: NSRange(location: 0, length: 0))
+                    let url = URL(string: "https://swdestinydb.com")!
+                    _ = sut.aboutTextView.delegate?.textView?(sut.aboutTextView, shouldInteractWith: url, in: NSRange(location: 0, length: 0), interaction: .invokeDefaultAction)
 
                     expect(touched) == true
                 }

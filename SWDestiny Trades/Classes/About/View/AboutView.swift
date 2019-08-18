@@ -87,8 +87,8 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     // MARK: - <UITextViewDelegate>
 
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        didTouchHTTPLink?(URL)
+    func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        didTouchHTTPLink?(url)
         return false
     }
 }
