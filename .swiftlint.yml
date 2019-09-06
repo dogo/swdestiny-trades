@@ -8,6 +8,8 @@ opt_in_rules:
   - attributes
   - closure_end_indentation
   - closure_spacing
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
   - convenience_type
   - discouraged_object_literal
   - discouraged_optional_boolean  
