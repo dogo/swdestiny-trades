@@ -11,7 +11,11 @@ import Reusable
 
 final class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    var baseViewCell = BaseViewCell()
+    let baseViewCell: BaseViewCell = {
+        let view = BaseViewCell(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,15 +43,6 @@ final class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         } else {
             baseViewCell.subtitleLabel.text = "\(card.subtitle)"
         }
-
-        baseViewCell.titleLabel.snp.remakeConstraints { make in
-            make.left.equalTo(baseViewCell.iconImageView.snp.right).offset(12)
-            guard let subtitle = baseViewCell.subtitleLabel.text, !subtitle.isEmpty else {
-                make.centerY.equalTo(baseViewCell.contentView)
-                return
-            }
-            make.top.equalTo(baseViewCell.contentView)
-        }
     }
 
     private func setIconImage(card: CardDTO) {
@@ -68,19 +63,18 @@ final class CardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         // just hightlight
     }
 
-    // MARK: <BaseViewConfiguration>
+    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(baseViewCell)
     }
 
     internal func setupConstraints() {
-        baseViewCell.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
+        baseViewCell
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
     }
 
     internal func configureViews() {

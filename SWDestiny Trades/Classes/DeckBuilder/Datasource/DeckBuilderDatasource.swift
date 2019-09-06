@@ -118,7 +118,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
                     card.quantity = newValue
                 }
             } catch let error as NSError {
-                print("Error opening realm: \(error)")
+                debugPrint("Error opening realm: \(error)")
             }
         }
     }
@@ -131,7 +131,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
                     card.isElite = newValue
                 }
             } catch let error as NSError {
-                print("Error opening realm: \(error)")
+                debugPrint("Error opening realm: \(error)")
             }
         }
     }
@@ -145,7 +145,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
                 }
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 }

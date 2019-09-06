@@ -10,7 +10,11 @@ import UIKit
 
 final class PeopleListView: UIView, BaseViewConfiguration {
 
-    let peopleListTableView = PeopleListTableView()
+    let peopleListTableView: PeopleListTableView = {
+        let view = PeopleListTableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,12 +32,11 @@ final class PeopleListView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        peopleListTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self)
-            make.right.equalTo(self)
-        }
+        peopleListTableView
+            .topAnchor(equalTo: self.topAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.bottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
     }
 
     internal func configureViews() {

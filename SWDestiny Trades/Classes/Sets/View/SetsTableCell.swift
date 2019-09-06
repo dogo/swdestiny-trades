@@ -13,12 +13,14 @@ final class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
     var expansionImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -56,17 +58,15 @@ final class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        expansionImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(12)
-            make.height.equalTo(35)
-            make.width.equalTo(35)
-        }
+        expansionImageView
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+            .heightAnchor(equalTo: 35)
+            .widthAnchor(equalTo: 35)
 
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.left.equalTo(expansionImageView.snp.right).offset(12)
-        }
+        titleLabel
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.expansionImageView.trailingAnchor, constant: 12)
     }
 
     internal func configureViews() {

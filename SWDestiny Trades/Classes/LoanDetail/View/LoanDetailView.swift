@@ -10,8 +10,17 @@ import UIKit
 
 final class LoanDetailView: UIView, BaseViewConfiguration {
 
-    let loanDetailTableView = LoanDetailTableView()
-    let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+    let loanDetailTableView: LoanDetailTableView = {
+        let view = LoanDetailTableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,17 +40,15 @@ final class LoanDetailView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        loanDetailTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self)
-            make.right.equalTo(self)
-        }
+        loanDetailTableView
+            .topAnchor(equalTo: self.topAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.bottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
 
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self)
-        }
+        activityIndicator
+            .centerXAnchor(equalTo: self.centerXAnchor)
+            .centerYAnchor(equalTo: self.centerYAnchor)
     }
 
     internal func configureViews() {

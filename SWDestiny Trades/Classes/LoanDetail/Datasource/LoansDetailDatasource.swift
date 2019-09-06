@@ -86,7 +86,7 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
                             card.quantity = value
                         }
                     } catch let error as NSError {
-                        print("Error opening realm: \(error)")
+                        debugPrint("Error opening realm: \(error)")
                     }
                 }
             }
@@ -111,7 +111,7 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
                             card.quantity = value
                         }
                     } catch let error as NSError {
-                        print("Error opening realm: \(error)")
+                        debugPrint("Error opening realm: \(error)")
                     }
                 }
             }
@@ -131,7 +131,7 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
             }
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 

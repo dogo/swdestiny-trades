@@ -20,12 +20,14 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
 
     private var arrowLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ">"
         return label
     }()
@@ -67,15 +69,13 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
     }
 
     internal func setupConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(12)
-        }
+        titleLabel
+            .centerYAnchor(equalTo: self.centerYAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
 
-        arrowLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.right.equalTo(self).offset(-12)
-        }
+        arrowLabel
+            .centerYAnchor(equalTo: self.centerYAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
     }
 
     internal func configureViews() {

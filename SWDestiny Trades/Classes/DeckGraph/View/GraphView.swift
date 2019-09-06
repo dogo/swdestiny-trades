@@ -10,7 +10,11 @@ import UIKit
 
 final class GraphView: UIView, BaseViewConfiguration {
 
-    let deckGraphCollectionView = DeckGraphCollectionView()
+    let deckGraphCollectionView: DeckGraphCollectionView = {
+        let view = DeckGraphCollectionView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,12 +33,11 @@ final class GraphView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        deckGraphCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(64)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
-            make.right.equalTo(self)
-        }
+        deckGraphCollectionView
+            .topAnchor(equalTo: self.safeTopAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
+            .bottomAnchor(equalTo: self.safeBottomAnchor)
     }
 
     internal func configureViews() {

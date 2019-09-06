@@ -10,8 +10,17 @@ import UIKit
 
 final class CardListView: UIView, BaseViewConfiguration {
 
-    let cardListTableView = CardListTableView()
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    let cardListTableView: CardListTableView = {
+        let view = CardListTableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,17 +40,15 @@ final class CardListView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        cardListTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self)
-            make.right.equalTo(self)
-        }
+        cardListTableView
+            .topAnchor(equalTo: self.safeTopAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.safeBottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
 
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self)
-        }
+        activityIndicator
+            .centerXAnchor(equalTo: self.centerXAnchor)
+            .centerYAnchor(equalTo: self.centerYAnchor)
     }
 
     internal func configureViews() {

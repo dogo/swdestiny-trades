@@ -10,32 +10,44 @@ import UIKit
 
 final class BaseViewCell: UIView, BaseViewConfiguration {
 
-    var titleLabel: UILabel = {
+    let textContainer: UIStackView = {
+        let view = UIStackView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        return view
+    }()
+
+    let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
 
-    var subtitleLabel: UILabel = {
+    let subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
 
-    var accessoryLabel: UILabel = {
+    let accessoryLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
-    var contentView: UIView = {
+    let contentView: UIView = {
         let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    var iconImageView: UIImageView = {
+    let iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -56,40 +68,32 @@ final class BaseViewCell: UIView, BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(contentView)
+        contentView.addSubview(textContainer)
         contentView.addSubview(iconImageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subtitleLabel)
+        textContainer.addArrangedSubview(titleLabel)
+        textContainer.addArrangedSubview(subtitleLabel)
         contentView.addSubview(accessoryLabel)
     }
 
     internal func setupConstraints() {
-        contentView.snp.makeConstraints { make in
-            make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
-        }
+        contentView
+            .inset(to: self, withInset: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
 
-        iconImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(12)
-            make.height.equalTo(25)
-            make.width.equalTo(25)
-        }
+        textContainer
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 12)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
+            .trailingAnchor(equalTo: self.accessoryLabel.leadingAnchor)
 
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView)
-            make.left.equalTo(iconImageView.snp.right).offset(12)
-        }
+        iconImageView
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+            .heightAnchor(equalTo: 25)
+            .widthAnchor(equalTo: 25)
 
-        subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(iconImageView.snp.right).offset(12)
-            make.bottom.equalTo(contentView)
-            make.right.equalTo(accessoryLabel.snp.left)
-        }
-
-        accessoryLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView)
-            make.right.equalTo(contentView)
-        }
+        accessoryLabel
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
     }
 
     internal func configureViews() {

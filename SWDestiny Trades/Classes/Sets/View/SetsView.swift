@@ -10,9 +10,17 @@ import UIKit
 
 final class SetsView: UIView, BaseViewConfiguration {
 
-    let setsTableView = SetsTableView()
+    let setsTableView: SetsTableView = {
+        let view = SetsTableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    let activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     let pullToRefresh = UIRefreshControl()
 
@@ -47,26 +55,19 @@ final class SetsView: UIView, BaseViewConfiguration {
     internal func buildViewHierarchy() {
         self.addSubview(setsTableView)
         setsTableView.addSubview(activityIndicator)
-        if #available(iOS 10.0, *) {
-            setsTableView.refreshControl = pullToRefresh
-        } else {
-            setsTableView.addSubview(pullToRefresh)
-            setsTableView.sendSubviewToBack(pullToRefresh)
-        }
+        setsTableView.refreshControl = pullToRefresh
     }
 
     internal func setupConstraints() {
-        setsTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self)
-            make.right.equalTo(self)
-        }
+        setsTableView
+            .topAnchor(equalTo: self.topAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.bottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
 
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self)
-        }
+        activityIndicator
+            .centerXAnchor(equalTo: self.centerXAnchor)
+            .centerYAnchor(equalTo: self.centerYAnchor)
     }
 
     internal func configureViews() {

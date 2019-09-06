@@ -99,7 +99,7 @@ final class AddCardViewController: UIViewController {
                 }
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 

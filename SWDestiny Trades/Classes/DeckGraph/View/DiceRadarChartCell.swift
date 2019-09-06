@@ -16,6 +16,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
 
     var diceRadarView: RadarChartView = {
         let view = RadarChartView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.webLineWidth = 1.0
         view.innerWebLineWidth = 1.0
         view.webColor = UIColor.lightGray
@@ -46,12 +47,11 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
     }
 
     internal func setupConstraints() {
-        diceRadarView.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
+        diceRadarView
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
     }
 
     internal func configureViews() {
@@ -76,6 +76,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
         chartDataSet.setDrawHighlightIndicators(false)
         chartDataSet.setColor(.lightGray)
         chartDataSet.fillColor = .lightGray
+
         let chartData = RadarChartData(dataSet: chartDataSet)
         chartData.setDrawValues(false)
         diceRadarView.data = chartData

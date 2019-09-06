@@ -14,6 +14,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
 
     var cardCostChartView: LineChartView = {
         let view = LineChartView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -38,12 +39,11 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
     }
 
     internal func setupConstraints() {
-        cardCostChartView.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
+        cardCostChartView
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
     }
 
     internal func configureViews() {

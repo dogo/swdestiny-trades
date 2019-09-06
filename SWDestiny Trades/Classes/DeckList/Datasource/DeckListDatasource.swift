@@ -46,7 +46,7 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
                 self.deckList.remove(at: indexPath.row)
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 
@@ -67,7 +67,7 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
                 self?.tableView?.reloadData()
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 }

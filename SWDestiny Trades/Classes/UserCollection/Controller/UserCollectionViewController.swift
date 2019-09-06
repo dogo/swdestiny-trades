@@ -86,7 +86,7 @@ final class UserCollectionViewController: UIViewController {
                 RealmManager.shared.realm.add(user, update: .all)
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 
@@ -104,7 +104,7 @@ final class UserCollectionViewController: UIViewController {
                     RealmManager.shared.realm.add(user, update: .all)
                 }
             } catch let error as NSError {
-                print("Error opening realm: \(error)")
+                debugPrint("Error opening realm: \(error)")
             }
         }
         return user

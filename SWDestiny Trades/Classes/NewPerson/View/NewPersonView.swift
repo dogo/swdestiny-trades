@@ -13,6 +13,7 @@ final class NewPersonView: UIView {
 
     lazy var firstNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .black
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
@@ -26,6 +27,7 @@ final class NewPersonView: UIView {
 
     var lastNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .black
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
@@ -57,19 +59,17 @@ extension NewPersonView: BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        firstNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(self.safeArea.snp.topMargin)
-            make.left.equalTo(self).offset(12)
-            make.right.equalTo(self).offset(-12)
-            make.height.equalTo(60)
-        }
+        firstNameTextField
+            .topAnchor(equalTo: self.safeTopAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+            .heightAnchor(equalTo: 60)
 
-        lastNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(firstNameTextField.snp.bottom).offset(33)
-            make.left.equalTo(self).offset(12)
-            make.right.equalTo(self).offset(-12)
-            make.height.equalTo(60)
-        }
+        lastNameTextField
+            .topAnchor(equalTo: self.firstNameTextField.bottomAnchor, constant: 33)
+            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+            .heightAnchor(equalTo: 60)
     }
 
     internal func configureViews() {

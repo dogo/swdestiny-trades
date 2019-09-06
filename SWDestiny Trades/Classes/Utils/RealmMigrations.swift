@@ -86,7 +86,7 @@ enum RealmMigrations {
                     }
                 }
             } catch let error as NSError {
-                print("Error opening realm: \(error)")
+                debugPrint("Error opening realm: \(error)")
             }
             let allPersons = realm.objects(PersonDTO.self)
             do {
@@ -115,7 +115,7 @@ enum RealmMigrations {
                     }
                 }
             } catch let error as NSError {
-                print("Error opening realm: \(error)")
+                debugPrint("Error opening realm: \(error)")
             }
         }
     }

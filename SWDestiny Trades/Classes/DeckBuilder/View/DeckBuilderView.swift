@@ -10,7 +10,11 @@ import UIKit
 
 final class DeckBuilderView: UIView, BaseViewConfiguration {
 
-    let deckBuilderTableView = DeckBuilderTableView()
+    let deckBuilderTableView: DeckBuilderTableView = {
+       let view = DeckBuilderTableView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,12 +33,11 @@ final class DeckBuilderView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        deckBuilderTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self)
-            make.right.equalTo(self)
-        }
+        deckBuilderTableView
+            .topAnchor(equalTo: self.topAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.bottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
     }
 
     internal func configureViews() {

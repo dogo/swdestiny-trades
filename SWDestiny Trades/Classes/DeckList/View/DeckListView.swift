@@ -10,7 +10,11 @@ import UIKit
 
 final class DeckListView: UIView, BaseViewConfiguration {
 
-    let deckListTableView = DeckListTableView()
+    let deckListTableView: DeckListTableView = {
+        let view = DeckListTableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,12 +33,11 @@ final class DeckListView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        deckListTableView.snp.makeConstraints { make in
-            make.top.equalTo(self)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self)
-            make.right.equalTo(self)
-        }
+        deckListTableView
+            .topAnchor(equalTo: self.topAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.bottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
     }
 
     internal func configureViews() {

@@ -56,7 +56,6 @@
 		DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
 		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
 		DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; };
-		DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */; };
 		DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
 		DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
@@ -73,9 +72,10 @@
 		DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4D988F1E4182FB006412AD /* KingfisherSource.swift */; };
 		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
 		DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */; };
+		DD508A7423227A970058D8B7 /* UIView+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD508A7323227A970058D8B7 /* UIView+Anchors.swift */; };
+		DD508A7623227FC80058D8B7 /* Anchors+SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD508A7523227FC80058D8B7 /* Anchors+SafeArea.swift */; };
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
-		DD5DFAF920C79E5800F12325 /* SnapKit+SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */; };
 		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
@@ -261,9 +261,10 @@
 		DD4D988F1E4182FB006412AD /* KingfisherSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KingfisherSource.swift; sourceTree = "<group>"; };
 		DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewTests.swift; sourceTree = "<group>"; };
+		DD508A7323227A970058D8B7 /* UIView+Anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Anchors.swift"; sourceTree = "<group>"; };
+		DD508A7523227FC80058D8B7 /* Anchors+SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anchors+SafeArea.swift"; sourceTree = "<group>"; };
 		DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardDTO+Utils.swift"; sourceTree = "<group>"; };
-		DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SnapKit+SafeArea.swift"; sourceTree = "<group>"; };
 		DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -397,7 +398,6 @@
 				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
 				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
 				DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */,
-				DD3E239F1FF70EC20033EF1B /* SnapKit.framework in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
 				A06419749030F9ACEF749075 /* Pods_SWDestiny_Trades.framework in Frameworks */,
@@ -1258,12 +1258,13 @@
 		DDCDE3861E1DFA2300B4BE18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DD508A7523227FC80058D8B7 /* Anchors+SafeArea.swift */,
 				DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */,
 				DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */,
 				DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */,
 				DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */,
-				DD5DFAF820C79E5800F12325 /* SnapKit+SafeArea.swift */,
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
+				DD508A7323227A970058D8B7 /* UIView+Anchors.swift */,
 				DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */,
 			);
 			path = Extensions;
@@ -1564,7 +1565,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TextFieldEffects.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/FTPopOverMenu_Swift.framework",
@@ -1585,7 +1585,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		DD4D3A211E1D577900719E96 /* Post Build Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1701,10 +1701,10 @@
 				DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */,
 				DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */,
 				DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */,
-				DD5DFAF920C79E5800F12325 /* SnapKit+SafeArea.swift in Sources */,
 				DDB764C11E43639E007758D5 /* DiceRadarChartCell.swift in Sources */,
 				DDAFBF281FF6F3F500927875 /* AddToDeckHeaderView.swift in Sources */,
 				DDCA97B71E2FA72A0098FFB5 /* DeckBuilderDatasource.swift in Sources */,
+				DD508A7623227FC80058D8B7 /* Anchors+SafeArea.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */,
 				DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */,
@@ -1763,6 +1763,7 @@
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */,
 				DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */,
+				DD508A7423227A970058D8B7 /* UIView+Anchors.swift in Sources */,
 				DDCA97BE1E2FD2580098FFB5 /* DeckListCell.swift in Sources */,
 				DD0905491E24701D00D9EFB0 /* CardDTO.swift in Sources */,
 				DD09054D1E24701D00D9EFB0 /* LoansDetailViewController.swift in Sources */,

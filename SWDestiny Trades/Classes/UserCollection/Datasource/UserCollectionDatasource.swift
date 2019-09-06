@@ -35,7 +35,7 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
                             card.quantity = value
                         }
                     } catch let error as NSError {
-                        print("Error opening realm: \(error)")
+                        debugPrint("Error opening realm: \(error)")
                     }
                 }
             }
@@ -96,7 +96,7 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
                 }
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 }

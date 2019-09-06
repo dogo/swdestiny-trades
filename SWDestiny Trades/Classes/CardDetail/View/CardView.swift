@@ -11,8 +11,9 @@ import ImageSlideshow
 
 final class CardView: UIView, BaseViewConfiguration {
 
-    var slideshow: ImageSlideshow = {
+    let slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow(frame: .zero)
+        slideshow.translatesAutoresizingMaskIntoConstraints = false
         slideshow.activityIndicator = DefaultActivityIndicator()
         slideshow.backgroundColor = .white
         slideshow.contentScaleMode = .scaleAspectFit
@@ -32,19 +33,18 @@ final class CardView: UIView, BaseViewConfiguration {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: <BaseViewConfiguration>
+    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.addSubview(slideshow)
     }
 
     internal func setupConstraints() {
-        slideshow.snp.makeConstraints { make in
-            make.top.equalTo(self.safeArea.snp.topMargin)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
-            make.right.equalTo(self)
-        }
+        slideshow
+            .topAnchor(equalTo: self.safeTopAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.safeBottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
     }
 
     internal func configureViews() {

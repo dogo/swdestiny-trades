@@ -15,12 +15,14 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
@@ -31,6 +33,7 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -38,12 +41,14 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var quantityLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
 
     lazy var quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
+        stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
         stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
@@ -104,34 +109,29 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        iconImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(8)
-            make.height.equalTo(25)
-            make.width.equalTo(25)
-        }
+        iconImageView
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
+            .heightAnchor(equalTo: 25)
+            .widthAnchor(equalTo: 25)
 
-        quantityLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.left.equalTo(iconImageView.snp.right).offset(8)
-        }
+        quantityLabel
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 8)
 
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView).offset(8)
-            make.right.equalTo(quantityStepper.snp.left).offset(-1)
-            make.left.equalTo(quantityLabel.snp.right).offset(8)
-        }
+        titleLabel
+            .topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
+            .trailingAnchor(equalTo: self.quantityStepper.leadingAnchor, constant: -1)
+            .leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
 
-        subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(quantityLabel.snp.right).offset(8)
-            make.bottom.equalTo(self.contentView).offset(-8)
-        }
+        subtitleLabel
+            .topAnchor(equalTo: self.titleLabel.bottomAnchor)
+            .leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
 
-        quantityStepper.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.right.equalTo(self.contentView.snp.right)
-        }
+        quantityStepper
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
     }
 
     internal func configureViews() {

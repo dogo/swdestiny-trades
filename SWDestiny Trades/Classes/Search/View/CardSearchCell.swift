@@ -11,7 +11,11 @@ import Reusable
 
 final class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    var baseViewCell = BaseViewCell()
+    let baseViewCell: BaseViewCell = {
+        let view = BaseViewCell(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,13 +25,6 @@ final class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        baseViewCell.accessoryLabel.snp.updateConstraints { make in
-            make.right.equalTo(-36)
-        }
-        super.layoutSubviews()
     }
 
     internal func configureCell(cardDTO: CardDTO) {
@@ -61,12 +58,11 @@ final class CardSearchCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        baseViewCell.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
+        baseViewCell
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
     }
 
     internal func configureViews() {

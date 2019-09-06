@@ -15,6 +15,7 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
 
     lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
+        segment.translatesAutoresizingMaskIntoConstraints = false
         segment.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return segment
     }()
@@ -56,12 +57,11 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
     }
 
     internal func setupConstraints() {
-        segmentControl.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(8)
-            make.left.equalTo(self).offset(18)
-            make.bottom.equalTo(self).offset(-8)
-            make.right.equalTo(self).offset(-18)
-        }
+        segmentControl
+            .topAnchor(equalTo: self.topAnchor, constant: 8)
+            .leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
+            .bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
+            .trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
     }
 
     internal func configureViews() {

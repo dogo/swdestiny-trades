@@ -10,9 +10,23 @@ import UIKit
 
 final class SearchView: UIView, BaseViewConfiguration {
 
-    let searchBar = SearchBar()
-    let searchTableView = SearchTableView()
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    let searchBar: SearchBar = {
+        let view = SearchBar()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let searchTableView: SearchTableView = {
+        let view = SearchTableView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let activityIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,24 +47,21 @@ final class SearchView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        searchBar.snp.makeConstraints { make in
-            make.top.equalTo(self.safeArea.snp.topMargin)
-            make.left.equalTo(self)
-            make.right.equalTo(self)
-            make.height.equalTo(44)
-        }
+        searchBar
+            .topAnchor(equalTo: self.safeTopAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
+            .heightAnchor(equalTo: 44)
 
-        searchTableView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom)
-            make.left.equalTo(self)
-            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
-            make.right.equalTo(self)
-        }
+        searchTableView
+            .topAnchor(equalTo: self.searchBar.bottomAnchor)
+            .leadingAnchor(equalTo: self.leadingAnchor)
+            .bottomAnchor(equalTo: self.safeBottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor)
 
-        activityIndicator.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.centerY.equalTo(self)
-        }
+        activityIndicator
+            .centerXAnchor(equalTo: self.centerXAnchor)
+            .centerYAnchor(equalTo: self.centerYAnchor)
     }
 
     internal func configureViews() {

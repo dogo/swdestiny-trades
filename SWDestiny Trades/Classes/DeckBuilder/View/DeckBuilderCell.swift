@@ -14,14 +14,23 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     var stepperValueChanged: ((Int, DeckBuilderCell) -> Void)?
     var eliteButtonTouched: ((Bool, DeckBuilderCell) -> Void)?
 
+    let textContainer: UIStackView = {
+        let view = UIStackView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        return view
+    }()
+
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
@@ -32,6 +41,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -39,12 +49,14 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var quantityLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
 
     lazy var quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
+        stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
         stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
@@ -53,6 +65,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var eliteButton: ToggleButton = {
         let button = ToggleButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(L10n.nonElite, for: .normal)
         button.setTitleColor(ColorPalette.appTheme, for: .normal)
         return button
@@ -81,20 +94,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     private func setSubtitle(card: CardDTO) {
-
         subtitleLabel.text = card.subtitle
-
-        titleLabel.snp.remakeConstraints { make in
-            make.left.equalTo(quantityLabel.snp.right).offset(8)
-            make.right.equalTo(quantityStepper.snp.left).offset(-1)
-            guard let subtitle = subtitleLabel.text, !subtitle.isEmpty else {
-                make.centerY.equalTo(self.contentView)
-                self.layoutIfNeeded()
-                return
-            }
-            make.top.equalTo(self.contentView).offset(8)
-            self.layoutIfNeeded()
-        }
     }
 
     private func setIconImage(card: CardDTO) {
@@ -125,49 +125,39 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     // MARK: <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
+        self.contentView.addSubview(textContainer)
         self.contentView.addSubview(iconImageView)
-        self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(subtitleLabel)
+        self.textContainer.addArrangedSubview(titleLabel)
+        self.textContainer.addArrangedSubview(subtitleLabel)
         self.contentView.addSubview(quantityLabel)
         self.contentView.addSubview(quantityStepper)
         self.contentView.addSubview(eliteButton)
     }
 
     internal func setupConstraints() {
-        iconImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(contentView)
-            make.left.equalTo(contentView).offset(8)
-            make.height.equalTo(25)
-            make.width.equalTo(25)
-        }
+        iconImageView
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
+            .heightAnchor(equalTo: 25)
+            .widthAnchor(equalTo: 25)
 
-        quantityLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.left.equalTo(iconImageView.snp.right).offset(8)
-        }
+        quantityLabel
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 8)
 
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView).offset(8)
-            make.left.equalTo(quantityLabel.snp.right).offset(8)
-            make.right.equalTo(quantityStepper.snp.left).offset(-1)
-        }
+        textContainer
+            .topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
+            .leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
 
-        subtitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.left.equalTo(quantityLabel.snp.right).offset(8)
-            make.bottom.equalTo(self.contentView).offset(-8)
-        }
+        quantityStepper
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
 
-        quantityStepper.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.right.equalTo(self.contentView.snp.right)
-        }
-
-        eliteButton.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.right.equalTo(self.contentView.snp.right)
-            make.width.equalTo(quantityStepper.snp.width)
-        }
+        eliteButton
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .widthAnchor(equalTo: self.quantityStepper.widthAnchor)
     }
 
     internal func configureViews() {

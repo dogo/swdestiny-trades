@@ -5,7 +5,6 @@ github "onevcat/Kingfisher"
 github "pkluz/PKHUD"
 github "raulriera/TextFieldEffects"
 github "realm/realm-cocoa"
-github "SnapKit/SnapKit"
 github "SwiftKickMobile/SwiftMessages"
 github "zvonicek/ImageSlideshow"
 

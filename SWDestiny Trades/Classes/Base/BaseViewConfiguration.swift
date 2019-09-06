@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SnapKit
 
 protocol BaseViewConfiguration {
     func buildViewHierarchy()

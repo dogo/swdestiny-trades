@@ -103,7 +103,7 @@ final class AddToDeckViewController: UIViewController {
                 self?.insertToDeckBuilder(card: copy, predicate: predicate)
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 

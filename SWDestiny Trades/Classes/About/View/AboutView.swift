@@ -14,18 +14,21 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     var logoImage: UIImageView = {
         let image = UIImageView(frame: .zero)
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         return image
     }()
 
     var versionLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
 
     var aboutTextView: UITextView = {
         let textView = UITextView(frame: .zero)
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
 
@@ -48,24 +51,21 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
     }
 
     internal func setupConstraints() {
-        logoImage.snp.makeConstraints { make in
-            make.top.equalTo(self.safeArea.snp.topMargin).offset(34)
-            make.centerX.equalTo(self)
-            make.width.equalTo(280)
-            make.height.equalTo(150)
-        }
+        logoImage
+            .topAnchor(equalTo: self.safeTopAnchor, constant: 34)
+            .centerXAnchor(equalTo: self.centerXAnchor)
+            .widthAnchor(equalTo: 280)
+            .heightAnchor(equalTo: 150)
 
-        versionLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom)
-            make.right.equalTo(self.snp.right).offset(-15)
-        }
+        versionLabel
+            .topAnchor(equalTo: logoImage.bottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor, constant: -15)
 
-        aboutTextView.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).offset(22)
-            make.left.equalTo(self).offset(12)
-            make.bottom.equalTo(self.safeArea.snp.bottomMargin)
-            make.right.equalTo(self).offset(-12)
-        }
+        aboutTextView
+            .topAnchor(equalTo: logoImage.bottomAnchor, constant: 22)
+            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+            .bottomAnchor(equalTo: self.safeBottomAnchor)
+            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
     }
 
     internal func configureViews() {

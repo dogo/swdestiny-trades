@@ -11,7 +11,11 @@ import Reusable
 
 final class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    var baseViewCell = BaseViewCell()
+    let baseViewCell: BaseViewCell = {
+        let view = BaseViewCell(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,12 +56,11 @@ final class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        baseViewCell.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
+        baseViewCell
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
     }
 
     internal func configureViews() {

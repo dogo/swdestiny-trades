@@ -15,6 +15,7 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
 
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .black
         textField.tintColor = .black
         textField.placeholder = L10n.deckName
@@ -25,6 +26,7 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
 
     var subTitle: UILabel = {
         let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -32,6 +34,7 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
 
     lazy var accessoryButton: UIButton = {
         let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(accessoryButtonTouched(sender:)), for: .touchUpInside)
         return button
     }()
@@ -80,22 +83,21 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
     }
 
     internal func setupConstraints() {
-        titleEditText.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView).offset(8)
-            make.left.equalTo(self.contentView).offset(12)
-        }
-        subTitle.snp.makeConstraints { make in
-            make.top.equalTo(titleEditText.snp.bottom)
-            make.left.equalTo(self.contentView).offset(12)
-            make.bottom.equalTo(self.contentView).offset(-8)
-        }
-        accessoryButton.snp.makeConstraints { make in
-            make.centerY.equalTo(self.contentView)
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-            make.left.equalTo(titleEditText.snp.right)
-            make.right.equalTo(self.contentView.snp.right)
-        }
+        titleEditText
+            .topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+
+        subTitle
+            .topAnchor(equalTo: self.titleEditText.bottomAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+
+        accessoryButton
+            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            .leadingAnchor(equalTo: self.titleEditText.trailingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .widthAnchor(equalTo: 50)
+            .heightAnchor(equalTo: 50)
     }
 
     internal func configureViews() {
@@ -125,7 +127,7 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
                 }
             }
             } catch let error as NSError {
-                print("Error opening realm: \(error)")
+                debugPrint("Error opening realm: \(error)")
             }
         }
     }

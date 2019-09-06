@@ -1,7 +1,6 @@
 github "AliSoftware/Reusable" "4.1.0"
 github "Quick/Nimble" "v8.0.2"
 github "Quick/Quick" "v2.1.0"
-github "SnapKit/SnapKit" "5.0.1"
 github "SwiftKickMobile/SwiftMessages" "7.0.0"
 github "ashfurrow/Nimble-Snapshots" "8.0.0"
 github "danielgindi/Charts" "v3.3.0"

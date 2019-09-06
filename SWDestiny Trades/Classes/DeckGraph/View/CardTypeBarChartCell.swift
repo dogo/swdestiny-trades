@@ -16,6 +16,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
 
     var cardTypeChartView: BarChartView = {
         let view = BarChartView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.drawBarShadowEnabled = false
         view.drawValueAboveBarEnabled = true
         return view
@@ -42,12 +43,11 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
     }
 
     internal func setupConstraints() {
-        cardTypeChartView.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-        }
+        cardTypeChartView
+            .topAnchor(equalTo: self.contentView.topAnchor)
+            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
     }
 
     internal func configureViews() {

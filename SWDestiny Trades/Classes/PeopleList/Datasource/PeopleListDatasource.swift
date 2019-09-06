@@ -62,7 +62,7 @@ final class PeopleListDatasource: NSObject, UITableViewDataSource {
             }
             tableView?.reloadData()
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 
@@ -73,7 +73,7 @@ final class PeopleListDatasource: NSObject, UITableViewDataSource {
                 self?.persons.remove(at: indexPath.row)
             }
         } catch let error as NSError {
-            print("Error opening realm: \(error)")
+            debugPrint("Error opening realm: \(error)")
         }
     }
 }
