@@ -8,15 +8,22 @@
 
 import UIKit
 
+protocol UserCollectionProtocol: AnyObject {
+    func stepperValueChanged(newValue: Int, card: CardDTO)
+    func remove(at index: Int)
+}
+
 final class UserCollectionDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var userCollection: UserCollectionDTO?
+    private weak var delegate: UserCollectionProtocol?
     var collectionList: [CardDTO] = []
 
-    required init(tableView: UITableView) {
+    required init(tableView: UITableView, delegate: UserCollectionProtocol) {
         super.init()
         self.tableView = tableView
+        self.delegate = delegate
         tableView.register(cellType: LoanDetailCell.self)
         self.tableView?.dataSource = self
         self.tableView?.reloadData()
@@ -26,17 +33,9 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
         if let card = getCard(at: indexPath) {
             cell.configureCell(cardDTO: card)
-            cell.stepperValueChanged = { [weak self] value, cell in
-                guard let self = self else { return }
-                guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-                if let card = self.getCard(at: indexPath) {
-                    do {
-                        try RealmManager.shared.realm.write {
-                            card.quantity = value
-                        }
-                    } catch let error as NSError {
-                        debugPrint("Error opening realm: \(error)")
-                    }
+            cell.stepperValueChanged = { [weak self] value in
+                if let card = self?.getCard(at: indexPath) {
+                    self?.delegate?.stepperValueChanged(newValue: value, card: card)
                 }
             }
         }
@@ -88,15 +87,9 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                if let card = self?.getCard(at: indexPath), let realmIndex = self?.userCollection?.myCollection.index(of: card) {
-                    self?.userCollection?.myCollection.remove(at: realmIndex)
-                    self?.collectionList.remove(at: indexPath.row)
-                }
-            }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
+        if let card = self.getCard(at: indexPath), let index = self.userCollection?.myCollection.index(of: card) {
+            self.delegate?.remove(at: index)
+            self.collectionList.remove(at: indexPath.row)
         }
     }
 }

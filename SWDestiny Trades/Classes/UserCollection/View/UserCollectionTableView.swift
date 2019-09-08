@@ -14,10 +14,10 @@ final class UserCollectionTableView: UITableView {
 
     var tableViewDatasource: UserCollectionDatasource?
 
-    override init(frame: CGRect, style: UITableView.Style) {
+    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: UserCollectionProtocol) {
         super.init(frame: frame, style: style)
         self.delegate = self
-        tableViewDatasource = UserCollectionDatasource(tableView: self)
+        tableViewDatasource = UserCollectionDatasource(tableView: self, delegate: delegate)
         self.backgroundColor = .white
     }
 

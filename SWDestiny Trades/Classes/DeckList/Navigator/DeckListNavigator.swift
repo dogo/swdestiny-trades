@@ -11,7 +11,7 @@ import UIKit
 final class DeckListNavigator: Navigator {
 
     enum Destination {
-        case deckBuilder(with: DeckDTO)
+        case deckBuilder(database: DatabaseProtocol?, with: DeckDTO)
     }
 
     private weak var navigationController: UINavigationController?
@@ -33,8 +33,8 @@ final class DeckListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .deckBuilder(let deck):
-            return DeckBuilderViewController(with: deck)
+        case .deckBuilder(let database, let deck):
+            return DeckBuilderViewController(database: database, with: deck)
         }
     }
 }

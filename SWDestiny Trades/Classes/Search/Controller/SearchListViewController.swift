@@ -22,14 +22,16 @@ protocol SearchDelegate: AnyObject {
 final class SearchListViewController: UIViewController {
 
     private let destinyService = SWDestinyServiceImpl()
+    private let database: DatabaseProtocol?
     private let searchView = SearchView()
     private var cards = [CardDTO]()
     private lazy var navigator = SearchNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(database: DatabaseProtocol?) {
+        self.database = database
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -76,6 +78,6 @@ final class SearchListViewController: UIViewController {
     // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(with: cards, card: card))
+        self.navigator.navigate(to: .cardDetail(database: self.database, with: cards, card: card))
     }
 }

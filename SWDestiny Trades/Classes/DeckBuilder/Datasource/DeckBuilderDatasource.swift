@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol DeckBuilderProtocol: AnyObject {
+    func updateCardQuantity(newValue: Int, card: CardDTO)
+    func updateCharacterElite(newValue: Bool, card: CardDTO)
+    func remove(at index: Int)
+}
+
 final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     struct Section {
@@ -24,13 +30,15 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var currentDeck: DeckDTO?
+    private weak var delegate: DeckBuilderProtocol?
     var deckList = [Section]()
 
     weak var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
 
-    required init(tableView: UITableView) {
+    required init(tableView: UITableView, delegate: DeckBuilderProtocol) {
         super.init()
         self.tableView = tableView
+        self.delegate = delegate
         tableView.register(cellType: DeckBuilderCell.self)
         tableView.register(headerFooterViewType: CollapsibleTableViewHeader.self)
         self.tableView?.dataSource = self
@@ -41,11 +49,11 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckBuilderCell.self)
         if let card = getCard(at: indexPath) {
             cell.configureCell(card: card)
-            cell.stepperValueChanged = { [weak self] value, cell in
-                self?.updateCardQuantity(newValue: value, cell: cell)
+            cell.stepperValueChanged = { [weak self] value in
+                self?.delegate?.updateCardQuantity(newValue: value, card: card)
             }
-            cell.eliteButtonTouched = { [weak self] isElite, cell in
-                self?.updateCharacterElite(newValue: isElite, cell: cell)
+            cell.eliteButtonTouched = { [weak self] isElite in
+                self?.delegate?.updateCharacterElite(newValue: isElite, card: card)
             }
         }
         return cell
@@ -110,42 +118,10 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         tableView?.reloadData()
     }
 
-    private func updateCardQuantity(newValue: Int, cell: DeckBuilderCell) {
-        guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-        if let card = self.getCard(at: indexPath) {
-            do {
-                try RealmManager.shared.realm.write {
-                    card.quantity = newValue
-                }
-            } catch let error as NSError {
-                debugPrint("Error opening realm: \(error)")
-            }
-        }
-    }
-
-    private func updateCharacterElite(newValue: Bool, cell: DeckBuilderCell) {
-        guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-        if let card = self.getCard(at: indexPath) {
-            do {
-                try RealmManager.shared.realm.write {
-                    card.isElite = newValue
-                }
-            } catch let error as NSError {
-                debugPrint("Error opening realm: \(error)")
-            }
-        }
-    }
-
     private func remove(at indexPath: IndexPath) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                if let card = self?.getCard(at: indexPath), let realmIndex = self?.currentDeck?.list.index(of: card) {
-                    self?.currentDeck?.list.remove(at: realmIndex)
-                    self?.deckList[indexPath.section].items.remove(at: indexPath.row)
-                }
-            }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
+        if let card = self.getCard(at: indexPath), let index = self.currentDeck?.list.index(of: card) {
+            self.deckList[indexPath.section].items.remove(at: indexPath.row)
+            self.delegate?.remove(at: index)
         }
     }
 }

@@ -24,17 +24,20 @@ final class AddCardViewController: UIViewController {
     private var personDTO: PersonDTO?
     private var userCollectionDTO: UserCollectionDTO?
     private lazy var navigator = AddCardNavigator(self.navigationController)
+    private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle
 
     init(service: SWDestinyService = SWDestinyServiceImpl(),
+         database: DatabaseProtocol?,
          person: PersonDTO? = nil,
          userCollection: UserCollectionDTO? = nil,
          type: AddCardType) {
-        destinyService = service
-        addCardType = type
+        self.destinyService = service
+        self.database = database
+        self.addCardType = type
         super.init(nibName: nil, bundle: nil)
-        personDTO = person
+        self.personDTO = person
         userCollectionDTO = userCollection
     }
 
@@ -85,29 +88,22 @@ final class AddCardViewController: UIViewController {
     // MARK: - Helpers
 
     private func insert(card: CardDTO) {
-        let predicate = NSPredicate(format: "code == %@", card.code)
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                guard let self = self else { return }
-                switch self.addCardType {
-                case .lent:
-                    self.insertToLentMe(card: card, predicate: predicate)
-                case .borrow:
-                    self.insertToBorrowed(card: card, predicate: predicate)
-                case .collection:
-                    self.insertToCollection(card: card, predicate: predicate)
-                }
+        switch self.addCardType {
+        case .lent:
+            self.insertToLentMe(card: card)
+        case .borrow:
+            self.insertToBorrowed(card: card)
+        case .collection:
+            self.insertToCollection(card: card)
+        }
+    }
+
+    private func insertToBorrowed(card: CardDTO) {
+        if let person = personDTO, !person.borrowed.contains(where: { $0.code == card.code }) {
+            try? self.database?.update { [weak self] in
+                person.borrowed.append(card)
+                self?.showSuccessMessage(card: card)
             }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
-        }
-    }
-
-    private func insertToBorrowed(card: CardDTO, predicate: NSPredicate) {
-        if let person = personDTO, person.borrowed.filter(predicate).isEmpty {
-            person.borrowed.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(person, update: .all)
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
@@ -115,11 +111,12 @@ final class AddCardViewController: UIViewController {
         }
     }
 
-    private func insertToLentMe(card: CardDTO, predicate: NSPredicate) {
-        if let person = personDTO, person.lentMe.filter(predicate).isEmpty {
-            person.lentMe.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(person, update: .all)
+    private func insertToLentMe(card: CardDTO) {
+        if let person = personDTO, !person.lentMe.contains(where: { $0.code == card.code }) {
+            try? self.database?.update { [weak self] in
+                person.lentMe.append(card)
+                self?.showSuccessMessage(card: card)
+            }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
@@ -127,11 +124,12 @@ final class AddCardViewController: UIViewController {
         }
     }
 
-    private func insertToCollection(card: CardDTO, predicate: NSPredicate) {
-        if let userCollection = userCollectionDTO, userCollection.myCollection.filter(predicate).isEmpty {
-            userCollection.myCollection.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(userCollection, update: .all)
+    private func insertToCollection(card: CardDTO) {
+        if let userCollection = userCollectionDTO, !userCollection.myCollection.contains(where: { $0.code == card.code }) {
+            try? self.database?.update { [weak self] in
+                userCollection.myCollection.append(card)
+                self?.showSuccessMessage(card: card)
+            }
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }
@@ -146,6 +144,6 @@ final class AddCardViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(with: cards, card: card))
+        self.navigator.navigate(to: .cardDetail(database: self.database, with: cards, card: card))
     }
 }

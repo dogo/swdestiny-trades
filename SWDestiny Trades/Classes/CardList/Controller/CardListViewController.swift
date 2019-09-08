@@ -11,14 +11,16 @@ import UIKit
 final class CardListViewController: UIViewController {
 
     private let cardListView = CardListView()
+    private let database: DatabaseProtocol?
     private let destinyService = SWDestinyServiceImpl()
     private var setDTO: SetDTO
     private lazy var navigator = CardListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    init(with set: SetDTO) {
-        setDTO = set
+    init(database: DatabaseProtocol?, with set: SetDTO) {
+        self.database = database
+        self.setDTO = set
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -60,6 +62,6 @@ final class CardListViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(cardList: [CardDTO], card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(with: cardList, card: card))
+        self.navigator.navigate(to: .cardDetail(database: self.database, with: cardList, card: card))
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class CardDTO: Object, Decodable {
+class CardDTO: Object, Decodable, Storable {
 
     let dieFaces = List<StringObject>()
     @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
@@ -127,6 +127,6 @@ class CardDTO: Object, Decodable {
     }
 }
 
-class StringObject: Object {
+class StringObject: Object, Storable {
     @objc dynamic var value: String?
 }

@@ -13,19 +13,17 @@ final class AddToDeckViewController: UIViewController {
 
     private let destinyService = SWDestinyServiceImpl()
     private let addToDeckView = AddToDeckView()
+    private let database: DatabaseProtocol?
     private var cards = [CardDTO]()
     private var deckDTO: DeckDTO?
     private lazy var navigator = AddCardNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    convenience init(deck: DeckDTO?) {
-        self.init(nibName: nil, bundle: nil)
-        deckDTO = deck
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    required init(database: DatabaseProtocol?, deck: DeckDTO?) {
+        self.database = database
+        self.deckDTO = deck
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -85,7 +83,8 @@ final class AddToDeckViewController: UIViewController {
 
     private func loadDataFromRealm() {
         destinyService.cancelAllRequests()
-        if let collection = Array(RealmManager.shared.realm.objects(UserCollectionDTO.self)).first {
+        try? self.database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
+            guard let self = self, let collection = collections.first else { return }
             self.cards = Array(collection.myCollection)
             addToDeckView.addToDeckTableView.updateSearchList(self.cards)
         }
@@ -94,24 +93,19 @@ final class AddToDeckViewController: UIViewController {
     // MARK: - Helpers
 
     private func insert(card: CardDTO) {
-        let predicate = NSPredicate(format: "code == %@", card.code)
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                let copy = CardDTO(value: card)
-                copy.id = NSUUID().uuidString
-                copy.quantity = 1
-                self?.insertToDeckBuilder(card: copy, predicate: predicate)
-            }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
-        }
+        let copy = CardDTO(value: card)
+        copy.id = NSUUID().uuidString
+        copy.quantity = 1
+
+        self.insertToDeckBuilder(card: copy)
     }
 
-    private func insertToDeckBuilder(card: CardDTO, predicate: NSPredicate) {
-        if let deck = deckDTO, deck.list.filter(predicate).isEmpty {
-            deck.list.append(card)
-            showSuccessMessage(card: card)
-            RealmManager.shared.realm.add(deck, update: .all)
+    private func insertToDeckBuilder(card: CardDTO) {
+        if let deck = deckDTO, !deck.list.contains(where: { $0.code == card.code }) {
+            try? self.database?.update { [weak self] in
+                deck.list.append(card)
+                self?.showSuccessMessage(card: card)
+            }
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         } else {
@@ -138,6 +132,6 @@ final class AddToDeckViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(with: cards, card: card))
+        self.navigator.navigate(to: .cardDetail(database: self.database, with: cards, card: card))
     }
 }

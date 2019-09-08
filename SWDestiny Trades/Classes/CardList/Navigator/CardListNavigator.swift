@@ -11,7 +11,7 @@ import UIKit
 final class CardListNavigator: Navigator {
 
     enum Destination {
-        case cardDetail(with: [CardDTO], card: CardDTO)
+        case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
     }
 
     private weak var navigationController: UINavigationController?
@@ -33,8 +33,8 @@ final class CardListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .cardDetail(let cardList, let card):
-            return CardDetailViewController(cardList: cardList, selected: card)
+        case .cardDetail(let database, let cardList, let card):
+            return CardDetailViewController(database: database, cardList: cardList, selected: card)
         }
     }
 }

@@ -10,13 +10,15 @@ import UIKit
 
 final class DeckListViewController: UIViewController {
 
-    private let deckListView = DeckListView()
+    private lazy var deckListView = DeckListTableView(delegate: self)
     private lazy var navigator = DeckListNavigator(self.navigationController)
+    private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(database: DatabaseProtocol?) {
+        self.database = database
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -35,42 +37,55 @@ final class DeckListViewController: UIViewController {
 
         loadDataFromRealm()
 
-        deckListView.deckListTableView.didSelectDeck = { [weak self] deck in
+        deckListView.didSelectDeck = { [weak self] deck in
             self?.navigateToNextController(with: deck)
         }
     }
 
     func loadDataFromRealm() {
-        let decks = Array(RealmManager.shared.realm.objects(DeckDTO.self))
-        deckListView.deckListTableView.updateTableViewData(decksList: decks)
+        try? self.database?.fetch(DeckDTO.self, predicate: nil, sorted: nil) { [weak self] decks in
+            self?.deckListView.updateTableViewData(decksList: decks)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.navigationItem.title = L10n.decks
-        deckListView.deckListTableView.reloadData()
+        deckListView.reloadData()
     }
 
     private func setupNavigationItem() {
-        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_account"), style: .plain, target: self, action: #selector(loginButtonTouched(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
     }
 
     // MARK: - Navigation
 
     func navigateToNextController(with deck: DeckDTO) {
-        self.navigator.navigate(to: .deckBuilder(with: deck))
+        self.navigator.navigate(to: .deckBuilder(database: self.database, with: deck))
     }
 
     // MARK: - UIBarButton Actions
 
-    func loginButtonTouched(_ sender: Any) {
-
-    }
-
     @objc
     func addButtonTouched(_ sender: Any) {
-        deckListView.deckListTableView.insert(deck: DeckDTO())
+        deckListView.insert(deck: DeckDTO())
+    }
+}
+
+extension DeckListViewController: DeckListProtocol {
+
+    func remove(deck: DeckDTO) {
+        try? self.database?.delete(object: deck)
+    }
+
+    func insert(deck: DeckDTO) {
+        try? self.database?.save(object: deck)
+    }
+
+    func rename(name: String, deck: DeckDTO) {
+        try? self.database?.update {
+            deck.name = name
+        }
     }
 }

@@ -9,11 +9,15 @@
 import Foundation
 import RealmSwift
 
+//swiftlint:disable cyclomatic_complexity
 enum RealmMigrations {
 
-    static func performMigrations() {
-        var config = Realm.Configuration.defaultConfiguration
-        config.schemaVersion = 3
+    static let schemaVersion: UInt64 = 3
+
+    static func performMigrations(with database: DatabaseProtocol?) {
+        guard let database = database as? Realm else { return }
+        var config = database.configuration
+        config.schemaVersion = RealmMigrations.schemaVersion
         var needsMigrationToV2 = false
 
         config.migrationBlock = { migration, oldSchemaVersion in
@@ -60,13 +64,11 @@ enum RealmMigrations {
         }
 
         Realm.Configuration.defaultConfiguration = config
-        _ = RealmManager.shared.realm
 
-        migrateCardQuantity(needsMigrationToV2)
+        migrateCardQuantity(realm: database, needsMigration: needsMigrationToV2)
     }
 
-    private static func migrateCardQuantity(_ needsMigration: Bool) {
-        let realm = RealmManager.shared.realm
+    private static func migrateCardQuantity(realm: Realm, needsMigration: Bool) {
 
         if needsMigration {
             let allDecks = realm.objects(DeckDTO.self)
@@ -120,6 +122,7 @@ enum RealmMigrations {
         }
     }
 }
+//swiftlint:enable cyclomatic_complexity
 
 let kDices = [
     "01001": ["1RD", "2RD", "1F", "1Dc", "1R", "-"],

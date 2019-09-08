@@ -11,14 +11,16 @@ import FTPopOverMenu_Swift
 
 final class UserCollectionViewController: UIViewController {
 
-    private let userCollectionView = UserCollectionView()
     private var currentSortIndex = 0
+    private lazy var userCollectionView = UserCollectionTableView(delegate: self)
     private lazy var navigator = UserCollectionNavigator(self.navigationController)
+    private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(database: DatabaseProtocol?) {
+        self.database = database
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -35,7 +37,7 @@ final class UserCollectionViewController: UIViewController {
 
         setupNavigationItem()
 
-        userCollectionView.userCollectionTableView.didSelectCard = { [weak self] list, card in
+        userCollectionView.didSelectCard = { [weak self] list, card in
             self?.navigateToCardDetailViewController(cardList: list, card: card)
         }
     }
@@ -59,10 +61,14 @@ final class UserCollectionViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icSort.image, style: .plain, target: self, action: #selector(sort(_:event:)))
     }
 
+    private func createDatabase(object: UserCollectionDTO) {
+        try? self.database?.save(object: object)
+    }
+
     func loadDataFromRealm() {
-        let user = UserCollectionViewController.getUserCollection()
-        userCollectionView.userCollectionTableView.updateTableViewData(collection: user)
-        userCollectionView.userCollectionTableView.sort(currentSortIndex)
+        let user = self.getUserCollection()
+        userCollectionView.updateTableViewData(collection: user)
+        userCollectionView.sort(currentSortIndex)
     }
 
     func configureFTPopOverMenu() {
@@ -72,39 +78,26 @@ final class UserCollectionViewController: UIViewController {
         config.menuSeparatorColor = .lightGray
     }
 
-    static func addToCollection(carDTO: CardDTO) {
+    func addToCollection(carDTO: CardDTO) {
         let user = getUserCollection()
-        do {
-            try RealmManager.shared.realm.write {
-                let predicate = NSPredicate(format: "code == %@", carDTO.code)
-                if let index = user.myCollection.index(matching: predicate) {
-                    let newCard = user.myCollection[index]
-                    newCard.quantity += 1
-                } else {
-                    user.myCollection.append(carDTO)
-                }
-                RealmManager.shared.realm.add(user, update: .all)
+        try? self.database?.update {
+            let predicate = NSPredicate(format: "code == %@", carDTO.code)
+            if let index = user.myCollection.index(matching: predicate) {
+                let newCard = user.myCollection[index]
+                newCard.quantity += 1
+            } else {
+                user.myCollection.append(carDTO)
             }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
         }
     }
 
-    static func getUserCollection() -> UserCollectionDTO {
-        var user: UserCollectionDTO
-
-        let result = RealmManager.shared.realm.objects(UserCollectionDTO.self)
-
-        if let userCollection = result.first {
-            user = userCollection
-        } else {
-            user = UserCollectionDTO()
-            do {
-                try RealmManager.shared.realm.write {
-                    RealmManager.shared.realm.add(user, update: .all)
-                }
-            } catch let error as NSError {
-                debugPrint("Error opening realm: \(error)")
+    func getUserCollection() -> UserCollectionDTO {
+        var user = UserCollectionDTO()
+        try? self.database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
+            if let userCollection = results.first {
+                user = userCollection
+            } else {
+                self?.createDatabase(object: user)
             }
         }
         return user
@@ -113,12 +106,12 @@ final class UserCollectionViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(with: cardList, card: card))
+        self.navigator.navigate(to: .cardDetail(database: self.database, with: cardList, card: card))
     }
 
     @objc
     func navigateToAddCardViewController() {
-        self.navigator.navigate(to: .addCard(with: UserCollectionViewController.getUserCollection()))
+        self.navigator.navigate(to: .addCard(database: self.database, with: self.getUserCollection()))
     }
 
     @objc
@@ -126,7 +119,7 @@ final class UserCollectionViewController: UIViewController {
 
         var collectionList: String = ""
 
-        if let cardList = userCollectionView.userCollectionTableView.tableViewDatasource?.getCardList() {
+        if let cardList = userCollectionView.tableViewDatasource?.getCardList() {
             for card in cardList {
                 collectionList.append(String(format: "%d %@\n", card.quantity, card.name))
             }
@@ -153,10 +146,25 @@ final class UserCollectionViewController: UIViewController {
         let cellConfis = Array(repeating: cellConfi, count: 3)
 
         FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], menuImageArray: nil,
-                                   cellConfigurationArray: cellConfis, done: { selectedIndex in
-            self.userCollectionView.userCollectionTableView.sort(selectedIndex)
-            self.currentSortIndex = selectedIndex
+                                   cellConfigurationArray: cellConfis, done: { [weak self] selectedIndex in
+            self?.userCollectionView.sort(selectedIndex)
+            self?.currentSortIndex = selectedIndex
         }, cancel: {
         })
+    }
+}
+
+extension UserCollectionViewController: UserCollectionProtocol {
+
+    func stepperValueChanged(newValue: Int, card: CardDTO) {
+        try? self.database?.update {
+            card.quantity = newValue
+        }
+    }
+
+    func remove(at index: Int) {
+        try? self.database?.update { [weak self] in
+            self?.getUserCollection().myCollection.remove(at: index)
+        }
     }
 }

@@ -11,7 +11,7 @@ import Reusable
 
 final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    var stepperValueChanged: ((Int, LoanDetailCell) -> Void)?
+    var stepperValueChanged: ((Int) -> Void)?
 
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
@@ -83,7 +83,7 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
     func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
-        self.stepperValueChanged?(value, self)
+        self.stepperValueChanged?(value)
     }
 
     override func prepareForReuse() {

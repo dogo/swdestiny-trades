@@ -19,7 +19,7 @@ class CardDetailViewControllerTests: QuickSpec {
             let cardList = [CardDTO()]
 
             beforeEach {
-                controller = CardDetailViewController(cardList: cardList, selected: CardDTO())
+                controller = CardDetailViewController(database: nil, cardList: cardList, selected: CardDTO())
             }
 
             it("should be able to create a controller") {

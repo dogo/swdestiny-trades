@@ -8,14 +8,22 @@
 
 import UIKit
 
+protocol DeckListProtocol: AnyObject {
+    func remove(deck: DeckDTO)
+    func insert(deck: DeckDTO)
+    func rename(name: String, deck: DeckDTO)
+}
+
 final class DeckListDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var deckList: [DeckDTO] = []
+    private weak var delegate: DeckListProtocol?
 
-    required init(tableView: UITableView) {
+    required init(tableView: UITableView, delegate: DeckListProtocol) {
         super.init()
         self.tableView = tableView
+        self.delegate = delegate
         tableView.register(cellType: DeckListCell.self)
         self.tableView?.dataSource = self
         self.tableView?.reloadData()
@@ -24,6 +32,9 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckListCell.self)
         cell.configureCell(deck: getDeck(at: indexPath))
+        cell.accessoryButtonTouched = { [weak self] name, deck in
+            self?.delegate?.rename(name: name, deck: deck)
+        }
         return cell
     }
 
@@ -39,15 +50,8 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                guard let self = self else { return }
-                RealmManager.shared.realm.delete(self.deckList[indexPath.row])
-                self.deckList.remove(at: indexPath.row)
-            }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
-        }
+        self.delegate?.remove(deck: self.deckList[indexPath.row])
+        self.deckList.remove(at: indexPath.row)
     }
 
     public func getDeck(at index: IndexPath) -> DeckDTO {
@@ -60,14 +64,8 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(deck: DeckDTO) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                RealmManager.shared.realm.add(deck)
-                self?.deckList.append(deck)
-                self?.tableView?.reloadData()
-            }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
-        }
+        self.delegate?.insert(deck: deck)
+        self.deckList.append(deck)
+        self.tableView?.reloadData()
     }
 }

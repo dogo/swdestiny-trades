@@ -9,9 +9,10 @@
 import UIKit
 import Reusable
 
-final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITextFieldDelegate {
+final class DeckListCell: UITableViewCell, Reusable {
 
     private var deckDTO: DeckDTO?
+    var accessoryButtonTouched: ((String, DeckDTO) -> Void)?
 
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
@@ -49,6 +50,22 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleEditText.text = nil
+        titleEditText.isUserInteractionEnabled = false
+        toggleEditButton()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        // just hightlight
+    }
+
+    private func toggleEditButton() {
+        let isEditing = titleEditText.isUserInteractionEnabled
+        accessoryButton.setImage(isEditing ? Asset.icDoneEdit.image : Asset.icEdit.image, for: .normal)
+    }
+
     internal func configureCell(deck: DeckDTO) {
         deckDTO = deck
         titleEditText.text = deckDTO?.name
@@ -63,18 +80,21 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
         }
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        titleEditText.text = nil
-        titleEditText.isUserInteractionEnabled = false
+    // MARK: - Actions
+
+    @objc
+    func accessoryButtonTouched(sender: Any?) {
+        titleEditText.isUserInteractionEnabled = !titleEditText.isUserInteractionEnabled
         toggleEditButton()
+        if titleEditText.isUserInteractionEnabled {
+            titleEditText.becomeFirstResponder()
+        } else if let deck = self.deckDTO {
+            self.accessoryButtonTouched?(self.titleEditText.text ?? "", deck)
+        }
     }
+}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        // just hightlight
-    }
-
-    // MARK: <BaseViewConfiguration>
+extension DeckListCell: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(titleEditText)
@@ -104,38 +124,12 @@ final class DeckListCell: UITableViewCell, Reusable, BaseViewConfiguration, UITe
         titleEditText.delegate = self
         toggleEditButton()
     }
+}
 
-    private func toggleEditButton() {
-        let isEditing = titleEditText.isUserInteractionEnabled
-        accessoryButton.setImage(isEditing ? Asset.icDoneEdit.image : Asset.icEdit.image, for: .normal)
-    }
-
-    // MARK: - Actions
-
-    @objc
-    func accessoryButtonTouched(sender: Any?) {
-        titleEditText.isUserInteractionEnabled = !titleEditText.isUserInteractionEnabled
-        toggleEditButton()
-        if titleEditText.isUserInteractionEnabled {
-            titleEditText.becomeFirstResponder()
-        } else {
-            do {
-            try RealmManager.shared.realm.write { [weak self] in
-                if let deck = self?.deckDTO {
-                    deck.name = self?.titleEditText.text ?? ""
-                    RealmManager.shared.realm.add(deck, update: .all)
-                }
-            }
-            } catch let error as NSError {
-                debugPrint("Error opening realm: \(error)")
-            }
-        }
-    }
-
-    // MARK: - <UITextFieldDelegate>
+extension DeckListCell: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if titleEditText == textField {
+        if titleEditText === textField {
             accessoryButtonTouched(sender: nil)
         }
         return true

@@ -11,13 +11,15 @@ import UIKit
 final class SetsListViewController: UIViewController {
 
     private let setsView = SetsView()
+    private let database: DatabaseProtocol?
     private let destinyService = SWDestinyServiceImpl()
     private lazy var navigator = SetsListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(database: DatabaseProtocol?) {
+        self.database = database
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -76,7 +78,7 @@ final class SetsListViewController: UIViewController {
     // MARK: - <SetsListViewDelegate>
 
     func navigateToNextController(with set: SetDTO) {
-        self.navigator.navigate(to: .cardList(with: set))
+        self.navigator.navigate(to: .cardList(database: self.database, with: set))
     }
 
     // MARK: - UIBarButton Actions
@@ -88,6 +90,6 @@ final class SetsListViewController: UIViewController {
 
     @objc
     func searchButtonTouched(_ sender: Any) {
-        self.navigator.navigate(to: .search)
+        self.navigator.navigate(to: .search(database: self.database))
     }
 }

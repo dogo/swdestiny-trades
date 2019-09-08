@@ -13,25 +13,19 @@ import PKHUD
 final class CardDetailViewController: UIViewController {
 
     private let cardView = CardView()
+    private let database: DatabaseProtocol?
     private var cards = [CardDTO]()
     private var cardDTO: CardDTO
     private var imageSource = [InputSource]()
 
     // MARK: - Life Cycle
 
-    init(cardList: [CardDTO], selected: CardDTO) {
-        cardDTO = selected
-        cards = cardList
+    init(database: DatabaseProtocol?, cardList: [CardDTO], selected: CardDTO) {
+        self.database = database
+        self.cardDTO = selected
+        self.cards = cardList
         super.init(nibName: nil, bundle: nil)
-
-        for card in cardList {
-            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
-                imageSource.append(remoteSource)
-            } else {
-                let localSource = ImageSource(image: Asset.ic404.image)
-                imageSource.append(localSource)
-            }
-        }
+        self.setupCardCarousel()
     }
 
     @available(*, unavailable)
@@ -70,11 +64,51 @@ final class CardDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
 
+    private func setupCardCarousel() {
+        for card in self.cards {
+            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
+                imageSource.append(remoteSource)
+            } else {
+                let localSource = ImageSource(image: Asset.ic404.image)
+                imageSource.append(localSource)
+            }
+        }
+    }
+
     @objc
     func addToCollection() {
         let card = self.cards[cardView.slideshow.currentPage]
-        UserCollectionViewController.addToCollection(carDTO: card)
+        self.saveToCollection(carDTO: card)
         showSuccessMessage(cardDTO: card)
+    }
+
+    private func saveToCollection(carDTO: CardDTO) {
+        let user = getUserCollection()
+        try? self.database?.update {
+            let predicate = NSPredicate(format: "code == %@", carDTO.code)
+            if let index = user.myCollection.index(matching: predicate) {
+                let newCard = user.myCollection[index]
+                newCard.quantity += 1
+            } else {
+                user.myCollection.append(carDTO)
+            }
+        }
+    }
+
+    private func getUserCollection() -> UserCollectionDTO {
+        var user = UserCollectionDTO()
+        try? self.database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
+            if let userCollection = results.first {
+                user = userCollection
+            } else {
+                self?.createDatabase(object: user)
+            }
+        }
+        return user
+    }
+
+    private func createDatabase(object: UserCollectionDTO) {
+        try? self.database?.save(object: object)
     }
 
     private func showSuccessMessage(cardDTO: CardDTO) {

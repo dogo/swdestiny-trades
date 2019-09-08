@@ -8,14 +8,21 @@
 
 import UIKit
 
+protocol PeopleListProtocol: AnyObject {
+    func remove(person: PersonDTO)
+    func insert(person: PersonDTO)
+}
+
 final class PeopleListDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var persons: [PersonDTO] = []
+    private weak var delegate: PeopleListProtocol?
 
-    required init(tableView: UITableView) {
+    required init(tableView: UITableView, delegate: PeopleListProtocol) {
         super.init()
         self.tableView = tableView
+        self.delegate = delegate
         tableView.register(cellType: PersonCell.self)
         self.tableView?.dataSource = self
         self.tableView?.reloadData()
@@ -55,25 +62,13 @@ final class PeopleListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(person: PersonDTO) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                RealmManager.shared.realm.add(person, update: .all)
-                self?.persons.append(person)
-            }
-            tableView?.reloadData()
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
-        }
+        self.delegate?.insert(person: person)
+        self.persons.append(person)
+        self.tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                RealmManager.shared.realm.delete(persons[indexPath.row])
-                self?.persons.remove(at: indexPath.row)
-            }
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
-        }
+        self.delegate?.remove(person: persons[indexPath.row])
+        self.persons.remove(at: indexPath.row)
     }
 }

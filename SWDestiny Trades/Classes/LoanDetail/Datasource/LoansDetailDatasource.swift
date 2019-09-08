@@ -8,16 +8,23 @@
 
 import UIKit
 
+protocol LoansDetailsProtocol: AnyObject {
+    func stepperValueChanged(newValue: Int, card: CardDTO)
+    func remove(from section: AddCardType, at index: Int)
+}
+
 final class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     private var tableView: UITableView?
     private var currentPerson: PersonDTO?
+    private weak var delegate: LoansDetailsProtocol?
     var lentMe: [CardDTO] = []
     var borrowed: [CardDTO] = []
 
-    required init(tableView: UITableView) {
+    required init(tableView: UITableView, delegate: LoansDetailsProtocol) {
         super.init()
         self.tableView = tableView
+        self.delegate = delegate
         tableView.register(cellType: LoanDetailCell.self)
         self.tableView?.dataSource = self
         self.tableView?.reloadData()
@@ -77,17 +84,9 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
             cell.quantityStepper.isHidden = false
             cell.textLabel?.text = nil
             cell.configureCell(cardDTO: lentMe[indexPath.row])
-            cell.stepperValueChanged = { [weak self] value, cell in
-                guard let self = self else { return }
-                guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-                if let card = self.getCard(at: indexPath) {
-                    do {
-                        try RealmManager.shared.realm.write {
-                            card.quantity = value
-                        }
-                    } catch let error as NSError {
-                        debugPrint("Error opening realm: \(error)")
-                    }
+            cell.stepperValueChanged = { [weak self] value in
+                if let card = self?.getCard(at: indexPath) {
+                    self?.delegate?.stepperValueChanged(newValue: value, card: card)
                 }
             }
         }
@@ -102,37 +101,23 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
             cell.quantityStepper.isHidden = false
             cell.textLabel?.text = nil
             cell.configureCell(cardDTO: borrowed[indexPath.row])
-            cell.stepperValueChanged = { [weak self] value, cell in
-                guard let self = self else { return }
-                guard let indexPath = self.tableView?.indexPath(for: cell) else { return }
-                if let card = self.getCard(at: indexPath) {
-                    do {
-                        try RealmManager.shared.realm.write {
-                            card.quantity = value
-                        }
-                    } catch let error as NSError {
-                        debugPrint("Error opening realm: \(error)")
-                    }
+            cell.stepperValueChanged = { [weak self] value in
+                if let card = self?.getCard(at: indexPath) {
+                    self?.delegate?.stepperValueChanged(newValue: value, card: card)
                 }
             }
         }
     }
 
     private func remove(at indexPath: IndexPath) {
-        do {
-            try RealmManager.shared.realm.write { [weak self] in
-                if indexPath.section == 0 {
-                    self?.lentMe.remove(at: indexPath.row)
-                    self?.currentPerson?.lentMe.remove(at: indexPath.row)
-                } else {
-                    self?.borrowed.remove(at: indexPath.row)
-                    self?.currentPerson?.borrowed.remove(at: indexPath.row)
-                }
-            }
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
-        } catch let error as NSError {
-            debugPrint("Error opening realm: \(error)")
+        if indexPath.section == 0 {
+            self.lentMe.remove(at: indexPath.row)
+            self.delegate?.remove(from: .lent, at: indexPath.row)
+        } else {
+            self.borrowed.remove(at: indexPath.row)
+            self.delegate?.remove(from: .borrow, at: indexPath.row)
         }
+        NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
     }
 
     public func getCard(at index: IndexPath) -> CardDTO? {

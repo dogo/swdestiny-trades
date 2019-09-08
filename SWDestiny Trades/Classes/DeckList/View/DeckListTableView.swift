@@ -14,10 +14,10 @@ final class DeckListTableView: UITableView {
 
     private var tableViewDatasource: DeckListDatasource?
 
-    override init(frame: CGRect, style: UITableView.Style) {
+    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: DeckListProtocol) {
         super.init(frame: frame, style: style)
         self.delegate = self
-        tableViewDatasource = DeckListDatasource(tableView: self)
+        tableViewDatasource = DeckListDatasource(tableView: self, delegate: delegate)
         self.backgroundColor = .white
         self.keyboardDismissMode = .onDrag
 

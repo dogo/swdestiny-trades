@@ -18,7 +18,7 @@ class AddCardViewControllerTests: QuickSpec {
             var controller: AddCardViewController!
 
             beforeEach {
-                controller = AddCardViewController(person: nil, userCollection: nil, type: .collection)
+                controller = AddCardViewController(database: nil, person: nil, userCollection: nil, type: .collection)
             }
 
             it("should be able to create a controller") {

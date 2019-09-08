@@ -33,13 +33,13 @@ class AddCardViewControllerSnapshotTests: QuickSpec {
                 }
 
                 it("should have valid layout when isLentMe is True") {
-                    sut = AddCardViewController(service: service, person: PersonDTOMock.mockedPersonDTO(), type: .lent)
+                    sut = AddCardViewController(service: service, database: nil, person: PersonDTOMock.mockedPersonDTO(), type: .lent)
                     window.showTestWindow(controller: sut)
                     expect(sut) == snapshot()
                 }
 
                 it("should have valid layout when isLentMe is false") {
-                    sut = AddCardViewController(service: service, person: PersonDTOMock.mockedPersonDTO(), type: .borrow)
+                    sut = AddCardViewController(service: service, database: nil, person: PersonDTOMock.mockedPersonDTO(), type: .borrow)
                     window.showTestWindow(controller: sut)
                     expect(sut) == snapshot()
                 }

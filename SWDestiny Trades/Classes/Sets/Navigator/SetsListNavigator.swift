@@ -12,8 +12,8 @@ final class SetsListNavigator: Navigator {
 
     enum Destination {
         case about
-        case cardList(with: SetDTO)
-        case search
+        case cardList(database: DatabaseProtocol?, with: SetDTO)
+        case search(database: DatabaseProtocol?)
     }
 
     private weak var navigationController: UINavigationController?
@@ -37,10 +37,10 @@ final class SetsListNavigator: Navigator {
         switch destination {
         case .about:
             return AboutViewController()
-        case .cardList(let set):
-            return CardListViewController(with: set)
-        case .search:
-            return SearchListViewController()
+        case .cardList(let database, let set):
+            return CardListViewController(database: database, with: set)
+        case .search(let database):
+            return SearchListViewController(database: database)
         }
     }
 }

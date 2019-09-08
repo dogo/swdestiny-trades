@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class UserCollectionDTO: Object {
+class UserCollectionDTO: Object, Storable {
     @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
     let myCollection = List<CardDTO>()
 

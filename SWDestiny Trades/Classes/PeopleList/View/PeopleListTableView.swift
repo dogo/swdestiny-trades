@@ -14,10 +14,10 @@ final class PeopleListTableView: UITableView {
 
     private var tableViewDatasource: PeopleListDatasource?
 
-    override init(frame: CGRect, style: UITableView.Style) {
+    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: PeopleListProtocol) {
         super.init(frame: frame, style: style)
         self.delegate = self
-        tableViewDatasource = PeopleListDatasource(tableView: self)
+        tableViewDatasource = PeopleListDatasource(tableView: self, delegate: delegate)
         self.backgroundColor = .white
     }
 

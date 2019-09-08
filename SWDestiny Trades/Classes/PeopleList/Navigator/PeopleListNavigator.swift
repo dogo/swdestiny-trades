@@ -11,7 +11,8 @@ import UIKit
 final class PeopleListNavigator: Navigator {
 
     enum Destination {
-        case loanDetail(with: PersonDTO)
+        case loanDetail(database: DatabaseProtocol?, with: PersonDTO)
+        case newPerson(with: UpdateTableDataDelegate)
     }
 
     private weak var navigationController: UINavigationController?
@@ -33,8 +34,12 @@ final class PeopleListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .loanDetail(let person):
-            return LoansDetailViewController(person: person)
+        case .loanDetail(let database, let person):
+            return LoansDetailViewController(database: database, person: person)
+        case .newPerson(let delegate):
+            let viewController = NewPersonViewController()
+            viewController.delegate = delegate
+            return viewController
         }
     }
 }

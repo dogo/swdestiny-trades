@@ -11,8 +11,8 @@ import Reusable
 
 final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
-    var stepperValueChanged: ((Int, DeckBuilderCell) -> Void)?
-    var eliteButtonTouched: ((Bool, DeckBuilderCell) -> Void)?
+    var stepperValueChanged: ((Int) -> Void)?
+    var eliteButtonTouched: ((Bool) -> Void)?
 
     let textContainer: UIStackView = {
         let view = UIStackView(frame: .zero)
@@ -107,7 +107,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
-        self.stepperValueChanged?(value, self)
+        self.stepperValueChanged?(value)
     }
 
     override func prepareForReuse() {
@@ -164,8 +164,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
         self.accessoryType = .disclosureIndicator
 
         eliteButton.buttonTouched = { [weak self] newVaue in
-            guard let self = self else { return }
-            self.eliteButtonTouched?(newVaue, self)
+            self?.eliteButtonTouched?(newVaue)
         }
     }
 }

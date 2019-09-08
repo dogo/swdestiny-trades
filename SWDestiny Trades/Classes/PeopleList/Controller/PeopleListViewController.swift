@@ -14,13 +14,15 @@ protocol UpdateTableDataDelegate: AnyObject {
 
 final class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
-    private let peopleListView = PeopleListView()
+    private lazy var peopleListView = PeopleListTableView(delegate: self)
     private lazy var navigator = PeopleListNavigator(self.navigationController)
+    private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(database: DatabaseProtocol?) {
+        self.database = database
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -41,7 +43,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
 
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)
 
-        peopleListView.peopleListTableView.didSelectPerson = { [weak self] person in
+        peopleListView.didSelectPerson = { [weak self] person in
             self?.navigateToLoansDetailViewController(person: person)
         }
     }
@@ -50,7 +52,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
         super.viewWillAppear(animated)
 
         self.navigationItem.title = L10n.people
-        peopleListView.peopleListTableView.reloadData()
+        peopleListView.reloadData()
     }
 
     deinit {
@@ -65,8 +67,9 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
     }
 
     func loadDataFromRealm() {
-        let persons = Array(RealmManager.shared.realm.objects(PersonDTO.self))
-        peopleListView.peopleListTableView.updatePeopleList(persons)
+        try? database?.fetch(PersonDTO.self, predicate: nil, sorted: nil) { [weak self] persons in
+            self?.peopleListView.updatePeopleList(persons)
+        }
     }
 
     @objc
@@ -77,7 +80,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
     // MARK: - <UpdateTableDataDelegate>
 
     internal func insertNew(person: PersonDTO) {
-        peopleListView.peopleListTableView.insert(person)
+        peopleListView.insert(person)
     }
 
     // MARK: - UIBarButton Actions
@@ -91,7 +94,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
 
     private func toggleTableViewEditable(editable: Bool) {
         super.setEditing(!editable, animated: true)
-        peopleListView.peopleListTableView.toggleTableViewEditable(editable: editable)
+        peopleListView.toggleTableViewEditable(editable: editable)
         navigationItem.leftBarButtonItem?.title = !editable ? L10n.done : L10n.edit
     }
 
@@ -103,14 +106,21 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
         if self.isEditing {
             toggleTableViewEditable(editable: self.isEditing)
         }
-
-        let nextController = NewPersonViewController()
-        nextController.delegate = self
-        self.navigationController?.pushViewController(nextController, animated: true)
+        self.navigator.navigate(to: .newPerson(with: self))
     }
 
     func navigateToLoansDetailViewController(person: PersonDTO) {
-        self.navigator.navigate(to: .loanDetail(with: person))
+        self.navigator.navigate(to: .loanDetail(database: self.database, with: person))
+    }
+}
+
+extension PeopleListViewController: PeopleListProtocol {
+
+    func remove(person: PersonDTO) {
+        try? self.database?.delete(object: person)
     }
 
+    func insert(person: PersonDTO) {
+        try? self.database?.save(object: person)
+    }
 }

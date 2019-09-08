@@ -11,8 +11,8 @@ import UIKit
 final class UserCollectionNavigator: Navigator {
 
     enum Destination {
-        case cardDetail(with: [CardDTO], card: CardDTO)
-        case addCard(with: UserCollectionDTO)
+        case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
+        case addCard(database: DatabaseProtocol?, with: UserCollectionDTO)
     }
 
     private weak var navigationController: UINavigationController?
@@ -34,10 +34,10 @@ final class UserCollectionNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .cardDetail(let cardList, let card):
-            return CardDetailViewController(cardList: cardList, selected: card)
-        case .addCard(let userCollection):
-            return AddCardViewController(userCollection: userCollection, type: .collection)
+        case .cardDetail(let database, let cardList, let card):
+            return CardDetailViewController(database: database, cardList: cardList, selected: card)
+        case .addCard(let database, let userCollection):
+            return AddCardViewController(database: database, userCollection: userCollection, type: .collection)
         }
     }
 }

@@ -10,15 +10,15 @@ import UIKit
 
 final class LoanDetailTableView: UITableView {
 
-    var didSelectCard: ((CardDTO, Bool) -> Void)?
+    var didSelectCard: ((CardDTO, AddCardType) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
 
     private var tableViewDatasource: LoansDetailDatasource?
 
-    override init(frame: CGRect, style: UITableView.Style) {
+    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: LoansDetailsProtocol) {
         super.init(frame: frame, style: style)
         self.delegate = self
-        tableViewDatasource = LoansDetailDatasource(tableView: self)
+        self.tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: delegate)
         self.backgroundColor = .white
     }
 
@@ -37,7 +37,7 @@ final class LoanDetailTableView: UITableView {
         if (index.row == tableViewDatasource?.lentMe.count && index.section == 0) || (index.row == tableViewDatasource?.borrowed.count && index.section == 1) {
             didSelectAddItem?(index.section == 0 ? .lent : .borrow)
         } else if let card = tableViewDatasource?.getCard(at: index) {
-            didSelectCard?(card, index.section == 0)
+            didSelectCard?(card, index.section == 0 ? .lent : .borrow)
         }
     }
 }

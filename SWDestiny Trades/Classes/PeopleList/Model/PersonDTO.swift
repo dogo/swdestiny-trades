@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class PersonDTO: Object {
+class PersonDTO: Object, Storable {
     @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
     @objc dynamic var name = ""
     @objc dynamic var lastName = ""

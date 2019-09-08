@@ -10,14 +10,16 @@ import UIKit
 
 final class DeckBuilderViewController: UIViewController {
 
-    private let deckBuilderView = DeckBuilderView()
-    private var deckDTO: DeckDTO
+    private lazy var deckBuilderView = DeckBuilderTableView(delegate: self)
     private lazy var navigator = DeckBuilderNavigator(self.navigationController)
+    private let database: DatabaseProtocol?
+    private var deckDTO: DeckDTO
 
     // MARK: - Life Cycle
 
-    init(with deck: DeckDTO) {
-        deckDTO = deck
+    init(database: DatabaseProtocol?, with deck: DeckDTO) {
+        self.database = database
+        self.deckDTO = deck
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -35,7 +37,7 @@ final class DeckBuilderViewController: UIViewController {
 
         setupNavigationItem()
 
-        deckBuilderView.deckBuilderTableView.didSelectCard = { [weak self] list, card in
+        deckBuilderView.didSelectCard = { [weak self] list, card in
             self?.navigateToCardDetailViewController(cardList: list, card: card)
         }
 
@@ -62,7 +64,7 @@ final class DeckBuilderViewController: UIViewController {
     }
 
     func loadData(deck: DeckDTO) {
-        deckBuilderView.deckBuilderTableView.updateTableViewData(deck: deck)
+        deckBuilderView.updateTableViewData(deck: deck)
     }
 
     @objc
@@ -75,12 +77,12 @@ final class DeckBuilderViewController: UIViewController {
     // MARK: Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(with: cardList, card: card))
+        self.navigator.navigate(to: .cardDetail(database: self.database, with: cardList, card: card))
     }
 
     @objc
     func navigateToAddToDeckViewController() {
-        self.navigator.navigate(to: .addToDeck(with: deckDTO))
+        self.navigator.navigate(to: .addToDeck(database: self.database, with: deckDTO))
     }
 
     @objc
@@ -93,7 +95,7 @@ final class DeckBuilderViewController: UIViewController {
 
         var deckList: String = "\(deckDTO.name)\n\n"
 
-        if let deckObject = deckBuilderView.deckBuilderTableView.tableViewDatasource?.deckList {
+        if let deckObject = deckBuilderView.tableViewDatasource?.deckList {
             for section in deckObject {
                 deckList.append(String(format: "%@ (%d)\n", section.name, section.items.count))
                 for card in section.items {
@@ -111,6 +113,27 @@ final class DeckBuilderViewController: UIViewController {
             DispatchQueue.main.async {
                 self.present(activityVC, animated: true, completion: nil)
             }
+        }
+    }
+}
+
+extension DeckBuilderViewController: DeckBuilderProtocol {
+
+    func updateCardQuantity(newValue: Int, card: CardDTO) {
+        try? self.database?.update {
+            card.quantity = newValue
+        }
+    }
+
+    func updateCharacterElite(newValue: Bool, card: CardDTO) {
+        try? self.database?.update {
+            card.isElite = newValue
+        }
+    }
+
+    func remove(at index: Int) {
+        try? self.database?.update { [weak self] in
+            self?.deckDTO.list.remove(at: index)
         }
     }
 }
