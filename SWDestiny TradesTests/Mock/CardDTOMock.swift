@@ -46,16 +46,4 @@ enum CardDTOMock {
         let jsonData = try! JSONSerialization.data(withJSONObject: mockInfo, options: [])
         return try! JSONDecoder().decode(CardDTO.self, from: jsonData)
     }
-
-    static func mockedCardListDTO() -> Result<[CardDTO]?, APIError> {
-
-        let result: Result<[CardDTO]?, APIError>
-        let jsonData = try? JSONSerialization.data(withJSONObject: [mockInfo], options: [])
-        do {
-            result = .success(try JSONDecoder().decode([CardDTO].self, from: jsonData!))
-        } catch {
-            result = .failure(APIError.jsonConversionFailure)
-        }
-        return result
-    }
 }

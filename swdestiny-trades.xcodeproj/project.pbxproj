@@ -10,6 +10,7 @@
 		5FE310317C62B0C39D0F7678 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191590B68D41DCDE32CD69E /* Pods_SWDestiny_TradesTests.framework */; };
 		9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */; };
 		9D513F4023353AD200CCC12B /* sets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D513F3F23353AD100CCC12B /* sets.json */; };
+		9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */; };
 		A06419749030F9ACEF749075 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B4F4B4717FC627CF5D40A3 /* Pods_SWDestiny_Trades.framework */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
@@ -40,7 +41,7 @@
 		DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
 		DD2ABDC6230659EE00374A8B /* CardDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC2230659C900374A8B /* CardDTOMock.swift */; };
-		DD2ABDC7230659F200374A8B /* SetDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC4230659E900374A8B /* SetDTOMock.swift */; };
+		DD2ABDC7230659F200374A8B /* DeckDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC4230659E900374A8B /* DeckDTOMock.swift */; };
 		DD2ABDC923065D8200374A8B /* ReferenceImages in Resources */ = {isa = PBXBuildFile; fileRef = DD2ABDC823065D8200374A8B /* ReferenceImages */; };
 		DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */; };
 		DD38C2C2212FB0D300153D70 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */; };
@@ -212,6 +213,7 @@
 		8DB5911ED471A371A9B8EC77 /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsListViewControllerTests.swift; sourceTree = "<group>"; };
 		9D513F3F23353AD100CCC12B /* sets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sets.json; sourceTree = "<group>"; };
+		9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckGraphViewControllerTests.swift; sourceTree = "<group>"; };
 		D191590B68D41DCDE32CD69E /* Pods_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
 		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
@@ -241,7 +243,7 @@
 		DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImpl.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
 		DD2ABDC2230659C900374A8B /* CardDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDTOMock.swift; sourceTree = "<group>"; };
-		DD2ABDC4230659E900374A8B /* SetDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDTOMock.swift; sourceTree = "<group>"; };
+		DD2ABDC4230659E900374A8B /* DeckDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDTOMock.swift; sourceTree = "<group>"; };
 		DD2ABDC823065D8200374A8B /* ReferenceImages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ReferenceImages; path = "SWDestiny TradesTests/ReferenceImages"; sourceTree = SOURCE_ROOT; };
 		DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Testable.swift"; sourceTree = "<group>"; };
 		DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -442,6 +444,14 @@
 				9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */,
 			);
 			path = Sets;
+			sourceTree = "<group>";
+		};
+		9D513F4123353DCE00CCC12B /* DeckGraph */ = {
+			isa = PBXGroup;
+			children = (
+				9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */,
+			);
+			path = DeckGraph;
 			sourceTree = "<group>";
 		};
 		DD09051C1E24594E00D9EFB0 /* AddCard */ = {
@@ -773,6 +783,7 @@
 			children = (
 				DD4EA5DA2133A9E300D85ADD /* About */,
 				DD9EF542213431EF005C536E /* AddCard */,
+				9D513F4123353DCE00CCC12B /* DeckGraph */,
 				DDD19C762334488B007A9AF8 /* PeopleList */,
 				9D513F3C2335386500CCC12B /* Sets */,
 			);
@@ -996,8 +1007,8 @@
 			isa = PBXGroup;
 			children = (
 				DD2ABDC2230659C900374A8B /* CardDTOMock.swift */,
+				DD2ABDC4230659E900374A8B /* DeckDTOMock.swift */,
 				DD9EF5452134340B005C536E /* PersonDTOMock.swift */,
-				DD2ABDC4230659E900374A8B /* SetDTOMock.swift */,
 				DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */,
 			);
 			path = Mock;
@@ -1887,9 +1898,10 @@
 				DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DD2ABDC6230659EE00374A8B /* CardDTOMock.swift in Sources */,
-				DD2ABDC7230659F200374A8B /* SetDTOMock.swift in Sources */,
+				DD2ABDC7230659F200374A8B /* DeckDTOMock.swift in Sources */,
 				DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
+				9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */,
 				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
 				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
