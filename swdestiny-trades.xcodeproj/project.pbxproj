@@ -970,7 +970,6 @@
 			children = (
 				DD4D988F1E4182FB006412AD /* KingfisherSource.swift */,
 				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
-				DDF2DD2C1E42B27D0090519E /* RealmMigrations.swift */,
 				DDF678A61E441C6E00390878 /* SectionsBuilder.swift */,
 				DDF2DD2A1E429EF50090519E /* Sort.swift */,
 				DDB8A2241E266DFF0086FC01 /* Split.swift */,
@@ -1404,6 +1403,7 @@
 		DDEDC96423252FF00045F125 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				DDF2DD2C1E42B27D0090519E /* RealmMigrations.swift */,
 				DDEDC965232530D50045F125 /* RealmDatabase.swift */,
 				DDEDC967232531320045F125 /* RealmDatabase+Operations.swift */,
 			);
