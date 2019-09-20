@@ -42,15 +42,9 @@ enum CardDTOMock {
                                            "label": "Captain Phasma - Elite Trooper",
                                            "cp": 1215]
 
-    static func mockedCardDTO() -> Result<CardDTO?, APIError> {
-        let result: Result<CardDTO?, APIError>
-        let jsonData = try? JSONSerialization.data(withJSONObject: mockInfo, options: [])
-        do {
-            result = .success(try JSONDecoder().decode(CardDTO.self, from: jsonData!))
-        } catch {
-            result = .failure(APIError.jsonConversionFailure)
-        }
-        return result
+    static func mockedCardDTO() -> CardDTO {
+        let jsonData = try! JSONSerialization.data(withJSONObject: mockInfo, options: [])
+        return try! JSONDecoder().decode(CardDTO.self, from: jsonData)
     }
 
     static func mockedCardListDTO() -> Result<[CardDTO]?, APIError> {

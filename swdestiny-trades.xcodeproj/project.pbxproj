@@ -148,6 +148,10 @@
 		DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3841E1DF7BD00B4BE18 /* CardView.swift */; };
 		DDCDE38A1E1DFE8C00B4BE18 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */; };
 		DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */; };
+		DDD19C6523344118007A9AF8 /* card-list.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD19C6423344118007A9AF8 /* card-list.json */; };
+		DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C7423344228007A9AF8 /* JSONHelper.swift */; };
+		DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C772334489E007A9AF8 /* PeopleListViewControllerTests.swift */; };
+		DDD19C7A233453C5007A9AF8 /* card.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD19C79233453C5007A9AF8 /* card.json */; };
 		DDDA724D20C70E04002147CF /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */; };
 		DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; };
 		DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; };
@@ -360,6 +364,10 @@
 		DDCEBD691FDC24D60067AAE0 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		DDCEBD6A1FDC24D60067AAE0 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		DDCEF4151E248379007EACC5 /* PeopleListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListTableView.swift; sourceTree = "<group>"; };
+		DDD19C6423344118007A9AF8 /* card-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "card-list.json"; sourceTree = "<group>"; };
+		DDD19C7423344228007A9AF8 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
+		DDD19C772334489E007A9AF8 /* PeopleListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListViewControllerTests.swift; sourceTree = "<group>"; };
+		DDD19C79233453C5007A9AF8 /* card.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = card.json; sourceTree = "<group>"; };
 		DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanDetailNavigator.swift; sourceTree = "<group>"; };
 		DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImplTests.swift; sourceTree = "<group>"; };
 		DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyAPI.swift; sourceTree = "<group>"; };
@@ -751,6 +759,7 @@
 		DD4EA5D92133A9D100D85ADD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				DDD19C762334488B007A9AF8 /* PeopleList */,
 				DD4EA5DA2133A9E300D85ADD /* About */,
 				DD9EF542213431EF005C536E /* AddCard */,
 			);
@@ -849,13 +858,15 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
+				DD6E06A01E114E88004A5653 /* Info.plist */,
 				DDB6DE6A1E539443003558E4 /* Controllers */,
 				DD2F8A0D2134A21700B9FAAB /* Extension */,
+				DDD19C7323344210007A9AF8 /* Helper */,
+				DDD19C6323344118007A9AF8 /* Json */,
 				DD8CD48920F7BCD10036CA8D /* Mock */,
 				DDDE91C720F7253C00D48563 /* Rest */,
 				DD4EA5D82133A98400D85ADD /* SnapShots */,
 				DD4EA5DF2133AF5D00D85ADD /* Views */,
-				DD6E06A01E114E88004A5653 /* Info.plist */,
 			);
 			path = "SWDestiny TradesTests";
 			sourceTree = "<group>";
@@ -1315,6 +1326,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DDD19C6323344118007A9AF8 /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				DDD19C6423344118007A9AF8 /* card-list.json */,
+				DDD19C79233453C5007A9AF8 /* card.json */,
+			);
+			path = Json;
+			sourceTree = "<group>";
+		};
+		DDD19C7323344210007A9AF8 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				DDD19C7423344228007A9AF8 /* JSONHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		DDD19C762334488B007A9AF8 /* PeopleList */ = {
+			isa = PBXGroup;
+			children = (
+				DDD19C772334489E007A9AF8 /* PeopleListViewControllerTests.swift */,
+			);
+			path = PeopleList;
+			sourceTree = "<group>";
+		};
 		DDDA724B20C70E04002147CF /* Navigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1543,6 +1579,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD19C6523344118007A9AF8 /* card-list.json in Resources */,
+				DDD19C7A233453C5007A9AF8 /* card.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1834,9 +1872,11 @@
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DD2ABDC6230659EE00374A8B /* CardDTOMock.swift in Sources */,
 				DD2ABDC7230659F200374A8B /* SetDTOMock.swift in Sources */,
+				DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
 				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
+				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
 				DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */,
 				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,

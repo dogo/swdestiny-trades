@@ -20,11 +20,13 @@ class SWDestinyServiceMock: SWDestinyService {
     }
 
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
-        return completion(CardDTOMock.mockedCardListDTO())
+        let json: [CardDTO] = JSONHelper.loadJSON(withFile: "card-list")!
+        return completion(.success(json))
     }
 
     func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO?, APIError>) -> Void) {
-        return completion(CardDTOMock.mockedCardDTO())
+        let json: CardDTO = JSONHelper.loadJSON(withFile: "card")!
+        return completion(.success(json))
     }
 
     func cancelAllRequests() {

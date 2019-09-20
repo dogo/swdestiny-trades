@@ -28,4 +28,6 @@ protocol DatabaseProtocol: AnyObject {
     func deleteAll<T: Storable>(_ model: T.Type) throws
 
     func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?, completion: (([T]) -> Void)) throws
+
+    func reset() throws
 }

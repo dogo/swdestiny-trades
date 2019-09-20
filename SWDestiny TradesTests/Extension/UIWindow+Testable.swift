@@ -10,7 +10,7 @@ import UIKit
 
 extension UIWindow {
 
-    static func framed(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 564)) -> UIWindow {
+    static func framed(frame: CGRect = CGRect(x: 0, y: 0, width: 375, height: 812)) -> UIWindow {
         return UIWindow(frame: frame)
     }
 
