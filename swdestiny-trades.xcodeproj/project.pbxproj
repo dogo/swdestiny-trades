@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5FE310317C62B0C39D0F7678 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D191590B68D41DCDE32CD69E /* Pods_SWDestiny_TradesTests.framework */; };
+		9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */; };
+		9D513F4023353AD200CCC12B /* sets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D513F3F23353AD100CCC12B /* sets.json */; };
 		A06419749030F9ACEF749075 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B4F4B4717FC627CF5D40A3 /* Pods_SWDestiny_Trades.framework */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
@@ -208,6 +210,8 @@
 		50AF927615755ED1134B539F /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
 		75F549B773EAD954C2C1F498 /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
 		8DB5911ED471A371A9B8EC77 /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsListViewControllerTests.swift; sourceTree = "<group>"; };
+		9D513F3F23353AD100CCC12B /* sets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sets.json; sourceTree = "<group>"; };
 		D191590B68D41DCDE32CD69E /* Pods_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
 		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
@@ -430,6 +434,14 @@
 				360A188E4BAD476C711FD368 /* Pods-SWDestiny-TradesTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9D513F3C2335386500CCC12B /* Sets */ = {
+			isa = PBXGroup;
+			children = (
+				9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */,
+			);
+			path = Sets;
 			sourceTree = "<group>";
 		};
 		DD09051C1E24594E00D9EFB0 /* AddCard */ = {
@@ -759,9 +771,10 @@
 		DD4EA5D92133A9D100D85ADD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				DDD19C762334488B007A9AF8 /* PeopleList */,
 				DD4EA5DA2133A9E300D85ADD /* About */,
 				DD9EF542213431EF005C536E /* AddCard */,
+				DDD19C762334488B007A9AF8 /* PeopleList */,
+				9D513F3C2335386500CCC12B /* Sets */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1330,6 +1343,7 @@
 			children = (
 				DDD19C6423344118007A9AF8 /* card-list.json */,
 				DDD19C79233453C5007A9AF8 /* card.json */,
+				9D513F3F23353AD100CCC12B /* sets.json */,
 			);
 			path = Json;
 			sourceTree = "<group>";
@@ -1580,6 +1594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDD19C6523344118007A9AF8 /* card-list.json in Resources */,
+				9D513F4023353AD200CCC12B /* sets.json in Resources */,
 				DDD19C7A233453C5007A9AF8 /* card.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1868,6 +1883,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */,
+				9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */,
 				DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DD2ABDC6230659EE00374A8B /* CardDTOMock.swift in Sources */,

@@ -12,11 +12,13 @@ class SWDestinyServiceMock: SWDestinyService {
     var isCancelled = false
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void) {
-        return completion(SetDTOMock.mockedSetDTO())
+        let json: [SetDTO] = JSONHelper.loadJSON(withFile: "sets")!
+        return completion(.success(json))
     }
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
-        return completion(CardDTOMock.mockedCardListDTO())
+        let json: [CardDTO] = JSONHelper.loadJSON(withFile: "card-list")!
+        return completion(.success(json))
     }
 
     func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
