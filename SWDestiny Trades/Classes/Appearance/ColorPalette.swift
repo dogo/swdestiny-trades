@@ -16,4 +16,5 @@ enum ColorPalette {
     static let gray = UIColor(red: 151 / 255, green: 157 / 255, blue: 159 / 255, alpha: 1.0)
     static let lightGray = UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1.0)
     static let appTheme = UIColor(red: 0.08235294118, green: 0.08235294118, blue: 0.08235294118, alpha: 1.000)
+    static let appThemeV2 = UIColor(red: 54 / 255, green: 54 / 255, blue: 54 / 255, alpha: 1.000)
 }
