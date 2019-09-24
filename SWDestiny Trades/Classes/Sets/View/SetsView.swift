@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SetsView: UIView, BaseViewConfiguration {
+final class SetsView: UIView {
 
     let setsTableView: SetsTableView = {
         let view = SetsTableView()
@@ -18,6 +18,7 @@ final class SetsView: UIView, BaseViewConfiguration {
 
     let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
+        view.color = .whiteBlack
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -49,8 +50,9 @@ final class SetsView: UIView, BaseViewConfiguration {
         self.pullToRefresh.attributedTitle = attributedTitle
         self.pullToRefresh.endRefreshing()
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension SetsView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(setsTableView)
@@ -71,7 +73,7 @@ final class SetsView: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
         if #available(iOS 11, *) {
             textColor = .white
         }

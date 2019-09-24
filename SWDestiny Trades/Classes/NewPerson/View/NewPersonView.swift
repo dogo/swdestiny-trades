@@ -14,13 +14,13 @@ final class NewPersonView: UIView {
     lazy var firstNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textColor = .black
+        textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.placeholder = L10n.firstName
-        textField.placeholderColor = .darkGray
-        textField.borderInactiveColor = .black
-        textField.borderActiveColor = .black
+        textField.placeholderColor = .secondaryLabel
+        textField.borderInactiveColor = .whiteBlack
+        textField.borderActiveColor = .whiteBlack
         textField.delegate = self
         return textField
     }()
@@ -28,13 +28,13 @@ final class NewPersonView: UIView {
     var lastNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textColor = .black
+        textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.placeholder = L10n.lastName
-        textField.placeholderColor = .darkGray
-        textField.borderInactiveColor = .black
-        textField.borderActiveColor = .black
+        textField.placeholderColor = .secondaryLabel
+        textField.borderInactiveColor = .whiteBlack
+        textField.borderActiveColor = .whiteBlack
         return textField
     }()
 
@@ -50,8 +50,6 @@ final class NewPersonView: UIView {
 }
 
 extension NewPersonView: BaseViewConfiguration {
-
-    // MARK: - <BaseViewConfiguration>
 
     internal func buildViewHierarchy() {
         self.addSubview(firstNameTextField)
@@ -73,7 +71,7 @@ extension NewPersonView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 }
 

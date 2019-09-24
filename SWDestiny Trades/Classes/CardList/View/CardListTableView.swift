@@ -28,8 +28,8 @@ final class CardListTableView: UITableView {
 
         self.register(cellType: CardCell.self)
         self.register(headerFooterViewType: FilterHeaderView.self)
-        self.backgroundColor = .white
-        self.sectionIndexColor = ColorPalette.appTheme
+        self.backgroundColor = .blackWhite
+        self.sectionIndexColor = .whiteBlack
         self.sectionIndexBackgroundColor = .clear
         self.delegate = self
     }

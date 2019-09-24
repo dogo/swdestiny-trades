@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class AddCardCell: UITableViewCell, Reusable {
 
     let baseViewCell: BaseViewCell = {
         let view = BaseViewCell(frame: .zero)
@@ -49,7 +49,9 @@ final class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
         // just hightlight
     }
 
-    // MARK: - <BaseViewConfiguration>
+}
+
+extension AddCardCell: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(baseViewCell)
@@ -66,6 +68,6 @@ final class AddCardCell: UITableViewCell, Reusable, BaseViewConfiguration {
     internal func configureViews() {
         self.accessoryType = .detailButton
         self.selectionStyle = .none
-        self.tintColor = ColorPalette.appTheme
+        self.tintColor = .whiteBlack
     }
 }

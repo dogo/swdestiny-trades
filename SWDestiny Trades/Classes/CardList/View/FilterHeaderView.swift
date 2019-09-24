@@ -69,7 +69,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
     }
 
     internal func configureViews() {
-        self.contentView.backgroundColor = .white
+        self.contentView.backgroundColor = .blackWhite
         segmentControl.tintColor = ColorPalette.appTheme
     }
 }

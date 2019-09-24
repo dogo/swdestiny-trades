@@ -17,9 +17,8 @@ final class DeckListCell: UITableViewCell, Reusable {
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textColor = .black
-        textField.tintColor = .black
-        textField.placeholder = L10n.deckName
+        textField.tintColor = .secondaryLabel
+        textField.attributedPlaceholder = NSAttributedString(string: L10n.deckName, attributes: [.foregroundColor: UIColor.secondaryLabel])
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.isUserInteractionEnabled = false
         return textField
@@ -28,7 +27,7 @@ final class DeckListCell: UITableViewCell, Reusable {
     var subTitle: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -63,7 +62,9 @@ final class DeckListCell: UITableViewCell, Reusable {
 
     private func toggleEditButton() {
         let isEditing = titleEditText.isUserInteractionEnabled
-        accessoryButton.setImage(isEditing ? Asset.icDoneEdit.image : Asset.icEdit.image, for: .normal)
+        let image = isEditing ? Asset.icDoneEdit.image : Asset.icEdit.image
+        accessoryButton.tintColor = .whiteBlack
+        accessoryButton.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
     }
 
     internal func configureCell(deck: DeckDTO) {

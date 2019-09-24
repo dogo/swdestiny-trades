@@ -18,7 +18,7 @@ final class PeopleListTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = PeopleListDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)

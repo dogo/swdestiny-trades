@@ -42,7 +42,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     var subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()

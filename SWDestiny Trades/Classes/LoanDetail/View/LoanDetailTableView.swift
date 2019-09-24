@@ -19,7 +19,7 @@ final class LoanDetailTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         self.tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)

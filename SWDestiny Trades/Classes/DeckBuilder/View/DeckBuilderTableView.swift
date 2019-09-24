@@ -19,7 +19,7 @@ final class DeckBuilderTableView: UITableView {
         tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: delegate)
         self.delegate = self
         tableViewDatasource?.collapsibleDelegate = self
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)
@@ -32,10 +32,8 @@ final class DeckBuilderTableView: UITableView {
     }
 
     internal func didSelectRowAt(index: IndexPath) {
-        if let currentDatasource = tableViewDatasource {
-            if let card = currentDatasource.getCard(at: index) {
-                didSelectCard?(currentDatasource.getCardList(), card)
-            }
+        if let currentDatasource = tableViewDatasource, let card = currentDatasource.getCard(at: index) {
+            didSelectCard?(currentDatasource.getCardList(), card)
         }
     }
 }

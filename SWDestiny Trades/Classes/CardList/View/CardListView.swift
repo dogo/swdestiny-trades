@@ -18,6 +18,7 @@ final class CardListView: UIView, BaseViewConfiguration {
 
     let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
+        view.color = .whiteBlack
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -52,6 +53,6 @@ final class CardListView: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 }

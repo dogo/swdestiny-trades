@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class BaseViewCell: UIView, BaseViewConfiguration {
+final class BaseViewCell: UIView {
 
     let textContainer: UIStackView = {
         let view = UIStackView(frame: .zero)
@@ -27,7 +27,7 @@ final class BaseViewCell: UIView, BaseViewConfiguration {
     let subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
@@ -65,6 +65,9 @@ final class BaseViewCell: UIView, BaseViewConfiguration {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension BaseViewCell: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(contentView)
@@ -97,6 +100,5 @@ final class BaseViewCell: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        contentView.backgroundColor = .white
     }
 }

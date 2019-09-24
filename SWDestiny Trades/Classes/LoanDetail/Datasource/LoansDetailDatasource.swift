@@ -79,7 +79,7 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
         if indexPath.row == lentMe.count {
             cell.quantityStepper.isHidden = true
             cell.textLabel?.text = L10n.addCard.appending("...")
-            cell.textLabel?.textColor = .darkGray
+            cell.textLabel?.textColor = .secondaryLabel
         } else {
             cell.quantityStepper.isHidden = false
             cell.textLabel?.text = nil
@@ -96,7 +96,7 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
         if indexPath.row == borrowed.count {
             cell.quantityStepper.isHidden = true
             cell.textLabel?.text = L10n.addMyCard
-            cell.textLabel?.textColor = .darkGray
+            cell.textLabel?.textColor = .secondaryLabel
         } else {
             cell.quantityStepper.isHidden = false
             cell.textLabel?.text = nil

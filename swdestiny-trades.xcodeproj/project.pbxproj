@@ -116,6 +116,7 @@
 		DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */; };
 		DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */; };
 		DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4C1217FE68900AE1301 /* LoggerManager.swift */; };
+		DD9EA4EB23397EF700DB1A56 /* UIColor+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EA4EA23397EF700DB1A56 /* UIColor+DarkMode.swift */; };
 		DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */; };
 		DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF5452134340B005C536E /* PersonDTOMock.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
@@ -312,6 +313,7 @@
 		DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLogger.swift; sourceTree = "<group>"; };
 		DD99D4C1217FE68900AE1301 /* LoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
+		DD9EA4EA23397EF700DB1A56 /* UIColor+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkMode.swift"; sourceTree = "<group>"; };
 		DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		DD9EF5452134340B005C536E /* PersonDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDTOMock.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
@@ -1287,6 +1289,7 @@
 				DD88285C202A4E7F00F08C31 /* Decoder+Utils.swift */,
 				DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */,
 				DDCDE3891E1DFE8C00B4BE18 /* String+Utils.swift */,
+				DD9EA4EA23397EF700DB1A56 /* UIColor+DarkMode.swift */,
 				DD508A7323227A970058D8B7 /* UIView+Anchors.swift */,
 				DD7B108B1EE9EBA7003CA48D /* UIView+Utils.swift */,
 			);
@@ -1767,6 +1770,7 @@
 			files = (
 				DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */,
 				DDCA97B61E2FA72A0098FFB5 /* DeckBuilderViewController.swift in Sources */,
+				DD9EA4EB23397EF700DB1A56 /* UIColor+DarkMode.swift in Sources */,
 				DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,

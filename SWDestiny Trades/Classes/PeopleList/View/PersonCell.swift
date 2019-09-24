@@ -13,7 +13,7 @@ final class PersonCell: UITableViewCell, Reusable {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        self.detailTextLabel?.textColor = .darkGray
+        self.detailTextLabel?.textColor = .secondaryLabel
         self.accessoryType = .disclosureIndicator
     }
 

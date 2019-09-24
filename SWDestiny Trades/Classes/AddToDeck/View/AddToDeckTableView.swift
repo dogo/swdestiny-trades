@@ -23,7 +23,7 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
         super.init(frame: frame, style: style)
         addCardToDeckTable.delegate = self
         tableDatasource = AddToDeckCardDatasource(cards: [], tableView: self, delegate: addCardToDeckTable)
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
         self.keyboardDismissMode = .onDrag
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)

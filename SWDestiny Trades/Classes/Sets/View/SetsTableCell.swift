@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class SetsTableCell: UITableViewCell, Reusable {
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -37,7 +37,8 @@ final class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     internal func configureCell(setDTO: SetDTO) {
         titleLabel.text = setDTO.name
-        expansionImageView.image = setDTO.setIcon()
+        expansionImageView.image = setDTO.setIcon().withRenderingMode(.alwaysTemplate)
+        expansionImageView.tintColor = .whiteBlack
     }
 
     override func prepareForReuse() {
@@ -49,8 +50,9 @@ final class SetsTableCell: UITableViewCell, Reusable, BaseViewConfiguration {
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension SetsTableCell: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(expansionImageView)

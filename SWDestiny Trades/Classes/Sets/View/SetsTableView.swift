@@ -18,7 +18,7 @@ final class SetsTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = SetsListDatasource(tableView: self)
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)

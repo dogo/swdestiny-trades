@@ -79,6 +79,6 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
     }
 
     internal func configureViews() {
-        contentView.backgroundColor = ColorPalette.lightGray
+        contentView.backgroundColor = .sectionColor
     }
 }

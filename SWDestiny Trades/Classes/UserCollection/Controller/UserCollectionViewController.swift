@@ -140,7 +140,7 @@ final class UserCollectionViewController: UIViewController {
     func sort(_ sender: UIBarButtonItem, event: UIEvent) {
 
         let cellConfi = FTCellConfiguration()
-        cellConfi.textColor = UIColor.white
+        cellConfi.textColor = .white
         cellConfi.textAlignment = .center
 
         let cellConfis = Array(repeating: cellConfi, count: 3)

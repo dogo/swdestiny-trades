@@ -15,7 +15,7 @@ final class CardView: UIView, BaseViewConfiguration {
         let slideshow = ImageSlideshow(frame: .zero)
         slideshow.translatesAutoresizingMaskIntoConstraints = false
         slideshow.activityIndicator = DefaultActivityIndicator()
-        slideshow.backgroundColor = .white
+        slideshow.backgroundColor = .blackWhite
         slideshow.contentScaleMode = .scaleAspectFit
         slideshow.pageIndicator = nil
         slideshow.circular = false
@@ -48,6 +48,6 @@ final class CardView: UIView, BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
     }
 }

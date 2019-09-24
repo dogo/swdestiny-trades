@@ -18,7 +18,7 @@ final class DeckListTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = DeckListDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
         self.keyboardDismissMode = .onDrag
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)

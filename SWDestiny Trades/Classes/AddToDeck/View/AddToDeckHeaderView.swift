@@ -65,7 +65,6 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
     }
 
     internal func configureViews() {
-        self.contentView.backgroundColor = .white
         segmentControl.tintColor = ColorPalette.appTheme
     }
 }

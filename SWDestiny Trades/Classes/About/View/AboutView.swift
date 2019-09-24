@@ -16,6 +16,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         let image = UIImageView(frame: .zero)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
+        image.tintColor = .whiteBlack
         return image
     }()
 
@@ -70,9 +71,9 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     internal func configureViews() {
 
-        self.backgroundColor = .white
+        self.backgroundColor = .blackWhite
 
-        logoImage.image = Asset.Logo.largeIconBlack.image
+        logoImage.image = Asset.Logo.largeIconBlack.image.withRenderingMode(.alwaysTemplate)
 
         aboutTextView.delegate = self
         aboutTextView.isEditable = false
@@ -80,6 +81,7 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         versionLabel.text = L10n.version(Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber)
 
         let attributedString = NSMutableAttributedString(string: L10n.aboutText)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.whiteBlack, range: NSRange(location: 0, length: attributedString.length))
         attributedString.setAsLink(textToFind: "https://swdestinydb.com", linkURL: "https://swdestinydb.com")
 
         aboutTextView.attributedText = attributedString
