@@ -3,7 +3,6 @@ github "danielgindi/Charts"
 github "liufengting/FTPopOverMenu_Swift"
 github "pkluz/PKHUD"
 github "raulriera/TextFieldEffects"
-github "realm/realm-cocoa"
 github "SwiftKickMobile/SwiftMessages"
 github "zvonicek/ImageSlideshow"
 

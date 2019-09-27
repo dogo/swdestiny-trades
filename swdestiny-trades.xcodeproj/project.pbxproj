@@ -53,8 +53,6 @@
 		DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; };
 		DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
 		DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
-		DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
-		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
 		DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD591FDC24D40067AAE0 /* Reusable.framework */; };
 		DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
 		DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */; };
@@ -115,6 +113,8 @@
 		DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */; };
 		DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */; };
 		DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4C1217FE68900AE1301 /* LoggerManager.swift */; };
+		DD9AE540233DB750004B8151 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DD9AE53F233DB750004B8151 /* Realm */; };
+		DD9AE542233DB750004B8151 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DD9AE541233DB750004B8151 /* RealmSwift */; };
 		DD9EA4EB23397EF700DB1A56 /* UIColor+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EA4EA23397EF700DB1A56 /* UIColor+DarkMode.swift */; };
 		DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */; };
 		DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF5452134340B005C536E /* PersonDTOMock.swift */; };
@@ -403,10 +403,10 @@
 				DDF90290233DB2C700440CE8 /* Kingfisher in Frameworks */,
 				DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */,
 				DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */,
+				DD9AE542233DB750004B8151 /* RealmSwift in Frameworks */,
 				DD18056E20215155007CD3A7 /* FTPopOverMenu_Swift.framework in Frameworks */,
 				DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */,
-				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
-				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
+				DD9AE540233DB750004B8151 /* Realm in Frameworks */,
 				DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
@@ -1517,6 +1517,8 @@
 			name = "SWDestiny Trades";
 			packageProductDependencies = (
 				DDF9028F233DB2C700440CE8 /* Kingfisher */,
+				DD9AE53F233DB750004B8151 /* Realm */,
+				DD9AE541233DB750004B8151 /* RealmSwift */,
 			);
 			productName = "SWDestiny Trades";
 			productReference = DD6E06841E114E88004A5653 /* SWDestiny Trades.app */;
@@ -1580,6 +1582,7 @@
 			mainGroup = DD6E067B1E114E88004A5653;
 			packageReferences = (
 				DDF9028E233DB2C700440CE8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				DD9AE53E233DB750004B8151 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1665,8 +1668,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Reusable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TextFieldEffects.framework",
@@ -1677,10 +1678,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Charts.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImageSlideshow.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PKHUD.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftMessages.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TextFieldEffects.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FTPopOverMenu_Swift.framework",
@@ -2228,6 +2226,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DD9AE53E233DB750004B8151 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.18.0;
+			};
+		};
 		DDF9028E233DB2C700440CE8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -2239,6 +2245,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DD9AE53F233DB750004B8151 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD9AE53E233DB750004B8151 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		DD9AE541233DB750004B8151 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD9AE53E233DB750004B8151 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		DDF9028F233DB2C700440CE8 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DDF9028E233DB2C700440CE8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
