@@ -1,13 +1,10 @@
 github "AliSoftware/Reusable"
 github "danielgindi/Charts"
-github "liufengting/FTPopOverMenu_Swift"
 github "pkluz/PKHUD"
 github "raulriera/TextFieldEffects"
 github "SwiftKickMobile/SwiftMessages"
 github "zvonicek/ImageSlideshow"
 
 # Tests
-github "Quick/Quick"
-github "Quick/Nimble"
 github "ashfurrow/Nimble-Snapshots"
 github "uber/ios-snapshot-test-case"
