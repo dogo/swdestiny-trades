@@ -9,28 +9,25 @@
 import UIKit
 import Reusable
 
-final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class DeckBuilderCell: UITableViewCell, Reusable {
 
     var stepperValueChanged: ((Int) -> Void)?
     var eliteButtonTouched: ((Bool) -> Void)?
 
     let textContainer: UIStackView = {
         let view = UIStackView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         return view
     }()
 
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
@@ -41,7 +38,6 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -49,14 +45,12 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var quantityLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
 
     lazy var quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
-        stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
         stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
@@ -65,7 +59,6 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var eliteButton: ToggleButton = {
         let button = ToggleButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(L10n.nonElite, for: .normal)
         button.setTitleColor(ColorPalette.appTheme, for: .normal)
         return button
@@ -121,8 +114,9 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension DeckBuilderCell: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(textContainer)
@@ -135,29 +129,34 @@ final class DeckBuilderCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        iconImageView
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
-            .heightAnchor(equalTo: 25)
-            .widthAnchor(equalTo: 25)
+        iconImageView.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
+            view.heightAnchor(equalTo: 25)
+            view.widthAnchor(equalTo: 25)
+        }
 
-        quantityLabel
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 8)
+        quantityLabel.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 8)
+        }
 
-        textContainer
-            .topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
-            .leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+        textContainer.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
+            view.leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+        }
 
-        quantityStepper
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+        quantityStepper.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+        }
 
-        eliteButton
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
-            .widthAnchor(equalTo: self.quantityStepper.widthAnchor)
+        eliteButton.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            view.widthAnchor(equalTo: self.quantityStepper.widthAnchor)
+        }
     }
 
     internal func configureViews() {

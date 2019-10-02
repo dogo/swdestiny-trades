@@ -9,13 +9,12 @@
 import UIKit
 import Reusable
 
-final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
+final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable {
 
     weak var delegate: SearchDelegate?
 
     lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
-        segment.translatesAutoresizingMaskIntoConstraints = false
         segment.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return segment
     }()
@@ -49,19 +48,21 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable, BaseView
     func valueChanged(_ sender: UISegmentedControl) {
         self.delegate?.didSelectSegment?(index: sender.selectedSegmentIndex)
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension AddToDeckHeaderView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(segmentControl)
     }
 
     internal func setupConstraints() {
-        segmentControl
-            .topAnchor(equalTo: self.topAnchor, constant: 8)
-            .leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
-            .bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
+        segmentControl.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.topAnchor, constant: 8)
+            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
+            view.bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
+        }
     }
 
     internal func configureViews() {

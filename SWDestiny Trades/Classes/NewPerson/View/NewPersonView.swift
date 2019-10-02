@@ -13,7 +13,6 @@ final class NewPersonView: UIView {
 
     lazy var firstNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
@@ -27,7 +26,6 @@ final class NewPersonView: UIView {
 
     var lastNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
@@ -57,17 +55,19 @@ extension NewPersonView: BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        firstNameTextField
-            .topAnchor(equalTo: self.safeTopAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
-            .heightAnchor(equalTo: 60)
+        firstNameTextField.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.safeTopAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+            view.heightAnchor(equalTo: 60)
+        }
 
-        lastNameTextField
-            .topAnchor(equalTo: self.firstNameTextField.bottomAnchor, constant: 33)
-            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
-            .heightAnchor(equalTo: 60)
+        lastNameTextField.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.firstNameTextField.bottomAnchor, constant: 33)
+            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+            view.heightAnchor(equalTo: 60)
+        }
     }
 
     internal func configureViews() {
@@ -76,8 +76,6 @@ extension NewPersonView: BaseViewConfiguration {
 }
 
 extension NewPersonView: UITextFieldDelegate {
-
-    // MARK: - <UITextFieldDelegate>
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if firstNameTextField == textField {

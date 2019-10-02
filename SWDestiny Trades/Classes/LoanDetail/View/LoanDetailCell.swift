@@ -9,20 +9,18 @@
 import UIKit
 import Reusable
 
-final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
+final class LoanDetailCell: UITableViewCell, Reusable {
 
     var stepperValueChanged: ((Int) -> Void)?
 
     var iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
@@ -33,7 +31,6 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -41,14 +38,12 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
 
     var quantityLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
 
     lazy var quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
-        stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
         stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
@@ -97,8 +92,9 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension LoanDetailCell: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.contentView.addSubview(iconImageView)
@@ -109,29 +105,34 @@ final class LoanDetailCell: UITableViewCell, Reusable, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        iconImageView
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
-            .heightAnchor(equalTo: 25)
-            .widthAnchor(equalTo: 25)
+        iconImageView.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
+            view.heightAnchor(equalTo: 25)
+            view.widthAnchor(equalTo: 25)
+        }
 
-        quantityLabel
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 8)
+        quantityLabel.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 8)
+        }
 
-        titleLabel
-            .topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
-            .trailingAnchor(equalTo: self.quantityStepper.leadingAnchor, constant: -1)
-            .leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
+        titleLabel.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
+            view.trailingAnchor(equalTo: self.quantityStepper.leadingAnchor, constant: -1)
+            view.leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
+        }
 
-        subtitleLabel
-            .topAnchor(equalTo: self.titleLabel.bottomAnchor)
-            .leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+        subtitleLabel.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.titleLabel.bottomAnchor)
+            view.leadingAnchor(equalTo: self.quantityLabel.trailingAnchor, constant: 8)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+        }
 
-        quantityStepper
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+        quantityStepper.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+        }
     }
 
     internal func configureViews() {

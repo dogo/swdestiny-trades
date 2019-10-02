@@ -8,18 +8,13 @@
 
 import UIKit
 
-final class CardListView: UIView, BaseViewConfiguration {
+final class CardListView: UIView {
 
-    let cardListTableView: CardListTableView = {
-        let view = CardListTableView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let cardListTableView = CardListTableView()
 
     let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
         view.color = .whiteBlack
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -32,8 +27,9 @@ final class CardListView: UIView, BaseViewConfiguration {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension CardListView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(cardListTableView)
@@ -41,15 +37,18 @@ final class CardListView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        cardListTableView
-            .topAnchor(equalTo: self.safeTopAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor)
-            .bottomAnchor(equalTo: self.safeBottomAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor)
 
-        activityIndicator
-            .centerXAnchor(equalTo: self.centerXAnchor)
-            .centerYAnchor(equalTo: self.centerYAnchor)
+        cardListTableView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.safeTopAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor)
+            view.bottomAnchor(equalTo: self.safeBottomAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor)
+        }
+
+        activityIndicator.layout.applyConstraint { view in
+            view.centerXAnchor(equalTo: self.centerXAnchor)
+            view.centerYAnchor(equalTo: self.centerYAnchor)
+        }
     }
 
     internal func configureViews() {

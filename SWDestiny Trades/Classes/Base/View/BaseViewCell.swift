@@ -10,23 +10,22 @@ import UIKit
 
 final class BaseViewCell: UIView {
 
+    let contentView = UIView(frame: .zero)
+
     let textContainer: UIStackView = {
         let view = UIStackView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .vertical
         return view
     }()
 
     let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
 
     let subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -34,20 +33,12 @@ final class BaseViewCell: UIView {
 
     let accessoryLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
-    let contentView: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     let iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -79,24 +70,28 @@ extension BaseViewCell: BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        contentView
-            .inset(to: self, withInset: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        contentView.layout.applyConstraint { view in
+            view.inset(to: self, withInset: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        }
 
-        textContainer
-            .topAnchor(equalTo: self.contentView.topAnchor)
-            .leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 12)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
-            .trailingAnchor(equalTo: self.accessoryLabel.leadingAnchor)
+        textContainer.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor)
+            view.leadingAnchor(equalTo: self.iconImageView.trailingAnchor, constant: 12)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor)
+            view.trailingAnchor(equalTo: self.accessoryLabel.leadingAnchor)
+        }
 
-        iconImageView
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
-            .heightAnchor(equalTo: 25)
-            .widthAnchor(equalTo: 25)
+        iconImageView.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+            view.heightAnchor(equalTo: 25)
+            view.widthAnchor(equalTo: 25)
+        }
 
-        accessoryLabel
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
+        accessoryLabel.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+        }
     }
 
     internal func configureViews() {

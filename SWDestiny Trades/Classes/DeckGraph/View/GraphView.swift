@@ -8,13 +8,9 @@
 
 import UIKit
 
-final class GraphView: UIView, BaseViewConfiguration {
+final class GraphView: UIView {
 
-    let deckGraphCollectionView: DeckGraphCollectionView = {
-        let view = DeckGraphCollectionView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let deckGraphCollectionView = DeckGraphCollectionView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,19 +21,21 @@ final class GraphView: UIView, BaseViewConfiguration {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension GraphView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(deckGraphCollectionView)
     }
 
     internal func setupConstraints() {
-        deckGraphCollectionView
-            .topAnchor(equalTo: self.safeTopAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor)
-            .bottomAnchor(equalTo: self.safeBottomAnchor)
+        deckGraphCollectionView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.safeTopAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor)
+            view.bottomAnchor(equalTo: self.safeBottomAnchor)
+        }
     }
 
     internal func configureViews() {

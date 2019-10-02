@@ -40,6 +40,7 @@
 		DD2ABDC6230659EE00374A8B /* CardDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC2230659C900374A8B /* CardDTOMock.swift */; };
 		DD2ABDC7230659F200374A8B /* DeckDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC4230659E900374A8B /* DeckDTOMock.swift */; };
 		DD2ABDC923065D8200374A8B /* ReferenceImages in Resources */ = {isa = PBXBuildFile; fileRef = DD2ABDC823065D8200374A8B /* ReferenceImages */; };
+		DD2F82882345519300556000 /* AutoLayoutDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F82872345519300556000 /* AutoLayoutDSL.swift */; };
 		DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */; };
 		DD38C2C2212FB0D300153D70 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
@@ -241,6 +242,7 @@
 		DD2ABDC2230659C900374A8B /* CardDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDTOMock.swift; sourceTree = "<group>"; };
 		DD2ABDC4230659E900374A8B /* DeckDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDTOMock.swift; sourceTree = "<group>"; };
 		DD2ABDC823065D8200374A8B /* ReferenceImages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ReferenceImages; path = "SWDestiny TradesTests/ReferenceImages"; sourceTree = SOURCE_ROOT; };
+		DD2F82872345519300556000 /* AutoLayoutDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutDSL.swift; sourceTree = "<group>"; };
 		DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Testable.swift"; sourceTree = "<group>"; };
 		DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwdShareProvider.swift; sourceTree = "<group>"; };
@@ -1393,6 +1395,7 @@
 		DDEDC95E23252F4F0045F125 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DD2F82872345519300556000 /* AutoLayoutDSL.swift */,
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
 				DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */,
@@ -1846,6 +1849,7 @@
 				DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */,
 				DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */,
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
+				DD2F82882345519300556000 /* AutoLayoutDSL.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,
 				DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */,

@@ -8,13 +8,12 @@
 
 import UIKit
 
-final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
+final class AboutView: UIView, UITextViewDelegate {
 
     var didTouchHTTPLink: ((URL) -> Void)?
 
     var logoImage: UIImageView = {
         let image = UIImageView(frame: .zero)
-        image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
         image.tintColor = .whiteBlack
         return image
@@ -22,14 +21,12 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
 
     var versionLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
 
     var aboutTextView: UITextView = {
         let textView = UITextView(frame: .zero)
-        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
 
@@ -43,7 +40,15 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - <BaseViewConfiguration>
+    // MARK: - <UITextViewDelegate>
+
+    func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        didTouchHTTPLink?(url)
+        return false
+    }
+}
+
+extension AboutView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(logoImage)
@@ -52,21 +57,24 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
     }
 
     internal func setupConstraints() {
-        logoImage
-            .topAnchor(equalTo: self.safeTopAnchor, constant: 34)
-            .centerXAnchor(equalTo: self.centerXAnchor)
-            .widthAnchor(equalTo: 280)
-            .heightAnchor(equalTo: 150)
+        logoImage.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.safeTopAnchor, constant: 34)
+            view.centerXAnchor(equalTo: self.centerXAnchor)
+            view.widthAnchor(equalTo: 280)
+            view.heightAnchor(equalTo: 150)
+        }
 
-        versionLabel
-            .topAnchor(equalTo: logoImage.bottomAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -15)
+        versionLabel.layout.applyConstraint { view in
+            view.topAnchor(equalTo: logoImage.bottomAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -15)
+        }
 
-        aboutTextView
-            .topAnchor(equalTo: logoImage.bottomAnchor, constant: 22)
-            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
-            .bottomAnchor(equalTo: self.safeBottomAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+        aboutTextView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: logoImage.bottomAnchor, constant: 22)
+            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+            view.bottomAnchor(equalTo: self.safeBottomAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+        }
     }
 
     internal func configureViews() {
@@ -85,12 +93,5 @@ final class AboutView: UIView, BaseViewConfiguration, UITextViewDelegate {
         attributedString.setAsLink(textToFind: "https://swdestinydb.com", linkURL: "https://swdestinydb.com")
 
         aboutTextView.attributedText = attributedString
-    }
-
-    // MARK: - <UITextViewDelegate>
-
-    func textView(_ textView: UITextView, shouldInteractWith url: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        didTouchHTTPLink?(url)
-        return false
     }
 }

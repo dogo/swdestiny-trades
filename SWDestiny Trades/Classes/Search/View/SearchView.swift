@@ -8,24 +8,15 @@
 
 import UIKit
 
-final class SearchView: UIView, BaseViewConfiguration {
+final class SearchView: UIView {
 
-    let searchBar: SearchBar = {
-        let view = SearchBar()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let searchBar = SearchBar()
 
-    let searchTableView: SearchTableView = {
-        let view = SearchTableView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let searchTableView = SearchTableView()
 
     let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
         view.color = .whiteBlack
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -38,8 +29,9 @@ final class SearchView: UIView, BaseViewConfiguration {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension SearchView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(searchBar)
@@ -48,21 +40,24 @@ final class SearchView: UIView, BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        searchBar
-            .topAnchor(equalTo: self.safeTopAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor)
-            .heightAnchor(equalTo: 44)
+        searchBar.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.safeTopAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor)
+            view.heightAnchor(equalTo: 44)
+        }
 
-        searchTableView
-            .topAnchor(equalTo: self.searchBar.bottomAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor)
-            .bottomAnchor(equalTo: self.safeBottomAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor)
+        searchTableView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.searchBar.bottomAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor)
+            view.bottomAnchor(equalTo: self.safeBottomAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor)
+        }
 
-        activityIndicator
-            .centerXAnchor(equalTo: self.centerXAnchor)
-            .centerYAnchor(equalTo: self.centerYAnchor)
+        activityIndicator.layout.applyConstraint { view in
+            view.centerXAnchor(equalTo: self.centerXAnchor)
+            view.centerYAnchor(equalTo: self.centerYAnchor)
+        }
     }
 
     internal func configureViews() {

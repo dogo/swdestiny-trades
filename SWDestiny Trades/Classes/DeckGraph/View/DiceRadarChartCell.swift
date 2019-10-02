@@ -10,13 +10,12 @@ import UIKit
 import Reusable
 import Charts
 
-final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfiguration, IAxisValueFormatter {
+final class DiceRadarChartCell: UICollectionViewCell, Reusable {
 
     let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus", "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
 
     var diceRadarView: RadarChartView = {
         let view = RadarChartView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.webLineWidth = 1.0
         view.innerWebLineWidth = 1.0
         view.webColor = UIColor.lightGray
@@ -38,24 +37,6 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
 
     internal func configureCell(dataValues: [Int]) {
         setDataCount(values: dataValues)
-    }
-
-    // MARK: <BaseViewConfiguration>
-
-    internal func buildViewHierarchy() {
-        self.contentView.addSubview(diceRadarView)
-    }
-
-    internal func setupConstraints() {
-        diceRadarView
-            .topAnchor(equalTo: self.contentView.topAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
-    }
-
-    internal func configureViews() {
-        setupLineChartView(chartView: diceRadarView)
     }
 
     // MARK: - Setup
@@ -105,10 +86,31 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable, BaseViewConfigur
         marker.minimumSize = CGSize(width: 80.0, height: 40.0)
         diceRadarView.marker = marker
     }
+}
 
-    // MARK: - IAxisValueFormatter
+extension DiceRadarChartCell: IAxisValueFormatter {
 
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return dieFaces[Int(value) % dieFaces.count]
+    }
+}
+
+extension DiceRadarChartCell: BaseViewConfiguration {
+
+    internal func buildViewHierarchy() {
+        self.contentView.addSubview(diceRadarView)
+    }
+
+    internal func setupConstraints() {
+        diceRadarView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor)
+        }
+    }
+
+    internal func configureViews() {
+        setupLineChartView(chartView: diceRadarView)
     }
 }

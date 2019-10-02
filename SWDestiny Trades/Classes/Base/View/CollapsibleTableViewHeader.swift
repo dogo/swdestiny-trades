@@ -13,21 +13,19 @@ protocol CollapsibleTableViewHeaderDelegate: AnyObject {
     func toggleSection(header: CollapsibleTableViewHeader, section: Int)
 }
 
-final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
+final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable {
 
     weak var delegate: CollapsibleTableViewHeaderDelegate?
     var section = 0
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
 
     private var arrowLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = ">"
         return label
     }()
@@ -60,8 +58,9 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
         // Animate the arrow rotation
         arrowLabel.rotate(toValue: collapsed ? 0.0 : CGFloat(Double.pi / 2))
     }
+}
 
-    // MARK: - <BaseViewConfiguration>
+extension CollapsibleTableViewHeader: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         contentView.addSubview(titleLabel)
@@ -69,13 +68,15 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable, B
     }
 
     internal func setupConstraints() {
-        titleLabel
-            .centerYAnchor(equalTo: self.centerYAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+        titleLabel.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.centerYAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
+        }
 
-        arrowLabel
-            .centerYAnchor(equalTo: self.centerYAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+        arrowLabel.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.centerYAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
+        }
     }
 
     internal func configureViews() {

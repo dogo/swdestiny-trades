@@ -10,13 +10,9 @@ import UIKit
 import Reusable
 import Charts
 
-final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfiguration {
+final class CardCostLineChartCell: UICollectionViewCell, Reusable {
 
-    var cardCostChartView: LineChartView = {
-        let view = LineChartView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    var cardCostChartView = LineChartView(frame: .zero)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,24 +26,6 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
 
     internal func configureCell(dataValues: [Int]) {
         setDataCount(dataValues: dataValues)
-    }
-
-    // MARK: <BaseViewConfiguration>
-
-    internal func buildViewHierarchy() {
-        self.contentView.addSubview(cardCostChartView)
-    }
-
-    internal func setupConstraints() {
-        cardCostChartView
-            .topAnchor(equalTo: self.contentView.topAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
-    }
-
-    internal func configureViews() {
-        setupLineChartView(chartView: cardCostChartView)
     }
 
     // MARK: - Setup
@@ -102,5 +80,25 @@ final class CardCostLineChartCell: UICollectionViewCell, Reusable, BaseViewConfi
             marker.minimumSize = CGSize(width: 80.0, height: 40.0)
             chartView.marker = marker
         }
+    }
+}
+
+extension CardCostLineChartCell: BaseViewConfiguration {
+
+    internal func buildViewHierarchy() {
+        self.contentView.addSubview(cardCostChartView)
+    }
+
+    internal func setupConstraints() {
+        cardCostChartView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor)
+        }
+    }
+
+    internal func configureViews() {
+        setupLineChartView(chartView: cardCostChartView)
     }
 }

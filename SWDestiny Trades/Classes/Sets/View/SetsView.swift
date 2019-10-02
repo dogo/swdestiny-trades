@@ -10,20 +10,15 @@ import UIKit
 
 final class SetsView: UIView {
 
-    let setsTableView: SetsTableView = {
-        let view = SetsTableView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let setsTableView = SetsTableView()
+
+    let pullToRefresh = UIRefreshControl()
 
     let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
         view.color = .whiteBlack
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-    let pullToRefresh = UIRefreshControl()
 
     var textColor: UIColor = .black
 
@@ -61,15 +56,17 @@ extension SetsView: BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        setsTableView
-            .topAnchor(equalTo: self.topAnchor)
-            .leadingAnchor(equalTo: self.leadingAnchor)
-            .bottomAnchor(equalTo: self.bottomAnchor)
-            .trailingAnchor(equalTo: self.trailingAnchor)
+        setsTableView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.topAnchor)
+            view.leadingAnchor(equalTo: self.leadingAnchor)
+            view.bottomAnchor(equalTo: self.bottomAnchor)
+            view.trailingAnchor(equalTo: self.trailingAnchor)
+        }
 
-        activityIndicator
-            .centerXAnchor(equalTo: self.centerXAnchor)
-            .centerYAnchor(equalTo: self.centerYAnchor)
+        activityIndicator.layout.applyConstraint { view in
+            view.centerXAnchor(equalTo: self.centerXAnchor)
+            view.centerYAnchor(equalTo: self.centerYAnchor)
+        }
     }
 
     internal func configureViews() {

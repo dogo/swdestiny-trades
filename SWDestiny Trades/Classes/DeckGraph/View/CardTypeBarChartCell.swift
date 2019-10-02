@@ -10,13 +10,12 @@ import UIKit
 import Reusable
 import Charts
 
-final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfiguration, IAxisValueFormatter {
+final class CardTypeBarChartCell: UICollectionViewCell, Reusable {
 
     let cardTypes = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
 
     var cardTypeChartView: BarChartView = {
         let view = BarChartView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.drawBarShadowEnabled = false
         view.drawValueAboveBarEnabled = true
         return view
@@ -34,24 +33,6 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
 
     internal func configureCell(dataValues: [Int]) {
         setDataCount(values: dataValues)
-    }
-
-    // MARK: <BaseViewConfiguration>
-
-    internal func buildViewHierarchy() {
-        self.contentView.addSubview(cardTypeChartView)
-    }
-
-    internal func setupConstraints() {
-        cardTypeChartView
-            .topAnchor(equalTo: self.contentView.topAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor)
-    }
-
-    internal func configureViews() {
-        setupBarLineChartView(chartView: cardTypeChartView)
     }
 
     // MARK: - Setup
@@ -103,10 +84,31 @@ final class CardTypeBarChartCell: UICollectionViewCell, Reusable, BaseViewConfig
         marker.minimumSize = CGSize(width: 80.0, height: 40.0)
         chartView.marker = marker
     }
+}
 
-    // MARK: - IAxisValueFormatter
+extension CardTypeBarChartCell: IAxisValueFormatter {
 
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return cardTypes[Int(value)]
+    }
+}
+
+extension CardTypeBarChartCell: BaseViewConfiguration {
+
+    internal func buildViewHierarchy() {
+        self.contentView.addSubview(cardTypeChartView)
+    }
+
+    internal func setupConstraints() {
+        cardTypeChartView.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor)
+        }
+    }
+
+    internal func configureViews() {
+        setupBarLineChartView(chartView: cardTypeChartView)
     }
 }

@@ -16,7 +16,6 @@ final class DeckListCell: UITableViewCell, Reusable {
 
     var titleEditText: UITextField = {
         let textField = UITextField(frame: .zero)
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.tintColor = .secondaryLabel
         textField.attributedPlaceholder = NSAttributedString(string: L10n.deckName, attributes: [.foregroundColor: UIColor.secondaryLabel])
         textField.font = UIFont.systemFont(ofSize: 17)
@@ -26,7 +25,6 @@ final class DeckListCell: UITableViewCell, Reusable {
 
     var subTitle: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
@@ -34,7 +32,6 @@ final class DeckListCell: UITableViewCell, Reusable {
 
     lazy var accessoryButton: UIButton = {
         let button = UIButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(accessoryButtonTouched(sender:)), for: .touchUpInside)
         return button
     }()
@@ -104,21 +101,24 @@ extension DeckListCell: BaseViewConfiguration {
     }
 
     internal func setupConstraints() {
-        titleEditText
-            .topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+        titleEditText.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+        }
 
-        subTitle
-            .topAnchor(equalTo: self.titleEditText.bottomAnchor)
-            .leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
-            .bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+        subTitle.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.titleEditText.bottomAnchor)
+            view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
+            view.bottomAnchor(equalTo: self.contentView.bottomAnchor, constant: -8)
+        }
 
-        accessoryButton
-            .centerYAnchor(equalTo: self.contentView.centerYAnchor)
-            .leadingAnchor(equalTo: self.titleEditText.trailingAnchor)
-            .trailingAnchor(equalTo: self.contentView.trailingAnchor)
-            .widthAnchor(equalTo: 50)
-            .heightAnchor(equalTo: 50)
+        accessoryButton.layout.applyConstraint { view in
+            view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
+            view.leadingAnchor(equalTo: self.titleEditText.trailingAnchor)
+            view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
+            view.widthAnchor(equalTo: 50)
+            view.heightAnchor(equalTo: 50)
+        }
     }
 
     internal func configureViews() {

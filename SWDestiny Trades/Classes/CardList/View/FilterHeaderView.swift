@@ -9,14 +9,13 @@
 import UIKit
 import Reusable
 
-final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewConfiguration {
+final class FilterHeaderView: UITableViewHeaderFooterView, Reusable {
 
     weak var delegate: CardListViewDelegate?
     private var selectedIndex: Int = 0
 
     lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
-        segment.translatesAutoresizingMaskIntoConstraints = false
         segment.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return segment
     }()
@@ -53,19 +52,21 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Reusable, BaseViewCon
         self.selectedIndex = sender.selectedSegmentIndex
         self.delegate?.didSelectSegment(index: selectedIndex)
     }
+}
 
-    // MARK: <BaseViewConfiguration>
+extension FilterHeaderView: BaseViewConfiguration {
 
     internal func buildViewHierarchy() {
         self.addSubview(segmentControl)
     }
 
     internal func setupConstraints() {
-        segmentControl
-            .topAnchor(equalTo: self.topAnchor, constant: 8)
-            .leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
-            .bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
-            .trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
+        segmentControl.layout.applyConstraint { view in
+            view.topAnchor(equalTo: self.topAnchor, constant: 8)
+            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
+            view.bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
+            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
+        }
     }
 
     internal func configureViews() {
