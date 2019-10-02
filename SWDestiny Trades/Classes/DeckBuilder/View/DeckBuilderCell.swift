@@ -60,7 +60,7 @@ final class DeckBuilderCell: UITableViewCell, Reusable {
     var eliteButton: ToggleButton = {
         let button = ToggleButton(frame: .zero)
         button.setTitle(L10n.nonElite, for: .normal)
-        button.setTitleColor(ColorPalette.appTheme, for: .normal)
+        button.setTitleColor(.whiteBlack, for: .normal)
         return button
     }()
 

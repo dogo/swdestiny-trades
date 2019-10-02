@@ -13,8 +13,9 @@ final class ToggleButton: UIButton {
     var isActivate: Bool = false {
         didSet {
             let title = isActivate ? L10n.elite : L10n.nonElite
-            let titleColor = isActivate ? .white : ColorPalette.appTheme
-            backgroundColor = isActivate ? ColorPalette.appTheme : .clear
+            let titleColor: UIColor = isActivate ? .blackWhite  : .whiteBlack
+            backgroundColor = isActivate ? .whiteBlack : .clear
+            layer.borderColor = titleColor.cgColor
             setTitleColor(titleColor, for: .normal)
             setTitle(title, for: .normal)
         }
@@ -39,8 +40,6 @@ final class ToggleButton: UIButton {
 
     private func initButton() {
         layer.borderWidth = 1.0
-        layer.borderColor = ColorPalette.appTheme.cgColor
-
         addTarget(self, action: #selector(ToggleButton.buttonPressed), for: .touchUpInside)
     }
 
