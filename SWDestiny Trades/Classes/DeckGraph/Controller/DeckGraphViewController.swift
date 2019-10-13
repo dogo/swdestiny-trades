@@ -11,7 +11,7 @@ import UIKit
 final class DeckGraphViewController: UIViewController {
 
     private let deckDTO: DeckDTO
-    private let graphView = GraphView()
+    private let graphView = DeckGraphCollectionView()
 
     // MARK: - Life Cycle
 
@@ -32,7 +32,7 @@ final class DeckGraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        graphView.deckGraphCollectionView.updateCollecionViewData(deck: deckDTO)
+        graphView.updateCollecionViewData(deck: deckDTO)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -133,7 +133,6 @@
 		DDB764C21E43639E007758D5 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764B81E43639E007758D5 /* BalloonMarker.swift */; };
 		DDB764C31E43639E007758D5 /* RadarMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764B91E43639E007758D5 /* RadarMarkerView.swift */; };
 		DDB764C41E43639E007758D5 /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764BA1E43639E007758D5 /* XYMarkerView.swift */; };
-		DDB764C51E43639E007758D5 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764BB1E43639E007758D5 /* GraphView.swift */; };
 		DDB8A2251E266DFF0086FC01 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8A2241E266DFF0086FC01 /* Split.swift */; };
 		DDC60FAD1E26B9AC00473F6E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDC60FA41E26B9AC00473F6E /* Localizable.strings */; };
 		DDC60FAE1E26B9AC00473F6E /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DDC60FA61E26B9AC00473F6E /* Localizable.stringsdict */; };
@@ -329,7 +328,6 @@
 		DDB764B81E43639E007758D5 /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		DDB764B91E43639E007758D5 /* RadarMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadarMarkerView.swift; sourceTree = "<group>"; };
 		DDB764BA1E43639E007758D5 /* XYMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYMarkerView.swift; sourceTree = "<group>"; };
-		DDB764BB1E43639E007758D5 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		DDB8A2241E266DFF0086FC01 /* Split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
 		DDC60FA51E26B9AC00473F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Localizable.strings; sourceTree = "<group>"; };
 		DDC60FA71E26B9AC00473F6E /* Base */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = Base; path = Localizable.stringsdict; sourceTree = "<group>"; };
@@ -1174,7 +1172,6 @@
 				DDB764B41E43639E007758D5 /* CardTypeBarChartCell.swift */,
 				DDB764B51E43639E007758D5 /* DeckGraphCollectionView.swift */,
 				DDB764B61E43639E007758D5 /* DiceRadarChartCell.swift */,
-				DDB764BB1E43639E007758D5 /* GraphView.swift */,
 				DDB764B71E43639E007758D5 /* GraphMarker */,
 			);
 			path = View;
@@ -1833,7 +1830,6 @@
 				DD88285D202A4E7F00F08C31 /* Decoder+Utils.swift in Sources */,
 				DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */,
 				DDEDC96323252F930045F125 /* DatabaseProtocol.swift in Sources */,
-				DDB764C51E43639E007758D5 /* GraphView.swift in Sources */,
 				DD0905521E24701D00D9EFB0 /* PeopleListViewController.swift in Sources */,
 				DDCA97AB1E2FA2A20098FFB5 /* DeckListTableView.swift in Sources */,
 				DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */,
