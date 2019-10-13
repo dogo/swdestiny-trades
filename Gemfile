@@ -1,6 +1,6 @@
 source "https://www.rubygems.org"
 
-ruby '2.6.0'
+ruby '2.6.3'
 
 gem 'slather'
 gem 'cocoapods'
