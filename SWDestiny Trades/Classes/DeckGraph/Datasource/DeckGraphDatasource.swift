@@ -15,15 +15,11 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     private var dieFaces: [Int] = []
     private var collectionView: UICollectionView?
 
-    enum GraphType: Int {
+    enum GraphType: Int, CaseIterable {
         case
         barGraph,
         lineGraph,
         radarGraph
-
-        static func count() -> Int {
-            return 3
-        }
     }
 
     required init(collectionView: UICollectionView) {
@@ -60,7 +56,7 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return GraphType.count()
+        return GraphType.allCases.count
     }
 
     public func updateCollecionViewData(deck: DeckDTO) {

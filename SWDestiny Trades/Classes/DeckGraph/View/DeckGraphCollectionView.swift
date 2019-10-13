@@ -31,18 +31,9 @@ final class DeckGraphCollectionView: UICollectionView {
     func updateCollecionViewData(deck: DeckDTO) {
         collectionViewDatasource?.updateCollecionViewData(deck: deck)
     }
-
-    // MARK: <BaseDelegate>
-
-    internal func didSelectRowAt(index: IndexPath) {
-    }
 }
 
-extension DeckGraphCollectionView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectRowAt(index: indexPath)
-    }
+extension DeckGraphCollectionView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.size.width - 16)
