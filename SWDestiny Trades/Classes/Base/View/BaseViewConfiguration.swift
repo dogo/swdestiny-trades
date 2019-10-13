@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SketchKit
 
 protocol BaseViewConfiguration {
     func buildViewHierarchy()
