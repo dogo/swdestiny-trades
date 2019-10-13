@@ -1,6 +1,5 @@
 github "AliSoftware/Reusable"
 github "liufengting/FTPopOverMenu_Swift"
-github "onevcat/Kingfisher"
 github "pkluz/PKHUD"
 github "raulriera/TextFieldEffects"
 github "realm/realm-cocoa"

@@ -51,7 +51,6 @@
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
 		DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
-		DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; };
 		DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
 		DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
 		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
@@ -155,6 +154,7 @@
 		DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C7423344228007A9AF8 /* JSONHelper.swift */; };
 		DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C772334489E007A9AF8 /* PeopleListViewControllerTests.swift */; };
 		DDD19C7A233453C5007A9AF8 /* card.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD19C79233453C5007A9AF8 /* card.json */; };
+		DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1C0BA23539C4B005B522E /* Kingfisher */; };
 		DDDA724D20C70E04002147CF /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */; };
 		DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; };
 		DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; };
@@ -399,12 +399,12 @@
 			files = (
 				DD56EFE3235397C400F32891 /* Charts in Frameworks */,
 				DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */,
-				DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */,
 				DD18056E20215155007CD3A7 /* FTPopOverMenu_Swift.framework in Frameworks */,
 				DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */,
 				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
 				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
 				DD3E239D1FF70EC20033EF1B /* Reusable.framework in Frameworks */,
+				DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
 				A06419749030F9ACEF749075 /* Pods_SWDestiny_Trades.framework in Frameworks */,
@@ -1514,6 +1514,7 @@
 			packageProductDependencies = (
 				DD995C8B2353957A00EF17EC /* SketchKit */,
 				DD56EFE2235397C400F32891 /* Charts */,
+				DDD1C0BA23539C4B005B522E /* Kingfisher */,
 			);
 			productName = "SWDestiny Trades";
 			productReference = DD6E06841E114E88004A5653 /* SWDestiny Trades.app */;
@@ -1578,6 +1579,7 @@
 			packageReferences = (
 				DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */,
 				DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */,
+				DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1661,7 +1663,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ImageSlideshow.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
@@ -1673,12 +1674,10 @@
 			name = "[Carthage] Embed Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImageSlideshow.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PKHUD.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reusable.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftMessages.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TextFieldEffects.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FTPopOverMenu_Swift.framework",
@@ -2240,6 +2239,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2252,6 +2259,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */;
 			productName = SketchKit;
+		};
+		DDD1C0BA23539C4B005B522E /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
