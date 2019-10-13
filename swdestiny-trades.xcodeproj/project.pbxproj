@@ -50,7 +50,6 @@
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
-		DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5B1FDC24D50067AAE0 /* Charts.framework */; };
 		DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
 		DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5A1FDC24D40067AAE0 /* Kingfisher.framework */; };
 		DD3E23991FF70EC20033EF1B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5C1FDC24D50067AAE0 /* PKHUD.framework */; };
@@ -73,6 +72,7 @@
 		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
 		DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */; };
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
+		DD56EFE3235397C400F32891 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = DD56EFE2235397C400F32891 /* Charts */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
 		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
@@ -397,7 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD3E23931FF70EC20033EF1B /* Charts.framework in Frameworks */,
+				DD56EFE3235397C400F32891 /* Charts in Frameworks */,
 				DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */,
 				DD3E23951FF70EC20033EF1B /* Kingfisher.framework in Frameworks */,
 				DD18056E20215155007CD3A7 /* FTPopOverMenu_Swift.framework in Frameworks */,
@@ -1513,6 +1513,7 @@
 			name = "SWDestiny Trades";
 			packageProductDependencies = (
 				DD995C8B2353957A00EF17EC /* SketchKit */,
+				DD56EFE2235397C400F32891 /* Charts */,
 			);
 			productName = "SWDestiny Trades";
 			productReference = DD6E06841E114E88004A5653 /* SWDestiny Trades.app */;
@@ -1576,6 +1577,7 @@
 			mainGroup = DD6E067B1E114E88004A5653;
 			packageReferences = (
 				DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */,
+				DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1658,7 +1660,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
@@ -1671,7 +1672,6 @@
 			);
 			name = "[Carthage] Embed Frameworks";
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Charts.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImageSlideshow.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/PKHUD.framework",
@@ -2224,6 +2224,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
 		DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dogo/SketchKit";
@@ -2235,6 +2243,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DD56EFE2235397C400F32891 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
 		DD995C8B2353957A00EF17EC /* SketchKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */;
