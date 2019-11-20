@@ -14,8 +14,8 @@ enum RealmMigrations {
 
     static let schemaVersion: UInt64 = 3
 
-    static func performMigrations(with database: DatabaseProtocol?) {
-        guard let database = database as? Realm else { return }
+    static func performMigrations(with database: RealmDatabase?) {
+        guard let database = database?.realm else { return }
         var config = database.configuration
         config.schemaVersion = RealmMigrations.schemaVersion
         var needsMigrationToV2 = false
