@@ -48,8 +48,6 @@ final class UserCollectionViewController: UIViewController {
         self.navigationItem.title = L10n.myCollection
 
         loadDataFromRealm()
-
-        configureFTPopOverMenu()
     }
 
     // MARK: - Private
@@ -71,11 +69,14 @@ final class UserCollectionViewController: UIViewController {
         userCollectionView.sort(currentSortIndex)
     }
 
-    func configureFTPopOverMenu() {
-        let config = FTConfiguration.shared
+    func popOverMenuConfiguration() -> FTConfiguration {
+        let config = FTConfiguration()
         config.backgoundTintColor = ColorPalette.appTheme
         config.borderColor = ColorPalette.appTheme
         config.menuSeparatorColor = .lightGray
+        config.textColor = .white
+        config.textAlignment = .center
+        return config
     }
 
     func addToCollection(carDTO: CardDTO) {
@@ -126,7 +127,12 @@ final class UserCollectionViewController: UIViewController {
         }
 
         let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: L10n.myCollection, text: collectionList), L10n.shareText], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList, .postToFacebook]
+        activityVC.excludedActivityTypes = [.saveToCameraRoll,
+                                            .postToFlickr,
+                                            .postToVimeo,
+                                            .assignToContact,
+                                            .addToReadingList,
+                                            .postToFacebook]
 
         activityVC.popoverPresentationController?.barButtonItem = sender
         DispatchQueue.global(qos: .userInteractive).async {
@@ -138,15 +144,8 @@ final class UserCollectionViewController: UIViewController {
 
     @objc
     func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-
-        let cellConfi = FTCellConfiguration()
-        cellConfi.textColor = .white
-        cellConfi.textAlignment = .center
-
-        let cellConfis = Array(repeating: cellConfi, count: 3)
-
-        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color], menuImageArray: nil,
-                                   cellConfigurationArray: cellConfis, done: { [weak self] selectedIndex in
+        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color],
+                                   config: popOverMenuConfiguration(), done: { [weak self] selectedIndex in
             self?.userCollectionView.sort(selectedIndex)
             self?.currentSortIndex = selectedIndex
         }, cancel: {
