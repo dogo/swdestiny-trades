@@ -16,19 +16,19 @@ final class SWDestinyServiceImpl: SWDestinyService {
         self.api = api
     }
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void) {
+    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {
         return self.api.retrieveSetList(completion: completion)
     }
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
         return self.api.retrieveSetCardList(setCode: setCode, completion: completion)
     }
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
         return self.api.retrieveAllCards(completion: completion)
     }
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO?, APIError>) -> Void) {
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void) {
         return self.api.retrieveCard(cardId: cardId, completion: completion)
     }
 

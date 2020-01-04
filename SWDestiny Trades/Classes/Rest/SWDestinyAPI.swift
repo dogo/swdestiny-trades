@@ -20,9 +20,9 @@ final class SWDestinyAPI: APIClient, SWDestinyService {
         self.init(configuration: .default)
     }
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void) {
+    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {
 
-        let endpoint: SWDestinyRoute = .setList
+        let endpoint: SWDestinyEndpoint = .setList
         let request = endpoint.request
 
         self.request(request, decode: { json -> [SetDTO]? in
@@ -31,9 +31,9 @@ final class SWDestinyAPI: APIClient, SWDestinyService {
         }, completion: completion)
     }
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
 
-        let endpoint: SWDestinyRoute = .cardList(setCode: setCode)
+        let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
         let request = endpoint.request
 
         self.request(request, decode: { json -> [CardDTO]? in
@@ -42,9 +42,9 @@ final class SWDestinyAPI: APIClient, SWDestinyService {
         }, completion: completion)
     }
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void) {
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
 
-        let endpoint: SWDestinyRoute = .allCards
+        let endpoint: SWDestinyEndpoint = .allCards
         let request = endpoint.request
 
         self.request(request, decode: { json -> [CardDTO]? in
@@ -53,9 +53,9 @@ final class SWDestinyAPI: APIClient, SWDestinyService {
         }, completion: completion)
     }
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO?, APIError>) -> Void) {
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void) {
 
-        let endpoint: SWDestinyRoute = .card(cardId: cardId)
+        let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
         let request = endpoint.request
 
         self.request(request, decode: { json -> CardDTO? in

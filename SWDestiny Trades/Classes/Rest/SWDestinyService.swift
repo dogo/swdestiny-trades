@@ -10,13 +10,13 @@ import Foundation
 
 protocol SWDestinyService {
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO]?, APIError>) -> Void)
+    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void)
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO]?, APIError>) -> Void)
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO]?, APIError>) -> Void)
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void)
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO?, APIError>) -> Void)
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void)
 
     func cancelAllRequests()
 }

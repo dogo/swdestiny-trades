@@ -67,7 +67,6 @@ final class SetsListViewController: UIViewController {
             self?.setsView.activityIndicator.stopAnimating()
             switch result {
             case .success(let setList):
-                guard let setList = setList else { return }
                 self?.setsView.setsTableView.updateSetList(setList)
             case .failure(let error):
                 ToastMessages.showNetworkErrorMessage()

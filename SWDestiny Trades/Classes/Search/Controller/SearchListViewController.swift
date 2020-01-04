@@ -51,7 +51,6 @@ final class SearchListViewController: UIViewController {
             self?.searchView.activityIndicator.stopAnimating()
             switch result {
             case .success(let allCards):
-                guard let allCards = allCards else { return }
                 self?.searchView.searchTableView.updateSearchList(allCards)
                 self?.cards = allCards
             case .failure(let error):

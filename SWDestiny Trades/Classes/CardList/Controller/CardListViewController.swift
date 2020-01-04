@@ -41,7 +41,6 @@ final class CardListViewController: UIViewController {
             self?.cardListView.activityIndicator.stopAnimating()
             switch result {
             case .success(let cardList):
-                guard let cardList = cardList else { return }
                 self?.cardListView.cardListTableView.updateCardList(cardList)
             case .failure(let error):
                 ToastMessages.showNetworkErrorMessage()

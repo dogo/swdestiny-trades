@@ -58,7 +58,6 @@ final class AddCardViewController: UIViewController {
             self?.addCardView.activityIndicator.stopAnimating()
             switch result {
             case .success(let allCards):
-                guard let allCards = allCards else { return }
                 self?.addCardView.addCardTableView.updateSearchList(allCards)
                 self?.cards = allCards
             case .failure(let error):

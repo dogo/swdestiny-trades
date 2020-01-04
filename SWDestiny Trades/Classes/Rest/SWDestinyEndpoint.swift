@@ -1,5 +1,5 @@
 //
-//  SWDestinyRoute.swift
+//  SWDestinyEndpoint.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 12/01/17.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum SWDestinyRoute {
+enum SWDestinyEndpoint {
     case setList
     case cardList(setCode: String)
     case allCards
     case card(cardId: String)
 }
 
-extension SWDestinyRoute: EndpointProtocol {
+extension SWDestinyEndpoint: EndpointProtocol {
 
     /// The scheme subcomponent of the `URL`.
     var scheme: HttpScheme {

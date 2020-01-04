@@ -72,7 +72,6 @@ final class AddToDeckViewController: UIViewController {
             self?.addToDeckView.activityIndicator.stopAnimating()
             switch result {
             case .success(let allCards):
-                guard let allCards = allCards else { return }
                 self?.addToDeckView.addToDeckTableView.updateSearchList(allCards)
                 self?.cards = allCards
             case .failure(let error):
