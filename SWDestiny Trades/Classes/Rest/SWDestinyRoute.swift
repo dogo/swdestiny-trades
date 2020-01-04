@@ -8,14 +8,6 @@
 
 import Foundation
 
-protocol Endpoint {
-
-    var baseURL: String { get }
-    var path: String { get }
-    var method: HttpMethod { get }
-    var headers: [String: String]? { get }
-}
-
 enum SWDestinyRoute {
     case setList
     case cardList(setCode: String)
@@ -23,14 +15,19 @@ enum SWDestinyRoute {
     case card(cardId: String)
 }
 
-extension SWDestinyRoute: Endpoint {
+extension SWDestinyRoute: EndpointProtocol {
 
-    /// The target's base `URL`.
-    var baseURL: String {
-        return "https://swdestinydb.com"
+    /// The scheme subcomponent of the `URL`.
+    var scheme: HttpScheme {
+        return .https
     }
 
-    /// The path to be appended to `baseURL` to form the full `URL`.
+    /// The target's host `URL`.
+    var host: String {
+        return "swdestinydb.com"
+    }
+
+    /// The path to be appended to `host` to form the full `URL`.
     var path: String {
         switch self {
         case .setList:
@@ -53,20 +50,22 @@ extension SWDestinyRoute: Endpoint {
     }
 
     /// The headers to be used in the request.
-    var headers: [String: String]? {
+    var headers: HttpHeaders? {
         return ["Content-type": "application/json"]
     }
 
     /// The components of a URL.
     var urlComponents: URLComponents {
-        var components = URLComponents(string: baseURL)! // swiftlint:disable:this force_unwrapping
+        var components = URLComponents()
+        components.scheme = scheme.toString()
+        components.host = host
         components.path = path
         return components
     }
 
     /// The URLRequest with the given URL and httpMethod.
     var request: URLRequest {
-        var request = URLRequest(url: urlComponents.url!) // swiftlint:disable:this force_unwrapping
+        var request = URLRequest(with: urlComponents.url)
         request.httpMethod = method.toString()
         request.allHTTPHeaderFields = headers
         return request

@@ -72,6 +72,7 @@
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
 		DD56EFE3235397C400F32891 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = DD56EFE2235397C400F32891 /* Charts */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
+		DD5DE3FD23C0D6EB00DCC743 /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DE3FC23C0D6EB00DCC743 /* EndpointProtocol.swift */; };
 		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
@@ -104,7 +105,7 @@
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD922D1F23061DEC00F7255F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D1E23061DEC00F7255F /* APIClient.swift */; };
-		DD922D2E23062AE300F7255F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D2D23062AE300F7255F /* HTTPMethod.swift */; };
+		DD922D2E23062AE300F7255F /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D2D23062AE300F7255F /* HttpMethod.swift */; };
 		DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93D3C72008EEAB00C2663D /* ToggleButton.swift */; };
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
@@ -123,6 +124,8 @@
 		DDAFBF281FF6F3F500927875 /* AddToDeckHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF211FF6F3F500927875 /* AddToDeckHeaderView.swift */; };
 		DDAFBF2A1FF6F3F500927875 /* AddToDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF231FF6F3F500927875 /* AddToDeckView.swift */; };
 		DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB6DE6B1E539443003558E4 /* AboutViewControllerTests.swift */; };
+		DDB6E75923C0DE9600075432 /* HttpScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB6E75823C0DE9600075432 /* HttpScheme.swift */; };
+		DDB6E75C23C0E50B00075432 /* URLRequest+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB6E75B23C0E50B00075432 /* URLRequest+Utils.swift */; };
 		DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764AF1E43639E007758D5 /* DeckGraphViewController.swift */; };
 		DDB764BD1E43639E007758D5 /* DeckGraphDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764B11E43639E007758D5 /* DeckGraphDatasource.swift */; };
 		DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB764B31E43639E007758D5 /* CardCostLineChartCell.swift */; };
@@ -266,6 +269,7 @@
 		DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewTests.swift; sourceTree = "<group>"; };
 		DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SetDTO+Utils.swift"; sourceTree = "<group>"; };
 		DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardDTO+Utils.swift"; sourceTree = "<group>"; };
+		DD5DE3FC23C0D6EB00DCC743 /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
 		DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -301,7 +305,7 @@
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD922D1E23061DEC00F7255F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		DD922D2D23062AE300F7255F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		DD922D2D23062AE300F7255F /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		DD93D3C72008EEAB00C2663D /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
@@ -319,6 +323,8 @@
 		DDAFBF211FF6F3F500927875 /* AddToDeckHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckHeaderView.swift; sourceTree = "<group>"; };
 		DDAFBF231FF6F3F500927875 /* AddToDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckView.swift; sourceTree = "<group>"; };
 		DDB6DE6B1E539443003558E4 /* AboutViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewControllerTests.swift; sourceTree = "<group>"; };
+		DDB6E75823C0DE9600075432 /* HttpScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpScheme.swift; sourceTree = "<group>"; };
+		DDB6E75B23C0E50B00075432 /* URLRequest+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Utils.swift"; sourceTree = "<group>"; };
 		DDB764AF1E43639E007758D5 /* DeckGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckGraphViewController.swift; sourceTree = "<group>"; };
 		DDB764B11E43639E007758D5 /* DeckGraphDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckGraphDatasource.swift; sourceTree = "<group>"; };
 		DDB764B31E43639E007758D5 /* CardCostLineChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCostLineChartCell.swift; sourceTree = "<group>"; };
@@ -937,7 +943,9 @@
 			children = (
 				DD922D1E23061DEC00F7255F /* APIClient.swift */,
 				DD7F77DD2306D62D0027AA18 /* APIError.swift */,
-				DD922D2D23062AE300F7255F /* HTTPMethod.swift */,
+				DD5DE3FC23C0D6EB00DCC743 /* EndpointProtocol.swift */,
+				DD922D2D23062AE300F7255F /* HttpMethod.swift */,
+				DDB6E75823C0DE9600075432 /* HttpScheme.swift */,
 				DDF47FBC2306330800F130DB /* HttpStatusCode.swift */,
 			);
 			path = Base;
@@ -1058,6 +1066,7 @@
 		DD9289061E11933C00FDEC48 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
+				DDB6E75A23C0E36400075432 /* Extensions */,
 				DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */,
 				DDFB0C8E1E285F0C00442E1B /* SWDestinyRoute.swift */,
 				DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */,
@@ -1137,6 +1146,14 @@
 				DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DDB6E75A23C0E36400075432 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DDB6E75B23C0E50B00075432 /* URLRequest+Utils.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DDB764AD1E43639E007758D5 /* DeckGraph */ = {
@@ -1626,15 +1643,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1778,6 +1792,7 @@
 				DDB764BE1E43639E007758D5 /* CardCostLineChartCell.swift in Sources */,
 				DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */,
 				DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */,
+				DD5DE3FD23C0D6EB00DCC743 /* EndpointProtocol.swift in Sources */,
 				DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
 				DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */,
@@ -1801,14 +1816,16 @@
 				DDB764C11E43639E007758D5 /* DiceRadarChartCell.swift in Sources */,
 				DDAFBF281FF6F3F500927875 /* AddToDeckHeaderView.swift in Sources */,
 				DDCA97B71E2FA72A0098FFB5 /* DeckBuilderDatasource.swift in Sources */,
+				DDB6E75923C0DE9600075432 /* HttpScheme.swift in Sources */,
 				DD7FF0F91E1DCEAB004FC6CF /* AboutView.swift in Sources */,
 				DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */,
 				DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */,
-				DD922D2E23062AE300F7255F /* HTTPMethod.swift in Sources */,
+				DD922D2E23062AE300F7255F /* HttpMethod.swift in Sources */,
 				DD0905481E24701D00D9EFB0 /* AlphabeticalListDatasource.swift in Sources */,
 				DDDE91CD20F728AE00D48563 /* SWDestinyAPI.swift in Sources */,
 				DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */,
 				DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */,
+				DDB6E75C23C0E50B00075432 /* URLRequest+Utils.swift in Sources */,
 				DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */,
 				DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */,
 				DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */,
