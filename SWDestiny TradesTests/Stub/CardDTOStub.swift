@@ -1,5 +1,5 @@
 //
-//  CardDTOMock.swift
+//  CardDTOStub.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 12/07/18.
@@ -9,7 +9,7 @@
 import Foundation
 @testable import SWDestiny_Trades
 
-enum CardDTOMock {
+extension CardDTO {
 
     static let mockInfo: [String: Any?] = ["sides": ["1RD", "2RD", "1F", "1Dc", "1R", "-"],
                                            "set_code": "AW",
@@ -42,7 +42,7 @@ enum CardDTOMock {
                                            "label": "Captain Phasma - Elite Trooper",
                                            "cp": 1215]
 
-    static func mockedCardDTO() -> CardDTO {
+    static func stub() -> CardDTO {
         let jsonData = try! JSONSerialization.data(withJSONObject: mockInfo, options: [])
         return try! JSONDecoder().decode(CardDTO.self, from: jsonData)
     }

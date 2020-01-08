@@ -1,5 +1,5 @@
 //
-//  PersonDTOMock.swift
+//  PersonDTOStub.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 27/08/18.
@@ -9,9 +9,9 @@
 import Foundation
 @testable import SWDestiny_Trades
 
-enum PersonDTOMock {
+extension PersonDTO {
 
-    static func mockedPersonDTO() -> PersonDTO {
+    static func stub() -> PersonDTO {
         let person = PersonDTO()
         person.name = "User"
         person.lastName = "Mock"

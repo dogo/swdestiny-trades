@@ -24,7 +24,7 @@ class DeckGraphViewControllerTests: QuickSpec {
             context("when it's initialized") {
 
                 beforeEach {
-                    sut = DeckGraphViewController(deck: DeckDTOMock.mockedDeckDTO())
+                    sut = DeckGraphViewController(deck: DeckDTO.stub())
                     window.showTestWindow(controller: sut)
                 }
 

@@ -48,7 +48,7 @@ class PeopleListViewControllerTests: QuickSpec {
                     }
 
                     it("with a person with no loans") {
-                        let person = PersonDTOMock.mockedPersonDTO()
+                        let person = PersonDTO.stub()
                         try! database.save(object: person)
 
                         sut = PeopleListViewController(database: database)
@@ -58,8 +58,8 @@ class PeopleListViewControllerTests: QuickSpec {
                     }
 
                     it("with a person with lent cards") {
-                        let person = PersonDTOMock.mockedPersonDTO()
-                        person.lentMe.append(CardDTOMock.mockedCardDTO())
+                        let person = PersonDTO.stub()
+                        person.lentMe.append(CardDTO.stub())
                         try! database.save(object: person)
 
                         sut = PeopleListViewController(database: database)
@@ -69,8 +69,8 @@ class PeopleListViewControllerTests: QuickSpec {
                     }
 
                     it("with a person with borrowed cards") {
-                        let person = PersonDTOMock.mockedPersonDTO()
-                        person.borrowed.append(CardDTOMock.mockedCardDTO())
+                        let person = PersonDTO.stub()
+                        person.borrowed.append(CardDTO.stub())
                         try! database.save(object: person)
 
                         sut = PeopleListViewController(database: database)
@@ -80,9 +80,9 @@ class PeopleListViewControllerTests: QuickSpec {
                     }
 
                     it("with a person with lent and borrowed cards") {
-                        let person = PersonDTOMock.mockedPersonDTO()
-                        person.lentMe.append(CardDTOMock.mockedCardDTO())
-                        person.borrowed.append(CardDTOMock.mockedCardDTO())
+                        let person = PersonDTO.stub()
+                        person.lentMe.append(CardDTO.stub())
+                        person.borrowed.append(CardDTO.stub())
                         try! database.save(object: person)
 
                         sut = PeopleListViewController(database: database)

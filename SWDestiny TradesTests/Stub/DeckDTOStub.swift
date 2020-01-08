@@ -1,6 +1,6 @@
 //
-//  DeckDTOMock.swift
-//  SWDestiny Trades
+//  DeckDTOStub.swift
+//  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 20/09/19.
 //  Copyright © 2019 Diogo Autilio. All rights reserved.
@@ -10,9 +10,9 @@ import Foundation
 import RealmSwift
 @testable import SWDestiny_Trades
 
-enum DeckDTOMock {
+extension DeckDTO {
 
-    static func mockedDeckDTO() -> DeckDTO {
+    static func stub() -> DeckDTO {
 
         let deck = DeckDTO()
         deck.name = "Mock Deck"
