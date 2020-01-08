@@ -32,7 +32,6 @@ class SWDestinyServiceImplTests: QuickSpec {
                 sut.retrieveSetList { result in
                     switch result {
                     case .success(let setList):
-                        guard let setList = setList else { fatalError("Fail") }
                         expect(setList[0].name).to(equal("Awakenings"))
                         expect(setList[0].code).to(equal("AW"))
                     case .failure(let error):
@@ -45,7 +44,6 @@ class SWDestinyServiceImplTests: QuickSpec {
                 sut.retrieveSetCardList(setCode: "anyString") { result in
                     switch result {
                     case .success(let cardList):
-                        guard let cardList = cardList else { fatalError("Fail") }
                         expect(cardList[0].setCode).to(equal("RIV"))
                         expect(cardList[0].setName).to(equal("Rivals"))
                         expect(cardList[0].typeCode).to(equal("character"))
@@ -84,7 +82,6 @@ class SWDestinyServiceImplTests: QuickSpec {
                 sut.retrieveCard(cardId: "anyString") { result in
                     switch result {
                     case .success(let card):
-                        guard let card = card else { fatalError("Fail") }
                         expect(card.setCode).to(equal("AW"))
                         expect(card.setName).to(equal("Awakenings"))
                         expect(card.typeCode).to(equal("character"))
@@ -123,7 +120,6 @@ class SWDestinyServiceImplTests: QuickSpec {
                 sut.retrieveAllCards { result in
                     switch result {
                     case .success(let cardList):
-                        guard let cardList = cardList else { fatalError("Fail") }
                         expect(cardList[0].setCode).to(equal("RIV"))
                         expect(cardList[0].setName).to(equal("Rivals"))
                         expect(cardList[0].typeCode).to(equal("character"))
