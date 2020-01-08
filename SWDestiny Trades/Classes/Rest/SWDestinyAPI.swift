@@ -12,12 +12,8 @@ final class SWDestinyAPI: APIClient, SWDestinyService {
 
     let session: URLSession
 
-    init(configuration: URLSessionConfiguration) {
-        self.session = URLSession(configuration: configuration)
-    }
-
-    convenience init() {
-        self.init(configuration: .default)
+    init(session: URLSession = .shared) {
+        self.session = session
     }
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {

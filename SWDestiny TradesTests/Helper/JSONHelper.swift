@@ -26,16 +26,15 @@ enum JSONHelper {
         return jsonData
     }
 
-    public static func loadJSONData(withFile fileName: String) -> Any? {
-        var jsonData: Any?
+    public static func loadJSONData(withFile fileName: String) -> Data? {
+        var data: Data?
         if let url = Bundle(for: BundleTestClass.self).url(forResource: fileName, withExtension: "json") {
             do {
-                let data = try Data(contentsOf: url)
-                jsonData = try? JSONSerialization.jsonObject(with: data, options: [])
+                data = try Data(contentsOf: url)
             } catch {
                 debugPrint(error.localizedDescription)
             }
         }
-        return jsonData
+        return data
     }
 }

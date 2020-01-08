@@ -117,6 +117,10 @@
 		DD9EA4EB23397EF700DB1A56 /* UIColor+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EA4EA23397EF700DB1A56 /* UIColor+DarkMode.swift */; };
 		DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */; };
 		DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9EF5452134340B005C536E /* PersonDTOMock.swift */; };
+		DDA56A6923C56E750091CD09 /* APIClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6823C56E750091CD09 /* APIClientMock.swift */; };
+		DDA56A6B23C56FE00091CD09 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6A23C56FE00091CD09 /* URLSessionMock.swift */; };
+		DDA56A6D23C5700D0091CD09 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6C23C5700D0091CD09 /* URLSessionDataTaskMock.swift */; };
+		DDA56A6F23C572C70091CD09 /* SWDestinyAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6E23C572C70091CD09 /* SWDestinyAPITests.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
 		DDAFBF251FF6F3F500927875 /* AddToDeckCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF1C1FF6F3F500927875 /* AddToDeckCardDatasource.swift */; };
 		DDAFBF261FF6F3F500927875 /* AddToDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF1E1FF6F3F500927875 /* AddToDeckViewController.swift */; };
@@ -316,6 +320,10 @@
 		DD9EA4EA23397EF700DB1A56 /* UIColor+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+DarkMode.swift"; sourceTree = "<group>"; };
 		DD9EF54321343229005C536E /* AddCardViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		DD9EF5452134340B005C536E /* PersonDTOMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDTOMock.swift; sourceTree = "<group>"; };
+		DDA56A6823C56E750091CD09 /* APIClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientMock.swift; sourceTree = "<group>"; };
+		DDA56A6A23C56FE00091CD09 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		DDA56A6C23C5700D0091CD09 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
+		DDA56A6E23C572C70091CD09 /* SWDestinyAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyAPITests.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
 		DDAFBF1C1FF6F3F500927875 /* AddToDeckCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckCardDatasource.swift; sourceTree = "<group>"; };
 		DDAFBF1E1FF6F3F500927875 /* AddToDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckViewController.swift; sourceTree = "<group>"; };
@@ -1012,10 +1020,13 @@
 		DD8CD48920F7BCD10036CA8D /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				DDA56A6823C56E750091CD09 /* APIClientMock.swift */,
 				DD2ABDC2230659C900374A8B /* CardDTOMock.swift */,
 				DD2ABDC4230659E900374A8B /* DeckDTOMock.swift */,
 				DD9EF5452134340B005C536E /* PersonDTOMock.swift */,
 				DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */,
+				DDA56A6C23C5700D0091CD09 /* URLSessionDataTaskMock.swift */,
+				DDA56A6A23C56FE00091CD09 /* URLSessionMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1399,6 +1410,7 @@
 		DDDE91C720F7253C00D48563 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
+				DDA56A6E23C572C70091CD09 /* SWDestinyAPITests.swift */,
 				DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */,
 			);
 			path = Rest;
@@ -1914,15 +1926,19 @@
 				DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DD2ABDC6230659EE00374A8B /* CardDTOMock.swift in Sources */,
+				DDA56A6F23C572C70091CD09 /* SWDestinyAPITests.swift in Sources */,
 				DD2ABDC7230659F200374A8B /* DeckDTOMock.swift in Sources */,
 				DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
 				9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */,
 				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
+				DDA56A6D23C5700D0091CD09 /* URLSessionDataTaskMock.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
 				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
+				DDA56A6B23C56FE00091CD09 /* URLSessionMock.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
 				DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */,
+				DDA56A6923C56E750091CD09 /* APIClientMock.swift in Sources */,
 				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,
 				DD9EF5462134340B005C536E /* PersonDTOMock.swift in Sources */,
 			);
