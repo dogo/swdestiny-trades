@@ -11,9 +11,11 @@ import Foundation
 final class URLSessionMock: URLSession {
 
     typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
+    typealias CancelCompletionHandler = ([URLSessionDataTask], [URLSessionUploadTask], [URLSessionDownloadTask]) -> Void
 
     var data: Data?
     var error: Error?
+    var tasksCancelled: Bool = false
 
     override func dataTask(with request: URLRequest, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask {
 
@@ -24,5 +26,10 @@ final class URLSessionMock: URLSession {
             let response = HTTPURLResponse(url: URL(string: ":D")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             completionHandler(data, response, error)
         }
+    }
+
+    override func getTasksWithCompletionHandler(_ completionHandler: @escaping CancelCompletionHandler) {
+        tasksCancelled = true
+        completionHandler([URLSessionDataTask](), [URLSessionUploadTask](), [URLSessionDownloadTask]())
     }
 }

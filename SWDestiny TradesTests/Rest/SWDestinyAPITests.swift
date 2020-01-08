@@ -99,6 +99,12 @@ class SWDestinyAPITests: QuickSpec {
                     }
                 }
             }
+
+            it("should cancel all requests") {
+
+                sut.cancelAllRequests()
+                expect(session.tasksCancelled) == true
+            }
         }
     }
 }
