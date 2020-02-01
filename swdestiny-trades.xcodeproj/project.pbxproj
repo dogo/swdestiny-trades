@@ -120,6 +120,7 @@
 		DDA56A6B23C56FE00091CD09 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6A23C56FE00091CD09 /* URLSessionMock.swift */; };
 		DDA56A6D23C5700D0091CD09 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6C23C5700D0091CD09 /* URLSessionDataTaskMock.swift */; };
 		DDA56A6F23C572C70091CD09 /* SWDestinyAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA56A6E23C572C70091CD09 /* SWDestinyAPITests.swift */; };
+		DDAB37EF23E5ACFB00B65738 /* RealmDatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB37ED23E5AC2600B65738 /* RealmDatabaseHelper.swift */; };
 		DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB3DA91E27BD14006A603D /* CardReturnable.swift */; };
 		DDAFBF251FF6F3F500927875 /* AddToDeckCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF1C1FF6F3F500927875 /* AddToDeckCardDatasource.swift */; };
 		DDAFBF261FF6F3F500927875 /* AddToDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAFBF1E1FF6F3F500927875 /* AddToDeckViewController.swift */; };
@@ -322,6 +323,7 @@
 		DDA56A6A23C56FE00091CD09 /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		DDA56A6C23C5700D0091CD09 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
 		DDA56A6E23C572C70091CD09 /* SWDestinyAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyAPITests.swift; sourceTree = "<group>"; };
+		DDAB37ED23E5AC2600B65738 /* RealmDatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabaseHelper.swift; sourceTree = "<group>"; };
 		DDAB3DA91E27BD14006A603D /* CardReturnable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardReturnable.swift; sourceTree = "<group>"; };
 		DDAFBF1C1FF6F3F500927875 /* AddToDeckCardDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckCardDatasource.swift; sourceTree = "<group>"; };
 		DDAFBF1E1FF6F3F500927875 /* AddToDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToDeckViewController.swift; sourceTree = "<group>"; };
@@ -1392,6 +1394,7 @@
 			isa = PBXGroup;
 			children = (
 				DDD19C7423344228007A9AF8 /* JSONHelper.swift */,
+				DDAB37ED23E5AC2600B65738 /* RealmDatabaseHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1940,6 +1943,7 @@
 				DDA56A6D23C5700D0091CD09 /* URLSessionDataTaskMock.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */,
 				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
+				DDAB37EF23E5ACFB00B65738 /* RealmDatabaseHelper.swift in Sources */,
 				DDA56A6B23C56FE00091CD09 /* URLSessionMock.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
 				DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */,

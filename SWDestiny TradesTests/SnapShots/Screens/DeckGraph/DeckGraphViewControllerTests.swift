@@ -26,7 +26,7 @@ class DeckGraphViewControllerTests: QuickSpec {
 
                 beforeEach {
                     let deck = DeckDTO.stub()
-                    let memoryDB = try? RealmDatabase(configuration: .inMemory(identifier: "DeckGraph"))
+                    let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: "DeckGraph")
                     try? memoryDB?.save(object: deck)
 
                     sut = DeckGraphViewController(deck: deck)
