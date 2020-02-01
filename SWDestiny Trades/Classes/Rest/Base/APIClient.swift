@@ -33,7 +33,7 @@ extension APIClient {
                 return
             }
             switch httpResponse.statusCode {
-            case 200...299:
+            case 200...399:
                 if let data = data {
                     do {
                         let model = try JSONDecoder().decode(decodingType, from: data)
