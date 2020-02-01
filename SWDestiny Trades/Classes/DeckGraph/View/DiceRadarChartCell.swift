@@ -18,8 +18,8 @@ final class DiceRadarChartCell: UICollectionViewCell, Reusable {
         let view = RadarChartView(frame: .zero)
         view.webLineWidth = 1.0
         view.innerWebLineWidth = 1.0
-        view.webColor = UIColor.lightGray
-        view.innerWebColor = UIColor.lightGray
+        view.webColor = .lightGray
+        view.innerWebColor = .lightGray
         view.webAlpha = 1.0
         view.chartDescription?.enabled = false
         return view

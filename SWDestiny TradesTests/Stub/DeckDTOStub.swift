@@ -12,12 +12,16 @@ import RealmSwift
 
 extension DeckDTO {
 
-    static func stub() -> DeckDTO {
+    static func stub(emptyList: Bool = false) -> DeckDTO {
 
         let deck = DeckDTO()
         deck.name = "Mock Deck"
-        //let list: List<CardDTO> = JSONHelper.loadJSON(withFile: "card-list")!
-        //deck.list = list
+        if !emptyList {
+            let list: List<CardDTO> = JSONHelper.loadJSON(withFile: "card-list")!
+            deck.list.append(objectsIn: list)
+        } else {
+            deck.list.append(objectsIn: [])
+        }
 
         return deck
     }

@@ -153,7 +153,7 @@ class SWDestinyServiceImplTests: QuickSpec {
                     }
                 }
             }
-            
+
             it("should cancel all requests") {
 
                 sut.cancelAllRequests()

@@ -17,23 +17,38 @@ class DeckGraphViewControllerTests: QuickSpec {
     override func spec() {
 
         var sut: DeckGraphViewController!
-        let window = UIWindow.framed()
+        var navigationController: UINavigationController!
+        let window = UIWindow.framed(frame: CGRect(x: 0, y: 0, width: 375, height: 1350))
 
         describe("DeckGraphViewController layout") {
 
             context("when it's initialized") {
 
                 beforeEach {
-                    sut = DeckGraphViewController(deck: DeckDTO.stub())
-                    window.showTestWindow(controller: sut)
+                    let deck = DeckDTO.stub()
+                    let memoryDB = try? RealmDatabase(configuration: .inMemory(identifier: "DeckGraph"))
+                    try? memoryDB?.save(object: deck)
+
+                    sut = DeckGraphViewController(deck: deck)
+                    navigationController = UINavigationController(rootViewController: sut)
+                    window.showTestWindow(controller: navigationController)
                 }
 
                 afterEach {
                     window.cleanTestWindow()
                 }
 
-                xit("should have valid layout") {
-                    expect(sut) == snapshot()
+                it("should have valid layout") {
+                    expect(navigationController) == snapshot()
+                }
+
+                it("should have an empty state layout") {
+                    let deck = DeckDTO.stub(emptyList: true)
+                    sut = DeckGraphViewController(deck: deck)
+                    navigationController = UINavigationController(rootViewController: sut)
+                    window.showTestWindow(controller: navigationController)
+
+                    expect(navigationController) == snapshot()
                 }
             }
         }
