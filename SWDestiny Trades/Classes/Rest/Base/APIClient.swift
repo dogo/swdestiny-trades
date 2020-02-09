@@ -75,16 +75,10 @@ extension APIClient {
     }
 
     func cancel() {
-        self.session.getTasksWithCompletionHandler { (dataTasks: Array, uploadTasks: Array, downloadTasks: Array) in
-            for task in downloadTasks {
-                task.cancel()
-            }
-            for task in uploadTasks {
-                task.cancel()
-            }
-            for task in dataTasks {
-                task.cancel()
-            }
+        self.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
+            dataTasks.forEach { $0.cancel() }
+            uploadTasks.forEach { $0.cancel() }
+            downloadTasks.forEach { $0.cancel() }
         }
     }
 }
