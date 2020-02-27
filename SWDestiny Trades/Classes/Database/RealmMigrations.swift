@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-//swiftlint:disable cyclomatic_complexity
+// swiftlint:disable cyclomatic_complexity
 enum RealmMigrations {
 
     static let schemaVersion: UInt64 = 3
@@ -122,7 +122,7 @@ enum RealmMigrations {
         }
     }
 }
-//swiftlint:enable cyclomatic_complexity
+// swiftlint:enable cyclomatic_complexity
 
 let kDices = [
     "01001": ["1RD", "2RD", "1F", "1Dc", "1R", "-"],

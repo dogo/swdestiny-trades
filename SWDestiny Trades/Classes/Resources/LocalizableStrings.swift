@@ -15,8 +15,10 @@ internal enum L10n {
   internal static let aToZ = L10n.tr("Localizable", "A_TO_Z")
   /// About
   internal static let about = L10n.tr("Localizable", "ABOUT")
-  /// By Diogo Autilio\n\nAPI Data by Paco https://swdestinydb.com\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
-  internal static let aboutText = L10n.tr("Localizable", "ABOUT_TEXT")
+  /// By Diogo Autilio\n\nAPI Data by Paco %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
+  internal static func aboutText(_ p1: String) -> String {
+    return L10n.tr("Localizable", "ABOUT_TEXT", p1)
+  }
   /// Add card
   internal static let addCard = L10n.tr("Localizable", "ADD_CARD")
   /// Add my card...
@@ -101,6 +103,8 @@ internal enum L10n {
   internal static let shareText = L10n.tr("Localizable", "SHARE_TEXT")
   /// Support
   internal static let support = L10n.tr("Localizable", "SUPPORT")
+  /// https://swdestinydb.com
+  internal static let swdestinydbWebsite = L10n.tr("Localizable", "SWDESTINYDB_WEBSITE")
   /// Upgrade
   internal static let upgrade = L10n.tr("Localizable", "UPGRADE")
   /// version %@ (%@)

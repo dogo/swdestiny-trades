@@ -22,8 +22,9 @@ enum ToastMessages {
             SwiftMessages.hide()
         }
         errorView.tapHandler = { _ in
-            let url = URL(string: "http://www.swdestinydb.com")! // swiftlint:disable:this force_unwrapping
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            if let url = URL(string: L10n.swdestinydbWebsite) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
         }
         errorView.configureContent(title: "", body: L10n.errorMessage)
         SwiftMessages.show(config: config, view: errorView)

@@ -88,9 +88,9 @@ extension AboutView: BaseViewConfiguration {
 
         versionLabel.text = L10n.version(Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber)
 
-        let attributedString = NSMutableAttributedString(string: L10n.aboutText)
+        let attributedString = NSMutableAttributedString(string: L10n.aboutText(L10n.swdestinydbWebsite))
         attributedString.addAttribute(.foregroundColor, value: UIColor.whiteBlack, range: NSRange(location: 0, length: attributedString.length))
-        attributedString.setAsLink(textToFind: "https://swdestinydb.com", linkURL: "https://swdestinydb.com")
+        attributedString.setAsLink(textToFind: L10n.swdestinydbWebsite, linkURL: L10n.swdestinydbWebsite)
 
         aboutTextView.attributedText = attributedString
     }
