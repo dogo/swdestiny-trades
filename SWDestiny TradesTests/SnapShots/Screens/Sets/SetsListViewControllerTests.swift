@@ -41,7 +41,7 @@ class SetsListViewControllerTests: QuickSpec {
                     sut = SetsListViewController(service: service, database: nil)
                     navigation = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigation)
-                    expect(navigation) == snapshot()
+                    expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
                 }
             }
         }

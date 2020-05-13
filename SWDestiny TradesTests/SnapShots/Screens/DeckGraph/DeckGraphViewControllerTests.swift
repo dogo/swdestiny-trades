@@ -39,7 +39,7 @@ class DeckGraphViewControllerTests: QuickSpec {
                 }
 
                 it("should have valid layout") {
-                    expect(navigationController) == snapshot()
+                    expect(navigationController).to(haveValidSnapshot(tolerance: 0.02))
                 }
 
                 it("should have an empty state layout") {
@@ -48,7 +48,7 @@ class DeckGraphViewControllerTests: QuickSpec {
                     navigationController = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigationController)
 
-                    expect(navigationController) == snapshot()
+                    expect(navigationController).to(haveValidSnapshot(tolerance: 0.02))
                 }
             }
         }

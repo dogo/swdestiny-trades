@@ -44,7 +44,7 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation) == snapshot()
+                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
                     }
 
                     it("with a person with no loans") {
@@ -54,7 +54,7 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation) == snapshot()
+                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
                     }
 
                     it("with a person with lent cards") {
@@ -65,7 +65,7 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation) == snapshot()
+                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
                     }
 
                     it("with a person with borrowed cards") {
@@ -76,7 +76,7 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation) == snapshot()
+                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
                     }
 
                     it("with a person with lent and borrowed cards") {
@@ -88,7 +88,7 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation) == snapshot()
+                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
                     }
                 }
             }
