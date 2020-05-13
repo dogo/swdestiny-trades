@@ -1,0 +1,22 @@
+# For a detailed guide to building and testing on iOS, read the docs:
+# https://circleci.com/docs/2.0/testing-ios/
+
+version: 2.1
+
+jobs:
+  build:
+
+    macos:
+      xcode: 12.0
+
+    steps:
+      - checkout
+      - run: bundle install
+      - run: pod install
+      - run: fastlane scan
+
+      - store_test_results:
+          path: test_output
+      - store_artifacts:
+          path: test_output
+          destination: scan-output
