@@ -13,6 +13,8 @@
 		9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */; };
 		C3F4244043839A9D3B3509F6 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D865459D1D3A1D8943375F /* Pods_SWDestiny_TradesTests.framework */; };
 		DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA372517AD29008C68B8 /* PKHUD */; };
+		DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */; };
+		DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */; };
@@ -36,7 +38,6 @@
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
-		DD18056E20215155007CD3A7 /* FTPopOverMenu_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5D1FDC24D50067AAE0 /* FTPopOverMenu_Swift.framework */; };
 		DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */; };
 		DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */; };
 		DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */; };
@@ -51,7 +52,6 @@
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
-		DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD5F1FDC24D50067AAE0 /* ImageSlideshow.framework */; };
 		DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD661FDC24D60067AAE0 /* Realm.framework */; };
 		DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD601FDC24D50067AAE0 /* RealmSwift.framework */; };
 		DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */; };
@@ -410,17 +410,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD56EFE3235397C400F32891 /* Charts in Frameworks */,
-				DD3E23941FF70EC20033EF1B /* ImageSlideshow.framework in Frameworks */,
-				DD18056E20215155007CD3A7 /* FTPopOverMenu_Swift.framework in Frameworks */,
 				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
 				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
 				DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */,
 				DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
+				DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
 				DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */,
 				DDFDB7862385AB31009F6DF3 /* Reusable in Frameworks */,
 				8F89FCE285A254630107670F /* Pods_SWDestiny_Trades.framework in Frameworks */,
+				DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1551,6 +1551,8 @@
 				DDD1C0BA23539C4B005B522E /* Kingfisher */,
 				DDFDB7852385AB31009F6DF3 /* Reusable */,
 				DD01CA372517AD29008C68B8 /* PKHUD */,
+				DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */,
+				DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */,
 			);
 			productName = "SWDestiny Trades";
 			productReference = DD6E06841E114E88004A5653 /* SWDestiny Trades.app */;
@@ -1618,6 +1620,8 @@
 				DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */,
+				DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */,
+				DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1741,21 +1745,17 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ImageSlideshow.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftMessages.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TextFieldEffects.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FTPopOverMenu_Swift.framework",
 			);
 			name = "[Carthage] Embed Frameworks";
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImageSlideshow.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftMessages.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TextFieldEffects.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FTPopOverMenu_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2270,6 +2270,22 @@
 				minimumVersion = 5.4.0;
 			};
 		};
+		DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/liufengting/FTPopOverMenu_Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.3;
+			};
+		};
+		DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zvonicek/ImageSlideshow.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.1;
+			};
+		};
 		DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts";
@@ -2309,6 +2325,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */;
 			productName = PKHUD;
+		};
+		DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */;
+			productName = FTPopOverMenu;
+		};
+		DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			productName = ImageSlideshow/Kingfisher;
 		};
 		DD56EFE2235397C400F32891 /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;

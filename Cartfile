@@ -1,8 +1,6 @@
-github "liufengting/FTPopOverMenu_Swift"
 github "raulriera/TextFieldEffects"
 github "realm/realm-cocoa"
 github "SwiftKickMobile/SwiftMessages"
-github "zvonicek/ImageSlideshow"
 
 # Tests
 github "Quick/Quick"
