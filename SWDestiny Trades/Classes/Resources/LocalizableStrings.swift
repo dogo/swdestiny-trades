@@ -3,21 +3,20 @@
 
 import Foundation
 
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length
+// swiftlint:disable superfluous_disable_command file_length implicit_return
 
 // MARK: - Strings
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:disable nesting type_body_length type_name
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   /// A-Z
   internal static let aToZ = L10n.tr("Localizable", "A_TO_Z")
   /// About
   internal static let about = L10n.tr("Localizable", "ABOUT")
   /// By Diogo Autilio\n\nAPI Data by Paco %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
-  internal static func aboutText(_ p1: String) -> String {
-    return L10n.tr("Localizable", "ABOUT_TEXT", p1)
+  internal static func aboutText(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "ABOUT_TEXT", String(describing: p1))
   }
   /// Add card
   internal static let addCard = L10n.tr("Localizable", "ADD_CARD")
@@ -78,8 +77,8 @@ internal enum L10n {
   /// Last Name
   internal static let lastName = L10n.tr("Localizable", "LAST_NAME")
   /// Last update: %@
-  internal static func lastUpdate(_ p1: String) -> String {
-    return L10n.tr("Localizable", "LAST_UPDATE", p1)
+  internal static func lastUpdate(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "LAST_UPDATE", String(describing: p1))
   }
   /// Loans
   internal static let loans = L10n.tr("Localizable", "LOANS")
@@ -108,23 +107,26 @@ internal enum L10n {
   /// Upgrade
   internal static let upgrade = L10n.tr("Localizable", "UPGRADE")
   /// version %@ (%@)
-  internal static func version(_ p1: String, _ p2: String) -> String {
-    return L10n.tr("Localizable", "VERSION", p1, p2)
+  internal static func version(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "VERSION", String(describing: p1), String(describing: p2))
   }
   /// Yellow
   internal static let yellow = L10n.tr("Localizable", "YELLOW")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
-// swiftlint:enable nesting type_body_length type_name
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
 
 // MARK: - Implementation Details
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    // swiftlint:disable:next nslocalizedstring_key
-    let format = NSLocalizedString(key, tableName: table, bundle: Bundle(for: BundleToken.self), comment: "")
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
-private final class BundleToken {}
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle = Bundle(for: BundleToken.self)
+}
+// swiftlint:enable convenience_type
