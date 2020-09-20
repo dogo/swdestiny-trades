@@ -6,9 +6,8 @@ target 'SWDestiny Trades' do
   use_frameworks!
   
   # Pods for SWDestiny Trades
-  pod 'Crashlytics'
-  pod 'Fabric'
   pod 'Firebase/Core'
+  pod 'Firebase/Crashlytics'
   pod 'SwiftGen'
   pod 'SwiftLint'
 
