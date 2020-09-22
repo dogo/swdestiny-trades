@@ -1,9 +1,0 @@
-github "raulriera/TextFieldEffects"
-github "realm/realm-cocoa"
-github "SwiftKickMobile/SwiftMessages"
-
-# Tests
-github "Quick/Quick"
-github "Quick/Nimble"
-github "ashfurrow/Nimble-Snapshots"
-github "uber/ios-snapshot-test-case"

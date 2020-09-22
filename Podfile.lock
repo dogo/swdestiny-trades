@@ -63,23 +63,50 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
+  - iOSSnapshotTestCase (6.2.0):
+    - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
+  - iOSSnapshotTestCase/Core (6.2.0)
+  - iOSSnapshotTestCase/SwiftSupport (6.2.0):
+    - iOSSnapshotTestCase/Core
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - Nimble (8.1.2)
+  - Nimble-Snapshots (8.2.1):
+    - Nimble-Snapshots/Core (= 8.2.1)
+  - Nimble-Snapshots/Core (8.2.1):
+    - iOSSnapshotTestCase (~> 6.0)
+    - Nimble (~> 8.0)
   - PromisesObjC (1.2.10)
+  - Quick (3.0.0)
+  - Realm (5.4.3):
+    - Realm/Headers (= 5.4.3)
+  - Realm/Headers (5.4.3)
+  - RealmSwift (5.4.3):
+    - Realm (= 5.4.3)
   - SwiftGen (6.3.0)
   - SwiftLint (0.40.2)
+  - SwiftMessages (8.0.2):
+    - SwiftMessages/App (= 8.0.2)
+  - SwiftMessages/App (8.0.2)
+  - TextFieldEffects (1.6.0)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Crashlytics
+  - Nimble
+  - Nimble-Snapshots
+  - Quick
+  - RealmSwift
   - SwiftGen
   - SwiftLint
+  - SwiftMessages
+  - TextFieldEffects
 
 SPEC REPOS:
-  trunk:
+  https://cocoapods-cdn.netlify.app/:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -89,10 +116,18 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - iOSSnapshotTestCase
     - nanopb
+    - Nimble
+    - Nimble-Snapshots
     - PromisesObjC
+    - Quick
+    - Realm
+    - RealmSwift
     - SwiftGen
     - SwiftLint
+    - SwiftMessages
+    - TextFieldEffects
 
 SPEC CHECKSUMS:
   Firebase: 47176280bfba198e531f909cfb1612dad216cb96
@@ -104,11 +139,19 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 1a66f478c68ecd6c16ee63ee60c7c3a648e6b337
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  Nimble: 3864815b4703c7ebffba875973c70e854489fbae
+  Nimble-Snapshots: 3a4750d83752625c8ebfdc588da105303ee2201e
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
+  Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
+  RealmSwift: db608068eccc54bce47928e8118bde13c120c307
   SwiftGen: 3d5024a47ea79e408cded20763d7a17d18a4548c
   SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
+  SwiftMessages: 633304165351b8e3dcbb81a71f8efcd86f9c1669
+  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 90fc71ecd90e7d8088729e09308d1b2f8e4b1f7f
+PODFILE CHECKSUM: acb865fc8ca05a46215b59f018c52a2cfb0f4bcb
 
 COCOAPODS: 1.9.1

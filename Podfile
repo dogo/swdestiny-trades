@@ -1,4 +1,5 @@
-# Uncomment the next line to define a global platform for your project
+source 'https://cocoapods-cdn.netlify.app/'
+
 platform :ios, '12.0'
 
 target 'SWDestiny Trades' do
@@ -8,11 +9,17 @@ target 'SWDestiny Trades' do
   # Pods for SWDestiny Trades
   pod 'Firebase/Core'
   pod 'Firebase/Crashlytics'
+  pod 'RealmSwift'
   pod 'SwiftGen'
   pod 'SwiftLint'
+  pod 'SwiftMessages'
+  pod 'TextFieldEffects'
 
   target 'SWDestiny-TradesTests' do
     inherit! :search_paths
+    pod 'Quick'
+	pod 'Nimble'
+	pod 'Nimble-Snapshots'
   end
 
 end
