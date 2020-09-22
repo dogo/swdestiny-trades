@@ -77,7 +77,7 @@ extension HttpClient {
         task.resume()
     }
 
-    func cancel() {
+    func cancelAllRequests() {
         self.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
             dataTasks.forEach { $0.cancel() }
             uploadTasks.forEach { $0.cancel() }

@@ -21,7 +21,7 @@ protocol SearchDelegate: AnyObject {
 
 final class SearchListViewController: UIViewController {
 
-    private let destinyService = SWDestinyServiceImpl()
+    private let destinyService: SWDestinyServiceProtocol
     private let database: DatabaseProtocol?
     private let searchView = SearchView()
     private var cards = [CardDTO]()
@@ -29,7 +29,8 @@ final class SearchListViewController: UIViewController {
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?) {
+    init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?) {
+        self.destinyService = service
         self.database = database
         super.init(nibName: nil, bundle: nil)
     }

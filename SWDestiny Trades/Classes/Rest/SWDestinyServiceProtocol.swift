@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SWDestinyService {
+protocol SWDestinyServiceProtocol {
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void)
 

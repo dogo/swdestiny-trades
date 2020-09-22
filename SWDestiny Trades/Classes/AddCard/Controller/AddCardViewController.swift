@@ -18,7 +18,7 @@ public enum AddCardType {
 final class AddCardViewController: UIViewController {
 
     private let addCardView = AddCardView()
-    private let destinyService: SWDestinyService
+    private let destinyService: SWDestinyServiceProtocol
     private let addCardType: AddCardType
     private var cards = [CardDTO]()
     private var personDTO: PersonDTO?
@@ -28,7 +28,7 @@ final class AddCardViewController: UIViewController {
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyService = SWDestinyServiceImpl(),
+    init(service: SWDestinyServiceProtocol = SWDestinyService(),
          database: DatabaseProtocol?,
          person: PersonDTO? = nil,
          userCollection: UserCollectionDTO? = nil,

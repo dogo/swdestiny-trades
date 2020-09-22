@@ -12,12 +12,12 @@ final class SetsListViewController: UIViewController {
 
     private let setsView = SetsView()
     private let database: DatabaseProtocol?
-    private let destinyService: SWDestinyService
+    private let destinyService: SWDestinyServiceProtocol
     private lazy var navigator = SetsListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyService = SWDestinyServiceImpl(), database: DatabaseProtocol?) {
+    init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?) {
         self.destinyService = service
         self.database = database
         super.init(nibName: nil, bundle: nil)

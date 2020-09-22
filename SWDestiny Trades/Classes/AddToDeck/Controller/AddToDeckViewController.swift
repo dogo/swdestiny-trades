@@ -11,7 +11,7 @@ import PKHUD
 
 final class AddToDeckViewController: UIViewController {
 
-    private let destinyService = SWDestinyServiceImpl()
+    private let destinyService: SWDestinyServiceProtocol
     private let addToDeckView = AddToDeckView()
     private let database: DatabaseProtocol?
     private var cards = [CardDTO]()
@@ -20,7 +20,8 @@ final class AddToDeckViewController: UIViewController {
 
     // MARK: - Life Cycle
 
-    required init(database: DatabaseProtocol?, deck: DeckDTO?) {
+    required init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?, deck: DeckDTO?) {
+        self.destinyService = service
         self.database = database
         self.deckDTO = deck
         super.init(nibName: nil, bundle: nil)

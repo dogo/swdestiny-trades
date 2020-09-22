@@ -21,7 +21,7 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         let endpoint: SWDestinyEndpoint = .setList
         let request = endpoint.request
 
-        self.request(request, completion: completion)
+        self.client.request(request, completion: completion)
     }
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
@@ -29,7 +29,7 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
         let request = endpoint.request
 
-        self.request(request, completion: completion)
+        self.client.request(request, completion: completion)
     }
 
     func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
@@ -37,7 +37,7 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         let endpoint: SWDestinyEndpoint = .allCards
         let request = endpoint.request
 
-        self.request(request, completion: completion)
+        self.client.request(request, completion: completion)
     }
 
     func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void) {
@@ -45,10 +45,10 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
         let request = endpoint.request
 
-        self.request(request, completion: completion)
+        self.client.request(request, completion: completion)
     }
 
     func cancelAllRequests() {
-        self.cancel()
+        self.client.cancelAllRequests()
     }
 }

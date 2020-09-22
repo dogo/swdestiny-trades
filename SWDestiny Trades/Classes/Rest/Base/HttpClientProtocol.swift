@@ -11,6 +11,8 @@ import Foundation
 protocol HttpClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void)
+
+    func cancelAllRequests()
 }
 
 extension HttpClientProtocol {

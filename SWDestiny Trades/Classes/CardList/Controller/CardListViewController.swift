@@ -12,13 +12,14 @@ final class CardListViewController: UIViewController {
 
     private let cardListView = CardListView()
     private let database: DatabaseProtocol?
-    private let destinyService = SWDestinyServiceImpl()
+    private let destinyService: SWDestinyServiceProtocol
     private var setDTO: SetDTO
     private lazy var navigator = CardListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?, with set: SetDTO) {
+    init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?, with set: SetDTO) {
+        self.destinyService = service
         self.database = database
         self.setDTO = set
         super.init(nibName: nil, bundle: nil)
