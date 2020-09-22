@@ -8,19 +8,22 @@
 
 import Foundation
 
-protocol APIClient {
+final class HttpClient: HttpClientProtocol {
 
-    var session: URLSession { get }
-    func request<T: Decodable>(_ request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, APIError>) -> Void)
+    private let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
 }
 
-extension APIClient {
+extension HttpClient {
 
     typealias DecodingCompletionHandler = (Decodable?, APIError?) -> Void
 
     func decodingTask<T: Decodable>(with request: URLRequest,
                                     decodingType: T.Type,
-                                    completionHandler completion: @escaping DecodingCompletionHandler) -> URLSessionDataTask {
+                                    completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
 
         let task = self.session.dataTask(with: request) { data, response, error in
 
@@ -51,7 +54,7 @@ extension APIClient {
         return task
     }
 
-    func request<T: Decodable>(_ request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, APIError>) -> Void) {
+    func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) {
 
         let task = self.decodingTask(with: request, decodingType: T.self) { json, error in
 
@@ -64,10 +67,10 @@ extension APIClient {
                     }
                     return
                 }
-                if let value = decode(json) {
+                if let value = decode?(json) {
                     completion(.success(value))
                 } else {
-                    completion(.failure(.jsonParsingFailure))
+                    completion(.success(json))
                 }
             }
         }

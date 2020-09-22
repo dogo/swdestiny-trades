@@ -2,21 +2,53 @@
 //  SWDestinyService.swift
 //  SWDestiny Trades
 //
-//  Created by Diogo Autilio on 12/4/17.
-//  Copyright © 2017 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 12/07/18.
+//  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
 
-protocol SWDestinyService {
+final class SWDestinyService: SWDestinyServiceProtocol {
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void)
+    private let client: HttpClientProtocol
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)
+    init(client: HttpClientProtocol = HttpClient()) {
+        self.client = client
+    }
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void)
+    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void)
+        let endpoint: SWDestinyEndpoint = .setList
+        let request = endpoint.request
 
-    func cancelAllRequests()
+        self.request(request, completion: completion)
+    }
+
+    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
+
+        let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
+        let request = endpoint.request
+
+        self.request(request, completion: completion)
+    }
+
+    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
+
+        let endpoint: SWDestinyEndpoint = .allCards
+        let request = endpoint.request
+
+        self.request(request, completion: completion)
+    }
+
+    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void) {
+
+        let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
+        let request = endpoint.request
+
+        self.request(request, completion: completion)
+    }
+
+    func cancelAllRequests() {
+        self.cancel()
+    }
 }

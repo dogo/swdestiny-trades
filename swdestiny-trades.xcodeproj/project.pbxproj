@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8F89FCE285A254630107670F /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA9B13E1368355B7D656329D /* Pods_SWDestiny_Trades.framework */; };
+		9D507EE5251A4843006D0E9B /* HttpClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D507EE4251A4843006D0E9B /* HttpClientProtocol.swift */; };
+		9D507EE7251A49DB006D0E9B /* HttpParameters+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D507EE6251A49DB006D0E9B /* HttpParameters+Utils.swift */; };
 		9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */; };
 		9D513F4023353AD200CCC12B /* sets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D513F3F23353AD100CCC12B /* sets.json */; };
 		9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */; };
-		C3F4244043839A9D3B3509F6 /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D865459D1D3A1D8943375F /* Pods_SWDestiny_TradesTests.framework */; };
-		DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA372517AD29008C68B8 /* PKHUD */; };
-		DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */; };
-		DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */; };
+		DD01CA382517AD29008C68B8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA372517AD29008C68B8 /* SwiftPackageProductDependency */; };
+		DD01CA3F2517AEB3008C68B8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA3E2517AEB3008C68B8 /* SwiftPackageProductDependency */; };
+		DD01CA442517B134008C68B8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA432517B134008C68B8 /* SwiftPackageProductDependency */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */; };
@@ -39,8 +39,7 @@
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
 		DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */; };
-		DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */; };
-		DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */; };
+		DD2287E71FD5F15F003FCADB /* SWDestinyServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyServiceProtocol.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
 		DD2ABDC6230659EE00374A8B /* CardDTOStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC2230659C900374A8B /* CardDTOStub.swift */; };
 		DD2ABDC7230659F200374A8B /* DeckDTOStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC4230659E900374A8B /* DeckDTOStub.swift */; };
@@ -70,7 +69,7 @@
 		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
 		DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */; };
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
-		DD56EFE3235397C400F32891 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = DD56EFE2235397C400F32891 /* Charts */; };
+		DD56EFE3235397C400F32891 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD56EFE2235397C400F32891 /* SwiftPackageProductDependency */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
 		DD5DE3FD23C0D6EB00DCC743 /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DE3FC23C0D6EB00DCC743 /* EndpointProtocol.swift */; };
 		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
@@ -104,13 +103,13 @@
 		DD8CD49020F7CDF60036CA8D /* SWDestinyServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */; };
 		DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */; };
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
-		DD922D1F23061DEC00F7255F /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D1E23061DEC00F7255F /* APIClient.swift */; };
+		DD922D1F23061DEC00F7255F /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D1E23061DEC00F7255F /* HttpClient.swift */; };
 		DD922D2E23062AE300F7255F /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D2D23062AE300F7255F /* HttpMethod.swift */; };
 		DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93D3C72008EEAB00C2663D /* ToggleButton.swift */; };
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
-		DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD995C8B2353957A00EF17EC /* SketchKit */; };
+		DD995C8C2353957A00EF17EC /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD995C8B2353957A00EF17EC /* SwiftPackageProductDependency */; };
 		DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */; };
 		DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */; };
 		DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4C1217FE68900AE1301 /* LoggerManager.swift */; };
@@ -159,14 +158,14 @@
 		DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C7423344228007A9AF8 /* JSONHelper.swift */; };
 		DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C772334489E007A9AF8 /* PeopleListViewControllerTests.swift */; };
 		DDD19C7A233453C5007A9AF8 /* card.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD19C79233453C5007A9AF8 /* card.json */; };
-		DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1C0BA23539C4B005B522E /* Kingfisher */; };
+		DDD1C0BB23539C4B005B522E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1C0BA23539C4B005B522E /* SwiftPackageProductDependency */; };
 		DDDA724D20C70E04002147CF /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */; };
 		DDDC46AB1FDCD46100D79449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; };
 		DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; };
 		DDDC46AE1FDCD4BD00D79449 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD551FDC24D40067AAE0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDDC46AF1FDCD4BD00D79449 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDCEBD671FDC24D60067AAE0 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDDE91C920F7258800D48563 /* SWDestinyServiceImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */; };
-		DDDE91CD20F728AE00D48563 /* SWDestinyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */; };
+		DDDE91CD20F728AE00D48563 /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91CC20F728AE00D48563 /* SWDestinyService.swift */; };
 		DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE923391E1A8A3100F35001 /* NotificationConstants.swift */; };
 		DDEDC96323252F930045F125 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEDC96223252F930045F125 /* DatabaseProtocol.swift */; };
 		DDEDC966232530D50045F125 /* RealmDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEDC965232530D50045F125 /* RealmDatabase.swift */; };
@@ -178,7 +177,7 @@
 		DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF678A61E441C6E00390878 /* SectionsBuilder.swift */; };
 		DDF73A062130369700456ED2 /* FBSnapshotTestCase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDFB0C8F1E285F0C00442E1B /* SWDestinyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C8E1E285F0C00442E1B /* SWDestinyEndpoint.swift */; };
-		DDFDB7862385AB31009F6DF3 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = DDFDB7852385AB31009F6DF3 /* Reusable */; };
+		DDFDB7862385AB31009F6DF3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DDFDB7852385AB31009F6DF3 /* SwiftPackageProductDependency */; };
 		DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */; };
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
 		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
@@ -212,14 +211,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6742646E4CB339FED676F526 /* Pods-SWDestiny Trades.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.release.xcconfig"; path = "Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.release.xcconfig"; sourceTree = "<group>"; };
-		8FA39989DC0A3E57DD9198C4 /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9D450019C4D46AC0017E5149 /* Pods-SWDestiny-TradesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.release.xcconfig"; path = "Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D507EE4251A4843006D0E9B /* HttpClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientProtocol.swift; sourceTree = "<group>"; };
+		9D507EE6251A49DB006D0E9B /* HttpParameters+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpParameters+Utils.swift"; sourceTree = "<group>"; };
 		9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsListViewControllerTests.swift; sourceTree = "<group>"; };
 		9D513F3F23353AD100CCC12B /* sets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sets.json; sourceTree = "<group>"; };
 		9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckGraphViewControllerTests.swift; sourceTree = "<group>"; };
-		BA9B13E1368355B7D656329D /* Pods_SWDestiny_Trades.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_Trades.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C34DF1BBAD5692EAFFD74595 /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0905181E244E4000D9EFB0 /* SetsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableView.swift; sourceTree = "<group>"; };
 		DD09051A1E2450B300D9EFB0 /* SetsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
@@ -244,8 +240,7 @@
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
 		DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsTableCell.swift; sourceTree = "<group>"; };
 		DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewControllerTests.swift; sourceTree = "<group>"; };
-		DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyService.swift; sourceTree = "<group>"; };
-		DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImpl.swift; sourceTree = "<group>"; };
+		DD2287E61FD5F15F003FCADB /* SWDestinyServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceProtocol.swift; sourceTree = "<group>"; };
 		DD2742E31E1E742500F8DDED /* BaseViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewCell.swift; sourceTree = "<group>"; };
 		DD2ABDC2230659C900374A8B /* CardDTOStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDTOStub.swift; sourceTree = "<group>"; };
 		DD2ABDC4230659E900374A8B /* DeckDTOStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDTOStub.swift; sourceTree = "<group>"; };
@@ -307,7 +302,7 @@
 		DD8CD48F20F7CDF50036CA8D /* SWDestinyServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceMock.swift; sourceTree = "<group>"; };
 		DD8CE7591E1C27FB00110B07 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DD922D1E23061DEC00F7255F /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		DD922D1E23061DEC00F7255F /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		DD922D2D23062AE300F7255F /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		DD93D3C72008EEAB00C2663D /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
@@ -386,7 +381,7 @@
 		DDD19C79233453C5007A9AF8 /* card.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = card.json; sourceTree = "<group>"; };
 		DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanDetailNavigator.swift; sourceTree = "<group>"; };
 		DDDE91C820F7258800D48563 /* SWDestinyServiceImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyServiceImplTests.swift; sourceTree = "<group>"; };
-		DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyAPI.swift; sourceTree = "<group>"; };
+		DDDE91CC20F728AE00D48563 /* SWDestinyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWDestinyService.swift; sourceTree = "<group>"; };
 		DDE923391E1A8A3100F35001 /* NotificationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationConstants.swift; sourceTree = "<group>"; };
 		DDEDC96223252F930045F125 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		DDEDC965232530D50045F125 /* RealmDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDatabase.swift; sourceTree = "<group>"; };
@@ -401,7 +396,6 @@
 		DDFEB9581E253A04004EADE9 /* AddCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardCell.swift; sourceTree = "<group>"; };
 		DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardTableView.swift; sourceTree = "<group>"; };
 		DDFEB95B1E253A04004EADE9 /* AddCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
-		E2D865459D1D3A1D8943375F /* Pods_SWDestiny_TradesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SWDestiny_TradesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,18 +403,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD56EFE3235397C400F32891 /* Charts in Frameworks */,
+				DD56EFE3235397C400F32891 /* BuildFile in Frameworks */,
 				DD3E239A1FF70EC20033EF1B /* Realm.framework in Frameworks */,
 				DD3E239B1FF70EC20033EF1B /* RealmSwift.framework in Frameworks */,
-				DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */,
-				DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */,
+				DDD1C0BB23539C4B005B522E /* BuildFile in Frameworks */,
+				DD01CA382517AD29008C68B8 /* BuildFile in Frameworks */,
 				DD3E23A01FF70EC20033EF1B /* SwiftMessages.framework in Frameworks */,
-				DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */,
+				DD01CA442517B134008C68B8 /* BuildFile in Frameworks */,
 				DD3E23A11FF70EC20033EF1B /* TextFieldEffects.framework in Frameworks */,
-				DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */,
-				DDFDB7862385AB31009F6DF3 /* Reusable in Frameworks */,
-				8F89FCE285A254630107670F /* Pods_SWDestiny_Trades.framework in Frameworks */,
-				DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */,
+				DD995C8C2353957A00EF17EC /* BuildFile in Frameworks */,
+				DDFDB7862385AB31009F6DF3 /* BuildFile in Frameworks */,
+				DD01CA3F2517AEB3008C68B8 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +425,6 @@
 				DD7571692133D19400C0CA45 /* Nimble_Snapshots.framework in Frameworks */,
 				DDDC46AC1FDCD46100D79449 /* Quick.framework in Frameworks */,
 				DD38C2C2212FB0D300153D70 /* FBSnapshotTestCase.framework in Frameworks */,
-				C3F4244043839A9D3B3509F6 /* Pods_SWDestiny_TradesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,10 +434,6 @@
 		2A7B76A5F7E1E69C7A326B7B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C34DF1BBAD5692EAFFD74595 /* Pods-SWDestiny Trades.debug.xcconfig */,
-				6742646E4CB339FED676F526 /* Pods-SWDestiny Trades.release.xcconfig */,
-				8FA39989DC0A3E57DD9198C4 /* Pods-SWDestiny-TradesTests.debug.xcconfig */,
-				9D450019C4D46AC0017E5149 /* Pods-SWDestiny-TradesTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -950,9 +938,10 @@
 		DD7F77DC2306D5D50027AA18 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				DD922D1E23061DEC00F7255F /* APIClient.swift */,
 				DD7F77DD2306D62D0027AA18 /* APIError.swift */,
 				DD5DE3FC23C0D6EB00DCC743 /* EndpointProtocol.swift */,
+				DD922D1E23061DEC00F7255F /* HttpClient.swift */,
+				9D507EE4251A4843006D0E9B /* HttpClientProtocol.swift */,
 				DD922D2D23062AE300F7255F /* HttpMethod.swift */,
 				DDB6E75823C0DE9600075432 /* HttpScheme.swift */,
 				DDF47FBC2306330800F130DB /* HttpStatusCode.swift */,
@@ -1074,10 +1063,9 @@
 		DD9289061E11933C00FDEC48 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
-				DDDE91CC20F728AE00D48563 /* SWDestinyAPI.swift */,
 				DDFB0C8E1E285F0C00442E1B /* SWDestinyEndpoint.swift */,
-				DD2287E61FD5F15F003FCADB /* SWDestinyService.swift */,
-				DD2287E81FD5F4F3003FCADB /* SWDestinyServiceImpl.swift */,
+				DDDE91CC20F728AE00D48563 /* SWDestinyService.swift */,
+				DD2287E61FD5F15F003FCADB /* SWDestinyServiceProtocol.swift */,
 				DD7F77DC2306D5D50027AA18 /* Base */,
 				DDB6E75A23C0E36400075432 /* Extensions */,
 			);
@@ -1169,6 +1157,7 @@
 		DDB6E75A23C0E36400075432 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9D507EE6251A49DB006D0E9B /* HttpParameters+Utils.swift */,
 				DDB6E75B23C0E50B00075432 /* URLRequest+Utils.swift */,
 			);
 			path = Extensions;
@@ -1374,8 +1363,6 @@
 				DDCEBD531FDC24D40067AAE0 /* SnapKit.framework */,
 				DDCEBD611FDC24D50067AAE0 /* SwiftMessages.framework */,
 				DDCEBD5E1FDC24D50067AAE0 /* TextFieldEffects.framework */,
-				BA9B13E1368355B7D656329D /* Pods_SWDestiny_Trades.framework */,
-				E2D865459D1D3A1D8943375F /* Pods_SWDestiny_TradesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1530,7 +1517,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A31E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny Trades" */;
 			buildPhases = (
-				1ACC781A4E0C29439F8AE9E7 /* [CP] Check Pods Manifest.lock */,
 				DD2026E5200AACFD006B17DD /* [SwiftGen] Run Script */,
 				E3EA64F422284137009A142D /* [SwiftLint] Run Script */,
 				DD6E06801E114E88004A5653 /* Sources */,
@@ -1538,7 +1524,6 @@
 				DD6E06821E114E88004A5653 /* Resources */,
 				DD3E23A21FF70F4A0033EF1B /* [Carthage] Embed Frameworks */,
 				DD4D3A211E1D577900719E96 /* Post Build Run Script */,
-				7CA487FB4CF790DD8FC9B08D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1546,13 +1531,13 @@
 			);
 			name = "SWDestiny Trades";
 			packageProductDependencies = (
-				DD995C8B2353957A00EF17EC /* SketchKit */,
-				DD56EFE2235397C400F32891 /* Charts */,
-				DDD1C0BA23539C4B005B522E /* Kingfisher */,
-				DDFDB7852385AB31009F6DF3 /* Reusable */,
-				DD01CA372517AD29008C68B8 /* PKHUD */,
-				DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */,
-				DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */,
+				DD995C8B2353957A00EF17EC /* SwiftPackageProductDependency */,
+				DD56EFE2235397C400F32891 /* SwiftPackageProductDependency */,
+				DDD1C0BA23539C4B005B522E /* SwiftPackageProductDependency */,
+				DDFDB7852385AB31009F6DF3 /* SwiftPackageProductDependency */,
+				DD01CA372517AD29008C68B8 /* SwiftPackageProductDependency */,
+				DD01CA3E2517AEB3008C68B8 /* SwiftPackageProductDependency */,
+				DD01CA432517B134008C68B8 /* SwiftPackageProductDependency */,
 			);
 			productName = "SWDestiny Trades";
 			productReference = DD6E06841E114E88004A5653 /* SWDestiny Trades.app */;
@@ -1562,7 +1547,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD6E06A61E114E88004A5653 /* Build configuration list for PBXNativeTarget "SWDestiny-TradesTests" */;
 			buildPhases = (
-				A893FEE863A184D3E74888FD /* [CP] Check Pods Manifest.lock */,
 				DD6E06961E114E88004A5653 /* Sources */,
 				DD6E06971E114E88004A5653 /* Frameworks */,
 				DD6E06981E114E88004A5653 /* Resources */,
@@ -1615,13 +1599,13 @@
 			);
 			mainGroup = DD6E067B1E114E88004A5653;
 			packageReferences = (
-				DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */,
-				DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */,
-				DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */,
-				DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */,
-				DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */,
-				DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
+				DD995C8A2353957A00EF17EC /* RemoteSwiftPackageReference */,
+				DD56EFE1235397C400F32891 /* RemoteSwiftPackageReference */,
+				DDD1C0B923539C4B005B522E /* RemoteSwiftPackageReference */,
+				DDFDB7842385AB30009F6DF3 /* RemoteSwiftPackageReference */,
+				DD01CA362517AD29008C68B8 /* RemoteSwiftPackageReference */,
+				DD01CA3D2517AEB3008C68B8 /* RemoteSwiftPackageReference */,
+				DD01CA422517B134008C68B8 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1664,67 +1648,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1ACC781A4E0C29439F8AE9E7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SWDestiny Trades-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7CA487FB4CF790DD8FC9B08D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A893FEE863A184D3E74888FD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SWDestiny-TradesTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DD2026E5200AACFD006B17DD /* [SwiftGen] Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1815,13 +1738,12 @@
 				DD5DE3FD23C0D6EB00DCC743 /* EndpointProtocol.swift in Sources */,
 				DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
-				DD2287E71FD5F15F003FCADB /* SWDestinyService.swift in Sources */,
+				DD2287E71FD5F15F003FCADB /* SWDestinyServiceProtocol.swift in Sources */,
 				DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */,
 				DD09054B1E24701D00D9EFB0 /* CardListTableView.swift in Sources */,
 				DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */,
 				DDB8A2251E266DFF0086FC01 /* Split.swift in Sources */,
 				DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */,
-				DD2287E91FD5F4F3003FCADB /* SWDestinyServiceImpl.swift in Sources */,
 				DD09054A1E24701D00D9EFB0 /* CardCell.swift in Sources */,
 				DDCA97BC1E2FB0370098FFB5 /* DeckDTO.swift in Sources */,
 				DDFEB9601E253A04004EADE9 /* AddCardView.swift in Sources */,
@@ -1842,7 +1764,7 @@
 				DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */,
 				DD922D2E23062AE300F7255F /* HttpMethod.swift in Sources */,
 				DD0905481E24701D00D9EFB0 /* AlphabeticalListDatasource.swift in Sources */,
-				DDDE91CD20F728AE00D48563 /* SWDestinyAPI.swift in Sources */,
+				DDDE91CD20F728AE00D48563 /* SWDestinyService.swift in Sources */,
 				DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */,
 				DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */,
 				DDB6E75C23C0E50B00075432 /* URLRequest+Utils.swift in Sources */,
@@ -1886,7 +1808,7 @@
 				DD6AE3772089988B00289193 /* Navigator.swift in Sources */,
 				DDB764C31E43639E007758D5 /* RadarMarkerView.swift in Sources */,
 				DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */,
-				DD922D1F23061DEC00F7255F /* APIClient.swift in Sources */,
+				DD922D1F23061DEC00F7255F /* HttpClient.swift in Sources */,
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
 				DD7B108C1EE9EBA7003CA48D /* UIView+Utils.swift in Sources */,
 				DDFB0C8F1E285F0C00442E1B /* SWDestinyEndpoint.swift in Sources */,
@@ -1919,6 +1841,8 @@
 				DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */,
 				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
 				DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */,
+				9D507EE5251A4843006D0E9B /* HttpClientProtocol.swift in Sources */,
+				9D507EE7251A49DB006D0E9B /* HttpParameters+Utils.swift in Sources */,
 				DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */,
 				DDAFBF2A1FF6F3F500927875 /* AddToDeckView.swift in Sources */,
 				DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */,
@@ -2138,7 +2062,6 @@
 		};
 		DD6E06A41E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C34DF1BBAD5692EAFFD74595 /* Pods-SWDestiny Trades.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 43;
@@ -2162,7 +2085,6 @@
 		};
 		DD6E06A51E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6742646E4CB339FED676F526 /* Pods-SWDestiny Trades.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 43;
@@ -2185,7 +2107,6 @@
 		};
 		DD6E06A71E114E88004A5653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FA39989DC0A3E57DD9198C4 /* Pods-SWDestiny-TradesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -2208,7 +2129,6 @@
 		};
 		DD6E06A81E114E88004A5653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9D450019C4D46AC0017E5149 /* Pods-SWDestiny-TradesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 75C4E36ZA7;
@@ -2262,7 +2182,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+		DD01CA362517AD29008C68B8 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pkluz/PKHUD.git";
 			requirement = {
@@ -2270,7 +2190,7 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */ = {
+		DD01CA3D2517AEB3008C68B8 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/liufengting/FTPopOverMenu_Swift.git";
 			requirement = {
@@ -2278,7 +2198,7 @@
 				minimumVersion = 0.3.3;
 			};
 		};
-		DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
+		DD01CA422517B134008C68B8 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zvonicek/ImageSlideshow.git";
 			requirement = {
@@ -2286,7 +2206,7 @@
 				minimumVersion = 1.9.1;
 			};
 		};
-		DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */ = {
+		DD56EFE1235397C400F32891 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts";
 			requirement = {
@@ -2294,7 +2214,7 @@
 				minimumVersion = 3.4.0;
 			};
 		};
-		DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */ = {
+		DD995C8A2353957A00EF17EC /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dogo/SketchKit";
 			requirement = {
@@ -2302,7 +2222,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		DDD1C0B923539C4B005B522E /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
@@ -2310,7 +2230,7 @@
 				minimumVersion = 5.8.3;
 			};
 		};
-		DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */ = {
+		DDFDB7842385AB30009F6DF3 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/Reusable.git";
 			requirement = {
@@ -2321,39 +2241,39 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DD01CA372517AD29008C68B8 /* PKHUD */ = {
+		DD01CA372517AD29008C68B8 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */;
+			package = DD01CA362517AD29008C68B8 /* RemoteSwiftPackageReference */;
 			productName = PKHUD;
 		};
-		DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */ = {
+		DD01CA3E2517AEB3008C68B8 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */;
+			package = DD01CA3D2517AEB3008C68B8 /* RemoteSwiftPackageReference */;
 			productName = FTPopOverMenu;
 		};
-		DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */ = {
+		DD01CA432517B134008C68B8 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			package = DD01CA422517B134008C68B8 /* RemoteSwiftPackageReference */;
 			productName = ImageSlideshow/Kingfisher;
 		};
-		DD56EFE2235397C400F32891 /* Charts */ = {
+		DD56EFE2235397C400F32891 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */;
+			package = DD56EFE1235397C400F32891 /* RemoteSwiftPackageReference */;
 			productName = Charts;
 		};
-		DD995C8B2353957A00EF17EC /* SketchKit */ = {
+		DD995C8B2353957A00EF17EC /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */;
+			package = DD995C8A2353957A00EF17EC /* RemoteSwiftPackageReference */;
 			productName = SketchKit;
 		};
-		DDD1C0BA23539C4B005B522E /* Kingfisher */ = {
+		DDD1C0BA23539C4B005B522E /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = DDD1C0B923539C4B005B522E /* RemoteSwiftPackageReference */;
 			productName = Kingfisher;
 		};
-		DDFDB7852385AB31009F6DF3 /* Reusable */ = {
+		DDFDB7852385AB31009F6DF3 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */;
+			package = DDFDB7842385AB30009F6DF3 /* RemoteSwiftPackageReference */;
 			productName = Reusable;
 		};
 /* End XCSwiftPackageProductDependency section */
