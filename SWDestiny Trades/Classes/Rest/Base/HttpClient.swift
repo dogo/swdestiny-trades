@@ -59,18 +59,16 @@ extension HttpClient {
         let task = self.decodingTask(with: request, decodingType: T.self) { json, error in
 
             DispatchQueue.main.async {
-                guard let json = json else {
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        completion(.failure(.invalidData))
-                    }
+                if let error = error {
+                    completion(.failure(error))
                     return
                 }
-                if let value = decode?(json) {
-                    completion(.success(value))
-                } else {
-                    completion(.success(json))
+                if let json = json {
+                    if let value = decode?(json) {
+                        completion(.success(value))
+                    } else {
+                        completion(.success(json))
+                    }
                 }
             }
         }

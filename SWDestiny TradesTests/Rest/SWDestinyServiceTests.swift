@@ -24,7 +24,8 @@ class SWDestinyServiceTests: QuickSpec {
                 sut = SWDestinyService(client: client)
             }
 
-            xit("Retrieve set list with success") {
+            it("Retrieve set list with success") {
+                client.fileName = "sets"
                 sut.retrieveSetList { result in
                     switch result {
                     case .success(let setList):
@@ -36,7 +37,8 @@ class SWDestinyServiceTests: QuickSpec {
                 }
             }
 
-            xit("Retrieve card list with success") {
+            it("Retrieve card list with success") {
+                client.fileName = "card-list"
                 sut.retrieveSetCardList(setCode: "anyString") { result in
                     switch result {
                     case .success(let cardList):
@@ -74,7 +76,8 @@ class SWDestinyServiceTests: QuickSpec {
                 }
             }
 
-            xit("Retrieve specific card with success") {
+            it("Retrieve specific card with success") {
+                client.fileName = "card"
                 sut.retrieveCard(cardId: "anyString") { result in
                     switch result {
                     case .success(let card):
@@ -112,7 +115,8 @@ class SWDestinyServiceTests: QuickSpec {
                 }
             }
 
-            xit("Retrieve all cards with success") {
+            it("Retrieve all cards with success") {
+                client.fileName = "card-list"
                 sut.retrieveAllCards { result in
                     switch result {
                     case .success(let cardList):

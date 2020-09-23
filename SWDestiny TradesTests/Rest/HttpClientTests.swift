@@ -10,7 +10,7 @@ import Quick
 import Nimble
 @testable import SWDestiny_Trades
 
-class HttpClientTests: QuickSpec {
+final class HttpClientTests: QuickSpec {
 
     override func spec() {
 
@@ -43,6 +43,19 @@ class HttpClientTests: QuickSpec {
                             fail("Should be a success result")
                         }
                     })
+                }
+
+                it("without decode block") {
+
+                    session.data = try JSONEncoder().encode(true)
+
+                    sut.request(request) { (result: Result<Bool, APIError>) in
+                        if case .success(let boolean) = result {
+                            expect(boolean) == true
+                        } else {
+                            fail("Should be a success result")
+                        }
+                    }
                 }
             }
 
@@ -91,6 +104,34 @@ class HttpClientTests: QuickSpec {
                             fail("Should be a failure result")
                         }
                     })
+                }
+
+                it("with cancelled error") {
+
+                    session.response = nil
+                    session.error = NSError(domain: NSURLErrorDomain, code: NSURLErrorCancelled, userInfo: nil)
+
+                    sut.request(request) { (result: Result<Bool, APIError>) in
+                        if case .failure(let error) = result {
+                            expect(error.localizedDescription) == "Request Cancelled"
+                        } else {
+                            fail("Should be a failure result")
+                        }
+                    }
+                }
+
+                it("with server error reason") {
+
+                    session.response = nil
+                    session.error = NSError(domain: NSURLErrorDomain, code: NSURLErrorUnsupportedURL, userInfo: nil)
+
+                    sut.request(request) { (result: Result<Bool, APIError>) in
+                        if case .failure(let error) = result {
+                            expect(error.localizedDescription) == "The operation couldn’t be completed"
+                        } else {
+                            fail("Should be a failure result")
+                        }
+                    }
                 }
             }
 

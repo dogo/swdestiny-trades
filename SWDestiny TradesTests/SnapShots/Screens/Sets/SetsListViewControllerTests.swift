@@ -18,6 +18,7 @@ class SetsListViewControllerTests: QuickSpec {
 
         var sut: SetsListViewController!
         var service: SWDestinyService!
+        var client: HttpClientMock!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
@@ -30,7 +31,8 @@ class SetsListViewControllerTests: QuickSpec {
             context("when it's initialized") {
 
                 beforeEach {
-                    service = SWDestinyService(client: HttpClientMock())
+                    client = HttpClientMock()
+                    service = SWDestinyService(client: client)
                 }
 
                 afterEach {
@@ -38,6 +40,7 @@ class SetsListViewControllerTests: QuickSpec {
                 }
 
                 it("should have valid layout") {
+                    client.fileName = "sets"
                     sut = SetsListViewController(service: service, database: nil)
                     navigation = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigation)

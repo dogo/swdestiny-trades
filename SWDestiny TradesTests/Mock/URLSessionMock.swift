@@ -18,18 +18,18 @@ final class URLSessionMock: URLSession {
     var statusCode: Int = 200
     var tasksCancelled: Bool = false
 
+    lazy var response: HTTPURLResponse? = {
+        let response = HTTPURLResponse(url: URL(string: "http://base.url.com")!,
+                                       statusCode: statusCode,
+                                       httpVersion: nil,
+                                       headerFields: nil)
+        return response
+    }()
+
     override func dataTask(with request: URLRequest, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask {
 
-        let data = self.data
-        let error = self.error
-        let statusCode = self.statusCode
-
-        return URLSessionDataTaskMock {
-            let response = HTTPURLResponse(url: URL(string: ":D")!,
-                                           statusCode: statusCode,
-                                           httpVersion: nil,
-                                           headerFields: nil)!
-            completionHandler(data, response, error)
+        return URLSessionDataTaskMock { [weak self] in
+            completionHandler(self?.data, self?.response, self?.error)
         }
     }
 
