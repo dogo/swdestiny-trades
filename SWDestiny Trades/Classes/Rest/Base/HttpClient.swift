@@ -21,9 +21,9 @@ extension HttpClient {
 
     typealias DecodingCompletionHandler = (Decodable?, APIError?) -> Void
 
-    func decodingTask<T: Decodable>(with request: URLRequest,
-                                    decodingType: T.Type,
-                                    completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
+    private func decodingTask<T: Decodable>(with request: URLRequest,
+                                            decodingType: T.Type,
+                                            completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
 
         let task = self.session.dataTask(with: request) { data, response, error in
 
