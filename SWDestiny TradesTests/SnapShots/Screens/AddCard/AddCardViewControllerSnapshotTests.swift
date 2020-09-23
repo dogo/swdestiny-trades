@@ -17,7 +17,7 @@ class AddCardViewControllerSnapshotTests: QuickSpec {
     override func spec() {
 
         var sut: AddCardViewController!
-        var service: SWDestinyServiceImpl!
+        var service: SWDestinyService!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
@@ -30,7 +30,7 @@ class AddCardViewControllerSnapshotTests: QuickSpec {
             context("when it's initialized from Loan screen") {
 
                 beforeEach {
-                    service = SWDestinyServiceImpl(api: SWDestinyServiceMock())
+                    service = SWDestinyService(client: HttpClientMock())
                 }
 
                 afterEach {

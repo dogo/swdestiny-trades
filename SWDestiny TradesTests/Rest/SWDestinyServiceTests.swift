@@ -1,5 +1,5 @@
 //
-//  SWDestinyServiceImplTests.swift
+//  SWDestinyServiceTests.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 12/07/18.
@@ -10,22 +10,18 @@ import Quick
 import Nimble
 @testable import SWDestiny_Trades
 
-class SWDestinyServiceImplTests: QuickSpec {
+class SWDestinyServiceTests: QuickSpec {
 
     override func spec() {
 
-        describe("SWDestinyServiceImpl") {
+        describe("SWDestinyService") {
 
-            var sut: SWDestinyServiceImpl!
-            var api: SWDestinyServiceMock!
+            var sut: SWDestinyService!
+            var client: HttpClientMock!
 
             beforeEach {
-                api = SWDestinyServiceMock()
-                sut = SWDestinyServiceImpl(api: api)
-            }
-
-            it("instance") {
-                expect(sut.api) === api
+                client = HttpClientMock()
+                sut = SWDestinyService(client: client)
             }
 
             it("Retrieve set list with success") {
@@ -157,7 +153,7 @@ class SWDestinyServiceImplTests: QuickSpec {
             it("should cancel all requests") {
 
                 sut.cancelAllRequests()
-                expect(api.isCancelled) == true
+                expect(client.isCancelled) == true
             }
         }
     }

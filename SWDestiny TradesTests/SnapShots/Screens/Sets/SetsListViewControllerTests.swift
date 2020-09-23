@@ -17,7 +17,7 @@ class SetsListViewControllerTests: QuickSpec {
     override func spec() {
 
         var sut: SetsListViewController!
-        var service: SWDestinyServiceImpl!
+        var service: SWDestinyService!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
@@ -30,7 +30,7 @@ class SetsListViewControllerTests: QuickSpec {
             context("when it's initialized") {
 
                 beforeEach {
-                    service = SWDestinyServiceImpl(api: SWDestinyServiceMock())
+                    service = SWDestinyService(client: HttpClientMock())
                 }
 
                 afterEach {

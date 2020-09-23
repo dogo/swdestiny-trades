@@ -15,15 +15,20 @@ final class URLSessionMock: URLSession {
 
     var data: Data?
     var error: Error?
+    var statusCode: Int = 200
     var tasksCancelled: Bool = false
 
     override func dataTask(with request: URLRequest, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask {
 
         let data = self.data
         let error = self.error
+        let statusCode = self.statusCode
 
         return URLSessionDataTaskMock {
-            let response = HTTPURLResponse(url: URL(string: ":D")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            let response = HTTPURLResponse(url: URL(string: ":D")!,
+                                           statusCode: statusCode,
+                                           httpVersion: nil,
+                                           headerFields: nil)!
             completionHandler(data, response, error)
         }
     }
