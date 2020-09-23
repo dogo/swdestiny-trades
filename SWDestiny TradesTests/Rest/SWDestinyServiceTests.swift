@@ -24,7 +24,7 @@ class SWDestinyServiceTests: QuickSpec {
                 sut = SWDestinyService(client: client)
             }
 
-            it("Retrieve set list with success") {
+            xit("Retrieve set list with success") {
                 sut.retrieveSetList { result in
                     switch result {
                     case .success(let setList):
@@ -36,7 +36,7 @@ class SWDestinyServiceTests: QuickSpec {
                 }
             }
 
-            it("Retrieve card list with success") {
+            xit("Retrieve card list with success") {
                 sut.retrieveSetCardList(setCode: "anyString") { result in
                     switch result {
                     case .success(let cardList):
@@ -74,7 +74,7 @@ class SWDestinyServiceTests: QuickSpec {
                 }
             }
 
-            it("Retrieve specific card with success") {
+            xit("Retrieve specific card with success") {
                 sut.retrieveCard(cardId: "anyString") { result in
                     switch result {
                     case .success(let card):
@@ -112,7 +112,7 @@ class SWDestinyServiceTests: QuickSpec {
                 }
             }
 
-            it("Retrieve all cards with success") {
+            xit("Retrieve all cards with success") {
                 sut.retrieveAllCards { result in
                     switch result {
                     case .success(let cardList):
