@@ -12,7 +12,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@develop
+        uses: actions/checkout@v2
       - name: Set XCode Version
         run: sudo xcode-select -switch /Applications/Xcode_12.0.app
       - name: Install Dependencies (CocoaPods Action)
