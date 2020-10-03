@@ -1,11 +1,6 @@
 name: Testing
-on:
-  push:
-    branches:
-    - develop
-  pull_request:
-    branches:
-    - develop
+on: [push, pull_request]
+
 jobs:
   test:
     name: Testing SWDestiny Trades app
@@ -25,5 +20,12 @@ jobs:
         with:
           additional_build_params: -destination 'platform=iOS Simulator,name=iPhone X,OS=14.0'
           additional_lint_params: --private
+      - name: Cache libraries
+        uses: actions/cache@v2          
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
       - name: Testing iOS app
         run: exec ./.github/scripts/test_app.sh
