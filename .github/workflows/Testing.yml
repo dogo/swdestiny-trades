@@ -20,6 +20,8 @@ jobs:
         with:
           workspace: swdestiny-trades.xcworkspace
           scheme: SWDestiny-Trades
+          test: false
+          use_modern_build_system: true
           additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.0'
       - name: Cache libraries
         uses: actions/cache@v2          
