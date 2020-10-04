@@ -127,7 +127,7 @@ final class HttpClientTests: QuickSpec {
 
                     sut.request(request) { (result: Result<Bool, APIError>) in
                         if case .failure(let error) = result {
-                            expect(error.localizedDescription) == "The operation couldn’t be completed"
+                            expect(error.localizedDescription) == "Request failed with reason: The operation couldn’t be completed. (NSURLErrorDomain error -1002.)"
                         } else {
                             fail("Should be a failure result")
                         }
