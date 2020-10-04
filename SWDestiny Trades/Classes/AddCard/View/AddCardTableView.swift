@@ -33,11 +33,6 @@ final class AddCardTableView: UITableView, SearchDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
     func doingSearch(_ query: String) {
         tableDatasource?.doingSearch(query)
     }

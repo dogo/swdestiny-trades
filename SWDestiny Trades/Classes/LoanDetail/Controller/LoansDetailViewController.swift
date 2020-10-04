@@ -54,10 +54,6 @@ final class LoansDetailViewController: UIViewController {
         self.navigationItem.title = "\(personDTO.name) \(personDTO.lastName)"
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     func loadDataFromRealm() {
         loanDetailView.updateTableViewData(person: personDTO)
     }

@@ -55,10 +55,6 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
         peopleListView.reloadData()
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     // MARK: - Private
 
     func setupNavigationItem() {

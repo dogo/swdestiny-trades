@@ -52,10 +52,6 @@ final class DeckBuilderViewController: UIViewController {
         loadData(deck: deckDTO)
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddToDeckViewController))

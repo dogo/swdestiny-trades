@@ -23,7 +23,7 @@ final class AboutViewController: UIViewController {
         super.viewDidLoad()
 
         aboutView.didTouchHTTPLink = { [weak self] url in
-            let safariViewController = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+            let safariViewController = SFSafariViewController(url: url)
             self?.present(safariViewController, animated: true)
         }
     }
