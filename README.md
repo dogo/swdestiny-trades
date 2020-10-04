@@ -1,7 +1,7 @@
 SWDestiny Trades
 ============
 
-[![Build Status](https://app.bitrise.io/app/5ee4942dee9b5be7/status.svg?token=5XXKV1uAbVJJRI-ETm68YQ&branch=develop)](https://app.bitrise.io/app/5ee4942dee9b5be7)
+[![Testing Status](https://github.com/dogo/swdestiny-trades/workflows/Testing/badge.svg)](https://github.com/dogo/swdestiny-trades/actions)
 [![codecov](https://codecov.io/gh/dogo/swdestiny-trades/branch/develop/graph/badge.svg)](https://codecov.io/gh/dogo/swdestiny-trades)
 
 ### About SWDTrades
