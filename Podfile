@@ -1,5 +1,3 @@
-source 'https://cocoapods-cdn.netlify.app/'
-
 platform :ios, '12.0'
 
 target 'SWDestiny Trades' do
