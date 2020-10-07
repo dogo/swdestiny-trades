@@ -33,6 +33,10 @@ extension SetDTO {
             return Asset.Sets.icAlliesOfNecessity.image
         } else if self.code.lowercased() == "soh" {
             return Asset.Sets.icSparkOfHope.image
+        } else if self.code.lowercased() == "cm" {
+            return Asset.Sets.icCovertMissions.image
+        } else if self.code.lowercased() == "tr" {
+            return Asset.Sets.icTransformations.image
         } else {
             return Asset.Sets.icNotFound.image
         }
