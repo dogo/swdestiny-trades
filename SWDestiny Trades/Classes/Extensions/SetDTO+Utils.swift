@@ -37,6 +37,8 @@ extension SetDTO {
             return Asset.Sets.icCovertMissions.image
         } else if self.code.lowercased() == "tr" {
             return Asset.Sets.icTransformations.image
+        } else if self.code.lowercased() == "fa" {
+            return Asset.Sets.icFalteringAllegiances.image
         } else {
             return Asset.Sets.icNotFound.image
         }
