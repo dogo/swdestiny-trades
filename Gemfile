@@ -2,7 +2,8 @@ source "https://www.rubygems.org"
 
 ruby '2.6.5'
 
-gem 'slather'
 gem 'cocoapods'
-gem 'fastlane'
 gem 'coveralls', require: false
+gem 'fastlane'
+gem 'install github_changelog_generator'
+gem 'slather'
