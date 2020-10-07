@@ -43,4 +43,4 @@ I'm sure there are ways of improving and adding more features, so feel free to c
 
 ## License
 
-SketchKit is released under the MIT license. See LICENSE for details.
+SWDestiny Trades is released under the MIT license. See LICENSE for details.
