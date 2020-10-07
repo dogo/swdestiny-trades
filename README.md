@@ -39,4 +39,8 @@ $ open swdestiny-trades.xcworkspace
 Now, just build :D
 
 ### Collaboration
-TODO
+I'm sure there are ways of improving and adding more features, so feel free to collaborate with ideas, issues and/or pull requests.
+
+## License
+
+SketchKit is released under the MIT license. See LICENSE for details.
