@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import Reusable
 
 protocol CollapsibleTableViewHeaderDelegate: AnyObject {
     func toggleSection(header: CollapsibleTableViewHeader, section: Int)
 }
 
-final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Reusable {
+final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Identifiable {
 
     weak var delegate: CollapsibleTableViewHeaderDelegate?
     var section = 0

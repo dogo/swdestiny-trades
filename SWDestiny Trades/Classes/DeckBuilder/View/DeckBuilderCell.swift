@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class DeckBuilderCell: UITableViewCell, Reusable {
+final class DeckBuilderCell: UITableViewCell, Identifiable {
 
     var stepperValueChanged: ((Int) -> Void)?
     var eliteButtonTouched: ((Bool) -> Void)?

@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Reusable
+
 import Charts
 
-final class CardCostLineChartCell: UICollectionViewCell, Reusable {
+final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
 
     var cardCostChartView = LineChartView(frame: .zero)
 

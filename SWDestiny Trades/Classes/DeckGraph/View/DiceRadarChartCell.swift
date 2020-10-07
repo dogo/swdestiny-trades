@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Reusable
+
 import Charts
 
-final class DiceRadarChartCell: UICollectionViewCell, Reusable {
+final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
 
     let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus", "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
 

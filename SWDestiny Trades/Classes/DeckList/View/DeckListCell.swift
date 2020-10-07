@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class DeckListCell: UITableViewCell, Reusable {
+final class DeckListCell: UITableViewCell, Identifiable {
 
     private var deckDTO: DeckDTO?
     var accessoryButtonTouched: ((String, DeckDTO) -> Void)?

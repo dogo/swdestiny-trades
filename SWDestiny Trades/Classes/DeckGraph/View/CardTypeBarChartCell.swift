@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Reusable
+
 import Charts
 
-final class CardTypeBarChartCell: UICollectionViewCell, Reusable {
+final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
 
     let cardTypes = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
 

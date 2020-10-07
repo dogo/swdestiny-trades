@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class FilterHeaderView: UITableViewHeaderFooterView, Reusable {
+final class FilterHeaderView: UITableViewHeaderFooterView, Identifiable {
 
     weak var delegate: CardListViewDelegate?
     private var selectedIndex: Int = 0

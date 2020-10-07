@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class AddToDeckHeaderView: UITableViewHeaderFooterView, Reusable {
+final class AddToDeckHeaderView: UITableViewHeaderFooterView, Identifiable {
 
     weak var delegate: SearchDelegate?
 

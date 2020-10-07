@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class CardSearchCell: UITableViewCell, Reusable {
+final class CardSearchCell: UITableViewCell, Identifiable {
 
     let baseViewCell = BaseViewCell(frame: .zero)
 

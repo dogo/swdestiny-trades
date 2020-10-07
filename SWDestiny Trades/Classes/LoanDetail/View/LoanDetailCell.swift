@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class LoanDetailCell: UITableViewCell, Reusable {
+final class LoanDetailCell: UITableViewCell, Identifiable {
 
     var stepperValueChanged: ((Int) -> Void)?
 

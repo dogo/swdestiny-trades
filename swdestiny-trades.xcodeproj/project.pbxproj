@@ -59,6 +59,9 @@
 		DD43B96620C7056300CEBFE5 /* UserCollectionNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
 		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
+		DD4AB30E252DFBC000196A3F /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30B252DFBC000196A3F /* Identifiable.swift */; };
+		DD4AB30F252DFBC000196A3F /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30C252DFBC000196A3F /* UITableView+Identifiable.swift */; };
+		DD4AB310252DFBC000196A3F /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30D252DFBC000196A3F /* UICollectionView+Identifiable.swift */; };
 		DD4B0ACA1E25A9BF0042D4EB /* FilterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */; };
 		DD4BBCDF1E26CC7E009929C4 /* NumberListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */; };
 		DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */; };
@@ -168,7 +171,6 @@
 		DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF5D9601E2EA7C0007C8A4B /* DeckListViewController.swift */; };
 		DDF678A71E441C6E00390878 /* SectionsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF678A61E441C6E00390878 /* SectionsBuilder.swift */; };
 		DDFB0C8F1E285F0C00442E1B /* SWDestinyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB0C8E1E285F0C00442E1B /* SWDestinyEndpoint.swift */; };
-		DDFDB7862385AB31009F6DF3 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = DDFDB7852385AB31009F6DF3 /* Reusable */; };
 		DDFEB95C1E253A04004EADE9 /* AddCardDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9561E253A04004EADE9 /* AddCardDatasource.swift */; };
 		DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB9581E253A04004EADE9 /* AddCardCell.swift */; };
 		DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFEB95A1E253A04004EADE9 /* AddCardTableView.swift */; };
@@ -237,6 +239,9 @@
 		DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionNavigator.swift; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
 		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
+		DD4AB30B252DFBC000196A3F /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		DD4AB30C252DFBC000196A3F /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
+		DD4AB30D252DFBC000196A3F /* UICollectionView+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Identifiable.swift"; sourceTree = "<group>"; };
 		DD4B0AC91E25A9BF0042D4EB /* FilterHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeaderView.swift; sourceTree = "<group>"; };
 		DD4BBCDE1E26CC7E009929C4 /* NumberListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberListDatasource.swift; sourceTree = "<group>"; };
 		DD4BBCE21E26D104009929C4 /* ColorListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorListDatasource.swift; sourceTree = "<group>"; };
@@ -390,7 +395,6 @@
 				DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */,
 				DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */,
 				DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */,
-				DDFDB7862385AB31009F6DF3 /* Reusable in Frameworks */,
 				DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */,
 				319D84306E4FAFD63F148AD4 /* Pods_SWDestiny_Trades.framework in Frameworks */,
 			);
@@ -728,6 +732,16 @@
 			path = Navigator;
 			sourceTree = "<group>";
 		};
+		DD4AB30A252DFBC000196A3F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DD4AB30B252DFBC000196A3F /* Identifiable.swift */,
+				DD4AB30D252DFBC000196A3F /* UICollectionView+Identifiable.swift */,
+				DD4AB30C252DFBC000196A3F /* UITableView+Identifiable.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		DD4B0ABE1E25951E0042D4EB /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +937,7 @@
 			isa = PBXGroup;
 			children = (
 				DDEDC96123252F720045F125 /* Database */,
+				DD4AB30A252DFBC000196A3F /* Extension */,
 				DDEDC95F23252F5C0045F125 /* Logger */,
 				DDEDC96023252F650045F125 /* Router */,
 				DDEDC95E23252F4F0045F125 /* View */,
@@ -1518,7 +1533,6 @@
 				DD995C8B2353957A00EF17EC /* SketchKit */,
 				DD56EFE2235397C400F32891 /* Charts */,
 				DDD1C0BA23539C4B005B522E /* Kingfisher */,
-				DDFDB7852385AB31009F6DF3 /* Reusable */,
 				DD01CA372517AD29008C68B8 /* PKHUD */,
 				DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */,
 				DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */,
@@ -1587,7 +1601,6 @@
 				DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */,
 				DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */,
 				DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */,
 				DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
@@ -1820,6 +1833,7 @@
 				DDCA97B81E2FA72A0098FFB5 /* DeckBuilderTableView.swift in Sources */,
 				DDEDC966232530D50045F125 /* RealmDatabase.swift in Sources */,
 				DD6AE37A2089991300289193 /* SetsListNavigator.swift in Sources */,
+				DD4AB30F252DFBC000196A3F /* UITableView+Identifiable.swift in Sources */,
 				DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */,
 				DD09054E1E24701D00D9EFB0 /* LoansDetailDatasource.swift in Sources */,
 				DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */,
@@ -1835,6 +1849,7 @@
 				DD0905521E24701D00D9EFB0 /* PeopleListViewController.swift in Sources */,
 				DDCA97AB1E2FA2A20098FFB5 /* DeckListTableView.swift in Sources */,
 				DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */,
+				DD4AB30E252DFBC000196A3F /* Identifiable.swift in Sources */,
 				DDE9233A1E1A8A3100F35001 /* NotificationConstants.swift in Sources */,
 				DDB764C41E43639E007758D5 /* XYMarkerView.swift in Sources */,
 				DDAFBF261FF6F3F500927875 /* AddToDeckViewController.swift in Sources */,
@@ -1882,6 +1897,7 @@
 				DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */,
 				DDCDE3831E1DF7A600B4BE18 /* CardDetailViewController.swift in Sources */,
 				DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */,
+				DD4AB310252DFBC000196A3F /* UICollectionView+Identifiable.swift in Sources */,
 				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
 				DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */,
 				9D507EE5251A4843006D0E9B /* HttpClientProtocol.swift in Sources */,
@@ -2266,14 +2282,6 @@
 				minimumVersion = 5.8.3;
 			};
 		};
-		DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AliSoftware/Reusable.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2306,11 +2314,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		DDFDB7852385AB31009F6DF3 /* Reusable */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DDFDB7842385AB30009F6DF3 /* XCRemoteSwiftPackageReference "Reusable" */;
-			productName = Reusable;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

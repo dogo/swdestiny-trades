@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class SetsTableCell: UITableViewCell, Reusable {
+final class SetsTableCell: UITableViewCell, Identifiable {
 
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
