@@ -16,15 +16,27 @@ Features:
 • Share cards, your collection or decks with your friends.  
 • Universal app for iPhone and iPad.  
 • Collection manager.  
-• Ready for iOS 13.  
+• Ready for iOS 14.  
 
 This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.  
 
 <img src="https://github.com/dogo/swdestiny-trades/raw/develop/fastlane/screenshots/en-US/1_iphone6Plus_1.Simulator Screen Shot - iPhone 8 Plus.png" alt="SWDestiny Trades Screenshot" width="310" height="552" />
-<img src="https://github.com/dogo/swdestiny-trades/raw/develop/fastlane/screenshots/en-US/3_iphone6Plus.png" alt="SWDestiny Trades Screenshot" width="310" height="552" />
 
 ### Building SWDTrades
-TODO
+
+Run the CocoaPods command:
+
+```bash
+$ pod install
+```
+
+Then, open the `swdestiny-trades.xcworkspace`
+
+```bash
+$ open swdestiny-trades.xcworkspace
+```
+
+Now, just build :D
 
 ### Collaboration
 TODO
