@@ -25,14 +25,10 @@ extension HttpClient {
                                             decodingType: T.Type,
                                             completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
 
-        let task = self.session.dataTask(with: request) { data, response, error in
+        let task = self.session.dataTask(with: request) { [weak self] data, response, error in
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                if let error = error as NSError?, error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
-                    completion(nil, .requestCancelled)
-                } else {
-                    completion(nil, .requestFailed(reason: error?.localizedDescription))
-                }
+                completion(nil, self?.failureReason(error))
                 return
             }
             switch httpResponse.statusCode {
@@ -81,5 +77,14 @@ extension HttpClient {
             uploadTasks.forEach { $0.cancel() }
             downloadTasks.forEach { $0.cancel() }
         }
+    }
+
+    // MARK: - Helper
+
+    private func failureReason(_ error: Error?) -> APIError {
+        if let error = error as NSError?, error.code == NSURLErrorCancelled {
+            return .requestCancelled
+        }
+        return .requestFailed(reason: error?.localizedDescription)
     }
 }
