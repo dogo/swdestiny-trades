@@ -131,8 +131,8 @@ extension DeckBuilderCell: BaseViewConfiguration {
         iconImageView.layout.applyConstraint { view in
             view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
-            view.heightAnchor(equalTo: 25)
-            view.widthAnchor(equalTo: 25)
+            view.heightAnchor(equalToConstant: 25)
+            view.widthAnchor(equalToConstant: 25)
         }
 
         quantityLabel.layout.applyConstraint { view in

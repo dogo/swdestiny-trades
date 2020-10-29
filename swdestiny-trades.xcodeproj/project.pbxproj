@@ -14,9 +14,9 @@
 		9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */; };
 		9D513F4023353AD200CCC12B /* sets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D513F3F23353AD100CCC12B /* sets.json */; };
 		9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */; };
-		DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA372517AD29008C68B8 /* PKHUD */; };
-		DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */; };
-		DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */; };
+		DD01CA382517AD29008C68B8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA372517AD29008C68B8 /* SwiftPackageProductDependency */; };
+		DD01CA3F2517AEB3008C68B8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA3E2517AEB3008C68B8 /* SwiftPackageProductDependency */; };
+		DD01CA442517B134008C68B8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD01CA432517B134008C68B8 /* SwiftPackageProductDependency */; };
 		DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905181E244E4000D9EFB0 /* SetsTableView.swift */; };
 		DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051A1E2450B300D9EFB0 /* SetsView.swift */; };
 		DD0905211E24594E00D9EFB0 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09051E1E24594E00D9EFB0 /* AddCardViewController.swift */; };
@@ -69,7 +69,7 @@
 		DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5DB2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift */; };
 		DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */; };
 		DD52425920BCF076003BDDEA /* SetDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD52425820BCF076003BDDEA /* SetDTO+Utils.swift */; };
-		DD56EFE3235397C400F32891 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = DD56EFE2235397C400F32891 /* Charts */; };
+		DD56EFE3235397C400F32891 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD56EFE2235397C400F32891 /* SwiftPackageProductDependency */; };
 		DD5B315E200FCDE6007D373B /* CardDTO+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5B315D200FCDE6007D373B /* CardDTO+Utils.swift */; };
 		DD5DE3FD23C0D6EB00DCC743 /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5DE3FC23C0D6EB00DCC743 /* EndpointProtocol.swift */; };
 		DD61B93C1E1FBC1400F38482 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93B1E1FBC1400F38482 /* SearchTableView.swift */; };
@@ -107,7 +107,7 @@
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
-		DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD995C8B2353957A00EF17EC /* SketchKit */; };
+		DD995C8C2353957A00EF17EC /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DD995C8B2353957A00EF17EC /* SwiftPackageProductDependency */; };
 		DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */; };
 		DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */; };
 		DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4C1217FE68900AE1301 /* LoggerManager.swift */; };
@@ -157,7 +157,7 @@
 		DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C7423344228007A9AF8 /* JSONHelper.swift */; };
 		DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD19C772334489E007A9AF8 /* PeopleListViewControllerTests.swift */; };
 		DDD19C7A233453C5007A9AF8 /* card.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD19C79233453C5007A9AF8 /* card.json */; };
-		DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1C0BA23539C4B005B522E /* Kingfisher */; };
+		DDD1C0BB23539C4B005B522E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1C0BA23539C4B005B522E /* SwiftPackageProductDependency */; };
 		DDDA724D20C70E04002147CF /* LoanDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDA724C20C70E04002147CF /* LoanDetailNavigator.swift */; };
 		DDDE91C920F7258800D48563 /* SWDestinyServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91C820F7258800D48563 /* SWDestinyServiceTests.swift */; };
 		DDDE91CD20F728AE00D48563 /* SWDestinyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDE91CC20F728AE00D48563 /* SWDestinyService.swift */; };
@@ -390,12 +390,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD56EFE3235397C400F32891 /* Charts in Frameworks */,
-				DDD1C0BB23539C4B005B522E /* Kingfisher in Frameworks */,
-				DD01CA382517AD29008C68B8 /* PKHUD in Frameworks */,
-				DD01CA442517B134008C68B8 /* ImageSlideshow/Kingfisher in Frameworks */,
-				DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */,
-				DD01CA3F2517AEB3008C68B8 /* FTPopOverMenu in Frameworks */,
+				DD56EFE3235397C400F32891 /* BuildFile in Frameworks */,
+				DDD1C0BB23539C4B005B522E /* BuildFile in Frameworks */,
+				DD01CA382517AD29008C68B8 /* BuildFile in Frameworks */,
+				DD01CA442517B134008C68B8 /* BuildFile in Frameworks */,
+				DD995C8C2353957A00EF17EC /* BuildFile in Frameworks */,
+				DD01CA3F2517AEB3008C68B8 /* BuildFile in Frameworks */,
 				319D84306E4FAFD63F148AD4 /* Pods_SWDestiny_Trades.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1530,12 +1530,12 @@
 			);
 			name = "SWDestiny Trades";
 			packageProductDependencies = (
-				DD995C8B2353957A00EF17EC /* SketchKit */,
-				DD56EFE2235397C400F32891 /* Charts */,
-				DDD1C0BA23539C4B005B522E /* Kingfisher */,
-				DD01CA372517AD29008C68B8 /* PKHUD */,
-				DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */,
-				DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */,
+				DD995C8B2353957A00EF17EC /* SwiftPackageProductDependency */,
+				DD56EFE2235397C400F32891 /* SwiftPackageProductDependency */,
+				DDD1C0BA23539C4B005B522E /* SwiftPackageProductDependency */,
+				DD01CA372517AD29008C68B8 /* SwiftPackageProductDependency */,
+				DD01CA3E2517AEB3008C68B8 /* SwiftPackageProductDependency */,
+				DD01CA432517B134008C68B8 /* SwiftPackageProductDependency */,
 			);
 			productName = "SWDestiny Trades";
 			productReference = DD6E06841E114E88004A5653 /* SWDestiny Trades.app */;
@@ -1598,12 +1598,12 @@
 			);
 			mainGroup = DD6E067B1E114E88004A5653;
 			packageReferences = (
-				DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */,
-				DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */,
-				DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */,
-				DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */,
-				DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
+				DD995C8A2353957A00EF17EC /* RemoteSwiftPackageReference */,
+				DD56EFE1235397C400F32891 /* RemoteSwiftPackageReference */,
+				DDD1C0B923539C4B005B522E /* RemoteSwiftPackageReference */,
+				DD01CA362517AD29008C68B8 /* RemoteSwiftPackageReference */,
+				DD01CA3D2517AEB3008C68B8 /* RemoteSwiftPackageReference */,
+				DD01CA422517B134008C68B8 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1651,12 +1651,25 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1690,12 +1703,19 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/iOSSnapshotTestCase/FBSnapshotTestCase.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2234,7 +2254,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+		DD01CA362517AD29008C68B8 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pkluz/PKHUD.git";
 			requirement = {
@@ -2242,7 +2262,7 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */ = {
+		DD01CA3D2517AEB3008C68B8 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/liufengting/FTPopOverMenu_Swift.git";
 			requirement = {
@@ -2250,7 +2270,7 @@
 				minimumVersion = 0.3.3;
 			};
 		};
-		DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
+		DD01CA422517B134008C68B8 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zvonicek/ImageSlideshow.git";
 			requirement = {
@@ -2258,7 +2278,7 @@
 				minimumVersion = 1.9.1;
 			};
 		};
-		DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */ = {
+		DD56EFE1235397C400F32891 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts";
 			requirement = {
@@ -2266,7 +2286,7 @@
 				minimumVersion = 3.4.0;
 			};
 		};
-		DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */ = {
+		DD995C8A2353957A00EF17EC /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dogo/SketchKit";
 			requirement = {
@@ -2274,7 +2294,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		DDD1C0B923539C4B005B522E /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
@@ -2285,34 +2305,34 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DD01CA372517AD29008C68B8 /* PKHUD */ = {
+		DD01CA372517AD29008C68B8 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */;
+			package = DD01CA362517AD29008C68B8 /* RemoteSwiftPackageReference */;
 			productName = PKHUD;
 		};
-		DD01CA3E2517AEB3008C68B8 /* FTPopOverMenu */ = {
+		DD01CA3E2517AEB3008C68B8 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */;
+			package = DD01CA3D2517AEB3008C68B8 /* RemoteSwiftPackageReference */;
 			productName = FTPopOverMenu;
 		};
-		DD01CA432517B134008C68B8 /* ImageSlideshow/Kingfisher */ = {
+		DD01CA432517B134008C68B8 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			package = DD01CA422517B134008C68B8 /* RemoteSwiftPackageReference */;
 			productName = ImageSlideshow/Kingfisher;
 		};
-		DD56EFE2235397C400F32891 /* Charts */ = {
+		DD56EFE2235397C400F32891 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */;
+			package = DD56EFE1235397C400F32891 /* RemoteSwiftPackageReference */;
 			productName = Charts;
 		};
-		DD995C8B2353957A00EF17EC /* SketchKit */ = {
+		DD995C8B2353957A00EF17EC /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */;
+			package = DD995C8A2353957A00EF17EC /* RemoteSwiftPackageReference */;
 			productName = SketchKit;
 		};
-		DDD1C0BA23539C4B005B522E /* Kingfisher */ = {
+		DDD1C0BA23539C4B005B522E /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDD1C0B923539C4B005B522E /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = DDD1C0B923539C4B005B522E /* RemoteSwiftPackageReference */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */

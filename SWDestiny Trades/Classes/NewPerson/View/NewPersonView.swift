@@ -59,14 +59,14 @@ extension NewPersonView: BaseViewConfiguration {
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
             view.trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
-            view.heightAnchor(equalTo: 60)
+            view.heightAnchor(equalToConstant: 60)
         }
 
         lastNameTextField.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.firstNameTextField.bottomAnchor, constant: 33)
             view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
             view.trailingAnchor(equalTo: self.trailingAnchor, constant: -12)
-            view.heightAnchor(equalTo: 60)
+            view.heightAnchor(equalToConstant: 60)
         }
     }
 

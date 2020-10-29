@@ -43,7 +43,7 @@ extension AddCardView: BaseViewConfiguration {
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
             view.trailingAnchor(equalTo: self.trailingAnchor)
-            view.heightAnchor(equalTo: 44)
+            view.heightAnchor(equalToConstant: 44)
         }
 
         addCardTableView.layout.applyConstraint { view in

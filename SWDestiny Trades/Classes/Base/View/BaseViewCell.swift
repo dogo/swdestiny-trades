@@ -84,8 +84,8 @@ extension BaseViewCell: BaseViewConfiguration {
         iconImageView.layout.applyConstraint { view in
             view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
-            view.heightAnchor(equalTo: 25)
-            view.widthAnchor(equalTo: 25)
+            view.heightAnchor(equalToConstant: 25)
+            view.widthAnchor(equalToConstant: 25)
         }
 
         accessoryLabel.layout.applyConstraint { view in

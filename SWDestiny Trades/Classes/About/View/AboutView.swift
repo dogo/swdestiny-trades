@@ -60,8 +60,8 @@ extension AboutView: BaseViewConfiguration {
         logoImage.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor, constant: 34)
             view.centerXAnchor(equalTo: self.centerXAnchor)
-            view.widthAnchor(equalTo: 280)
-            view.heightAnchor(equalTo: 150)
+            view.widthAnchor(equalToConstant: 280)
+            view.heightAnchor(equalToConstant: 150)
         }
 
         versionLabel.layout.applyConstraint { view in

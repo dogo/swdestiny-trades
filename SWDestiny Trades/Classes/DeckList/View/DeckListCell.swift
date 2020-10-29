@@ -115,8 +115,8 @@ extension DeckListCell: BaseViewConfiguration {
             view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
             view.leadingAnchor(equalTo: self.titleEditText.trailingAnchor)
             view.trailingAnchor(equalTo: self.contentView.trailingAnchor)
-            view.widthAnchor(equalTo: 50)
-            view.heightAnchor(equalTo: 50)
+            view.widthAnchor(equalToConstant: 50)
+            view.heightAnchor(equalToConstant: 50)
         }
     }
 
