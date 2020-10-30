@@ -19,6 +19,10 @@ final class HttpClient: HttpClientProtocol {
 
 extension HttpClient {
 
+    var logger: NetworkingLogger {
+        return NetworkingLogger(level: .debug)
+    }
+
     typealias DecodingCompletionHandler = (Decodable?, APIError?) -> Void
 
     private func decodingTask<T: Decodable>(with request: URLRequest,
@@ -26,6 +30,8 @@ extension HttpClient {
                                             completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
 
         let task = self.session.dataTask(with: request) { [weak self] data, response, error in
+
+            self?.logger.log(response: response, data: data)
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, self?.failureReason(error))
@@ -51,6 +57,8 @@ extension HttpClient {
     }
 
     func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) {
+
+        logger.log(request: request)
 
         let task = self.decodingTask(with: request, decodingType: T.self) { json, error in
 

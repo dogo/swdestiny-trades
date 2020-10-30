@@ -10,6 +10,8 @@ import Foundation
 
 protocol HttpClientProtocol {
 
+    var logger: NetworkingLogger { get }
+
     func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void)
 
     func cancelAllRequests()
