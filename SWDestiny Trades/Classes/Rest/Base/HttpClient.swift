@@ -27,30 +27,30 @@ extension HttpClient {
 
     private func decodingTask<T: Decodable>(with request: URLRequest,
                                             decodingType: T.Type,
-                                            completionHandler completion: @escaping (T?, APIError?) -> Void) -> URLSessionDataTask {
+                                            completionHandler completion: @escaping (T?, RequestError?) -> Void) -> URLSessionDataTask {
 
         let task = self.session.dataTask(with: request) { [weak self] data, response, error in
 
-            self?.logger.log(response: response, data: data)
-
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(nil, self?.failureReason(error))
+                completion(nil, self?.failureReason(HttpStatusCode.unknown.rawValue, error))
                 return
             }
-            switch httpResponse.statusCode {
+            let statusCode = httpResponse.statusCode
+            switch statusCode {
             case 200...399:
                 if let data = data {
                     do {
                         let model = try JSONDecoder().decode(decodingType, from: data)
+                        self?.logger.log(response: response, data: data)
                         completion(model, nil)
                     } catch {
-                        completion(nil, .jsonConversionFailure)
+                        completion(nil, RequestError(statusCode, reason: .jsonConversionFailure))
                     }
                 } else {
-                    completion(nil, .invalidData)
+                    completion(nil, RequestError(statusCode, reason: .invalidData))
                 }
             default:
-                completion(nil, .responseUnsuccessful)
+                completion(nil, RequestError(statusCode, reason: .responseUnsuccessful))
             }
         }
         return task
@@ -60,11 +60,12 @@ extension HttpClient {
 
         logger.log(request: request)
 
-        let task = self.decodingTask(with: request, decodingType: T.self) { json, error in
+        let task = self.decodingTask(with: request, decodingType: T.self) { [weak self] json, error in
 
             DispatchQueue.main.async {
                 if let error = error {
-                    completion(.failure(error))
+                    self?.logger.logError(request: request, statusCode: error.statusCode, error: error.reason)
+                    completion(.failure(error.reason))
                     return
                 }
                 if let json = json {
@@ -89,10 +90,12 @@ extension HttpClient {
 
     // MARK: - Helper
 
-    private func failureReason(_ error: Error?) -> APIError {
+    private func failureReason(_ statusCode: Int, _ error: Error?) -> RequestError {
+        var reason: APIError = .requestFailed(reason: error?.localizedDescription)
+
         if let error = error as NSError?, error.code == NSURLErrorCancelled {
-            return .requestCancelled
+            reason = .requestCancelled
         }
-        return .requestFailed(reason: error?.localizedDescription)
+        return RequestError(statusCode, reason: reason)
     }
 }

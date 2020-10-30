@@ -34,3 +34,14 @@ enum APIError: Error {
         }
     }
 }
+
+final class RequestError {
+
+    var reason: APIError
+    var statusCode: Int
+
+    init(_ statusCode: Int, reason: APIError) {
+        self.statusCode = statusCode
+        self.reason = reason
+    }
+}

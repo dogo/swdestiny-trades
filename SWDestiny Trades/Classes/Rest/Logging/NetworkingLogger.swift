@@ -29,6 +29,7 @@ final class NetworkingLogger {
         guard loglevel != .none else { return }
 
         if let method = request.httpMethod, let url = request.url {
+            printSeparator()
             log(method: method, url: url.absoluteString)
             log(headers: request.allHTTPHeaderFields)
             log(body: request.httpBody)
@@ -50,34 +51,52 @@ final class NetworkingLogger {
         }
     }
 
+    // MARK: - Log Error
+
+    func logError(request: URLRequest, statusCode: Int, error: Error?) {
+        guard let method = request.httpMethod,
+              let url = request.url,
+              let error = error else { return }
+        printTagged("[Error] \(statusCode) \(method) '\(url)':")
+        printTagged("Description: \(error.localizedDescription)")
+    }
+
     // MARK: - Log Body
 
     private func log(statusCode: Int, url: String) {
-        debugPrint("\(statusCode) '\(url)'")
+        printTagged("\(statusCode) '\(url)'")
     }
 
     // MARK: - Log JSON
 
     private func logJSON(_ data: Data?) {
-        if let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-            debugPrint(json)
+        guard let data = data else { return }
+        do {
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+
+            if let prettyString = String(data: prettyData, encoding: .utf8) {
+                prettyJSON(prettyString)
+            }
+        } catch {
+            if let string = String(data: data, encoding: .utf8) {
+                printTagged(string)
+            }
         }
     }
 
     // MARK: - Log Headers
 
     private func log(method: String, url: String) {
-        debugPrint("\(method) '\(url)'")
+        printTagged("\(method) '\(url)':")
     }
 
     // MARK: - Log Headers
 
     private func log(headers: [String: String]?) {
-        if let allHTTPHeaderfields = headers {
-            for (key, value) in allHTTPHeaderfields {
-                debugPrint("    \(key) : \(value)'")
-            }
-        }
+        printTagged("Headers: [")
+        headers?.forEach { printTagged("  \($0): \($1)") }
+        printTagged("]")
     }
 
     // MARK: - Log Body
@@ -85,7 +104,23 @@ final class NetworkingLogger {
     private func log(body: Data?) {
         if let httpBody = body {
             let bodyStr = String(data: httpBody, encoding: .utf8) ?? String()
-            debugPrint("    HttpBody : \(bodyStr)")
+            printTagged("Body: \(bodyStr)")
         }
+    }
+
+    // MARK: - Log Tag
+
+    private func printTagged(_ string: String) {
+        print("LOGGER | " + string)
+    }
+
+    private func printSeparator() {
+        print("LOGGER |---------------------------------------------------")
+    }
+
+    private func prettyJSON(_ string: String) {
+        let components = string.components(separatedBy: "\n")
+        printTagged("JSON:")
+        components.forEach { printTagged($0) }
     }
 }
