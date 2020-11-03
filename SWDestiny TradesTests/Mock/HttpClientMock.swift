@@ -14,6 +14,10 @@ final class HttpClientMock: HttpClientProtocol {
     var error: Bool = false
     var isCancelled = false
 
+    var logger: NetworkingLogger {
+        return NetworkingLogger(level: .none)
+    }
+
     func request<T>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) where T: Decodable {
         guard !error else {
             return completion(.failure(.jsonParsingFailure))
