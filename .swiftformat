@@ -1,0 +1,5 @@
+# file options
+--exclude Pods
+
+# Rules
+--disable unusedArguments

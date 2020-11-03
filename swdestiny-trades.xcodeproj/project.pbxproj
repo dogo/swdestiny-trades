@@ -1528,6 +1528,7 @@
 			buildPhases = (
 				336920EE78B31BAE5BCC7178 /* [CP] Check Pods Manifest.lock */,
 				DD2026E5200AACFD006B17DD /* [SwiftGen] Run Script */,
+				DDAC517C2551912A00F68E4F /* [SwiftFormat] Run Script */,
 				E3EA64F422284137009A142D /* [SwiftLint] Run Script */,
 				DD6E06801E114E88004A5653 /* Sources */,
 				DD6E06811E114E88004A5653 /* Frameworks */,
@@ -1755,7 +1756,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# SwiftGen\n\"${PODS_ROOT}\"/SwiftGen/bin/swiftgen\n";
+			shellScript = "# SwiftGen\nmint run swiftgen\n";
 		};
 		DD4D3A211E1D577900719E96 /* Firebase Crashlytics SDK */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1773,6 +1774,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n#\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols -p ios -gsp ${PROJECT_DIR}/GoogleService-Info.plist\"\n";
 		};
+		DDAC517C2551912A00F68E4F /* [SwiftFormat] Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[SwiftFormat] Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# SwiftFormat\nmint run swiftformat --config .swiftformat .\n";
+		};
 		E3EA64F422284137009A142D /* [SwiftLint] Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1789,7 +1808,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n    echo \"warning: SwiftLint not installed, install using pod install command\"\nfi\n";
+			shellScript = "# SwiftLint\nmint run swiftlint\n\n";
 		};
 		FB8CBC15D114429DC56810EF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

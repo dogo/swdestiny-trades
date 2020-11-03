@@ -43,6 +43,9 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - yoda_condition
 
+disabled_rules:
+  - opening_brace  
+
 line_length: 160
 
 function_body_length: 80
