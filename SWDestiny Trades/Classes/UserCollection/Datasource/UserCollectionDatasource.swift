@@ -14,7 +14,6 @@ protocol UserCollectionProtocol: AnyObject {
 }
 
 final class UserCollectionDatasource: NSObject, UITableViewDataSource {
-
     private var tableView: UITableView?
     private var userCollection: UserCollectionDTO?
     private weak var delegate: UserCollectionProtocol?
@@ -87,9 +86,9 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        if let card = self.getCard(at: indexPath), let index = self.userCollection?.myCollection.index(of: card) {
-            self.delegate?.remove(at: index)
-            self.collectionList.remove(at: indexPath.row)
+        if let card = getCard(at: indexPath), let index = userCollection?.myCollection.index(of: card) {
+            delegate?.remove(at: index)
+            collectionList.remove(at: indexPath.row)
         }
     }
 }

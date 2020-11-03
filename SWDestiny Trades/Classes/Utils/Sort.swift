@@ -9,7 +9,6 @@
 import Foundation
 
 enum Sort {
-
     static func cardsByNumber(cardsArray: [CardDTO]) -> [CardDTO] {
         let source = cardsArray.sorted {
             $0.code < $1.code

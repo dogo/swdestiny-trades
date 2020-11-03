@@ -9,7 +9,6 @@
 import UIKit
 
 final class UserCollectionTableView: UITableView {
-
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     var tableViewDatasource: UserCollectionDatasource?
@@ -18,7 +17,7 @@ final class UserCollectionTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = UserCollectionDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)
@@ -60,7 +59,6 @@ final class UserCollectionTableView: UITableView {
 }
 
 extension UserCollectionTableView: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

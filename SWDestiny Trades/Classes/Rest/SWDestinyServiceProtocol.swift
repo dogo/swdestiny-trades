@@ -9,7 +9,6 @@
 import Foundation
 
 protocol SWDestinyServiceProtocol {
-
     func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void)
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)

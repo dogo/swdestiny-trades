@@ -6,15 +6,13 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
+import Quick
 @testable import SWDestiny_Trades
 
 class CardDetailViewControllerTests: QuickSpec {
-
     override func spec() {
         describe("CardDetail view controller") {
-
             var controller: CardDetailViewController!
             let cardList = [CardDTO()]
 

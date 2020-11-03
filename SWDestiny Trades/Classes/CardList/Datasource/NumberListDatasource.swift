@@ -9,7 +9,6 @@
 import UIKit
 
 final class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnable {
-
     private var tableView: UITableView?
     private var numberCards: [CardDTO] = []
 

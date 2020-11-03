@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckListTableView: UITableView {
-
     var didSelectDeck: ((DeckDTO) -> Void)?
 
     private var tableViewDatasource: DeckListDatasource?
@@ -18,8 +17,8 @@ final class DeckListTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = DeckListDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .blackWhite
-        self.keyboardDismissMode = .onDrag
+        backgroundColor = .blackWhite
+        keyboardDismissMode = .onDrag
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -54,21 +53,20 @@ final class DeckListTableView: UITableView {
             if let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardSize = keyboardInfo.cgRectValue.size
                 let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-                self.contentInset = contentInsets
-                self.scrollIndicatorInsets = contentInsets
+                contentInset = contentInsets
+                scrollIndicatorInsets = contentInsets
             }
         }
     }
 
     @objc
     func keyboardWillHide(notification: NSNotification) {
-        self.contentInset = .zero
-        self.scrollIndicatorInsets = .zero
+        contentInset = .zero
+        scrollIndicatorInsets = .zero
     }
 }
 
 extension DeckListTableView: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckListCell: UITableViewCell, Identifiable {
-
     private var deckDTO: DeckDTO?
     var accessoryButtonTouched: ((String, DeckDTO) -> Void)?
 
@@ -85,18 +84,17 @@ final class DeckListCell: UITableViewCell, Identifiable {
         toggleEditButton()
         if titleEditText.isUserInteractionEnabled {
             titleEditText.becomeFirstResponder()
-        } else if let deck = self.deckDTO {
-            self.accessoryButtonTouched?(self.titleEditText.text ?? "", deck)
+        } else if let deck = deckDTO {
+            accessoryButtonTouched?(titleEditText.text ?? "", deck)
         }
     }
 }
 
 extension DeckListCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(titleEditText)
-        self.contentView.addSubview(subTitle)
-        self.contentView.addSubview(accessoryButton)
+        contentView.addSubview(titleEditText)
+        contentView.addSubview(subTitle)
+        contentView.addSubview(accessoryButton)
     }
 
     internal func setupConstraints() {
@@ -127,7 +125,6 @@ extension DeckListCell: BaseViewConfiguration {
 }
 
 extension DeckListCell: UITextFieldDelegate {
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if titleEditText === textField {
             accessoryButtonTouched(sender: nil)

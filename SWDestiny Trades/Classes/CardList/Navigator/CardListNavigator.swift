@@ -9,7 +9,6 @@
 import UIKit
 
 final class CardListNavigator: Navigator {
-
     enum Destination {
         case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
     }
@@ -33,7 +32,7 @@ final class CardListNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .cardDetail(let database, let cardList, let card):
+        case let .cardDetail(database, cardList, card):
             return CardDetailViewController(database: database, cardList: cardList, selected: card)
         }
     }

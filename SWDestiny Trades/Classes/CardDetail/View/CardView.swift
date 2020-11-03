@@ -6,11 +6,10 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import ImageSlideshow
+import UIKit
 
 final class CardView: UIView {
-
     let slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow(frame: .zero)
         slideshow.activityIndicator = DefaultActivityIndicator()
@@ -34,9 +33,8 @@ final class CardView: UIView {
 }
 
 extension CardView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(slideshow)
+        addSubview(slideshow)
     }
 
     internal func setupConstraints() {
@@ -49,6 +47,6 @@ extension CardView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 }

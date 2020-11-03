@@ -9,7 +9,6 @@
 import UIKit
 
 final class AddCardTableView: UITableView, SearchDelegate {
-
     var didSelectCard: ((CardDTO) -> Void)?
     var didSelectAccessory: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
@@ -21,8 +20,8 @@ final class AddCardTableView: UITableView, SearchDelegate {
         super.init(frame: frame, style: style)
         addCardTable.delegate = self
         tableDatasource = AddCardDatasource(cards: [], tableView: self, delegate: addCardTable)
-        self.backgroundColor = .blackWhite
-        self.keyboardDismissMode = .onDrag
+        backgroundColor = .blackWhite
+        keyboardDismissMode = .onDrag
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -63,15 +62,15 @@ final class AddCardTableView: UITableView, SearchDelegate {
             if let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardSize = keyboardInfo.cgRectValue.size
                 let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-                self.contentInset = contentInsets
-                self.scrollIndicatorInsets = contentInsets
+                contentInset = contentInsets
+                scrollIndicatorInsets = contentInsets
             }
         }
     }
 
     @objc
     func keyboardWillHide(notification: NSNotification) {
-        self.contentInset = .zero
-        self.scrollIndicatorInsets = .zero
+        contentInset = .zero
+        scrollIndicatorInsets = .zero
     }
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 final class AddCardCell: UITableViewCell, Identifiable {
-
     let baseViewCell = BaseViewCell(frame: .zero)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,13 +42,11 @@ final class AddCardCell: UITableViewCell, Identifiable {
     override func setSelected(_ selected: Bool, animated: Bool) {
         // just hightlight
     }
-
 }
 
 extension AddCardCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(baseViewCell)
+        contentView.addSubview(baseViewCell)
     }
 
     internal func setupConstraints() {
@@ -62,8 +59,8 @@ extension AddCardCell: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.accessoryType = .detailButton
-        self.selectionStyle = .none
-        self.tintColor = .whiteBlack
+        accessoryType = .detailButton
+        selectionStyle = .none
+        tintColor = .whiteBlack
     }
 }

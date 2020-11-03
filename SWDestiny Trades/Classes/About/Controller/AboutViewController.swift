@@ -6,17 +6,16 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 final class AboutViewController: UIViewController {
-
     private let aboutView = AboutView()
 
     // MARK: - Life Cycle
 
     override func loadView() {
-        self.view = aboutView
+        view = aboutView
     }
 
     override func viewDidLoad() {
@@ -30,6 +29,6 @@ final class AboutViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = L10n.about
+        navigationItem.title = L10n.about
     }
 }

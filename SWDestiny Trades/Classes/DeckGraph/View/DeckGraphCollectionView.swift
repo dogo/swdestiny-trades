@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckGraphCollectionView: UICollectionView {
-
     private var collectionViewDatasource: DeckGraphDatasource?
 
     convenience init() {
@@ -18,9 +17,9 @@ final class DeckGraphCollectionView: UICollectionView {
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        self.delegate = self
+        delegate = self
         collectionViewDatasource = DeckGraphDatasource(collectionView: self)
-        self.backgroundColor = .white
+        backgroundColor = .white
     }
 
     @available(*, unavailable)
@@ -34,7 +33,6 @@ final class DeckGraphCollectionView: UICollectionView {
 }
 
 extension DeckGraphCollectionView: UICollectionViewDelegateFlowLayout {
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.size.width - 16)
         return CGSize(width: width, height: width * CGFloat(1.1))

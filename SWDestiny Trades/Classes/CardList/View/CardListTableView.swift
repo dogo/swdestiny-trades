@@ -9,7 +9,6 @@
 import UIKit
 
 final class CardListTableView: UITableView {
-
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     private var alphabeticalDatasource: AlphabeticalListDatasource?
@@ -24,14 +23,14 @@ final class CardListTableView: UITableView {
         numberDatasource = NumberListDatasource(tableView: self)
 
         // Initial datasource and delegate
-        self.dataSource = alphabeticalDatasource
+        dataSource = alphabeticalDatasource
 
-        self.register(cellType: CardCell.self)
-        self.register(headerFooterViewType: FilterHeaderView.self)
-        self.backgroundColor = .blackWhite
-        self.sectionIndexColor = .whiteBlack
-        self.sectionIndexBackgroundColor = .clear
-        self.delegate = self
+        register(cellType: CardCell.self)
+        register(headerFooterViewType: FilterHeaderView.self)
+        backgroundColor = .blackWhite
+        sectionIndexColor = .whiteBlack
+        sectionIndexBackgroundColor = .clear
+        delegate = self
     }
 
     @available(*, unavailable)
@@ -48,7 +47,7 @@ final class CardListTableView: UITableView {
     // MARK: <CardListViewDelegate>
 
     internal func didSelectRowAt(index: IndexPath) {
-        if let currentDatasource: CardReturnable = self.dataSource as? CardReturnable {
+        if let currentDatasource: CardReturnable = dataSource as? CardReturnable {
             if let card = currentDatasource.getCard(at: index) {
                 didSelectCard?(currentDatasource.getCardList(), card)
             }
@@ -60,14 +59,14 @@ final class CardListTableView: UITableView {
     internal func didSelectSegment(index: Int) {
         switch index {
         case 0:
-            self.dataSource = alphabeticalDatasource
-            self.reloadData()
+            dataSource = alphabeticalDatasource
+            reloadData()
         case 1:
-            self.dataSource = colorDatasource
-            self.reloadData()
+            dataSource = colorDatasource
+            reloadData()
         case 2:
-            self.dataSource = numberDatasource
-            self.reloadData()
+            dataSource = numberDatasource
+            reloadData()
         default:
             break
         }
@@ -79,7 +78,6 @@ protocol CardListViewDelegate: AnyObject {
 }
 
 extension CardListTableView: UITableViewDelegate, CardListViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }
@@ -89,7 +87,6 @@ extension CardListTableView: UITableViewDelegate, CardListViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
         if section == 0 {
             let header = tableView.dequeueReusableHeaderFooterView(FilterHeaderView.self)
             header?.configureHeader()

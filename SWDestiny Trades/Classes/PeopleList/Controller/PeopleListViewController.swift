@@ -13,7 +13,6 @@ protocol UpdateTableDataDelegate: AnyObject {
 }
 
 final class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
-
     private lazy var peopleListView = PeopleListTableView(delegate: self)
     private lazy var navigator = PeopleListNavigator(self.navigationController)
     private let database: DatabaseProtocol?
@@ -31,7 +30,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
     }
 
     override func loadView() {
-        self.view = peopleListView
+        view = peopleListView
     }
 
     override func viewDidLoad() {
@@ -51,15 +50,15 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = L10n.people
+        navigationItem.title = L10n.people
         peopleListView.reloadData()
     }
 
     // MARK: - Private
 
     func setupNavigationItem() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: L10n.edit, style: .plain, target: self, action: #selector(editButtonTouched(_:)))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToNextController(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: L10n.edit, style: .plain, target: self, action: #selector(editButtonTouched(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToNextController(_:)))
     }
 
     func loadDataFromRealm() {
@@ -83,7 +82,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
 
     @objc
     func editButtonTouched(_ sender: Any) {
-        toggleTableViewEditable(editable: self.isEditing)
+        toggleTableViewEditable(editable: isEditing)
     }
 
     // MARK: - Helper
@@ -98,25 +97,23 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
 
     @objc
     func navigateToNextController(_ sender: Any) {
-
-        if self.isEditing {
-            toggleTableViewEditable(editable: self.isEditing)
+        if isEditing {
+            toggleTableViewEditable(editable: isEditing)
         }
-        self.navigator.navigate(to: .newPerson(with: self))
+        navigator.navigate(to: .newPerson(with: self))
     }
 
     func navigateToLoansDetailViewController(person: PersonDTO) {
-        self.navigator.navigate(to: .loanDetail(database: self.database, with: person))
+        navigator.navigate(to: .loanDetail(database: database, with: person))
     }
 }
 
 extension PeopleListViewController: PeopleListProtocol {
-
     func remove(person: PersonDTO) {
-        try? self.database?.delete(object: person)
+        try? database?.delete(object: person)
     }
 
     func insert(person: PersonDTO) {
-        try? self.database?.save(object: person)
+        try? database?.save(object: person)
     }
 }

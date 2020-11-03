@@ -9,26 +9,25 @@
 import Foundation
 
 extension Bundle {
-
     var releaseVersionNumber: String {
         guard let version = infoDictionary?["CFBundleShortVersionString"] as? String else {
             return ""
         }
-#if targetEnvironment(simulator)
-        return "#DEADBEFF"
-#else
-        return version
-#endif
+        #if targetEnvironment(simulator)
+            return "#DEADBEFF"
+        #else
+            return version
+        #endif
     }
 
     var buildVersionNumber: String {
         guard let version = infoDictionary?["CFBundleVersion"] as? String else {
             return ""
         }
-#if targetEnvironment(simulator)
-        return "42"
-#else
-        return version
-#endif
+        #if targetEnvironment(simulator)
+            return "42"
+        #else
+            return version
+        #endif
     }
 }

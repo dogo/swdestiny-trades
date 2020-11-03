@@ -11,33 +11,33 @@ import UIKit
 extension SetDTO {
     // swiftlint:disable:next cyclomatic_complexity
     func setIcon() -> UIImage {
-        if self.code.lowercased() == "aw" {
+        if code.lowercased() == "aw" {
             return Asset.Sets.icAwakenings.image
-        } else if self.code.lowercased() == "sor" {
+        } else if code.lowercased() == "sor" {
             return Asset.Sets.icSpiritOfRebellion.image
-        } else if self.code.lowercased() == "eaw" {
+        } else if code.lowercased() == "eaw" {
             return Asset.Sets.icEmpireAtWar.image
-        } else if self.code.lowercased() == "tpg" {
+        } else if code.lowercased() == "tpg" {
             return Asset.Sets.icTwoPlayerGame.image
-        } else if self.code.lowercased() == "leg" {
+        } else if code.lowercased() == "leg" {
             return Asset.Sets.icLegacies.image
-        } else if self.code.lowercased() == "riv" {
+        } else if code.lowercased() == "riv" {
             return Asset.Sets.icRivals.image
-        } else if self.code.lowercased() == "wotf" {
+        } else if code.lowercased() == "wotf" {
             return Asset.Sets.icWayOfTheForce.image
-        } else if self.code.lowercased() == "atg" {
+        } else if code.lowercased() == "atg" {
             return Asset.Sets.icAcrossTheGalaxy.image
-        } else if self.code.lowercased() == "conv" {
+        } else if code.lowercased() == "conv" {
             return Asset.Sets.icConvergence.image
-        } else if self.code.lowercased() == "aon" {
+        } else if code.lowercased() == "aon" {
             return Asset.Sets.icAlliesOfNecessity.image
-        } else if self.code.lowercased() == "soh" {
+        } else if code.lowercased() == "soh" {
             return Asset.Sets.icSparkOfHope.image
-        } else if self.code.lowercased() == "cm" {
+        } else if code.lowercased() == "cm" {
             return Asset.Sets.icCovertMissions.image
-        } else if self.code.lowercased() == "tr" {
+        } else if code.lowercased() == "tr" {
             return Asset.Sets.icTransformations.image
-        } else if self.code.lowercased() == "fa" {
+        } else if code.lowercased() == "fa" {
             return Asset.Sets.icFalteringAllegiances.image
         } else {
             return Asset.Sets.icNotFound.image

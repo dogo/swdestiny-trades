@@ -11,7 +11,6 @@ import UIKit
 import Charts
 
 final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
-
     var cardCostChartView = LineChartView(frame: .zero)
 
     override init(frame: CGRect) {
@@ -33,7 +32,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
     func setDataCount(dataValues: [Int]) {
         if !dataValues.isEmpty {
             var dataEntries: [ChartDataEntry] = []
-            for value in 0..<dataValues.count {
+            for value in 0 ..< dataValues.count {
                 let dataEntry = ChartDataEntry(x: Double(value), y: Double(dataValues[value]))
                 dataEntries.append(dataEntry)
             }
@@ -70,7 +69,6 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
         leftAxis.granularity = 2.0
 
         if let xAxisValueFormatter = cardCostChartView.xAxis.valueFormatter {
-
             let marker = XYMarkerView(color: .lightGray,
                                       font: UIFont.systemFont(ofSize: CGFloat(10.0)),
                                       textColor: .white,
@@ -84,9 +82,8 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
 }
 
 extension CardCostLineChartCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(cardCostChartView)
+        contentView.addSubview(cardCostChartView)
     }
 
     internal func setupConstraints() {

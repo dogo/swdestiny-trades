@@ -9,11 +9,10 @@
 import UIKit
 
 final class PersonCell: UITableViewCell, Identifiable {
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        self.detailTextLabel?.textColor = .secondaryLabel
-        self.accessoryType = .disclosureIndicator
+        detailTextLabel?.textColor = .secondaryLabel
+        accessoryType = .disclosureIndicator
     }
 
     @available(*, unavailable)
@@ -28,11 +27,10 @@ final class PersonCell: UITableViewCell, Identifiable {
     }
 
     private func getLoanState(personDTO: PersonDTO) -> String {
-
         var loanState = L10n.noLoans
         let lentMeCount = personDTO.lentMe.sum(ofProperty: "quantity") as Int
         let borrowedCount = personDTO.borrowed.sum(ofProperty: "quantity") as Int
-        if lentMeCount > 0 && borrowedCount > 0 {
+        if lentMeCount > 0, borrowedCount > 0 {
             loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_AND_BORROWED_CARDS", comment: ""), lentMeCount, borrowedCount)
         } else if lentMeCount > 0 {
             loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_CARD", comment: ""), lentMeCount)

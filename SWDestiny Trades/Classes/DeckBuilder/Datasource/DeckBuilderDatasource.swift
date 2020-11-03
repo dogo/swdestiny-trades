@@ -15,7 +15,6 @@ protocol DeckBuilderProtocol: AnyObject {
 }
 
 final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
-
     struct Section {
         var name: String
         var items: [CardDTO]
@@ -119,9 +118,9 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        if let card = self.getCard(at: indexPath), let index = self.currentDeck?.list.index(of: card) {
-            self.deckList[indexPath.section].items.remove(at: indexPath.row)
-            self.delegate?.remove(at: index)
+        if let card = getCard(at: indexPath), let index = currentDeck?.list.index(of: card) {
+            deckList[indexPath.section].items.remove(at: indexPath.row)
+            delegate?.remove(at: index)
         }
     }
 }

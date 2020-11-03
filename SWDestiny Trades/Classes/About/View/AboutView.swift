@@ -9,7 +9,6 @@
 import UIKit
 
 final class AboutView: UIView, UITextViewDelegate {
-
     var didTouchHTTPLink: ((URL) -> Void)?
 
     var logoImage: UIImageView = {
@@ -49,11 +48,10 @@ final class AboutView: UIView, UITextViewDelegate {
 }
 
 extension AboutView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(logoImage)
-        self.addSubview(versionLabel)
-        self.addSubview(aboutTextView)
+        addSubview(logoImage)
+        addSubview(versionLabel)
+        addSubview(aboutTextView)
     }
 
     internal func setupConstraints() {
@@ -78,8 +76,7 @@ extension AboutView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
 
         logoImage.image = Asset.Logo.largeIconBlack.image.withRenderingMode(.alwaysTemplate)
 

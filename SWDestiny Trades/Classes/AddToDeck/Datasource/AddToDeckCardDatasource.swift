@@ -9,7 +9,6 @@
 import UIKit
 
 final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
-
     private var tableView: UITableView?
     private var searchIsActive = false
     private var cardsData: [CardDTO] = []
@@ -17,8 +16,8 @@ final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBa
 
     required init(cards: [CardDTO], tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
-        self.cardsData = cards
-        self.filtered = cards
+        cardsData = cards
+        filtered = cards
         self.tableView = tableView
         tableView.register(cellType: AddCardCell.self)
         tableView.register(headerFooterViewType: AddToDeckHeaderView.self)
@@ -38,9 +37,9 @@ final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBa
     }
 
     func updateSearchList(_ cards: [CardDTO]) {
-        self.cardsData = cards
-        self.filtered = cards
-        self.tableView?.reloadData()
+        cardsData = cards
+        filtered = cards
+        tableView?.reloadData()
     }
 
     func getCard(at index: IndexPath) -> CardDTO {
@@ -55,7 +54,6 @@ final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBa
 }
 
 final class AddToDeckCardDelegate: NSObject, UITableViewDelegate {
-
     weak var delegate: SearchDelegate?
     private var header: AddToDeckHeaderView?
 

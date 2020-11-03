@@ -10,7 +10,8 @@ import Foundation
 
 extension KeyedDecodingContainer {
     func decodeSafely<T>(key: K, defaultValue: T) throws -> T
-        where T: Decodable {
-            return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
+        where T: Decodable
+    {
+        return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
     }
 }

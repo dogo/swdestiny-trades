@@ -9,7 +9,6 @@
 import UIKit
 
 enum ColorPalette {
-
     static let red = UIColor(red: 178 / 255, green: 34 / 255, blue: 34 / 255, alpha: 1.0)
     static let yellow = UIColor(red: 218 / 255, green: 176 / 255, blue: 50 / 255, alpha: 1.0)
     static let blue = UIColor(red: 11 / 255, green: 96 / 255, blue: 158 / 255, alpha: 1.0)

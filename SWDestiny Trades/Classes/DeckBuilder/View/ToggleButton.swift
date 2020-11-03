@@ -9,17 +9,17 @@
 import UIKit
 
 final class ToggleButton: UIButton {
-
     var isActivate: Bool = false {
         didSet {
             let title = isActivate ? L10n.elite : L10n.nonElite
-            let titleColor: UIColor = isActivate ? .blackWhite  : .whiteBlack
+            let titleColor: UIColor = isActivate ? .blackWhite : .whiteBlack
             backgroundColor = isActivate ? .whiteBlack : .clear
             layer.borderColor = titleColor.cgColor
             setTitleColor(titleColor, for: .normal)
             setTitle(title, for: .normal)
         }
     }
+
     var buttonTouched: ((Bool) -> Void)?
 
     override init(frame: CGRect) {
@@ -45,7 +45,7 @@ final class ToggleButton: UIButton {
 
     @objc
     private func buttonPressed() {
-        self.isActivate = !isActivate
-        buttonTouched?(self.isActivate)
+        isActivate = !isActivate
+        buttonTouched?(isActivate)
     }
 }

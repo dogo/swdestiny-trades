@@ -6,11 +6,10 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import PKHUD
+import UIKit
 
 final class AddToDeckViewController: UIViewController {
-
     private let destinyService: SWDestinyServiceProtocol
     private let addToDeckView = AddToDeckView()
     private let database: DatabaseProtocol?
@@ -21,9 +20,9 @@ final class AddToDeckViewController: UIViewController {
     // MARK: - Life Cycle
 
     required init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?, deck: DeckDTO?) {
-        self.destinyService = service
+        destinyService = service
         self.database = database
-        self.deckDTO = deck
+        deckDTO = deck
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -33,7 +32,7 @@ final class AddToDeckViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = addToDeckView
+        view = addToDeckView
     }
 
     override func viewDidLoad() {
@@ -64,7 +63,7 @@ final class AddToDeckViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = L10n.addCard
+        navigationItem.title = L10n.addCard
     }
 
     private func retrieveAllCards() {
@@ -72,10 +71,10 @@ final class AddToDeckViewController: UIViewController {
         destinyService.retrieveAllCards { [weak self] result in
             self?.addToDeckView.activityIndicator.stopAnimating()
             switch result {
-            case .success(let allCards):
+            case let .success(allCards):
                 self?.addToDeckView.addToDeckTableView.updateSearchList(allCards)
                 self?.cards = allCards
-            case .failure(let error):
+            case let .failure(error):
                 self?.handleFailure(error)
             }
         }
@@ -83,7 +82,7 @@ final class AddToDeckViewController: UIViewController {
 
     private func loadDataFromRealm() {
         destinyService.cancelAllRequests()
-        try? self.database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
+        try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
             guard let self = self, let collection = collections.first else { return }
             self.cards = Array(collection.myCollection)
             addToDeckView.addToDeckTableView.updateSearchList(self.cards)
@@ -97,12 +96,12 @@ final class AddToDeckViewController: UIViewController {
         copy.id = NSUUID().uuidString
         copy.quantity = 1
 
-        self.insertToDeckBuilder(card: copy)
+        insertToDeckBuilder(card: copy)
     }
 
     private func insertToDeckBuilder(card: CardDTO) {
         if let deck = deckDTO, !deck.list.contains(where: { $0.code == card.code }) {
-            try? self.database?.update { [weak self] in
+            try? database?.update { [weak self] in
                 deck.list.append(card)
                 self?.showSuccessMessage(card: card)
             }
@@ -132,6 +131,6 @@ final class AddToDeckViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(database: self.database, with: cards, card: card))
+        navigator.navigate(to: .cardDetail(database: database, with: cards, card: card))
     }
 }

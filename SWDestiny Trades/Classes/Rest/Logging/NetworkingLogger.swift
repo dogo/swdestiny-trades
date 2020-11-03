@@ -9,7 +9,6 @@
 import Foundation
 
 final class NetworkingLogger {
-
     enum LogLevel {
         case none
         case info
@@ -19,13 +18,12 @@ final class NetworkingLogger {
     private let loglevel: LogLevel
 
     required init(level: LogLevel) {
-        self.loglevel = level
+        loglevel = level
     }
 
     // MARK: - Log Request
 
     func log(request: URLRequest) {
-
         guard loglevel != .none else { return }
 
         if let method = request.httpMethod, let url = request.url {
@@ -39,7 +37,6 @@ final class NetworkingLogger {
     // MARK: - Log Response
 
     func log(response: URLResponse?, data: Data?) {
-
         guard loglevel != .none else { return }
 
         if let response = response as? HTTPURLResponse, let url = response.url {

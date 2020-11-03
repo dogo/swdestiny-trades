@@ -6,29 +6,25 @@
 //  Copyright © 2019 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
 import Nimble_Snapshots
+import Quick
 
 @testable import SWDestiny_Trades
 
 class PeopleListViewControllerTests: QuickSpec {
-
     override func spec() {
-
         var sut: PeopleListViewController!
         var database: DatabaseProtocol!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
         describe("PeopleListViewController layout") {
-
             beforeSuite {
                 AppearanceProxyHelper.customizeNavigationBar()
             }
 
             context("when it's initialized from the tabbar") {
-
                 beforeEach {
                     try! database = RealmDatabase(configuration: .inMemory(identifier: self.name))
                 }
@@ -39,7 +35,6 @@ class PeopleListViewControllerTests: QuickSpec {
                 }
 
                 context("should have valid layout when trying to load a database") {
-
                     it("with empty state") {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)

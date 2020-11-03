@@ -9,7 +9,6 @@
 import UIKit
 
 final class CardCell: UITableViewCell, Identifiable {
-
     let baseViewCell = BaseViewCell(frame: .zero)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -26,7 +25,7 @@ final class CardCell: UITableViewCell, Identifiable {
         baseViewCell.titleLabel.text = card.name
         setSubtitle(card: card, useIndex: useIndex)
         setIconImage(card: card)
-        baseViewCell.accessoryLabel.text = ""//cardDTO.price
+        baseViewCell.accessoryLabel.text = "" // cardDTO.price
     }
 
     private func setSubtitle(card: CardDTO, useIndex: Bool) {
@@ -60,9 +59,8 @@ final class CardCell: UITableViewCell, Identifiable {
 }
 
 extension CardCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(baseViewCell)
+        contentView.addSubview(baseViewCell)
     }
 
     internal func setupConstraints() {
@@ -75,6 +73,6 @@ extension CardCell: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
     }
 }

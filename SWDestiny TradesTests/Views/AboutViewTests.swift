@@ -6,21 +6,17 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
+import Quick
 
 @testable import SWDestiny_Trades
 
 class AboutViewTests: QuickSpec {
-
     override func spec() {
-
         var sut: AboutView!
 
         describe("AboutView layout") {
-
             context("when URL link it's touched") {
-
                 beforeEach {
                     sut = AboutView(frame: .zero)
                     sut.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +24,6 @@ class AboutViewTests: QuickSpec {
                 }
 
                 it("should call closure when the url link is touched") {
-
                     var touched = false
                     sut.didTouchHTTPLink = { url in
                         touched = true

@@ -16,13 +16,11 @@ protocol BaseViewConfiguration {
 }
 
 extension BaseViewConfiguration {
-
     func setupBaseView() {
         buildViewHierarchy()
         setupConstraints()
         configureViews()
     }
 
-    func configureViews() {
-    }
+    func configureViews() {}
 }

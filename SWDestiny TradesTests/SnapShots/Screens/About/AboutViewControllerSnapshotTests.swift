@@ -6,23 +6,19 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
 import Nimble_Snapshots
+import Quick
 
 @testable import SWDestiny_Trades
 
 class AboutViewControllerSnapshotTests: QuickSpec {
-
     override func spec() {
-
         var sut: AboutViewController!
         let window = UIWindow.framed()
 
         describe("AboutViewController layout") {
-
             context("when it's initialized") {
-
                 beforeEach {
                     sut = AboutViewController()
                     window.showTestWindow(controller: sut)

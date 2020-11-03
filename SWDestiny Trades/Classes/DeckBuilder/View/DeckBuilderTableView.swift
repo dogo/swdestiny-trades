@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckBuilderTableView: UITableView {
-
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
     var tableViewDatasource: DeckBuilderDatasource?
@@ -19,7 +18,7 @@ final class DeckBuilderTableView: UITableView {
         tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: delegate)
         self.delegate = self
         tableViewDatasource?.collapsibleDelegate = self
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)
@@ -39,17 +38,14 @@ final class DeckBuilderTableView: UITableView {
 }
 
 extension DeckBuilderTableView: CollapsibleTableViewHeaderDelegate {
-
     func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
         tableViewDatasource?.toggleSection(header: header, section: section)
     }
 }
 
 extension DeckBuilderTableView: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        guard let currentDatasource = self.tableViewDatasource else {
+        guard let currentDatasource = tableViewDatasource else {
             return 0
         }
         return currentDatasource.deckList[indexPath.section].collapsed ? 0 : BaseViewCell.height()
@@ -65,8 +61,8 @@ extension DeckBuilderTableView: UITableViewDelegate {
             header = tableView.dequeueReusableHeaderFooterView(CollapsibleTableViewHeader.self)
         }
 
-        header?.titleLabel.text = self.tableViewDatasource?.deckList[section].name
-        header?.setCollapsed(self.tableViewDatasource?.deckList[section].collapsed ?? true)
+        header?.titleLabel.text = tableViewDatasource?.deckList[section].name
+        header?.setCollapsed(tableViewDatasource?.deckList[section].collapsed ?? true)
 
         header?.section = section
         header?.delegate = self

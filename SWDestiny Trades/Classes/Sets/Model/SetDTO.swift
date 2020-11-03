@@ -9,7 +9,6 @@
 import Foundation
 
 class SetDTO: Codable {
-
     var name: String = ""
     var code: String = ""
 }

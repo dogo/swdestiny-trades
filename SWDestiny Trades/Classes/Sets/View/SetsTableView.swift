@@ -9,16 +9,15 @@
 import UIKit
 
 final class SetsTableView: UITableView {
-
     var didSelectSet: ((SetDTO) -> Void)?
 
     private var tableViewDatasource: SetsListDatasource?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
-        self.delegate = self
+        delegate = self
         tableViewDatasource = SetsListDatasource(tableView: self)
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)
@@ -40,7 +39,6 @@ final class SetsTableView: UITableView {
 }
 
 extension SetsTableView: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

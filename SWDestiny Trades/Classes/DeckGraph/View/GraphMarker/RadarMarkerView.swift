@@ -6,12 +6,11 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
+import Charts
 import Foundation
 import UIKit
-import Charts
 
 final class RadarMarkerView: BalloonMarker {
-
     public var xAxisValueFormatter: IAxisValueFormatter?
     private var yFormatter = NumberFormatter()
 

@@ -9,7 +9,6 @@
 import UIKit
 
 final class LoanDetailCell: UITableViewCell, Identifiable {
-
     var stepperValueChanged: ((Int) -> Void)?
 
     var iconImageView: UIImageView = {
@@ -77,7 +76,7 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
     func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
-        self.stepperValueChanged?(value)
+        stepperValueChanged?(value)
     }
 
     override func prepareForReuse() {
@@ -94,13 +93,12 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
 }
 
 extension LoanDetailCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(iconImageView)
-        self.contentView.addSubview(titleLabel)
-        self.contentView.addSubview(subtitleLabel)
-        self.contentView.addSubview(quantityLabel)
-        self.contentView.addSubview(quantityStepper)
+        contentView.addSubview(iconImageView)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subtitleLabel)
+        contentView.addSubview(quantityLabel)
+        contentView.addSubview(quantityStepper)
     }
 
     internal func setupConstraints() {
@@ -135,6 +133,6 @@ extension LoanDetailCell: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
     }
 }

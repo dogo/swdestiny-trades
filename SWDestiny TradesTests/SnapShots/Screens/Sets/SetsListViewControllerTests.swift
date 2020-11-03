@@ -6,16 +6,14 @@
 //  Copyright © 2019 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
 import Nimble_Snapshots
+import Quick
 
 @testable import SWDestiny_Trades
 
 class SetsListViewControllerTests: QuickSpec {
-
     override func spec() {
-
         var sut: SetsListViewController!
         var service: SWDestinyService!
         var client: HttpClientMock!
@@ -23,13 +21,11 @@ class SetsListViewControllerTests: QuickSpec {
         let window = UIWindow.framed()
 
         describe("SetsListViewController layout") {
-
             beforeSuite {
                 AppearanceProxyHelper.customizeNavigationBar()
             }
 
             context("when it's initialized") {
-
                 beforeEach {
                     client = HttpClientMock()
                     service = SWDestinyService(client: client)

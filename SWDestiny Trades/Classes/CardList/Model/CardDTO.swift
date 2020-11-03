@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 class CardDTO: Object, Decodable, Storable {
-
     let dieFaces = List<StringObject>()
     @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
     @objc dynamic var setCode: String = ""
@@ -57,24 +56,24 @@ class CardDTO: Object, Decodable, Storable {
         case affiliationName = "affiliation_name"
         case rarityCode = "rarity_code"
         case rarityName = "rarity_name"
-        case position = "position"
-        case code = "code"
-        case ttscardid = "ttscardid"
-        case name = "name"
-        case subtitle = "subtitle"
-        case cost = "cost"
-        case health = "health"
-        case points = "points"
-        case text = "text"
+        case position
+        case code
+        case ttscardid
+        case name
+        case subtitle
+        case cost
+        case health
+        case points
+        case text
         case deckLimit = "deck_limit"
-        case flavor = "flavor"
-        case illustrator = "illustrator"
+        case flavor
+        case illustrator
         case isUnique = "is_unique"
         case hasDie = "has_die"
         case externalUrl = "url"
         case imageUrl = "imagesrc"
-        case label = "label"
-        case cp = "cp" // swiftlint:disable:this identifier_name
+        case label
+        case cp // swiftlint:disable:this identifier_name
     }
 
     required convenience init(from decoder: Decoder) throws {

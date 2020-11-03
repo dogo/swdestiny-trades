@@ -10,7 +10,6 @@ import Firebase
 import FirebaseAnalytics
 
 struct FirebaseLogger: LoggerProtocol {
-
     func setup() {
         FirebaseApp.configure()
     }

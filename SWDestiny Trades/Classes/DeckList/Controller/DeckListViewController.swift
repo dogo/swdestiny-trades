@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckListViewController: UIViewController {
-
     private lazy var deckListView = DeckListTableView(delegate: self)
     private lazy var navigator = DeckListNavigator(self.navigationController)
     private let database: DatabaseProtocol?
@@ -27,7 +26,7 @@ final class DeckListViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = deckListView
+        view = deckListView
     }
 
     override func viewDidLoad() {
@@ -43,7 +42,7 @@ final class DeckListViewController: UIViewController {
     }
 
     func loadDataFromRealm() {
-        try? self.database?.fetch(DeckDTO.self, predicate: nil, sorted: nil) { [weak self] decks in
+        try? database?.fetch(DeckDTO.self, predicate: nil, sorted: nil) { [weak self] decks in
             self?.deckListView.updateTableViewData(decksList: decks)
         }
     }
@@ -51,18 +50,18 @@ final class DeckListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = L10n.decks
+        navigationItem.title = L10n.decks
         deckListView.reloadData()
     }
 
     private func setupNavigationItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
     }
 
     // MARK: - Navigation
 
     func navigateToNextController(with deck: DeckDTO) {
-        self.navigator.navigate(to: .deckBuilder(database: self.database, with: deck))
+        navigator.navigate(to: .deckBuilder(database: database, with: deck))
     }
 
     // MARK: - UIBarButton Actions
@@ -74,17 +73,16 @@ final class DeckListViewController: UIViewController {
 }
 
 extension DeckListViewController: DeckListProtocol {
-
     func remove(deck: DeckDTO) {
-        try? self.database?.delete(object: deck)
+        try? database?.delete(object: deck)
     }
 
     func insert(deck: DeckDTO) {
-        try? self.database?.save(object: deck)
+        try? database?.save(object: deck)
     }
 
     func rename(name: String, deck: DeckDTO) {
-        try? self.database?.update {
+        try? database?.update {
             deck.name = name
         }
     }

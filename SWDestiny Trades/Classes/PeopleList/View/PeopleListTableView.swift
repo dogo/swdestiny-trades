@@ -9,7 +9,6 @@
 import UIKit
 
 final class PeopleListTableView: UITableView {
-
     var didSelectPerson: ((PersonDTO) -> Void)?
 
     private var tableViewDatasource: PeopleListDatasource?
@@ -18,7 +17,7 @@ final class PeopleListTableView: UITableView {
         super.init(frame: frame, style: style)
         self.delegate = self
         tableViewDatasource = PeopleListDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)
@@ -35,7 +34,7 @@ final class PeopleListTableView: UITableView {
     }
 
     func toggleTableViewEditable(editable: Bool) {
-        self.setEditing(!editable, animated: true)
+        setEditing(!editable, animated: true)
     }
 
     // MARK: <BaseDelegate>
@@ -48,7 +47,6 @@ final class PeopleListTableView: UITableView {
 }
 
 extension PeopleListTableView: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

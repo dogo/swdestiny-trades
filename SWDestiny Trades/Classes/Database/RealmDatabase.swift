@@ -20,29 +20,27 @@ enum ConfigurationType {
 
     var associated: String? {
         switch self {
-        case .basic(let url):
+        case let .basic(url):
             return url
-        case .inMemory(let identifier):
+        case let .inMemory(identifier):
             return identifier
         }
     }
 }
 
 final class RealmDatabase: DatabaseProtocol {
-
     let realm: Realm
 
     convenience init() throws {
-#if targetEnvironment(simulator)
-        let configuration = ConfigurationType.basic(url: "\(RealmDatabase.realHomeDirectory())/Desktop/default.realm")
-        try self.init(configuration: configuration)
-#else
-        try self.init(configuration: .basic(url: nil))
-#endif
+        #if targetEnvironment(simulator)
+            let configuration = ConfigurationType.basic(url: "\(RealmDatabase.realHomeDirectory())/Desktop/default.realm")
+            try self.init(configuration: configuration)
+        #else
+            try self.init(configuration: .basic(url: nil))
+        #endif
     }
 
     required init(configuration: ConfigurationType = .basic(url: nil)) throws {
-
         var rmConfig = Realm.Configuration()
         rmConfig.readOnly = true
 
@@ -61,14 +59,14 @@ final class RealmDatabase: DatabaseProtocol {
             }
         }
         rmConfig.schemaVersion = RealmMigrations.schemaVersion
-        try self.realm = Realm(configuration: rmConfig)
+        try realm = Realm(configuration: rmConfig)
     }
 
-    func writeSafely(_ block: (() throws -> Void)) throws {
+    func writeSafely(_ block: () throws -> Void) throws {
         if realm.isInWriteTransaction {
             try block()
         } else {
-            try self.realm.write(block)
+            try realm.write(block)
         }
     }
 

@@ -9,7 +9,6 @@
 import UIKit
 
 final class UserCollectionNavigator: Navigator {
-
     enum Destination {
         case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
         case addCard(database: DatabaseProtocol?, with: UserCollectionDTO)
@@ -34,9 +33,9 @@ final class UserCollectionNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .cardDetail(let database, let cardList, let card):
+        case let .cardDetail(database, cardList, card):
             return CardDetailViewController(database: database, cardList: cardList, selected: card)
-        case .addCard(let database, let userCollection):
+        case let .addCard(database, userCollection):
             return AddCardViewController(database: database, userCollection: userCollection, type: .collection)
         }
     }

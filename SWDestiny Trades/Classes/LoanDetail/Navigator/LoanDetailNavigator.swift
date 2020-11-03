@@ -9,7 +9,6 @@
 import UIKit
 
 final class LoanDetailNavigator: Navigator {
-
     enum Destination {
         case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
         case addCard(database: DatabaseProtocol?, with: PersonDTO, type: AddCardType)
@@ -34,9 +33,9 @@ final class LoanDetailNavigator: Navigator {
 
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
-        case .cardDetail(let database, let cardList, let card):
+        case let .cardDetail(database, cardList, card):
             return CardDetailViewController(database: database, cardList: cardList, selected: card)
-        case .addCard(let database, let person, let type):
+        case let .addCard(database, person, type):
             return AddCardViewController(database: database, person: person, type: type)
         }
     }

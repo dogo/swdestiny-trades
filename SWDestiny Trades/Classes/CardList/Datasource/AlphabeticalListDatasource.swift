@@ -9,9 +9,8 @@
 import UIKit
 
 final class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardReturnable {
-
     private var tableView: UITableView?
-    private var alphabeticallyCards: [String: [CardDTO]] = [ : ]
+    private var alphabeticallyCards: [String: [CardDTO]] = [:]
     private var sections: [String] = []
 
     required init(tableView: UITableView) {

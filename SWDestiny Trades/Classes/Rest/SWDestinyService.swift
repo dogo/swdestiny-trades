@@ -9,7 +9,6 @@
 import Foundation
 
 final class SWDestinyService: SWDestinyServiceProtocol {
-
     private let client: HttpClientProtocol
 
     init(client: HttpClientProtocol = HttpClient()) {
@@ -17,38 +16,34 @@ final class SWDestinyService: SWDestinyServiceProtocol {
     }
 
     func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {
-
         let endpoint: SWDestinyEndpoint = .setList
         let request = endpoint.request
 
-        self.client.request(request, completion: completion)
+        client.request(request, completion: completion)
     }
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
-
         let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
         let request = endpoint.request
 
-        self.client.request(request, completion: completion)
+        client.request(request, completion: completion)
     }
 
     func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
-
         let endpoint: SWDestinyEndpoint = .allCards
         let request = endpoint.request
 
-        self.client.request(request, completion: completion)
+        client.request(request, completion: completion)
     }
 
     func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void) {
-
         let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
         let request = endpoint.request
 
-        self.client.request(request, completion: completion)
+        client.request(request, completion: completion)
     }
 
     func cancelAllRequests() {
-        self.client.cancelAllRequests()
+        client.cancelAllRequests()
     }
 }

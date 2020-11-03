@@ -9,7 +9,6 @@
 import UIKit
 
 final class LoanDetailTableView: UITableView {
-
     var didSelectCard: ((CardDTO, AddCardType) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
 
@@ -18,8 +17,8 @@ final class LoanDetailTableView: UITableView {
     required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: LoansDetailsProtocol) {
         super.init(frame: frame, style: style)
         self.delegate = self
-        self.tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: delegate)
-        self.backgroundColor = .blackWhite
+        tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: delegate)
+        backgroundColor = .blackWhite
     }
 
     @available(*, unavailable)
@@ -43,7 +42,6 @@ final class LoanDetailTableView: UITableView {
 }
 
 extension LoanDetailTableView: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

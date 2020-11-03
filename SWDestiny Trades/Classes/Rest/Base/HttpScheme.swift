@@ -16,6 +16,6 @@ enum HttpScheme: String {
     case https
 
     func toString() -> String {
-        return self.rawValue
+        return rawValue
     }
 }

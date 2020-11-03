@@ -9,11 +9,9 @@
 import Foundation
 
 enum SectionsBuilder {
-
     // MARK: - CardDTO
 
     static func alphabetically(cardList: [CardDTO]) -> [String] {
-
         func getFirstLetter(cardDTO: CardDTO) -> String {
             return String(cardDTO.name[cardDTO.name.startIndex])
         }
@@ -31,7 +29,6 @@ enum SectionsBuilder {
     }
 
     static func byColor(cardList: [CardDTO]) -> [String] {
-
         func getColor(cardDTO: CardDTO) -> String {
             return cardDTO.factionCode
         }
@@ -45,7 +42,6 @@ enum SectionsBuilder {
     }
 
     static func byType(cardList: [CardDTO]) -> [String] {
-
         func getType(cardDTO: CardDTO) -> String {
             return cardDTO.typeName
         }
@@ -65,7 +61,6 @@ enum SectionsBuilder {
     // MARK: - AppearanceProxyHelper.swiftSetDTO
 
     static func alphabetically(setList: [SetDTO]) -> [String] {
-
         func getFirstLetter(setDTO: SetDTO) -> String {
             return String(setDTO.name[setDTO.name.startIndex])
         }
@@ -81,5 +76,4 @@ enum SectionsBuilder {
 
         return sortedSymbols
     }
-
 }

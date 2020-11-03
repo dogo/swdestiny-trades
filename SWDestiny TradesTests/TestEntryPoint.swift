@@ -9,7 +9,6 @@
 import Foundation
 
 final class TestEntryPoint: NSObject {
-
     override init() {
         super.init()
     }

@@ -20,7 +20,6 @@ protocol SearchDelegate: AnyObject {
 }
 
 final class SearchListViewController: UIViewController {
-
     private let destinyService: SWDestinyServiceProtocol
     private let database: DatabaseProtocol?
     private let searchView = SearchView()
@@ -30,7 +29,7 @@ final class SearchListViewController: UIViewController {
     // MARK: - Life Cycle
 
     init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?) {
-        self.destinyService = service
+        destinyService = service
         self.database = database
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,7 +40,7 @@ final class SearchListViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = searchView
+        view = searchView
     }
 
     override func viewDidLoad() {
@@ -51,10 +50,10 @@ final class SearchListViewController: UIViewController {
         destinyService.retrieveAllCards { [weak self] result in
             self?.searchView.activityIndicator.stopAnimating()
             switch result {
-            case .success(let allCards):
+            case let .success(allCards):
                 self?.searchView.searchTableView.updateSearchList(allCards)
                 self?.cards = allCards
-            case .failure(let error):
+            case let .failure(error):
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
@@ -72,12 +71,12 @@ final class SearchListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = L10n.search
+        navigationItem.title = L10n.search
     }
 
     // MARK: Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(database: self.database, with: cards, card: card))
+        navigator.navigate(to: .cardDetail(database: database, with: cards, card: card))
     }
 }

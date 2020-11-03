@@ -6,8 +6,8 @@
 //  Copyright © 2016 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import PKHUD
+import UIKit
 
 public enum AddCardType {
     case lent
@@ -16,7 +16,6 @@ public enum AddCardType {
 }
 
 final class AddCardViewController: UIViewController {
-
     private let addCardView = AddCardView()
     private let destinyService: SWDestinyServiceProtocol
     private let addCardType: AddCardType
@@ -32,12 +31,13 @@ final class AddCardViewController: UIViewController {
          database: DatabaseProtocol?,
          person: PersonDTO? = nil,
          userCollection: UserCollectionDTO? = nil,
-         type: AddCardType) {
-        self.destinyService = service
+         type: AddCardType)
+    {
+        destinyService = service
         self.database = database
-        self.addCardType = type
+        addCardType = type
         super.init(nibName: nil, bundle: nil)
-        self.personDTO = person
+        personDTO = person
         userCollectionDTO = userCollection
     }
 
@@ -47,7 +47,7 @@ final class AddCardViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = addCardView
+        view = addCardView
     }
 
     override func viewDidLoad() {
@@ -57,10 +57,10 @@ final class AddCardViewController: UIViewController {
         destinyService.retrieveAllCards { [weak self] result in
             self?.addCardView.activityIndicator.stopAnimating()
             switch result {
-            case .success(let allCards):
+            case let .success(allCards):
                 self?.addCardView.addCardTableView.updateSearchList(allCards)
                 self?.cards = allCards
-            case .failure(let error):
+            case let .failure(error):
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
@@ -81,25 +81,25 @@ final class AddCardViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = L10n.addCard
+        navigationItem.title = L10n.addCard
     }
 
     // MARK: - Helpers
 
     private func insert(card: CardDTO) {
-        switch self.addCardType {
+        switch addCardType {
         case .lent:
-            self.insertToLentMe(card: card)
+            insertToLentMe(card: card)
         case .borrow:
-            self.insertToBorrowed(card: card)
+            insertToBorrowed(card: card)
         case .collection:
-            self.insertToCollection(card: card)
+            insertToCollection(card: card)
         }
     }
 
     private func insertToBorrowed(card: CardDTO) {
         if let person = personDTO, !person.borrowed.contains(where: { $0.code == card.code }) {
-            try? self.database?.update { [weak self] in
+            try? database?.update { [weak self] in
                 person.borrowed.append(card)
                 self?.showSuccessMessage(card: card)
             }
@@ -112,7 +112,7 @@ final class AddCardViewController: UIViewController {
 
     private func insertToLentMe(card: CardDTO) {
         if let person = personDTO, !person.lentMe.contains(where: { $0.code == card.code }) {
-            try? self.database?.update { [weak self] in
+            try? database?.update { [weak self] in
                 person.lentMe.append(card)
                 self?.showSuccessMessage(card: card)
             }
@@ -125,7 +125,7 @@ final class AddCardViewController: UIViewController {
 
     private func insertToCollection(card: CardDTO) {
         if let userCollection = userCollectionDTO, !userCollection.myCollection.contains(where: { $0.code == card.code }) {
-            try? self.database?.update { [weak self] in
+            try? database?.update { [weak self] in
                 userCollection.myCollection.append(card)
                 self?.showSuccessMessage(card: card)
             }
@@ -143,6 +143,6 @@ final class AddCardViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToNextController(with card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(database: self.database, with: cards, card: card))
+        navigator.navigate(to: .cardDetail(database: database, with: cards, card: card))
     }
 }

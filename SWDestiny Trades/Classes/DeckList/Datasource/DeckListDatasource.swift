@@ -15,7 +15,6 @@ protocol DeckListProtocol: AnyObject {
 }
 
 final class DeckListDatasource: NSObject, UITableViewDataSource {
-
     private var tableView: UITableView?
     private var deckList: [DeckDTO] = []
     private weak var delegate: DeckListProtocol?
@@ -50,8 +49,8 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     private func remove(at indexPath: IndexPath) {
-        self.delegate?.remove(deck: self.deckList[indexPath.row])
-        self.deckList.remove(at: indexPath.row)
+        delegate?.remove(deck: deckList[indexPath.row])
+        deckList.remove(at: indexPath.row)
     }
 
     public func getDeck(at index: IndexPath) -> DeckDTO {
@@ -64,8 +63,8 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(deck: DeckDTO) {
-        self.delegate?.insert(deck: deck)
-        self.deckList.append(deck)
-        self.tableView?.reloadData()
+        delegate?.insert(deck: deck)
+        deckList.append(deck)
+        tableView?.reloadData()
     }
 }

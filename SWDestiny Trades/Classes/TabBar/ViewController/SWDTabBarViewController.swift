@@ -9,7 +9,6 @@
 import UIKit
 
 final class SWDTabBarViewController: UITabBarController {
-
     private weak var database: DatabaseProtocol?
 
     init(database: DatabaseProtocol?) {
@@ -26,21 +25,21 @@ final class SWDTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         // Create SetsListViewController Tab
-        let setsTab = UINavigationController(rootViewController: SetsListViewController(database: self.database))
+        let setsTab = UINavigationController(rootViewController: SetsListViewController(database: database))
         setsTab.tabBarItem = UITabBarItem(title: L10n.cards, image: Asset.Tabbar.icCards.image, selectedImage: Asset.Tabbar.icCardsFilled.image)
 
         // Create DeckListViewController Tab
-        let decktab = UINavigationController(rootViewController: DeckListViewController(database: self.database))
+        let decktab = UINavigationController(rootViewController: DeckListViewController(database: database))
         decktab.tabBarItem = UITabBarItem(title: L10n.decks, image: Asset.Tabbar.icDecks.image, selectedImage: nil)
 
         // Create PeopleListViewController Tab
-        let loansTab = UINavigationController(rootViewController: PeopleListViewController(database: self.database))
+        let loansTab = UINavigationController(rootViewController: PeopleListViewController(database: database))
         loansTab.tabBarItem = UITabBarItem(title: L10n.loans, image: Asset.Tabbar.icLoans.image, selectedImage: nil)
 
         // Create UserCollectionViewController Tab
-        let collectionTab = UINavigationController(rootViewController: UserCollectionViewController(database: self.database))
+        let collectionTab = UINavigationController(rootViewController: UserCollectionViewController(database: database))
         collectionTab.tabBarItem = UITabBarItem(title: L10n.collection, image: Asset.Tabbar.icCollection.image, selectedImage: nil)
 
-        self.viewControllers = [setsTab, decktab, loansTab, collectionTab]
+        viewControllers = [setsTab, decktab, loansTab, collectionTab]
     }
 }

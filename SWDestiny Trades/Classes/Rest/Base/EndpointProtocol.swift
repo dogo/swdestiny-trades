@@ -12,7 +12,6 @@ typealias HttpHeaders = [String: String]
 typealias HttpParameters = [String: String]
 
 protocol EndpointProtocol {
-
     var scheme: HttpScheme { get }
     var host: String { get }
     var path: String { get }

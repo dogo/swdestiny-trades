@@ -14,7 +14,6 @@ protocol PeopleListProtocol: AnyObject {
 }
 
 final class PeopleListDatasource: NSObject, UITableViewDataSource {
-
     private var tableView: UITableView?
     private var persons: [PersonDTO] = []
     private weak var delegate: PeopleListProtocol?
@@ -62,13 +61,13 @@ final class PeopleListDatasource: NSObject, UITableViewDataSource {
     }
 
     public func insert(person: PersonDTO) {
-        self.delegate?.insert(person: person)
-        self.persons.append(person)
-        self.tableView?.reloadData()
+        delegate?.insert(person: person)
+        persons.append(person)
+        tableView?.reloadData()
     }
 
     private func remove(at indexPath: IndexPath) {
-        self.delegate?.remove(person: persons[indexPath.row])
-        self.persons.remove(at: indexPath.row)
+        delegate?.remove(person: persons[indexPath.row])
+        persons.remove(at: indexPath.row)
     }
 }

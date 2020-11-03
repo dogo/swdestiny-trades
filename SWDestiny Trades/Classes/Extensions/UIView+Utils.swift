@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UIView {
-
     func rotate(toValue: CGFloat, duration: CFTimeInterval = 0.2) {
         let animation = CABasicAnimation(keyPath: "transform.rotation")
 
@@ -19,6 +18,6 @@ extension UIView {
         animation.isRemovedOnCompletion = false
         animation.fillMode = CAMediaTimingFillMode.forwards
 
-        self.layer.add(animation, forKey: nil)
+        layer.add(animation, forKey: nil)
     }
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 final class SetsView: UIView {
-
     let setsTableView = SetsTableView()
 
     let pullToRefresh = UIRefreshControl()
@@ -42,15 +41,14 @@ final class SetsView: UIView {
         let title = L10n.lastUpdate(formatter.string(from: Date()))
         let attrsDictionary = [NSAttributedString.Key.foregroundColor: textColor]
         let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
-        self.pullToRefresh.attributedTitle = attributedTitle
-        self.pullToRefresh.endRefreshing()
+        pullToRefresh.attributedTitle = attributedTitle
+        pullToRefresh.endRefreshing()
     }
 }
 
 extension SetsView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(setsTableView)
+        addSubview(setsTableView)
         setsTableView.addSubview(activityIndicator)
         setsTableView.refreshControl = pullToRefresh
     }
@@ -70,10 +68,10 @@ extension SetsView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
         if #available(iOS 11, *) {
             textColor = .white
         }
-        self.pullToRefresh.tintColor = textColor
+        pullToRefresh.tintColor = textColor
     }
 }

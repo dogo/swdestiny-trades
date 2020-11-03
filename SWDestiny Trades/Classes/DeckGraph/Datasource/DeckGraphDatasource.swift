@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
-
     private var cardCosts: [Int] = []
     private var cardTypes: [Int] = []
     private var dieFaces: [Int] = []
@@ -17,9 +16,9 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
     enum GraphType: Int, CaseIterable {
         case
-        barGraph,
-        lineGraph,
-        radarGraph
+            barGraph,
+            lineGraph,
+            radarGraph
     }
 
     required init(collectionView: UICollectionView) {
@@ -33,22 +32,20 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         if let graphType = GraphType(rawValue: indexPath.row) {
-
             switch graphType {
             case .barGraph:
-                    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardTypeBarChartCell.self)
-                    cell.configureCell(dataValues: cardTypes)
-                    return cell
+                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardTypeBarChartCell.self)
+                cell.configureCell(dataValues: cardTypes)
+                return cell
             case .lineGraph:
-                    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardCostLineChartCell.self)
-                    cell.configureCell(dataValues: cardCosts)
-                    return cell
+                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: CardCostLineChartCell.self)
+                cell.configureCell(dataValues: cardCosts)
+                return cell
             case .radarGraph:
-                    let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DiceRadarChartCell.self)
-                    cell.configureCell(dataValues: dieFaces)
-                    return cell
+                let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: DiceRadarChartCell.self)
+                cell.configureCell(dataValues: dieFaces)
+                return cell
             }
         }
         // return the default cell if none of above succeed
@@ -65,15 +62,14 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     }
 
     func generateGraphData(deck: DeckDTO) {
-
         // BarChart
-        self.buildBarChart(deck: deck)
+        buildBarChart(deck: deck)
 
         // LineChart
-        self.buildLineChart(deck: deck)
+        buildLineChart(deck: deck)
 
         // RadarChart
-        self.buildRadarChart(deck: deck)
+        buildRadarChart(deck: deck)
     }
 
     private func buildBarChart(deck: DeckDTO) {
@@ -104,13 +100,14 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
 
     private func buildLineChart(deck: DeckDTO) {
         if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
-            for cost in 0...maxCost {
+            for cost in 0 ... maxCost {
                 var cardCost = 0
                 for card in deck.list where card.cost == cost &&
                     card.typeCode != "character" &&
                     card.typeCode != "battlefield" &&
-                    card.typeCode != "plot" {
-                        cardCost += card.quantity
+                    card.typeCode != "plot"
+                {
+                    cardCost += card.quantity
                 }
                 cardCosts.append(cardCost)
             }

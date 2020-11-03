@@ -9,7 +9,6 @@
 import UIKit
 
 final class SetsTableCell: UITableViewCell, Identifiable {
-
     var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 17)
@@ -50,10 +49,9 @@ final class SetsTableCell: UITableViewCell, Identifiable {
 }
 
 extension SetsTableCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(expansionImageView)
-        self.contentView.addSubview(titleLabel)
+        contentView.addSubview(expansionImageView)
+        contentView.addSubview(titleLabel)
     }
 
     internal func setupConstraints() {
@@ -71,6 +69,6 @@ extension SetsTableCell: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
     }
 }

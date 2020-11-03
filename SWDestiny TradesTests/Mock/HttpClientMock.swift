@@ -10,13 +10,11 @@ import Foundation
 @testable import SWDestiny_Trades
 
 final class HttpClientMock: HttpClientProtocol {
-
     var fileName = String()
     var error: Bool = false
     var isCancelled = false
 
     func request<T>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) where T: Decodable {
-
         guard !error else {
             return completion(.failure(.jsonParsingFailure))
         }
@@ -29,6 +27,6 @@ final class HttpClientMock: HttpClientProtocol {
     }
 
     func cancelAllRequests() {
-        self.isCancelled = true
+        isCancelled = true
     }
 }

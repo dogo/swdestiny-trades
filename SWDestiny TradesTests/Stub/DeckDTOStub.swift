@@ -11,9 +11,7 @@ import RealmSwift
 @testable import SWDestiny_Trades
 
 extension DeckDTO {
-
     static func stub(emptyList: Bool = false) -> DeckDTO {
-
         let deck = DeckDTO()
         deck.name = "Mock Deck"
         if !emptyList {

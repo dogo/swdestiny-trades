@@ -16,7 +16,6 @@ enum SWDestinyEndpoint {
 }
 
 extension SWDestinyEndpoint: EndpointProtocol {
-
     /// The scheme subcomponent of the `URL`.
     var scheme: HttpScheme {
         return .https
@@ -32,11 +31,11 @@ extension SWDestinyEndpoint: EndpointProtocol {
         switch self {
         case .setList:
             return "/api/public/sets/"
-        case .cardList(let setCode):
+        case let .cardList(setCode):
             return "/api/public/cards/\(setCode)"
         case .allCards:
             return "/api/public/cards/"
-        case .card(let cardId):
+        case let .card(cardId):
             return "/api/public/card/\(cardId)"
         }
     }

@@ -9,7 +9,6 @@
 import UIKit
 
 final class SetsListNavigator: Navigator {
-
     enum Destination {
         case about
         case cardList(database: DatabaseProtocol?, with: SetDTO)
@@ -37,9 +36,9 @@ final class SetsListNavigator: Navigator {
         switch destination {
         case .about:
             return AboutViewController()
-        case .cardList(let database, let set):
+        case let .cardList(database, set):
             return CardListViewController(database: database, with: set)
-        case .search(let database):
+        case let .search(database):
             return SearchListViewController(database: database)
         }
     }

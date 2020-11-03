@@ -6,11 +6,10 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import FTPopOverMenu_Swift
+import UIKit
 
 final class UserCollectionViewController: UIViewController {
-
     private var currentSortIndex = 0
     private lazy var userCollectionView = UserCollectionTableView(delegate: self)
     private lazy var navigator = UserCollectionNavigator(self.navigationController)
@@ -29,7 +28,7 @@ final class UserCollectionViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = userCollectionView
+        view = userCollectionView
     }
 
     override func viewDidLoad() {
@@ -45,7 +44,7 @@ final class UserCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = L10n.myCollection
+        navigationItem.title = L10n.myCollection
 
         loadDataFromRealm()
     }
@@ -55,16 +54,16 @@ final class UserCollectionViewController: UIViewController {
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCardViewController))
-        self.navigationItem.rightBarButtonItems = [addCardBarItem, shareBarItem]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icSort.image, style: .plain, target: self, action: #selector(sort(_:event:)))
+        navigationItem.rightBarButtonItems = [addCardBarItem, shareBarItem]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icSort.image, style: .plain, target: self, action: #selector(sort(_:event:)))
     }
 
     private func createDatabase(object: UserCollectionDTO) {
-        try? self.database?.save(object: object)
+        try? database?.save(object: object)
     }
 
     func loadDataFromRealm() {
-        let user = self.getUserCollection()
+        let user = getUserCollection()
         userCollectionView.updateTableViewData(collection: user)
         userCollectionView.sort(currentSortIndex)
     }
@@ -81,7 +80,7 @@ final class UserCollectionViewController: UIViewController {
 
     func addToCollection(carDTO: CardDTO) {
         let user = getUserCollection()
-        try? self.database?.update {
+        try? database?.update {
             let predicate = NSPredicate(format: "code == %@", carDTO.code)
             if let index = user.myCollection.index(matching: predicate) {
                 let newCard = user.myCollection[index]
@@ -94,7 +93,7 @@ final class UserCollectionViewController: UIViewController {
 
     func getUserCollection() -> UserCollectionDTO {
         var user = UserCollectionDTO()
-        try? self.database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
+        try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
             if let userCollection = results.first {
                 user = userCollection
             } else {
@@ -107,17 +106,16 @@ final class UserCollectionViewController: UIViewController {
     // MARK: - Navigation
 
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        self.navigator.navigate(to: .cardDetail(database: self.database, with: cardList, card: card))
+        navigator.navigate(to: .cardDetail(database: database, with: cardList, card: card))
     }
 
     @objc
     func navigateToAddCardViewController() {
-        self.navigator.navigate(to: .addCard(database: self.database, with: self.getUserCollection()))
+        navigator.navigate(to: .addCard(database: database, with: getUserCollection()))
     }
 
     @objc
     func share(_ sender: UIBarButtonItem) {
-
         var collectionList: String = ""
 
         if let cardList = userCollectionView.tableViewDatasource?.getCardList() {
@@ -146,23 +144,21 @@ final class UserCollectionViewController: UIViewController {
     func sort(_ sender: UIBarButtonItem, event: UIEvent) {
         FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color],
                                    config: popOverMenuConfiguration(), done: { [weak self] selectedIndex in
-            self?.userCollectionView.sort(selectedIndex)
-            self?.currentSortIndex = selectedIndex
-        }, cancel: {
-        })
+                                       self?.userCollectionView.sort(selectedIndex)
+                                       self?.currentSortIndex = selectedIndex
+                                   }, cancel: {})
     }
 }
 
 extension UserCollectionViewController: UserCollectionProtocol {
-
     func stepperValueChanged(newValue: Int, card: CardDTO) {
-        try? self.database?.update {
+        try? database?.update {
             card.quantity = newValue
         }
     }
 
     func remove(at index: Int) {
-        try? self.database?.update { [weak self] in
+        try? database?.update { [weak self] in
             self?.getUserCollection().myCollection.remove(at: index)
         }
     }

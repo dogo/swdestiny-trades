@@ -6,12 +6,11 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
+import Charts
 import Foundation
 import UIKit
-import Charts
 
 open class XYMarkerView: BalloonMarker {
-
     open var xAxisValueFormatter: IAxisValueFormatter?
     private var yFormatter = NumberFormatter()
 

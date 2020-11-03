@@ -9,7 +9,6 @@
 import UIKit
 
 final class SearchView: UIView {
-
     let searchBar = SearchBar()
 
     let searchTableView = SearchTableView()
@@ -32,10 +31,9 @@ final class SearchView: UIView {
 }
 
 extension SearchView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(searchBar)
-        self.addSubview(searchTableView)
+        addSubview(searchBar)
+        addSubview(searchTableView)
         searchTableView.addSubview(activityIndicator)
     }
 
@@ -61,6 +59,6 @@ extension SearchView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 }

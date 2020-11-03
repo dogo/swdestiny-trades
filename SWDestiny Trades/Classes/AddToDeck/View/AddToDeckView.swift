@@ -9,7 +9,6 @@
 import UIKit
 
 final class AddToDeckView: UIView {
-
     let searchBar = SearchBar(frame: .zero)
 
     let addToDeckTableView = AddToDeckTableView(frame: .zero)
@@ -32,10 +31,9 @@ final class AddToDeckView: UIView {
 }
 
 extension AddToDeckView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(searchBar)
-        self.addSubview(addToDeckTableView)
+        addSubview(searchBar)
+        addSubview(addToDeckTableView)
         addToDeckTableView.addSubview(activityIndicator)
     }
 
@@ -61,6 +59,6 @@ extension AddToDeckView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 }

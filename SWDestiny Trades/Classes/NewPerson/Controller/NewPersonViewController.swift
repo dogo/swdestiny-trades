@@ -9,7 +9,6 @@
 import UIKit
 
 final class NewPersonViewController: UIViewController {
-
     private let newPersonView = NewPersonView()
     weak var delegate: UpdateTableDataDelegate?
 
@@ -25,7 +24,7 @@ final class NewPersonViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = newPersonView
+        view = newPersonView
     }
 
     override func viewDidLoad() {
@@ -36,18 +35,17 @@ final class NewPersonViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = L10n.newPerson
+        navigationItem.title = L10n.newPerson
     }
 
     func setupNavigationItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTouched(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTouched(_:)))
     }
 
     // MARK: - UIBarButton Actions
 
     @objc
     func doneButtonTouched(_ sender: Any) {
-
         let name = newPersonView.firstNameTextField.text ?? ""
         let lastName = newPersonView.lastNameTextField.text ?? ""
 
@@ -57,6 +55,6 @@ final class NewPersonViewController: UIViewController {
             person.lastName = lastName
             delegate?.insertNew(person: person)
         }
-        _ = self.navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
 }

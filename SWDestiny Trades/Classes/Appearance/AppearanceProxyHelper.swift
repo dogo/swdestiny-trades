@@ -9,7 +9,6 @@
 import UIKit
 
 enum AppearanceProxyHelper {
-
     static func customizeTabBar() {
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.tintColor = .white
@@ -17,7 +16,6 @@ enum AppearanceProxyHelper {
     }
 
     static func customizeNavigationBar() {
-
         if #available(iOS 13.0, *) {
             // Set the standard appearance
             let navBarAppearance = UINavigationBarAppearance()

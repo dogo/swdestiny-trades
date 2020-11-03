@@ -6,11 +6,10 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import TextFieldEffects
+import UIKit
 
 final class NewPersonView: UIView {
-
     lazy var firstNameTextField: HoshiTextField = {
         let textField = HoshiTextField(frame: .zero)
         textField.textColor = .whiteBlack
@@ -48,10 +47,9 @@ final class NewPersonView: UIView {
 }
 
 extension NewPersonView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(firstNameTextField)
-        self.addSubview(lastNameTextField)
+        addSubview(firstNameTextField)
+        addSubview(lastNameTextField)
     }
 
     internal func setupConstraints() {
@@ -71,12 +69,11 @@ extension NewPersonView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 }
 
 extension NewPersonView: UITextFieldDelegate {
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if firstNameTextField == textField {
             lastNameTextField.becomeFirstResponder()

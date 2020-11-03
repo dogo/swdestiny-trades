@@ -11,7 +11,6 @@ import UIKit
 import Charts
 
 final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
-
     let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus", "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
 
     var diceRadarView: RadarChartView = {
@@ -42,9 +41,8 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
     // MARK: - Setup
 
     func setDataCount(values: [Int]) {
-
         var dataEntries: [RadarChartDataEntry] = []
-        for dieFace in 0..<dieFaces.count {
+        for dieFace in 0 ..< dieFaces.count {
             let dataEntry = RadarChartDataEntry(value: Double(values[dieFace]))
             dataEntries.append(dataEntry)
         }
@@ -64,7 +62,6 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
     }
 
     func setupLineChartView(chartView: PieRadarChartViewBase) {
-
         let xAxis: XAxis = diceRadarView.xAxis
         xAxis.labelFont = UIFont.systemFont(ofSize: CGFloat(12.0))
         xAxis.xOffset = 0.0
@@ -89,16 +86,14 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
 }
 
 extension DiceRadarChartCell: IAxisValueFormatter {
-
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return dieFaces[Int(value) % dieFaces.count]
     }
 }
 
 extension DiceRadarChartCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(diceRadarView)
+        contentView.addSubview(diceRadarView)
     }
 
     internal func setupConstraints() {

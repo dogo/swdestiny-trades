@@ -9,14 +9,13 @@
 import UIKit
 
 final class SearchBar: UISearchBar, UISearchBarDelegate {
-
     var doingSearch: ((String) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.delegate = self
-        self.searchBarStyle = .minimal
-        self.placeholder = L10n.allCards
+        delegate = self
+        searchBarStyle = .minimal
+        placeholder = L10n.allCards
     }
 
     @available(*, unavailable)

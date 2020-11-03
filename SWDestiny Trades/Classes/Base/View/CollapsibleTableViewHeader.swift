@@ -13,7 +13,6 @@ protocol CollapsibleTableViewHeaderDelegate: AnyObject {
 }
 
 final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Identifiable {
-
     weak var delegate: CollapsibleTableViewHeaderDelegate?
     var section = 0
 
@@ -60,7 +59,6 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Identifiabl
 }
 
 extension CollapsibleTableViewHeader: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowLabel)

@@ -9,7 +9,6 @@
 import UIKit
 
 final class FilterHeaderView: UITableViewHeaderFooterView, Identifiable {
-
     weak var delegate: CardListViewDelegate?
     private var selectedIndex: Int = 0
 
@@ -36,7 +35,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Identifiable {
     internal func configureHeader() {
         segmentControl.insertSegment(withTitle: L10n.aToZ, at: 0, animated: false)
         segmentControl.insertSegment(withTitle: L10n.color, at: 1, animated: false)
-        //segmentControl.insertSegment(withTitle: "Price", at: 2, animated: false)
+        // segmentControl.insertSegment(withTitle: "Price", at: 2, animated: false)
         segmentControl.insertSegment(withTitle: L10n.cardNumber, at: 2, animated: false)
         segmentControl.selectedSegmentIndex = selectedIndex
     }
@@ -48,15 +47,14 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Identifiable {
 
     @objc
     func valueChanged(_ sender: UISegmentedControl) {
-        self.selectedIndex = sender.selectedSegmentIndex
-        self.delegate?.didSelectSegment(index: selectedIndex)
+        selectedIndex = sender.selectedSegmentIndex
+        delegate?.didSelectSegment(index: selectedIndex)
     }
 }
 
 extension FilterHeaderView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(segmentControl)
+        addSubview(segmentControl)
     }
 
     internal func setupConstraints() {
@@ -69,7 +67,7 @@ extension FilterHeaderView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.contentView.backgroundColor = .blackWhite
+        contentView.backgroundColor = .blackWhite
         segmentControl.tintColor = ColorPalette.appTheme
     }
 }

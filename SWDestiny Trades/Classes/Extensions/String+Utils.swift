@@ -10,36 +10,33 @@ import Foundation
 import UIKit
 
 extension String {
-
     func trim() -> String {
-        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     func subString(start: Int, end: Int) -> String {
-        let startIndex = self.index(self.startIndex, offsetBy: start)
-        let endIndex = self.index(startIndex, offsetBy: end)
+        let startIndex = index(self.startIndex, offsetBy: start)
+        let endIndex = index(startIndex, offsetBy: end)
 
         let finalString = self[startIndex...]
         return String(finalString[..<endIndex])
     }
 
     func subString(from: Int) -> String {
-        let startIndex = self.index(self.startIndex, offsetBy: from)
+        let startIndex = index(self.startIndex, offsetBy: from)
         return String(self[startIndex...])
     }
 
     var length: Int {
-        return self.count
+        return count
     }
 }
 
-extension NSMutableAttributedString {
-
-    public func setAsLink(textToFind: String, linkURL: String) {
-
-        let foundRange = self.mutableString.range(of: textToFind)
+public extension NSMutableAttributedString {
+    func setAsLink(textToFind: String, linkURL: String) {
+        let foundRange = mutableString.range(of: textToFind)
         if foundRange.location != NSNotFound {
-            self.addAttribute(.link, value: linkURL, range: foundRange)
+            addAttribute(.link, value: linkURL, range: foundRange)
         }
     }
 }

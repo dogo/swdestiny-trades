@@ -9,7 +9,6 @@
 import UIKit
 
 final class CardSearchCell: UITableViewCell, Identifiable {
-
     let baseViewCell = BaseViewCell(frame: .zero)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -26,7 +25,7 @@ final class CardSearchCell: UITableViewCell, Identifiable {
         baseViewCell.titleLabel.text = cardDTO.name
         setIconImage(card: cardDTO)
         baseViewCell.subtitleLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
-        baseViewCell.accessoryLabel.text = ""//cardDTO.price
+        baseViewCell.accessoryLabel.text = "" // cardDTO.price
     }
 
     private func setIconImage(card: CardDTO) {
@@ -48,9 +47,8 @@ final class CardSearchCell: UITableViewCell, Identifiable {
 }
 
 extension CardSearchCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(baseViewCell)
+        contentView.addSubview(baseViewCell)
     }
 
     internal func setupConstraints() {
@@ -63,6 +61,6 @@ extension CardSearchCell: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
     }
 }

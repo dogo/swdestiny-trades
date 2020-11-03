@@ -10,7 +10,6 @@ import Foundation
 import SwiftMessages
 
 enum ToastMessages {
-
     static func showNetworkErrorMessage() {
         let errorView = MessageView.viewFromNib(layout: .cardView)
         var config = SwiftMessages.defaultConfig

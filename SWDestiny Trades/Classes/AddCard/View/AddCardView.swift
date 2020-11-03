@@ -9,7 +9,6 @@
 import UIKit
 
 final class AddCardView: UIView {
-
     let searchBar = SearchBar(frame: .zero)
     let addCardTableView = AddCardTableView(frame: .zero)
 
@@ -31,10 +30,9 @@ final class AddCardView: UIView {
 }
 
 extension AddCardView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(searchBar)
-        self.addSubview(addCardTableView)
+        addSubview(searchBar)
+        addSubview(addCardTableView)
         addCardTableView.addSubview(activityIndicator)
     }
 
@@ -60,6 +58,6 @@ extension AddCardView: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.backgroundColor = .blackWhite
+        backgroundColor = .blackWhite
     }
 }

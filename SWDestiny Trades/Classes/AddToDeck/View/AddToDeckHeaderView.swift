@@ -9,7 +9,6 @@
 import UIKit
 
 final class AddToDeckHeaderView: UITableViewHeaderFooterView, Identifiable {
-
     weak var delegate: SearchDelegate?
 
     lazy var segmentControl: UISegmentedControl = {
@@ -45,14 +44,13 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Identifiable {
 
     @objc
     func valueChanged(_ sender: UISegmentedControl) {
-        self.delegate?.didSelectSegment?(index: sender.selectedSegmentIndex)
+        delegate?.didSelectSegment?(index: sender.selectedSegmentIndex)
     }
 }
 
 extension AddToDeckHeaderView: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(segmentControl)
+        addSubview(segmentControl)
     }
 
     internal func setupConstraints() {

@@ -9,7 +9,6 @@
 import UIKit
 
 final class SwdShareProvider: UIActivityItemProvider {
-
     var subject: String
     var text: String
 

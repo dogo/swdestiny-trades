@@ -10,13 +10,12 @@ import Foundation
 import RealmSwift
 
 extension RealmDatabase {
-
     func create<T: Storable>(_ model: T.Type, completion: @escaping ((T) -> Void)) throws {
         guard let storable = model as? Object.Type else {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
 
-        try self.writeSafely { [weak self] in
+        try writeSafely { [weak self] in
             if let newObject = self?.realm.create(storable, value: [], update: .error) as? T {
                 completion(newObject)
             }
@@ -28,13 +27,13 @@ extension RealmDatabase {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
 
-        try self.writeSafely { [weak self] in
+        try writeSafely { [weak self] in
             self?.realm.add(storable)
         }
     }
 
     func update(block: @escaping () -> Void) throws {
-        try self.writeSafely {
+        try writeSafely {
             block()
         }
     }
@@ -44,7 +43,7 @@ extension RealmDatabase {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
 
-        try self.writeSafely { [weak self] in
+        try writeSafely { [weak self] in
             self?.realm.delete(storable)
         }
     }
@@ -54,7 +53,7 @@ extension RealmDatabase {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
 
-        try self.writeSafely { [weak self] in
+        try writeSafely { [weak self] in
             guard let self = self else { return }
 
             let objects = self.realm.objects(storable)
@@ -66,17 +65,17 @@ extension RealmDatabase {
     }
 
     func reset() throws {
-        try self.writeSafely { [weak self] in
+        try writeSafely { [weak self] in
             self?.realm.deleteAll()
         }
     }
 
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil, completion: (([T]) -> Void)) throws {
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil, completion: ([T]) -> Void) throws {
         guard let storable = model as? Object.Type else {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
 
-        var objects = self.realm.objects(storable)
+        var objects = realm.objects(storable)
 
         if let predicate = predicate {
             objects = objects.filter(predicate)

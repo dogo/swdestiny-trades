@@ -6,29 +6,25 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
 import Nimble_Snapshots
+import Quick
 
 @testable import SWDestiny_Trades
 
 class AddCardViewControllerSnapshotTests: QuickSpec {
-
     override func spec() {
-
         var sut: AddCardViewController!
         var service: SWDestinyService!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
         describe("AddCardViewController layout") {
-
             beforeSuite {
                 AppearanceProxyHelper.customizeNavigationBar()
             }
 
             context("when it's initialized from Loan screen") {
-
                 beforeEach {
                     service = SWDestinyService(client: HttpClientMock())
                 }

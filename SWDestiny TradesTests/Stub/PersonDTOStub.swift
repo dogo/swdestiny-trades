@@ -10,7 +10,6 @@ import Foundation
 @testable import SWDestiny_Trades
 
 extension PersonDTO {
-
     static func stub() -> PersonDTO {
         let person = PersonDTO()
         person.name = "User"

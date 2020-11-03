@@ -9,7 +9,6 @@
 import Foundation
 
 final class LoggerManager: LoggerProtocol {
-
     static let shared: LoggerManager = {
         var manager = LoggerManager()
         manager.loggers.append(FirebaseLogger())
@@ -22,10 +21,10 @@ final class LoggerManager: LoggerProtocol {
     private init() {}
 
     internal func setup() {
-        self.loggers.forEach { $0.setup() }
+        loggers.forEach { $0.setup() }
     }
 
     func log(event: Events, parameters: [String: Any]? = nil) {
-        self.loggers.forEach { $0.log(event: event, parameters: parameters) }
+        loggers.forEach { $0.log(event: event, parameters: parameters) }
     }
 }

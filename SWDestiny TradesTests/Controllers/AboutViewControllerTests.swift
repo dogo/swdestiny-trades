@@ -6,15 +6,13 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
+import Quick
 @testable import SWDestiny_Trades
 
 class AboutViewControllerTests: QuickSpec {
-
     override func spec() {
         describe("About view controller") {
-
             var controller: AboutViewController!
 
             beforeEach {

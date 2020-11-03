@@ -11,7 +11,6 @@ import UIKit
 import Charts
 
 final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
-
     let cardTypes = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
 
     var cardTypeChartView: BarChartView = {
@@ -40,7 +39,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
     func setDataCount(values: [Int]) {
         if !values.isEmpty {
             var dataEntries: [BarChartDataEntry] = []
-            for cardType in 0..<cardTypes.count {
+            for cardType in 0 ..< cardTypes.count {
                 let dataEntry = BarChartDataEntry(x: Double(cardType), y: Double(values[cardType]))
                 dataEntries.append(dataEntry)
             }
@@ -87,16 +86,14 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
 }
 
 extension CardTypeBarChartCell: IAxisValueFormatter {
-
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return cardTypes[Int(value)]
     }
 }
 
 extension CardTypeBarChartCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(cardTypeChartView)
+        contentView.addSubview(cardTypeChartView)
     }
 
     internal func setupConstraints() {

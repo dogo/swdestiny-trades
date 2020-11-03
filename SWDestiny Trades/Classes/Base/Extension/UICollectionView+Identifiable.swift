@@ -9,16 +9,16 @@
 import UIKit
 
 public extension UICollectionView {
-
     /**
-      Register a Class-Based `UICollectionViewCell` subclass (conforming to `Identifiable`)
-      - parameter cellType: the `UICollectionViewCell` (`Identifiable`-conforming) subclass to register
-      - seealso: `register(_:,forCellWithReuseIdentifier:)`
-      */
-     final func register<T: UICollectionViewCell>(cellType: T.Type)
-       where T: Identifiable {
-         self.register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
-     }
+     Register a Class-Based `UICollectionViewCell` subclass (conforming to `Identifiable`)
+     - parameter cellType: the `UICollectionViewCell` (`Identifiable`-conforming) subclass to register
+     - seealso: `register(_:,forCellWithReuseIdentifier:)`
+     */
+    final func register<T: UICollectionViewCell>(cellType: T.Type)
+        where T: Identifiable
+    {
+        register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
+    }
 
     /**
      Returns a reusable `UICollectionViewCell` object for the class inferred by the return-type
@@ -30,13 +30,14 @@ public extension UICollectionView {
      - seealso: `dequeueReusableCell(withReuseIdentifier:,for:)`
      */
     final func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath, cellType: T.Type = T.self) -> T
-      where T: Identifiable {
-        let bareCell = self.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath)
+        where T: Identifiable
+    {
+        let bareCell = dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath)
         guard let cell = bareCell as? T else {
-          fatalError(
-            "Failed to dequeue a cell with identifier \(cellType.reuseIdentifier) matching type \(cellType.self). "
-                + "Check the reuseIdentifier that you registered the cell beforehand"
-          )
+            fatalError(
+                "Failed to dequeue a cell with identifier \(cellType.reuseIdentifier) matching type \(cellType.self). "
+                    + "Check the reuseIdentifier that you registered the cell beforehand"
+            )
         }
         return cell
     }

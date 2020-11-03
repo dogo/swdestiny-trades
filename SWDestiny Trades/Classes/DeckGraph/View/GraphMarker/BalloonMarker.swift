@@ -6,9 +6,9 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
+import Charts
 import Foundation
 import UIKit
-import Charts
 
 open class BalloonMarker: MarkerImage {
     open var color: UIColor?
@@ -38,14 +38,14 @@ open class BalloonMarker: MarkerImage {
     override open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
         var offset = self.offset
 
-        let chart = self.chartView
+        let chart = chartView
 
         var size = self.size
 
-        if size.width == 0.0 && image != nil {
+        if size.width == 0.0, image != nil {
             size.width = image?.size.width ?? 0.0
         }
-        if size.height == 0.0 && image != nil {
+        if size.height == 0.0, image != nil {
             size.height = image?.size.height ?? 0.0
         }
 
@@ -74,14 +74,16 @@ open class BalloonMarker: MarkerImage {
         if labelns == nil {
             return
         }
-        let offset = self.offsetForDrawing(atPoint: point)
+        let offset = offsetForDrawing(atPoint: point)
         let size = self.size
 
         var rect = CGRect(
             origin: CGPoint(
                 x: point.x + offset.x,
-                y: point.y + offset.y),
-            size: size)
+                y: point.y + offset.y
+            ),
+            size: size
+        )
         rect.origin.x -= size.width / 2.0
         rect.origin.y -= size.height
         context.saveGState()
@@ -92,66 +94,82 @@ open class BalloonMarker: MarkerImage {
                 context.beginPath()
                 context.move(to: CGPoint(
                     x: rect.origin.x,
-                    y: rect.origin.y + arrowSize.height))
+                    y: rect.origin.y + arrowSize.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0,
-                    y: rect.origin.y + arrowSize.height))
-                //arrow vertex
+                    y: rect.origin.y + arrowSize.height
+                ))
+                // arrow vertex
                 context.addLine(to: CGPoint(
                     x: point.x,
-                    y: point.y))
+                    y: point.y
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0,
-                    y: rect.origin.y + arrowSize.height))
+                    y: rect.origin.y + arrowSize.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + rect.size.width,
-                    y: rect.origin.y + arrowSize.height))
+                    y: rect.origin.y + arrowSize.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + rect.size.width,
-                    y: rect.origin.y + rect.size.height))
+                    y: rect.origin.y + rect.size.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x,
-                    y: rect.origin.y + rect.size.height))
+                    y: rect.origin.y + rect.size.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x,
-                    y: rect.origin.y + arrowSize.height))
+                    y: rect.origin.y + arrowSize.height
+                ))
                 context.fillPath()
             } else {
                 context.beginPath()
                 context.move(to: CGPoint(
                     x: rect.origin.x,
-                    y: rect.origin.y))
+                    y: rect.origin.y
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + rect.size.width,
-                    y: rect.origin.y))
+                    y: rect.origin.y
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + rect.size.width,
-                    y: rect.origin.y + rect.size.height - arrowSize.height))
+                    y: rect.origin.y + rect.size.height - arrowSize.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0,
-                    y: rect.origin.y + rect.size.height - arrowSize.height))
-                //arrow vertex
+                    y: rect.origin.y + rect.size.height - arrowSize.height
+                ))
+                // arrow vertex
                 context.addLine(to: CGPoint(
                     x: point.x,
-                    y: point.y))
+                    y: point.y
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0,
-                    y: rect.origin.y + rect.size.height - arrowSize.height))
+                    y: rect.origin.y + rect.size.height - arrowSize.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x,
-                    y: rect.origin.y + rect.size.height - arrowSize.height))
+                    y: rect.origin.y + rect.size.height - arrowSize.height
+                ))
                 context.addLine(to: CGPoint(
                     x: rect.origin.x,
-                    y: rect.origin.y))
+                    y: rect.origin.y
+                ))
                 context.fillPath()
             }
         }
         if offset.y > 0 {
-            rect.origin.y += self.insets.top + arrowSize.height
+            rect.origin.y += insets.top + arrowSize.height
         } else {
-            rect.origin.y += self.insets.top
+            rect.origin.y += insets.top
         }
-        rect.size.height -= self.insets.top + self.insets.bottom
+        rect.size.height -= insets.top + insets.bottom
 
         UIGraphicsPushContext(context)
 
@@ -170,15 +188,15 @@ open class BalloonMarker: MarkerImage {
         labelns = label as NSString
 
         _drawAttributes.removeAll()
-        _drawAttributes[NSAttributedString.Key.font] = self.font
+        _drawAttributes[NSAttributedString.Key.font] = font
         _drawAttributes[NSAttributedString.Key.paragraphStyle] = _paragraphStyle
-        _drawAttributes[NSAttributedString.Key.foregroundColor] = self.textColor
+        _drawAttributes[NSAttributedString.Key.foregroundColor] = textColor
 
         _labelSize = labelns?.size(withAttributes: _drawAttributes) ?? CGSize.zero
 
         var size = CGSize()
-        size.width = _labelSize.width + self.insets.left + self.insets.right
-        size.height = _labelSize.height + self.insets.top + self.insets.bottom
+        size.width = _labelSize.width + insets.left + insets.right
+        size.height = _labelSize.height + insets.top + insets.bottom
         size.width = max(minimumSize.width, size.width)
         size.height = max(minimumSize.height, size.height)
         self.size = size

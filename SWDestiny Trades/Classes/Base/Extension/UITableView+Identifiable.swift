@@ -9,7 +9,6 @@
 import UIKit
 
 public extension UITableView {
-
     /**
      Register a Class-Based `UITableViewCell` subclass (conforming to `Identifiable`)
      - parameter cellType: the `UITableViewCell` (`Identifiable`-conforming) subclass to register
@@ -24,8 +23,9 @@ public extension UITableView {
      - seealso: `register(_:,forHeaderFooterViewReuseIdentifier:)`
      */
     final func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type)
-      where T: Identifiable {
-        self.register(headerFooterViewType.self, forHeaderFooterViewReuseIdentifier: headerFooterViewType.reuseIdentifier)
+        where T: Identifiable
+    {
+        register(headerFooterViewType.self, forHeaderFooterViewReuseIdentifier: headerFooterViewType.reuseIdentifier)
     }
 
     /**
@@ -37,7 +37,7 @@ public extension UITableView {
      except when your type is in a variable and cannot be determined at compile time.
      */
     final func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath, cellType: T.Type = T.self) -> T where T: Identifiable {
-        guard let cell = self.dequeueReusableCell(withIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
+        guard let cell = dequeueReusableCell(withIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell with identifier: \(cellType.reuseIdentifier)")
         }
         return cell
@@ -52,13 +52,14 @@ public extension UITableView {
      - seealso: `dequeueReusableHeaderFooterView(withIdentifier:)`
      */
     final func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>(_ viewType: T.Type = T.self) -> T?
-      where T: Identifiable {
-        guard let view = self.dequeueReusableHeaderFooterView(withIdentifier: viewType.reuseIdentifier) as? T? else {
-          fatalError(
-            "Failed to dequeue a header/footer with identifier \(viewType.reuseIdentifier) "
-              + "matching type \(viewType.self). "
-              + "Check the reuseIdentifier that you registered the header/footer beforehand"
-          )
+        where T: Identifiable
+    {
+        guard let view = dequeueReusableHeaderFooterView(withIdentifier: viewType.reuseIdentifier) as? T? else {
+            fatalError(
+                "Failed to dequeue a header/footer with identifier \(viewType.reuseIdentifier) "
+                    + "matching type \(viewType.self). "
+                    + "Check the reuseIdentifier that you registered the header/footer beforehand"
+            )
         }
         return view
     }

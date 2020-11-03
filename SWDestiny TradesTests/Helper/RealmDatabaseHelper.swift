@@ -11,7 +11,6 @@ import Foundation
 @testable import SWDestiny_Trades
 
 enum RealmDatabaseHelper {
-
     static func createMemoryDatabase(identifier: String) -> RealmDatabase? {
         return try? RealmDatabase(configuration: .inMemory(identifier: identifier))
     }

@@ -9,9 +9,7 @@
 import Foundation
 
 enum Split {
-
     static func cardsAlphabetically(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
-
         func getFirstLetter(cardDTO: CardDTO) -> String {
             return String(cardDTO.name[cardDTO.name.startIndex])
         }
@@ -20,7 +18,6 @@ enum Split {
         var tableViewSource = [String: [CardDTO]]()
 
         for symbol in sections {
-
             var cardsDTO = [CardDTO]()
 
             for card in cardList where symbol == getFirstLetter(cardDTO: card) {
@@ -35,7 +32,6 @@ enum Split {
     }
 
     static func cardsByColor(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
-
         func getColor(cardDTO: CardDTO) -> String {
             return cardDTO.factionCode
         }
@@ -44,7 +40,6 @@ enum Split {
         var tableViewSource = [String: [CardDTO]]()
 
         for symbol in sections {
-
             var cardsDTO = [CardDTO]()
 
             for card in cardList where symbol == getColor(cardDTO: card) {
@@ -58,7 +53,6 @@ enum Split {
     }
 
     static func cardsByType(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
-
         func getType(cardDTO: CardDTO) -> String {
             return cardDTO.typeName
         }
@@ -67,7 +61,6 @@ enum Split {
         var tableViewSource = [String: [CardDTO]]()
 
         for symbol in sections {
-
             var cardsDTO = [CardDTO]()
 
             for card in cardList where symbol == getType(cardDTO: card) {
@@ -82,7 +75,6 @@ enum Split {
     }
 
     static func setsByAlphabetically(setList: [SetDTO], sections: [String]) -> [String: [SetDTO]] {
-
         func getFirstLetter(setDTO: SetDTO) -> String {
             return String(setDTO.name.prefix(1))
         }
@@ -91,7 +83,6 @@ enum Split {
         var tableViewSource = [String: [SetDTO]]()
 
         for symbol in sections {
-
             var setsDTO = [SetDTO]()
 
             for set in setList where symbol == getFirstLetter(setDTO: set) {

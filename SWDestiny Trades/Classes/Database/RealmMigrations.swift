@@ -11,7 +11,6 @@ import RealmSwift
 
 // swiftlint:disable cyclomatic_complexity
 enum RealmMigrations {
-
     static let schemaVersion: UInt64 = 3
 
     static func performMigrations(with database: RealmDatabase?) {
@@ -69,7 +68,6 @@ enum RealmMigrations {
     }
 
     private static func migrateCardQuantity(realm: Realm, needsMigration: Bool) {
-
         if needsMigration {
             let allDecks = realm.objects(DeckDTO.self)
             do {
@@ -122,6 +120,7 @@ enum RealmMigrations {
         }
     }
 }
+
 // swiftlint:enable cyclomatic_complexity
 
 let kDices = [
@@ -196,5 +195,5 @@ let kDices = [
     "02003": ["2RD", "1F", "2Dr", "2Dc", "1R", "-"],
     "02011": ["2RD", "3RD", "2Dc", "2Sh", "1R", "-"],
     "02014": ["2RD", "3RD1", "4RD1", "Sp", "Sp", "-"],
-    "02044": ["2RD", "2RD", "1Dc", "2Dc", "1R", "-"]
+    "02044": ["2RD", "2RD", "1Dc", "2Dc", "1R", "-"],
 ]

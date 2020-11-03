@@ -9,7 +9,6 @@
 import Foundation
 
 final class HttpClient: HttpClientProtocol {
-
     private let session: URLSession
 
     init(session: URLSession = .shared) {
@@ -18,7 +17,6 @@ final class HttpClient: HttpClientProtocol {
 }
 
 extension HttpClient {
-
     var logger: NetworkingLogger {
         return NetworkingLogger(level: .debug)
     }
@@ -27,9 +25,9 @@ extension HttpClient {
 
     private func decodingTask<T: Decodable>(with request: URLRequest,
                                             decodingType: T.Type,
-                                            completionHandler completion: @escaping (T?, RequestError?) -> Void) -> URLSessionDataTask {
-
-        let task = self.session.dataTask(with: request) { [weak self] data, response, error in
+                                            completionHandler completion: @escaping (T?, RequestError?) -> Void) -> URLSessionDataTask
+    {
+        let task = session.dataTask(with: request) { [weak self] data, response, error in
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, self?.failureReason(HttpStatusCode.unknown.rawValue, error))
@@ -37,7 +35,7 @@ extension HttpClient {
             }
             let statusCode = httpResponse.statusCode
             switch statusCode {
-            case 200...399:
+            case 200 ... 399:
                 if let data = data {
                     do {
                         let model = try JSONDecoder().decode(decodingType, from: data)
@@ -57,10 +55,9 @@ extension HttpClient {
     }
 
     func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) {
-
         logger.log(request: request)
 
-        let task = self.decodingTask(with: request, decodingType: T.self) { [weak self] json, error in
+        let task = decodingTask(with: request, decodingType: T.self) { [weak self] json, error in
 
             DispatchQueue.main.async {
                 if let error = error {
@@ -81,7 +78,7 @@ extension HttpClient {
     }
 
     func cancelAllRequests() {
-        self.session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
+        session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
             dataTasks.forEach { $0.cancel() }
             uploadTasks.forEach { $0.cancel() }
             downloadTasks.forEach { $0.cancel() }

@@ -9,8 +9,7 @@
 import Foundation
 
 extension HttpParameters {
-
     var queryItems: [URLQueryItem] {
-        return self.compactMap { URLQueryItem(name: $0, value: $1) }
+        return compactMap { URLQueryItem(name: $0, value: $1) }
     }
 }

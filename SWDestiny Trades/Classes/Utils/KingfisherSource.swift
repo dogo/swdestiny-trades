@@ -6,9 +6,9 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
-import Kingfisher
 import ImageSlideshow
+import Kingfisher
+import UIKit
 
 /// Input Source to image using Kingfisher
 public final class KingfisherSource: NSObject, InputSource {
@@ -38,7 +38,7 @@ public final class KingfisherSource: NSObject, InputSource {
     /// - parameter options: options for displaying
     public init?(urlString: String, placeholder: UIImage? = nil, options: KingfisherOptionsInfo? = nil) {
         if let validUrl = URL(string: urlString) {
-            self.url = validUrl
+            url = validUrl
             self.placeholder = placeholder
             self.options = options
             super.init()
@@ -49,9 +49,9 @@ public final class KingfisherSource: NSObject, InputSource {
 
     @objc
     public func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
-        imageView.kf.setImage(with: self.url, placeholder: self.placeholder, options: self.options, progressBlock: nil) { result in
+        imageView.kf.setImage(with: url, placeholder: placeholder, options: options, progressBlock: nil) { result in
             switch result {
-            case .success(let image):
+            case let .success(image):
                 callback(image.image)
             case .failure:
                 callback(nil)

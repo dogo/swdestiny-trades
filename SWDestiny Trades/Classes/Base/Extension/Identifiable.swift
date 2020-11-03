@@ -12,7 +12,6 @@ import UIKit
 // MARK: - Identifiable protocol
 
 public protocol Identifiable: AnyObject {
-
     /// The reuse identifier to use when registering and later dequeuing a Identifiable cell
     static var reuseIdentifier: String { get }
 }
@@ -20,8 +19,8 @@ public protocol Identifiable: AnyObject {
 // MARK: - Default implementation
 
 public extension Identifiable {
-  /// By default, use the name of the class as String for its reuseIdentifier
-  static var reuseIdentifier: String {
-    return String(describing: self)
-  }
+    /// By default, use the name of the class as String for its reuseIdentifier
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
 }

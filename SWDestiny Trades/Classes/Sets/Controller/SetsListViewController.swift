@@ -9,7 +9,6 @@
 import UIKit
 
 final class SetsListViewController: UIViewController {
-
     private let setsView = SetsView()
     private let database: DatabaseProtocol?
     private let destinyService: SWDestinyServiceProtocol
@@ -18,7 +17,7 @@ final class SetsListViewController: UIViewController {
     // MARK: - Life Cycle
 
     init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?) {
-        self.destinyService = service
+        destinyService = service
         self.database = database
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,13 +28,13 @@ final class SetsListViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = setsView
+        view = setsView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .blackWhite
+        view.backgroundColor = .blackWhite
 
         setupNavigationItem()
 
@@ -52,12 +51,12 @@ final class SetsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = L10n.expansions
+        navigationItem.title = L10n.expansions
     }
 
     func setupNavigationItem() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icAbout.image, style: .plain, target: self, action: #selector(aboutButtonTouched(_:)))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icAbout.image, style: .plain, target: self, action: #selector(aboutButtonTouched(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
     }
 
     @objc
@@ -66,9 +65,9 @@ final class SetsListViewController: UIViewController {
             self?.setsView.endRefreshControl()
             self?.setsView.activityIndicator.stopAnimating()
             switch result {
-            case .success(let setList):
+            case let .success(setList):
                 self?.setsView.setsTableView.updateSetList(setList)
-            case .failure(let error):
+            case let .failure(error):
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
             }
@@ -78,18 +77,18 @@ final class SetsListViewController: UIViewController {
     // MARK: - <SetsListViewDelegate>
 
     func navigateToNextController(with set: SetDTO) {
-        self.navigator.navigate(to: .cardList(database: self.database, with: set))
+        navigator.navigate(to: .cardList(database: database, with: set))
     }
 
     // MARK: - UIBarButton Actions
 
     @objc
     func aboutButtonTouched(_ sender: Any) {
-        self.navigator.navigate(to: .about)
+        navigator.navigate(to: .about)
     }
 
     @objc
     func searchButtonTouched(_ sender: Any) {
-        self.navigator.navigate(to: .search(database: self.database))
+        navigator.navigate(to: .search(database: database))
     }
 }

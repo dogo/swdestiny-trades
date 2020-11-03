@@ -6,16 +6,13 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Quick
 import Nimble
+import Quick
 @testable import SWDestiny_Trades
 
 class SWDestinyServiceTests: QuickSpec {
-
     override func spec() {
-
         describe("SWDestinyService") {
-
             var sut: SWDestinyService!
             var client: HttpClientMock!
 
@@ -28,10 +25,10 @@ class SWDestinyServiceTests: QuickSpec {
                 client.fileName = "sets"
                 sut.retrieveSetList { result in
                     switch result {
-                    case .success(let setList):
+                    case let .success(setList):
                         expect(setList[0].name).to(equal("Awakenings"))
                         expect(setList[0].code).to(equal("AW"))
-                    case .failure(let error):
+                    case let .failure(error):
                         fatalError(error.localizedDescription)
                     }
                 }
@@ -41,7 +38,7 @@ class SWDestinyServiceTests: QuickSpec {
                 client.fileName = "card-list"
                 sut.retrieveSetCardList(setCode: "anyString") { result in
                     switch result {
-                    case .success(let cardList):
+                    case let .success(cardList):
                         expect(cardList[0].setCode).to(equal("RIV"))
                         expect(cardList[0].setName).to(equal("Rivals"))
                         expect(cardList[0].typeCode).to(equal("character"))
@@ -70,7 +67,7 @@ class SWDestinyServiceTests: QuickSpec {
                         expect(cardList[0].imageUrl).to(equal("https://swdestinydb.com/bundles/cards/en/06/06001.jpg"))
                         expect(cardList[0].label).to(equal("Anakin Skywalker - Conflicted Apprentice"))
                         expect(cardList[0].cp).to(equal(1013))
-                    case .failure(let error):
+                    case let .failure(error):
                         fatalError(error.localizedDescription)
                     }
                 }
@@ -80,7 +77,7 @@ class SWDestinyServiceTests: QuickSpec {
                 client.fileName = "card"
                 sut.retrieveCard(cardId: "anyString") { result in
                     switch result {
-                    case .success(let card):
+                    case let .success(card):
                         expect(card.setCode).to(equal("AW"))
                         expect(card.setName).to(equal("Awakenings"))
                         expect(card.typeCode).to(equal("character"))
@@ -109,7 +106,7 @@ class SWDestinyServiceTests: QuickSpec {
                         expect(card.imageUrl).to(equal("https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))
                         expect(card.label).to(equal("Captain Phasma - Elite Trooper"))
                         expect(card.cp).to(equal(1215))
-                    case .failure(let error):
+                    case let .failure(error):
                         fatalError(error.localizedDescription)
                     }
                 }
@@ -119,7 +116,7 @@ class SWDestinyServiceTests: QuickSpec {
                 client.fileName = "card-list"
                 sut.retrieveAllCards { result in
                     switch result {
-                    case .success(let cardList):
+                    case let .success(cardList):
                         expect(cardList[0].setCode).to(equal("RIV"))
                         expect(cardList[0].setName).to(equal("Rivals"))
                         expect(cardList[0].typeCode).to(equal("character"))
@@ -148,14 +145,13 @@ class SWDestinyServiceTests: QuickSpec {
                         expect(cardList[0].imageUrl).to(equal("https://swdestinydb.com/bundles/cards/en/06/06001.jpg"))
                         expect(cardList[0].label).to(equal("Anakin Skywalker - Conflicted Apprentice"))
                         expect(cardList[0].cp).to(equal(1013))
-                    case .failure(let error):
+                    case let .failure(error):
                         fatalError(error.localizedDescription)
                     }
                 }
             }
 
             it("should cancel all requests") {
-
                 sut.cancelAllRequests()
                 expect(client.isCancelled) == true
             }

@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckGraphViewController: UIViewController {
-
     private let deckDTO: DeckDTO
     private let graphView = DeckGraphCollectionView()
 
@@ -26,7 +25,7 @@ final class DeckGraphViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = graphView
+        view = graphView
     }
 
     override func viewDidLoad() {
@@ -38,6 +37,6 @@ final class DeckGraphViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.title = L10n.deckStatistics
+        navigationItem.title = L10n.deckStatistics
     }
 }

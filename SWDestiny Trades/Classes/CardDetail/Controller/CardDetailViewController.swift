@@ -6,12 +6,11 @@
 //  Copyright © 2016 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
 import ImageSlideshow
 import PKHUD
+import UIKit
 
 final class CardDetailViewController: UIViewController {
-
     private let cardView = CardView()
     private let database: DatabaseProtocol?
     private var cards = [CardDTO]()
@@ -22,10 +21,10 @@ final class CardDetailViewController: UIViewController {
 
     init(database: DatabaseProtocol?, cardList: [CardDTO], selected: CardDTO) {
         self.database = database
-        self.cardDTO = selected
-        self.cards = cardList
+        cardDTO = selected
+        cards = cardList
         super.init(nibName: nil, bundle: nil)
-        self.setupCardCarousel()
+        setupCardCarousel()
     }
 
     @available(*, unavailable)
@@ -34,7 +33,7 @@ final class CardDetailViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = cardView
+        view = cardView
     }
 
     override func viewDidLoad() {
@@ -55,17 +54,17 @@ final class CardDetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = cardDTO.name
+        navigationItem.title = cardDTO.name
     }
 
     private func setupNavigationItem() {
         let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
         let addToCollectionBarItem = UIBarButtonItem(image: Asset.NavigationBar.icAddCollection.image, style: .plain, target: self, action: #selector(addToCollection))
-        self.navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
+        navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
     }
 
     private func setupCardCarousel() {
-        for card in self.cards {
+        for card in cards {
             if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
                 imageSource.append(remoteSource)
             } else {
@@ -77,14 +76,14 @@ final class CardDetailViewController: UIViewController {
 
     @objc
     func addToCollection() {
-        let card = self.cards[cardView.slideshow.currentPage]
-        self.saveToCollection(carDTO: card)
+        let card = cards[cardView.slideshow.currentPage]
+        saveToCollection(carDTO: card)
         showSuccessMessage(cardDTO: card)
     }
 
     private func saveToCollection(carDTO: CardDTO) {
         let user = getUserCollection()
-        try? self.database?.update {
+        try? database?.update {
             let predicate = NSPredicate(format: "code == %@", carDTO.code)
             if let index = user.myCollection.index(matching: predicate) {
                 let newCard = user.myCollection[index]
@@ -97,7 +96,7 @@ final class CardDetailViewController: UIViewController {
 
     private func getUserCollection() -> UserCollectionDTO {
         var user = UserCollectionDTO()
-        try? self.database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
+        try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
             if let userCollection = results.first {
                 user = userCollection
             } else {
@@ -108,7 +107,7 @@ final class CardDetailViewController: UIViewController {
     }
 
     private func createDatabase(object: UserCollectionDTO) {
-        try? self.database?.save(object: object)
+        try? database?.save(object: object)
     }
 
     private func showSuccessMessage(cardDTO: CardDTO) {
@@ -119,9 +118,7 @@ final class CardDetailViewController: UIViewController {
 
     @objc
     func share(_ sender: UIBarButtonItem) {
-
         if let shareImage = cardView.slideshow.currentSlideshowItem?.imageView.image {
-
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
             activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
             activityVC.popoverPresentationController?.barButtonItem = sender

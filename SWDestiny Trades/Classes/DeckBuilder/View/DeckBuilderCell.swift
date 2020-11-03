@@ -9,7 +9,6 @@
 import UIKit
 
 final class DeckBuilderCell: UITableViewCell, Identifiable {
-
     var stepperValueChanged: ((Int) -> Void)?
     var eliteButtonTouched: ((Bool) -> Void)?
 
@@ -99,7 +98,7 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
     func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
-        self.stepperValueChanged?(value)
+        stepperValueChanged?(value)
     }
 
     override func prepareForReuse() {
@@ -116,15 +115,14 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
 }
 
 extension DeckBuilderCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.contentView.addSubview(textContainer)
-        self.contentView.addSubview(iconImageView)
-        self.textContainer.addArrangedSubview(titleLabel)
-        self.textContainer.addArrangedSubview(subtitleLabel)
-        self.contentView.addSubview(quantityLabel)
-        self.contentView.addSubview(quantityStepper)
-        self.contentView.addSubview(eliteButton)
+        contentView.addSubview(textContainer)
+        contentView.addSubview(iconImageView)
+        textContainer.addArrangedSubview(titleLabel)
+        textContainer.addArrangedSubview(subtitleLabel)
+        contentView.addSubview(quantityLabel)
+        contentView.addSubview(quantityStepper)
+        contentView.addSubview(eliteButton)
     }
 
     internal func setupConstraints() {
@@ -159,7 +157,7 @@ extension DeckBuilderCell: BaseViewConfiguration {
     }
 
     internal func configureViews() {
-        self.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
 
         eliteButton.buttonTouched = { [weak self] newVaue in
             self?.eliteButtonTouched?(newVaue)

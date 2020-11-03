@@ -9,7 +9,6 @@
 import UIKit
 
 final class BaseViewCell: UIView {
-
     let contentView = UIView(frame: .zero)
 
     let textContainer: UIStackView = {
@@ -59,9 +58,8 @@ final class BaseViewCell: UIView {
 }
 
 extension BaseViewCell: BaseViewConfiguration {
-
     internal func buildViewHierarchy() {
-        self.addSubview(contentView)
+        addSubview(contentView)
         contentView.addSubview(textContainer)
         contentView.addSubview(iconImageView)
         textContainer.addArrangedSubview(titleLabel)
@@ -94,6 +92,5 @@ extension BaseViewCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
-    }
+    internal func configureViews() {}
 }

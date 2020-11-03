@@ -14,7 +14,6 @@ protocol LoansDetailsProtocol: AnyObject {
 }
 
 final class LoansDetailDatasource: NSObject, UITableViewDataSource {
-
     private var tableView: UITableView?
     private var currentPerson: PersonDTO?
     private weak var delegate: LoansDetailsProtocol?
@@ -34,9 +33,9 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: LoanDetailCell.self)
 
         if indexPath.section == 0 {
-            self.configureLentMe(indexPath: indexPath, cell: cell)
+            configureLentMe(indexPath: indexPath, cell: cell)
         } else if indexPath.section == 1 {
-            self.configureBorrowed(indexPath: indexPath, cell: cell)
+            configureBorrowed(indexPath: indexPath, cell: cell)
         }
         return cell
     }
@@ -56,9 +55,9 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 0 && indexPath.row == lentMe.count {
+        if indexPath.section == 0, indexPath.row == lentMe.count {
             return false
-        } else if indexPath.section == 1 && indexPath.row == borrowed.count {
+        } else if indexPath.section == 1, indexPath.row == borrowed.count {
             return false
         }
         return true
@@ -111,11 +110,11 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     private func remove(at indexPath: IndexPath) {
         if indexPath.section == 0 {
-            self.lentMe.remove(at: indexPath.row)
-            self.delegate?.remove(from: .lent, at: indexPath.row)
+            lentMe.remove(at: indexPath.row)
+            delegate?.remove(from: .lent, at: indexPath.row)
         } else {
-            self.borrowed.remove(at: indexPath.row)
-            self.delegate?.remove(from: .borrow, at: indexPath.row)
+            borrowed.remove(at: indexPath.row)
+            delegate?.remove(from: .borrow, at: indexPath.row)
         }
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
     }
