@@ -36,6 +36,8 @@
 		DD0905541E24701D00D9EFB0 /* PersonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905431E24701D00D9EFB0 /* PersonDTO.swift */; };
 		DD0905551E24701D00D9EFB0 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905451E24701D00D9EFB0 /* PersonCell.swift */; };
 		DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */; };
+		DD09563F255EAA9200BE37DD /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09563D255EAA9200BE37DD /* ImageAssets.swift */; };
+		DD095640255EAA9200BE37DD /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09563E255EAA9200BE37DD /* LocalizableStrings.swift */; };
 		DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */; };
 		DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */; };
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
@@ -86,8 +88,6 @@
 		DD6CBFFD1E26C41400162FDD /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6CBFFC1E26C41400162FDD /* Bundle+Utils.swift */; };
 		DD6E06911E114E88004A5653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06901E114E88004A5653 /* Assets.xcassets */; };
 		DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6E06921E114E88004A5653 /* LaunchScreen.storyboard */; };
-		DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FBF191FCB159B00E62504 /* ImageAssets.swift */; };
-		DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */; };
 		DD77FCED1E13DC3F0046EFCA /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */; };
 		DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */; };
 		DD7B108A1EE99E99003CA48D /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */; };
@@ -216,6 +216,8 @@
 		DD0905431E24701D00D9EFB0 /* PersonDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDTO.swift; sourceTree = "<group>"; };
 		DD0905451E24701D00D9EFB0 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		DD0905581E2472B300D9EFB0 /* SWDTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWDTabBarViewController.swift; sourceTree = "<group>"; };
+		DD09563D255EAA9200BE37DD /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
+		DD09563E255EAA9200BE37DD /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastMessages.swift; sourceTree = "<group>"; };
 		DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
 		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
@@ -270,8 +272,6 @@
 		DD6E06951E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6E069A1E114E88004A5653 /* SWDestiny-TradesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SWDestiny-TradesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6E06A01E114E88004A5653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD6FBF191FCB159B00E62504 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
-		DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		DD7571682133D19400C0CA45 /* Nimble_Snapshots.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble_Snapshots.framework; path = Carthage/Build/iOS/Nimble_Snapshots.framework; sourceTree = "<group>"; };
 		DD77FCEA1E13DC3F0046EFCA /* SearchListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		DD77FCEC1E13DC3F0046EFCA /* CardSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSearchCell.swift; sourceTree = "<group>"; };
@@ -603,6 +603,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		DD09563C255EAA9200BE37DD /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				DD09563D255EAA9200BE37DD /* ImageAssets.swift */,
+				DD09563E255EAA9200BE37DD /* LocalizableStrings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		DD0F80F51E23C9980088BE43 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,15 +899,6 @@
 			path = "SWDestiny TradesTests";
 			sourceTree = "<group>";
 		};
-		DD6FBF141FCB153400E62504 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DD6FBF191FCB159B00E62504 /* ImageAssets.swift */,
-				DD6FBF1A1FCB159B00E62504 /* LocalizableStrings.swift */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		DD77FCE81E13DC3F0046EFCA /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,7 +1038,7 @@
 				DD7FF0F41E1DCD4B004FC6CF /* Base */,
 				DDEDC96423252FF00045F125 /* Database */,
 				DDCDE3861E1DFA2300B4BE18 /* Extensions */,
-				DD6FBF141FCB153400E62504 /* Resources */,
+				DD09563C255EAA9200BE37DD /* Generated */,
 				DD9289061E11933C00FDEC48 /* Rest */,
 				DDCDE38B1E1DFED100B4BE18 /* Screens */,
 				DD888C3D1E1947820093B3BF /* Utils */,
@@ -1842,7 +1842,6 @@
 				DDFEB95D1E253A04004EADE9 /* AddCardCell.swift in Sources */,
 				DDCA97B61E2FA72A0098FFB5 /* DeckBuilderViewController.swift in Sources */,
 				DD9EA4EB23397EF700DB1A56 /* UIColor+DarkMode.swift in Sources */,
-				DD6FBF1C1FCB159B00E62504 /* LocalizableStrings.swift in Sources */,
 				DD0905191E244E4000D9EFB0 /* SetsTableView.swift in Sources */,
 				DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */,
 				DD7B108A1EE99E99003CA48D /* CollapsibleTableViewHeader.swift in Sources */,
@@ -1901,6 +1900,7 @@
 				DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */,
 				DD8CE75A1E1C27FB00110B07 /* AboutViewController.swift in Sources */,
 				DDF5D9611E2EA7C0007C8A4B /* DeckListViewController.swift in Sources */,
+				DD095640255EAA9200BE37DD /* LocalizableStrings.swift in Sources */,
 				DD77FCEE1E13DC3F0046EFCA /* CardSearchCell.swift in Sources */,
 				DD4BBCE31E26D104009929C4 /* ColorListDatasource.swift in Sources */,
 				DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */,
@@ -1950,6 +1950,7 @@
 				DDB764BF1E43639E007758D5 /* CardTypeBarChartCell.swift in Sources */,
 				DD6A3D2620C5E60500C2F817 /* DeckListNavigator.swift in Sources */,
 				DDFEB95F1E253A04004EADE9 /* AddCardTableView.swift in Sources */,
+				DD09563F255EAA9200BE37DD /* ImageAssets.swift in Sources */,
 				DD43B96620C7056300CEBFE5 /* UserCollectionNavigator.swift in Sources */,
 				DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */,
 				DD09051B1E2450B300D9EFB0 /* SetsView.swift in Sources */,
@@ -1960,7 +1961,6 @@
 				DDB764BC1E43639E007758D5 /* DeckGraphViewController.swift in Sources */,
 				DD4AB310252DFBC000196A3F /* UICollectionView+Identifiable.swift in Sources */,
 				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
-				DD6FBF1B1FCB159B00E62504 /* ImageAssets.swift in Sources */,
 				9D507EE5251A4843006D0E9B /* HttpClientProtocol.swift in Sources */,
 				9D507EE7251A49DB006D0E9B /* HttpParameters+Utils.swift in Sources */,
 				DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */,

@@ -1,5 +1,5 @@
 # file options
---exclude Pods
+--exclude Pods,Generated
 
 # Rules
 --disable unusedArguments
