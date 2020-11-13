@@ -1,5 +1,5 @@
 # file options
---exclude Pods,Generated
+--exclude Pods,SWDestiny\ Trades/Classes/Generated
 
 # Rules
 --disable unusedArguments
