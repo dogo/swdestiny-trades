@@ -8,10 +8,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
       - name: Setup Xcode version
         uses: maxim-lobanov/setup-xcode@v1.1
         with:
           xcode-version: 12.0.0
+
+      - name: Install Mint
+        run: |
+          brew install mint
+        shell: bash      
+
       - name: Cache libraries
         uses: actions/cache@v2          
         with:
@@ -19,9 +26,16 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
-      - name: Install Dependencies (CocoaPods Action)
+      
+      - name: Install CocoaPods Dependencies
         run: |
           pod install --repo-update
         shell: bash
+
+      - name: Install Mint Dependencies
+        run: |
+          mint bootstrap
+        shell: bash        
+      
       - name: Testing iOS app
         run: exec ./.github/scripts/test_app.sh
