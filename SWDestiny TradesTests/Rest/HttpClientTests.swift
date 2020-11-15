@@ -26,14 +26,15 @@ final class HttpClientTests: QuickSpec {
 
             context("requesting with success") {
                 it("using decode block") {
-                    session.data = try JSONEncoder().encode(true)
+                    session.data = "{ \"bar\": true }".data(using: .utf8)
 
-                    sut.request(request, decode: { json -> Bool in
-                        let reverse = !json
-                        return reverse
+                    sut.request(request, decode: { foo -> Foo in
+                        var temp = foo
+                        temp.bar = !foo.bar
+                        return temp
                     }, completion: { result in
-                        if case let .success(boolean) = result {
-                            expect(boolean) == false
+                        if case let .success(foo) = result {
+                            expect(foo.bar) == false
                         } else {
                             fail("Should be a success result")
                         }
@@ -41,11 +42,11 @@ final class HttpClientTests: QuickSpec {
                 }
 
                 it("without decode block") {
-                    session.data = try JSONEncoder().encode(true)
+                    session.data = "{ \"bar\": true }".data(using: .utf8)
 
-                    sut.request(request) { (result: Result<Bool, APIError>) in
-                        if case let .success(boolean) = result {
-                            expect(boolean) == true
+                    sut.request(request) { (result: Result<Foo, APIError>) in
+                        if case let .success(foo) = result {
+                            expect(foo.bar) == true
                         } else {
                             fail("Should be a success result")
                         }
@@ -129,4 +130,8 @@ final class HttpClientTests: QuickSpec {
             }
         }
     }
+}
+
+struct Foo: Codable {
+    var bar: Bool
 }
