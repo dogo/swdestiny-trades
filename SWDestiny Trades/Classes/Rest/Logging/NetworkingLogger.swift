@@ -99,8 +99,7 @@ final class NetworkingLogger {
     // MARK: - Log Body
 
     private func log(body: Data?) {
-        if let httpBody = body {
-            let bodyStr = String(data: httpBody, encoding: .utf8) ?? String()
+        if let httpBody = body, let bodyStr = String(data: httpBody, encoding: .utf8) {
             printTagged("Body: \(bodyStr)")
         }
     }
