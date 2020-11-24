@@ -41,8 +41,8 @@ extension SWDestinyEndpoint: EndpointProtocol {
     }
 
     /// The query parameters to be used in the request.
-    var parameters: HttpParameters {
-        return ["": ""]
+    var parameters: HttpParameters? {
+        return nil
     }
 
     /// The HTTP method used in the request.
@@ -64,7 +64,7 @@ extension SWDestinyEndpoint: EndpointProtocol {
         components.scheme = scheme.toString()
         components.host = host
         components.path = path
-        components.queryItems = parameters.queryItems
+        components.queryItems = parameters?.queryItems
         return components
     }
 

@@ -15,7 +15,7 @@ protocol EndpointProtocol {
     var scheme: HttpScheme { get }
     var host: String { get }
     var path: String { get }
-    var parameters: HttpParameters { get }
+    var parameters: HttpParameters? { get }
     var method: HttpMethod { get }
     var headers: HttpHeaders? { get }
 }
