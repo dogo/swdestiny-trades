@@ -43,12 +43,12 @@
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
 		DD0F81031E23C9980088BE43 /* SetsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FE1E23C9980088BE43 /* SetsTableCell.swift */; };
+		DD18CA6125839F2A00B279D6 /* ReferenceImages in Resources */ = {isa = PBXBuildFile; fileRef = DD2ABDC823065D8200374A8B /* ReferenceImages */; };
 		DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */; };
 		DD2287E71FD5F15F003FCADB /* SWDestinyServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2287E61FD5F15F003FCADB /* SWDestinyServiceProtocol.swift */; };
 		DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2742E31E1E742500F8DDED /* BaseViewCell.swift */; };
 		DD2ABDC6230659EE00374A8B /* CardDTOStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC2230659C900374A8B /* CardDTOStub.swift */; };
 		DD2ABDC7230659F200374A8B /* DeckDTOStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC4230659E900374A8B /* DeckDTOStub.swift */; };
-		DD2ABDC923065D8200374A8B /* ReferenceImages in Resources */ = {isa = PBXBuildFile; fileRef = DD2ABDC823065D8200374A8B /* ReferenceImages */; };
 		DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
@@ -1636,7 +1636,6 @@
 				DDC60FB01E26B9AC00473F6E /* Localizable.stringsdict in Resources */,
 				DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */,
 				DD6E06941E114E88004A5653 /* LaunchScreen.storyboard in Resources */,
-				DD2ABDC923065D8200374A8B /* ReferenceImages in Resources */,
 				DDC60FAF1E26B9AC00473F6E /* Localizable.strings in Resources */,
 				DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */,
 				DD9442CF251AC529009C37F6 /* GoogleService-Info.plist in Resources */,
@@ -1649,6 +1648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD18CA6125839F2A00B279D6 /* ReferenceImages in Resources */,
 				DDD19C6523344118007A9AF8 /* card-list.json in Resources */,
 				9D513F4023353AD200CCC12B /* sets.json in Resources */,
 				DDD19C7A233453C5007A9AF8 /* card.json in Resources */,
