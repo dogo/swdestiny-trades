@@ -39,6 +39,8 @@ extension SetDTO {
             return Asset.Sets.icTransformations.image
         } else if code.lowercased() == "fa" {
             return Asset.Sets.icFalteringAllegiances.image
+        } else if code.lowercased() == "ec" {
+            return Asset.Sets.icEternalConflict.image
         } else {
             return Asset.Sets.icNotFound.image
         }

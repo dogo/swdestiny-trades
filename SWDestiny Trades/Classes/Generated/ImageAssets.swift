@@ -44,6 +44,7 @@ internal enum Asset {
     internal static let icConvergence = ImageAsset(name: "Sets/ic_convergence")
     internal static let icCovertMissions = ImageAsset(name: "Sets/ic_covert_missions")
     internal static let icEmpireAtWar = ImageAsset(name: "Sets/ic_empire_at_war")
+    internal static let icEternalConflict = ImageAsset(name: "Sets/ic_eternal_conflict")
     internal static let icFalteringAllegiances = ImageAsset(name: "Sets/ic_faltering_allegiances")
     internal static let icLegacies = ImageAsset(name: "Sets/ic_legacies")
     internal static let icNotFound = ImageAsset(name: "Sets/ic_not_found")
