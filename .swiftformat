@@ -4,3 +4,4 @@
 
 # Rules
 --disable unusedArguments
+--disable trailingCommas

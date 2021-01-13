@@ -25,7 +25,7 @@ class AboutViewTests: QuickSpec {
 
                 it("should call closure when the url link is touched") {
                     var touched = false
-                    sut.didTouchHTTPLink = { url in
+                    sut.didTouchHTTPLink = { _ in
                         touched = true
                     }
                     let url = URL(string: "https://swdestinydb.com")!
