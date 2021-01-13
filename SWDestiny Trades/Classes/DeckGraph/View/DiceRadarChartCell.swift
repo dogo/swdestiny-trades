@@ -11,7 +11,8 @@ import UIKit
 import Charts
 
 final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
-    let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus", "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
+    let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus",
+                    "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
 
     var diceRadarView: RadarChartView = {
         let view = RadarChartView(frame: .zero)
@@ -21,6 +22,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
         view.innerWebColor = .lightGray
         view.webAlpha = 1.0
         view.chartDescription?.enabled = false
+        view.legend.textColor = .black
         return view
     }()
 
@@ -64,6 +66,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
     func setupLineChartView(chartView: PieRadarChartViewBase) {
         let xAxis: XAxis = diceRadarView.xAxis
         xAxis.labelFont = UIFont.systemFont(ofSize: CGFloat(12.0))
+        xAxis.labelTextColor = .black
         xAxis.xOffset = 0.0
         xAxis.yOffset = 0.0
         xAxis.valueFormatter = self
@@ -71,6 +74,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
         let yAxis: YAxis = diceRadarView.yAxis
         yAxis.axisMinimum = 0.0
         yAxis.drawLabelsEnabled = false
+        yAxis.labelTextColor = .black
 
         chartView.rotationEnabled = false
 

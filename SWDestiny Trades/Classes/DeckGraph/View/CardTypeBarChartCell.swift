@@ -6,9 +6,8 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
-
 import Charts
+import UIKit
 
 final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
     let cardTypes = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
@@ -17,6 +16,8 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
         let view = BarChartView(frame: .zero)
         view.drawBarShadowEnabled = false
         view.drawValueAboveBarEnabled = true
+        view.legend.textColor = .black
+        view.noDataTextColor = .black
         return view
     }()
 
@@ -62,6 +63,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
 
         let xAxis: XAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
+        xAxis.labelTextColor = .black
         xAxis.labelFont = UIFont.systemFont(ofSize: CGFloat(12.0))
         xAxis.drawGridLinesEnabled = false
         xAxis.labelCount = cardTypes.count
@@ -73,6 +75,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
         leftAxis.axisMinimum = 0.0
         leftAxis.axisMaximum = 18
         leftAxis.granularity = 2.0
+        leftAxis.labelTextColor = .black
 
         let marker = XYMarkerView(color: .lightGray,
                                   font: UIFont.systemFont(ofSize: CGFloat(10.0)),

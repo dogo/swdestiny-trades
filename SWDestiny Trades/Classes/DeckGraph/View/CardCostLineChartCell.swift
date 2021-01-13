@@ -11,7 +11,12 @@ import UIKit
 import Charts
 
 final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
-    var cardCostChartView = LineChartView(frame: .zero)
+    let cardCostChartView: LineChartView = {
+        let view = LineChartView(frame: .zero)
+        view.legend.textColor = .black
+        view.noDataTextColor = .black
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,12 +62,14 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
 
         let xAxis: XAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
+        xAxis.labelTextColor = .black
         xAxis.labelFont = UIFont.systemFont(ofSize: CGFloat(10.0))
         xAxis.drawGridLinesEnabled = false
         xAxis.granularity = 1.0
 
         let leftAxis: YAxis = chartView.leftAxis
         leftAxis.labelFont = UIFont.systemFont(ofSize: CGFloat(10.0))
+        leftAxis.labelTextColor = .black
         leftAxis.labelPosition = .outsideChart
         leftAxis.axisMinimum = 0.0
         leftAxis.axisMaximum = 18
