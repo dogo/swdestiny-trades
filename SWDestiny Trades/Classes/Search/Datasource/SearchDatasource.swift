@@ -10,14 +10,11 @@ import UIKit
 
 final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
     private var tableView: UITableView?
-    private var searchIsActive: Bool = false
     private var cardsData: [CardDTO] = []
-    private var filtered: [CardDTO] = []
 
     required init(cards: [CardDTO], tableView: UITableView, delegate: UITableViewDelegate) {
         super.init()
         cardsData = cards
-        filtered = cards
         self.tableView = tableView
         tableView.register(cellType: CardSearchCell.self)
         self.tableView?.dataSource = self
@@ -27,32 +24,21 @@ final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelega
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: CardSearchCell.self)
-        cell.configureCell(cardDTO: getCard(at: indexPath))
+        cell.configureCell(cardDTO: cardsData[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchIsActive ? filtered.count : cardsData.count
+        return cardsData.count
     }
 
     func updateSearchList(_ cards: [CardDTO]) {
         cardsData = cards
-        filtered = cards
         tableView?.reloadData()
     }
 
     func getCard(at index: IndexPath) -> CardDTO {
-        return searchIsActive ? filtered[index.row] : cardsData[index.row]
-    }
-
-    func doingSearch(_ searchText: String) {
-        let predicate = NSPredicate(format: "name CONTAINS[cd] %@ OR code CONTAINS[cd] %@", searchText, searchText)
-        filtered = cardsData.filter {
-            predicate.evaluate(with: $0)
-        }
-
-        searchIsActive = !searchText.trim().isEmpty
-        tableView?.reloadData()
+        return cardsData[index.row]
     }
 }
 

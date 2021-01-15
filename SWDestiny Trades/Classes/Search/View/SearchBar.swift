@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SearchBar: UISearchBar, UISearchBarDelegate {
+final class SearchBar: UISearchBar {
     var doingSearch: ((String) -> Void)?
 
     override init(frame: CGRect) {
@@ -22,8 +22,11 @@ final class SearchBar: UISearchBar, UISearchBarDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        doingSearch?(searchText)
+extension SearchBar: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        doingSearch?(searchBar.text ?? "")
     }
 }

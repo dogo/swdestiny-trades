@@ -9,6 +9,8 @@
 import Foundation
 
 protocol SWDestinyServiceProtocol {
+    func search(query: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)
+
     func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void)
 
     func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)

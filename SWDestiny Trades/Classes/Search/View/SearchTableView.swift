@@ -13,7 +13,7 @@ final class SearchTableView: UITableView, SearchDelegate {
     var doingSearch: ((String) -> Void)?
 
     private var searchDatasource: SearchDatasource?
-    let search = Search()
+    private let search = Search()
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -29,10 +29,6 @@ final class SearchTableView: UITableView, SearchDelegate {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func doingSearch(_ query: String) {
-        searchDatasource?.doingSearch(query)
     }
 
     func updateSearchList(_ cards: [CardDTO]) {

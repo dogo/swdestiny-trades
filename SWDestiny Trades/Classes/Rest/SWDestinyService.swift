@@ -15,6 +15,13 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         self.client = client
     }
 
+    func search(query: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
+        let endpoint: SWDestinyEndpoint = .search(query: query)
+        let request = endpoint.request
+
+        client.request(request, completion: completion)
+    }
+
     func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {
         let endpoint: SWDestinyEndpoint = .setList
         let request = endpoint.request

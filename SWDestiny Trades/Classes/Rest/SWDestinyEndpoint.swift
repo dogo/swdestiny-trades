@@ -13,6 +13,7 @@ enum SWDestinyEndpoint {
     case cardList(setCode: String)
     case allCards
     case card(cardId: String)
+    case search(query: String)
 }
 
 extension SWDestinyEndpoint: EndpointProtocol {
@@ -37,18 +38,25 @@ extension SWDestinyEndpoint: EndpointProtocol {
             return "/api/public/cards/"
         case let .card(cardId):
             return "/api/public/card/\(cardId)"
+        case .search:
+            return "/api/public/find"
         }
     }
 
     /// The query parameters to be used in the request.
     var parameters: HttpParameters? {
-        return nil
+        switch self {
+        case let .search(query):
+            return ["q": query]
+        default:
+            return nil
+        }
     }
 
     /// The HTTP method used in the request.
     var method: HttpMethod {
         switch self {
-        case .setList, .cardList, .allCards, .card:
+        case .setList, .cardList, .allCards, .card, .search:
             return .get
         }
     }

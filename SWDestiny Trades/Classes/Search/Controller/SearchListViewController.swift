@@ -46,8 +46,24 @@ final class SearchListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        searchView.searchTableView.didSelectCard = { [weak self] card in
+            self?.navigateToNextController(with: card)
+        }
+
+        searchView.searchBar.doingSearch = { [weak self] query in
+            self?.search(query: query)
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationItem.title = L10n.search
+    }
+
+    func search(query: String) {
         searchView.activityIndicator.startAnimating()
-        destinyService.retrieveAllCards { [weak self] result in
+        destinyService.search(query: query) { [weak self] result in
             self?.searchView.activityIndicator.stopAnimating()
             switch result {
             case let .success(allCards):
@@ -58,20 +74,6 @@ final class SearchListViewController: UIViewController {
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
-
-        searchView.searchTableView.didSelectCard = { [weak self] card in
-            self?.navigateToNextController(with: card)
-        }
-
-        searchView.searchBar.doingSearch = { [weak self] query in
-            self?.searchView.searchTableView.doingSearch(query)
-        }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationItem.title = L10n.search
     }
 
     // MARK: Navigation
