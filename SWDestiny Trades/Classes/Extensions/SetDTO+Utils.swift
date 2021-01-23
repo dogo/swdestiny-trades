@@ -41,6 +41,8 @@ extension SetDTO {
             return Asset.Sets.icFalteringAllegiances.image
         } else if code.lowercased() == "ec" {
             return Asset.Sets.icEternalConflict.image
+        } else if code.lowercased() == "rm" {
+            return Asset.Sets.icRedemption.image
         } else {
             return Asset.Sets.icNotFound.image
         }
