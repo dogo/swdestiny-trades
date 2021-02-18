@@ -27,7 +27,10 @@ extension HttpClient {
                                             decodingType: T.Type,
                                             completionHandler completion: @escaping (T?, RequestError?) -> Void) -> URLSessionDataTask
     {
+        let requestDate = Date()
         let task = session.dataTask(with: request) { [weak self] data, response, error in
+
+            let responseTime = Date().timeIntervalSince(requestDate)
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, self?.failureReason(HttpStatusCode.unknown.rawValue, error))
@@ -39,7 +42,7 @@ extension HttpClient {
                 if let data = data {
                     do {
                         let model = try JSONDecoder().decode(decodingType, from: data)
-                        self?.logger.log(response: response, data: data)
+                        self?.logger.log(response: response, data: data, time: responseTime)
                         completion(model, nil)
                     } catch {
                         completion(nil, RequestError(statusCode, reason: .jsonConversionFailure))

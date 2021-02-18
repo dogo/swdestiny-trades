@@ -60,8 +60,9 @@ final class NetworkingLogger {
 
     // MARK: - Log Body
 
-    private func log(statusCode: Int, url: String) {
+    private func log(statusCode: Int, url: String, time: TimeInterval) {
         printTagged("\(statusCode) '\(url)'")
+        printTagged("Duration: '\(time.toString())'")
     }
 
     // MARK: - Log JSON
@@ -118,5 +119,20 @@ final class NetworkingLogger {
         let components = string.components(separatedBy: "\n")
         printTagged("JSON:")
         components.forEach { printTagged($0) }
+    }
+}
+
+extension TimeInterval {
+
+    func toString() -> String {
+
+        let int = NSInteger(self)
+
+        let milliseconds = Int((self.formTruncatingRemainder(dividingBy: 1)) * 1000)
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+
+        return String(format: "%00.2d:%0.2d:%0.2d.%0.3d", hours, minutes, seconds, milliseconds)
     }
 }
