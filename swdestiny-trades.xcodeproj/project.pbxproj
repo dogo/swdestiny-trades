@@ -2307,7 +2307,7 @@
 			repositoryURL = "https://github.com/liufengting/FTPopOverMenu_Swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.3;
+				minimumVersion = 0.4.2;
 			};
 		};
 		DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
