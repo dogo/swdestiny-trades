@@ -91,7 +91,6 @@ PODS:
   - SwiftMessages (9.0.0):
     - SwiftMessages/App (= 9.0.0)
   - SwiftMessages/App (9.0.0)
-  - TextFieldEffects (1.6.0)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -101,7 +100,6 @@ DEPENDENCIES:
   - Quick
   - RealmSwift
   - SwiftMessages
-  - TextFieldEffects
 
 SPEC REPOS:
   trunk:
@@ -123,7 +121,6 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SwiftMessages
-    - TextFieldEffects
 
 SPEC CHECKSUMS:
   Firebase: d59ad4129167f9f0d2a4f6c1f0c462254b6002c8
@@ -144,8 +141,7 @@ SPEC CHECKSUMS:
   Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
   RealmSwift: 4f6758c3adbdcc87f7b7777107226532a077f61c
   SwiftMessages: 55274ca3a239062398603008ed81924cfd1fe798
-  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: d79350dc744ae041f90255267b91b62d32f59db5
+PODFILE CHECKSUM: 95776c779e6ce7793a08d9c61c6335aadcb4b8d8
 
 COCOAPODS: 1.10.1

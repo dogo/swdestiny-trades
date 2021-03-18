@@ -62,6 +62,7 @@
 		DD43B96620C7056300CEBFE5 /* UserCollectionNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */; };
 		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
 		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
+		DD48490B2602FD8500C3B611 /* FloatingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48490A2602FD8500C3B611 /* FloatingTextfield.swift */; };
 		DD4AB30E252DFBC000196A3F /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30B252DFBC000196A3F /* Identifiable.swift */; };
 		DD4AB30F252DFBC000196A3F /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30C252DFBC000196A3F /* UITableView+Identifiable.swift */; };
 		DD4AB310252DFBC000196A3F /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30D252DFBC000196A3F /* UICollectionView+Identifiable.swift */; };
@@ -243,6 +244,7 @@
 		DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionNavigator.swift; sourceTree = "<group>"; };
 		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
 		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
+		DD48490A2602FD8500C3B611 /* FloatingTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingTextfield.swift; sourceTree = "<group>"; };
 		DD4AB30B252DFBC000196A3F /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		DD4AB30C252DFBC000196A3F /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
 		DD4AB30D252DFBC000196A3F /* UICollectionView+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Identifiable.swift"; sourceTree = "<group>"; };
@@ -1415,6 +1417,7 @@
 				DD2742E31E1E742500F8DDED /* BaseViewCell.swift */,
 				DD7FF0F51E1DCD69004FC6CF /* BaseViewConfiguration.swift */,
 				DD7B10891EE99E99003CA48D /* CollapsibleTableViewHeader.swift */,
+				DD48490A2602FD8500C3B611 /* FloatingTextfield.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1675,7 +1678,6 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
-				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1690,7 +1692,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1918,6 +1919,7 @@
 				DDAFBF251FF6F3F500927875 /* AddToDeckCardDatasource.swift in Sources */,
 				DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */,
 				DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */,
+				DD48490B2602FD8500C3B611 /* FloatingTextfield.swift in Sources */,
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,

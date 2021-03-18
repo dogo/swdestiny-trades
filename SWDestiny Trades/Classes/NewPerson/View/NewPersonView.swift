@@ -6,32 +6,27 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import TextFieldEffects
 import UIKit
 
 final class NewPersonView: UIView {
-    lazy var firstNameTextField: HoshiTextField = {
-        let textField = HoshiTextField(frame: .zero)
+    lazy var firstNameTextField: FloatingTextfield = {
+        let textField = FloatingTextfield(frame: .zero)
         textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.placeholder = L10n.firstName
-        textField.placeholderColor = .secondaryLabel
-        textField.borderInactiveColor = .whiteBlack
-        textField.borderActiveColor = .whiteBlack
+        textField.placeholderTextColor = .secondaryLabel
         textField.delegate = self
         return textField
     }()
 
-    var lastNameTextField: HoshiTextField = {
-        let textField = HoshiTextField(frame: .zero)
+    var lastNameTextField: FloatingTextfield = {
+        let textField = FloatingTextfield(frame: .zero)
         textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.placeholder = L10n.lastName
-        textField.placeholderColor = .secondaryLabel
-        textField.borderInactiveColor = .whiteBlack
-        textField.borderActiveColor = .whiteBlack
+        textField.placeholderTextColor = .secondaryLabel
         return textField
     }()
 

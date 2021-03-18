@@ -9,7 +9,6 @@ target 'SWDestiny Trades' do
   pod 'Firebase/Crashlytics'
   pod 'RealmSwift'
   pod 'SwiftMessages'
-  pod 'TextFieldEffects'
 
   target 'SWDestiny-TradesTests' do
     inherit! :search_paths
