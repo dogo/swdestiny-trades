@@ -36,11 +36,11 @@ final class NetworkingLogger {
 
     // MARK: - Log Response
 
-    func log(response: URLResponse?, data: Data?) {
+    func log(response: URLResponse?, data: Data?, time: TimeInterval) {
         guard loglevel != .none else { return }
 
         if let response = response as? HTTPURLResponse, let url = response.url {
-            log(statusCode: response.statusCode, url: url.absoluteString)
+            log(statusCode: response.statusCode, url: url.absoluteString, time: time)
         }
 
         if loglevel == .debug {
@@ -123,12 +123,10 @@ final class NetworkingLogger {
 }
 
 extension TimeInterval {
-
     func toString() -> String {
+        let time = NSInteger(self)
 
-        let int = NSInteger(self)
-
-        let milliseconds = Int((self.formTruncatingRemainder(dividingBy: 1)) * 1000)
+        let milliseconds = Int(truncatingRemainder(dividingBy: 1) * 1000)
         let seconds = time % 60
         let minutes = (time / 60) % 60
         let hours = (time / 3600)
