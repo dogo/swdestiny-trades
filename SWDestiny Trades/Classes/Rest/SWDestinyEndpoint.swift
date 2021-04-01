@@ -44,7 +44,7 @@ extension SWDestinyEndpoint: EndpointProtocol {
     }
 
     /// The query parameters to be used in the request.
-    var parameters: HttpParameters? {
+    var queryParameters: QueryParameters? {
         switch self {
         case let .search(query):
             return ["q": query]
@@ -72,7 +72,7 @@ extension SWDestinyEndpoint: EndpointProtocol {
         components.scheme = scheme.toString()
         components.host = host
         components.path = path
-        components.queryItems = parameters?.queryItems
+        components.queryItems = queryParameters?.items
         return components
     }
 

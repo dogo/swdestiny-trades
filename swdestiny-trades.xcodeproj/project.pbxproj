@@ -10,7 +10,7 @@
 		319D84306E4FAFD63F148AD4 /* Pods_SWDestiny_Trades.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F20A6B597A698E8D9AFB6AF4 /* Pods_SWDestiny_Trades.framework */; };
 		46B7D67CF4869026E4DCBD4B /* Pods_SWDestiny_TradesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A374E0D709F3526DFEFC5115 /* Pods_SWDestiny_TradesTests.framework */; };
 		9D507EE5251A4843006D0E9B /* HttpClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D507EE4251A4843006D0E9B /* HttpClientProtocol.swift */; };
-		9D507EE7251A49DB006D0E9B /* HttpParameters+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D507EE6251A49DB006D0E9B /* HttpParameters+Utils.swift */; };
+		9D507EE7251A49DB006D0E9B /* QueryParameters+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D507EE6251A49DB006D0E9B /* QueryParameters+Utils.swift */; };
 		9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */; };
 		9D513F4023353AD200CCC12B /* sets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D513F3F23353AD100CCC12B /* sets.json */; };
 		9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */; };
@@ -193,7 +193,7 @@
 		2ACD00FAEA22BFAC8E1E5AD4 /* Pods-SWDestiny-TradesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny-TradesTests.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C6CEC86AA7A814959672898 /* Pods-SWDestiny Trades.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SWDestiny Trades.debug.xcconfig"; path = "Target Support Files/Pods-SWDestiny Trades/Pods-SWDestiny Trades.debug.xcconfig"; sourceTree = "<group>"; };
 		9D507EE4251A4843006D0E9B /* HttpClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClientProtocol.swift; sourceTree = "<group>"; };
-		9D507EE6251A49DB006D0E9B /* HttpParameters+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpParameters+Utils.swift"; sourceTree = "<group>"; };
+		9D507EE6251A49DB006D0E9B /* QueryParameters+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QueryParameters+Utils.swift"; sourceTree = "<group>"; };
 		9D513F3D2335388800CCC12B /* SetsListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsListViewControllerTests.swift; sourceTree = "<group>"; };
 		9D513F3F23353AD100CCC12B /* sets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sets.json; sourceTree = "<group>"; };
 		9D513F4223353DEA00CCC12B /* DeckGraphViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckGraphViewControllerTests.swift; sourceTree = "<group>"; };
@@ -1155,7 +1155,7 @@
 		DDB6E75A23C0E36400075432 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9D507EE6251A49DB006D0E9B /* HttpParameters+Utils.swift */,
+				9D507EE6251A49DB006D0E9B /* QueryParameters+Utils.swift */,
 				DDB6E75B23C0E50B00075432 /* URLRequest+Utils.swift */,
 			);
 			path = Extensions;
@@ -1964,7 +1964,7 @@
 				DD4AB310252DFBC000196A3F /* UICollectionView+Identifiable.swift in Sources */,
 				DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */,
 				9D507EE5251A4843006D0E9B /* HttpClientProtocol.swift in Sources */,
-				9D507EE7251A49DB006D0E9B /* HttpParameters+Utils.swift in Sources */,
+				9D507EE7251A49DB006D0E9B /* QueryParameters+Utils.swift in Sources */,
 				DDAB3DAA1E27BD14006A603D /* CardReturnable.swift in Sources */,
 				DDAFBF2A1FF6F3F500927875 /* AddToDeckView.swift in Sources */,
 				DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */,

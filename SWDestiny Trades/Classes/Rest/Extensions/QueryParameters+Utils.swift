@@ -1,5 +1,5 @@
 //
-//  HttpParameters+Utils.swift
+//  QueryParameters+Utils.swift
 //  SWDestiny Trades
 //
 //  Created by diogo.autilio on 22/09/20.
@@ -8,8 +8,9 @@
 
 import Foundation
 
-extension HttpParameters {
-    var queryItems: [URLQueryItem] {
+extension QueryParameters {
+
+    var items: [URLQueryItem] {
         return compactMap { URLQueryItem(name: $0, value: $1) }
     }
 }
