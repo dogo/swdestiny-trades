@@ -33,12 +33,12 @@ extension HttpClient {
             let responseTime = Date().timeIntervalSince(requestDate)
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(nil, self?.failureReason(HttpStatusCode.unknown.rawValue, error))
+                completion(nil, self?.failureReason(HttpStatusCode.unknown, error))
                 return
             }
-            let statusCode = httpResponse.statusCode
+            let statusCode = HttpStatusCode(fromRawValue: httpResponse.statusCode)
             switch statusCode {
-            case 200 ... 399:
+            case .ok ... .permanentRedirect:
                 if let data = data {
                     do {
                         let model = try JSONDecoder().decode(decodingType, from: data)
@@ -64,7 +64,7 @@ extension HttpClient {
 
             DispatchQueue.main.async {
                 if let error = error {
-                    self?.logger.logError(request: request, statusCode: error.statusCode, error: error.reason)
+                    self?.logger.logError(request: request, statusCode: error.statusCode.rawValue, error: error.reason)
                     completion(.failure(error.reason))
                     return
                 }
@@ -90,7 +90,7 @@ extension HttpClient {
 
     // MARK: - Helper
 
-    private func failureReason(_ statusCode: Int, _ error: Error?) -> RequestError {
+    private func failureReason(_ statusCode: HttpStatusCode, _ error: Error?) -> RequestError {
         var reason: APIError = .requestFailed(reason: error?.localizedDescription)
 
         if let error = error as NSError?, error.code == NSURLErrorCancelled {

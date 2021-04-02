@@ -36,9 +36,9 @@ enum APIError: Error {
 
 final class RequestError {
     var reason: APIError
-    var statusCode: Int
+    var statusCode: HttpStatusCode
 
-    init(_ statusCode: Int, reason: APIError) {
+    init(_ statusCode: HttpStatusCode, reason: APIError) {
         self.statusCode = statusCode
         self.reason = reason
     }

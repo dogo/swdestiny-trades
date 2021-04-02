@@ -407,4 +407,11 @@ public enum HttpStatusCode: Int {
     case expiredSession = -1
 }
 
+extension HttpStatusCode: Comparable {
+
+    public static func < (lhs: HttpStatusCode, rhs: HttpStatusCode) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
 // swiftlint:enable file_length
