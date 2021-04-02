@@ -55,6 +55,7 @@
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
 		DD3AFB7A1E79E28A00BF2001 /* UserCollectionTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */; };
 		DD3AFB801E79E63200BF2001 /* UserCollectionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */; };
+		DD3BDE8C2616CCE700143494 /* BodyParameters+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3BDE8B2616CCE700143494 /* BodyParameters+Utils.swift */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
 		DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */; };
@@ -237,6 +238,7 @@
 		DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDatasource.swift; sourceTree = "<group>"; };
 		DD3AFB741E79E28A00BF2001 /* UserCollectionTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionTableView.swift; sourceTree = "<group>"; };
 		DD3AFB7F1E79E63200BF2001 /* UserCollectionDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionDTO.swift; sourceTree = "<group>"; };
+		DD3BDE8B2616CCE700143494 /* BodyParameters+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BodyParameters+Utils.swift"; sourceTree = "<group>"; };
 		DD4103D71E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckBuilderNavigator.swift; sourceTree = "<group>"; };
@@ -1155,6 +1157,7 @@
 		DDB6E75A23C0E36400075432 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DD3BDE8B2616CCE700143494 /* BodyParameters+Utils.swift */,
 				9D507EE6251A49DB006D0E9B /* QueryParameters+Utils.swift */,
 				DDB6E75B23C0E50B00075432 /* URLRequest+Utils.swift */,
 			);
@@ -1921,6 +1924,7 @@
 				DD99D4C2217FE68900AE1301 /* LoggerManager.swift in Sources */,
 				DD48490B2602FD8500C3B611 /* FloatingTextfield.swift in Sources */,
 				DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */,
+				DD3BDE8C2616CCE700143494 /* BodyParameters+Utils.swift in Sources */,
 				DD09054F1E24701D00D9EFB0 /* LoanDetailCell.swift in Sources */,
 				DDF2DD2B1E429EF50090519E /* Sort.swift in Sources */,
 				DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */,

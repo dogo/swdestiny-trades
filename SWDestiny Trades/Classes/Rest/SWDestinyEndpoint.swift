@@ -53,6 +53,11 @@ extension SWDestinyEndpoint: EndpointProtocol {
         }
     }
 
+    /// The body parameters to be used in the request.
+    var bodyParameters: BodyParameters? {
+        return nil
+    }
+
     /// The HTTP method used in the request.
     var method: HttpMethod {
         switch self {
@@ -81,6 +86,7 @@ extension SWDestinyEndpoint: EndpointProtocol {
         var request = URLRequest(with: urlComponents.url)
         request.httpMethod = method.toString()
         request.allHTTPHeaderFields = headers
+        request.httpBody = bodyParameters?.dataEncoded
         return request
     }
 }
