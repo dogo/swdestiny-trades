@@ -43,6 +43,10 @@ extension SetDTO {
             return Asset.Sets.icEternalConflict.image
         } else if code.lowercased() == "rm" {
             return Asset.Sets.icRedemption.image
+        } else if code.lowercased() == "hs" {
+            return Asset.Sets.icHighStakes.image
+        } else if code.lowercased() == "pw" {
+            return Asset.Sets.icPartingWords.image
         } else {
             return Asset.Sets.icNotFound.image
         }
