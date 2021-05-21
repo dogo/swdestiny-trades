@@ -5,3 +5,4 @@
 # Rules
 --disable unusedArguments
 --disable trailingCommas
+--disable blankLinesAtStartOfScope
