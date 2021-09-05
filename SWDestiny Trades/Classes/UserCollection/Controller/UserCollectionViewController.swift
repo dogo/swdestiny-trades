@@ -6,7 +6,7 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import FTPopOverMenu_Swift
+import FTPopOverMenu
 import UIKit
 
 final class UserCollectionViewController: UIViewController {
