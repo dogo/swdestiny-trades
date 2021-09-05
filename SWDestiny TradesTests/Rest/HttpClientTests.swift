@@ -13,6 +13,7 @@ import Quick
 @testable import SWDestiny_Trades
 
 final class HttpClientTests: QuickSpec {
+
     override func spec() {
         describe("HttpClient") {
             var sut: HttpClient!

@@ -12,7 +12,8 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class AboutViewControllerTests: QuickSpec {
+final class AboutViewControllerTests: QuickSpec {
+
     override func spec() {
         describe("About view controller") {
             var controller: AboutViewController!

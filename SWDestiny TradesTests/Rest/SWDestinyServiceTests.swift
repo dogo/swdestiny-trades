@@ -10,7 +10,8 @@ import Nimble
 import Quick
 @testable import SWDestiny_Trades
 
-class SWDestinyServiceTests: QuickSpec {
+final class SWDestinyServiceTests: QuickSpec {
+
     override func spec() {
         describe("SWDestinyService") {
             var sut: SWDestinyService!

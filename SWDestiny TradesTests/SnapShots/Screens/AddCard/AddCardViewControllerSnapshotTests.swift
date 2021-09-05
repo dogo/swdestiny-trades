@@ -13,7 +13,8 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class AddCardViewControllerSnapshotTests: QuickSpec {
+final class AddCardViewControllerSnapshotTests: QuickSpec {
+
     override func spec() {
         var sut: AddCardViewController!
         var service: SWDestinyService!

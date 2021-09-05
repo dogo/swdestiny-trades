@@ -12,7 +12,8 @@ import Quick
 
 @testable import SWDestiny_Trades
 
-class AboutViewTests: QuickSpec {
+final class AboutViewTests: QuickSpec {
+
     override func spec() {
         var sut: AboutView!
 

@@ -12,7 +12,8 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class CardDetailViewControllerTests: QuickSpec {
+final class CardDetailViewControllerTests: QuickSpec {
+
     override func spec() {
         describe("CardDetail view controller") {
             var controller: CardDetailViewController!
