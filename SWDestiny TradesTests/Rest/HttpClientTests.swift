@@ -6,8 +6,10 @@
 //  Copyright © 2020 Diogo Autilio. All rights reserved.
 //
 
+import Foundation
 import Nimble
 import Quick
+
 @testable import SWDestiny_Trades
 
 final class HttpClientTests: QuickSpec {

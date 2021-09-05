@@ -6,6 +6,7 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
+import Foundation
 import Nimble
 import Quick
 
