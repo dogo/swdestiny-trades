@@ -30,6 +30,10 @@ internal enum L10n {
   internal static let alreadyAdded = L10n.tr("Localizable", "ALREADY_ADDED")
   /// Blue
   internal static let blue = L10n.tr("Localizable", "BLUE")
+  /// Plural format key: "Borrowed %#@card@"
+  internal static func borrowedCard(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "BORROWED_CARD", p1)
+  }
   /// Card cost
   internal static let cardCost = L10n.tr("Localizable", "CARD_COST")
   /// Card #
@@ -38,6 +42,10 @@ internal enum L10n {
   internal static let cardTypes = L10n.tr("Localizable", "CARD_TYPES")
   /// Cards
   internal static let cards = L10n.tr("Localizable", "CARDS")
+  /// Plural format key: "%#@card@"
+  internal static func cardsCount(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "CARDS_COUNT", p1)
+  }
   /// Close
   internal static let close = L10n.tr("Localizable", "CLOSE")
   /// Collection
@@ -80,6 +88,14 @@ internal enum L10n {
   internal static func lastUpdate(_ p1: Any) -> String {
     return L10n.tr("Localizable", "LAST_UPDATE", String(describing: p1))
   }
+  /// Plural format key: "Lent me %#@card@ & borrowed %#@card@"
+  internal static func lentMeAndBorrowedCards(_ p1: Int, _ p2: Int) -> String {
+    return L10n.tr("Localizable", "LENT_ME_AND_BORROWED_CARDS", p1, p2)
+  }
+  /// Plural format key: "Lent me %#@card@"
+  internal static func lentMeCard(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "LENT_ME_CARD", p1)
+  }
   /// Loans
   internal static let loans = L10n.tr("Localizable", "LOANS")
   /// My Collection
@@ -100,6 +116,10 @@ internal enum L10n {
   internal static let search = L10n.tr("Localizable", "SEARCH")
   /// Shared with SWD Trades for iOS
   internal static let shareText = L10n.tr("Localizable", "SHARE_TEXT")
+  /// Plural format key: "%#@side@"
+  internal static func sidesCount(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "SIDES_COUNT", p1)
+  }
   /// Support
   internal static let support = L10n.tr("Localizable", "SUPPORT")
   /// https://swdestinydb.com

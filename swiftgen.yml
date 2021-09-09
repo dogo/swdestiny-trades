@@ -1,7 +1,7 @@
 input_dir: 'SWDestiny Trades'
 output_dir: 'SWDestiny Trades/Classes/Generated/'
 strings:
-  inputs: Localization/Base.lproj/Localizable.strings
+  inputs: Localization/Base.lproj
   outputs:
     - templateName: structured-swift4
       output: LocalizableStrings.swift

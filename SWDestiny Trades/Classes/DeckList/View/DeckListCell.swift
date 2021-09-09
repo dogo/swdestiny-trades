@@ -68,11 +68,7 @@ final class DeckListCell: UITableViewCell, Identifiable {
 
         if let deckList = deckDTO?.list {
             let quantity = deckList.sum(ofProperty: "quantity") as Int
-            if quantity > 0 {
-                subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), quantity)
-            } else {
-                subTitle.text = String.localizedStringWithFormat(NSLocalizedString("CARDS_COUNT", comment: ""), 0)
-            }
+            subTitle.text = L10n.cardsCount(quantity)
         }
     }
 

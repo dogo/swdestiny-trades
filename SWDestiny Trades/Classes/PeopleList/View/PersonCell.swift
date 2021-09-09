@@ -9,6 +9,7 @@
 import UIKit
 
 final class PersonCell: UITableViewCell, Identifiable {
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         detailTextLabel?.textColor = .secondaryLabel
@@ -30,12 +31,13 @@ final class PersonCell: UITableViewCell, Identifiable {
         var loanState = L10n.noLoans
         let lentMeCount = personDTO.lentMe.sum(ofProperty: "quantity") as Int
         let borrowedCount = personDTO.borrowed.sum(ofProperty: "quantity") as Int
+
         if lentMeCount > 0, borrowedCount > 0 {
-            loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_AND_BORROWED_CARDS", comment: ""), lentMeCount, borrowedCount)
+            loanState = L10n.lentMeAndBorrowedCards(lentMeCount, borrowedCount)
         } else if lentMeCount > 0 {
-            loanState = String.localizedStringWithFormat(NSLocalizedString("LENT_ME_CARD", comment: ""), lentMeCount)
+            loanState = L10n.lentMeCard(lentMeCount)
         } else if borrowedCount > 0 {
-            loanState = String.localizedStringWithFormat(NSLocalizedString("BORROWED_CARD", comment: ""), borrowedCount)
+            loanState = L10n.borrowedCard(borrowedCount)
         }
 
         return loanState
