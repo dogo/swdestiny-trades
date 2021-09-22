@@ -12,9 +12,6 @@ target 'SWDestiny Trades' do
 
   target 'SWDestiny-TradesTests' do
     inherit! :search_paths
-    pod 'Quick'
-    pod 'Nimble'
-    pod 'Nimble-Snapshots'
   end
 
 end

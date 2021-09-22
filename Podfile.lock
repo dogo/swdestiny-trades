@@ -82,24 +82,12 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
-  - iOSSnapshotTestCase (6.2.0):
-    - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
-  - iOSSnapshotTestCase/Core (6.2.0)
-  - iOSSnapshotTestCase/SwiftSupport (6.2.0):
-    - iOSSnapshotTestCase/Core
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - Nimble (9.2.1)
-  - Nimble-Snapshots (9.1.1):
-    - Nimble-Snapshots/Core (= 9.1.1)
-  - Nimble-Snapshots/Core (9.1.1):
-    - iOSSnapshotTestCase (~> 6.0)
-    - Nimble
   - PromisesObjC (2.0.0)
-  - Quick (4.0.0)
   - Realm (10.14.0):
     - Realm/Headers (= 10.14.0)
   - Realm/Headers (10.14.0)
@@ -112,9 +100,6 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Crashlytics
-  - Nimble
-  - Nimble-Snapshots
-  - Quick
   - RealmSwift
   - SwiftMessages
 
@@ -129,12 +114,8 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
-    - iOSSnapshotTestCase
     - nanopb
-    - Nimble
-    - Nimble-Snapshots
     - PromisesObjC
-    - Quick
     - Realm
     - RealmSwift
     - SwiftMessages
@@ -149,16 +130,12 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 2c0c6e2a7ab3fe730ade6379f732bdefb46f50b0
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
-  iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
-  Nimble-Snapshots: 881d47f238c5462f38ffcccb1747b17c633b2c18
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   Realm: 95a120db10fa66d0f1d10bee4ce828177ae00090
   RealmSwift: 4937e1b6f9b87bc25dc23883198807bf69e8cb76
   SwiftMessages: 082ed63613a49fa8e749cd6000bb0a8b9bbc736f
 
-PODFILE CHECKSUM: 95776c779e6ce7793a08d9c61c6335aadcb4b8d8
+PODFILE CHECKSUM: d1aa897d292bd32820305e5e154ecf0c7f5a6c38
 
 COCOAPODS: 1.10.2

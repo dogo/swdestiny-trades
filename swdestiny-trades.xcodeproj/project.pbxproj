@@ -104,6 +104,9 @@
 		DD8E8AA61E11610100C54FD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8E8A9C1E11610100C54FD9 /* AppDelegate.swift */; };
 		DD922D1F23061DEC00F7255F /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D1E23061DEC00F7255F /* HttpClient.swift */; };
 		DD922D2E23062AE300F7255F /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD922D2D23062AE300F7255F /* HttpMethod.swift */; };
+		DD93C2F326FAD64F00AE54BF /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = DD93C2F226FAD64F00AE54BF /* Nimble */; };
+		DD93C2F626FAD67500AE54BF /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = DD93C2F526FAD67500AE54BF /* Quick */; };
+		DD93C2F926FAD69500AE54BF /* Nimble-Snapshots in Frameworks */ = {isa = PBXBuildFile; productRef = DD93C2F826FAD69500AE54BF /* Nimble-Snapshots */; };
 		DD93D3C82008EEAB00C2663D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93D3C72008EEAB00C2663D /* ToggleButton.swift */; };
 		DD9442CF251AC529009C37F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD9442CE251AC529009C37F6 /* GoogleService-Info.plist */; };
 		DD94430D251ACC36009C37F6 /* HttpClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94430C251ACC36009C37F6 /* HttpClientMock.swift */; };
@@ -410,7 +413,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD93C2F626FAD67500AE54BF /* Quick in Frameworks */,
 				46B7D67CF4869026E4DCBD4B /* Pods_SWDestiny_TradesTests.framework in Frameworks */,
+				DD93C2F326FAD64F00AE54BF /* Nimble in Frameworks */,
+				DD93C2F926FAD69500AE54BF /* Nimble-Snapshots in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1567,7 +1573,6 @@
 				DD6E06961E114E88004A5653 /* Sources */,
 				DD6E06971E114E88004A5653 /* Frameworks */,
 				DD6E06981E114E88004A5653 /* Resources */,
-				45209D9AA8A28FA7BC820ADD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1575,6 +1580,11 @@
 				DD6E069C1E114E88004A5653 /* PBXTargetDependency */,
 			);
 			name = "SWDestiny-TradesTests";
+			packageProductDependencies = (
+				DD93C2F226FAD64F00AE54BF /* Nimble */,
+				DD93C2F526FAD67500AE54BF /* Quick */,
+				DD93C2F826FAD69500AE54BF /* Nimble-Snapshots */,
+			);
 			productName = "SWDestiny TradesTests";
 			productReference = DD6E069A1E114E88004A5653 /* SWDestiny-TradesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1622,6 +1632,9 @@
 				DD01CA362517AD29008C68B8 /* XCRemoteSwiftPackageReference "PKHUD" */,
 				DD01CA3D2517AEB3008C68B8 /* XCRemoteSwiftPackageReference "FTPopOverMenu_Swift" */,
 				DD01CA422517B134008C68B8 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
+				DD93C2F126FAD64F00AE54BF /* XCRemoteSwiftPackageReference "Nimble" */,
+				DD93C2F426FAD67500AE54BF /* XCRemoteSwiftPackageReference "Quick" */,
+				DD93C2F726FAD69500AE54BF /* XCRemoteSwiftPackageReference "Nimble-Snapshots" */,
 			);
 			productRefGroup = DD6E06851E114E88004A5653 /* Products */;
 			projectDirPath = "";
@@ -1722,30 +1735,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		45209D9AA8A28FA7BC820ADD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-				"${BUILT_PRODUCTS_DIR}/iOSSnapshotTestCase/FBSnapshotTestCase.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SWDestiny-TradesTests/Pods-SWDestiny-TradesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD2026E5200AACFD006B17DD /* [SwiftGen] Run Script */ = {
@@ -2333,6 +2322,30 @@
 				minimumVersion = 3.4.0;
 			};
 		};
+		DD93C2F126FAD64F00AE54BF /* XCRemoteSwiftPackageReference "Nimble" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		DD93C2F426FAD67500AE54BF /* XCRemoteSwiftPackageReference "Quick" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Quick.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		DD93C2F726FAD69500AE54BF /* XCRemoteSwiftPackageReference "Nimble-Snapshots" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashfurrow/Nimble-Snapshots.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dogo/SketchKit";
@@ -2371,6 +2384,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD56EFE1235397C400F32891 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		DD93C2F226FAD64F00AE54BF /* Nimble */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD93C2F126FAD64F00AE54BF /* XCRemoteSwiftPackageReference "Nimble" */;
+			productName = Nimble;
+		};
+		DD93C2F526FAD67500AE54BF /* Quick */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD93C2F426FAD67500AE54BF /* XCRemoteSwiftPackageReference "Quick" */;
+			productName = Quick;
+		};
+		DD93C2F826FAD69500AE54BF /* Nimble-Snapshots */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD93C2F726FAD69500AE54BF /* XCRemoteSwiftPackageReference "Nimble-Snapshots" */;
+			productName = "Nimble-Snapshots";
 		};
 		DD995C8B2353957A00EF17EC /* SketchKit */ = {
 			isa = XCSwiftPackageProductDependency;
