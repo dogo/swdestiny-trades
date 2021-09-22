@@ -113,6 +113,7 @@
 		DD94E6F91E36658A0070735B /* AppearanceProxyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */; };
 		DD94E6FA1E36658A0070735B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD94E6F81E36658A0070735B /* ColorPalette.swift */; };
 		DD96D5E21E659B97003C1AEA /* DeckBuilderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */; };
+		DD9895D426FADD7C003E5BB4 /* AboutViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9895D326FADD7C003E5BB4 /* AboutViewSpy.swift */; };
 		DD995C8C2353957A00EF17EC /* SketchKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD995C8B2353957A00EF17EC /* SketchKit */; };
 		DD99D4BD217FE5E700AE1301 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */; };
 		DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */; };
@@ -300,6 +301,7 @@
 		DD94E6F71E36658A0070735B /* AppearanceProxyHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceProxyHelper.swift; sourceTree = "<group>"; };
 		DD94E6F81E36658A0070735B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		DD96D5E11E659B97003C1AEA /* DeckBuilderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilderCell.swift; sourceTree = "<group>"; };
+		DD9895D326FADD7C003E5BB4 /* AboutViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewSpy.swift; sourceTree = "<group>"; };
 		DD99D4BC217FE5E700AE1301 /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		DD99D4BF217FE61400AE1301 /* FirebaseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLogger.swift; sourceTree = "<group>"; };
 		DD99D4C1217FE68900AE1301 /* LoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerManager.swift; sourceTree = "<group>"; };
@@ -810,12 +812,12 @@
 			path = About;
 			sourceTree = "<group>";
 		};
-		DD4EA5DF2133AF5D00D85ADD /* Views */ = {
+		DD4EA5DF2133AF5D00D85ADD /* View */ = {
 			isa = PBXGroup;
 			children = (
 				DD4EA5E02133AF9D00D85ADD /* AboutViewTests.swift */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
 		DD61B93D1E1FBC5400F38482 /* Datasource */ = {
@@ -894,6 +896,7 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
+				DD9895CF26FADD10003E5BB4 /* Screens */,
 				DD6E06A01E114E88004A5653 /* Info.plist */,
 				DDB315ED252A1E9700B87A4C /* TestEntryPoint.swift */,
 				DDB6DE6A1E539443003558E4 /* Controllers */,
@@ -904,7 +907,6 @@
 				DDDE91C720F7253C00D48563 /* Rest */,
 				DD4EA5D82133A98400D85ADD /* SnapShots */,
 				DDA56A8323C5806C0091CD09 /* Stub */,
-				DD4EA5DF2133AF5D00D85ADD /* Views */,
 			);
 			path = "SWDestiny TradesTests";
 			sourceTree = "<group>";
@@ -1087,6 +1089,40 @@
 			path = Appearance;
 			sourceTree = "<group>";
 		};
+		DD9895CF26FADD10003E5BB4 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				DD9895D026FADD1F003E5BB4 /* About */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		DD9895D026FADD1F003E5BB4 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				DD9895D126FADD3A003E5BB4 /* Controller */,
+				DD9895D226FADD50003E5BB4 /* Doubles */,
+				DD4EA5DF2133AF5D00D85ADD /* View */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		DD9895D126FADD3A003E5BB4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DDB6DE6B1E539443003558E4 /* AboutViewControllerTests.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD9895D226FADD50003E5BB4 /* Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				DD9895D326FADD7C003E5BB4 /* AboutViewSpy.swift */,
+			);
+			path = Doubles;
+			sourceTree = "<group>";
+		};
 		DD99D4BE217FE5F000AE1301 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1153,7 +1189,6 @@
 		DDB6DE6A1E539443003558E4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DDB6DE6B1E539443003558E4 /* AboutViewControllerTests.swift */,
 				DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */,
 				DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */,
 			);
@@ -1985,6 +2020,7 @@
 				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
 				DDAB37EF23E5ACFB00B65738 /* RealmDatabaseHelper.swift in Sources */,
 				DDA56A6B23C56FE00091CD09 /* URLSessionMock.swift in Sources */,
+				DD9895D426FADD7C003E5BB4 /* AboutViewSpy.swift in Sources */,
 				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
 				DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */,
 				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,

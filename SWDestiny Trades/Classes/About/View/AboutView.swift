@@ -8,24 +8,32 @@
 
 import UIKit
 
-final class AboutView: UIView, UITextViewDelegate {
+protocol AboutViewType where Self: UIView {
+
+    var didTouchHTTPLink: ((URL) -> Void)? { get set }
+}
+
+final class AboutView: UIView, AboutViewType {
+
     var didTouchHTTPLink: ((URL) -> Void)?
 
-    var logoImage: UIImageView = {
+    private var logoImage: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFill
         image.tintColor = .whiteBlack
         return image
     }()
 
-    var versionLabel: UILabel = {
+    private var versionLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
 
-    var aboutTextView: UITextView = {
+    lazy var aboutTextView: UITextView = {
         let textView = UITextView(frame: .zero)
+        textView.delegate = self
+        textView.isEditable = false
         return textView
     }()
 
@@ -38,6 +46,9 @@ final class AboutView: UIView, UITextViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension AboutView: UITextViewDelegate {
 
     // MARK: - <UITextViewDelegate>
 
@@ -48,6 +59,7 @@ final class AboutView: UIView, UITextViewDelegate {
 }
 
 extension AboutView: BaseViewConfiguration {
+
     internal func buildViewHierarchy() {
         addSubview(logoImage)
         addSubview(versionLabel)
@@ -79,10 +91,6 @@ extension AboutView: BaseViewConfiguration {
         backgroundColor = .blackWhite
 
         logoImage.image = Asset.Logo.largeIconBlack.image.withRenderingMode(.alwaysTemplate)
-
-        aboutTextView.delegate = self
-        aboutTextView.isEditable = false
-
         versionLabel.text = L10n.version(Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber)
 
         let attributedString = NSMutableAttributedString(string: L10n.aboutText(L10n.swdestinydbWebsite))

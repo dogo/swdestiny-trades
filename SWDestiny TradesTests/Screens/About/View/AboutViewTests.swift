@@ -15,10 +15,13 @@ import Quick
 final class AboutViewTests: QuickSpec {
 
     override func spec() {
+
         var sut: AboutView!
 
         describe("AboutView layout") {
+
             context("when URL link it's touched") {
+
                 beforeEach {
                     sut = AboutView(frame: .zero)
                     sut.translatesAutoresizingMaskIntoConstraints = false
@@ -27,13 +30,17 @@ final class AboutViewTests: QuickSpec {
 
                 it("should call closure when the url link is touched") {
                     var touched = false
-                    sut.didTouchHTTPLink = { _ in
+                    var touchedURL: URL?
+
+                    sut.didTouchHTTPLink = { url in
                         touched = true
+                        touchedURL = url
                     }
                     let url = URL(string: "https://swdestinydb.com")!
-                    _ = sut.aboutTextView.delegate?.textView?(sut.aboutTextView, shouldInteractWith: url, in: NSRange(location: 0, length: 0), interaction: .invokeDefaultAction)
+                    _ = sut.aboutTextView.delegate?.textView?(sut.aboutTextView, shouldInteractWith: url, in: NSRange(), interaction: .invokeDefaultAction)
 
                     expect(touched) == true
+                    expect(touchedURL) == url
                 }
             }
         }
