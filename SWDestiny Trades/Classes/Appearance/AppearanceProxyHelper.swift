@@ -9,10 +9,17 @@
 import UIKit
 
 enum AppearanceProxyHelper {
+
     static func customizeTabBar() {
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.tintColor = .white
         tabBarAppearance.barTintColor = ColorPalette.appTheme
+
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = ColorPalette.appTheme
+            UITabBar.appearance(whenContainedInInstancesOf: [UITabBarController.self]).scrollEdgeAppearance = appearance
+        }
     }
 
     static func customizeNavigationBar() {
@@ -32,7 +39,6 @@ enum AppearanceProxyHelper {
             scrollNavBarAppearance.backgroundColor = ColorPalette.appThemeV2
 
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).scrollEdgeAppearance = scrollNavBarAppearance
-
             UINavigationBar.appearance().prefersLargeTitles = true
             UINavigationBar.appearance().tintColor = .white
         } else {

@@ -9,6 +9,7 @@
 import UIKit
 
 final class SWDTabBarViewController: UITabBarController {
+
     private weak var database: DatabaseProtocol?
 
     init(database: DatabaseProtocol?) {
