@@ -105,9 +105,9 @@ PODS:
   - Realm/Headers (10.14.0)
   - RealmSwift (10.14.0):
     - Realm (= 10.14.0)
-  - SwiftMessages (9.0.3):
-    - SwiftMessages/App (= 9.0.3)
-  - SwiftMessages/App (9.0.3)
+  - SwiftMessages (9.0.4):
+    - SwiftMessages/App (= 9.0.4)
+  - SwiftMessages/App (9.0.4)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -157,7 +157,7 @@ SPEC CHECKSUMS:
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   Realm: 95a120db10fa66d0f1d10bee4ce828177ae00090
   RealmSwift: 4937e1b6f9b87bc25dc23883198807bf69e8cb76
-  SwiftMessages: 077f19126c24033fe24042237ecc20261adb46e4
+  SwiftMessages: 082ed63613a49fa8e749cd6000bb0a8b9bbc736f
 
 PODFILE CHECKSUM: 95776c779e6ce7793a08d9c61c6335aadcb4b8d8
 
