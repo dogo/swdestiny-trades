@@ -13,19 +13,23 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class PeopleListViewControllerTests: QuickSpec {
+final class PeopleListViewControllerTests: QuickSpec {
+
     override func spec() {
+
         var sut: PeopleListViewController!
         var database: DatabaseProtocol!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
         describe("PeopleListViewController layout") {
+
             beforeSuite {
                 AppearanceProxyHelper.customizeNavigationBar()
             }
 
             context("when it's initialized from the tabbar") {
+
                 beforeEach {
                     try! database = RealmDatabase(configuration: .inMemory(identifier: self.name))
                 }
@@ -36,11 +40,14 @@ class PeopleListViewControllerTests: QuickSpec {
                 }
 
                 context("should have valid layout when trying to load a database") {
+
                     it("with empty state") {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a empty state layout",
+                                                                tolerance: 0.02))
                     }
 
                     it("with a person with no loans") {
@@ -50,7 +57,9 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with no loans",
+                                                                tolerance: 0.02))
                     }
 
                     it("with a person with lent cards") {
@@ -61,7 +70,9 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with lent cards",
+                                                                tolerance: 0.02))
                     }
 
                     it("with a person with borrowed cards") {
@@ -72,7 +83,9 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with borrowed cards",
+                                                                tolerance: 0.02))
                     }
 
                     it("with a person with lent and borrowed cards") {
@@ -84,7 +97,9 @@ class PeopleListViewControllerTests: QuickSpec {
                         sut = PeopleListViewController(database: database)
                         navigation = UINavigationController(rootViewController: sut)
                         window.showTestWindow(controller: navigation)
-                        expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with lent and borrowed cards",
+                                                                tolerance: 0.02))
                     }
                 }
             }

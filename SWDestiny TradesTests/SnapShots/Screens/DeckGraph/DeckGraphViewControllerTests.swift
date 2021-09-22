@@ -13,14 +13,18 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class DeckGraphViewControllerTests: QuickSpec {
+final class DeckGraphViewControllerTests: QuickSpec {
+
     override func spec() {
+
         var sut: DeckGraphViewController!
         var navigationController: UINavigationController!
         let window = UIWindow.framed(frame: CGRect(x: 0, y: 0, width: 375, height: 1350))
 
         describe("DeckGraphViewController layout") {
+
             context("when it's initialized") {
+
                 beforeEach {
                     let deck = DeckDTO.stub()
                     let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: "DeckGraph")
@@ -36,7 +40,8 @@ class DeckGraphViewControllerTests: QuickSpec {
                 }
 
                 it("should have valid layout") {
-                    expect(navigationController).to(haveValidSnapshot(tolerance: 0.02))
+                    expect(navigationController).to(haveValidSnapshot(named: "DeckGraphViewController with a valid layout",
+                                                                      tolerance: 0.02))
                 }
 
                 it("should have an empty state layout") {
@@ -45,7 +50,8 @@ class DeckGraphViewControllerTests: QuickSpec {
                     navigationController = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigationController)
 
-                    expect(navigationController).to(haveValidSnapshot(tolerance: 0.02))
+                    expect(navigationController).to(haveValidSnapshot(named: "DeckGraphViewController with a empty state layout",
+                                                                      tolerance: 0.02))
                 }
             }
         }

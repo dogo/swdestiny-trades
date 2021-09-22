@@ -13,8 +13,10 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class SetsListViewControllerTests: QuickSpec {
+final class SetsListViewControllerTests: QuickSpec {
+
     override func spec() {
+
         var sut: SetsListViewController!
         var service: SWDestinyService!
         var client: HttpClientMock!
@@ -22,11 +24,13 @@ class SetsListViewControllerTests: QuickSpec {
         let window = UIWindow.framed()
 
         describe("SetsListViewController layout") {
+
             beforeSuite {
                 AppearanceProxyHelper.customizeNavigationBar()
             }
 
             context("when it's initialized") {
+
                 beforeEach {
                     client = HttpClientMock()
                     service = SWDestinyService(client: client)
@@ -41,7 +45,9 @@ class SetsListViewControllerTests: QuickSpec {
                     sut = SetsListViewController(service: service, database: nil)
                     navigation = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigation)
-                    expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                    expect(navigation).to(haveValidSnapshot(named: "SetsListViewControllerTests with a valid layout",
+                                                            tolerance: 0.02))
                 }
             }
         }

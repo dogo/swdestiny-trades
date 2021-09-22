@@ -16,17 +16,20 @@ import UIKit
 final class AddCardViewControllerSnapshotTests: QuickSpec {
 
     override func spec() {
+
         var sut: AddCardViewController!
         var service: SWDestinyService!
         var navigation: UINavigationController!
         let window = UIWindow.framed()
 
         describe("AddCardViewController layout") {
+
             beforeSuite {
                 AppearanceProxyHelper.customizeNavigationBar()
             }
 
             context("when it's initialized from Loan screen") {
+
                 beforeEach {
                     service = SWDestinyService(client: HttpClientMock())
                 }
@@ -36,17 +39,21 @@ final class AddCardViewControllerSnapshotTests: QuickSpec {
                 }
 
                 it("should have valid layout when isLentMe is True") {
-                    sut = AddCardViewController(service: service, database: nil, person: PersonDTO.stub(), type: .lent)
+                    sut = AddCardViewController(service: service, database: nil, person: .stub(), type: .lent)
                     navigation = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigation)
-                    expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                    expect(navigation).to(haveValidSnapshot(named: "AddCardViewController layout when isLentMe is true",
+                                                            tolerance: 0.02))
                 }
 
                 it("should have valid layout when isLentMe is false") {
-                    sut = AddCardViewController(service: service, database: nil, person: PersonDTO.stub(), type: .borrow)
+                    sut = AddCardViewController(service: service, database: nil, person: .stub(), type: .borrow)
                     navigation = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigation)
-                    expect(navigation).to(haveValidSnapshot(tolerance: 0.02))
+
+                    expect(navigation).to(haveValidSnapshot(named: "AddCardViewController layout when isLentMe is false",
+                                                            tolerance: 0.02))
                 }
             }
         }
