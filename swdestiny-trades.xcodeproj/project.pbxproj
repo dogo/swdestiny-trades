@@ -2382,8 +2382,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashfurrow/Nimble-Snapshots.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
 			};
 		};
 		DD995C8A2353957A00EF17EC /* XCRemoteSwiftPackageReference "SketchKit" */ = {
