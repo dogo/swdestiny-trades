@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import Nimble
 import Quick
 
@@ -29,17 +30,20 @@ final class AboutViewTests: QuickSpec {
                 }
 
                 it("should call closure when the url link is touched") {
-                    var touched = false
+                    var didTouchHTTPLinkWasCalled = false
                     var touchedURL: URL?
 
                     sut.didTouchHTTPLink = { url in
-                        touched = true
+                        didTouchHTTPLinkWasCalled = true
                         touchedURL = url
                     }
                     let url = URL(string: "https://swdestinydb.com")!
-                    _ = sut.aboutTextView.delegate?.textView?(sut.aboutTextView, shouldInteractWith: url, in: NSRange(), interaction: .invokeDefaultAction)
-
-                    expect(touched) == true
+                    let aboutTextView = sut.viewWith(accessibilityIdentifier: "ABOUT_TEXT_VIEW") as! UITextView
+                    _ = aboutTextView.delegate?.textView?(aboutTextView,
+                                                          shouldInteractWith: url,
+                                                          in: NSRange(),
+                                                          interaction: .invokeDefaultAction)
+                    expect(didTouchHTTPLinkWasCalled) == true
                     expect(touchedURL) == url
                 }
             }

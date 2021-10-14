@@ -13,8 +13,10 @@ import UIKit
 
 @testable import SWDestiny_Trades
 
-class AboutViewControllerSnapshotTests: QuickSpec {
+final class AboutViewControllerSnapshotTests: QuickSpec {
+
     override func spec() {
+
         var sut: AboutViewController!
         let window = UIWindow.framed()
 

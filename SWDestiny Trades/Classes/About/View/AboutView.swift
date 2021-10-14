@@ -30,10 +30,11 @@ final class AboutView: UIView, AboutViewType {
         return label
     }()
 
-    lazy var aboutTextView: UITextView = {
+    private lazy var aboutTextView: UITextView = {
         let textView = UITextView(frame: .zero)
         textView.delegate = self
         textView.isEditable = false
+        textView.accessibilityIdentifier = "ABOUT_TEXT_VIEW"
         return textView
     }()
 

@@ -81,6 +81,7 @@
 		DD61B93F1E1FBCA400F38482 /* SearchDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */; };
 		DD61B9411E1FC59600F38482 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9401E1FC59600F38482 /* SearchView.swift */; };
 		DD61B9431E1FCE8C00F38482 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD61B9421E1FCE8C00F38482 /* SearchBar.swift */; };
+		DD66DAC4271866B500D32BD8 /* UIView+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66DAC3271866B500D32BD8 /* UIView+Testable.swift */; };
 		DD6A3D2020C5E0E600C2F817 /* AddCardNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */; };
 		DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */; };
 		DD6A3D2620C5E60500C2F817 /* DeckListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6A3D2520C5E60500C2F817 /* DeckListNavigator.swift */; };
@@ -267,6 +268,7 @@
 		DD61B93E1E1FBCA400F38482 /* SearchDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDatasource.swift; sourceTree = "<group>"; };
 		DD61B9401E1FC59600F38482 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		DD61B9421E1FCE8C00F38482 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		DD66DAC3271866B500D32BD8 /* UIView+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Testable.swift"; sourceTree = "<group>"; };
 		DD6A3D1F20C5E0E600C2F817 /* AddCardNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardNavigator.swift; sourceTree = "<group>"; };
 		DD6A3D2220C5E4A900C2F817 /* SearchNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigator.swift; sourceTree = "<group>"; };
 		DD6A3D2520C5E60500C2F817 /* DeckListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckListNavigator.swift; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 		DD2F8A0D2134A21700B9FAAB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DD66DAC3271866B500D32BD8 /* UIView+Testable.swift */,
 				DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */,
 			);
 			path = Extension;
@@ -896,7 +899,6 @@
 		DD6E069D1E114E88004A5653 /* SWDestiny TradesTests */ = {
 			isa = PBXGroup;
 			children = (
-				DD9895CF26FADD10003E5BB4 /* Screens */,
 				DD6E06A01E114E88004A5653 /* Info.plist */,
 				DDB315ED252A1E9700B87A4C /* TestEntryPoint.swift */,
 				DDB6DE6A1E539443003558E4 /* Controllers */,
@@ -905,6 +907,7 @@
 				DDD19C6323344118007A9AF8 /* Json */,
 				DD8CD48920F7BCD10036CA8D /* Mock */,
 				DDDE91C720F7253C00D48563 /* Rest */,
+				DD9895CF26FADD10003E5BB4 /* Screens */,
 				DD4EA5D82133A98400D85ADD /* SnapShots */,
 				DDA56A8323C5806C0091CD09 /* Stub */,
 			);
@@ -2016,6 +2019,7 @@
 				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
 				DDA56A6D23C5700D0091CD09 /* URLSessionDataTaskMock.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceTests.swift in Sources */,
+				DD66DAC4271866B500D32BD8 /* UIView+Testable.swift in Sources */,
 				DD94430D251ACC36009C37F6 /* HttpClientMock.swift in Sources */,
 				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
 				DDAB37EF23E5ACFB00B65738 /* RealmDatabaseHelper.swift in Sources */,
