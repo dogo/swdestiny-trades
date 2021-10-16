@@ -8,6 +8,7 @@
 
 import Nimble
 import Quick
+import SafariServices
 import UIKit
 
 @testable import SWDestiny_Trades
@@ -19,11 +20,12 @@ final class AboutViewControllerTests: QuickSpec {
         describe("About view controller") {
 
             var sut: AboutViewController!
-            var view: AboutViewSpy!
 
             beforeEach {
-                view = AboutViewSpy()
-                sut = AboutViewController(with: view)
+                sut = AboutViewController()
+                let navigationController = UINavigationController(rootViewController: sut)
+                let window = UIWindow.framed()
+                window.showTestWindow(controller: navigationController)
             }
 
             it("should be able to create a controller") {
@@ -36,24 +38,12 @@ final class AboutViewControllerTests: QuickSpec {
 
             it("should call didTouchHTTPLink when the url is touched") {
 
-                var didTouchHTTPLinkWasCalled = false
-                var touchedURL: URL?
-
-                view.didTouchHTTPLink = { url in
-                    didTouchHTTPLinkWasCalled = true
-                    touchedURL = url
-                }
-
-                _ = view.textView(UITextView(),
-                                  shouldInteractWith: URL(string: "https://SWDestinyTrades.com")!,
-                                  in: NSRange(),
-                                  interaction: .invokeDefaultAction)
-                expect(didTouchHTTPLinkWasCalled) == true
-                expect(touchedURL) == URL(string: "https://SWDestinyTrades.com")!
+                let view = sut.view.viewWith(accessibilityIdentifier: "ABOUT_VIEW") as! AboutView
+                view.didTouchHTTPLink?(URL(string: "http://google.com")!)
+                expect(sut.presentedViewController).to(beAKindOf(SFSafariViewController.self))
             }
 
             it("should have the expected navigation title") {
-                _ = UINavigationController(rootViewController: sut)
                 sut.viewWillAppear(true)
 
                 expect(sut.navigationItem.title).to(equal(L10n.about))

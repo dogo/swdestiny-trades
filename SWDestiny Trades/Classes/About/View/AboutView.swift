@@ -41,6 +41,7 @@ final class AboutView: UIView, AboutViewType {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBaseView()
+        accessibilityIdentifier = "ABOUT_VIEW"
     }
 
     @available(*, unavailable)

@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import UIKit
 import Nimble
 import Quick
+import UIKit
 
 @testable import SWDestiny_Trades
 
