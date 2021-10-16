@@ -76,7 +76,7 @@ final class DeckListCell: UITableViewCell, Identifiable {
 
     @objc
     func accessoryButtonTouched(sender: Any?) {
-        titleEditText.isUserInteractionEnabled = !titleEditText.isUserInteractionEnabled
+        titleEditText.isUserInteractionEnabled.toggle()
         toggleEditButton()
         if titleEditText.isUserInteractionEnabled {
             titleEditText.becomeFirstResponder()

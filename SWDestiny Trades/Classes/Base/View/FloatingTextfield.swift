@@ -205,11 +205,12 @@ final class FloatingTextfield: UITextField {
                                     underlineAlpha: CGFloat,
                                     isLiftedAfterFinishing: Bool)
     {
-        UIView.animate(withDuration: animationDuration, animations: {
-            self.placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)
-            self.placeholderLabel.alpha = newAlpha
-            self.underlineView.alpha = underlineAlpha
-        }, completion: isLiftedCompletion(withNewValue: isLiftedAfterFinishing))
+        UIView.animate(withDuration: animationDuration,
+                       animations: {
+                           self.placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)
+                           self.placeholderLabel.alpha = newAlpha
+                           self.underlineView.alpha = underlineAlpha
+                       }, completion: isLiftedCompletion(withNewValue: isLiftedAfterFinishing))
     }
 
     private func isLiftedCompletion(withNewValue value: Bool) -> ((Bool) -> Void)? {

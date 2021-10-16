@@ -119,14 +119,14 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
     }
 
-    public func getCard(at index: IndexPath) -> CardDTO? {
+    func getCard(at index: IndexPath) -> CardDTO? {
         if index.section == 0 {
             return lentMe[index.row]
         }
         return borrowed[index.row]
     }
 
-    public func updateTableViewData(person: PersonDTO?) {
+    func updateTableViewData(person: PersonDTO?) {
         if let currentPerson = person {
             self.currentPerson = currentPerson
             lentMe = Array(currentPerson.lentMe)

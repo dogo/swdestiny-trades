@@ -142,8 +142,10 @@ final class UserCollectionViewController: UIViewController {
 
     @objc
     func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        FTPopOverMenu.showForEvent(event: event, with: [L10n.aToZ, L10n.cardNumber, L10n.color],
-                                   config: popOverMenuConfiguration(), done: { [weak self] selectedIndex in
+        FTPopOverMenu.showForEvent(event: event,
+                                   with: [L10n.aToZ, L10n.cardNumber, L10n.color],
+                                   config: popOverMenuConfiguration(),
+                                   done: { [weak self] selectedIndex in
                                        self?.userCollectionView.sort(selectedIndex)
                                        self?.currentSortIndex = selectedIndex
                                    }, cancel: {})

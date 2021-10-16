@@ -41,7 +41,7 @@ final class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnabl
 
     // MARK: Sort options
 
-    public func sortByCardNumber(cardList: [CardDTO]) {
+    func sortByCardNumber(cardList: [CardDTO]) {
         numberCards = cardList.sorted {
             $0.code < $1.code
         }

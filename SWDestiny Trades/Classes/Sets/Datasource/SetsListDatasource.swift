@@ -45,11 +45,11 @@ final class SetsListDatasource: NSObject, UITableViewDataSource {
         return rows.count
     }
 
-    public func getSet(at index: IndexPath) -> SetDTO? {
+    func getSet(at index: IndexPath) -> SetDTO? {
         return (swdSets[sections[index.section]]?[index.row])
     }
 
-    public func sortAndSplitTableData(setList: [SetDTO]) {
+    func sortAndSplitTableData(setList: [SetDTO]) {
         sections = SectionsBuilder.alphabetically(setList: setList)
         swdSets = Split.setsByAlphabetically(setList: setList, sections: sections)
         tableView?.reloadData()

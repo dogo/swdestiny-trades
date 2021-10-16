@@ -53,16 +53,16 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
         deckList.remove(at: indexPath.row)
     }
 
-    public func getDeck(at index: IndexPath) -> DeckDTO {
+    func getDeck(at index: IndexPath) -> DeckDTO {
         return deckList[index.row]
     }
 
-    public func updateTableViewData(list: [DeckDTO]) {
+    func updateTableViewData(list: [DeckDTO]) {
         deckList = list
         tableView?.reloadData()
     }
 
-    public func insert(deck: DeckDTO) {
+    func insert(deck: DeckDTO) {
         delegate?.insert(deck: deck)
         deckList.append(deck)
         tableView?.reloadData()

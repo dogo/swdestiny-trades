@@ -15,6 +15,7 @@ import UIKit
 final class CardDetailViewControllerTests: QuickSpec {
 
     override func spec() {
+
         describe("CardDetail view controller") {
             var controller: CardDetailViewController!
             let cardList = [CardDTO()]
@@ -34,7 +35,7 @@ final class CardDetailViewControllerTests: QuickSpec {
             it("should have the expected navigation title") {
                 _ = UINavigationController(rootViewController: controller)
                 controller.viewWillAppear(true)
-                expect(controller.navigationItem.title).to(equal(NSLocalizedString("", comment: "")))
+                expect(controller.navigationItem.title).to(equal(""))
             }
         }
     }

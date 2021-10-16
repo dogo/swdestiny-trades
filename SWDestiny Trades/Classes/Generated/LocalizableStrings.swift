@@ -14,7 +14,11 @@ internal enum L10n {
   internal static let aToZ = L10n.tr("Localizable", "A_TO_Z")
   /// About
   internal static let about = L10n.tr("Localizable", "ABOUT")
-  /// By Diogo Autilio\n\nAPI Data by Paco %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
+  /// By Diogo Autilio
+  /// 
+  /// API Data by Paco %@
+  /// 
+  /// The information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
   internal static func aboutText(_ p1: Any) -> String {
     return L10n.tr("Localizable", "ABOUT_TEXT", String(describing: p1))
   }

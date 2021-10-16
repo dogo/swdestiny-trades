@@ -56,7 +56,7 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         return GraphType.allCases.count
     }
 
-    public func updateCollecionViewData(deck: DeckDTO) {
+    func updateCollecionViewData(deck: DeckDTO) {
         generateGraphData(deck: deck)
         collectionView?.reloadData()
     }

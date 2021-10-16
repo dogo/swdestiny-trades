@@ -11,6 +11,7 @@ import PKHUD
 import UIKit
 
 final class CardDetailViewController: UIViewController {
+
     private let cardView = CardView()
     private let database: DatabaseProtocol?
     private var cards = [CardDTO]()

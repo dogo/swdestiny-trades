@@ -51,16 +51,16 @@ final class PeopleListDatasource: NSObject, UITableViewDataSource {
         return persons.count
     }
 
-    public func getPerson(at index: IndexPath) -> PersonDTO? {
+    func getPerson(at index: IndexPath) -> PersonDTO? {
         return persons[index.row]
     }
 
-    public func insert(personArray: [PersonDTO]) {
+    func insert(personArray: [PersonDTO]) {
         persons = personArray
         tableView?.reloadData()
     }
 
-    public func insert(person: PersonDTO) {
+    func insert(person: PersonDTO) {
         delegate?.insert(person: person)
         persons.append(person)
         tableView?.reloadData()

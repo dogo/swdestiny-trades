@@ -14,6 +14,7 @@ protocol UserCollectionProtocol: AnyObject {
 }
 
 final class UserCollectionDatasource: NSObject, UITableViewDataSource {
+
     private var tableView: UITableView?
     private var userCollection: UserCollectionDTO?
     private weak var delegate: UserCollectionProtocol?
@@ -52,15 +53,15 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
         return collectionList.count
     }
 
-    public func getCard(at index: IndexPath) -> CardDTO? {
+    func getCard(at index: IndexPath) -> CardDTO? {
         return collectionList[index.row]
     }
 
-    public func getCardList() -> [CardDTO] {
+    func getCardList() -> [CardDTO] {
         return collectionList
     }
 
-    public func updateTableViewData(collection: UserCollectionDTO?) {
+    func updateTableViewData(collection: UserCollectionDTO?) {
         if let userCollection = collection {
             self.userCollection = userCollection
             collectionList = Array(userCollection.myCollection)
@@ -70,17 +71,17 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
 
     // MARK: Sort options
 
-    public func sortAlphabetically() {
+    func sortAlphabetically() {
         collectionList = Sort.cardsAlphabetically(cardsArray: collectionList)
         tableView?.reloadData()
     }
 
-    public func sortNumerically() {
+    func sortNumerically() {
         collectionList = Sort.cardsByNumber(cardsArray: collectionList)
         tableView?.reloadData()
     }
 
-    public func sortByColor() {
+    func sortByColor() {
         collectionList = Sort.cardsByColor(cardsArray: collectionList)
         tableView?.reloadData()
     }

@@ -78,11 +78,11 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         return deckList[section].collapsed ? 0 : deckList[section].items.count
     }
 
-    public func getCard(at index: IndexPath) -> CardDTO? {
+    func getCard(at index: IndexPath) -> CardDTO? {
         return deckList[index.section].items[index.row]
     }
 
-    public func getCardList() -> [CardDTO] {
+    func getCardList() -> [CardDTO] {
         var list = [CardDTO]()
         for cardList in deckList {
             for card in cardList.items {
@@ -92,7 +92,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         return list
     }
 
-    public func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
+    func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
         let collapsed = !deckList[section].collapsed
 
         // Toggle collapse
@@ -103,7 +103,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
         tableView?.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 
-    public func updateTableViewData(deck: DeckDTO?) {
+    func updateTableViewData(deck: DeckDTO?) {
         if let currentDeck = deck {
             self.currentDeck = deck
             if !currentDeck.list.isEmpty {

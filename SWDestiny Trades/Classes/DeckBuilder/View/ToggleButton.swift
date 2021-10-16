@@ -45,7 +45,7 @@ final class ToggleButton: UIButton {
 
     @objc
     private func buttonPressed() {
-        isActivate = !isActivate
+        isActivate.toggle()
         buttonTouched?(isActivate)
     }
 }
