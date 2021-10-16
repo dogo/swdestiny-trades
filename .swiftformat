@@ -3,6 +3,7 @@
 --exclude SWDestiny\ Trades/Classes/Generated
 
 # Rules
---disable unusedArguments
---disable trailingCommas
 --disable blankLinesAtStartOfScope
+--disable trailingCommas
+--disable unusedArguments
+--disable wrapMultilineStatementBraces

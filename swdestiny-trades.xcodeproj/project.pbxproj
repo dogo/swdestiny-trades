@@ -39,6 +39,8 @@
 		DD09563F255EAA9200BE37DD /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09563D255EAA9200BE37DD /* ImageAssets.swift */; };
 		DD095640255EAA9200BE37DD /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD09563E255EAA9200BE37DD /* LocalizableStrings.swift */; };
 		DD0BFE781E68B66B004C2FE4 /* ToastMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */; };
+		DD0E0C03271B5A1C00E5AA2E /* AddCardNavigatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0E0C02271B5A1C00E5AA2E /* AddCardNavigatorTests.swift */; };
+		DD0E0C05271B5D8E00E5AA2E /* UINavigationControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0E0C04271B5D8E00E5AA2E /* UINavigationControllerMock.swift */; };
 		DD0F81001E23C9980088BE43 /* SetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */; };
 		DD0F81011E23C9980088BE43 /* SetsListDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */; };
 		DD0F81021E23C9980088BE43 /* SetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0F80FC1E23C9980088BE43 /* SetDTO.swift */; };
@@ -226,6 +228,8 @@
 		DD09563D255EAA9200BE37DD /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		DD09563E255EAA9200BE37DD /* LocalizableStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		DD0BFE771E68B66B004C2FE4 /* ToastMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastMessages.swift; sourceTree = "<group>"; };
+		DD0E0C02271B5A1C00E5AA2E /* AddCardNavigatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardNavigatorTests.swift; sourceTree = "<group>"; };
+		DD0E0C04271B5D8E00E5AA2E /* UINavigationControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerMock.swift; sourceTree = "<group>"; };
 		DD0F80F81E23C9980088BE43 /* SetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListViewController.swift; sourceTree = "<group>"; };
 		DD0F80FA1E23C9980088BE43 /* SetsListDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetsListDatasource.swift; sourceTree = "<group>"; };
 		DD0F80FC1E23C9980088BE43 /* SetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDTO.swift; sourceTree = "<group>"; };
@@ -626,6 +630,22 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		DD0E0C00271B59E900E5AA2E /* AddCard */ = {
+			isa = PBXGroup;
+			children = (
+				DD0E0C01271B5A0900E5AA2E /* Navigator */,
+			);
+			path = AddCard;
+			sourceTree = "<group>";
+		};
+		DD0E0C01271B5A0900E5AA2E /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				DD0E0C02271B5A1C00E5AA2E /* AddCardNavigatorTests.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
 		DD0F80F51E23C9980088BE43 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,6 +1041,7 @@
 			isa = PBXGroup;
 			children = (
 				DD94430C251ACC36009C37F6 /* HttpClientMock.swift */,
+				DD0E0C04271B5D8E00E5AA2E /* UINavigationControllerMock.swift */,
 				DDA56A6C23C5700D0091CD09 /* URLSessionDataTaskMock.swift */,
 				DDA56A6A23C56FE00091CD09 /* URLSessionMock.swift */,
 			);
@@ -1096,6 +1117,7 @@
 			isa = PBXGroup;
 			children = (
 				DD9895D026FADD1F003E5BB4 /* About */,
+				DD0E0C00271B59E900E5AA2E /* AddCard */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -2008,11 +2030,13 @@
 			files = (
 				DD4EA5E12133AF9D00D85ADD /* AboutViewTests.swift in Sources */,
 				9D513F3E2335388900CCC12B /* SetsListViewControllerTests.swift in Sources */,
+				DD0E0C05271B5D8E00E5AA2E /* UINavigationControllerMock.swift in Sources */,
 				DDB315EE252A1E9700B87A4C /* TestEntryPoint.swift in Sources */,
 				DD1DA42A1E873648001E76C4 /* CardDetailViewControllerTests.swift in Sources */,
 				DD2ABDC6230659EE00374A8B /* CardDTOStub.swift in Sources */,
 				DDA56A6F23C572C70091CD09 /* HttpClientTests.swift in Sources */,
 				DD2ABDC7230659F200374A8B /* DeckDTOStub.swift in Sources */,
+				DD0E0C03271B5A1C00E5AA2E /* AddCardNavigatorTests.swift in Sources */,
 				DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
 				9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */,
