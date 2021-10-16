@@ -19,6 +19,7 @@ enum AppearanceProxyHelper {
             let appearance = UITabBarAppearance()
             appearance.backgroundColor = ColorPalette.appTheme
             UITabBar.appearance(whenContainedInInstancesOf: [UITabBarController.self]).scrollEdgeAppearance = appearance
+            UITabBar.appearance(whenContainedInInstancesOf: [UITabBarController.self]).standardAppearance = appearance
         }
     }
 
