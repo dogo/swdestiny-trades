@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol AboutViewType where Self: UIView {
-
-    var didTouchHTTPLink: ((URL) -> Void)? { get set }
-}
-
 final class AboutView: UIView, AboutViewType {
 
     var didTouchHTTPLink: ((URL) -> Void)?

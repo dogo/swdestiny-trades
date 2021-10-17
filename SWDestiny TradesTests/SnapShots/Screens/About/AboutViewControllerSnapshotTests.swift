@@ -21,7 +21,9 @@ final class AboutViewControllerSnapshotTests: QuickSpec {
         let window = UIWindow.framed()
 
         describe("AboutViewController layout") {
+
             context("when it's initialized") {
+
                 beforeEach {
                     sut = AboutViewController()
                     window.showTestWindow(controller: sut)

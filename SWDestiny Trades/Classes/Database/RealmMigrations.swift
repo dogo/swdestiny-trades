@@ -30,7 +30,7 @@ enum RealmMigrations {
                                 newObject["cost"] = Int(oldCost)
                             }
 
-                            if let id = oldObject["code"] as? String { // swiftlint:disable:this identifier_name
+                            if let id = oldObject["code"] as? String {
                                 if kDices[id] != nil {
                                     let dieFaces = List<StringObject>()
                                     kDices[id]?.forEach { side in

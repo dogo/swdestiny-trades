@@ -11,7 +11,7 @@ import RealmSwift
 
 class CardDTO: Object, Decodable, Storable {
     let dieFaces = List<StringObject>()
-    @objc dynamic var id = NSUUID().uuidString // swiftlint:disable:this identifier_name
+    @objc dynamic var id = NSUUID().uuidString
     @objc dynamic var setCode: String = ""
     @objc dynamic var setName: String = ""
     @objc dynamic var typeCode: String = ""

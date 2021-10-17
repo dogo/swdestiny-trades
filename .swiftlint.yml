@@ -74,6 +74,10 @@ function_body_length: 80
 
 line_length: 180
 
+identifier_name:
+  excluded:
+    - id
+
 excluded:
   - Pods
   - Carthage

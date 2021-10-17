@@ -9,6 +9,7 @@
 import UIKit
 
 final class AddCardTableView: UITableView, SearchDelegate {
+
     var didSelectCard: ((CardDTO) -> Void)?
     var didSelectAccessory: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
@@ -23,8 +24,14 @@ final class AddCardTableView: UITableView, SearchDelegate {
         backgroundColor = .blackWhite
         keyboardDismissMode = .onDrag
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
 
     @available(*, unavailable)

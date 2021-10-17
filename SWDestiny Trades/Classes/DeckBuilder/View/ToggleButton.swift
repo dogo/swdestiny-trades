@@ -9,6 +9,7 @@
 import UIKit
 
 final class ToggleButton: UIButton {
+
     var isActivate: Bool = false {
         didSet {
             let title = isActivate ? L10n.elite : L10n.nonElite

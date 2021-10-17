@@ -17,14 +17,17 @@ final class AboutViewControllerTests: QuickSpec {
 
     override func spec() {
 
+        let window = UIWindow.framed()
+
         describe("About view controller") {
 
             var sut: AboutViewController!
+            var view: AboutViewSpy!
 
             beforeEach {
-                sut = AboutViewController()
+                view = AboutViewSpy()
+                sut = AboutViewController(with: view)
                 let navigationController = UINavigationController(rootViewController: sut)
-                let window = UIWindow.framed()
                 window.showTestWindow(controller: navigationController)
             }
 
@@ -37,8 +40,7 @@ final class AboutViewControllerTests: QuickSpec {
             }
 
             it("should call didTouchHTTPLink when the url is touched") {
-
-                let view = sut.view.viewWith(accessibilityIdentifier: "ABOUT_VIEW") as! AboutView
+                sut.viewDidLoad()
                 view.didTouchHTTPLink?(URL(string: "http://google.com")!)
                 expect(sut.presentedViewController).to(beAKindOf(SFSafariViewController.self))
             }

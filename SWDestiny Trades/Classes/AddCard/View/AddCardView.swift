@@ -8,15 +8,34 @@
 
 import UIKit
 
-final class AddCardView: UIView {
-    let searchBar = SearchBar(frame: .zero)
-    let addCardTableView = AddCardTableView(frame: .zero)
+final class AddCardView: UIView, AddCardViewType {
 
-    let activityIndicator: UIActivityIndicatorView = {
+    private let searchBar = SearchBar(frame: .zero)
+    private let addCardTableView = AddCardTableView(frame: .zero)
+
+    private let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
         view.color = .whiteBlack
         return view
     }()
+
+    var didSelectCard: ((CardDTO) -> Void)? {
+        didSet {
+            addCardTableView.didSelectCard = didSelectCard
+        }
+    }
+
+    var didSelectAccessory: ((CardDTO) -> Void)? {
+        didSet {
+            addCardTableView.didSelectAccessory = didSelectAccessory
+        }
+    }
+
+    var doingSearch: ((String) -> Void)? {
+        didSet {
+            searchBar.doingSearch = doingSearch
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,9 +46,26 @@ final class AddCardView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func startLoading() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
+
+    func updateSearchList(_ cards: [CardDTO]) {
+        addCardTableView.updateSearchList(cards)
+    }
+
+    func doingSearch(_ query: String) {
+        addCardTableView.doingSearch(query)
+    }
 }
 
 extension AddCardView: BaseViewConfiguration {
+
     internal func buildViewHierarchy() {
         addSubview(searchBar)
         addSubview(addCardTableView)

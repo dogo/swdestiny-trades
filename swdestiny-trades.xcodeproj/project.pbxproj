@@ -60,10 +60,14 @@
 		DD3BDE8C2616CCE700143494 /* BodyParameters+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3BDE8B2616CCE700143494 /* BodyParameters+Utils.swift */; };
 		DD4103DA1E3FC70F00B13F85 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D61E3FC70F00B13F85 /* Localizable.strings */; };
 		DD4103DB1E3FC70F00B13F85 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */; };
+		DD41D776271BB3FB00EE7795 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41D775271BB3FB00EE7795 /* AddCardViewControllerTests.swift */; };
+		DD41D778271BB50300EE7795 /* UserCollectionDTO+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41D777271BB50300EE7795 /* UserCollectionDTO+Stub.swift */; };
+		DD41D77B271BB71200EE7795 /* AboutViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41D77A271BB71200EE7795 /* AboutViewType.swift */; };
+		DD41D77E271BB73700EE7795 /* AddCardViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41D77D271BB73700EE7795 /* AddCardViewType.swift */; };
+		DD41D781271BBBCB00EE7795 /* AddCardViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41D780271BBBCB00EE7795 /* AddCardViewSpy.swift */; };
 		DD43B95D20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */; };
 		DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */; };
 		DD43B96620C7056300CEBFE5 /* UserCollectionNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */; };
-		DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */; };
 		DD47BBFE208AA10600B886CD /* CardListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD47BBFD208AA10600B886CD /* CardListNavigator.swift */; };
 		DD48490B2602FD8500C3B611 /* FloatingTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48490A2602FD8500C3B611 /* FloatingTextfield.swift */; };
 		DD4AB30E252DFBC000196A3F /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4AB30B252DFBC000196A3F /* Identifiable.swift */; };
@@ -250,10 +254,14 @@
 		DD3BDE8B2616CCE700143494 /* BodyParameters+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BodyParameters+Utils.swift"; sourceTree = "<group>"; };
 		DD4103D71E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
 		DD4103D91E3FC70F00B13F85 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.info; name = es; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		DD41D775271BB3FB00EE7795 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
+		DD41D777271BB50300EE7795 /* UserCollectionDTO+Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCollectionDTO+Stub.swift"; sourceTree = "<group>"; };
+		DD41D77A271BB71200EE7795 /* AboutViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewType.swift; sourceTree = "<group>"; };
+		DD41D77D271BB73700EE7795 /* AddCardViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewType.swift; sourceTree = "<group>"; };
+		DD41D780271BBBCB00EE7795 /* AddCardViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewSpy.swift; sourceTree = "<group>"; };
 		DD43B95C20C6F63E00CEBFE5 /* DeckBuilderNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckBuilderNavigator.swift; sourceTree = "<group>"; };
 		DD43B96220C702A600CEBFE5 /* PeopleListNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleListNavigator.swift; sourceTree = "<group>"; };
 		DD43B96520C7056300CEBFE5 /* UserCollectionNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionNavigator.swift; sourceTree = "<group>"; };
-		DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewControllerTests.swift; sourceTree = "<group>"; };
 		DD47BBFD208AA10600B886CD /* CardListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardListNavigator.swift; sourceTree = "<group>"; };
 		DD48490A2602FD8500C3B611 /* FloatingTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingTextfield.swift; sourceTree = "<group>"; };
 		DD4AB30B252DFBC000196A3F /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
@@ -461,6 +469,7 @@
 				DD09051D1E24594E00D9EFB0 /* Controller */,
 				DDFEB9551E253A04004EADE9 /* Datasource */,
 				DD6A3D1E20C5E0E600C2F817 /* Navigator */,
+				DD41D77C271BB72600EE7795 /* Protocol */,
 				DDFEB9571E253A04004EADE9 /* View */,
 			);
 			path = AddCard;
@@ -633,6 +642,8 @@
 		DD0E0C00271B59E900E5AA2E /* AddCard */ = {
 			isa = PBXGroup;
 			children = (
+				DD41D774271BB3DD00EE7795 /* Controller */,
+				DD41D77F271BBBB300EE7795 /* Doubles */,
 				DD0E0C01271B5A0900E5AA2E /* Navigator */,
 			);
 			path = AddCard;
@@ -752,6 +763,38 @@
 				DD4103D81E3FC70F00B13F85 /* Localizable.stringsdict */,
 			);
 			path = es.lproj;
+			sourceTree = "<group>";
+		};
+		DD41D774271BB3DD00EE7795 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DD41D775271BB3FB00EE7795 /* AddCardViewControllerTests.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DD41D779271BB69E00EE7795 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				DD41D77A271BB71200EE7795 /* AboutViewType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		DD41D77C271BB72600EE7795 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				DD41D77D271BB73700EE7795 /* AddCardViewType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		DD41D77F271BBBB300EE7795 /* Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				DD41D780271BBBCB00EE7795 /* AddCardViewSpy.swift */,
+			);
+			path = Doubles;
 			sourceTree = "<group>";
 		};
 		DD43B95B20C6F62A00CEBFE5 /* Navigator */ = {
@@ -1052,6 +1095,7 @@
 			isa = PBXGroup;
 			children = (
 				DD8CE7581E1C27FB00110B07 /* Controller */,
+				DD41D779271BB69E00EE7795 /* Protocol */,
 				DD7FF0F71E1DCE96004FC6CF /* View */,
 			);
 			path = About;
@@ -1171,6 +1215,7 @@
 				DD2ABDC2230659C900374A8B /* CardDTOStub.swift */,
 				DD2ABDC4230659E900374A8B /* DeckDTOStub.swift */,
 				DD9EF5452134340B005C536E /* PersonDTOStub.swift */,
+				DD41D777271BB50300EE7795 /* UserCollectionDTO+Stub.swift */,
 			);
 			path = Stub;
 			sourceTree = "<group>";
@@ -1214,7 +1259,6 @@
 		DDB6DE6A1E539443003558E4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DD440D111E5399140037C048 /* AddCardViewControllerTests.swift */,
 				DD1DA4281E8735BC001E76C4 /* CardDetailViewControllerTests.swift */,
 			);
 			path = Controllers;
@@ -1904,6 +1948,7 @@
 				DDF2DD2D1E42B27D0090519E /* RealmMigrations.swift in Sources */,
 				DD6A3D2320C5E4A900C2F817 /* SearchNavigator.swift in Sources */,
 				9DA13A94254C504A00F0A22C /* NetworkingLogger.swift in Sources */,
+				DD41D77B271BB71200EE7795 /* AboutViewType.swift in Sources */,
 				DD5DE3FD23C0D6EB00DCC743 /* EndpointProtocol.swift in Sources */,
 				DD43B96320C702A600CEBFE5 /* PeopleListNavigator.swift in Sources */,
 				DD0905501E24701D00D9EFB0 /* LoanDetailTableView.swift in Sources */,
@@ -1986,6 +2031,7 @@
 				DD0905461E24701D00D9EFB0 /* CardListViewController.swift in Sources */,
 				DD7B108C1EE9EBA7003CA48D /* UIView+Utils.swift in Sources */,
 				DDFB0C8F1E285F0C00442E1B /* SWDestinyEndpoint.swift in Sources */,
+				DD41D77E271BB73700EE7795 /* AddCardViewType.swift in Sources */,
 				DDF47FBD2306330800F130DB /* HttpStatusCode.swift in Sources */,
 				DD7FF1001E1DE56C004FC6CF /* NewPersonView.swift in Sources */,
 				DD99D4C0217FE61400AE1301 /* FirebaseLogger.swift in Sources */,
@@ -2038,18 +2084,20 @@
 				DD2ABDC7230659F200374A8B /* DeckDTOStub.swift in Sources */,
 				DD0E0C03271B5A1C00E5AA2E /* AddCardNavigatorTests.swift in Sources */,
 				DDD19C782334489E007A9AF8 /* PeopleListViewControllerTests.swift in Sources */,
+				DD41D778271BB50300EE7795 /* UserCollectionDTO+Stub.swift in Sources */,
 				DDB6DE6C1E539443003558E4 /* AboutViewControllerTests.swift in Sources */,
 				9D513F4323353DEA00CCC12B /* DeckGraphViewControllerTests.swift in Sources */,
 				DD9EF54421343229005C536E /* AddCardViewControllerSnapshotTests.swift in Sources */,
 				DDA56A6D23C5700D0091CD09 /* URLSessionDataTaskMock.swift in Sources */,
 				DDDE91C920F7258800D48563 /* SWDestinyServiceTests.swift in Sources */,
 				DD66DAC4271866B500D32BD8 /* UIView+Testable.swift in Sources */,
+				DD41D776271BB3FB00EE7795 /* AddCardViewControllerTests.swift in Sources */,
 				DD94430D251ACC36009C37F6 /* HttpClientMock.swift in Sources */,
+				DD41D781271BBBCB00EE7795 /* AddCardViewSpy.swift in Sources */,
 				DDD19C7523344228007A9AF8 /* JSONHelper.swift in Sources */,
 				DDAB37EF23E5ACFB00B65738 /* RealmDatabaseHelper.swift in Sources */,
 				DDA56A6B23C56FE00091CD09 /* URLSessionMock.swift in Sources */,
 				DD9895D426FADD7C003E5BB4 /* AboutViewSpy.swift in Sources */,
-				DD440D131E5399940037C048 /* AddCardViewControllerTests.swift in Sources */,
 				DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */,
 				DD4EA5DC2133AA0D00D85ADD /* AboutViewControllerSnapshotTests.swift in Sources */,
 				DD9EF5462134340B005C536E /* PersonDTOStub.swift in Sources */,

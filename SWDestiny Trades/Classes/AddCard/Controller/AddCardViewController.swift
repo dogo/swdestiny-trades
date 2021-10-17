@@ -9,14 +9,15 @@
 import PKHUD
 import UIKit
 
-public enum AddCardType {
+enum AddCardType {
     case lent
     case borrow
     case collection
 }
 
 final class AddCardViewController: UIViewController {
-    private let addCardView = AddCardView()
+
+    private let addCardView: AddCardViewType
     private let destinyService: SWDestinyServiceProtocol
     private let addCardType: AddCardType
     private var cards = [CardDTO]()
@@ -27,12 +28,13 @@ final class AddCardViewController: UIViewController {
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyServiceProtocol = SWDestinyService(),
+    init(with view: AddCardViewType = AddCardView(),
+         service: SWDestinyServiceProtocol = SWDestinyService(),
          database: DatabaseProtocol?,
          person: PersonDTO? = nil,
          userCollection: UserCollectionDTO? = nil,
-         type: AddCardType)
-    {
+         type: AddCardType) {
+        addCardView = view
         destinyService = service
         self.database = database
         addCardType = type
@@ -53,12 +55,12 @@ final class AddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addCardView.activityIndicator.startAnimating()
+        addCardView.startLoading()
         destinyService.retrieveAllCards { [weak self] result in
-            self?.addCardView.activityIndicator.stopAnimating()
+            self?.addCardView.stopLoading()
             switch result {
             case let .success(allCards):
-                self?.addCardView.addCardTableView.updateSearchList(allCards)
+                self?.addCardView.updateSearchList(allCards)
                 self?.cards = allCards
             case let .failure(error):
                 ToastMessages.showNetworkErrorMessage()
@@ -66,16 +68,16 @@ final class AddCardViewController: UIViewController {
             }
         }
 
-        addCardView.addCardTableView.didSelectCard = { [weak self] card in
+        addCardView.didSelectCard = { [weak self] card in
             self?.insert(card: card)
         }
 
-        addCardView.addCardTableView.didSelectAccessory = { [weak self] card in
+        addCardView.didSelectAccessory = { [weak self] card in
             self?.navigateToNextController(with: card)
         }
 
-        addCardView.searchBar.doingSearch = { [weak self] query in
-            self?.addCardView.addCardTableView.doingSearch(query)
+        addCardView.doingSearch = { [weak self] query in
+            self?.addCardView.doingSearch(query)
         }
     }
 
