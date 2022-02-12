@@ -52,6 +52,12 @@ Pods/
 Carthage/Checkouts
 Carthage/Build
 
+## Tuist
+Tuist/Dependencies/graph.json
+Tuist/Dependencies/Carthage
+Tuist/Dependencies/SwiftPackageManager
+Tuist/Dependencies/Cocoapods
+
 ## Fastlane
 fastlane/report.xml
 fastlane/test_output/*

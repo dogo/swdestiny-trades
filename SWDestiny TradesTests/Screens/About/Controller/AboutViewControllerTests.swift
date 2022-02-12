@@ -11,7 +11,7 @@ import Quick
 import SafariServices
 import UIKit
 
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 final class AboutViewControllerTests: QuickSpec {
 

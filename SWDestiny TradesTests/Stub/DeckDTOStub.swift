@@ -8,7 +8,7 @@
 
 import Foundation
 import RealmSwift
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 extension DeckDTO {
     static func stub(emptyList: Bool = false) -> DeckDTO {

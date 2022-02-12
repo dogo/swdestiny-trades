@@ -8,7 +8,7 @@
 
 import Nimble
 import Quick
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 final class SWDestinyServiceTests: QuickSpec {
 

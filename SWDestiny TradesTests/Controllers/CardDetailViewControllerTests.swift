@@ -10,7 +10,7 @@ import Nimble
 import Quick
 import UIKit
 
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 final class CardDetailViewControllerTests: QuickSpec {
 
