@@ -8,7 +8,7 @@
 
 import Foundation
 
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 extension UserCollectionDTO {
 

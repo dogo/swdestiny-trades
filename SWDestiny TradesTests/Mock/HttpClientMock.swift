@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 final class HttpClientMock: HttpClientProtocol {
     var fileName = String()

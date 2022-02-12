@@ -1,6 +1,8 @@
 platform :ios, '12.0'
 
-target 'SWDestiny Trades' do
+project 'swdestiny-trades-tuist.xcodeproj'
+
+target 'SWDestinyTrades' do
 
   use_frameworks!
   
@@ -10,7 +12,7 @@ target 'SWDestiny Trades' do
   pod 'RealmSwift'
   pod 'SwiftMessages'
 
-  target 'SWDestiny-TradesTests' do
+  target 'SWDestinyTradesTests' do
     inherit! :search_paths
   end
 

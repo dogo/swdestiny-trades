@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@testable import SWDestiny_Trades
+@testable import SWDestinyTrades
 
 final class AboutViewSpy: UIView, AboutViewType {
 
