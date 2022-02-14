@@ -6,7 +6,6 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import PKHUD
 import UIKit
 
 final class AddToDeckViewController: UIViewController {
@@ -113,9 +112,7 @@ final class AddToDeckViewController: UIViewController {
     }
 
     private func showSuccessMessage(card: CardDTO) {
-        PKHUD.sharedHUD.dimsBackground = false
-        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
-        HUD.flash(.labeledSuccess(title: L10n.added, subtitle: card.name), delay: 0.2)
+        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
 
     private func handleFailure(_ error: APIError) {

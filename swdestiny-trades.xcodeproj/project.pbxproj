@@ -52,6 +52,7 @@
 		DD2ABDC6230659EE00374A8B /* CardDTOStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC2230659C900374A8B /* CardDTOStub.swift */; };
 		DD2ABDC7230659F200374A8B /* DeckDTOStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2ABDC4230659E900374A8B /* DeckDTOStub.swift */; };
 		DD2F8A0F2134A29300B9FAAB /* UIWindow+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */; };
+		DD31793A27BAD86300341BF2 /* LoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31793927BAD86300341BF2 /* LoadingHUD.swift */; };
 		DD3AFB591E79CF6900BF2001 /* SwdShareProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */; };
 		DD3AFB761E79E28A00BF2001 /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */; };
 		DD3AFB781E79E28A00BF2001 /* UserCollectionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AFB721E79E28A00BF2001 /* UserCollectionDatasource.swift */; };
@@ -245,6 +246,7 @@
 		DD2ABDC4230659E900374A8B /* DeckDTOStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDTOStub.swift; sourceTree = "<group>"; };
 		DD2ABDC823065D8200374A8B /* ReferenceImages */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ReferenceImages; path = "SWDestiny TradesTests/ReferenceImages"; sourceTree = SOURCE_ROOT; };
 		DD2F8A0E2134A29300B9FAAB /* UIWindow+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Testable.swift"; sourceTree = "<group>"; };
+		DD31793927BAD86300341BF2 /* LoadingHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingHUD.swift; sourceTree = "<group>"; };
 		DD38C2C1212FB0D300153D70 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		DD3AFB581E79CF6900BF2001 /* SwdShareProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwdShareProvider.swift; sourceTree = "<group>"; };
 		DD3AFB701E79E28A00BF2001 /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
@@ -1070,6 +1072,7 @@
 			isa = PBXGroup;
 			children = (
 				DD4D988F1E4182FB006412AD /* KingfisherSource.swift */,
+				DD31793927BAD86300341BF2 /* LoadingHUD.swift */,
 				DDE923391E1A8A3100F35001 /* NotificationConstants.swift */,
 				DDF678A61E441C6E00390878 /* SectionsBuilder.swift */,
 				DDF2DD2A1E429EF50090519E /* Sort.swift */,
@@ -1982,6 +1985,7 @@
 				DD4D98901E4182FB006412AD /* KingfisherSource.swift in Sources */,
 				DD0905591E2472B300D9EFB0 /* SWDTabBarViewController.swift in Sources */,
 				DDB6E75C23C0E50B00075432 /* URLRequest+Utils.swift in Sources */,
+				DD31793A27BAD86300341BF2 /* LoadingHUD.swift in Sources */,
 				DDCEF4161E248379007EACC5 /* PeopleListTableView.swift in Sources */,
 				DD2742E41E1E742500F8DDED /* BaseViewCell.swift in Sources */,
 				DDCDE3851E1DF7BD00B4BE18 /* CardView.swift in Sources */,

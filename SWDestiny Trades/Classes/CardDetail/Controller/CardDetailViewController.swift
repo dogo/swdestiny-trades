@@ -7,7 +7,6 @@
 //
 
 import ImageSlideshow
-import PKHUD
 import UIKit
 
 final class CardDetailViewController: UIViewController {
@@ -112,9 +111,7 @@ final class CardDetailViewController: UIViewController {
     }
 
     private func showSuccessMessage(cardDTO: CardDTO) {
-        PKHUD.sharedHUD.dimsBackground = false
-        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
-        HUD.flash(.labeledSuccess(title: L10n.added, subtitle: cardDTO.name), delay: 0.2)
+        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: cardDTO.name))
     }
 
     @objc
