@@ -5,6 +5,9 @@ xcuserdata
 *.xcworkspace
 *.bak
 
+## Project
+*.xcodeproj
+
 ## Build generated
 build/
 DerivedData/

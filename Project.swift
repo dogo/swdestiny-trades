@@ -67,7 +67,7 @@ let targets = [
 ]
 
 let project = Project(
-    name: "swdestiny-trades-tuist",
+    name: "swdestiny-trades",
     organizationName: "Diogo Autilio",
     options: options,
     settings: settings,
