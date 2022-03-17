@@ -87,7 +87,7 @@ final class DeckBuilderViewController: UIViewController {
 
     @objc
     func share(_ sender: UIBarButtonItem) {
-        var deckList: String = "\(deckDTO.name)\n\n"
+        var deckList = "\(deckDTO.name)\n\n"
 
         if let deckObject = deckBuilderView.tableViewDatasource?.deckList {
             for section in deckObject {

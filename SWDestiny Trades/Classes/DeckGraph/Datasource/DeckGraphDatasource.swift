@@ -105,8 +105,7 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
                 for card in deck.list where card.cost == cost &&
                     card.typeCode != "character" &&
                     card.typeCode != "battlefield" &&
-                    card.typeCode != "plot"
-                {
+                    card.typeCode != "plot" {
                     cardCost += card.quantity
                 }
                 cardCosts.append(cardCost)

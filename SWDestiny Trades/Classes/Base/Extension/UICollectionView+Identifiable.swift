@@ -15,8 +15,7 @@ public extension UICollectionView {
      - seealso: `register(_:,forCellWithReuseIdentifier:)`
      */
     final func register<T: UICollectionViewCell>(cellType: T.Type)
-        where T: Identifiable
-    {
+        where T: Identifiable {
         register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
     }
 
@@ -30,8 +29,7 @@ public extension UICollectionView {
      - seealso: `dequeueReusableCell(withReuseIdentifier:,for:)`
      */
     final func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath, cellType: T.Type = T.self) -> T
-        where T: Identifiable
-    {
+        where T: Identifiable {
         let bareCell = dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath)
         guard let cell = bareCell as? T else {
             fatalError(

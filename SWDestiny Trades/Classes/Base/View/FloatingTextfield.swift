@@ -203,8 +203,7 @@ final class FloatingTextfield: UITextField {
                                     scaleCoeff: CGFloat,
                                     newAlpha: CGFloat,
                                     underlineAlpha: CGFloat,
-                                    isLiftedAfterFinishing: Bool)
-    {
+                                    isLiftedAfterFinishing: Bool) {
         UIView.animate(withDuration: animationDuration,
                        animations: {
                            self.placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)

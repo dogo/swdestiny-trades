@@ -116,7 +116,7 @@ final class UserCollectionViewController: UIViewController {
 
     @objc
     func share(_ sender: UIBarButtonItem) {
-        var collectionList: String = ""
+        var collectionList = ""
 
         if let cardList = userCollectionView.tableViewDatasource?.getCardList() {
             for card in cardList {
