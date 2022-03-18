@@ -54,7 +54,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
     }
 
     func setupBarLineChartView(chartView: BarLineChartViewBase) {
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
         chartView.legend.enabled = true
         chartView.dragEnabled = false
         chartView.setScaleEnabled(false)
@@ -88,7 +88,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
     }
 }
 
-extension CardTypeBarChartCell: IAxisValueFormatter {
+extension CardTypeBarChartCell: AxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return cardTypes[Int(value)]
     }

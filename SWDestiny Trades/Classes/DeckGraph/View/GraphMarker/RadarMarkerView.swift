@@ -12,10 +12,10 @@ import UIKit
 
 final class RadarMarkerView: BalloonMarker {
 
-    var xAxisValueFormatter: IAxisValueFormatter?
+    var xAxisValueFormatter: AxisValueFormatter?
     private var yFormatter = NumberFormatter()
 
-    init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets, xAxisValueFormatter: IAxisValueFormatter) {
+    init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets, xAxisValueFormatter: AxisValueFormatter) {
         super.init(color: color, font: font, textColor: textColor, insets: insets)
         self.xAxisValueFormatter = xAxisValueFormatter
         yFormatter.minimumFractionDigits = 1

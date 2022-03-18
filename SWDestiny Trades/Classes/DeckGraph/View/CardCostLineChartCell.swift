@@ -53,7 +53,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
     }
 
     func setupLineChartView(chartView: BarLineChartViewBase) {
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
         chartView.legend.enabled = true
         chartView.dragEnabled = false
         chartView.setScaleEnabled(false)

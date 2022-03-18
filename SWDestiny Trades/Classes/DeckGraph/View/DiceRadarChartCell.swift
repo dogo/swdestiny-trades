@@ -21,7 +21,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
         view.webColor = .lightGray
         view.innerWebColor = .lightGray
         view.webAlpha = 1.0
-        view.chartDescription?.enabled = false
+        view.chartDescription.enabled = false
         view.legend.textColor = .black
         return view
     }()
@@ -89,7 +89,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
     }
 }
 
-extension DiceRadarChartCell: IAxisValueFormatter {
+extension DiceRadarChartCell: AxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return dieFaces[Int(value) % dieFaces.count]
     }
