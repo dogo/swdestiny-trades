@@ -29,13 +29,13 @@ let targets = [
         product: .app,
         bundleId: "br.com.anykey.SWDestiny-Trades",
         deploymentTarget: .iOS(targetVersion: "12.0", devices: [.iphone, .ipad]),
-        infoPlist: "SWDestiny Trades/Info.plist",
-        sources: ["SWDestiny Trades/Classes/**"],
+        infoPlist: "SWDestinyTrades/Info.plist",
+        sources: ["SWDestinyTrades/Classes/**"],
         resources: [
             "GoogleService-Info.plist",
-            "SWDestiny Trades/Assets.xcassets",
-            "SWDestiny Trades/Base.lproj/**",
-            "SWDestiny Trades/Localization/**"
+            "SWDestinyTrades/Assets.xcassets",
+            "SWDestinyTrades/Base.lproj/**",
+            "SWDestinyTrades/Localization/**"
         ],
         scripts: scripts,
         dependencies: [
@@ -52,10 +52,10 @@ let targets = [
         platform: .iOS,
         product: .unitTests,
         bundleId: "br.com.anykey.SWDestiny-TradesTests",
-        infoPlist: "SWDestiny TradesTests/Info.plist",
-        sources: ["SWDestiny TradesTests/**"],
+        infoPlist: "SWDestinyTradesTests/Info.plist",
+        sources: ["SWDestinyTradesTests/**"],
         resources: [
-            "SWDestiny TradesTests/JSON/*.json"
+            "SWDestinyTradesTests/JSON/*.json"
         ],
         dependencies: [
             .target(name: "SWDestinyTrades"),
@@ -73,7 +73,7 @@ let project = Project(
     settings: settings,
     targets: targets,
     additionalFiles: [
-        .folderReference(path: "SWDestiny TradesTests/ReferenceImages")
+        .folderReference(path: "SWDestinyTradesTests/ReferenceImages")
     ],
     resourceSynthesizers: []
 )

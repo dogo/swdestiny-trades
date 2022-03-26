@@ -1,5 +1,5 @@
-input_dir: 'SWDestiny Trades'
-output_dir: 'SWDestiny Trades/Classes/Generated/'
+input_dir: 'SWDestinyTrades'
+output_dir: 'SWDestinyTrades/Classes/Generated/'
 strings:
   inputs: Localization/Base.lproj
   outputs:
