@@ -27,6 +27,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-
 
+      - name: Cache Tuist libraries
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.tuist/Cache
+            ~/.tuist/Versions
+          key: ${{ runner.os }}-tuist-${{ hashFiles('**/Tuist/Dependencies/Lockfiles/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-tuist-            
+
       - name: Fetch tuist dependencies
         uses: tuist/tuist-action@0.13.0
         with:
