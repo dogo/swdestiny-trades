@@ -24,6 +24,18 @@ This app is not produced, endorsed, supported, or affiliated with Fantasy Flight
 
 ### Building SWDTrades
 
+Run the Tuist command:
+
+```bash
+$ tuist fetch
+```
+
+Then:
+
+```bash
+$ tuist generate --no-open
+```
+
 Run the CocoaPods command:
 
 ```bash
