@@ -23,6 +23,12 @@ enum AppearanceProxyHelper {
         }
     }
 
+    static func customizeUITableView() {
+        if #available(iOS 15.0, *) {
+            UITableView.appearance().sectionHeaderTopPadding = .zero
+        }
+    }
+
     static func customizeNavigationBar() {
         if #available(iOS 13.0, *) {
             // Set the standard appearance

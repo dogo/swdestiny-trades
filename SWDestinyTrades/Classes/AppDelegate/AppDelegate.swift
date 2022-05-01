@@ -8,9 +8,10 @@
 
 import UIKit
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
-    var database: RealmDatabase?
+    private var database: RealmDatabase?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         database = try? RealmDatabase()
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AppearanceProxyHelper.customizeTabBar()
         AppearanceProxyHelper.customizeNavigationBar()
+        AppearanceProxyHelper.customizeUITableView()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
