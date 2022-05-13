@@ -8,9 +8,9 @@ let swiftPackageManagerDependencies = SwiftPackageManagerDependencies(
         .remote(url: "https://github.com/dogo/PKHUD.git", requirement: .branch("fix/spm-resource")),
         .remote(url: "https://github.com/liufengting/FTPopOverMenu_Swift.git", requirement: .upToNextMajor(from: "0.4.4")),
         .remote(url: "https://github.com/zvonicek/ImageSlideshow.git", requirement: .upToNextMajor(from: "1.9.1")),
-        .remote(url: "https://github.com/Quick/Nimble.git", requirement: .upToNextMajor(from: "9.2.1")),
-        .remote(url: "https://github.com/Quick/Quick.git", requirement: .upToNextMajor(from: "4.0.0")),
-        .remote(url: "https://github.com/ashfurrow/Nimble-Snapshots.git", requirement: .upToNextMajor(from: "9.3.1"))
+        .remote(url: "https://github.com/Quick/Nimble.git", requirement: .upToNextMajor(from: "10.0.0")),
+        .remote(url: "https://github.com/Quick/Quick.git", requirement: .upToNextMajor(from: "5.0.1")),
+        .remote(url: "https://github.com/ashfurrow/Nimble-Snapshots.git", requirement: .upToNextMajor(from: "9.4.0"))
     ],
     productTypes: [
         "ImageSlideshow": .framework
