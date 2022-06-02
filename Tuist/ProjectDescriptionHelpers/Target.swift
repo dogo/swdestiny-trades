@@ -25,14 +25,14 @@ public extension Project {
                 ],
                 scripts: Project.targetScripts(),
                 dependencies: [
-                    .external(name: "SketchKit"),
                     .external(name: "Charts"),
-                    .external(name: "Kingfisher"),
-                    .external(name: "PKHUD"),
+                    .external(name: "FirebaseAnalytics"),
+                    .external(name: "FirebaseCrashlytics"),
                     .external(name: "FTPopOverMenu"),
                     .external(name: "ImageSlideshow"),
-                    .external(name: "FirebaseAnalytics"),
-                    .external(name: "FirebaseCrashlytics")
+                    .external(name: "Kingfisher"),
+                    .external(name: "PKHUD"),
+                    .external(name: "SketchKit")
                 ]
             ),
             Target(
