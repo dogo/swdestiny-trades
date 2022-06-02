@@ -22,7 +22,7 @@ public extension Project {
                 name: "[SwiftLint] Run Script"
             ),
             TargetScript.post(
-                script: "${PODS_ROOT}/FirebaseCrashlytics/run",
+                script: "${PROJECT_DIR}/Tuist/Dependencies/SwiftPackageManager/.build/checkouts/firebase-ios-sdk/Crashlytics/run",
                 name: "[Crashlytics] Run Script"
             )
         ]

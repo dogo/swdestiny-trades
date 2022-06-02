@@ -30,7 +30,9 @@ public extension Project {
                     .external(name: "Kingfisher"),
                     .external(name: "PKHUD"),
                     .external(name: "FTPopOverMenu"),
-                    .external(name: "ImageSlideshow")
+                    .external(name: "ImageSlideshow"),
+                    .external(name: "FirebaseAnalytics"),
+                    .external(name: "FirebaseCrashlytics")
                 ]
             ),
             Target(
