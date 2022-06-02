@@ -15,7 +15,8 @@ let swiftPackageManagerDependencies = SwiftPackageManagerDependencies(
         .remote(url: "https://github.com/SwiftKickMobile/SwiftMessages", requirement: .upToNextMajor(from: "9.0.6"))
     ],
     productTypes: [
-        "ImageSlideshow": .framework
+        "ImageSlideshow": .framework,
+        "SwiftMessages": .framework
     ],
     targetSettings: [
         "Nimble-Snapshots": ["ENABLE_TESTING_SEARCH_PATHS": "YES"],
