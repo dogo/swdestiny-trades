@@ -4,25 +4,19 @@ PODS:
   - Realm/Headers (10.24.1)
   - RealmSwift (10.24.1):
     - Realm (= 10.24.1)
-  - SwiftMessages (9.0.6):
-    - SwiftMessages/App (= 9.0.6)
-  - SwiftMessages/App (9.0.6)
 
 DEPENDENCIES:
   - RealmSwift
-  - SwiftMessages
 
 SPEC REPOS:
   trunk:
     - Realm
     - RealmSwift
-    - SwiftMessages
 
 SPEC CHECKSUMS:
   Realm: f9bc5a212a9ab084b4ed90cda1c28d835a38a06b
   RealmSwift: 0b03bb38001bee4280dcc27709e6b33f438cfad1
-  SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
 
-PODFILE CHECKSUM: c5614ca42e824c76e5e5eb46cc2ee3a0f15ad332
+PODFILE CHECKSUM: ec1f07fa92eb476355165af345772bc9c267326e
 
 COCOAPODS: 1.11.3

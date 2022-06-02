@@ -12,6 +12,7 @@ let swiftPackageManagerDependencies = SwiftPackageManagerDependencies(
         .remote(url: "https://github.com/Quick/Quick", requirement: .upToNextMajor(from: "5.0.1")),
         .remote(url: "https://github.com/ashfurrow/Nimble-Snapshots", requirement: .upToNextMajor(from: "9.4.0")),
         .remote(url: "https://github.com/firebase/firebase-ios-sdk", requirement: .upToNextMajor(from: "9.1.0")),
+        .remote(url: "https://github.com/SwiftKickMobile/SwiftMessages", requirement: .upToNextMajor(from: "9.0.6"))
     ],
     productTypes: [
         "ImageSlideshow": .framework

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftMessages
+import UIKit
 
 enum ToastMessages {
     static func showNetworkErrorMessage() {

@@ -39,7 +39,7 @@
     {
       "identity" : "charts",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/danielgindi/Charts.git",
+      "location" : "https://github.com/danielgindi/Charts",
       "state" : {
         "revision" : "b38b8d45a8cbda9f0f2a3566778ed114f06056b7",
         "version" : "4.0.3"
@@ -66,7 +66,7 @@
     {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
+      "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
         "revision" : "2eb177effe7baf1f13ad0c5f4eb8c71a98429fb5",
         "version" : "9.1.0"
@@ -75,7 +75,7 @@
     {
       "identity" : "ftpopovermenu_swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/liufengting/FTPopOverMenu_Swift.git",
+      "location" : "https://github.com/liufengting/FTPopOverMenu_Swift",
       "state" : {
         "revision" : "69c156afc761127a8842b0bea6a7de6e673cd863",
         "version" : "0.4.4"
@@ -129,7 +129,7 @@
     {
       "identity" : "imageslideshow",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zvonicek/ImageSlideshow.git",
+      "location" : "https://github.com/zvonicek/ImageSlideshow",
       "state" : {
         "revision" : "a54e24d47944a1ca84c2a7bf03cb435425a9929d",
         "version" : "1.9.2"
@@ -147,7 +147,7 @@
     {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/onevcat/Kingfisher.git",
+      "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
         "revision" : "1a0c2df04b31ed7aa318354f3583faea24f006fc",
         "version" : "5.15.8"
@@ -174,7 +174,7 @@
     {
       "identity" : "nimble",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Quick/Nimble.git",
+      "location" : "https://github.com/Quick/Nimble",
       "state" : {
         "revision" : "1f3bde57bde12f5e7b07909848c071e9b73d6edc",
         "version" : "10.0.0"
@@ -183,7 +183,7 @@
     {
       "identity" : "nimble-snapshots",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ashfurrow/Nimble-Snapshots.git",
+      "location" : "https://github.com/ashfurrow/Nimble-Snapshots",
       "state" : {
         "revision" : "315171874edd18935e050fc97a7e6287d0a9c14f",
         "version" : "9.4.0"
@@ -192,7 +192,7 @@
     {
       "identity" : "pkhud",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dogo/PKHUD.git",
+      "location" : "https://github.com/dogo/PKHUD",
       "state" : {
         "branch" : "fix/spm-resource",
         "revision" : "c76d4ac8790608d49e946f87cfe9278770a670f9"
@@ -210,7 +210,7 @@
     {
       "identity" : "quick",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Quick/Quick.git",
+      "location" : "https://github.com/Quick/Quick",
       "state" : {
         "revision" : "f9d519828bb03dfc8125467d8f7b93131951124c",
         "version" : "5.0.1"
@@ -228,7 +228,7 @@
     {
       "identity" : "sketchkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dogo/SketchKit.git",
+      "location" : "https://github.com/dogo/SketchKit",
       "state" : {
         "revision" : "edbe488e7272aefc52d3f878a71f6e61e4bda6d1",
         "version" : "2.0.0"
@@ -259,6 +259,15 @@
       "state" : {
         "revision" : "e1499bc69b9040b29184f7f2996f7bab467c1639",
         "version" : "1.19.0"
+      }
+    },
+    {
+      "identity" : "swiftmessages",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftKickMobile/SwiftMessages",
+      "state" : {
+        "revision" : "b29dd21090b708aa0ae9ecbaf6e2d0487028dc3f",
+        "version" : "9.0.6"
       }
     }
   ],

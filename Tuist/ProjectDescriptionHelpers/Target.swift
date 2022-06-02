@@ -32,7 +32,8 @@ public extension Project {
                     .external(name: "ImageSlideshow"),
                     .external(name: "Kingfisher"),
                     .external(name: "PKHUD"),
-                    .external(name: "SketchKit")
+                    .external(name: "SketchKit"),
+                    .external(name: "SwiftMessages")
                 ]
             ),
             Target(

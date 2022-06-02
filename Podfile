@@ -6,7 +6,6 @@ target 'SWDestinyTrades' do
   
   # Pods for SWDestinyTrades
   pod 'RealmSwift'
-  pod 'SwiftMessages'
 
   target 'SWDestinyTradesTests' do
     inherit! :search_paths
