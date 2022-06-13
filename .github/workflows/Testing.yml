@@ -1,6 +1,9 @@
 name: Testing
 on: [push, pull_request]
 
+env:
+  TUIST_CONFIG_CLOUD_TOKEN: ${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }}
+
 jobs:
   test:
     name: Testing SWDestiny Trades app
