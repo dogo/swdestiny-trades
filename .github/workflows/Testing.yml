@@ -44,6 +44,12 @@ jobs:
         uses: tuist/tuist-action@0.13.0
         with:
           command: 'fetch'
+          
+      - name: Fetch/Cache dependencies
+        uses: tuist/tuist-action@0.13.0
+        with:
+          command: 'cache'
+          arguments: 'warm'
 
       - name: Generate project with tuist
         uses: tuist/tuist-action@0.13.0
