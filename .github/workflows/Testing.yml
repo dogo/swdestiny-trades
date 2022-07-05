@@ -42,12 +42,12 @@ jobs:
 
       - name: Tuist Warm Cache
         run: |
-          TUIST_CONFIG_CLOUD_TOKEN=${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }} tuist cache warm
+          tuist cache warm
         shell: bash
 
       - name: Generate project with tuist
         run: |
-          TUIST_CONFIG_CLOUD_TOKEN=${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }} tuist generate --no-open
+          tuist generate --no-open
         shell: bash
 
       - name: Install CocoaPods Dependencies
