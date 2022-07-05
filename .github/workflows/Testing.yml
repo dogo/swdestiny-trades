@@ -1,9 +1,6 @@
 name: Testing
 on: [push, pull_request]
 
-env:
-  TUIST_CONFIG_CLOUD_TOKEN: ${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }}
-
 jobs:
   test:
     name: Testing SWDestiny Trades app
@@ -47,9 +44,11 @@ jobs:
           
       - name: Fetch/Cache dependencies
         uses: tuist/tuist-action@0.13.0
+        env:
+          TUIST_CONFIG_CLOUD_TOKEN: ${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }} 
         with:
           command: 'cache'
-          arguments: 'warm'
+          arguments: 'warm'         
 
       - name: Generate project with tuist
         uses: tuist/tuist-action@0.13.0
