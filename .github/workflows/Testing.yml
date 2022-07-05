@@ -1,6 +1,9 @@
 name: Testing
 on: [push, pull_request]
 
+env:
+  TUIST_CONFIG_CLOUD_TOKEN: ${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }}
+
 jobs:
   test:
     name: Testing SWDestiny Trades app
@@ -17,7 +20,12 @@ jobs:
       - name: Install Mint
         run: |
           brew install mint
-        shell: bash      
+        shell: bash
+
+      - name: Install Tuist
+        run: |
+          bash <(curl -Ls https://install.tuist.io)
+        shell: bash                  
 
       - name: Cache CocoaPods libraries
         uses: actions/cache@v3
@@ -38,23 +46,23 @@ jobs:
             ${{ runner.os }}-tuist-            
 
       - name: Fetch tuist dependencies
-        uses: tuist/tuist-action@0.13.0
-        with:
-          command: 'fetch'
+        run: |
+          tuist fetch
+        shell: bash
           
-      - name: Fetch/Cache dependencies
-        uses: tuist/tuist-action@0.13.0
+      - name: Tuist Warm Cache
         env:
           TUIST_CONFIG_CLOUD_TOKEN: ${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }} 
-        with:
-          command: 'cache'
-          arguments: 'warm'         
+        run: |
+          tuist cache warm
+        shell: bash          
 
       - name: Generate project with tuist
-        uses: tuist/tuist-action@0.13.0
-        with:
-          command: 'generate'
-          arguments: '--no-open'
+        env:
+          TUIST_CONFIG_CLOUD_TOKEN: ${{ secrets.TUIST_CONFIG_CLOUD_TOKEN }} 
+        run: |          
+          tuist generate --no-open
+        shell: bash          
       
       - name: Install CocoaPods Dependencies
         run: |
