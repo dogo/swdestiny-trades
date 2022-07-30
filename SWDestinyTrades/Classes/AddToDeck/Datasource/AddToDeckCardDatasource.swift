@@ -9,6 +9,7 @@
 import UIKit
 
 final class AddToDeckCardDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
+
     private var tableView: UITableView?
     private var searchIsActive = false
     private var cardsData: [CardDTO] = []

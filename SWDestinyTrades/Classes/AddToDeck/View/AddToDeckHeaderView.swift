@@ -9,17 +9,14 @@
 import UIKit
 
 final class AddToDeckHeaderView: UITableViewHeaderFooterView, Identifiable {
+
     weak var delegate: SearchDelegate?
 
-    lazy var segmentControl: UISegmentedControl = {
+    private lazy var segmentControl: UISegmentedControl = {
         let segment = UISegmentedControl(frame: .zero)
         segment.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return segment
     }()
-
-    static func height() -> CGFloat {
-        return 45
-    }
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -31,38 +28,45 @@ final class AddToDeckHeaderView: UITableViewHeaderFooterView, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureHeader() {
-        segmentControl.insertSegment(withTitle: L10n.allCards, at: 0, animated: false)
-        segmentControl.insertSegment(withTitle: L10n.myCollection, at: 1, animated: false)
-        segmentControl.selectedSegmentIndex = 0
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
         segmentControl.removeAllSegments()
     }
 
+    static func height() -> CGFloat {
+        return 45
+    }
+
+    func configureHeader() {
+        segmentControl.insertSegment(withTitle: L10n.allCards, at: 0, animated: false)
+        segmentControl.insertSegment(withTitle: L10n.myCollection, at: 1, animated: false)
+        segmentControl.selectedSegmentIndex = 0
+    }
+
     @objc
     func valueChanged(_ sender: UISegmentedControl) {
-        delegate?.didSelectSegment?(index: sender.selectedSegmentIndex)
+        if sender === segmentControl {
+            delegate?.didSelectSegment?(index: sender.selectedSegmentIndex)
+        }
     }
 }
 
 extension AddToDeckHeaderView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+
+    func buildViewHierarchy() {
         addSubview(segmentControl)
     }
 
-    internal func setupConstraints() {
-        segmentControl.layout.applyConstraint { view in
-            view.topAnchor(equalTo: self.topAnchor, constant: 8)
-            view.leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
-            view.bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
-            view.trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
+    func setupConstraints() {
+        segmentControl.layout.applyConstraint {
+            $0.topAnchor(equalTo: self.topAnchor, constant: 8)
+            $0.leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
+            $0.bottomAnchor(equalTo: self.bottomAnchor, constant: -8)
+            $0.trailingAnchor(equalTo: self.trailingAnchor, constant: -18)
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         segmentControl.tintColor = ColorPalette.appTheme
     }
 }
