@@ -5,9 +5,9 @@ import ProjectDescription
 /// Create your own conventions, e.g: a func that makes sure all shared targets are "static frameworks"
 /// See https://docs.tuist.io/guides/helpers/
 
-public extension Project {
+extension Project {
 
-    static func targetScripts() -> [TargetScript] {
+    public static func targetScripts() -> [TargetScript] {
         return [
             TargetScript.pre(
                 script: "mint run swiftgen",

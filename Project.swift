@@ -4,6 +4,7 @@ import ProjectDescriptionHelpers
 // MARK: - Project
 
 let options = Project.Options.options(
+    automaticSchemesOptions: .disabled,
     disableBundleAccessors: true
 )
 
@@ -13,6 +14,7 @@ let project = Project(
     options: options,
     settings: Project.settings(),
     targets: Project.targets(),
+    schemes: Project.schemes(),
     additionalFiles: [
         .folderReference(path: "SWDestinyTradesTests/ReferenceImages")
     ],

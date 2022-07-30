@@ -5,9 +5,9 @@ import ProjectDescription
 /// Create your own conventions, e.g: a func that makes sure all shared targets are "static frameworks"
 /// See https://docs.tuist.io/guides/helpers/
 
-public extension Project {
+extension Project {
 
-    static func targets() -> [Target] {
+    public static func targets() -> [Target] {
         return [
             Target(
                 name: "SWDestinyTrades",
