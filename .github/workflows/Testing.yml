@@ -27,14 +27,6 @@ jobs:
           bash <(curl -Ls https://install.tuist.io)
         shell: bash
 
-      - name: Cache CocoaPods libraries
-        uses: actions/cache@v3
-        with:
-          path: Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-
       - name: Fetch tuist dependencies
         run: |
           tuist fetch
@@ -48,11 +40,6 @@ jobs:
       - name: Generate project with tuist
         run: |
           tuist generate --no-open
-        shell: bash
-
-      - name: Install CocoaPods Dependencies
-        run: |
-          pod install --repo-update
         shell: bash
 
       - name: Cache Mint packages
