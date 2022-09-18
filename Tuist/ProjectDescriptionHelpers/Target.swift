@@ -33,7 +33,8 @@ public extension Project {
                     .external(name: "Kingfisher"),
                     .external(name: "PKHUD"),
                     .external(name: "SketchKit"),
-                    .external(name: "SwiftMessages")
+                    .external(name: "SwiftMessages"),
+                    .package(product: "RealmSwift")
                 ]
             ),
             Target(
