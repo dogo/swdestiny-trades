@@ -3,7 +3,7 @@ import ProjectDescription
 let swiftPackageManagerDependencies = SwiftPackageManagerDependencies(
     [
         .remote(url: "https://github.com/dogo/SketchKit", requirement: .upToNextMajor(from: "2.0.0")),
-        .remote(url: "https://github.com/danielgindi/Charts", requirement: .upToNextMajor(from: "4.0.2")),
+        .remote(url: "https://github.com/danielgindi/Charts", requirement: .upToNextMajor(from: "4.1.0")),
         .remote(url: "https://github.com/onevcat/Kingfisher", requirement: .upToNextMajor(from: "5.15.8")),
         .remote(url: "https://github.com/dogo/PKHUD", requirement: .branch("fix/spm-resource")),
         .remote(url: "https://github.com/liufengting/FTPopOverMenu_Swift", requirement: .upToNextMajor(from: "0.4.4")),
