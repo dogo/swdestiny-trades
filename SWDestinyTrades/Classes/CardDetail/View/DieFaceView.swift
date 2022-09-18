@@ -6,6 +6,7 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 final class DieFaceView: UIView {
@@ -56,7 +57,6 @@ final class DieFaceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // swiftlint:disable:next cyclomatic_complexity
     internal func configureDie(face: String) {
         if face.contains("+") {
             symbol.tintColor = .blue
@@ -66,40 +66,60 @@ final class DieFaceView: UIView {
             quantity.textColor = .black
         }
 
-        var allowed = CharacterSet()
-        allowed.formUnion(CharacterSet.decimalDigits)
-        allowed.formUnion(CharacterSet.symbols)
-        allowed.formUnion(CharacterSet(charactersIn: "X"))
-
-        let face2 = face.trimmingCharacters(in: allowed)
-
-        switch face2.uppercased() {
-        case "MD":
-            symbol.image = Asset.icMelee.image.withRenderingMode(.alwaysTemplate)
-        case "RD":
-            symbol.image = Asset.icRanged.image.withRenderingMode(.alwaysTemplate)
-        case "R":
-            symbol.image = Asset.icResource.image.withRenderingMode(.alwaysTemplate)
-        case "DR":
-            symbol.image = Asset.icDisrupt.image.withRenderingMode(.alwaysTemplate)
-        case "-":
-            symbol.image = Asset.icBlank.image.withRenderingMode(.alwaysTemplate)
-            quantity.isHidden = true
-        case "SP":
-            symbol.image = Asset.icSpecial.image.withRenderingMode(.alwaysTemplate)
-            quantity.isHidden = true
-        case "F":
-            symbol.image = Asset.icFocus.image.withRenderingMode(.alwaysTemplate)
-        case "SH":
-            symbol.image = Asset.icShield.image.withRenderingMode(.alwaysTemplate)
-        case "DC":
-            symbol.image = Asset.icDiscard.image.withRenderingMode(.alwaysTemplate)
-        case "ID":
-            symbol.image = Asset.icIndirect.image.withRenderingMode(.alwaysTemplate)
-        default:
-            symbol.isHidden = true
+        let options = getSubtitle(input: face)
+        if let firstOption = options.first {
+            quantity.text = firstOption.quantity
+            symbol.image = firstOption.icon
         }
-        quantity.text = face.trimmingCharacters(in: allowed.inverted)
+    }
+
+    func getSubtitle(input: String) -> [Option] {
+        var options: [Option] = []
+
+        let pattern = "(\\+?\\d+)?([A-Za-z\\-]+)?(\\d+)?"
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex.matches(in: input, options: [], range: NSRange(input.startIndex..., in: input))
+
+        for match in matches {
+            let quantityRange = Range(match.range(at: 1), in: input)
+            let faceRange = Range(match.range(at: 2), in: input)
+            let extraRange = Range(match.range(at: 3), in: input)
+
+            let quantity = quantityRange.map { String(input[$0]) }
+            let face = faceRange.map { String(input[$0]) }
+            let extra = extraRange != nil ? assignImage(option: "R") : nil
+            let icon = face.compactMap { assignImage(option: $0) }.first
+
+            options.append(Option(quantity: quantity, face: face, icon: icon, extra: extra))
+        }
+
+        return options
+    }
+
+    func assignImage(option: String) -> UIImage? {
+        print("[Debug] face:" + option)
+
+        let imageMapping: [String: UIImage] = [
+            "MD": Asset.icMelee.image,
+            "RD": Asset.icRanged.image,
+            "R": Asset.icResource.image,
+            "DR": Asset.icDisrupt.image,
+            "-": Asset.icBlank.image,
+            "SP": Asset.icSpecial.image,
+            "F": Asset.icFocus.image,
+            "SH": Asset.icShield.image,
+            "DC": Asset.icDiscard.image,
+            "ID": Asset.icIndirect.image
+        ]
+
+        if let image = imageMapping[option.uppercased()] {
+            quantity.isHidden = (option == "-" || option.uppercased() == "SP")
+            symbol.isHidden = false
+            return image.withRenderingMode(.alwaysTemplate)
+        } else {
+            symbol.isHidden = true
+            return nil
+        }
     }
 }
 
@@ -136,4 +156,11 @@ extension DieFaceView: BaseViewConfiguration {
     internal func configureViews() {
         backgroundColor = .clear
     }
+}
+
+struct Option {
+    let quantity: String?
+    let face: String?
+    let icon: UIImage?
+    let extra: UIImage?
 }
