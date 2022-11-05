@@ -35,7 +35,8 @@ public extension Project {
                     .external(name: "SketchKit"),
                     .external(name: "SwiftMessages"),
                     .package(product: "RealmSwift")
-                ]
+                ],
+                settings: Settings.default
             ),
             Target(
                 name: "SWDestinyTradesTests",
@@ -56,4 +57,13 @@ public extension Project {
             )
         ]
     }
+}
+
+public extension Settings {
+
+    static let `default`: Settings = .settings(
+        base: SettingsDictionary().otherLinkerFlags(["-ObjC"]),
+        configurations: [],
+        defaultSettings: .recommended
+    )
 }
