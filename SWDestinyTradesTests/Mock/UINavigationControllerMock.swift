@@ -10,35 +10,51 @@ import UIKit
 
 final class UINavigationControllerMock: UINavigationController {
 
-    private(set) var dismissWasCalled = false
-    private(set) var popViewControllerWaCalled = false
-    private(set) var popToViewControllerWasCalled = false
-    private(set) var popToRootViewControllerWasCalled = false
-
-    private(set) var currentPushedViewController: UIViewController?
     private(set) var currentPresentedViewController: UIViewController?
+    override var presentedViewController: UIViewController? {
+        return currentPresentedViewController
+    }
 
+    private(set) var visibleViewControllerCount = 0
+    override var visibleViewController: UIViewController? {
+        visibleViewControllerCount += 1
+        return super.visibleViewController
+    }
+
+    private(set) var dismissCount = 0
+    private(set) var setViewControllers: [UIViewController]?
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        dismissWasCalled = true
+        dismissCount += 1
         completion?()
     }
 
+    private(set) var setViewControllersCount = 0
+    override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+        setViewControllersCount += 1
+        setViewControllers = viewControllers
+        super.setViewControllers(viewControllers, animated: false)
+    }
+
+    private(set) var popViewControllerCount = 0
     override func popViewController(animated: Bool) -> UIViewController? {
-        popViewControllerWaCalled = true
+        popViewControllerCount += 1
         return super.popViewController(animated: false)
     }
 
+    private(set) var popToViewControllerCount = 0
     override func popToViewController(_ viewController: UIViewController,
                                       animated: Bool) -> [UIViewController]? {
-        popToViewControllerWasCalled = true
+        popToViewControllerCount += 1
         return super.popToViewController(viewController, animated: false)
     }
 
+    private(set) var popToRootViewControllerCount = 0
     override func popToRootViewController(animated: Bool) -> [UIViewController]? {
-        popToRootViewControllerWasCalled = true
+        popToRootViewControllerCount += 1
         return super.popToRootViewController(animated: false)
     }
 
+    private(set) var currentPushedViewController: UIViewController?
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         currentPushedViewController = viewController
         super.pushViewController(viewController, animated: false)

@@ -9,6 +9,7 @@
 import UIKit
 
 final class DeckListNavigator: Navigator {
+
     enum Destination {
         case deckBuilder(database: DatabaseProtocol?, with: DeckDTO)
     }
