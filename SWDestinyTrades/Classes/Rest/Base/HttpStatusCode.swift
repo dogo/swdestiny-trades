@@ -7,7 +7,7 @@
 //  Copyright (c) 2015 Anykey Entertrainment. All rights reserved.
 //
 
-/**
+/*
  * Http status codes.
  *
  * The list here is based on the description at Wikipedia.
