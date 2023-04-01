@@ -14,7 +14,7 @@ let project = Project(
     options: options,
     packages: [
         .remote(url: "https://github.com/realm/realm-swift",
-                requirement: .upToNextMajor(from: "10.29.0"))
+                requirement: .upToNextMajor(from: "10.38.0"))
     ],
     settings: Project.settings(),
     targets: Project.targets(),
