@@ -42,12 +42,12 @@ final class NewPersonView: UIView {
 }
 
 extension NewPersonView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(firstNameTextField)
         addSubview(lastNameTextField)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         firstNameTextField.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
@@ -63,7 +63,7 @@ extension NewPersonView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
     }
 }

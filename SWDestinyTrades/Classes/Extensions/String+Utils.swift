@@ -1,5 +1,5 @@
 //
-//  StringUtils.swift
+//  String+Utils.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 01/01/17.

@@ -1,5 +1,5 @@
 //
-//  AboutViewControllerSpec.swift
+//  AboutViewControllerTests.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 26/12/16.

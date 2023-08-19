@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  HttpClient.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 15/08/19.

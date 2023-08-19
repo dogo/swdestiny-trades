@@ -72,7 +72,7 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(card: CardDTO) {
+    func configureCell(card: CardDTO) {
         titleLabel.text = card.name
         setSubtitle(card: card)
         setIconImage(card: card)
@@ -115,7 +115,7 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
 }
 
 extension DeckBuilderCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(textContainer)
         contentView.addSubview(iconImageView)
         textContainer.addArrangedSubview(titleLabel)
@@ -125,7 +125,7 @@ extension DeckBuilderCell: BaseViewConfiguration {
         contentView.addSubview(eliteButton)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         iconImageView.layout.applyConstraint { view in
             view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
@@ -156,7 +156,7 @@ extension DeckBuilderCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         accessoryType = .disclosureIndicator
 
         eliteButton.buttonTouched = { [weak self] newVaue in

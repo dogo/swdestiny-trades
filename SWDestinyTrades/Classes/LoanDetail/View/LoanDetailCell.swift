@@ -58,7 +58,7 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(cardDTO: CardDTO) {
+    func configureCell(cardDTO: CardDTO) {
         titleLabel.text = cardDTO.name
         setIconImage(card: cardDTO)
         subtitleLabel.text = cardDTO.setName
@@ -93,7 +93,7 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
 }
 
 extension LoanDetailCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
@@ -101,7 +101,7 @@ extension LoanDetailCell: BaseViewConfiguration {
         contentView.addSubview(quantityStepper)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         iconImageView.layout.applyConstraint { view in
             view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 8)
@@ -132,7 +132,7 @@ extension LoanDetailCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         accessoryType = .disclosureIndicator
     }
 }

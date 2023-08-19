@@ -1,5 +1,5 @@
 //
-//  CardListDatasource.swift
+//  AlphabeticalListDatasource.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 28/12/16.
@@ -47,11 +47,11 @@ final class AlphabeticalListDatasource: NSObject, UITableViewDataSource, CardRet
 
     // MARK: <CardReturnable>
 
-    internal func getCard(at index: IndexPath) -> CardDTO? {
-        return (alphabeticallyCards[sections[index.section]]?[index.row])
+    func getCard(at index: IndexPath) -> CardDTO? {
+        return alphabeticallyCards[sections[index.section]]?[index.row]
     }
 
-    internal func getCardList() -> [CardDTO] {
+    func getCardList() -> [CardDTO] {
         var list = [CardDTO]()
         for cardList in alphabeticallyCards.values {
             list.append(contentsOf: Array(cardList))

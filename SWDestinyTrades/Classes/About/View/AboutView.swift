@@ -57,13 +57,13 @@ extension AboutView: UITextViewDelegate {
 
 extension AboutView: BaseViewConfiguration {
 
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(logoImage)
         addSubview(versionLabel)
         addSubview(aboutTextView)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         logoImage.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor, constant: 34)
             view.centerXAnchor(equalTo: self.centerXAnchor)
@@ -84,7 +84,7 @@ extension AboutView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
 
         logoImage.image = Asset.Logo.largeIconBlack.image.withRenderingMode(.alwaysTemplate)

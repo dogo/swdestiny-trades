@@ -30,7 +30,7 @@ final class DeckBuilderTableView: UITableView {
         tableViewDatasource?.updateTableViewData(deck: deck)
     }
 
-    internal func didSelectRowAt(index: IndexPath) {
+    func didSelectRowAt(index: IndexPath) {
         if let currentDatasource = tableViewDatasource, let card = currentDatasource.getCard(at: index) {
             didSelectCard?(currentDatasource.getCardList(), card)
         }

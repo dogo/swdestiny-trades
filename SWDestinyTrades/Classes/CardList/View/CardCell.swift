@@ -21,7 +21,7 @@ final class CardCell: UITableViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(card: CardDTO, useIndex: Bool) {
+    func configureCell(card: CardDTO, useIndex: Bool) {
         baseViewCell.titleLabel.text = card.name
         setSubtitle(card: card, useIndex: useIndex)
         setIconImage(card: card)
@@ -59,11 +59,11 @@ final class CardCell: UITableViewCell, Identifiable {
 }
 
 extension CardCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(baseViewCell)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         baseViewCell.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.contentView.topAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
@@ -72,7 +72,7 @@ extension CardCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         accessoryType = .disclosureIndicator
     }
 }

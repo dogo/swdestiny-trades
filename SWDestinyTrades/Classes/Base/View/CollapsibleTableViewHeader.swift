@@ -59,12 +59,12 @@ final class CollapsibleTableViewHeader: UITableViewHeaderFooterView, Identifiabl
 }
 
 extension CollapsibleTableViewHeader: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowLabel)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         titleLabel.layout.applyConstraint { view in
             view.centerYAnchor(equalTo: self.centerYAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor, constant: 12)
@@ -76,7 +76,7 @@ extension CollapsibleTableViewHeader: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         contentView.backgroundColor = .sectionColor
     }
 }

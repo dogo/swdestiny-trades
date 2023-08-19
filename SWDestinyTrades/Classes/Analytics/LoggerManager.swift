@@ -20,7 +20,7 @@ final class LoggerManager: LoggerProtocol {
 
     private init() {}
 
-    internal func setup() {
+    func setup() {
         loggers.forEach { $0.setup() }
     }
 

@@ -1,5 +1,5 @@
 //
-//  DiceRadarCell.swift
+//  DiceRadarChartCell.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 27/01/17.
@@ -36,7 +36,7 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(dataValues: [Int]) {
+    func configureCell(dataValues: [Int]) {
         setDataCount(values: dataValues)
     }
 
@@ -96,11 +96,11 @@ extension DiceRadarChartCell: AxisValueFormatter {
 }
 
 extension DiceRadarChartCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(diceRadarView)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         diceRadarView.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.contentView.topAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
@@ -109,7 +109,7 @@ extension DiceRadarChartCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         setupLineChartView(chartView: diceRadarView)
     }
 }

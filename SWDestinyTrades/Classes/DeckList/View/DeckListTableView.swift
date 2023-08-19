@@ -39,7 +39,7 @@ final class DeckListTableView: UITableView {
 
     // MARK: - <BaseDelegate>
 
-    internal func didSelectRowAt(index: IndexPath) {
+    func didSelectRowAt(index: IndexPath) {
         if let deck = tableViewDatasource?.getDeck(at: index) {
             didSelectDeck?(deck)
         }

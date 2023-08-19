@@ -46,7 +46,7 @@ final class SetsListDatasource: NSObject, UITableViewDataSource {
     }
 
     func getSet(at index: IndexPath) -> SetDTO? {
-        return (swdSets[sections[index.section]]?[index.row])
+        return swdSets[sections[index.section]]?[index.row]
     }
 
     func sortAndSplitTableData(setList: [SetDTO]) {

@@ -1,5 +1,5 @@
 //
-//  CardDetailViewControllerSpec.swift
+//  CardDetailViewControllerTests.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 25/03/17.

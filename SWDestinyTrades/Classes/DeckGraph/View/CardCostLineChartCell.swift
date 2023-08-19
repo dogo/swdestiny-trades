@@ -1,5 +1,5 @@
 //
-//  CardCostLineCell.swift
+//  CardCostLineChartCell.swift
 //  swdestiny-trades
 //
 //  Created by Diogo Autilio on 27/01/17.
@@ -28,7 +28,7 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(dataValues: [Int]) {
+    func configureCell(dataValues: [Int]) {
         setDataCount(dataValues: dataValues)
     }
 
@@ -89,11 +89,11 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
 }
 
 extension CardCostLineChartCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(cardCostChartView)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         cardCostChartView.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.contentView.topAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
@@ -102,7 +102,7 @@ extension CardCostLineChartCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         setupLineChartView(chartView: cardCostChartView)
     }
 }

@@ -31,11 +31,11 @@ final class NumberListDatasource: NSObject, UITableViewDataSource, CardReturnabl
 
     // MARK: <CardReturnable>
 
-    internal func getCard(at index: IndexPath) -> CardDTO? {
+    func getCard(at index: IndexPath) -> CardDTO? {
         return numberCards[index.row]
     }
 
-    internal func getCardList() -> [CardDTO] {
+    func getCardList() -> [CardDTO] {
         return numberCards
     }
 

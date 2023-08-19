@@ -44,13 +44,13 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
 
     // MARK: - <SearchDelegate>
 
-    internal func didSelectRow(at index: IndexPath) {
+    func didSelectRow(at index: IndexPath) {
         if let card = tableDatasource?.getCard(at: index) {
             didSelectCard?(card)
         }
     }
 
-    internal func didSelectAccessory(at index: IndexPath) {
+    func didSelectAccessory(at index: IndexPath) {
         if let card = tableDatasource?.getCard(at: index) {
             didSelectAccessory?(card)
         }
@@ -58,7 +58,7 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
 
     // MARK: - <FilterHeaderViewDelegate>
 
-    internal func didSelectSegment(index: Int) {
+    func didSelectSegment(index: Int) {
         switch index {
         case 0:
             tableDatasource?.updateSearchList([])

@@ -32,7 +32,7 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureHeader() {
+    func configureHeader() {
         segmentControl.insertSegment(withTitle: L10n.aToZ, at: 0, animated: false)
         segmentControl.insertSegment(withTitle: L10n.color, at: 1, animated: false)
         // segmentControl.insertSegment(withTitle: "Price", at: 2, animated: false)
@@ -53,11 +53,11 @@ final class FilterHeaderView: UITableViewHeaderFooterView, Identifiable {
 }
 
 extension FilterHeaderView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(segmentControl)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         segmentControl.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.topAnchor, constant: 8)
             view.leadingAnchor(equalTo: self.leadingAnchor, constant: 18)
@@ -66,7 +66,7 @@ extension FilterHeaderView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         contentView.backgroundColor = .blackWhite
         segmentControl.tintColor = ColorPalette.appTheme
     }

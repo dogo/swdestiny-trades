@@ -21,7 +21,7 @@ final class CardSearchCell: UITableViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(cardDTO: CardDTO) {
+    func configureCell(cardDTO: CardDTO) {
         baseViewCell.titleLabel.text = cardDTO.name
         setIconImage(card: cardDTO)
         baseViewCell.subtitleLabel.text = "\(cardDTO.setName) -- \(cardDTO.rarityName)"
@@ -47,11 +47,11 @@ final class CardSearchCell: UITableViewCell, Identifiable {
 }
 
 extension CardSearchCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(baseViewCell)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         baseViewCell.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.contentView.topAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
@@ -60,7 +60,7 @@ extension CardSearchCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         accessoryType = .disclosureIndicator
     }
 }

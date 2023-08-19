@@ -66,13 +66,13 @@ final class AddCardView: UIView, AddCardViewType {
 
 extension AddCardView: BaseViewConfiguration {
 
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(searchBar)
         addSubview(addCardTableView)
         addCardTableView.addSubview(activityIndicator)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         searchBar.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
@@ -93,7 +93,7 @@ extension AddCardView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
     }
 }

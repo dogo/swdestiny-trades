@@ -31,7 +31,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(dataValues: [Int]) {
+    func configureCell(dataValues: [Int]) {
         setDataCount(values: dataValues)
     }
 
@@ -95,11 +95,11 @@ extension CardTypeBarChartCell: AxisValueFormatter {
 }
 
 extension CardTypeBarChartCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(cardTypeChartView)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         cardTypeChartView.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.contentView.topAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor)
@@ -108,7 +108,7 @@ extension CardTypeBarChartCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         setupBarLineChartView(chartView: cardTypeChartView)
     }
 }

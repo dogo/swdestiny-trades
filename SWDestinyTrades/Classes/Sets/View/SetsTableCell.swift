@@ -31,7 +31,7 @@ final class SetsTableCell: UITableViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(setDTO: SetDTO) {
+    func configureCell(setDTO: SetDTO) {
         titleLabel.text = setDTO.name
         expansionImageView.image = setDTO.setIcon().withRenderingMode(.alwaysTemplate)
         expansionImageView.tintColor = .whiteBlack
@@ -49,12 +49,12 @@ final class SetsTableCell: UITableViewCell, Identifiable {
 }
 
 extension SetsTableCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(expansionImageView)
         contentView.addSubview(titleLabel)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         expansionImageView.layout.applyConstraint { view in
             view.centerYAnchor(equalTo: self.contentView.centerYAnchor)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
@@ -68,7 +68,7 @@ extension SetsTableCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         accessoryType = .disclosureIndicator
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BaseCell.swift
+//  BaseViewCell.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 05/01/17.
@@ -58,7 +58,7 @@ final class BaseViewCell: UIView {
 }
 
 extension BaseViewCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(contentView)
         contentView.addSubview(textContainer)
         contentView.addSubview(iconImageView)
@@ -67,7 +67,7 @@ extension BaseViewCell: BaseViewConfiguration {
         contentView.addSubview(accessoryLabel)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         contentView.layout.applyConstraint { view in
             view.inset(to: self, withInset: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
         }
@@ -92,5 +92,5 @@ extension BaseViewCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {}
+    func configureViews() {}
 }

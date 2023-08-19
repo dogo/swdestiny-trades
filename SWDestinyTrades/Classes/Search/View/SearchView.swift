@@ -31,13 +31,13 @@ final class SearchView: UIView {
 }
 
 extension SearchView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(searchBar)
         addSubview(searchTableView)
         searchTableView.addSubview(activityIndicator)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         searchBar.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
@@ -58,7 +58,7 @@ extension SearchView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
     }
 }

@@ -21,7 +21,7 @@ final class PersonCell: UITableViewCell, Identifiable {
         fatalError("init(coder:) has not been implemented")
     }
 
-    internal func configureCell(personDTO: PersonDTO) {
+    func configureCell(personDTO: PersonDTO) {
         textLabel?.text = "\(personDTO.name) \(personDTO.lastName)"
         detailTextLabel?.text = getLoanState(personDTO: personDTO)
         detailTextLabel?.adjustsFontSizeToFitWidth = true

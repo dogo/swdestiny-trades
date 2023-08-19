@@ -33,11 +33,11 @@ final class CardView: UIView {
 }
 
 extension CardView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(slideshow)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         slideshow.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
@@ -46,7 +46,7 @@ extension CardView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
     }
 }

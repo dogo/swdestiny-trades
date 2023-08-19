@@ -74,7 +74,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
 
     // MARK: - <UpdateTableDataDelegate>
 
-    internal func insertNew(person: PersonDTO) {
+    func insertNew(person: PersonDTO) {
         peopleListView.insert(person)
     }
 

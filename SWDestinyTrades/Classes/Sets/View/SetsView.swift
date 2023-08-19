@@ -47,13 +47,13 @@ final class SetsView: UIView {
 }
 
 extension SetsView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(setsTableView)
         setsTableView.addSubview(activityIndicator)
         setsTableView.refreshControl = pullToRefresh
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         setsTableView.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.topAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
@@ -67,7 +67,7 @@ extension SetsView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
         if #available(iOS 11, *) {
             textColor = .white

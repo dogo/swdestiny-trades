@@ -62,7 +62,7 @@ final class DeckListCell: UITableViewCell, Identifiable {
         accessoryButton.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
     }
 
-    internal func configureCell(deck: DeckDTO) {
+    func configureCell(deck: DeckDTO) {
         deckDTO = deck
         titleEditText.text = deckDTO?.name
 
@@ -87,13 +87,13 @@ final class DeckListCell: UITableViewCell, Identifiable {
 }
 
 extension DeckListCell: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         contentView.addSubview(titleEditText)
         contentView.addSubview(subTitle)
         contentView.addSubview(accessoryButton)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         titleEditText.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.contentView.topAnchor, constant: 8)
             view.leadingAnchor(equalTo: self.contentView.leadingAnchor, constant: 12)
@@ -114,7 +114,7 @@ extension DeckListCell: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         titleEditText.delegate = self
         toggleEditButton()
     }

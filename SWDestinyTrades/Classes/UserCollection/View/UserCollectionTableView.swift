@@ -31,7 +31,7 @@ final class UserCollectionTableView: UITableView {
 
     // MARK: <BaseDelegate>
 
-    internal func didSelectRowAt(index: IndexPath) {
+    func didSelectRowAt(index: IndexPath) {
         if let datasource = tableViewDatasource {
             if let card = datasource.getCard(at: index) {
                 didSelectCard?(datasource.getCardList(), card)

@@ -29,12 +29,12 @@ final class CardListView: UIView {
 }
 
 extension CardListView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(cardListTableView)
         cardListTableView.addSubview(activityIndicator)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         cardListTableView.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
@@ -48,7 +48,7 @@ extension CardListView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
     }
 }

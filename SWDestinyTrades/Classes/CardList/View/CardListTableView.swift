@@ -46,7 +46,7 @@ final class CardListTableView: UITableView {
 
     // MARK: <CardListViewDelegate>
 
-    internal func didSelectRowAt(index: IndexPath) {
+    func didSelectRowAt(index: IndexPath) {
         if let currentDatasource: CardReturnable = dataSource as? CardReturnable {
             if let card = currentDatasource.getCard(at: index) {
                 didSelectCard?(currentDatasource.getCardList(), card)
@@ -56,7 +56,7 @@ final class CardListTableView: UITableView {
 
     // MARK: <FilterHeaderViewDelegate>
 
-    internal func didSelectSegment(index: Int) {
+    func didSelectSegment(index: Int) {
         switch index {
         case 0:
             dataSource = alphabeticalDatasource

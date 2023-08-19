@@ -31,13 +31,13 @@ final class AddToDeckView: UIView {
 }
 
 extension AddToDeckView: BaseViewConfiguration {
-    internal func buildViewHierarchy() {
+    func buildViewHierarchy() {
         addSubview(searchBar)
         addSubview(addToDeckTableView)
         addToDeckTableView.addSubview(activityIndicator)
     }
 
-    internal func setupConstraints() {
+    func setupConstraints() {
         searchBar.layout.applyConstraint { view in
             view.topAnchor(equalTo: self.safeTopAnchor)
             view.leadingAnchor(equalTo: self.leadingAnchor)
@@ -58,7 +58,7 @@ extension AddToDeckView: BaseViewConfiguration {
         }
     }
 
-    internal func configureViews() {
+    func configureViews() {
         backgroundColor = .blackWhite
     }
 }
