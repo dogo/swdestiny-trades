@@ -11,13 +11,14 @@ import Foundation
 protocol HttpClientProtocol {
     var logger: NetworkingLogger { get }
 
-    func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void)
+    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T
 
     func cancelAllRequests()
 }
 
 extension HttpClientProtocol {
-    func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)? = nil, completion: @escaping (Result<T, APIError>) -> Void) {
-        self.request(request, decode: decode, completion: completion)
+
+    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
+        try await self.request(request, decode: decode)
     }
 }

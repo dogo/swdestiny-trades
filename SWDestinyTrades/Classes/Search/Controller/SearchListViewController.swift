@@ -61,15 +61,20 @@ final class SearchListViewController: UIViewController {
         navigationItem.title = L10n.search
     }
 
-    func search(query: String) {
+    private func search(query: String) {
         searchView.activityIndicator.startAnimating()
-        destinyService.search(query: query) { [weak self] result in
-            self?.searchView.activityIndicator.stopAnimating()
-            switch result {
-            case let .success(allCards):
-                self?.searchView.searchTableView.updateSearchList(allCards)
-                self?.cards = allCards
-            case let .failure(error):
+        Task { [weak self] in
+            guard let self else { return }
+
+            defer {
+                self.searchView.activityIndicator.stopAnimating()
+            }
+
+            do {
+                let allCards = try await self.destinyService.search(query: query)
+                self.searchView.searchTableView.updateSearchList(allCards)
+                self.cards = allCards
+            } catch {
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }

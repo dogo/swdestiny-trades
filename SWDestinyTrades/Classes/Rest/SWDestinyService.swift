@@ -9,45 +9,46 @@
 import Foundation
 
 final class SWDestinyService: SWDestinyServiceProtocol {
+
     private let client: HttpClientProtocol
 
     init(client: HttpClientProtocol = HttpClient()) {
         self.client = client
     }
 
-    func search(query: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
+    func search(query: String) async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .search(query: query)
         let request = endpoint.request
 
-        client.request(request, completion: completion)
+        return try await client.request(request, decode: [CardDTO].self)
     }
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void) {
+    func retrieveSetList() async throws -> [SetDTO] {
         let endpoint: SWDestinyEndpoint = .setList
         let request = endpoint.request
 
-        client.request(request, completion: completion)
+        return try await client.request(request, decode: [SetDTO].self)
     }
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
+    func retrieveSetCardList(setCode: String) async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
         let request = endpoint.request
 
-        client.request(request, completion: completion)
+        return try await client.request(request, decode: [CardDTO].self)
     }
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void) {
+    func retrieveAllCards() async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .allCards
         let request = endpoint.request
 
-        client.request(request, completion: completion)
+        return try await client.request(request, decode: [CardDTO].self)
     }
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void) {
+    func retrieveCard(cardId: String) async throws -> CardDTO {
         let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
         let request = endpoint.request
 
-        client.request(request, completion: completion)
+        return try await client.request(request, decode: CardDTO.self)
     }
 
     func cancelAllRequests() {

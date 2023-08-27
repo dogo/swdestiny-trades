@@ -10,11 +10,15 @@ import Foundation
 
 enum APIError: Error {
     case requestFailed(reason: String?)
-    case jsonConversionFailure
+    case jsonConversionFailure(domain: String, description: String)
     case invalidData
     case responseUnsuccessful
     case jsonParsingFailure
     case requestCancelled
+    case keyNotFound(key: CodingKey, context: String)
+    case valueNotFound(type: Any.Type, context: String)
+    case typeMismatch(type: Any.Type, context: String)
+    case dataCorrupted(context: String)
 
     var localizedDescription: String {
         switch self {
@@ -26,10 +30,18 @@ enum APIError: Error {
             return "Response Unsuccessful"
         case .jsonParsingFailure:
             return "JSON Parsing Failure"
-        case .jsonConversionFailure:
-            return "JSON Conversion Failure"
+        case let .jsonConversionFailure(domain, description):
+            return "Error in read(from:ofType:) domain= \(domain), description= \(description)"
         case .requestCancelled:
             return "Request Cancelled"
+        case let .keyNotFound(key, context):
+            return "Could not find key \(key) in JSON: \(context)"
+        case let .valueNotFound(type, context):
+            return "Could not find type \(type) in JSON: \(context)"
+        case let .typeMismatch(type, context):
+            return "Type mismatch for type \(type) in JSON: \(context)"
+        case let .dataCorrupted(context):
+            return "Data found to be corrupted in JSON: \(context)"
         }
     }
 }

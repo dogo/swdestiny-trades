@@ -67,14 +67,22 @@ final class AddToDeckViewController: UIViewController {
 
     private func retrieveAllCards() {
         addToDeckView.activityIndicator.startAnimating()
-        destinyService.retrieveAllCards { [weak self] result in
-            self?.addToDeckView.activityIndicator.stopAnimating()
-            switch result {
-            case let .success(allCards):
-                self?.addToDeckView.addToDeckTableView.updateSearchList(allCards)
-                self?.cards = allCards
-            case let .failure(error):
-                self?.handleFailure(error)
+        Task { [weak self] in
+            guard let self else { return }
+
+            defer {
+                self.addToDeckView.activityIndicator.stopAnimating()
+            }
+
+            do {
+                let allCards = try await self.destinyService.retrieveAllCards()
+                self.addToDeckView.addToDeckTableView.updateSearchList(allCards)
+                self.cards = allCards
+            } catch APIError.requestCancelled {
+                // do nothing
+            } catch {
+                ToastMessages.showNetworkErrorMessage()
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
     }
@@ -113,16 +121,6 @@ final class AddToDeckViewController: UIViewController {
 
     private func showSuccessMessage(card: CardDTO) {
         LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
-    }
-
-    private func handleFailure(_ error: APIError) {
-        switch error {
-        case .requestCancelled:
-            break
-        default:
-            ToastMessages.showNetworkErrorMessage()
-            LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-        }
     }
 
     // MARK: - Navigation

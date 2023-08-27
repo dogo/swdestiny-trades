@@ -54,18 +54,7 @@ final class AddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addCardView.startLoading()
-        destinyService.retrieveAllCards { [weak self] result in
-            self?.addCardView.stopLoading()
-            switch result {
-            case let .success(allCards):
-                self?.addCardView.updateSearchList(allCards)
-                self?.cards = allCards
-            case let .failure(error):
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-            }
-        }
+        fetchAllCards()
 
         addCardView.didSelectCard = { [weak self] card in
             self?.insert(card: card)
@@ -86,6 +75,23 @@ final class AddCardViewController: UIViewController {
     }
 
     // MARK: - Helpers
+
+    private func fetchAllCards() {
+        addCardView.startLoading()
+        Task { [weak self] in
+            guard let self else { return }
+
+            do {
+                let allCards = try await self.destinyService.retrieveAllCards()
+                self.addCardView.stopLoading()
+                self.addCardView.updateSearchList(allCards)
+                self.cards = allCards
+            } catch {
+                ToastMessages.showNetworkErrorMessage()
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
+            }
+        }
+    }
 
     private func insert(card: CardDTO) {
         switch addCardType {

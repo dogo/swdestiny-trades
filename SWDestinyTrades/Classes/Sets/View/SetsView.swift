@@ -14,7 +14,7 @@ final class SetsView: UIView {
     let pullToRefresh = UIRefreshControl()
 
     let activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .gray)
+        let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
     }()
@@ -29,6 +29,14 @@ final class SetsView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func startAnimating() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopAnimating() {
+        activityIndicator.stopAnimating()
     }
 
     func beginRefreshing() {

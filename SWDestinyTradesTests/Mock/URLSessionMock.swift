@@ -8,14 +8,54 @@
 
 import Foundation
 
-final class URLSessionMock: URLSession {
-    typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
-    typealias CancelCompletionHandler = ([URLSessionDataTask], [URLSessionUploadTask], [URLSessionDownloadTask]) -> Void
+final class URLSessionMock {
+
+    func build() -> URLSession {
+        let sessionConfiguration = URLSessionConfiguration.ephemeral
+        sessionConfiguration.protocolClasses = [URLProtocolMock.self]
+        return URLSession(configuration: sessionConfiguration)
+    }
+}
+
+final class URLProtocolMock: URLProtocol {
+
+    static var response: ((URLRequest) throws -> (HTTPResponse?))?
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+
+        do {
+            guard var urlRequest = try Self.response?(request) else {
+                return
+            }
+
+            if let response = urlRequest.response {
+                client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            }
+
+            if let data = urlRequest.data {
+                client?.urlProtocol(self, didLoad: data)
+            }
+            client?.urlProtocolDidFinishLoading(self)
+        } catch {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+    }
+
+    override func stopLoading() {}
+}
+
+struct HTTPResponse {
 
     var data: Data?
-    var error: Error?
-    var statusCode: Int = 200
-    var tasksCancelled: Bool = false
+    let statusCode: Int
 
     lazy var response: HTTPURLResponse? = {
         let response = HTTPURLResponse(url: URL(string: "http://base.url.com")!,
@@ -24,15 +64,4 @@ final class URLSessionMock: URLSession {
                                        headerFields: nil)
         return response
     }()
-
-    override func dataTask(with request: URLRequest, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask {
-        return URLSessionDataTaskMock { [weak self] in
-            completionHandler(self?.data, self?.response, self?.error)
-        }
-    }
-
-    override func getTasksWithCompletionHandler(_ completionHandler: @escaping CancelCompletionHandler) {
-        tasksCancelled = true
-        completionHandler([URLSessionDataTask](), [URLSessionUploadTask](), [URLSessionDownloadTask]())
-    }
 }

@@ -36,17 +36,8 @@ final class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cardListView.activityIndicator.startAnimating()
-        destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased()) { [weak self] result in
-            self?.cardListView.activityIndicator.stopAnimating()
-            switch result {
-            case let .success(cardList):
-                self?.cardListView.cardListTableView.updateCardList(cardList)
-            case let .failure(error):
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])
-            }
-        }
+        fetchSetCardList()
+
         cardListView.cardListTableView.didSelectCard = { [weak self] list, card in
             self?.navigateToNextController(cardList: list, card: card)
         }
@@ -56,6 +47,25 @@ final class CardListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         navigationItem.title = setDTO.name
+    }
+
+    private func fetchSetCardList() {
+        cardListView.activityIndicator.startAnimating()
+        Task { [weak self] in
+            guard let self else { return }
+
+            defer {
+                self.cardListView.activityIndicator.stopAnimating()
+            }
+
+            do {
+                let cardList = try await self.destinyService.retrieveSetCardList(setCode: self.setDTO.code.lowercased())
+                self.cardListView.cardListTableView.updateCardList(cardList)
+            } catch {
+                ToastMessages.showNetworkErrorMessage()
+                LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])
+            }
+        }
     }
 
     // MARK: - Navigation

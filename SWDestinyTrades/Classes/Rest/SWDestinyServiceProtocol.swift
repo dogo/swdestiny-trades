@@ -9,15 +9,16 @@
 import Foundation
 
 protocol SWDestinyServiceProtocol {
-    func search(query: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)
 
-    func retrieveSetList(completion: @escaping (Result<[SetDTO], APIError>) -> Void)
+    func search(query: String) async throws -> [CardDTO]
 
-    func retrieveSetCardList(setCode: String, completion: @escaping (Result<[CardDTO], APIError>) -> Void)
+    func retrieveSetList() async throws -> [SetDTO]
 
-    func retrieveAllCards(completion: @escaping (Result<[CardDTO], APIError>) -> Void)
+    func retrieveSetCardList(setCode: String) async throws -> [CardDTO]
 
-    func retrieveCard(cardId: String, completion: @escaping (Result<CardDTO, APIError>) -> Void)
+    func retrieveAllCards() async throws -> [CardDTO]
+
+    func retrieveCard(cardId: String) async throws -> CardDTO
 
     func cancelAllRequests()
 }

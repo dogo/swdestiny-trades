@@ -40,7 +40,7 @@ final class SetsListViewController: UIViewController {
 
         setsView.pullToRefresh.addTarget(self, action: #selector(retrieveSets(sender:)), for: .valueChanged)
 
-        setsView.activityIndicator.startAnimating()
+        setsView.startAnimating()
         retrieveSets(sender: setsView.pullToRefresh)
 
         setsView.setsTableView.didSelectSet = { [weak self] set in
@@ -61,13 +61,20 @@ final class SetsListViewController: UIViewController {
 
     @objc
     func retrieveSets(sender: UIRefreshControl) {
-        destinyService.retrieveSetList { [weak self] result in
-            self?.setsView.endRefreshControl()
-            self?.setsView.activityIndicator.stopAnimating()
-            switch result {
-            case let .success(setList):
-                self?.setsView.setsTableView.updateSetList(setList)
-            case let .failure(error):
+        Task { [weak self] in
+            guard let self else { return }
+
+            defer {
+                Task { @MainActor in
+                    self.setsView.activityIndicator.stopAnimating()
+                    self.setsView.endRefreshControl()
+                }
+            }
+
+            do {
+                let setList = try await self.destinyService.retrieveSetList()
+                self.setsView.setsTableView.updateSetList(setList)
+            } catch {
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
             }

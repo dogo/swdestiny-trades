@@ -17,66 +17,38 @@ final class HttpClient: HttpClientProtocol {
 }
 
 extension HttpClient {
+
     var logger: NetworkingLogger {
         return NetworkingLogger(level: .debug)
     }
 
-    typealias DecodingCompletionHandler = (Decodable?, APIError?) -> Void
+    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
 
-    private func decodingTask<T: Decodable>(with request: URLRequest,
-                                            decodingType: T.Type,
-                                            completionHandler completion: @escaping (T?, RequestError?) -> Void) -> URLSessionDataTask {
+        logger.log(request: request)
+
         let requestDate = Date()
-        let task = session.dataTask(with: request) { [weak self] data, response, error in
+
+        do {
+            let (data, response) = try await session.data(for: request)
 
             let responseTime = Date().timeIntervalSince(requestDate)
 
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(nil, self?.failureReason(HttpStatusCode.unknown, error))
-                return
+                throw APIError.invalidData
             }
-            let statusCode = HttpStatusCode(fromRawValue: httpResponse.statusCode)
-            switch statusCode {
-            case .ok ... .permanentRedirect:
-                if let data = data {
-                    do {
-                        let model = try JSONDecoder().decode(decodingType, from: data)
-                        self?.logger.log(response: response, data: data, time: responseTime)
-                        completion(model, nil)
-                    } catch {
-                        completion(nil, RequestError(statusCode, reason: .jsonConversionFailure))
-                    }
-                } else {
-                    completion(nil, RequestError(statusCode, reason: .invalidData))
-                }
-            default:
-                completion(nil, RequestError(statusCode, reason: .responseUnsuccessful))
+
+            logger.log(response: response, data: data, time: responseTime)
+
+            guard case 200 ... 300 = httpResponse.statusCode else {
+                throw APIError.responseUnsuccessful
             }
+
+            return try decodeData(data, decode: T.self)
+        } catch let error as URLError where error.code == .cancelled {
+            throw APIError.requestCancelled
+        } catch {
+            throw error
         }
-        return task
-    }
-
-    func request<T: Decodable>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) {
-        logger.log(request: request)
-
-        let task = decodingTask(with: request, decodingType: T.self) { [weak self] json, error in
-
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.logger.logError(request: request, statusCode: error.statusCode.rawValue, error: error.reason)
-                    completion(.failure(error.reason))
-                    return
-                }
-                if let json = json {
-                    if let value = decode?(json) {
-                        completion(.success(value))
-                    } else {
-                        completion(.success(json))
-                    }
-                }
-            }
-        }
-        task.resume()
     }
 
     func cancelAllRequests() {
@@ -89,12 +61,19 @@ extension HttpClient {
 
     // MARK: - Helper
 
-    private func failureReason(_ statusCode: HttpStatusCode, _ error: Error?) -> RequestError {
-        var reason: APIError = .requestFailed(reason: error?.localizedDescription)
-
-        if let error = error as NSError?, error.code == NSURLErrorCancelled {
-            reason = .requestCancelled
+    private func decodeData<T: Decodable>(_ data: Data, decode: T.Type) throws -> T {
+        do {
+            return try JSONDecoder().decode(T.self, from: data)
+        } catch let DecodingError.keyNotFound(key, context) {
+            throw APIError.keyNotFound(key: key, context: context.debugDescription)
+        } catch let DecodingError.valueNotFound(type, context) {
+            throw APIError.valueNotFound(type: type, context: context.debugDescription)
+        } catch let DecodingError.typeMismatch(type, context) {
+            throw APIError.typeMismatch(type: type, context: context.debugDescription)
+        } catch let DecodingError.dataCorrupted(context) {
+            throw APIError.dataCorrupted(context: context.debugDescription)
+        } catch let error as NSError {
+            throw APIError.jsonConversionFailure(domain: error.domain, description: error.localizedDescription)
         }
-        return RequestError(statusCode, reason: reason)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 @testable import SWDestinyTrades
 
 final class HttpClientMock: HttpClientProtocol {
@@ -18,16 +19,13 @@ final class HttpClientMock: HttpClientProtocol {
         return NetworkingLogger(level: .none)
     }
 
-    func request<T>(_ request: URLRequest, decode: ((T) -> T)?, completion: @escaping (Result<T, APIError>) -> Void) where T: Decodable {
+    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
         guard !error else {
-            return completion(.failure(.jsonParsingFailure))
+            throw APIError.jsonParsingFailure
         }
 
         let decodable: T = JSONHelper.loadJSON(withFile: fileName)!
-        if let value = decode?(decodable) {
-            return completion(.success(value))
-        }
-        return completion(.success(decodable))
+        return decodable
     }
 
     func cancelAllRequests() {

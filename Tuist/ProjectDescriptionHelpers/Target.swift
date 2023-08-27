@@ -14,7 +14,7 @@ public extension Project {
                 platform: .iOS,
                 product: .app,
                 bundleId: "br.com.anykey.SWDestiny-Trades",
-                deploymentTarget: .iOS(targetVersion: "12.0", devices: [.iphone, .ipad]),
+                deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
                 infoPlist: "SWDestinyTrades/Info.plist",
                 sources: ["SWDestinyTrades/Classes/**"],
                 resources: [
