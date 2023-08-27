@@ -52,7 +52,8 @@ public extension Project {
                     .target(name: "SWDestinyTrades"),
                     .external(name: "Quick"),
                     .external(name: "Nimble"),
-                    .external(name: "Nimble-Snapshots")
+                    .external(name: "Nimble-Snapshots"),
+                    .package(product: "RealmSwift") // Fix unit test linkage issue
                 ]
             )
         ]
