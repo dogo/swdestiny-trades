@@ -33,10 +33,10 @@ jobs:
           tuist fetch
         shell: bash
 
-      - name: Tuist Warm Cache
-        run: |
-          tuist cache warm
-        shell: bash
+      #- name: Tuist Warm Cache
+      #  run: |
+      #    tuist cache warm
+      #  shell: bash
 
       - name: Generate project with tuist
         run: |
