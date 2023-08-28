@@ -15,7 +15,7 @@ import UIKit
 
 final class AddCardViewControllerSnapshotTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         var sut: AddCardViewController!
         var service: SWDestinyService!

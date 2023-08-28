@@ -15,7 +15,7 @@ import UIKit
 
 final class AddCardNavigatorTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         var sut: AddCardNavigator!
         var navigationController: UINavigationControllerMock!

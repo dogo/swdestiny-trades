@@ -176,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Quick/Nimble",
       "state" : {
-        "revision" : "1f3bde57bde12f5e7b07909848c071e9b73d6edc",
-        "version" : "10.0.0"
+        "revision" : "f552a16f434eef1f18b62985172489f41d37a18e",
+        "version" : "12.2.0"
       }
     },
     {
@@ -185,8 +185,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ashfurrow/Nimble-Snapshots",
       "state" : {
-        "revision" : "315171874edd18935e050fc97a7e6287d0a9c14f",
-        "version" : "9.4.0"
+        "branch" : "master",
+        "revision" : "9e4ab0a00b3d0f1d6d2d358e5886532f87503d10"
       }
     },
     {
@@ -212,8 +212,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Quick/Quick",
       "state" : {
-        "revision" : "f9d519828bb03dfc8125467d8f7b93131951124c",
-        "version" : "5.0.1"
+        "revision" : "494eff9ad74a37047782b0d5d8d84c7ff49a60e4",
+        "version" : "7.2.0"
       }
     },
     {

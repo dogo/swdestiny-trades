@@ -12,7 +12,7 @@ import Quick
 
 final class SWDestinyServiceTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
         describe("SWDestinyService") {
             var sut: SWDestinyService!
             var client: HttpClientMock!

@@ -15,7 +15,7 @@ import UIKit
 
 final class AboutViewTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         var sut: AboutView!
 

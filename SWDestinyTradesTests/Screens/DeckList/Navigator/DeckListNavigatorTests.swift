@@ -14,7 +14,7 @@ import UIKit
 
 final class DeckListNavigatorTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         describe("Deck List Navigator") {
 

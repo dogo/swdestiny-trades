@@ -15,7 +15,7 @@ import UIKit
 
 final class DeckGraphViewControllerTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         var sut: DeckGraphViewController!
         var navigationController: UINavigationController!

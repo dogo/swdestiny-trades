@@ -14,7 +14,7 @@ import UIKit
 
 final class CardDetailViewControllerTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         describe("CardDetail view controller") {
             var controller: CardDetailViewController!

@@ -14,7 +14,7 @@ import UIKit
 
 final class LoanDetailNavigatorTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         describe("Loan Detail Navigator") {
 

@@ -8,9 +8,9 @@ let swiftPackageManagerDependencies = SwiftPackageManagerDependencies(
         .remote(url: "https://github.com/dogo/PKHUD", requirement: .branch("fix/spm-resource")),
         .remote(url: "https://github.com/liufengting/FTPopOverMenu_Swift", requirement: .upToNextMajor(from: "0.4.4")),
         .remote(url: "https://github.com/zvonicek/ImageSlideshow", requirement: .upToNextMajor(from: "1.9.1")),
-        .remote(url: "https://github.com/Quick/Nimble", requirement: .upToNextMajor(from: "10.0.0")),
-        .remote(url: "https://github.com/Quick/Quick", requirement: .upToNextMajor(from: "5.0.1")),
-        .remote(url: "https://github.com/ashfurrow/Nimble-Snapshots", requirement: .upToNextMajor(from: "9.4.0")),
+        .remote(url: "https://github.com/Quick/Nimble", requirement: .upToNextMajor(from: "12.2.0")),
+        .remote(url: "https://github.com/Quick/Quick", requirement: .upToNextMajor(from: "7.2.0")),
+        .remote(url: "https://github.com/ashfurrow/Nimble-Snapshots", requirement: .branch("master")),
         .remote(url: "https://github.com/firebase/firebase-ios-sdk", requirement: .upToNextMajor(from: "10.1.0")),
         .remote(url: "https://github.com/SwiftKickMobile/SwiftMessages", requirement: .upToNextMajor(from: "9.0.6"))
     ],

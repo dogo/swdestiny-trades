@@ -15,7 +15,7 @@ import UIKit
 
 final class SetsListViewControllerTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         var sut: SetsListViewController!
         var service: SWDestinyService!

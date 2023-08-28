@@ -14,7 +14,7 @@ import Quick
 
 final class HttpClientTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         describe("HttpClient") {
             var sut: HttpClient!

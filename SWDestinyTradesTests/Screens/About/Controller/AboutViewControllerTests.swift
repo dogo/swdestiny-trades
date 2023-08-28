@@ -15,7 +15,7 @@ import UIKit
 
 final class AboutViewControllerTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         let window = UIWindow.framed()
 

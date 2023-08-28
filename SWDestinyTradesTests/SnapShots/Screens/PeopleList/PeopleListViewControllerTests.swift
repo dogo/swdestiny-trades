@@ -15,7 +15,7 @@ import UIKit
 
 final class PeopleListViewControllerTests: QuickSpec {
 
-    override func spec() {
+    override class func spec() {
 
         var sut: PeopleListViewController!
         var database: DatabaseProtocol!
@@ -31,7 +31,7 @@ final class PeopleListViewControllerTests: QuickSpec {
             context("when it's initialized from the tabbar") {
 
                 beforeEach {
-                    try! database = RealmDatabase(configuration: .inMemory(identifier: self.name))
+                    try! database = RealmDatabase(configuration: .inMemory(identifier: "PeopleListViewControllerTests"))
                 }
 
                 afterEach {
