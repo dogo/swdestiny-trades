@@ -53,7 +53,7 @@ public extension Project {
                     .external(name: "Quick"),
                     .external(name: "Nimble"),
                     .external(name: "Nimble-Snapshots"),
-                    .package(product: "RealmSwift") // Fix unit test linkage issue
+                    .package(product: "Realm") // Fix unit test linkage issue
                 ]
             )
         ]
