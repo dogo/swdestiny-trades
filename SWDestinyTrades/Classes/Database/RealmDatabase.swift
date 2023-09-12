@@ -70,7 +70,7 @@ final class RealmDatabase: DatabaseProtocol {
         }
     }
 
-    static func realHomeDirectory() -> String {
+    private static func realHomeDirectory() -> String {
         let homeDirectory = NSHomeDirectory()
         let pathComponents = homeDirectory.components(separatedBy: "/")
         return "/\(pathComponents[1])/\(pathComponents[2])"

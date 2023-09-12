@@ -31,7 +31,7 @@ final class PeopleListViewControllerTests: QuickSpec {
             context("when it's initialized from the tabbar") {
 
                 beforeEach {
-                    try! database = RealmDatabase(configuration: .inMemory(identifier: "PeopleListViewControllerTests"))
+                    database = RealmDatabaseHelper.createMemoryDatabase(identifier: "PeopleList")
                 }
 
                 afterEach {
