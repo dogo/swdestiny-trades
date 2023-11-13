@@ -4,6 +4,6 @@ set -eo pipefail
 
 xcodebuild -workspace swdestiny-trades.xcworkspace \
             -scheme SWDestinyTrades \
-            -destination platform=iOS\ Simulator,OS=16.4,name=iPhone\ 14 \
+            -destination platform=iOS\ Simulator,OS=17.0,name=iPhone\ 15 Pro \
             -enableCodeCoverage YES \
             clean test | xcpretty
