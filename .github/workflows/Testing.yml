@@ -9,9 +9,21 @@ jobs:
   test:
     name: Testing SWDestiny Trades app
     runs-on: macOS-13
+    strategy:
+      matrix:
+        scheme: [
+          SWDestinyTrades
+        ]
+        workspace: [
+          swdestiny-trades.xcworkspace
+        ]        
+        destination: [
+          'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.0.1'
+        ]
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Xcode version
         uses: maxim-lobanov/setup-xcode@v1.6.0
@@ -58,8 +70,13 @@ jobs:
           mint bootstrap
         shell: bash
 
-      - name: Testing iOS app
-        run: exec ./.github/scripts/test_app.sh
+      - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
+        run: |
+          xcodebuild -workspace ${{ matrix.workspace }}  
+                     -destination '${{ matrix.destination }}'
+                     -scheme ${{ matrix.scheme }} 
+                     -enableCodeCoverage YES  
+                     test | xcpretty && exit ${PIPESTATUS[0]}        
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.4
