@@ -75,7 +75,12 @@ jobs:
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
         run: |
-          xcodebuild -workspace ${{ matrix.workspace }} -scheme ${{ matrix.scheme }} -destination '${{ matrix.destination }}' -enableCodeCoverage YES test | xcpretty && exit ${PIPESTATUS[0]}        
+          xcodebuild -workspace ${{ matrix.workspace }} \
+            -scheme ${{ matrix.scheme }} \
+            -destination '${{ matrix.destination }}' \
+            -resultBundlePath SwdUnitTests.xcresult \
+            -enableCodeCoverage YES \
+            test | xcpretty && exit ${PIPESTATUS[0]}        
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.4
