@@ -61,9 +61,12 @@ jobs:
           path: |
             ~/.mint/bin
             ~/.mint/packages
-          key: ${{ runner.os }}-mint-${{ hashFiles('~/.mint/metadata.json') }}
+          key: ${{ runner.os }}-mint-${{ env.cache-name }}-${{ hashFiles('~/.mint/metadata.json') }}       
           restore-keys: |
             ${{ runner.os }}-mint-
+            ${{ runner.os }}-mint-${{ env.cache-name }}-
+            ${{ runner.os }}-mint-
+            ${{ runner.os }}-    
 
       - name: Install Mint Dependencies
         run: |
