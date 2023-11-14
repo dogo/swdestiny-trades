@@ -85,6 +85,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3.1.4
         with:
+          swift: true
           directory: ./coverage/
           files: ./coverage/SwdUnitTests.xcresult
           verbose: true        
