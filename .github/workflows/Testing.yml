@@ -72,9 +72,9 @@ jobs:
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
         run: |
-          xcodebuild -workspace ${{ matrix.workspace }}  
+          xcodebuild -workspace ${{ matrix.workspace }}                       
+                     -scheme ${{ matrix.scheme }}
                      -destination '${{ matrix.destination }}'
-                     -scheme ${{ matrix.scheme }} 
                      -enableCodeCoverage YES  
                      test | xcpretty && exit ${PIPESTATUS[0]}        
 
