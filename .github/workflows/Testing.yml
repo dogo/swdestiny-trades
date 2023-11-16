@@ -83,4 +83,5 @@ jobs:
         uses: codecov/codecov-action@v3.1.4
         with:
           swift: true
+          swift_project: SWDestinyTrades
           verbose: true        
