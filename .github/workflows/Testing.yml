@@ -30,11 +30,6 @@ jobs:
         with:
           xcode-version: 15.0.1
 
-      - name: Install Mint
-        run: |
-          brew install mint
-        shell: bash
-
       - name: Install Tuist
         run: |
           bash <(curl -Ls https://install.tuist.io)
@@ -55,20 +50,8 @@ jobs:
           tuist generate --no-open
         shell: bash
 
-      - name: Cache Mint packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.mint/bin
-            ~/.mint/packages
-          key: ${{ runner.os }}-mint-${{ hashFiles('~/.mint/metadata.json') }}       
-          restore-keys: |
-            ${{ runner.os }}-mint-
-
-      - name: Install Mint Dependencies
-        run: |
-          mint bootstrap
-        shell: bash
+      - name: Install Project Tools
+        uses: asdf-vm/actions/install@v2
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
         run: |
