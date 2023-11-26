@@ -17,19 +17,21 @@ final class AddCardViewControllerTests: QuickSpec {
 
     override class func spec() {
 
-        describe("AddCard view controller") {
+        describe("AddCardViewController") {
 
             var sut: AddCardViewController!
             var view: AddCardViewSpy!
             var database: DatabaseProtocol!
+            var service: SWDestinyService!
             var keyWindow: UIWindow!
 
             beforeEach {
                 keyWindow = UIWindow(frame: .testDevice)
                 database = RealmDatabaseHelper.createMemoryDatabase(identifier: "UserCollection")
+                service = SWDestinyService(client: HttpClientMock())
                 view = AddCardViewSpy()
                 sut = AddCardViewController(with: view,
-                                            service: SWDestinyService(client: HttpClientMock()),
+                                            service: service,
                                             database: database,
                                             person: .stub(),
                                             userCollection: .stub(),
@@ -42,7 +44,7 @@ final class AddCardViewControllerTests: QuickSpec {
                 keyWindow.cleanTestWindow()
             }
 
-            it("should be able to create a controller") {
+            it("should create a controller") {
                 expect(sut).toNot(beNil())
             }
 
@@ -52,7 +54,6 @@ final class AddCardViewControllerTests: QuickSpec {
 
             it("should have the expected navigation title") {
                 sut.viewWillAppear(false)
-
                 expect(sut.navigationItem.title).to(equal(L10n.addCard))
             }
 
@@ -60,47 +61,44 @@ final class AddCardViewControllerTests: QuickSpec {
 
                 var collection: UserCollectionDTO!
 
+                beforeEach {
+                    collection = UserCollectionDTO.stub()
+                }
+
                 context("didSelectCard") {
 
-                    beforeEach {
-                        collection = UserCollectionDTO.stub()
-                    }
-
-                    afterEach {
-                        keyWindow.cleanTestWindow()
-                    }
-
-                    it("should insert a card into the collection database successfuly") {
-
+                    it("should insert a card into the collection database successfully") {
                         sut = AddCardViewController(with: view,
-                                                    service: SWDestinyService(client: HttpClientMock()),
-                                                    database: database,
-                                                    person: .stub(),
-                                                    userCollection: collection,
-                                                    type: .collection)
-                        sut.viewDidLoad()
-                        view.didSelectCard?(.stub())
-
-                        expect(keyWindow.subviews.contains { $0 is ContainerView }).to(beTrue())
-                    }
-
-                    it("should't insert a card into the collection database") {
-
-                        collection.addCard(.stub())
-
-                        sut = AddCardViewController(with: view,
-                                                    service: SWDestinyService(client: HttpClientMock()),
+                                                    service: service,
                                                     database: database,
                                                     person: .stub(),
                                                     userCollection: collection,
                                                     type: .collection)
                         let navigationController = UINavigationController(rootViewController: sut)
                         keyWindow.showTestWindow(controller: navigationController)
-                        sut.viewDidLoad()
 
+                        sut.viewDidLoad()
                         view.didSelectCard?(.stub())
 
-                        expect(keyWindow.subviews.contains { $0 is UIImage }).to(beTrue())
+                        expect(keyWindow.subviews.contains { $0 is ContainerView }).to(beTrue())
+                    }
+
+                    it("should not insert a card into the collection database") {
+                        collection.addCard(.stub())
+
+                        sut = AddCardViewController(with: view,
+                                                    service: service,
+                                                    database: database,
+                                                    person: .stub(),
+                                                    userCollection: collection,
+                                                    type: .collection)
+                        let navigationController = UINavigationController(rootViewController: sut)
+                        keyWindow.showTestWindow(controller: navigationController)
+
+                        sut.viewDidLoad()
+                        view.didSelectCard?(.stub())
+
+                        expect(keyWindow.subviews.contains { $0 is ContainerView }).to(beTrue())
                     }
                 }
 
