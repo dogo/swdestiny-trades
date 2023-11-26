@@ -8,9 +8,9 @@
 
 import Foundation
 import Nimble
+import Nimble_Snapshots
 import Quick
 import UIKit
-import Nimble_Snapshots
 
 @testable import SWDestinyTrades
 
@@ -29,7 +29,7 @@ final class AboutViewTests: QuickSpec {
                     sut.translatesAutoresizingMaskIntoConstraints = false
                     sut.widthAnchor.constraint(equalToConstant: 320).isActive = true
                 }
-                
+
                 it("should have valid layout") {
                     expect(sut) == snapshot("About View Controller")
                 }

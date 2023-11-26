@@ -27,17 +27,12 @@ final class SetsViewTests: QuickSpec {
 
             context("when it's initialized") {
 
-                beforeEach {
+                beforeEach {}
 
-                }
+                afterEach {}
 
-                afterEach {
-                }
-
-                it("should have valid layout") {
-                }
+                it("should have valid layout") {}
             }
         }
     }
 }
-

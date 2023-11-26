@@ -1,5 +1,5 @@
 //
-//  AddCardViewTests.swift
+//  AddCardViewControllerSnapshotTests.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 27/08/18.
