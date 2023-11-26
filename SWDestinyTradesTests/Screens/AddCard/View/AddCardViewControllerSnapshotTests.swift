@@ -1,5 +1,5 @@
 //
-//  AddCardViewControllerSnapshotTests.swift
+//  AddCardViewTests.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 27/08/18.
@@ -13,7 +13,7 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class AddCardViewControllerSnapshotTests: QuickSpec {
+final class AddCardViewTests: QuickSpec {
 
     override class func spec() {
 

@@ -10,6 +10,7 @@ import Foundation
 import Nimble
 import Quick
 import UIKit
+import Nimble_Snapshots
 
 @testable import SWDestinyTrades
 
@@ -27,6 +28,10 @@ final class AboutViewTests: QuickSpec {
                     sut = AboutView(frame: .zero)
                     sut.translatesAutoresizingMaskIntoConstraints = false
                     sut.widthAnchor.constraint(equalToConstant: 320).isActive = true
+                }
+                
+                it("should have valid layout") {
+                    expect(sut) == snapshot("About View Controller")
                 }
 
                 it("should call closure when the url link is touched") {
