@@ -20,7 +20,7 @@ final class PeopleListViewControllerTests: QuickSpec {
         var sut: PeopleListViewController!
         var database: DatabaseProtocol!
         var navigation: UINavigationController!
-        let window = UIWindow.framed()
+        var window: UIWindow!
 
         describe("PeopleListViewController layout") {
 
@@ -31,6 +31,7 @@ final class PeopleListViewControllerTests: QuickSpec {
             context("when it's initialized from the tabbar") {
 
                 beforeEach {
+                    window = UIWindow(frame: .testDevice)
                     database = RealmDatabaseHelper.createMemoryDatabase(identifier: "PeopleList")
                 }
 

@@ -17,7 +17,7 @@ final class AboutViewControllerTests: QuickSpec {
 
     override class func spec() {
 
-        let window = UIWindow.framed()
+        var window: UIWindow!
 
         describe("About view controller") {
 
@@ -25,6 +25,7 @@ final class AboutViewControllerTests: QuickSpec {
             var view: AboutViewSpy!
 
             beforeEach {
+                window = UIWindow(frame: .testDevice)
                 view = AboutViewSpy()
                 sut = AboutViewController(with: view)
                 let navigationController = UINavigationController(rootViewController: sut)

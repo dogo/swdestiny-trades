@@ -20,7 +20,7 @@ final class AddCardViewTests: QuickSpec {
         var sut: AddCardViewController!
         var service: SWDestinyService!
         var navigation: UINavigationController!
-        let window = UIWindow.framed()
+        var window: UIWindow!
 
         describe("AddCardViewController layout") {
 
@@ -31,6 +31,7 @@ final class AddCardViewTests: QuickSpec {
             context("when it's initialized from Loan screen") {
 
                 beforeEach {
+                    window = UIWindow(frame: .testDevice)
                     service = SWDestinyService(client: HttpClientMock())
                 }
 

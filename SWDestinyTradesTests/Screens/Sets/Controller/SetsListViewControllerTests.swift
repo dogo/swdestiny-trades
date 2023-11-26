@@ -21,7 +21,7 @@ final class SetsListViewControllerTests: QuickSpec {
         var service: SWDestinyService!
         var client: HttpClientMock!
         var navigation: UINavigationController!
-        let window = UIWindow.framed()
+        var window: UIWindow!
 
         describe("SetsListViewController layout") {
 
@@ -32,6 +32,7 @@ final class SetsListViewControllerTests: QuickSpec {
             context("when it's initialized") {
 
                 beforeEach {
+                    window = UIWindow(frame: .testDevice)
                     client = HttpClientMock()
                     service = SWDestinyService(client: client)
                 }

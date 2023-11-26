@@ -19,13 +19,14 @@ final class DeckGraphViewControllerTests: QuickSpec {
 
         var sut: DeckGraphViewController!
         var navigationController: UINavigationController!
-        let window = UIWindow.framed(frame: CGRect(x: 0, y: 0, width: 375, height: 1350))
+        var window: UIWindow!
 
         describe("DeckGraphViewController layout") {
 
             context("when it's initialized") {
 
                 beforeEach {
+                    window = UIWindow(frame: CGRect(x: 0, y: 0, width: 375, height: 1350))
                     let deck = DeckDTO.stub()
                     let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: "DeckGraph")
                     try? memoryDB?.save(object: deck)

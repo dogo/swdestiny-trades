@@ -15,4 +15,8 @@ extension UserCollectionDTO {
     static func stub() -> UserCollectionDTO {
         return UserCollectionDTO()
     }
+
+    func addCard(_ card: CardDTO) {
+        myCollection.append(card)
+    }
 }
