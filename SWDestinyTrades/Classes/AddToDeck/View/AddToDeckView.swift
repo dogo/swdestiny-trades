@@ -14,7 +14,7 @@ final class AddToDeckView: UIView {
     let addToDeckTableView = AddToDeckTableView(frame: .zero)
 
     let activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .gray)
+        let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
     }()

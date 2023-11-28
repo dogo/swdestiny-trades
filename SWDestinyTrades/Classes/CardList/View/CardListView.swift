@@ -12,7 +12,7 @@ final class CardListView: UIView {
     let cardListTableView = CardListTableView()
 
     let activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .gray)
+        let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
     }()

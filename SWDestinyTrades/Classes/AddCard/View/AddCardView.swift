@@ -14,7 +14,7 @@ final class AddCardView: UIView, AddCardViewType {
     private let addCardTableView = AddCardTableView(frame: .zero)
 
     private let activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .gray)
+        let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
     }()

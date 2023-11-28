@@ -14,7 +14,7 @@ final class SearchView: UIView {
     let searchTableView = SearchTableView()
 
     let activityIndicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: .gray)
+        let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
     }()
