@@ -104,13 +104,19 @@ final class AddCardViewControllerTests: QuickSpec {
                 }
 
                 xit("didSelectAccessory") {
+                    sut.viewDidLoad()
                     view.didSelectAccessory?(.stub())
 
-                    expect(sut.navigationController?.children[0]).to(beAKindOf(CardDetailViewController.self))
+                    let viewController = sut.navigationController?.viewControllers[0]
+                    expect(viewController).to(beAKindOf(CardDetailViewController.self))
                 }
 
                 it("doingSearch") {
-                    view.doingSearch?("sss")
+                    sut.viewDidLoad()
+                    view.doingSearch?("jabba")
+
+                    expect(view.didCallDoingSearch.count) == 1
+                    expect(view.didCallDoingSearch[0]) == "jabba"
                 }
             }
         }

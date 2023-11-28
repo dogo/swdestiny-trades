@@ -32,8 +32,8 @@ final class AddCardViewSpy: UIView, AddCardViewType {
         updateSearchListWasCalled = true
     }
 
-    private(set) var doingSearchWasCalled = false
+    private(set) var didCallDoingSearch = [String]()
     func doingSearch(_ query: String) {
-        doingSearchWasCalled = true
+        didCallDoingSearch.append(query)
     }
 }
