@@ -25,8 +25,10 @@ final class SWDTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let factory = SWDTabBarFactory()
+
         // Create SetsListViewController Tab
-        let setsTab = UINavigationController(rootViewController: SetsListViewController(database: database))
+        let setsTab = UINavigationController(rootViewController: factory.makeSetsList(with: database))
         setsTab.tabBarItem = UITabBarItem(title: L10n.cards, image: Asset.Tabbar.icCards.image, selectedImage: Asset.Tabbar.icCardsFilled.image)
 
         // Create DeckListViewController Tab

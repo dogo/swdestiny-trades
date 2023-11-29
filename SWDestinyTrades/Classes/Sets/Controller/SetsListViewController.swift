@@ -9,16 +9,14 @@
 import UIKit
 
 final class SetsListViewController: UIViewController {
-    private let setsView = SetsView()
-    private let database: DatabaseProtocol?
-    private let destinyService: SWDestinyServiceProtocol
-    private lazy var navigator = SetsListNavigator(self.navigationController)
+
+    var presenter: SetsPresenterProtocol?
+    private let setsView: SetsView
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?) {
-        destinyService = service
-        self.database = database
+    init(setsView: SetsView = SetsView()) {
+        self.setsView = setsView
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -33,18 +31,12 @@ final class SetsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .blackWhite
+        setsView.pullToRefresh.addTarget(self, action: #selector(retrieveSets), for: .valueChanged)
+        presenter?.viewDidLoad()
 
-        setupNavigationItem()
-
-        setsView.pullToRefresh.addTarget(self, action: #selector(retrieveSets(sender:)), for: .valueChanged)
-
-        setsView.startAnimating()
-        retrieveSets(sender: setsView.pullToRefresh)
-
-        setsView.setsTableView.didSelectSet = { [weak self] set in
-            self?.navigateToNextController(with: set)
+        setsView.didSelectSet = { [weak self] set in
+            self?.presenter?.didSelectSet(set)
         }
     }
 
@@ -54,48 +46,42 @@ final class SetsListViewController: UIViewController {
         navigationItem.title = L10n.expansions
     }
 
+    @objc
+    func retrieveSets() {
+        presenter?.retrieveSets()
+    }
+
+    @objc
+    func aboutButtonTouched() {
+        presenter?.aboutButtonTouched()
+    }
+
+    @objc
+    func searchButtonTouched() {
+        presenter?.searchButtonTouched()
+    }
+}
+
+extension SetsListViewController: SetsViewProtocol {
+
+    func startAnimating() {
+        setsView.startAnimating()
+    }
+
+    func stopAnimating() {
+        setsView.stopAnimating()
+    }
+
+    func endRefreshControl() {
+        setsView.endRefreshControl()
+    }
+
+    func updateSetList(_ setList: [SetDTO]) {
+        setsView.updateSetList(setList)
+    }
+
     func setupNavigationItem() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icAbout.image, style: .plain, target: self, action: #selector(aboutButtonTouched(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched(_:)))
-    }
-
-    @objc
-    func retrieveSets(sender: UIRefreshControl) {
-        Task { [weak self] in
-            guard let self else { return }
-
-            defer {
-                Task { @MainActor in
-                    self.setsView.activityIndicator.stopAnimating()
-                    self.setsView.endRefreshControl()
-                }
-            }
-
-            do {
-                let setList = try await self.destinyService.retrieveSetList()
-                self.setsView.setsTableView.updateSetList(setList)
-            } catch {
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
-            }
-        }
-    }
-
-    // MARK: - <SetsListViewDelegate>
-
-    func navigateToNextController(with set: SetDTO) {
-        navigator.navigate(to: .cardList(database: database, with: set))
-    }
-
-    // MARK: - UIBarButton Actions
-
-    @objc
-    func aboutButtonTouched(_ sender: Any) {
-        navigator.navigate(to: .about)
-    }
-
-    @objc
-    func searchButtonTouched(_ sender: Any) {
-        navigator.navigate(to: .search(database: database))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icAbout.image, style: .plain, target: self, action: #selector(aboutButtonTouched))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched))
     }
 }

@@ -8,7 +8,18 @@
 
 import UIKit
 
+protocol SetsViewProtocol: AnyObject {
+    func startAnimating()
+    func stopAnimating()
+    func endRefreshControl()
+    func updateSetList(_ setList: [SetDTO])
+    func setupNavigationItem()
+}
+
 final class SetsView: UIView {
+
+    var didSelectSet: ((SetDTO) -> Void)?
+
     let setsTableView = SetsTableView()
 
     let pullToRefresh = UIRefreshControl()
@@ -24,6 +35,10 @@ final class SetsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBaseView()
+
+        setsTableView.didSelectSet = { [weak self] set in
+            self?.didSelectSet?(set)
+        }
     }
 
     @available(*, unavailable)
@@ -51,6 +66,10 @@ final class SetsView: UIView {
         let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
         pullToRefresh.attributedTitle = attributedTitle
         pullToRefresh.endRefreshing()
+    }
+
+    func updateSetList(_ setList: [SetDTO]) {
+        setsTableView.updateSetList(setList)
     }
 }
 

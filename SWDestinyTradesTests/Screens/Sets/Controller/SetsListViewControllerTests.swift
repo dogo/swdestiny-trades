@@ -43,7 +43,15 @@ final class SetsListViewControllerTests: QuickSpec {
 
                 it("should have valid layout") {
                     client.fileName = "sets"
-                    sut = SetsListViewController(service: service, database: nil)
+
+                    sut = SetsListViewController()
+                    let router = SetsListNavigator(sut)
+                    let presenter = SetsPresenter(view: sut,
+                                                  interactor: SetsListInteractor(service: service),
+                                                  database: nil,
+                                                  navigator: router)
+                    sut.presenter = presenter
+
                     navigation = UINavigationController(rootViewController: sut)
                     window.showTestWindow(controller: navigation)
 
