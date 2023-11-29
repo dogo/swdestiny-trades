@@ -20,17 +20,17 @@ final class SetsView: UIView {
 
     var didSelectSet: ((SetDTO) -> Void)?
 
-    let setsTableView = SetsTableView()
+    private let setsTableView = SetsTableView()
 
     let pullToRefresh = UIRefreshControl()
 
-    let activityIndicator: UIActivityIndicatorView = {
+    private let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
     }()
 
-    var textColor: UIColor = .black
+    private var textColor: UIColor = .black
 
     override init(frame: CGRect) {
         super.init(frame: frame)
