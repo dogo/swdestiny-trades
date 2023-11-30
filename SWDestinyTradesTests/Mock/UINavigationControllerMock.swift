@@ -10,6 +10,16 @@ import UIKit
 
 final class UINavigationControllerMock: UINavigationController {
 
+    override init(rootViewController: UIViewController = UIViewController()) {
+        super.init(rootViewController: rootViewController)
+        setViewControllers = [rootViewController]
+    }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     private(set) var currentPresentedViewController: UIViewController?
     override var presentedViewController: UIViewController? {
         return currentPresentedViewController
@@ -22,13 +32,13 @@ final class UINavigationControllerMock: UINavigationController {
     }
 
     private(set) var dismissCount = 0
-    private(set) var setViewControllers: [UIViewController]?
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         dismissCount += 1
         completion?()
     }
 
     private(set) var setViewControllersCount = 0
+    private(set) var setViewControllers: [UIViewController]?
     override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
         setViewControllersCount += 1
         setViewControllers = viewControllers
