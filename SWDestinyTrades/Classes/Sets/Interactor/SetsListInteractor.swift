@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol SetsInteractorProtocol {
+protocol SetsListInteractorProtocol {
     func retrieveSets() async throws -> [SetDTO]
 }
 
-final class SetsListInteractor: SetsInteractorProtocol {
+final class SetsListInteractor: SetsListInteractorProtocol {
 
     private let service: SWDestinyServiceProtocol
 

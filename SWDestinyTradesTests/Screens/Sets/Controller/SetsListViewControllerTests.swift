@@ -46,10 +46,10 @@ final class SetsListViewControllerTests: QuickSpec {
 
                     sut = SetsListViewController()
                     let router = SetsListNavigator(sut)
-                    let presenter = SetsPresenter(view: sut,
-                                                  interactor: SetsListInteractor(service: service),
-                                                  database: nil,
-                                                  navigator: router)
+                    let presenter = SetsListPresenter(view: sut,
+                                                      interactor: SetsListInteractor(service: service),
+                                                      database: nil,
+                                                      navigator: router)
                     sut.presenter = presenter
 
                     navigation = UINavigationController(rootViewController: sut)

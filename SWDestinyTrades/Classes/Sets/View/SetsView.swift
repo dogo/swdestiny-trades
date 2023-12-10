@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SetsViewProtocol: AnyObject {
+protocol SetsListViewProtocol: AnyObject {
     func startAnimating()
     func stopAnimating()
     func endRefreshControl()

@@ -62,7 +62,7 @@ final class SetsListViewController: UIViewController {
     }
 }
 
-extension SetsListViewController: SetsViewProtocol {
+extension SetsListViewController: SetsListViewProtocol {
 
     func startAnimating() {
         setsView.startAnimating()

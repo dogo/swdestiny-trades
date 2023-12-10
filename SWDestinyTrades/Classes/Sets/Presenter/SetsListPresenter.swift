@@ -16,15 +16,15 @@ protocol SetsPresenterProtocol {
     func didSelectSet(_ set: SetDTO)
 }
 
-final class SetsPresenter: SetsPresenterProtocol {
+final class SetsListPresenter: SetsPresenterProtocol {
 
-    weak var view: SetsViewProtocol?
-    private let interactor: SetsInteractorProtocol
+    weak var view: SetsListViewProtocol?
+    private let interactor: SetsListInteractorProtocol
     private let database: DatabaseProtocol?
     private let navigator: SetsListNavigator
 
-    init(view: SetsViewProtocol,
-         interactor: SetsInteractorProtocol,
+    init(view: SetsListViewProtocol,
+         interactor: SetsListInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: SetsListNavigator) {
         self.view = view

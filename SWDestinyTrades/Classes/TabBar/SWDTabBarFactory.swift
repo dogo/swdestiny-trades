@@ -15,10 +15,10 @@ final class SWDTabBarFactory {
         let viewController = SetsListViewController()
         let router = SetsListNavigator(viewController)
         let interactor = SetsListInteractor()
-        let presenter = SetsPresenter(view: viewController,
-                                      interactor: interactor,
-                                      database: database,
-                                      navigator: router)
+        let presenter = SetsListPresenter(view: viewController,
+                                          interactor: interactor,
+                                          database: database,
+                                          navigator: router)
         viewController.presenter = presenter
         return viewController
     }
