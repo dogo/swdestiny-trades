@@ -22,16 +22,19 @@ final class SetsListPresenterTests: QuickSpec {
         var client: HttpClientMock!
         var view: SetsListViewSpy!
         var navigator: SetsListNavigator!
+        var navigationController: UINavigationControllerMock!
 
         describe("SetsListPresenter") {
 
             context("when it's initialized") {
 
                 beforeEach {
+                    let controller = UIViewController()
                     client = HttpClientMock()
                     service = SWDestinyService(client: client)
+                    navigationController = UINavigationControllerMock(rootViewController: controller)
                     view = SetsListViewSpy()
-                    navigator = SetsListNavigator(UIViewController())
+                    navigator = SetsListNavigator(controller)
                     sut = SetsListPresenter(view: view,
                                             interactor: SetsListInteractor(service: service),
                                             database: nil,
@@ -47,14 +50,20 @@ final class SetsListPresenterTests: QuickSpec {
 
                 it("didSelectSet") {
                     sut.didSelectSet(.stub()[0])
+
+                    expect(navigationController.currentPushedViewController).to(beAKindOf(CardListViewController.self))
                 }
 
                 it("aboutButtonTouched") {
                     sut.aboutButtonTouched()
+
+                    expect(navigationController.currentPushedViewController).to(beAKindOf(AboutViewController.self))
                 }
 
                 it("searchButtonTouched") {
                     sut.searchButtonTouched()
+
+                    expect(navigationController.currentPushedViewController).to(beAKindOf(SearchListViewController.self))
                 }
             }
         }
