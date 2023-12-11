@@ -6,52 +6,53 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Foundation
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutViewTests: QuickSpec {
+final class AboutViewTests: SnapshotTestCase {
 
-    override class func spec() {
+    var sut: AboutView!
 
-        var sut: AboutView!
+    override func setUp() {
+        super.setUp()
+        sut = AboutView(frame: .zero)
+        sut.translatesAutoresizingMaskIntoConstraints = false
+        sut.widthAnchor.constraint(equalToConstant: 320).isActive = true
+    }
 
-        describe("AboutView layout") {
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
 
-            context("when URL link it's touched") {
+    func testAboutViewLayout() {
+        verifyView(sut)
+    }
 
-                beforeEach {
-                    sut = AboutView(frame: .zero)
-                    sut.translatesAutoresizingMaskIntoConstraints = false
-                    sut.widthAnchor.constraint(equalToConstant: 320).isActive = true
-                }
+    func testHTTPLinkTouchCallback() {
+        // Arrange
+        var didTouchHTTPLinkWasCalled = false
+        var touchedURL: URL?
 
-                it("should have valid layout") {
-                    expect(sut) == snapshot("About View Controller")
-                }
-
-                it("should call closure when the url link is touched") {
-                    var didTouchHTTPLinkWasCalled = false
-                    var touchedURL: URL?
-
-                    sut.didTouchHTTPLink = { url in
-                        didTouchHTTPLinkWasCalled = true
-                        touchedURL = url
-                    }
-                    let url = URL(string: "https://swdestinydb.com")!
-                    let aboutTextView = sut.viewWith(accessibilityIdentifier: "ABOUT_TEXT_VIEW") as! UITextView
-                    _ = aboutTextView.delegate?.textView?(aboutTextView,
-                                                          shouldInteractWith: url,
-                                                          in: NSRange(),
-                                                          interaction: .invokeDefaultAction)
-                    expect(didTouchHTTPLinkWasCalled) == true
-                    expect(touchedURL) == url
-                }
-            }
+        sut.didTouchHTTPLink = { url in
+            didTouchHTTPLinkWasCalled = true
+            touchedURL = url
         }
+
+        let url = URL(string: "https://swdestinydb.com")!
+        let aboutTextView = sut.viewWith(accessibilityIdentifier: "ABOUT_TEXT_VIEW") as! UITextView
+
+        // Act
+        let result = aboutTextView.delegate?.textView?(aboutTextView,
+                                                       shouldInteractWith: url,
+                                                       in: NSRange(),
+                                                       interaction: .invokeDefaultAction)
+
+        // Assert
+        XCTAssertTrue(didTouchHTTPLinkWasCalled)
+        XCTAssertEqual(touchedURL, url)
+        XCTAssertNotNil(result)
     }
 }
