@@ -6,51 +6,50 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
 import SafariServices
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutViewControllerTests: QuickSpec {
+final class AboutViewControllerTests: XCTestCase {
 
-    override class func spec() {
+    private var window: UIWindow!
+    private var sut: AboutViewController!
+    private var view: AboutViewSpy!
 
-        var window: UIWindow!
+    override func setUp() {
+        super.setUp()
+        window = UIWindow(frame: .testDevice)
+        view = AboutViewSpy()
+        sut = AboutViewController(with: view)
+        let navigationController = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigationController)
+    }
 
-        describe("About view controller") {
+    override func tearDown() {
+        window = nil
+        sut = nil
+        view = nil
+        super.tearDown()
+    }
 
-            var sut: AboutViewController!
-            var view: AboutViewSpy!
+    func testControllerCreation() {
+        XCTAssertNotNil(sut)
+    }
 
-            beforeEach {
-                window = UIWindow(frame: .testDevice)
-                view = AboutViewSpy()
-                sut = AboutViewController(with: view)
-                let navigationController = UINavigationController(rootViewController: sut)
-                window.showTestWindow(controller: navigationController)
-            }
+    func testViewType() {
+        XCTAssertTrue(sut.view is AboutViewType)
+    }
 
-            it("should be able to create a controller") {
-                expect(sut).toNot(beNil())
-            }
+    func testDidTouchHTTPLink() {
+        sut.viewDidLoad()
+        view.didTouchHTTPLink?(URL(string: "http://google.com")!)
+        XCTAssertTrue(sut.presentedViewController is SFSafariViewController)
+    }
 
-            it("should have a view of type") {
-                expect(sut.view).to(beAKindOf(AboutViewType.self))
-            }
-
-            it("should call didTouchHTTPLink when the url is touched") {
-                sut.viewDidLoad()
-                view.didTouchHTTPLink?(URL(string: "http://google.com")!)
-                expect(sut.presentedViewController).to(beAKindOf(SFSafariViewController.self))
-            }
-
-            it("should have the expected navigation title") {
-                sut.viewWillAppear(true)
-
-                expect(sut.navigationItem.title).to(equal(L10n.about))
-            }
-        }
+    func testNavigationTitle() {
+        sut.viewWillAppear(true)
+        XCTAssertEqual(sut.navigationItem.title, L10n.about)
     }
 }
