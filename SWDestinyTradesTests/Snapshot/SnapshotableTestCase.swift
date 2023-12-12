@@ -18,24 +18,23 @@ enum SnapshotTestMode {
 class SnapshotableTestCase: FBSnapshotTestCase {
 
     func snapshot(_ viewOrLayer: AnyObject,
-                  snapshotName: String? = nil,
+                  named: String? = nil,
                   testMode: SnapshotTestMode = .test,
                   perPixelTolerance: CGFloat = 0,
                   overallTolerance: CGFloat = 0,
                   file: StaticString = #file) -> Bool {
         if viewOrLayer.isKind(of: UIView.self), let view = viewOrLayer as? UIView {
             return verifySnapshot(view,
-                                  snapshotName: snapshotName,
+                                  snapshotName: named,
                                   testMode: testMode,
                                   perPixelTolerance: perPixelTolerance,
                                   overallTolerance: overallTolerance,
                                   file: file)
         } else if viewOrLayer.isKind(of: UIViewController.self), let viewController = viewOrLayer as? UIViewController {
-            viewController.view.bounds = UIScreen.main.bounds
-            viewController.viewWillAppear(false)
-            viewController.viewDidAppear(false)
-            return verifySnapshot(viewController,
-                                  snapshotName: snapshotName,
+            viewController.beginAppearanceTransition(true, animated: false)
+            viewController.endAppearanceTransition()
+            return verifySnapshot(viewController.view,
+                                  snapshotName: named,
                                   testMode: testMode,
                                   perPixelTolerance: perPixelTolerance,
                                   overallTolerance: overallTolerance,

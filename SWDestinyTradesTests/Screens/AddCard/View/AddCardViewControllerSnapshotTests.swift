@@ -6,57 +6,43 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardViewTests: QuickSpec {
+final class AddCardViewTests: SnapshotableTestCase {
 
-    override class func spec() {
+    var sut: AddCardViewController!
+    var service: SWDestinyService!
+    var navigation: UINavigationController!
+    var window: UIWindow!
 
-        var sut: AddCardViewController!
-        var service: SWDestinyService!
-        var navigation: UINavigationController!
-        var window: UIWindow!
+    override func setUp() {
+        super.setUp()
+        AppearanceProxyHelper.customizeNavigationBar()
+        window = UIWindow(frame: .testDevice)
+        service = SWDestinyService(client: HttpClientMock())
+    }
 
-        describe("AddCardViewController layout") {
+    override func tearDown() {
+        window.cleanTestWindow()
+        super.tearDown()
+    }
 
-            beforeSuite {
-                AppearanceProxyHelper.customizeNavigationBar()
-            }
+    func testLayoutWhenIsLentMeIsTrue() {
+        sut = AddCardViewController(service: service, database: nil, person: .stub(), type: .lent)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-            context("when it's initialized from Loan screen") {
+        XCTAssertTrue(snapshot(navigation, named: "AddCardViewController layout when isLentMe is true"))
+    }
 
-                beforeEach {
-                    window = UIWindow(frame: .testDevice)
-                    service = SWDestinyService(client: HttpClientMock())
-                }
+    func testLayoutWhenIsLentMeIsFalse() {
+        sut = AddCardViewController(service: service, database: nil, person: .stub(), type: .borrow)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-                afterEach {
-                    window.cleanTestWindow()
-                }
-
-                it("should have valid layout when isLentMe is True") {
-                    sut = AddCardViewController(service: service, database: nil, person: .stub(), type: .lent)
-                    navigation = UINavigationController(rootViewController: sut)
-                    window.showTestWindow(controller: navigation)
-
-                    expect(navigation).to(haveValidSnapshot(named: "AddCardViewController layout when isLentMe is true",
-                                                            tolerance: 0.02))
-                }
-
-                it("should have valid layout when isLentMe is false") {
-                    sut = AddCardViewController(service: service, database: nil, person: .stub(), type: .borrow)
-                    navigation = UINavigationController(rootViewController: sut)
-                    window.showTestWindow(controller: navigation)
-
-                    expect(navigation).to(haveValidSnapshot(named: "AddCardViewController layout when isLentMe is false",
-                                                            tolerance: 0.02))
-                }
-            }
-        }
+        XCTAssertTrue(snapshot(navigation, named: "AddCardViewController layout when isLentMe is false"))
     }
 }

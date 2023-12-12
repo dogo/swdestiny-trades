@@ -7,37 +7,29 @@
 //
 
 import Foundation
-import Nimble
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardNavigatorTests: QuickSpec {
+final class AddCardNavigatorTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: AddCardNavigator!
+    private var navigationController: UINavigationControllerMock!
+    private var panda: UIViewController!
 
-        var sut: AddCardNavigator!
-        var navigationController: UINavigationControllerMock!
-        var panda: UIViewController!
+    override func setUp() {
+        super.setUp()
+        panda = UIViewController()
+        navigationController = UINavigationControllerMock(rootViewController: panda)
+        sut = AddCardNavigator(navigationController)
+    }
 
-        describe("AddCard screen navigation") {
+    func testNavigateToCardDetailPushesToCardDetailViewController() {
+        sut.navigate(to: .cardDetail(database: nil,
+                                     with: [],
+                                     card: .stub()))
 
-            context("when navigate method is called with cardDetail destination") {
-
-                beforeEach {
-                    panda = UIViewController()
-                    navigationController = UINavigationControllerMock(rootViewController: panda)
-                    sut = AddCardNavigator(navigationController)
-                }
-
-                it("should to push to CardDetailViewController") {
-                    sut.navigate(to: .cardDetail(database: nil,
-                                                 with: [],
-                                                 card: .stub()))
-                    expect(navigationController.currentPushedViewController).to(beAKindOf(CardDetailViewController.self))
-                }
-            }
-        }
+        XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
     }
 }

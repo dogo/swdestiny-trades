@@ -28,7 +28,7 @@ final class AboutViewTests: SnapshotableTestCase {
     }
 
     func testAboutViewLayout() {
-        XCTAssertTrue(snapshot(sut, snapshotName: "About View Controller"))
+        XCTAssertTrue(snapshot(sut, named: "About View Controller"))
     }
 
     func testHTTPLinkTouchCallback() {
