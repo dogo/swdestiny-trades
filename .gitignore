@@ -55,6 +55,9 @@ Pods/
 Carthage/Checkouts
 Carthage/Build
 
+## Snapshot Failures
+FailureDiffs
+
 ## Tuist
 Tuist/Dependencies/graph.json
 Tuist/Dependencies/Carthage

@@ -10,6 +10,25 @@ import iOSSnapshotTestCaseCore
 import UIKit
 import XCTest
 
+@objc
+protocol Snapshotable {
+    var snapshotObject: UIView? { get }
+}
+
+extension UIViewController: Snapshotable {
+    var snapshotObject: UIView? {
+        beginAppearanceTransition(true, animated: false)
+        endAppearanceTransition()
+        return view
+    }
+}
+
+extension UIView: Snapshotable {
+    var snapshotObject: UIView? {
+        return self
+    }
+}
+
 public extension FBSnapshotTestCase {
 
     // swiftlint:disable:next function_parameter_count

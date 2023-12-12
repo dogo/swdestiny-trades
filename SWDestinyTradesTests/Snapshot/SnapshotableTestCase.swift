@@ -17,43 +17,18 @@ enum SnapshotTestMode {
 
 class SnapshotableTestCase: FBSnapshotTestCase {
 
-    func snapshot(_ viewOrLayer: AnyObject,
+    func snapshot(_ instance: Snapshotable,
                   named: String? = nil,
                   testMode: SnapshotTestMode = .test,
                   perPixelTolerance: CGFloat = 0,
                   overallTolerance: CGFloat = 0,
                   file: StaticString = #file) -> Bool {
-        if viewOrLayer.isKind(of: UIView.self), let view = viewOrLayer as? UIView {
-            return verifySnapshot(view,
-                                  snapshotName: named,
-                                  testMode: testMode,
-                                  perPixelTolerance: perPixelTolerance,
-                                  overallTolerance: overallTolerance,
-                                  file: file)
-        } else if viewOrLayer.isKind(of: UIViewController.self), let viewController = viewOrLayer as? UIViewController {
-            viewController.beginAppearanceTransition(true, animated: false)
-            viewController.endAppearanceTransition()
-            return verifySnapshot(viewController.view,
-                                  snapshotName: named,
-                                  testMode: testMode,
-                                  perPixelTolerance: perPixelTolerance,
-                                  overallTolerance: overallTolerance,
-                                  file: file)
-        } else {
-            assertionFailure("Only UIView and CALayer classes can be snapshotted")
-            return false
+        guard let snapshotObject = instance.snapshotObject else {
+            fatalError("Failed unwrapping Snapshot Object")
         }
-    }
 
-    // swiftlint:disable:next function_parameter_count
-    private func verifySnapshot(_ viewOrLayer: AnyObject,
-                                snapshotName: String?,
-                                testMode: SnapshotTestMode,
-                                perPixelTolerance: CGFloat,
-                                overallTolerance: CGFloat,
-                                file: StaticString) -> Bool {
-        let sanitizedName = sanitizedTestName(snapshotName)
-        return FBSnapshotTestCase.validateSnapshot(viewOrLayer,
+        let sanitizedName = sanitizedTestName(named)
+        return FBSnapshotTestCase.validateSnapshot(snapshotObject,
                                                    snapshot: sanitizedName,
                                                    record: testMode == .record,
                                                    referenceDirectory: getDefaultReferenceDirectory(file),
