@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APIError: Error {
+enum APIError: Error, Equatable {
     case requestFailed(reason: String?)
     case jsonConversionFailure(domain: String, description: String)
     case invalidData
@@ -42,6 +42,30 @@ enum APIError: Error {
             return "Type mismatch for type \(type) in JSON: \(context)"
         case let .dataCorrupted(context):
             return "Data found to be corrupted in JSON: \(context)"
+        }
+    }
+
+    static func == (lhs: APIError, rhs: APIError) -> Bool {
+        switch (lhs, rhs) {
+        case let (.requestFailed(lhsReason), .requestFailed(rhsReason)):
+            return lhsReason == rhsReason
+        case (.invalidData, .invalidData),
+             (.responseUnsuccessful, .responseUnsuccessful),
+             (.jsonParsingFailure, .jsonParsingFailure):
+            return true
+        case let (.jsonConversionFailure(lhsDomain, lhsDescription), .jsonConversionFailure(rhsDomain, rhsDescription)):
+            return lhsDomain == rhsDomain && lhsDescription == rhsDescription
+        case (.requestCancelled, .requestCancelled):
+            return true
+        case let (.keyNotFound(lhsKey, lhsContext), .keyNotFound(rhsKey, rhsContext)):
+            return lhsKey.stringValue == rhsKey.stringValue && lhsContext == rhsContext
+        case let (.valueNotFound(lhsType, lhsContext), .valueNotFound(rhsType, rhsContext)),
+             let (.typeMismatch(lhsType, lhsContext), .typeMismatch(rhsType, rhsContext)):
+            return lhsType == rhsType && lhsContext == rhsContext
+        case let (.dataCorrupted(lhsContext), .dataCorrupted(rhsContext)):
+            return lhsContext == rhsContext
+        default:
+            return false
         }
     }
 }

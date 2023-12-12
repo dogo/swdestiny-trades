@@ -37,6 +37,11 @@ final class SetsListInteractorTests: XCTestCase {
     func testFailToRetrieveSets() async throws {
         client.error = true
 
-        // await XCTAssertThrowsError(try await sut.retrieveSets())
+        do {
+            _ = try await sut.retrieveSets()
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            XCTAssertNotNil(error, "error must be not-nil")
+        }
     }
 }

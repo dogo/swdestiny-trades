@@ -40,16 +40,26 @@ final class HttpClientTests: XCTestCase {
             HTTPResponse(statusCode: 404)
         }
 
-        // await XCTAssertThrowsError(try await sut.request(request, decode: Foo.self), "responseUnsuccessful")
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            XCTAssertEqual(error as? APIError, .responseUnsuccessful)
+        }
     }
 
     func testRequestWithFailureJsonConversionFailure() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(data: "{ \"id\": 3465 }".data(using: .utf8),
+            HTTPResponse(data: "{ \"bar\": [1, 2, 3] }".data(using: .utf8),
                          statusCode: 200)
         }
 
-        // await XCTAssertThrowsError(try await sut.request(request, decode: Foo.self), "jsonConversionFailure")
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            // XCTAssertEqual(error as? APIError, .jsonConversionFailure(domain: "domain", description: "description"))
+        }
     }
 
     func testRequestWithFailureInvalidData() async throws {
@@ -57,7 +67,12 @@ final class HttpClientTests: XCTestCase {
             HTTPResponse(statusCode: 200)
         }
 
-        // await XCTAssertThrowsError(try await sut.request(request, decode: Foo.self), "invalidData")
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            // XCTAssertEqual(error as? APIError, .invalidData)
+        }
     }
 
     func testRequestWithFailureDataCorrupted() async throws {
@@ -65,7 +80,12 @@ final class HttpClientTests: XCTestCase {
             HTTPResponse(statusCode: 200)
         }
 
-        // await XCTAssertThrowsError(try await sut.request(request, decode: Foo.self), "dataCorrupted")
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            XCTAssertEqual(error as? APIError, .dataCorrupted(context: "The given data was not valid JSON."))
+        }
     }
 
     func testRequestWithFailureRequestCancelled() async throws {
@@ -73,17 +93,41 @@ final class HttpClientTests: XCTestCase {
             HTTPResponse(statusCode: 200)
         }
 
-        // Uncomment once cancellation handling is implemented in the HttpClient
-        // await XCTAssertThrowsError(try await sut.request(request, decode: Foo.self), "requestCancelled")
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            // XCTAssertEqual(error as? APIError, .requestCancelled)
+        }
     }
 
-    func testRequestWithFailureServerErrorReason() async throws {
+    func testRequestWithFailureKeyNotFound() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 200)
+            HTTPResponse(data: "{ \"id\": 3465 }".data(using: .utf8),
+                         statusCode: 200)
         }
 
-        // Uncomment once server error reason handling is implemented in the HttpClient
-        // await XCTAssertThrowsError(try await sut.request(request, decode: Foo.self), "serverErrorReason")
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch let error as APIError {
+            XCTAssertEqual(error, .keyNotFound(key: Foo.CodingKeys.bar,
+                                               context: "No value associated with key CodingKeys(stringValue: \"bar\", intValue: nil) (\"bar\")."))
+        }
+    }
+
+    func testRequestWithFailureTypeMismatch() async throws {
+        URLProtocolMock.response = { _ in
+            HTTPResponse(data: "{ \"bar\": \"invalid_value\" }".data(using: .utf8),
+                         statusCode: 200)
+        }
+
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            XCTAssertEqual(error as? APIError, .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead."))
+        }
     }
 
     func testCancelAllRequests() {
@@ -93,6 +137,10 @@ final class HttpClientTests: XCTestCase {
     }
 }
 
-struct Foo: Decodable {
+struct Foo: Codable {
     var bar: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case bar
+    }
 }
