@@ -85,27 +85,27 @@ class SnapshotTestCase: FBSnapshotTestCase {
     // Search the test file's path to find the first folder with a test suffix,
     // then append "/ReferenceImages" or "FailureDiffs" and use that.
     private func getTestsRootFolder(_ sourceFileName: StaticString) -> String {
-        // Grab the file's path
-        let fileName = NSString(string: "\(sourceFileName)")
-        let pathComponents = fileName.pathComponents as NSArray
+        // Convert StaticString to String
+        let fileName = String(describing: sourceFileName)
 
         // Find the directory in the path that ends with a test suffix.
-        let testPath = pathComponents.first { component -> Bool in
+        guard let testPath = fileName.components(separatedBy: "/").first(where: { component in
             ["tests", "specs"].contains {
-                (component as AnyObject).lowercased.hasSuffix($0)
+                component.lowercased().hasSuffix($0)
             }
-        }
-
-        guard let testDirectory = testPath else {
+        }) else {
             fatalError("Could not infer reference image folder – You should provide a reference dir using " +
                 "FBSnapshotTest.setReferenceImagesDirectory(FB_REFERENCE_IMAGE_DIR) " +
                 "or by setting the FB_REFERENCE_IMAGE_DIR environment variable")
         }
 
         // Recombine the path components and append our own image directory.
-        let currentIndex = pathComponents.index(of: testDirectory) + 1
-        let folderPathComponents = pathComponents.subarray(with: NSRange(location: 0, length: currentIndex)) as NSArray
-        let folderPath = folderPathComponents.componentsJoined(by: "/")
+        guard let currentIndex = fileName.components(separatedBy: "/").firstIndex(of: testPath) else {
+            fatalError("Unexpected error while extracting the test path.")
+        }
+
+        let folderPathComponents = Array(fileName.components(separatedBy: "/")[0 ... currentIndex])
+        let folderPath = folderPathComponents.joined(separator: "/")
 
         return folderPath
     }
