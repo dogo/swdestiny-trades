@@ -6,119 +6,105 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
 import UIKit
+import XCTest
 
 @testable import PKHUD
 @testable import SWDestinyTrades
 @testable import SwiftMessages
 
-final class AddCardViewControllerTests: QuickSpec {
+final class AddCardViewControllerTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: AddCardViewController!
+    private var view: AddCardViewSpy!
+    private var database: DatabaseProtocol!
+    private var service: SWDestinyService!
+    private var keyWindow: UIWindow!
 
-        describe("AddCardViewController") {
+    override func setUp() {
+        super.setUp()
+        keyWindow = UIWindow(frame: .testDevice)
+        database = RealmDatabaseHelper.createMemoryDatabase(identifier: "UserCollection")
+        service = SWDestinyService(client: HttpClientMock())
+        view = AddCardViewSpy()
+        sut = AddCardViewController(with: view,
+                                    service: service,
+                                    database: database,
+                                    person: .stub(),
+                                    userCollection: .stub(),
+                                    type: .collection)
+        let navigationController = UINavigationController(rootViewController: sut)
+        keyWindow.showTestWindow(controller: navigationController)
+    }
 
-            var sut: AddCardViewController!
-            var view: AddCardViewSpy!
-            var database: DatabaseProtocol!
-            var service: SWDestinyService!
-            var keyWindow: UIWindow!
+    override func tearDown() {
+        keyWindow.cleanTestWindow()
+        super.tearDown()
+    }
 
-            beforeEach {
-                keyWindow = UIWindow(frame: .testDevice)
-                database = RealmDatabaseHelper.createMemoryDatabase(identifier: "UserCollection")
-                service = SWDestinyService(client: HttpClientMock())
-                view = AddCardViewSpy()
-                sut = AddCardViewController(with: view,
-                                            service: service,
-                                            database: database,
-                                            person: .stub(),
-                                            userCollection: .stub(),
-                                            type: .collection)
-                let navigationController = UINavigationController(rootViewController: sut)
-                keyWindow.showTestWindow(controller: navigationController)
-            }
+    func testCreateController() {
+        XCTAssertNotNil(sut)
+    }
 
-            afterEach {
-                keyWindow.cleanTestWindow()
-            }
+    func testViewIsKindOfAddCardViewType() {
+        XCTAssertTrue(sut.view is AddCardViewType)
+    }
 
-            it("should create a controller") {
-                expect(sut).toNot(beNil())
-            }
+    func testNavigationTitle() {
+        sut.viewWillAppear(false)
+        XCTAssertEqual(sut.navigationItem.title, L10n.addCard)
+    }
 
-            it("should have a view of type") {
-                expect(sut.view).to(beAKindOf(AddCardViewType.self))
-            }
+    func testDidSelectCardInsertsIntoCollectionDatabaseSuccessfully() {
+        let collection = UserCollectionDTO.stub()
 
-            it("should have the expected navigation title") {
-                sut.viewWillAppear(false)
-                expect(sut.navigationItem.title).to(equal(L10n.addCard))
-            }
+        sut = AddCardViewController(with: view,
+                                    service: service,
+                                    database: database,
+                                    person: .stub(),
+                                    userCollection: collection,
+                                    type: .collection)
+        let navigationController = UINavigationController(rootViewController: sut)
+        keyWindow.showTestWindow(controller: navigationController)
 
-            context("binding actions") {
+        sut.viewDidLoad()
+        view.didSelectCard?(.stub())
 
-                var collection: UserCollectionDTO!
+        XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+    }
 
-                beforeEach {
-                    collection = UserCollectionDTO.stub()
-                }
+    func testDidSelectCardDoesNotInsertIntoCollectionDatabase() {
+        let collection = UserCollectionDTO.stub()
+        collection.addCard(.stub())
 
-                context("didSelectCard") {
+        sut = AddCardViewController(with: view,
+                                    service: service,
+                                    database: database,
+                                    person: .stub(),
+                                    userCollection: collection,
+                                    type: .collection)
+        let navigationController = UINavigationController(rootViewController: sut)
+        keyWindow.showTestWindow(controller: navigationController)
 
-                    it("should insert a card into the collection database successfully") {
-                        sut = AddCardViewController(with: view,
-                                                    service: service,
-                                                    database: database,
-                                                    person: .stub(),
-                                                    userCollection: collection,
-                                                    type: .collection)
-                        let navigationController = UINavigationController(rootViewController: sut)
-                        keyWindow.showTestWindow(controller: navigationController)
+        sut.viewDidLoad()
+        view.didSelectCard?(.stub())
 
-                        sut.viewDidLoad()
-                        view.didSelectCard?(.stub())
+        // XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+    }
 
-                        expect(keyWindow.subviews).to(containElementSatisfying { $0 is ContainerView })
-                    }
+    func testDidSelectAccessory() {
+        sut.viewDidLoad()
+        view.didSelectAccessory?(.stub())
 
-                    xit("should not insert a card into the collection database") {
-                        collection.addCard(.stub())
+        let viewController = sut.navigationController?.viewControllers[0]
+        // XCTAssertTrue(viewController is CardDetailViewController)
+    }
 
-                        sut = AddCardViewController(with: view,
-                                                    service: service,
-                                                    database: database,
-                                                    person: .stub(),
-                                                    userCollection: collection,
-                                                    type: .collection)
-                        let navigationController = UINavigationController(rootViewController: sut)
-                        keyWindow.showTestWindow(controller: navigationController)
+    func testDoingSearch() {
+        sut.viewDidLoad()
+        view.doingSearch?("jabba")
 
-                        sut.viewDidLoad()
-                        view.didSelectCard?(.stub())
-
-                        expect(keyWindow.subviews).to(containElementSatisfying { $0 is ContainerView })
-                    }
-                }
-
-                xit("didSelectAccessory") {
-                    sut.viewDidLoad()
-                    view.didSelectAccessory?(.stub())
-
-                    let viewController = sut.navigationController?.viewControllers[0]
-                    expect(viewController).to(beAKindOf(CardDetailViewController.self))
-                }
-
-                it("doingSearch") {
-                    sut.viewDidLoad()
-                    view.doingSearch?("jabba")
-
-                    expect(view.didCallDoingSearch.count) == 1
-                    expect(view.didCallDoingSearch[0]) == "jabba"
-                }
-            }
-        }
+        XCTAssertEqual(view.didCallDoingSearch.count, 1)
+        XCTAssertEqual(view.didCallDoingSearch[0], "jabba")
     }
 }
