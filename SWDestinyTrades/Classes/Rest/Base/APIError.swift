@@ -9,11 +9,8 @@
 import Foundation
 
 enum APIError: Error, Equatable {
-    case requestFailed(reason: String?)
-    case jsonConversionFailure(domain: String, description: String)
     case invalidData
     case responseUnsuccessful
-    case jsonParsingFailure
     case requestCancelled
     case keyNotFound(key: CodingKey, context: String)
     case valueNotFound(type: Any.Type, context: String)
@@ -22,16 +19,10 @@ enum APIError: Error, Equatable {
 
     var localizedDescription: String {
         switch self {
-        case let .requestFailed(reason):
-            return "Request failed with reason: \(reason ?? "unknown")"
         case .invalidData:
             return "Invalid Data"
         case .responseUnsuccessful:
             return "Response Unsuccessful"
-        case .jsonParsingFailure:
-            return "JSON Parsing Failure"
-        case let .jsonConversionFailure(domain, description):
-            return "Error in read(from:ofType:) domain= \(domain), description= \(description)"
         case .requestCancelled:
             return "Request Cancelled"
         case let .keyNotFound(key, context):
@@ -47,15 +38,9 @@ enum APIError: Error, Equatable {
 
     static func == (lhs: APIError, rhs: APIError) -> Bool {
         switch (lhs, rhs) {
-        case let (.requestFailed(lhsReason), .requestFailed(rhsReason)):
-            return lhsReason == rhsReason
         case (.invalidData, .invalidData),
              (.responseUnsuccessful, .responseUnsuccessful),
-             (.jsonParsingFailure, .jsonParsingFailure):
-            return true
-        case let (.jsonConversionFailure(lhsDomain, lhsDescription), .jsonConversionFailure(rhsDomain, rhsDescription)):
-            return lhsDomain == rhsDomain && lhsDescription == rhsDescription
-        case (.requestCancelled, .requestCancelled):
+             (.requestCancelled, .requestCancelled):
             return true
         case let (.keyNotFound(lhsKey, lhsContext), .keyNotFound(rhsKey, rhsContext)):
             return lhsKey.stringValue == rhsKey.stringValue && lhsContext == rhsContext
@@ -67,15 +52,5 @@ enum APIError: Error, Equatable {
         default:
             return false
         }
-    }
-}
-
-final class RequestError {
-    var reason: APIError
-    var statusCode: HttpStatusCode
-
-    init(_ statusCode: HttpStatusCode, reason: APIError) {
-        self.statusCode = statusCode
-        self.reason = reason
     }
 }

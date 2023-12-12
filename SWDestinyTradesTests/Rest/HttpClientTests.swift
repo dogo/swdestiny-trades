@@ -35,33 +35,6 @@ final class HttpClientTests: XCTestCase {
         XCTAssertTrue(result.bar)
     }
 
-    func testRequestWithFailureResponseUnsuccessful() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 404)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch {
-            XCTAssertEqual(error as? APIError, .responseUnsuccessful)
-        }
-    }
-
-    func testRequestWithFailureJsonConversionFailure() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(data: "{ \"bar\": [1, 2, 3] }".data(using: .utf8),
-                         statusCode: 200)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch {
-            // XCTAssertEqual(error as? APIError, .jsonConversionFailure(domain: "domain", description: "description"))
-        }
-    }
-
     func testRequestWithFailureInvalidData() async throws {
         URLProtocolMock.response = { _ in
             HTTPResponse(statusCode: 200)
@@ -75,16 +48,16 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func testRequestWithFailureDataCorrupted() async throws {
+    func testRequestWithFailureResponseUnsuccessful() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 200)
+            HTTPResponse(statusCode: 404)
         }
 
         do {
             _ = try await sut.request(request, decode: Foo.self)
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
-            XCTAssertEqual(error as? APIError, .dataCorrupted(context: "The given data was not valid JSON."))
+            XCTAssertEqual(error as? APIError, .responseUnsuccessful)
         }
     }
 
@@ -116,6 +89,20 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
+    func testRequestWithFailureValueNotFound() async throws {
+        URLProtocolMock.response = { _ in
+            HTTPResponse(data: "{ \"bar\": \"invalid_value\" }".data(using: .utf8),
+                         statusCode: 200)
+        }
+
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            // XCTAssertEqual(error as? APIError, .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead."))
+        }
+    }
+
     func testRequestWithFailureTypeMismatch() async throws {
         URLProtocolMock.response = { _ in
             HTTPResponse(data: "{ \"bar\": \"invalid_value\" }".data(using: .utf8),
@@ -127,6 +114,19 @@ final class HttpClientTests: XCTestCase {
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
             XCTAssertEqual(error as? APIError, .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead."))
+        }
+    }
+
+    func testRequestWithFailureDataCorrupted() async throws {
+        URLProtocolMock.response = { _ in
+            HTTPResponse(statusCode: 200)
+        }
+
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw while awaiting, but succeeded")
+        } catch {
+            XCTAssertEqual(error as? APIError, .dataCorrupted(context: "The given data was not valid JSON."))
         }
     }
 

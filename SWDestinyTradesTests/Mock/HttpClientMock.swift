@@ -21,7 +21,7 @@ final class HttpClientMock: HttpClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
         guard !error else {
-            throw APIError.jsonParsingFailure
+            throw APIError.invalidData
         }
 
         let decodable: T = JSONHelper.loadJSON(withFile: fileName)!

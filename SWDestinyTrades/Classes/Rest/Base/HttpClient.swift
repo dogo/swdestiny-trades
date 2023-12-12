@@ -72,8 +72,6 @@ extension HttpClient {
             throw APIError.typeMismatch(type: type, context: context.debugDescription)
         } catch let DecodingError.dataCorrupted(context) {
             throw APIError.dataCorrupted(context: context.debugDescription)
-        } catch let error as NSError {
-            throw APIError.jsonConversionFailure(domain: error.domain, description: error.localizedDescription)
         }
     }
 }
