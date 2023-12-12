@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutViewTests: SnapshotableTestCase {
+final class AboutViewTests: XCSnapshotableTestCase {
 
     var sut: AboutView!
 

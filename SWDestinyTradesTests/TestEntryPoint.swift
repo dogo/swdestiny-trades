@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import Nimble_Snapshots
 import XCTest
 
 final class TestEntryPoint: NSObject {
+
     override init() {
         super.init()
-        XCTestObservationCenter.shared.addTestObserver(CurrentTestCaseTracker.shared)
     }
 }

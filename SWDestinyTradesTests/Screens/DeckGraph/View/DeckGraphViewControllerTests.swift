@@ -6,55 +6,45 @@
 //  Copyright © 2019 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckGraphViewControllerTests: QuickSpec {
+final class DeckGraphViewControllerTests: XCSnapshotableTestCase {
 
-    override class func spec() {
+    private var sut: DeckGraphViewController!
+    private var navigationController: UINavigationController!
+    private var window: UIWindow!
 
-        var sut: DeckGraphViewController!
-        var navigationController: UINavigationController!
-        var window: UIWindow!
+    override func setUp() {
+        super.setUp()
+        window = UIWindow(frame: CGRect(x: 0, y: 0, width: 375, height: 1350))
+    }
 
-        describe("DeckGraphViewController layout") {
+    override func tearDown() {
+        window.cleanTestWindow()
+        super.tearDown()
+    }
 
-            context("when it's initialized") {
+    func testValidLayout() {
+        let deck = DeckDTO.stub()
+        let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: "DeckGraph")
+        try? memoryDB?.save(object: deck)
 
-                beforeEach {
-                    window = UIWindow(frame: CGRect(x: 0, y: 0, width: 375, height: 1350))
-                    let deck = DeckDTO.stub()
-                    let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: "DeckGraph")
-                    try? memoryDB?.save(object: deck)
+        sut = DeckGraphViewController(deck: deck)
+        navigationController = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigationController)
 
-                    sut = DeckGraphViewController(deck: deck)
-                    navigationController = UINavigationController(rootViewController: sut)
-                    window.showTestWindow(controller: navigationController)
-                }
+        XCTAssertTrue(snapshot(navigationController, named: "DeckGraphViewController with a valid layout"))
+    }
 
-                afterEach {
-                    window.cleanTestWindow()
-                }
+    func testEmptyStateLayout() {
+        let deck = DeckDTO.stub(emptyList: true)
+        sut = DeckGraphViewController(deck: deck)
+        navigationController = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigationController)
 
-                it("should have valid layout") {
-                    expect(navigationController).to(haveValidSnapshot(named: "DeckGraphViewController with a valid layout",
-                                                                      tolerance: 0.02))
-                }
-
-                it("should have an empty state layout") {
-                    let deck = DeckDTO.stub(emptyList: true)
-                    sut = DeckGraphViewController(deck: deck)
-                    navigationController = UINavigationController(rootViewController: sut)
-                    window.showTestWindow(controller: navigationController)
-
-                    expect(navigationController).to(haveValidSnapshot(named: "DeckGraphViewController with a empty state layout",
-                                                                      tolerance: 0.02))
-                }
-            }
-        }
+        XCTAssertTrue(snapshot(navigationController, named: "DeckGraphViewController with an empty state layout"))
     }
 }

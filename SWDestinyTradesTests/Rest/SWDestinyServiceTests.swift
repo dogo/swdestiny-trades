@@ -6,54 +6,52 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class SWDestinyServiceTests: AsyncSpec {
+final class SWDestinyServiceTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: SWDestinyService!
+    private var client: HttpClientMock!
 
-        describe("SWDestinyService") {
+    override func setUp() {
+        super.setUp()
+        client = HttpClientMock()
+        sut = SWDestinyService(client: client)
+    }
 
-            var sut: SWDestinyService!
-            var client: HttpClientMock!
+    func testRetrieveSetListWithSuccess() async throws {
+        client.fileName = "sets"
+        let result = try await sut.retrieveSetList()
 
-            beforeEach {
-                client = HttpClientMock()
-                sut = SWDestinyService(client: client)
-            }
+        XCTAssertNotNil(result)
+    }
 
-            it("Retrieve set list with success") {
-                client.fileName = "sets"
+    func testRetrieveSetCardListWithSuccess() async throws {
+        client.fileName = "card-list"
+        let result = try await sut.retrieveSetCardList(setCode: "anyString")
 
-                await expect { try? await sut.retrieveSetList() }.toNot(beNil())
-            }
+        XCTAssertNotNil(result)
+    }
 
-            it("Retrieve card list with success") {
-                client.fileName = "card-list"
+    func testRetrieveSpecificCardWithSuccess() async throws {
+        client.fileName = "card"
+        let result = try await sut.retrieveCard(cardId: "anyString")
 
-                await expect { try? await sut.retrieveSetCardList(setCode: "anyString") }.toNot(beNil())
-            }
+        XCTAssertNotNil(result)
+    }
 
-            it("Retrieve specific card with success") {
-                client.fileName = "card"
+    func testRetrieveAllCardsWithSuccess() async throws {
+        client.fileName = "card-list"
+        let result = try await sut.retrieveAllCards()
 
-                await expect { try? await sut.retrieveCard(cardId: "anyString") }.toNot(beNil())
-            }
+        XCTAssertNotNil(result)
+    }
 
-            it("Retrieve all cards with success") {
-                client.fileName = "card-list"
+    func testCancelAllRequests() {
+        sut.cancelAllRequests()
 
-                await expect { try? await sut.retrieveAllCards() }.toNot(beNil())
-            }
-
-            it("should cancel all requests") {
-                sut.cancelAllRequests()
-
-                expect(client.isCancelled) == true
-            }
-        }
+        XCTAssertTrue(client.isCancelled)
     }
 }

@@ -6,44 +6,38 @@
 //  Copyright © 2023 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListNavigatorTests: QuickSpec {
+final class SetsListNavigatorTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: SetsListNavigator!
+    private var navigationController: UINavigationControllerMock!
 
-        describe("SetsListNavigator") {
+    override func setUp() {
+        super.setUp()
+        let controller = UIViewController()
+        navigationController = UINavigationControllerMock(rootViewController: controller)
+        sut = SetsListNavigator(controller)
+    }
 
-            var sut: SetsListNavigator!
-            var navigationController: UINavigationControllerMock!
+    func testNavigateToAboutViewController() {
+        sut.navigate(to: .about)
 
-            beforeEach {
-                let controller = UIViewController()
-                navigationController = UINavigationControllerMock(rootViewController: controller)
-                sut = SetsListNavigator(controller)
-            }
+        XCTAssertTrue(navigationController.currentPushedViewController is AboutViewController)
+    }
 
-            it("should navigate to AboutViewController") {
-                sut.navigate(to: .about)
+    func testNavigateToCardListViewController() {
+        sut.navigate(to: .cardList(database: nil, with: .stub()[0]))
 
-                expect(navigationController.currentPushedViewController).to(beAKindOf(AboutViewController.self))
-            }
+        XCTAssertTrue(navigationController.currentPushedViewController is CardListViewController)
+    }
 
-            it("should navigate to CardListViewController") {
-                sut.navigate(to: .cardList(database: nil, with: .stub()[0]))
+    func testNavigateToSearchListViewController() {
+        sut.navigate(to: .search(database: nil))
 
-                expect(navigationController.currentPushedViewController).to(beAKindOf(CardListViewController.self))
-            }
-
-            it("should navigate to SearchListViewController") {
-                sut.navigate(to: .search(database: nil))
-
-                expect(navigationController.currentPushedViewController).to(beAKindOf(SearchListViewController.self))
-            }
-        }
+        XCTAssertTrue(navigationController.currentPushedViewController is SearchListViewController)
     }
 }

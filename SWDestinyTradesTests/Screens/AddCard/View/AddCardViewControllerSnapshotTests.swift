@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardViewTests: SnapshotableTestCase {
+final class AddCardViewTests: XCSnapshotableTestCase {
 
     var sut: AddCardViewController!
     var service: SWDestinyService!

@@ -6,37 +6,31 @@
 //  Copyright © 2022 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class LoanDetailNavigatorTests: QuickSpec {
+final class LoanDetailNavigatorTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: LoanDetailNavigator!
+    private var navigationController: UINavigationControllerMock!
 
-        describe("Loan Detail Navigator") {
+    override func setUp() {
+        super.setUp()
+        navigationController = UINavigationControllerMock()
+        sut = LoanDetailNavigator(navigationController)
+    }
 
-            var sut: LoanDetailNavigator!
-            var navigationController: UINavigationControllerMock!
+    func testNavigateToCardDetailViewController() {
+        sut.navigate(to: .cardDetail(database: nil, with: [.stub()], card: .stub()))
 
-            beforeEach {
-                navigationController = UINavigationControllerMock()
-                sut = LoanDetailNavigator(navigationController)
-            }
+        XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
+    }
 
-            it("should navigate to CardDetailViewController") {
-                sut.navigate(to: .cardDetail(database: nil, with: [.stub()], card: .stub()))
+    func testNavigateToAddCardViewController() {
+        sut.navigate(to: .addCard(database: nil, with: .stub(), type: .borrow))
 
-                expect(navigationController.currentPushedViewController).to(beAKindOf(CardDetailViewController.self))
-            }
-
-            it("should navigate to DeckBuilderViewController") {
-                sut.navigate(to: .addCard(database: nil, with: .stub(), type: .borrow))
-
-                expect(navigationController.currentPushedViewController).to(beAKindOf(AddCardViewController.self))
-            }
-        }
+        XCTAssertTrue(navigationController.currentPushedViewController is AddCardViewController)
     }
 }

@@ -6,49 +6,35 @@
 //  Copyright © 2023 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsViewTests: QuickSpec {
+final class SetsViewTests: XCSnapshotableTestCase {
 
-    override class func spec() {
+    private var sut: SetsView!
 
-        var sut: SetsView!
+    override func setUp() {
+        super.setUp()
+        sut = SetsView(frame: .testDevice)
+    }
 
-        describe("SetsListView") {
+    func testInitialization() {
+        sut.updateSetList(SetDTO.stub())
 
-            beforeEach {
-                sut = SetsView(frame: .testDevice)
-            }
+        XCTAssertTrue(snapshot(sut))
+    }
 
-            context("when it's initialized") {
-
-                it("should have valid layout") {
-                    sut.updateSetList(SetDTO.stub())
-
-                    expect(sut) == snapshot()
-                }
-            }
-
-            context("didSelectSet") {
-
-                it("should select a set") {
-
-                    var didCallDidSelectSet = [SetDTO]()
-                    sut.didSelectSet = { set in
-                        didCallDidSelectSet.append(set)
-                    }
-
-                    sut.setsTableView?.didSelectSet?(.stub().first!)
-
-                    expect(didCallDidSelectSet.count) == 1
-                    expect(didCallDidSelectSet[0].name) == SetDTO.stub()[0].name
-                }
-            }
+    func testDidSelectSet() {
+        var didCallDidSelectSet = [SetDTO]()
+        sut.didSelectSet = { set in
+            didCallDidSelectSet.append(set)
         }
+
+        sut.setsTableView?.didSelectSet?(.stub().first!)
+
+        XCTAssertEqual(didCallDidSelectSet.count, 1)
+        XCTAssertEqual(didCallDidSelectSet[0].name, SetDTO.stub()[0].name)
     }
 }

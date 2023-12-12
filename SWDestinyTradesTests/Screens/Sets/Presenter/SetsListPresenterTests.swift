@@ -6,66 +6,56 @@
 //  Copyright © 2023 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListPresenterTests: QuickSpec {
+final class SetsListPresenterTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: SetsListPresenter!
+    private var service: SWDestinyService!
+    private var client: HttpClientMock!
+    private var view: SetsListViewSpy!
+    private var navigator: SetsListNavigator!
+    private var navigationController: UINavigationControllerMock!
 
-        var sut: SetsListPresenter!
-        var service: SWDestinyService!
-        var client: HttpClientMock!
-        var view: SetsListViewSpy!
-        var navigator: SetsListNavigator!
-        var navigationController: UINavigationControllerMock!
+    override func setUp() {
+        super.setUp()
+        let controller = UIViewController()
+        client = HttpClientMock()
+        service = SWDestinyService(client: client)
+        navigationController = UINavigationControllerMock(rootViewController: controller)
+        view = SetsListViewSpy()
+        navigator = SetsListNavigator(controller)
+        sut = SetsListPresenter(view: view,
+                                interactor: SetsListInteractor(service: service),
+                                database: nil,
+                                navigator: navigator)
+    }
 
-        describe("SetsListPresenter") {
+    func testViewDidLoad() {
+        sut.viewDidLoad()
 
-            context("when it's initialized") {
+        XCTAssertEqual(view.didCallStartAnimating, 1)
+        XCTAssertEqual(view.didCallSetupNavigationItem, 1)
+    }
 
-                beforeEach {
-                    let controller = UIViewController()
-                    client = HttpClientMock()
-                    service = SWDestinyService(client: client)
-                    navigationController = UINavigationControllerMock(rootViewController: controller)
-                    view = SetsListViewSpy()
-                    navigator = SetsListNavigator(controller)
-                    sut = SetsListPresenter(view: view,
-                                            interactor: SetsListInteractor(service: service),
-                                            database: nil,
-                                            navigator: navigator)
-                }
+    func testDidSelectSet() {
+        sut.didSelectSet(.stub()[0])
 
-                it("viewDidLoad") {
-                    sut.viewDidLoad()
+        XCTAssertTrue(navigationController.currentPushedViewController is CardListViewController)
+    }
 
-                    expect(view.didCallStartAnimating) == 1
-                    expect(view.didCallSetupNavigationItem) == 1
-                }
+    func testAboutButtonTouched() {
+        sut.aboutButtonTouched()
 
-                it("didSelectSet") {
-                    sut.didSelectSet(.stub()[0])
+        XCTAssertTrue(navigationController.currentPushedViewController is AboutViewController)
+    }
 
-                    expect(navigationController.currentPushedViewController).to(beAKindOf(CardListViewController.self))
-                }
+    func testSearchButtonTouched() {
+        sut.searchButtonTouched()
 
-                it("aboutButtonTouched") {
-                    sut.aboutButtonTouched()
-
-                    expect(navigationController.currentPushedViewController).to(beAKindOf(AboutViewController.self))
-                }
-
-                it("searchButtonTouched") {
-                    sut.searchButtonTouched()
-
-                    expect(navigationController.currentPushedViewController).to(beAKindOf(SearchListViewController.self))
-                }
-            }
-        }
+        XCTAssertTrue(navigationController.currentPushedViewController is SearchListViewController)
     }
 }

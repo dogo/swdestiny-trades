@@ -6,104 +6,84 @@
 //  Copyright © 2019 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class PeopleListViewControllerTests: QuickSpec {
+final class PeopleListViewControllerTests: XCSnapshotableTestCase {
 
-    override class func spec() {
+    private var sut: PeopleListViewController!
+    private var database: DatabaseProtocol!
+    private var navigation: UINavigationController!
+    private var window: UIWindow!
 
-        var sut: PeopleListViewController!
-        var database: DatabaseProtocol!
-        var navigation: UINavigationController!
-        var window: UIWindow!
+    override func setUp() {
+        super.setUp()
+        AppearanceProxyHelper.customizeNavigationBar()
+        window = UIWindow(frame: .testDevice)
+        database = RealmDatabaseHelper.createMemoryDatabase(identifier: "PeopleList")
+    }
 
-        describe("PeopleListViewController layout") {
+    override func tearDown() {
+        try! database.reset()
+        window.cleanTestWindow()
+        super.tearDown()
+    }
 
-            beforeSuite {
-                AppearanceProxyHelper.customizeNavigationBar()
-            }
+    func testEmptyStateLayout() {
+        sut = PeopleListViewController(database: database)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-            context("when it's initialized from the tabbar") {
+        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with an empty state layout"))
+    }
 
-                beforeEach {
-                    window = UIWindow(frame: .testDevice)
-                    database = RealmDatabaseHelper.createMemoryDatabase(identifier: "PeopleList")
-                }
+    func testPersonWithNoLoansLayout() {
+        let person = PersonDTO.stub()
+        try! database.save(object: person)
 
-                afterEach {
-                    try! database.reset()
-                    window.cleanTestWindow()
-                }
+        sut = PeopleListViewController(database: database)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-                context("should have valid layout when trying to load a database") {
+        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with no loans"))
+    }
 
-                    it("with empty state") {
-                        sut = PeopleListViewController(database: database)
-                        navigation = UINavigationController(rootViewController: sut)
-                        window.showTestWindow(controller: navigation)
+    func testPersonWithLentCardsLayout() {
+        let person = PersonDTO.stub()
+        person.lentMe.append(CardDTO.stub())
+        try! database.save(object: person)
 
-                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a empty state layout",
-                                                                tolerance: 0.02))
-                    }
+        sut = PeopleListViewController(database: database)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-                    it("with a person with no loans") {
-                        let person = PersonDTO.stub()
-                        try! database.save(object: person)
+        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with lent cards"))
+    }
 
-                        sut = PeopleListViewController(database: database)
-                        navigation = UINavigationController(rootViewController: sut)
-                        window.showTestWindow(controller: navigation)
+    func testPersonWithBorrowedCardsLayout() {
+        let person = PersonDTO.stub()
+        person.borrowed.append(CardDTO.stub())
+        try! database.save(object: person)
 
-                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with no loans",
-                                                                tolerance: 0.02))
-                    }
+        sut = PeopleListViewController(database: database)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-                    it("with a person with lent cards") {
-                        let person = PersonDTO.stub()
-                        person.lentMe.append(CardDTO.stub())
-                        try! database.save(object: person)
+        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with borrowed cards"))
+    }
 
-                        sut = PeopleListViewController(database: database)
-                        navigation = UINavigationController(rootViewController: sut)
-                        window.showTestWindow(controller: navigation)
+    func testPersonWithLentAndBorrowedCardsLayout() {
+        let person = PersonDTO.stub()
+        person.lentMe.append(CardDTO.stub())
+        person.borrowed.append(CardDTO.stub())
+        try! database.save(object: person)
 
-                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with lent cards",
-                                                                tolerance: 0.02))
-                    }
+        sut = PeopleListViewController(database: database)
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-                    it("with a person with borrowed cards") {
-                        let person = PersonDTO.stub()
-                        person.borrowed.append(CardDTO.stub())
-                        try! database.save(object: person)
-
-                        sut = PeopleListViewController(database: database)
-                        navigation = UINavigationController(rootViewController: sut)
-                        window.showTestWindow(controller: navigation)
-
-                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with borrowed cards",
-                                                                tolerance: 0.02))
-                    }
-
-                    it("with a person with lent and borrowed cards") {
-                        let person = PersonDTO.stub()
-                        person.lentMe.append(CardDTO.stub())
-                        person.borrowed.append(CardDTO.stub())
-                        try! database.save(object: person)
-
-                        sut = PeopleListViewController(database: database)
-                        navigation = UINavigationController(rootViewController: sut)
-                        window.showTestWindow(controller: navigation)
-
-                        expect(navigation).to(haveValidSnapshot(named: "PeopleListViewController with a person with lent and borrowed cards",
-                                                                tolerance: 0.02))
-                    }
-                }
-            }
-        }
+        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with lent and borrowed cards"))
     }
 }

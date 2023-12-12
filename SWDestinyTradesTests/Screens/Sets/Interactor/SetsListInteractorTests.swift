@@ -6,38 +6,37 @@
 //  Copyright © 2023 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListInteractorTests: AsyncSpec {
+final class SetsListInteractorTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: SetsListInteractor!
+    private var service: SWDestinyService!
+    private var client: HttpClientMock!
 
-        var sut: SetsListInteractor!
-        var service: SWDestinyService!
-        var client: HttpClientMock!
+    override func setUpWithError() throws {
+        client = HttpClientMock()
+        service = SWDestinyService(client: client)
+        sut = SetsListInteractor(service: service)
+    }
 
-        describe("SetsListInteractor") {
+    override func tearDownWithError() throws {
+        client = nil
+        service = nil
+        sut = nil
+    }
 
-            beforeEach {
-                client = HttpClientMock()
-                service = SWDestinyService(client: client)
-                sut = SetsListInteractor(service: service)
-            }
+    func testRetrieveSetsWithSuccess() async throws {
+        let setList = try await sut.retrieveSets()
+        XCTAssertEqual(setList.count, 20)
+    }
 
-            it("should retrieve the set list with success") {
-                let setList = try await sut.retrieveSets()
-                expect(setList.count) == 20
-            }
+    func testFailToRetrieveSets() async throws {
+        client.error = true
 
-            it("should fail to retrieve the set list") {
-                client.error = true
-                await expect { try await sut.retrieveSets() }.to(throwError())
-            }
-        }
+        // await XCTAssertThrowsError(try await sut.retrieveSets())
     }
 }

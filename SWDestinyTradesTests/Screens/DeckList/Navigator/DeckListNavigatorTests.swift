@@ -6,31 +6,25 @@
 //  Copyright © 2022 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckListNavigatorTests: QuickSpec {
+final class DeckListNavigatorTests: XCTestCase {
 
-    override class func spec() {
+    private var sut: DeckListNavigator!
+    private var navigationController: UINavigationControllerMock!
 
-        describe("Deck List Navigator") {
+    override func setUp() {
+        super.setUp()
+        navigationController = UINavigationControllerMock()
+        sut = DeckListNavigator(navigationController)
+    }
 
-            var sut: DeckListNavigator!
-            var navigationController: UINavigationControllerMock!
+    func testNavigateToDeckBuilderViewController() {
+        sut.navigate(to: .deckBuilder(database: nil, with: .stub()))
 
-            beforeEach {
-                navigationController = UINavigationControllerMock()
-                sut = DeckListNavigator(navigationController)
-            }
-
-            it("should navigate to DeckBuilderViewController") {
-                sut.navigate(to: .deckBuilder(database: nil, with: .stub()))
-
-                expect(navigationController.currentPushedViewController).to(beAKindOf(DeckBuilderViewController.self))
-            }
-        }
+        XCTAssertTrue(navigationController.currentPushedViewController is DeckBuilderViewController)
     }
 }

@@ -15,7 +15,7 @@ enum SnapshotTestMode {
     case test
 }
 
-class SnapshotableTestCase: FBSnapshotTestCase {
+class XCSnapshotableTestCase: FBSnapshotTestCase {
 
     func snapshot(_ instance: Snapshotable,
                   named: String? = nil,

@@ -6,37 +6,33 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardDetailViewControllerTests: QuickSpec {
+final class CardDetailViewControllerTests: XCTestCase {
 
-    override class func spec() {
+    private var controller: CardDetailViewController!
+    private let cardList = [CardDTO()]
 
-        describe("CardDetail view controller") {
-            var controller: CardDetailViewController!
-            let cardList = [CardDTO()]
+    override func setUp() {
+        super.setUp()
+        controller = CardDetailViewController(database: nil, cardList: cardList, selected: CardDTO())
+    }
 
-            beforeEach {
-                controller = CardDetailViewController(database: nil, cardList: cardList, selected: CardDTO())
-            }
+    func testCreateController() {
+        XCTAssertNotNil(controller)
+    }
 
-            it("should be able to create a controller") {
-                expect(controller).toNot(beNil())
-            }
+    func testViewIsKindOfCardView() {
+        XCTAssertTrue(controller.view is CardView)
+    }
 
-            it("should have a view of type") {
-                expect(controller.view).to(beAKindOf(CardView.self))
-            }
+    func testNavigationTitle() {
+        _ = UINavigationController(rootViewController: controller)
+        controller.viewWillAppear(false)
 
-            it("should have the expected navigation title") {
-                _ = UINavigationController(rootViewController: controller)
-                controller.viewWillAppear(true)
-                expect(controller.navigationItem.title).to(equal(""))
-            }
-        }
+        XCTAssertEqual(controller.navigationItem.title, "")
     }
 }

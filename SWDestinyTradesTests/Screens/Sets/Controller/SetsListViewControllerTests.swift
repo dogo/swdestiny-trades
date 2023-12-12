@@ -6,59 +6,46 @@
 //  Copyright © 2019 Diogo Autilio. All rights reserved.
 //
 
-import Nimble
-import Nimble_Snapshots
-import Quick
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListViewControllerTests: QuickSpec {
+final class SetsListViewControllerTests: XCSnapshotableTestCase {
 
-    override class func spec() {
+    private var sut: SetsListViewController!
+    private var service: SWDestinyService!
+    private var client: HttpClientMock!
+    private var navigation: UINavigationController!
+    private var window: UIWindow!
 
-        var sut: SetsListViewController!
-        var service: SWDestinyService!
-        var client: HttpClientMock!
-        var navigation: UINavigationController!
-        var window: UIWindow!
+    override func setUp() {
+        super.setUp()
+        AppearanceProxyHelper.customizeNavigationBar()
+        window = UIWindow(frame: .testDevice)
+        client = HttpClientMock()
+        service = SWDestinyService(client: client)
+    }
 
-        describe("SetsListViewController layout") {
+    override func tearDown() {
+        window.cleanTestWindow()
+        super.tearDown()
+    }
 
-            beforeSuite {
-                AppearanceProxyHelper.customizeNavigationBar()
-            }
+    func testValidLayout() {
+        client.fileName = "sets"
 
-            context("when it's initialized") {
+        sut = SetsListViewController()
+        let router = SetsListNavigator(sut)
+        let presenter = SetsListPresenter(view: sut,
+                                          interactor: SetsListInteractor(service: service),
+                                          database: nil,
+                                          navigator: router)
+        sut.presenter = presenter
 
-                beforeEach {
-                    window = UIWindow(frame: .testDevice)
-                    client = HttpClientMock()
-                    service = SWDestinyService(client: client)
-                }
+        navigation = UINavigationController(rootViewController: sut)
+        window.showTestWindow(controller: navigation)
 
-                afterEach {
-                    window.cleanTestWindow()
-                }
-
-                it("should have valid layout") {
-                    client.fileName = "sets"
-
-                    sut = SetsListViewController()
-                    let router = SetsListNavigator(sut)
-                    let presenter = SetsListPresenter(view: sut,
-                                                      interactor: SetsListInteractor(service: service),
-                                                      database: nil,
-                                                      navigator: router)
-                    sut.presenter = presenter
-
-                    navigation = UINavigationController(rootViewController: sut)
-                    window.showTestWindow(controller: navigation)
-
-                    expect(navigation).to(haveValidSnapshot(named: "SetsListViewControllerTests with a valid layout",
-                                                            tolerance: 0.02))
-                }
-            }
-        }
+        XCTAssertTrue(snapshot(navigation, named: "SetsListViewControllerTests with a valid layout"))
     }
 }
