@@ -50,9 +50,7 @@ public extension Project {
                 ],
                 dependencies: [
                     .target(name: "SWDestinyTrades"),
-                    .external(name: "Quick"),
-                    .external(name: "Nimble"),
-                    .external(name: "Nimble-Snapshots"),
+                    .external(name: "iOSSnapshotTestCase"),
                     .package(product: "Realm") // Fix unit test linkage issue
                 ]
             )

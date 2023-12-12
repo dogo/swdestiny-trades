@@ -10,10 +10,8 @@ let package = Package(
         .package(url: "https://github.com/dogo/PKHUD", branch: "fix/spm-resource"),
         .package(url: "https://github.com/liufengting/FTPopOverMenu_Swift", from: "0.4.4"),
         .package(url: "https://github.com/zvonicek/ImageSlideshow", from: "1.9.1"),
-        .package(url: "https://github.com/Quick/Nimble", from: "12.2.0"),
-        .package(url: "https://github.com/Quick/Quick", from: "7.2.0"),
-        .package(url: "https://github.com/ashfurrow/Nimble-Snapshots", from: "9.6.1"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "10.1.0"),
-        .package(url: "https://github.com/SwiftKickMobile/SwiftMessages", from: "9.0.6")
+        .package(url: "https://github.com/SwiftKickMobile/SwiftMessages", from: "9.0.6"),
+        .package(url: "https://github.com/uber/ios-snapshot-test-case.git", from: "8.0.0")
     ]
 )

@@ -6,7 +6,6 @@ let swiftPackageManagerDependencies = SwiftPackageManagerDependencies(
         "SwiftMessages": .framework
     ],
     targetSettings: [
-        "Nimble-Snapshots": ["ENABLE_TESTING_SEARCH_PATHS": "YES"],
         "iOSSnapshotTestCase": ["ENABLE_TESTING_SEARCH_PATHS": "YES"]
     ]
 )
