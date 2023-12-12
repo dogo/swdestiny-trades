@@ -11,10 +11,10 @@ public extension Project {
         return [
             Target(
                 name: "SWDestinyTrades",
-                platform: .iOS,
+                destinations: [.iPhone, .iPad],
                 product: .app,
                 bundleId: "br.com.anykey.SWDestiny-Trades",
-                deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
+                deploymentTargets: .iOS("13.0"),
                 infoPlist: "SWDestinyTrades/Info.plist",
                 sources: ["SWDestinyTrades/Classes/**"],
                 resources: [
@@ -40,9 +40,10 @@ public extension Project {
             ),
             Target(
                 name: "SWDestinyTradesTests",
-                platform: .iOS,
+                destinations: [.iPhone, .iPad],
                 product: .unitTests,
                 bundleId: "br.com.anykey.SWDestiny-TradesTests",
+                deploymentTargets: .iOS("13.0"),
                 infoPlist: "SWDestinyTradesTests/Info.plist",
                 sources: ["SWDestinyTradesTests/**"],
                 resources: [
