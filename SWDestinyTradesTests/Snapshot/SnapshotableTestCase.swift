@@ -9,17 +9,17 @@
 import Foundation
 import iOSSnapshotTestCase
 
-// Enum para representar diferentes modos de teste
+// Enum to represent different test modes
 enum SnapshotTestMode {
     case record
-    case test
+    case validate
 }
 
 class XCSnapshotableTestCase: FBSnapshotTestCase {
 
     func snapshot(_ instance: Snapshotable,
                   named: String? = nil,
-                  testMode: SnapshotTestMode = .test,
+                  testMode: SnapshotTestMode = .validate,
                   perPixelTolerance: CGFloat = 0,
                   overallTolerance: CGFloat = 0,
                   file: StaticString = #file) -> Bool {
