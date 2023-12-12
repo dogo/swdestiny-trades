@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutViewTests: SnapshotTestCase {
+final class AboutViewTests: SnapshotableTestCase {
 
     var sut: AboutView!
 
@@ -28,7 +28,7 @@ final class AboutViewTests: SnapshotTestCase {
     }
 
     func testAboutViewLayout() {
-        verifySnapshot(sut)
+        XCTAssertTrue(snapshot(sut, snapshotName: "About View Controller"))
     }
 
     func testHTTPLinkTouchCallback() {
