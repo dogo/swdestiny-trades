@@ -20,37 +20,33 @@ class SnapshotTestCase: FBSnapshotTestCase {
     var referenceImageDirectory: String?
     var imageDiffDirectory: String?
 
-    func verifyView(_ view: UIView,
-                    perPixelTolerance: CGFloat = 0,
-                    overallTolerance: CGFloat = 0,
-                    file: StaticString = #file,
-                    line: UInt = #line) {
+    func verifySnapshot(_ viewOrLayer: AnyObject,
+                        perPixelTolerance: CGFloat = 0,
+                        overallTolerance: CGFloat = 0,
+                        file: StaticString = #file,
+                        line: UInt = #line) {
         referenceImageDirectory = getDefaultReferenceDirectory(file)
         imageDiffDirectory = getDefaultDiffDirectory(file)
 
-        FBSnapshotVerifyView(view,
-                             identifier: nil,
-                             suffixes: NSOrderedSet(),
-                             perPixelTolerance: perPixelTolerance,
-                             overallTolerance: overallTolerance,
-                             file: file,
-                             line: line)
-    }
-
-    func verifyViewController(_ viewController: UIViewController,
-                              perPixelTolerance: CGFloat = 0,
-                              overallTolerance: CGFloat = 0,
-                              file: StaticString = #file,
-                              line: UInt = #line) {
-        referenceImageDirectory = getDefaultReferenceDirectory(file)
-        imageDiffDirectory = getDefaultDiffDirectory(file)
-
-        FBSnapshotVerifyViewController(viewController,
-                                       identifier: nil,
-                                       perPixelTolerance: 0,
-                                       overallTolerance: 0,
-                                       file: file,
-                                       line: line)
+        if viewOrLayer.isKind(of: UIView.self), let view = viewOrLayer as? UIView {
+            FBSnapshotVerifyView(view,
+                                 identifier: nil,
+                                 suffixes: NSOrderedSet(object: "Images"),
+                                 perPixelTolerance: perPixelTolerance,
+                                 overallTolerance: overallTolerance,
+                                 file: file,
+                                 line: line)
+        } else if viewOrLayer.isKind(of: UIViewController.self), let viewController = viewOrLayer as? UIViewController {
+            FBSnapshotVerifyViewController(viewController,
+                                           identifier: nil,
+                                           suffixes: NSOrderedSet(object: "Images"),
+                                           perPixelTolerance: perPixelTolerance,
+                                           overallTolerance: overallTolerance,
+                                           file: file,
+                                           line: line)
+        } else {
+            assertionFailure("Only UIView and CALayer classes can be snapshotted")
+        }
     }
 
     override func getReferenceImageDirectory(withDefault dir: String?) -> String {
@@ -72,7 +68,7 @@ class SnapshotTestCase: FBSnapshotTestCase {
             return environmentReference
         }
 
-        return getTestsRootFolder(sourceFileName) + "/ReferenceImages"
+        return getTestsRootFolder(sourceFileName) + "/Reference"
     }
 
     private func getDefaultDiffDirectory(_ sourceFileName: StaticString) -> String {

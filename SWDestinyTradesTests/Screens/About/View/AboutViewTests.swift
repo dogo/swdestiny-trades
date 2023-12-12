@@ -28,7 +28,7 @@ final class AboutViewTests: SnapshotTestCase {
     }
 
     func testAboutViewLayout() {
-        verifyView(sut)
+        verifySnapshot(sut)
     }
 
     func testHTTPLinkTouchCallback() {
