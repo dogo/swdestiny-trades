@@ -99,7 +99,7 @@ final class HttpClientTests: XCTestCase {
             _ = try await sut.request(request, decode: Foo.self)
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
-            // XCTAssertEqual(error as? APIError, .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead."))
+            // XCTAssertEqual(error as? APIError, .valueNotFound(type: Foo.self, context: "Value for 'Foo' could not be decoded."))
         }
     }
 

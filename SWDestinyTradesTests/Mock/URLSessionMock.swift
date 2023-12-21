@@ -33,6 +33,9 @@ final class URLProtocolMock: URLProtocol {
 
         do {
             guard var urlRequest = try Self.response?(request) else {
+                client?.urlProtocol(self, didFailWithError: NSError(domain: "MyErrorDomain",
+                                                                    code: 1,
+                                                                    userInfo: ["reason": "Response creation failed"]))
                 return
             }
 
