@@ -34,7 +34,7 @@ final class SetsListNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case .about:
-            return AboutViewController()
+            return AboutViewControllerFactory().createViewController()
         case let .cardList(database, set):
             return CardListViewController(database: database, with: set)
         case let .search(database):

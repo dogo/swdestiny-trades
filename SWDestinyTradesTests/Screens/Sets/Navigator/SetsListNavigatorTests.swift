@@ -23,6 +23,12 @@ final class SetsListNavigatorTests: XCTestCase {
         sut = SetsListNavigator(controller)
     }
 
+    override func tearDown() {
+        navigationController = nil
+        sut = nil
+        super.tearDown()
+    }
+
     func testNavigateToAboutViewController() {
         sut.navigate(to: .about)
 

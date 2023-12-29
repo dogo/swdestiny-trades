@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol ViewControllerFactory {
+    func createViewController() -> UIViewController
+}
+
 final class SWDTabBarFactory {
 
     func makeSetsList(with database: DatabaseProtocol?) -> UIViewController {

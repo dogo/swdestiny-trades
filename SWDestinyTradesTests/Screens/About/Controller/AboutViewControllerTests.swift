@@ -6,7 +6,6 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import SafariServices
 import UIKit
 import XCTest
 
@@ -17,12 +16,15 @@ final class AboutViewControllerTests: XCTestCase {
     private var window: UIWindow!
     private var sut: AboutViewController!
     private var view: AboutViewSpy!
+    private var presenter: AboutPresenterSpy!
 
     override func setUp() {
         super.setUp()
         window = UIWindow(frame: .testDevice)
         view = AboutViewSpy()
+        presenter = AboutPresenterSpy()
         sut = AboutViewController(with: view)
+        sut.presenter = presenter
         let navigationController = UINavigationController(rootViewController: sut)
         window.showTestWindow(controller: navigationController)
     }
@@ -45,11 +47,13 @@ final class AboutViewControllerTests: XCTestCase {
     func testDidTouchHTTPLink() {
         sut.viewDidLoad()
         view.didTouchHTTPLink?(URL(string: "http://google.com")!)
-        XCTAssertTrue(sut.presentedViewController is SFSafariViewController)
+
+        XCTAssertEqual(presenter.didCallDidTouchHTTPUrl.count, 1)
+        XCTAssertEqual(presenter.didCallDidTouchHTTPUrl[0].absoluteString, "http://google.com")
     }
 
     func testNavigationTitle() {
-        sut.viewWillAppear(true)
+        sut.viewWillAppear(false)
         XCTAssertEqual(sut.navigationItem.title, L10n.about)
     }
 }

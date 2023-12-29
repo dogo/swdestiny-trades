@@ -6,11 +6,11 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import SafariServices
 import UIKit
 
 final class AboutViewController: UIViewController {
 
+    var presenter: AboutPresenterProtocol?
     private let aboutView: AboutViewType
 
     // MARK: - Life Cycle
@@ -33,8 +33,7 @@ final class AboutViewController: UIViewController {
         super.viewDidLoad()
 
         aboutView.didTouchHTTPLink = { [weak self] url in
-            let safariViewController = SFSafariViewController(url: url)
-            self?.present(safariViewController, animated: true)
+            self?.presenter?.didTouchHTTPUrl(url)
         }
     }
 
