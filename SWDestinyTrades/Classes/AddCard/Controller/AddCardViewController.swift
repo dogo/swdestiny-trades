@@ -8,38 +8,17 @@
 
 import UIKit
 
-enum AddCardType {
-    case lent
-    case borrow
-    case collection
-}
-
 final class AddCardViewController: UIViewController {
 
     private let addCardView: AddCardViewType
-    private let destinyService: SWDestinyServiceProtocol
-    private let addCardType: AddCardType
-    private var cards = [CardDTO]()
-    private var personDTO: PersonDTO?
-    private var userCollectionDTO: UserCollectionDTO?
-    private lazy var navigator = AddCardNavigator(self.navigationController)
-    private let database: DatabaseProtocol?
+
+    var presenter: AddCardPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(with view: AddCardViewType = AddCardView(),
-         service: SWDestinyServiceProtocol = SWDestinyService(),
-         database: DatabaseProtocol?,
-         person: PersonDTO? = nil,
-         userCollection: UserCollectionDTO? = nil,
-         type: AddCardType) {
+    init(with view: AddCardViewType = AddCardView()) {
         addCardView = view
-        destinyService = service
-        self.database = database
-        addCardType = type
         super.init(nibName: nil, bundle: nil)
-        personDTO = person
-        userCollectionDTO = userCollection
     }
 
     @available(*, unavailable)
@@ -54,18 +33,18 @@ final class AddCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchAllCards()
+        presenter?.fetchAllCards()
 
         addCardView.didSelectCard = { [weak self] card in
-            self?.insert(card: card)
+            self?.presenter?.insert(card: card)
         }
 
         addCardView.didSelectAccessory = { [weak self] card in
-            self?.navigateToNextController(with: card)
+            self?.presenter?.cardDetailButtonTouched(with: card)
         }
 
         addCardView.doingSearch = { [weak self] query in
-            self?.addCardView.doingSearch(query)
+            self?.presenter?.doingSearch(query)
         }
     }
 
@@ -73,81 +52,23 @@ final class AddCardViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationItem.title = L10n.addCard
     }
+}
 
-    // MARK: - Helpers
+extension AddCardViewController: AddCardViewProtocol {
 
-    private func fetchAllCards() {
+    func startLoading() {
         addCardView.startLoading()
-        Task { [weak self] in
-            guard let self else { return }
-
-            do {
-                let allCards = try await self.destinyService.retrieveAllCards()
-                self.addCardView.stopLoading()
-                self.addCardView.updateSearchList(allCards)
-                self.cards = allCards
-            } catch {
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-            }
-        }
     }
 
-    private func insert(card: CardDTO) {
-        switch addCardType {
-        case .lent:
-            insertToLentMe(card: card)
-        case .borrow:
-            insertToBorrowed(card: card)
-        case .collection:
-            insertToCollection(card: card)
-        }
+    func stopLoading() {
+        addCardView.stopLoading()
     }
 
-    private func insertToBorrowed(card: CardDTO) {
-        if let person = personDTO, !person.borrowed.contains(where: { $0.code == card.code }) {
-            try? database?.update { [weak self] in
-                person.borrowed.append(card)
-                self?.showSuccessMessage(card: card)
-            }
-            let personDataDict: [String: PersonDTO] = ["personDTO": person]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
-        } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
-        }
+    func updateSearchList(_ cards: [CardDTO]) {
+        addCardView.updateSearchList(cards)
     }
 
-    private func insertToLentMe(card: CardDTO) {
-        if let person = personDTO, !person.lentMe.contains(where: { $0.code == card.code }) {
-            try? database?.update { [weak self] in
-                person.lentMe.append(card)
-                self?.showSuccessMessage(card: card)
-            }
-            let personDataDict: [String: PersonDTO] = ["personDTO": person]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
-        } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
-        }
-    }
-
-    private func insertToCollection(card: CardDTO) {
-        if let userCollection = userCollectionDTO, !userCollection.myCollection.contains(where: { $0.code == card.code }) {
-            try? database?.update { [weak self] in
-                userCollection.myCollection.append(card)
-                self?.showSuccessMessage(card: card)
-            }
-        } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
-        }
-    }
-
-    private func showSuccessMessage(card: CardDTO) {
-        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
-    }
-
-    // MARK: - Navigation
-
-    func navigateToNextController(with card: CardDTO) {
-        navigator.navigate(to: .cardDetail(database: database, with: cards, card: card))
+    func doingSearch(_ query: String) {
+        addCardView.doingSearch(query)
     }
 }

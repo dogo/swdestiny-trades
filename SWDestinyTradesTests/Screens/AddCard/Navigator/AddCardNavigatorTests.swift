@@ -16,13 +16,18 @@ final class AddCardNavigatorTests: XCTestCase {
 
     private var sut: AddCardNavigator!
     private var navigationController: UINavigationControllerMock!
-    private var panda: UIViewController!
 
     override func setUp() {
         super.setUp()
-        panda = UIViewController()
-        navigationController = UINavigationControllerMock(rootViewController: panda)
-        sut = AddCardNavigator(navigationController)
+        let controller = UIViewController()
+        navigationController = UINavigationControllerMock(rootViewController: controller)
+        sut = AddCardNavigator(controller)
+    }
+
+    override func tearDown() {
+        navigationController = nil
+        sut = nil
+        super.tearDown()
     }
 
     func testNavigateToCardDetailPushesToCardDetailViewController() {

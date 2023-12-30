@@ -27,17 +27,16 @@ final class AddCardViewControllerTests: XCTestCase {
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: "UserCollection")
         service = SWDestinyService(client: HttpClientMock())
         view = AddCardViewSpy()
-        sut = AddCardViewController(with: view,
-                                    service: service,
-                                    database: database,
-                                    person: .stub(),
-                                    userCollection: .stub(),
-                                    type: .collection)
+        sut = createSUT(database: database, person: .stub(), userCollection: .stub(), type: .collection)
         let navigationController = UINavigationController(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
     }
 
     override func tearDown() {
+        database = nil
+        service = nil
+        view = nil
+        sut = nil
         keyWindow.cleanTestWindow()
         super.tearDown()
     }
@@ -57,13 +56,7 @@ final class AddCardViewControllerTests: XCTestCase {
 
     func testDidSelectCardInsertsIntoCollectionDatabaseSuccessfully() {
         let collection = UserCollectionDTO.stub()
-
-        sut = AddCardViewController(with: view,
-                                    service: service,
-                                    database: database,
-                                    person: .stub(),
-                                    userCollection: collection,
-                                    type: .collection)
+        sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
         let navigationController = UINavigationController(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
 
@@ -76,13 +69,7 @@ final class AddCardViewControllerTests: XCTestCase {
     func testDidSelectCardDoesNotInsertIntoCollectionDatabase() {
         let collection = UserCollectionDTO.stub()
         collection.addCard(.stub())
-
-        sut = AddCardViewController(with: view,
-                                    service: service,
-                                    database: database,
-                                    person: .stub(),
-                                    userCollection: collection,
-                                    type: .collection)
+        sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
         let navigationController = UINavigationController(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
 
@@ -106,5 +93,24 @@ final class AddCardViewControllerTests: XCTestCase {
 
         XCTAssertEqual(view.didCallDoingSearch.count, 1)
         XCTAssertEqual(view.didCallDoingSearch[0], "jabba")
+    }
+
+    // MARK: - Helpers
+
+    private func createSUT(database: DatabaseProtocol,
+                           person: PersonDTO? = nil,
+                           userCollection: UserCollectionDTO? = nil,
+                           type: AddCardType) -> AddCardViewController {
+        let viewController = AddCardViewController(with: view)
+        let router = AddCardNavigator(viewController)
+        let interactor = AddCardInteractor(service: service)
+        let viewModel = AddCardViewModel(person: person, userCollection: userCollection, type: type)
+        let presenter = AddCardPresenter(view: viewController,
+                                         interactor: interactor,
+                                         database: database,
+                                         navigator: router,
+                                         viewModel: viewModel)
+        viewController.presenter = presenter
+        return viewController
     }
 }

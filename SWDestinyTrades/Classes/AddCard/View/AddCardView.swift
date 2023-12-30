@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol AddCardViewProtocol: AnyObject {
+    func startLoading()
+    func stopLoading()
+    func updateSearchList(_ cards: [CardDTO])
+    func doingSearch(_ query: String)
+}
+
 final class AddCardView: UIView, AddCardViewType {
 
     private let searchBar = SearchBar(frame: .zero)

@@ -36,7 +36,10 @@ final class UserCollectionNavigator: Navigator {
         case let .cardDetail(database, cardList, card):
             return CardDetailViewController(database: database, cardList: cardList, selected: card)
         case let .addCard(database, userCollection):
-            return AddCardViewController(database: database, userCollection: userCollection, type: .collection)
+            return AddCardViewControllerFactory(database: database,
+                                                addCardType: .collection,
+                                                userCollectionDTO: userCollection)
+                .createViewController()
         }
     }
 }

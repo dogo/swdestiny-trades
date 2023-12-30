@@ -36,7 +36,10 @@ final class LoanDetailNavigator: Navigator {
         case let .cardDetail(database, cardList, card):
             return CardDetailViewController(database: database, cardList: cardList, selected: card)
         case let .addCard(database, person, type):
-            return AddCardViewController(database: database, person: person, type: type)
+            return AddCardViewControllerFactory(database: database,
+                                                addCardType: type,
+                                                personDTO: person)
+                .createViewController()
         }
     }
 }
