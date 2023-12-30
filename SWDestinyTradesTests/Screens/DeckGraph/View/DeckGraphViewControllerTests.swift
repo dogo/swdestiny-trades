@@ -23,6 +23,8 @@ final class DeckGraphViewControllerTests: XCSnapshotableTestCase {
     }
 
     override func tearDown() {
+        navigationController = nil
+        sut = nil
         window.cleanTestWindow()
         super.tearDown()
     }
