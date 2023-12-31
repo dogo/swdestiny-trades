@@ -56,6 +56,16 @@ final class AddCardPresenterTests: XCTestCase {
         XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
     }
 
+    func test_insert_card_does_not_insert_into_lentMe_database() {
+        sut = createSUT(person: .stub(), type: .lent, identifier: "test_insert_card_does_not_insert_into_lentMe_database")
+
+        sut.insert(card: .stub())
+        sut.insert(card: .stub())
+
+        XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
+        XCTAssertEqual(view.didCallShowErrorMessage, 1)
+    }
+
     func test_insert_card_into_borrow_database_successfuly() {
         sut = createSUT(person: .stub(), type: .borrow, identifier: "testInsertCardIntoBorrowDatabase")
 
@@ -64,12 +74,32 @@ final class AddCardPresenterTests: XCTestCase {
         XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
     }
 
+    func test_insert_card_does_not_insert_into_borrow_database() {
+        sut = createSUT(person: .stub(), type: .borrow, identifier: "test_insert_card_does_not_insert_into_borrow_database")
+
+        sut.insert(card: .stub())
+        sut.insert(card: .stub())
+
+        XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
+        XCTAssertEqual(view.didCallShowErrorMessage, 1)
+    }
+
     func test_insert_card_into_collection_database_successfuly() {
         sut = createSUT(userCollection: .stub(), type: .collection, identifier: "testInsertCardIntoCollectionDatabase")
 
         sut.insert(card: .stub())
 
         XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
+    }
+
+    func test_insert_card_does_not_insert_into_collection_database() {
+        sut = createSUT(userCollection: .stub(), type: .collection, identifier: "test_insert_card_does_not_insert_into_collection_database")
+
+        sut.insert(card: .stub())
+        sut.insert(card: .stub())
+
+        XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
+        XCTAssertEqual(view.didCallShowErrorMessage, 1)
     }
 
     func test_doingSearch() {

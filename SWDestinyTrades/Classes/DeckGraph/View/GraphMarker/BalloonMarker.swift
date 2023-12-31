@@ -71,7 +71,7 @@ open class BalloonMarker: MarkerImage {
     }
 
     override open func draw(context: CGContext, point: CGPoint) {
-        guard let labelns = labelns else {
+        if labelns == nil {
             return
         }
 

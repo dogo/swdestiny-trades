@@ -75,4 +75,8 @@ extension AddCardViewController: AddCardViewProtocol {
     func showSuccessMessage(card: CardDTO) {
         LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
+
+    func showErrorMessage() {
+        ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
+    }
 }

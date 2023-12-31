@@ -41,4 +41,9 @@ final class AddCardViewSpy: UIView, AddCardViewType, AddCardViewProtocol {
     func showSuccessMessage(card: CardDTO) {
         didCallShowSuccessMessage.append(card)
     }
+
+    private(set) var didCallShowErrorMessage = 0
+    func showErrorMessage() {
+        didCallShowErrorMessage += 1
+    }
 }

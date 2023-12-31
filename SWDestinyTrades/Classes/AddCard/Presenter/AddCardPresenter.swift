@@ -84,7 +84,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
+            view?.showErrorMessage()
         }
     }
 
@@ -97,7 +97,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
+            view?.showErrorMessage()
         }
     }
 
@@ -108,7 +108,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
                 self?.view?.showSuccessMessage(card: card)
             }
         } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
+            view?.showErrorMessage()
         }
     }
 }
