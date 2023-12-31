@@ -79,4 +79,8 @@ extension AddCardViewController: AddCardViewProtocol {
     func showErrorMessage() {
         ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
     }
+
+    func showNetworkErrorMessage() {
+        ToastMessages.showNetworkErrorMessage()
+    }
 }

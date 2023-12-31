@@ -15,6 +15,7 @@ protocol AddCardViewProtocol: AnyObject {
     func doingSearch(_ query: String)
     func showSuccessMessage(card: CardDTO)
     func showErrorMessage()
+    func showNetworkErrorMessage()
 }
 
 final class AddCardView: UIView, AddCardViewType {

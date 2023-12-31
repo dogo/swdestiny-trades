@@ -40,16 +40,31 @@ final class AddCardPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_fetchAllCards() async {
-        sut = createSUT(type: .borrow, identifier: "testFetchAllCards")
+    @MainActor
+    func test_fetchAllCards_successfully() async {
+        sut = createSUT(type: .borrow, identifier: #function)
 
-        await sut.fetchAllCards()
+        sut.fetchAllCards()
 
-        // XCTAssertEqual(view.didCallStartLoading, 1)
+        XCTAssertEqual(view.didCallStartLoading, 1)
+        // XCTAssertEqual(view.didCallStopLoading, 1)
+        // XCTAssertEqual(view.didCallUpdateSearchList.count, 1)
     }
 
-    func test_insert_card_into_lentMe_database_successfuly() {
-        sut = createSUT(person: .stub(), type: .lent, identifier: "testInsertCardIntoLentMeDatabase")
+    @MainActor
+    func test_fetchAllCards_failing() async {
+        sut = createSUT(type: .borrow, identifier: #function)
+
+        client.error = true
+        sut.fetchAllCards()
+
+        XCTAssertEqual(view.didCallStartLoading, 1)
+        // XCTAssertEqual(view.didCallStopLoading, 1)
+        // XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
+    }
+
+    func test_insert_card_into_lentMe_database_successfully() {
+        sut = createSUT(person: .stub(), type: .lent, identifier: #function)
 
         sut.insert(card: .stub())
 
@@ -57,7 +72,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_insert_card_does_not_insert_into_lentMe_database() {
-        sut = createSUT(person: .stub(), type: .lent, identifier: "test_insert_card_does_not_insert_into_lentMe_database")
+        sut = createSUT(person: .stub(), type: .lent, identifier: #function)
 
         sut.insert(card: .stub())
         sut.insert(card: .stub())
@@ -67,7 +82,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_insert_card_into_borrow_database_successfuly() {
-        sut = createSUT(person: .stub(), type: .borrow, identifier: "testInsertCardIntoBorrowDatabase")
+        sut = createSUT(person: .stub(), type: .borrow, identifier: #function)
 
         sut.insert(card: .stub())
 
@@ -75,7 +90,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_insert_card_does_not_insert_into_borrow_database() {
-        sut = createSUT(person: .stub(), type: .borrow, identifier: "test_insert_card_does_not_insert_into_borrow_database")
+        sut = createSUT(person: .stub(), type: .borrow, identifier: #function)
 
         sut.insert(card: .stub())
         sut.insert(card: .stub())
@@ -85,7 +100,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_insert_card_into_collection_database_successfuly() {
-        sut = createSUT(userCollection: .stub(), type: .collection, identifier: "testInsertCardIntoCollectionDatabase")
+        sut = createSUT(userCollection: .stub(), type: .collection, identifier: #function)
 
         sut.insert(card: .stub())
 
@@ -93,7 +108,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_insert_card_does_not_insert_into_collection_database() {
-        sut = createSUT(userCollection: .stub(), type: .collection, identifier: "test_insert_card_does_not_insert_into_collection_database")
+        sut = createSUT(userCollection: .stub(), type: .collection, identifier: #function)
 
         sut.insert(card: .stub())
         sut.insert(card: .stub())
@@ -103,7 +118,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_doingSearch() {
-        sut = createSUT(userCollection: .stub(), type: .collection, identifier: "test_doingSearch")
+        sut = createSUT(userCollection: .stub(), type: .collection, identifier: #function)
 
         sut.doingSearch("Jabba")
 
@@ -112,7 +127,7 @@ final class AddCardPresenterTests: XCTestCase {
     }
 
     func test_cardDetailButtonTouched() {
-        sut = createSUT(userCollection: .stub(), type: .collection, identifier: "test_cardDetailButtonTouched")
+        sut = createSUT(userCollection: .stub(), type: .collection, identifier: #function)
 
         sut.cardDetailButtonTouched(with: .stub())
 

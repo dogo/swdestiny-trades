@@ -48,7 +48,7 @@ final class AddCardViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.navigationItem.title, L10n.addCard)
     }
 
-    func test_didSelectCard_inserts_into_collection_database_successfully() {
+    func test_didSelectCard_inserts_into_collection_database() {
         let collection = UserCollectionDTO.stub()
         sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
         let navigationController = UINavigationController(rootViewController: sut)
@@ -60,24 +60,31 @@ final class AddCardViewControllerTests: XCTestCase {
         XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
 
-    func test_didSelectCard_does_not_insert_into_collection_database() {
-        let collection = UserCollectionDTO.stub()
-        collection.addCard(.stub())
-        sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
-        let navigationController = UINavigationController(rootViewController: sut)
-        keyWindow.showTestWindow(controller: navigationController)
-
-        sut.viewDidLoad()
-        view.didSelectCard?(.stub())
-
-        // XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
-    }
-
     func test_didSelectAccessory() {
         sut.viewDidLoad()
         view.didSelectAccessory?(.stub())
 
         XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
+    }
+
+    func test_startLoading() {
+        sut.startLoading()
+
+        XCTAssertEqual(view.didCallStartLoading, 1)
+    }
+
+    func test_stopLoading() {
+        sut.stopLoading()
+
+        XCTAssertEqual(view.didCallStopLoading, 1)
+    }
+
+    func test_updateSearchList() {
+        let expectedResult = CardDTO.stub()
+        sut.updateSearchList([expectedResult])
+
+        XCTAssertEqual(view.didCallUpdateSearchList.count, 1)
+        XCTAssertEqual(view.didCallUpdateSearchList[0], expectedResult)
     }
 
     func test_doingSearch() {
@@ -92,6 +99,18 @@ final class AddCardViewControllerTests: XCTestCase {
         sut.showSuccessMessage(card: .stub())
 
         XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+    }
+
+    func test_showErrorMessage() {
+        sut.showErrorMessage()
+
+        // XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+    }
+
+    func test_showNetworkErrorMessage() {
+        sut.showNetworkErrorMessage()
+
+        // XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
 
     // MARK: - Helpers

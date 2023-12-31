@@ -46,4 +46,9 @@ final class AddCardViewSpy: UIView, AddCardViewType, AddCardViewProtocol {
     func showErrorMessage() {
         didCallShowErrorMessage += 1
     }
+
+    private(set) var didCallShowNetworkErrorMessage = 0
+    func showNetworkErrorMessage() {
+        didCallShowNetworkErrorMessage += 1
+    }
 }

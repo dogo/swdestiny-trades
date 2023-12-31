@@ -41,14 +41,14 @@ final class AddCardPresenter: AddCardPresenterProtocol {
     func fetchAllCards() {
         view?.startLoading()
         Task { [weak self] in
-            guard let self else { return }
             do {
-                let allCards = try await self.interactor.retrieveAllCards()
-                self.view?.stopLoading()
-                self.view?.updateSearchList(allCards)
-                self.cards = allCards
+                let allCards = try await self?.interactor.retrieveAllCards() ?? []
+                self?.view?.stopLoading()
+                self?.view?.updateSearchList(allCards)
+                self?.cards = allCards
             } catch {
-                ToastMessages.showNetworkErrorMessage()
+                self?.view?.stopLoading()
+                self?.view?.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
