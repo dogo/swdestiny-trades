@@ -20,6 +20,7 @@ final class AddCardViewControllerTests: XCTestCase {
     private var database: DatabaseProtocol!
     private var service: SWDestinyService!
     private var keyWindow: UIWindow!
+    private var navigationController: UINavigationControllerMock!
 
     override func setUp() {
         super.setUp()
@@ -28,7 +29,7 @@ final class AddCardViewControllerTests: XCTestCase {
         service = SWDestinyService(client: HttpClientMock())
         view = AddCardViewSpy()
         sut = createSUT(database: database, person: .stub(), userCollection: .stub(), type: .collection)
-        let navigationController = UINavigationController(rootViewController: sut)
+        navigationController = UINavigationControllerMock(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
     }
 
@@ -36,25 +37,18 @@ final class AddCardViewControllerTests: XCTestCase {
         database = nil
         service = nil
         view = nil
+        navigationController = nil
         sut = nil
         keyWindow.cleanTestWindow()
         super.tearDown()
     }
 
-    func testCreateController() {
-        XCTAssertNotNil(sut)
-    }
-
-    func testViewIsKindOfAddCardViewType() {
-        XCTAssertTrue(sut.view is AddCardViewType)
-    }
-
-    func testNavigationTitle() {
+    func test_navigation_title() {
         sut.viewWillAppear(false)
         XCTAssertEqual(sut.navigationItem.title, L10n.addCard)
     }
 
-    func testDidSelectCardInsertsIntoCollectionDatabaseSuccessfully() {
+    func test_didSelectCard_inserts_into_collection_database_successfully() {
         let collection = UserCollectionDTO.stub()
         sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
         let navigationController = UINavigationController(rootViewController: sut)
@@ -66,7 +60,7 @@ final class AddCardViewControllerTests: XCTestCase {
         XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
 
-    func testDidSelectCardDoesNotInsertIntoCollectionDatabase() {
+    func test_didSelectCard_does_not_insert_into_collection_database() {
         let collection = UserCollectionDTO.stub()
         collection.addCard(.stub())
         sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
@@ -79,20 +73,25 @@ final class AddCardViewControllerTests: XCTestCase {
         // XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
 
-    func testDidSelectAccessory() {
+    func test_didSelectAccessory() {
         sut.viewDidLoad()
         view.didSelectAccessory?(.stub())
 
-        let viewController = sut.navigationController?.viewControllers[0]
-        // XCTAssertTrue(viewController is CardDetailViewController)
+        XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
     }
 
-    func testDoingSearch() {
+    func test_doingSearch() {
         sut.viewDidLoad()
         view.doingSearch?("jabba")
 
         XCTAssertEqual(view.didCallDoingSearch.count, 1)
         XCTAssertEqual(view.didCallDoingSearch[0], "jabba")
+    }
+
+    func test_showSuccessMessage() {
+        sut.showSuccessMessage(card: .stub())
+
+        XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
 
     // MARK: - Helpers
