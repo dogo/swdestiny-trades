@@ -34,6 +34,16 @@ final class SetsListPresenterTests: XCTestCase {
                                 navigator: navigator)
     }
 
+    override func tearDown() {
+        client = nil
+        service = nil
+        navigationController = nil
+        view = nil
+        navigator = nil
+        sut = nil
+        super.tearDown()
+    }
+
     func testViewDidLoad() {
         sut.viewDidLoad()
 

@@ -1,5 +1,5 @@
 //
-//  DeckDTOStub.swift
+//  DeckDTO+Stub.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 20/09/19.

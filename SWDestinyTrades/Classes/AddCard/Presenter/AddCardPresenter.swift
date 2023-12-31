@@ -37,23 +37,19 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         self.viewModel = viewModel
     }
 
+    @MainActor
     func fetchAllCards() {
         view?.startLoading()
         Task { [weak self] in
             guard let self else { return }
-
             do {
                 let allCards = try await self.interactor.retrieveAllCards()
-                await MainActor.run { [weak self] in
-                    self?.view?.stopLoading()
-                    self?.view?.updateSearchList(allCards)
-                    self?.cards = allCards
-                }
+                self.view?.stopLoading()
+                self.view?.updateSearchList(allCards)
+                self.cards = allCards
             } catch {
-                await MainActor.run {
-                    ToastMessages.showNetworkErrorMessage()
-                    LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-                }
+                ToastMessages.showNetworkErrorMessage()
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
     }
@@ -83,7 +79,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let person = viewModel.person, !person.borrowed.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 person.borrowed.append(card)
-                self?.showSuccessMessage(card: card)
+                self?.view?.showSuccessMessage(card: card)
             }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
@@ -96,7 +92,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let person = viewModel.person, !person.lentMe.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 person.lentMe.append(card)
-                self?.showSuccessMessage(card: card)
+                self?.view?.showSuccessMessage(card: card)
             }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
@@ -109,14 +105,10 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let userCollection = viewModel.userCollection, !userCollection.myCollection.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 userCollection.myCollection.append(card)
-                self?.showSuccessMessage(card: card)
+                self?.view?.showSuccessMessage(card: card)
             }
         } else {
             ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
         }
-    }
-
-    private func showSuccessMessage(card: CardDTO) {
-        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CardDTOStub.swift
+//  CardDTO+Stub.swift
 //  SWDestiny-TradesTests
 //
 //  Created by Diogo Autilio on 12/07/18.

@@ -11,29 +11,34 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class AddCardViewSpy: UIView, AddCardViewType {
+final class AddCardViewSpy: UIView, AddCardViewType, AddCardViewProtocol {
 
     var didSelectCard: ((CardDTO) -> Void)?
     var didSelectAccessory: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
 
-    private(set) var startLoadingWasCalled = false
+    private(set) var didCallStartLoading = 0
     func startLoading() {
-        startLoadingWasCalled = true
+        didCallStartLoading += 1
     }
 
-    private(set) var stopLoadingWasCalled = false
+    private(set) var didCallStopLoading = 0
     func stopLoading() {
-        stopLoadingWasCalled = true
+        didCallStopLoading += 1
     }
 
-    private(set) var updateSearchListWasCalled = false
+    private(set) var didCallUpdateSearchList = [CardDTO]()
     func updateSearchList(_ cards: [CardDTO]) {
-        updateSearchListWasCalled = true
+        didCallUpdateSearchList.append(contentsOf: cards)
     }
 
     private(set) var didCallDoingSearch = [String]()
     func doingSearch(_ query: String) {
         didCallDoingSearch.append(query)
+    }
+
+    private(set) var didCallShowSuccessMessage = [CardDTO]()
+    func showSuccessMessage(card: CardDTO) {
+        didCallShowSuccessMessage.append(card)
     }
 }
