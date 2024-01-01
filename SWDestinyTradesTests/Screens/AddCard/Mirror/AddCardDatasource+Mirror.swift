@@ -16,4 +16,12 @@ extension AddCardDatasource {
     var searchIsActive: Bool {
         Mirror.extract(variable: "searchIsActive", from: self)!
     }
+
+    var cardsData: [CardDTO] {
+        Mirror.extract(variable: "cardsData", from: self)!
+    }
+
+    var filtered: [CardDTO] {
+        Mirror.extract(variable: "filtered", from: self)!
+    }
 }
