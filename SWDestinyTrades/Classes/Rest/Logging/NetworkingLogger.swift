@@ -53,7 +53,7 @@ final class NetworkingLogger {
     func logError(request: URLRequest, statusCode: Int, error: Error?) {
         guard let method = request.httpMethod,
               let url = request.url,
-              let error = error else { return }
+              let error else { return }
         printTagged("[Error] \(statusCode) \(method) '\(url)':")
         printTagged("Description: \(error.localizedDescription)")
     }
@@ -68,7 +68,7 @@ final class NetworkingLogger {
     // MARK: - Log JSON
 
     private func logJSON(_ data: Data?) {
-        guard let data = data else { return }
+        guard let data else { return }
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
             let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)

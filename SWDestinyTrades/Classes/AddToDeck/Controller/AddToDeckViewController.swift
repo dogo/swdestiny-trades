@@ -75,9 +75,9 @@ final class AddToDeckViewController: UIViewController {
             }
 
             do {
-                let allCards = try await self.destinyService.retrieveAllCards()
-                self.addToDeckView.addToDeckTableView.updateSearchList(allCards)
-                self.cards = allCards
+                let allCards = try await destinyService.retrieveAllCards()
+                addToDeckView.addToDeckTableView.updateSearchList(allCards)
+                cards = allCards
             } catch APIError.requestCancelled {
                 // do nothing
             } catch {
@@ -90,9 +90,9 @@ final class AddToDeckViewController: UIViewController {
     private func loadDataFromRealm() {
         destinyService.cancelAllRequests()
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
-            guard let self = self, let collection = collections.first else { return }
-            self.cards = Array(collection.myCollection)
-            addToDeckView.addToDeckTableView.updateSearchList(self.cards)
+            guard let self, let collection = collections.first else { return }
+            cards = Array(collection.myCollection)
+            addToDeckView.addToDeckTableView.updateSearchList(cards)
         }
     }
 

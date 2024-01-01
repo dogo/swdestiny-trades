@@ -14,8 +14,7 @@ public extension UICollectionView {
      - parameter cellType: the `UICollectionViewCell` (`Identifiable`-conforming) subclass to register
      - seealso: `register(_:,forCellWithReuseIdentifier:)`
      */
-    final func register<T: UICollectionViewCell>(cellType: T.Type)
-        where T: Identifiable {
+    final func register(cellType: (some UICollectionViewCell & Identifiable).Type) {
         register(cellType.self, forCellWithReuseIdentifier: cellType.reuseIdentifier)
     }
 

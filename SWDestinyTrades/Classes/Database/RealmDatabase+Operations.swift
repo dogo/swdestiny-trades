@@ -48,15 +48,15 @@ extension RealmDatabase {
         }
     }
 
-    func deleteAll<T: Storable>(_ model: T.Type) throws {
+    func deleteAll(_ model: (some Storable).Type) throws {
         guard let storable = model as? Object.Type else {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
 
         try writeSafely { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
 
-            let objects = self.realm.objects(storable)
+            let objects = realm.objects(storable)
 
             _ = objects.compactMap { [weak self] in
                 self?.realm.delete($0)
@@ -77,11 +77,11 @@ extension RealmDatabase {
 
         var objects = realm.objects(storable)
 
-        if let predicate = predicate {
+        if let predicate {
             objects = objects.filter(predicate)
         }
 
-        if let sorted = sorted {
+        if let sorted {
             objects = objects.sorted(byKeyPath: sorted.key, ascending: sorted.ascending)
         }
 

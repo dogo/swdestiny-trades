@@ -59,8 +59,8 @@ final class CardListViewController: UIViewController {
             }
 
             do {
-                let cardList = try await self.destinyService.retrieveSetCardList(setCode: self.setDTO.code.lowercased())
-                self.cardListView.cardListTableView.updateCardList(cardList)
+                let cardList = try await destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased())
+                cardListView.cardListTableView.updateCardList(cardList)
             } catch {
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])

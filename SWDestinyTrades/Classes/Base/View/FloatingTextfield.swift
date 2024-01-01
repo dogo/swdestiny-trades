@@ -49,7 +49,7 @@ final class FloatingTextfield: UITextField {
     override func drawPlaceholder(in rect: CGRect) {
         super.drawPlaceholder(in: rect)
 
-        guard let font = font else { return }
+        guard let font else { return }
 
         let placeholderRect = CGRect(x: rect.origin.x,
                                      y: underlineWidth,
@@ -73,7 +73,7 @@ final class FloatingTextfield: UITextField {
     }
 
     func drawPlaceholderIfTextExistInRect(rect: CGRect) {
-        guard let font = font else { return }
+        guard let font else { return }
 
         let placeholderRect = CGRect(x: rect.origin.x,
                                      y: underlineWidth * 2,
@@ -139,7 +139,7 @@ final class FloatingTextfield: UITextField {
         if isLifted {
             liftDownPlaceholderIfTextIsEmpty()
         } else {
-            if let text = text, !text.isEmpty {
+            if let text, !text.isEmpty {
                 liftUpPlaceholder()
             } else {
                 animateUnderline(withAlpha: underlineAlphaBefore)
@@ -178,7 +178,7 @@ final class FloatingTextfield: UITextField {
     }
 
     private func liftDownPlaceholderIfTextIsEmpty() {
-        if let text = text, text.isEmpty {
+        if let text, text.isEmpty {
             let newCenterX = min(placeholderLabelMinCenter / scaleCoeff, placeholderLabel.center.x / scaleCoeff)
             let newCenterY = frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2.0 - 2.0
             let newCenter = CGPoint(x: newCenterX, y: newCenterY)

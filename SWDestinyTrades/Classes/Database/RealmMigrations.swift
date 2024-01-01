@@ -22,8 +22,8 @@ enum RealmMigrations {
         config.migrationBlock = { migration, oldSchemaVersion in
             if oldSchemaVersion < 1 {
                 migration.enumerateObjects(ofType: CardDTO.className()) { oldObject, newObject in
-                    if let newObject = newObject {
-                        if let oldObject = oldObject {
+                    if let newObject {
+                        if let oldObject {
                             newObject["id"] = NSUUID().uuidString
 
                             if let oldCost = oldObject["cost"] as? Float {
@@ -47,7 +47,7 @@ enum RealmMigrations {
             }
             if oldSchemaVersion < 2 {
                 migration.enumerateObjects(ofType: CardDTO.className()) { _, newObject in
-                    if let newObject = newObject {
+                    if let newObject {
                         newObject["quantity"] = 1
                     }
                 }
@@ -55,7 +55,7 @@ enum RealmMigrations {
             }
             if oldSchemaVersion < 3 {
                 migration.enumerateObjects(ofType: CardDTO.className()) { _, newObject in
-                    if let newObject = newObject {
+                    if let newObject {
                         newObject["isElite"] = false
                     }
                 }

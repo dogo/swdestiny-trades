@@ -71,9 +71,9 @@ final class SearchListViewController: UIViewController {
             }
 
             do {
-                let allCards = try await self.destinyService.search(query: query)
-                self.searchView.searchTableView.updateSearchList(allCards)
-                self.cards = allCards
+                let allCards = try await destinyService.search(query: query)
+                searchView.searchTableView.updateSearchList(allCards)
+                cards = allCards
             } catch {
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])

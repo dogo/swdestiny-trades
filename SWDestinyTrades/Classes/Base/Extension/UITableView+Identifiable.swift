@@ -13,7 +13,7 @@ public extension UITableView {
      Register a Class-Based `UITableViewCell` subclass (conforming to `Identifiable`)
      - parameter cellType: the `UITableViewCell` (`Identifiable`-conforming) subclass to register
      */
-    final func register<T: UITableViewCell>(cellType: T.Type) where T: Identifiable {
+    final func register(cellType: (some UITableViewCell & Identifiable).Type) {
         register(cellType.self, forCellReuseIdentifier: cellType.reuseIdentifier)
     }
 
@@ -22,8 +22,7 @@ public extension UITableView {
      - parameter headerFooterViewType: the `UITableViewHeaderFooterView` (`Identifiable`-confirming) subclass to register
      - seealso: `register(_:,forHeaderFooterViewReuseIdentifier:)`
      */
-    final func register<T: UITableViewHeaderFooterView>(headerFooterViewType: T.Type)
-        where T: Identifiable {
+    final func register(headerFooterViewType: (some UITableViewHeaderFooterView & Identifiable).Type) {
         register(headerFooterViewType.self, forHeaderFooterViewReuseIdentifier: headerFooterViewType.reuseIdentifier)
     }
 

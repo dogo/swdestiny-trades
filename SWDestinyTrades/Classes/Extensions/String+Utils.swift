@@ -15,7 +15,7 @@ extension String {
     }
 
     func subString(start: Int, end: Int) -> String {
-        let startIndex = index(self.startIndex, offsetBy: start)
+        let startIndex = index(startIndex, offsetBy: start)
         let endIndex = index(startIndex, offsetBy: end)
 
         let finalString = self[startIndex...]
@@ -23,7 +23,7 @@ extension String {
     }
 
     func subString(from: Int) -> String {
-        let startIndex = index(self.startIndex, offsetBy: from)
+        let startIndex = index(startIndex, offsetBy: from)
         return String(self[startIndex...])
     }
 

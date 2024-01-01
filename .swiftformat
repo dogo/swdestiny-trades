@@ -1,9 +1,10 @@
 # file options
 --exclude Pods
---exclude SWDestiny\ Trades/Classes/Generated
+--exclude SWDestinyTrades/Classes/Generated
 
 # Rules
 --disable blankLinesAtStartOfScope
 --disable trailingCommas
 --disable unusedArguments
 --disable wrapMultilineStatementBraces
+--disable redundantReturn
