@@ -48,6 +48,12 @@ final class AddCardViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.navigationItem.title, L10n.addCard)
     }
 
+    func testloadView() {
+        sut.loadView()
+
+        XCTAssertTrue(sut.view is AddCardViewType)
+    }
+
     func test_didSelectCard_inserts_into_collection_database() {
         let collection = UserCollectionDTO.stub()
         sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)

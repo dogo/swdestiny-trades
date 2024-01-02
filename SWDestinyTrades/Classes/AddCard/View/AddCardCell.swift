@@ -9,7 +9,8 @@
 import UIKit
 
 final class AddCardCell: UITableViewCell, Identifiable {
-    let baseViewCell = BaseViewCell(frame: .zero)
+
+    private let baseViewCell = BaseViewCell(frame: .zero)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
