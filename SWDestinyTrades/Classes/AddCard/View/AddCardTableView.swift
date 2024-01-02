@@ -14,7 +14,7 @@ final class AddCardTableView: UITableView, SearchDelegate {
     var didSelectAccessory: ((CardDTO) -> Void)?
     var doingSearch: ((String) -> Void)?
 
-    var tableDatasource: AddCardDatasource?
+    var tableDatasource: AddCardDatasourceProtocol?
     let addCardTable = AddCardTableDelegate()
 
     override init(frame: CGRect, style: UITableView.Style) {

@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol AddCardDatasourceProtocol: UITableViewDataSource {
+
+    func updateSearchList(_ cards: [CardDTO])
+    func getCard(at index: IndexPath) -> CardDTO
+    func doingSearch(_ searchText: String)
+}
+
 final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
     private var tableView: UITableView?
     private var searchIsActive = false
@@ -34,6 +41,9 @@ final class AddCardDatasource: NSObject, UITableViewDataSource, UISearchBarDeleg
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchIsActive ? filtered.count : cardsData.count
     }
+}
+
+extension AddCardDatasource: AddCardDatasourceProtocol {
 
     func updateSearchList(_ cards: [CardDTO]) {
         cardsData = cards

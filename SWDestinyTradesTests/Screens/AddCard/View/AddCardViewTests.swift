@@ -53,7 +53,8 @@ final class AddCardViewTests: XCSnapshotableTestCase {
     func testDoingSearch() {
         sut.doingSearch("Narf")
 
-        XCTAssertTrue(sut.addCardTableView.tableDatasource?.searchIsActive ?? false)
+        let datasource = sut.addCardTableView.tableDatasource as? AddCardDatasource
+        XCTAssertTrue(datasource?.searchIsActive ?? false)
     }
 
     func testDidSelectCardIsSet() {
