@@ -31,9 +31,15 @@ final class AddToDeckInteractorTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_retrieveAllCards() async throws {
-        let cards = try await sut.retrieveAllCards()
+    func test_fetchAllCards() async throws {
+        let cards = try await sut.fetchAllCards()
 
         XCTAssertNotNil(cards)
+    }
+
+    func test_cancelAllRequests() {
+        sut.cancelAllRequests()
+
+        XCTAssertTrue(client.isCancelled)
     }
 }

@@ -35,7 +35,7 @@ final class DeckBuilderNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case let .addToDeck(database, deck):
-            return AddToDeckViewController(database: database, deck: deck)
+            return AddToDeckViewControllerFactory(database: database, deck: deck).createViewController()
         case let .cardDetail(database, cardList, card):
             return CardDetailViewController(database: database, cardList: cardList, selected: card)
         case let .deckGraph(deck):

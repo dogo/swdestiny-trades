@@ -9,7 +9,8 @@
 import Foundation
 
 protocol AddToDeckInteractorProtocol {
-    func retrieveAllCards() async throws -> [CardDTO]
+    func fetchAllCards() async throws -> [CardDTO]
+    func cancelAllRequests()
 }
 
 final class AddToDeckInteractor: AddToDeckInteractorProtocol {
@@ -20,7 +21,11 @@ final class AddToDeckInteractor: AddToDeckInteractorProtocol {
         self.service = service
     }
 
-    func retrieveAllCards() async throws -> [CardDTO] {
+    func fetchAllCards() async throws -> [CardDTO] {
         return try await service.retrieveAllCards()
+    }
+
+    func cancelAllRequests() {
+        service.cancelAllRequests()
     }
 }

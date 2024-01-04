@@ -9,19 +9,15 @@
 import UIKit
 
 final class AddToDeckViewController: UIViewController {
-    private let destinyService: SWDestinyServiceProtocol
-    private let addToDeckView = AddToDeckView()
-    private let database: DatabaseProtocol?
-    private var cards = [CardDTO]()
-    private var deckDTO: DeckDTO?
-    private lazy var navigator = AddCardNavigator(self.navigationController)
+
+    private let addToDeckView: AddToDeckViewType
+
+    var presenter: AddToDeckPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    required init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?, deck: DeckDTO?) {
-        destinyService = service
-        self.database = database
-        deckDTO = deck
+    init(with view: AddToDeckViewType = AddToDeckView()) {
+        addToDeckView = view
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -37,26 +33,26 @@ final class AddToDeckViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        retrieveAllCards()
+        presenter?.retrieveAllCards()
 
-        addToDeckView.addToDeckTableView.didSelectCard = { [weak self] card in
-            self?.insert(card: card)
+        addToDeckView.didSelectCard = { [weak self] card in
+            self?.presenter?.insert(card: card)
         }
 
-        addToDeckView.addToDeckTableView.didSelectAccessory = { [weak self] card in
-            self?.navigateToNextController(with: card)
+        addToDeckView.didSelectAccessory = { [weak self] card in
+            self?.presenter?.navigateToCardDetail(with: card)
         }
 
-        addToDeckView.searchBar.doingSearch = { [weak self] query in
-            self?.addToDeckView.addToDeckTableView.doingSearch(query)
+        addToDeckView.doingSearch = { [weak self] query in
+            self?.presenter?.doingSearch(query)
         }
 
-        addToDeckView.addToDeckTableView.didSelectRemote = { [weak self] in
-            self?.retrieveAllCards()
+        addToDeckView.didSelectRemote = { [weak self] in
+            self?.presenter?.retrieveAllCards()
         }
 
-        addToDeckView.addToDeckTableView.didSelectLocal = { [weak self] in
-            self?.loadDataFromRealm()
+        addToDeckView.didSelectLocal = { [weak self] in
+            self?.presenter?.loadDataFromRealm()
         }
     }
 
@@ -64,68 +60,27 @@ final class AddToDeckViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationItem.title = L10n.addCard
     }
+}
 
-    private func retrieveAllCards() {
-        addToDeckView.activityIndicator.startAnimating()
-        Task { [weak self] in
-            guard let self else { return }
+extension AddToDeckViewController: AddToDeckViewProtocol {
 
-            defer {
-                self.addToDeckView.activityIndicator.stopAnimating()
-            }
-
-            do {
-                let allCards = try await destinyService.retrieveAllCards()
-                addToDeckView.addToDeckTableView.updateSearchList(allCards)
-                cards = allCards
-            } catch APIError.requestCancelled {
-                // do nothing
-            } catch {
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-            }
-        }
+    func startLoading() {
+        addToDeckView.startLoading()
     }
 
-    private func loadDataFromRealm() {
-        destinyService.cancelAllRequests()
-        try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
-            guard let self, let collection = collections.first else { return }
-            cards = Array(collection.myCollection)
-            addToDeckView.addToDeckTableView.updateSearchList(cards)
-        }
+    func stopLoading() {
+        addToDeckView.stopLoading()
     }
 
-    // MARK: - Helpers
-
-    private func insert(card: CardDTO) {
-        let copy = CardDTO(value: card)
-        copy.id = NSUUID().uuidString
-        copy.quantity = 1
-
-        insertToDeckBuilder(card: copy)
+    func updateSearchList(_ cards: [CardDTO]) {
+        addToDeckView.updateSearchList(cards)
     }
 
-    private func insertToDeckBuilder(card: CardDTO) {
-        if let deck = deckDTO, !deck.list.contains(where: { $0.code == card.code }) {
-            try? database?.update { [weak self] in
-                deck.list.append(card)
-                self?.showSuccessMessage(card: card)
-            }
-            let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
-        } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
-        }
+    func doingSearch(_ query: String) {
+        addToDeckView.doingSearch(query)
     }
 
-    private func showSuccessMessage(card: CardDTO) {
+    func showSuccessMessage(card: CardDTO) {
         LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
-    }
-
-    // MARK: - Navigation
-
-    func navigateToNextController(with card: CardDTO) {
-        navigator.navigate(to: .cardDetail(database: database, with: cards, card: card))
     }
 }
