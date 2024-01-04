@@ -1,32 +1,32 @@
 //
-//  AddCardDatasourceTests.swift
+//  AddToDeckCardDatasourceTests.swift
 //  SWDestinyTradesTests
 //
-//  Created by Diogo Autilio on 01/01/24.
+//  Created by Diogo Autilio on 04/01/24.
 //  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardDatasourceTests: XCTestCase {
+final class AddToDeckCardDatasourceTests: XCTestCase {
 
-    private var sut: AddCardDatasource!
+    private var sut: AddToDeckCardDatasource!
     private var tableView: UITableView!
+    private var delegate: UITableViewDelegate!
 
     override func setUp() {
         super.setUp()
         tableView = UITableView()
-        sut = AddCardDatasource(cards: [.stub()],
-                                tableView: tableView,
-                                delegate: AddCardTableDelegate())
+        sut = AddToDeckCardDatasource(cards: [.stub()],
+                                      tableView: tableView,
+                                      delegate: AddToDeckCardDelegate())
     }
 
     override func tearDown() {
         tableView = nil
+        delegate = nil
         sut = nil
         super.tearDown()
     }
