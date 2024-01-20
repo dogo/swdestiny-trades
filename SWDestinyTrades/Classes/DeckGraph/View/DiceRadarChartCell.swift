@@ -8,7 +8,7 @@
 
 import UIKit
 
-import Charts
+import DGCharts
 
 final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
     let dieFaces = ["Special", "Blank", "Melee", "Ranged", "Focus",

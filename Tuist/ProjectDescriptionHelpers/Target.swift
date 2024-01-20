@@ -25,7 +25,7 @@ public extension Project {
                 ],
                 scripts: Project.targetScripts(),
                 dependencies: [
-                    .external(name: "Charts"),
+                    .external(name: "DGCharts"),
                     .external(name: "FirebaseAnalytics"),
                     .external(name: "FirebaseCrashlytics"),
                     .external(name: "FTPopOverMenu"),

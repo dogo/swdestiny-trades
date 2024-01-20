@@ -8,7 +8,7 @@
 
 import UIKit
 
-import Charts
+import DGCharts
 
 final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
     let cardCostChartView: LineChartView = {

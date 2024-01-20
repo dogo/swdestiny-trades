@@ -6,7 +6,7 @@
 //  Copyright © 2017 Diogo Autilio. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import Foundation
 import UIKit
 

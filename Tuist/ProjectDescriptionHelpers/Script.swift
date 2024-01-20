@@ -10,17 +10,32 @@ public extension Project {
     static func targetScripts() -> [TargetScript] {
         return [
             TargetScript.pre(
-                script: "asdf exec swiftgen",
+                script:
+                """
+                # Add Mise to the PATH
+                export PATH="$HOME/.local/share/mise/shims:$PATH"
+                swiftgen
+                """,
                 name: "[SwiftGen] Run Script",
                 basedOnDependencyAnalysis: false
             ),
             TargetScript.pre(
-                script: "asdf exec swiftformat --config .swiftformat .",
+                script:
+                """
+                # Add Mise to the PATH
+                export PATH="$HOME/.local/share/mise/shims:$PATH"
+                swiftformat --config .swiftformat .
+                """,
                 name: "[SwiftFormat] Run Script",
                 basedOnDependencyAnalysis: false
             ),
             TargetScript.pre(
-                script: "asdf exec swiftlint",
+                script:
+                """
+                # Add Mise to the PATH
+                export PATH="$HOME/.local/share/mise/shims:$PATH"
+                swiftlint
+                """,
                 name: "[SwiftLint] Run Script",
                 basedOnDependencyAnalysis: false
             ),

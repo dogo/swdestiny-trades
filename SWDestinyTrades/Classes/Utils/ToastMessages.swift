@@ -11,6 +11,8 @@ import SwiftMessages
 import UIKit
 
 enum ToastMessages {
+
+    @MainActor
     static func showNetworkErrorMessage() {
         let errorView = MessageView.viewFromNib(layout: .cardView)
         var config = SwiftMessages.defaultConfig
@@ -30,6 +32,7 @@ enum ToastMessages {
         SwiftMessages.show(config: config, view: errorView)
     }
 
+    @MainActor
     static func showInfoMessage(title: String, message: String) {
         let infoView = MessageView.viewFromNib(layout: .cardView)
         var config = SwiftMessages.defaultConfig

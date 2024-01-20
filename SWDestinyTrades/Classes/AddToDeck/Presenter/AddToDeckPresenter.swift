@@ -49,7 +49,11 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
         } else {
-            ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
+            Task {
+                await MainActor.run {
+                    ToastMessages.showInfoMessage(title: "", message: L10n.alreadyAdded)
+                }
+            }
         }
     }
 }
