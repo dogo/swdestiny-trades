@@ -30,10 +30,10 @@ jobs:
         with:
           xcode-version: 15.1
 
-      - name: Install Tuist
-        run: |
-          bash <(curl -Ls https://install.tuist.io)
-        shell: bash
+      - name: Install Project Tools
+        uses: jdx/mise-action@v2
+        with:
+          experimental: true
 
       - name: Fetch tuist dependencies
         run: |
@@ -49,9 +49,6 @@ jobs:
         run: |
           tuist generate --no-open
         shell: bash
-
-      - name: Install Project Tools
-        uses: asdf-vm/actions/install@v2
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
         run: |
