@@ -16,7 +16,7 @@ Features:
 • Share cards, your collection or decks with your friends.  
 • Universal app for iPhone and iPad.  
 • Collection manager.  
-• Ready for iOS 14.  
+• Ready for iOS 17.  
 
 This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.  
 
@@ -34,12 +34,6 @@ Then:
 
 ```bash
 $ tuist generate --no-open
-```
-
-Run the CocoaPods command:
-
-```bash
-$ pod install
 ```
 
 Then, open the `swdestiny-trades.xcworkspace`
