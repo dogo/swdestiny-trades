@@ -18,7 +18,7 @@ protocol SetsPresenterProtocol {
 
 final class SetsListPresenter: SetsPresenterProtocol {
 
-    weak var view: SetsListViewProtocol?
+    private weak var view: SetsListViewProtocol?
     private let interactor: SetsListInteractorProtocol
     private let database: DatabaseProtocol?
     private let navigator: SetsListNavigator

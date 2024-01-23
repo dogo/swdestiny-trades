@@ -9,6 +9,7 @@
 import UIKit
 
 final class CardListNavigator: Navigator {
+
     enum Destination {
         case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
     }
