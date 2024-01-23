@@ -9,8 +9,24 @@
 import ImageSlideshow
 import UIKit
 
+protocol CardDetailViewProtocol: AnyObject {
+    func setSlideshowImageInputs(_ imageInputs: [InputSource])
+    func setCurrentPage(_ page: Int, animated: Bool)
+    func getCurrentPage() -> Int
+    func getCurrentSlideshowItem() -> ImageSlideshowItem?
+    func setNavigationTitle(_ title: String)
+    func showSuccessMessage(card: CardDTO)
+}
+
 final class CardView: UIView {
-    let slideshow: ImageSlideshow = {
+
+    var currentPageChanged: ((_ page: Int) -> Void)? {
+        didSet {
+            slideshow.currentPageChanged = currentPageChanged
+        }
+    }
+
+    private let slideshow: ImageSlideshow = {
         let slideshow = ImageSlideshow(frame: .zero)
         slideshow.activityIndicator = DefaultActivityIndicator()
         slideshow.backgroundColor = .blackWhite
@@ -30,9 +46,26 @@ final class CardView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setSlideshowImageInputs(_ imageInputs: [InputSource]) {
+        slideshow.setImageInputs(imageInputs)
+    }
+
+    func setCurrentPage(_ page: Int, animated: Bool) {
+        slideshow.setCurrentPage(page, animated: animated)
+    }
+
+    func getCurrentPage() -> Int {
+        return slideshow.currentPage
+    }
+
+    func getCurrentSlideshowItem() -> ImageSlideshowItem? {
+        return slideshow.currentSlideshowItem
+    }
 }
 
 extension CardView: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         addSubview(slideshow)
     }

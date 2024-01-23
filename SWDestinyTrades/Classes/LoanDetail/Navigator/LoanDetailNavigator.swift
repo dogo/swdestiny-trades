@@ -34,7 +34,7 @@ final class LoanDetailNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case let .cardDetail(database, cardList, card):
-            return CardDetailViewController(database: database, cardList: cardList, selected: card)
+            return CardDetailsViewControllerFactory(database: database, cardList: cardList, card: card).createViewController()
         case let .addCard(database, person, type):
             return AddCardViewControllerFactory(database: database,
                                                 addCardType: type,

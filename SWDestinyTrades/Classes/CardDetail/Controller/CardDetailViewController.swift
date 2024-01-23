@@ -11,20 +11,15 @@ import UIKit
 
 final class CardDetailViewController: UIViewController {
 
-    private let cardView = CardView()
-    private let database: DatabaseProtocol?
-    private var cards = [CardDTO]()
-    private var cardDTO: CardDTO
-    private var imageSource = [InputSource]()
+    private let cardView: CardView
+
+    var presenter: CardDetailPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?, cardList: [CardDTO], selected: CardDTO) {
-        self.database = database
-        cardDTO = selected
-        cards = cardList
+    init(with view: CardView = CardView()) {
+        cardView = view
         super.init(nibName: nil, bundle: nil)
-        setupCardCarousel()
     }
 
     @available(*, unavailable)
@@ -39,93 +34,46 @@ final class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationItem()
+        presenter?.viewDidLoad()
 
-        cardView.slideshow.setImageInputs(imageSource)
-
-        if let index = cards.firstIndex(of: cardDTO) {
-            cardView.slideshow.setCurrentPage(index, animated: true)
+        presenter?.setupNavigationItems { [weak self] items in
+            self?.navigationItem.rightBarButtonItems = items
         }
 
-        cardView.slideshow.currentPageChanged = { [weak self] page in
-            self?.navigationItem.title = self?.cards[page].name
+        cardView.currentPageChanged = { [weak self] _ in
+            self?.presenter?.setNavigationTitle()
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = cardDTO.name
+        presenter?.setNavigationTitle()
+    }
+}
+
+extension CardDetailViewController: CardDetailViewProtocol {
+
+    func setSlideshowImageInputs(_ imageInputs: [InputSource]) {
+        cardView.setSlideshowImageInputs(imageInputs)
     }
 
-    private func setupNavigationItem() {
-        let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        let addToCollectionBarItem = UIBarButtonItem(image: Asset.NavigationBar.icAddCollection.image, style: .plain, target: self, action: #selector(addToCollection))
-        navigationItem.rightBarButtonItems = [shareBarItem, addToCollectionBarItem]
+    func setCurrentPage(_ page: Int, animated: Bool) {
+        cardView.setCurrentPage(page, animated: animated)
     }
 
-    private func setupCardCarousel() {
-        for card in cards {
-            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
-                imageSource.append(remoteSource)
-            } else {
-                let localSource = ImageSource(image: Asset.ic404.image)
-                imageSource.append(localSource)
-            }
-        }
+    func getCurrentPage() -> Int {
+        cardView.getCurrentPage()
     }
 
-    @objc
-    func addToCollection() {
-        let card = cards[cardView.slideshow.currentPage]
-        saveToCollection(carDTO: card)
-        showSuccessMessage(cardDTO: card)
+    func getCurrentSlideshowItem() -> ImageSlideshowItem? {
+        cardView.getCurrentSlideshowItem()
     }
 
-    private func saveToCollection(carDTO: CardDTO) {
-        let user = getUserCollection()
-        try? database?.update {
-            let predicate = NSPredicate(format: "code == %@", carDTO.code)
-            if let index = user.myCollection.index(matching: predicate) {
-                let newCard = user.myCollection[index]
-                newCard.quantity += 1
-            } else {
-                user.myCollection.append(carDTO)
-            }
-        }
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 
-    private func getUserCollection() -> UserCollectionDTO {
-        var user = UserCollectionDTO()
-        try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
-            if let userCollection = results.first {
-                user = userCollection
-            } else {
-                self?.createDatabase(object: user)
-            }
-        }
-        return user
-    }
-
-    private func createDatabase(object: UserCollectionDTO) {
-        try? database?.save(object: object)
-    }
-
-    private func showSuccessMessage(cardDTO: CardDTO) {
-        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: cardDTO.name))
-    }
-
-    @objc
-    func share(_ sender: UIBarButtonItem) {
-        if let shareImage = cardView.slideshow.currentSlideshowItem?.imageView.image {
-            let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
-            activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
-            activityVC.popoverPresentationController?.barButtonItem = sender
-
-            DispatchQueue.global(qos: .userInteractive).async {
-                DispatchQueue.main.async {
-                    self.present(activityVC, animated: true, completion: nil)
-                }
-            }
-        }
+    func showSuccessMessage(card: CardDTO) {
+        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
 }
