@@ -13,26 +13,25 @@ import XCTest
 
 final class CardDetailViewControllerTests: XCTestCase {
 
-    private var controller: CardDetailViewController!
-    private let cardList = [CardDTO()]
+    private var sut: CardDetailViewController!
 
     override func setUp() {
         super.setUp()
-        controller = CardDetailViewController(database: nil, cardList: cardList, selected: CardDTO())
+        sut = CardDetailViewController()
     }
 
     func testCreateController() {
-        XCTAssertNotNil(controller)
+        XCTAssertNotNil(sut)
     }
 
     func testViewIsKindOfCardView() {
-        XCTAssertTrue(controller.view is CardView)
+        XCTAssertTrue(sut.view is CardView)
     }
 
     func testNavigationTitle() {
-        _ = UINavigationController(rootViewController: controller)
-        controller.viewWillAppear(false)
+        _ = UINavigationController(rootViewController: sut)
+        sut.viewWillAppear(false)
 
-        XCTAssertEqual(controller.navigationItem.title, "")
+        XCTAssertEqual(sut.navigationItem.title, "")
     }
 }
