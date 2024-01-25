@@ -9,29 +9,93 @@
 import UIKit
 import XCTest
 
+@testable import PKHUD
 @testable import SWDestinyTrades
 
 final class CardDetailViewControllerTests: XCTestCase {
 
     private var sut: CardDetailViewController!
+    private var view: CardViewSpy!
+    private var presenter: CardDetailPresenterSpy!
+    private var keyWindow: UIWindow!
+    private var navigationController: UINavigationControllerMock!
 
     override func setUp() {
         super.setUp()
-        sut = CardDetailViewController()
+        keyWindow = UIWindow(frame: .testDevice)
+        view = CardViewSpy()
+        sut = CardDetailViewController(with: view)
+        presenter = CardDetailPresenterSpy()
+        sut.presenter = presenter
+        navigationController = UINavigationControllerMock(rootViewController: sut)
+        keyWindow.showTestWindow(controller: navigationController)
     }
 
-    func testCreateController() {
-        XCTAssertNotNil(sut)
+    override func tearDown() {
+        view = nil
+        presenter = nil
+        navigationController = nil
+        sut = nil
+        keyWindow.cleanTestWindow()
+        super.tearDown()
     }
 
-    func testViewIsKindOfCardView() {
-        XCTAssertTrue(sut.view is CardView)
+    func test_loadView() {
+        sut.loadView()
+
+        XCTAssertTrue(sut.view is CardViewType)
     }
 
-    func testNavigationTitle() {
-        _ = UINavigationController(rootViewController: sut)
+    func test_viewDidLoad() {
+        sut.viewDidLoad()
+
+        XCTAssertEqual(presenter.didCallViewDidLoadCount, 1)
+        XCTAssertEqual(presenter.didCallSetupNavigationItemsCount, 1)
+    }
+
+    func test_viewWillAppear() {
         sut.viewWillAppear(false)
 
-        XCTAssertEqual(sut.navigationItem.title, "")
+        XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
+    }
+
+    func test_currentPageChanged() {
+        sut.viewDidLoad()
+        view.currentPageChanged?(1)
+
+        XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
+    }
+
+    func test_setSlideshowImageInputs() {
+        sut.setSlideshowImageInputs([])
+
+        XCTAssertEqual(view.didCallSetSlideshowImageInputs.count, 0)
+    }
+
+    func test_setCurrentPage() {
+        sut.setCurrentPage(1, animated: false)
+
+        XCTAssertEqual(view.didCallSetCurrentPage[0].page, 1)
+        XCTAssertEqual(view.didCallSetCurrentPage[0].animated, false)
+    }
+
+    func test_getCurrentPage() {
+        XCTAssertEqual(sut.getCurrentPage(), 0)
+    }
+
+    func test_getCurrentSlideshowItem() {
+        XCTAssertEqual(sut.getCurrentSlideshowItem(), nil)
+    }
+
+    func test_setNavigationTitle() {
+        sut.setNavigationTitle("Card Title")
+
+        XCTAssertEqual(sut.navigationItem.title, "Card Title")
+    }
+
+    func test_showSuccessMessage() {
+        sut.showSuccessMessage(card: .stub())
+
+        XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
 }

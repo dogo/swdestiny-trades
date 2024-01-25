@@ -18,7 +18,7 @@ protocol CardDetailViewProtocol: AnyObject {
     func showSuccessMessage(card: CardDTO)
 }
 
-final class CardView: UIView {
+final class CardView: UIView, CardViewType {
 
     var currentPageChanged: ((_ page: Int) -> Void)? {
         didSet {

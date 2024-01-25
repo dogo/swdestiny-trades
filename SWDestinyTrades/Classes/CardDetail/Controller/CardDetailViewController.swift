@@ -11,13 +11,13 @@ import UIKit
 
 final class CardDetailViewController: UIViewController {
 
-    private let cardView: CardView
+    private let cardView: CardViewType
 
     var presenter: CardDetailPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(with view: CardView = CardView()) {
+    init(with view: CardViewType = CardView()) {
         cardView = view
         super.init(nibName: nil, bundle: nil)
     }
