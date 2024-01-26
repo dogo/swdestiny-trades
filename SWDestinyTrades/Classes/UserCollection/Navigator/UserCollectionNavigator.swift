@@ -34,7 +34,7 @@ final class UserCollectionNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case let .cardDetail(database, cardList, card):
-            return CardDetailsViewControllerFactory(database: database, cardList: cardList, card: card).createViewController()
+            return CardDetailViewControllerFactory(database: database, cardList: cardList, card: card).createViewController()
         case let .addCard(database, userCollection):
             return AddCardViewControllerFactory(database: database,
                                                 addCardType: .collection,

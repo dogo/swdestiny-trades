@@ -1,5 +1,5 @@
 //
-//  CardDetailsViewControllerFactory.swift
+//  CardDetailViewControllerFactory.swift
 //  SWDestinyTrades
 //
 //  Created by Diogo Autilio on 23/01/24.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class CardDetailsViewControllerFactory: ViewControllerFactory {
+final class CardDetailViewControllerFactory: ViewControllerFactory {
 
     private let database: DatabaseProtocol?
     private let cardList: [CardDTO]
