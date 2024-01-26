@@ -12,7 +12,7 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class CardViewSpy: UIView, CardViewType {
+final class CardViewSpy: UIView, CardViewType, CardDetailViewProtocol {
 
     var currentPageChanged: ((Int) -> Void)?
 
@@ -36,5 +36,15 @@ final class CardViewSpy: UIView, CardViewType {
     func getCurrentSlideshowItem() -> ImageSlideshowItem? {
         didCallGetCurrentSlideshowItemCount += 1
         return nil
+    }
+
+    private(set) var didCallSetNavigationTitle = [String]()
+    func setNavigationTitle(_ title: String) {
+        didCallSetNavigationTitle.append(title)
+    }
+
+    private(set) var didCallShowSuccessMessage = [CardDTO]()
+    func showSuccessMessage(card: CardDTO) {
+        didCallShowSuccessMessage.append(card)
     }
 }

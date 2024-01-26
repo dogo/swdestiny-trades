@@ -56,6 +56,17 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
         completion([shareBarItem, addToCollectionBarItem])
     }
 
+    private func setupCardCarousel() {
+        for card in cards {
+            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
+                imageSource.append(remoteSource)
+            } else {
+                let localSource = ImageSource(image: Asset.ic404.image)
+                imageSource.append(localSource)
+            }
+        }
+    }
+
     @objc
     private func addToCollection() {
         let card = cards[view?.getCurrentPage() ?? 0]
@@ -74,17 +85,6 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
                 DispatchQueue.main.async {
                     // self.present(activityVC, animated: true, completion: nil)
                 }
-            }
-        }
-    }
-
-    private func setupCardCarousel() {
-        for card in cards {
-            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
-                imageSource.append(remoteSource)
-            } else {
-                let localSource = ImageSource(image: Asset.ic404.image)
-                imageSource.append(localSource)
             }
         }
     }
@@ -108,13 +108,9 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
             if let userCollection = results.first {
                 user = userCollection
             } else {
-                self?.createDatabase(object: user)
+                try? self?.database?.save(object: user)
             }
         }
         return user
-    }
-
-    private func createDatabase(object: UserCollectionDTO) {
-        try? database?.save(object: object)
     }
 }
