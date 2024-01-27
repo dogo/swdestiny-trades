@@ -35,7 +35,23 @@ final class CardDetailPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_viewDidLoadw() {
+    func test_viewDidLoad_with_valid_url_images() {
+        sut.viewDidLoad()
+
+        XCTAssertEqual(view.didCallSetSlideshowImageInputs.count, 2)
+        XCTAssertEqual(view.didCallSetCurrentPage.count, 1)
+    }
+
+    func test_viewDidLoad_with_invalid_url_images() {
+        let card = CardDTO.stub()
+        card.imageUrl = ""
+        let cardList: [CardDTO] = [card, card]
+
+        sut = CardDetailPresenter(view: view,
+                                  database: database,
+                                  cardList: cardList,
+                                  selected: cardList[0])
+
         sut.viewDidLoad()
 
         XCTAssertEqual(view.didCallSetSlideshowImageInputs.count, 2)

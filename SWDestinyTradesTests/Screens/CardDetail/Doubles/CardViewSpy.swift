@@ -47,4 +47,9 @@ final class CardViewSpy: UIView, CardViewType, CardDetailViewProtocol {
     func showSuccessMessage(card: CardDTO) {
         didCallShowSuccessMessage.append(card)
     }
+
+    private(set) var didCallPresentViewController = [(controller: UIViewController, animated: Bool)]()
+    func presentViewController(_ controller: UIViewController, animated: Bool) {
+        didCallPresentViewController.append((controller, animated))
+    }
 }
