@@ -16,6 +16,7 @@ protocol CardDetailViewProtocol: AnyObject {
     func getCurrentSlideshowItem() -> ImageSlideshowItem?
     func setNavigationTitle(_ title: String)
     func showSuccessMessage(card: CardDTO)
+    func presentViewController(_ controller: UIViewController, animated: Bool)
 }
 
 final class CardView: UIView, CardViewType {

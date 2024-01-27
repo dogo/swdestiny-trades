@@ -82,8 +82,8 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
             activityVC.popoverPresentationController?.barButtonItem = sender
 
             DispatchQueue.global(qos: .userInteractive).async {
-                DispatchQueue.main.async {
-                    // self.present(activityVC, animated: true, completion: nil)
+                DispatchQueue.main.async { [weak self] in
+                    self?.view?.presentViewController(activityVC, animated: true)
                 }
             }
         }

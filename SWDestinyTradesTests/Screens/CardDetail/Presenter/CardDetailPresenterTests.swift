@@ -19,15 +19,13 @@ final class CardDetailPresenterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        let cardList: [CardDTO] = [.stub(), .stub()]
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
         view = CardViewSpy()
         sut = CardDetailPresenter(view: view,
                                   database: database,
-                                  cardList: [
-                                      .stub(),
-                                      .stub()
-                                  ],
-                                  selected: .stub())
+                                  cardList: cardList,
+                                  selected: cardList[0])
     }
 
     override func tearDown() {
@@ -41,7 +39,7 @@ final class CardDetailPresenterTests: XCTestCase {
         sut.viewDidLoad()
 
         XCTAssertEqual(view.didCallSetSlideshowImageInputs.count, 2)
-        XCTAssertEqual(view.didCallSetCurrentPage.count, 0)
+        XCTAssertEqual(view.didCallSetCurrentPage.count, 1)
     }
 
     func test_setNavigationTitle() {
@@ -58,5 +56,30 @@ final class CardDetailPresenterTests: XCTestCase {
         }
 
         XCTAssertEqual(expectedItem?.count, 2)
+    }
+
+    func test_share() {}
+
+    func test_addToCollection_unique_card_with_success() {
+        var barButtonItems: [UIBarButtonItem]? = []
+        sut.setupNavigationItems { items in
+            barButtonItems = items
+        }
+        let addToCollectionButton = barButtonItems?[1]
+        _ = addToCollectionButton?.target?.perform(addToCollectionButton!.action, with: nil)
+
+        XCTAssertEqual(view.didCallShowSuccessMessage.count, 1)
+    }
+
+    func test_addToCollection_increase_card_quantity_with_success() {
+        var barButtonItems: [UIBarButtonItem]? = []
+        sut.setupNavigationItems { items in
+            barButtonItems = items
+        }
+        let addToCollectionButton = barButtonItems?[1]
+        _ = addToCollectionButton?.target?.perform(addToCollectionButton!.action, with: nil)
+        _ = addToCollectionButton?.target?.perform(addToCollectionButton!.action, with: nil)
+
+        XCTAssertEqual(view.didCallShowSuccessMessage.count, 2)
     }
 }

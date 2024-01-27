@@ -76,4 +76,8 @@ extension CardDetailViewController: CardDetailViewProtocol {
     func showSuccessMessage(card: CardDTO) {
         LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
+
+    func presentViewController(_ controller: UIViewController, animated: Bool) {
+        present(controller, animated: animated)
+    }
 }
