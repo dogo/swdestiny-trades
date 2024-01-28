@@ -35,7 +35,7 @@ final class CardViewSpy: UIView, CardViewType, CardDetailViewProtocol {
     private(set) var didCallGetCurrentSlideshowItemCount = 0
     func getCurrentSlideshowItem() -> ImageSlideshowItem? {
         didCallGetCurrentSlideshowItemCount += 1
-        return nil
+        return ImageSlideshowItemMock(image: ImageSource(image: Asset.ic404.image), zoomEnabled: false)
     }
 
     private(set) var didCallSetNavigationTitle = [String]()

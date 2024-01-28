@@ -15,6 +15,7 @@ final class CardDetailPresenterTests: XCTestCase {
 
     private var sut: CardDetailPresenter!
     private var view: CardViewSpy!
+    private var dispatchQueue: DispatchQueueSpy!
     private var database: RealmDatabase?
 
     override func setUp() {
@@ -22,7 +23,9 @@ final class CardDetailPresenterTests: XCTestCase {
         let cardList: [CardDTO] = [.stub(), .stub()]
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
         view = CardViewSpy()
+        dispatchQueue = DispatchQueueSpy()
         sut = CardDetailPresenter(view: view,
+                                  dispatchQueue: dispatchQueue,
                                   database: database,
                                   cardList: cardList,
                                   selected: cardList[0])
@@ -30,6 +33,7 @@ final class CardDetailPresenterTests: XCTestCase {
 
     override func tearDown() {
         database = nil
+        dispatchQueue = nil
         view = nil
         sut = nil
         super.tearDown()
@@ -74,7 +78,16 @@ final class CardDetailPresenterTests: XCTestCase {
         XCTAssertEqual(expectedItem?.count, 2)
     }
 
-    func test_share() {}
+    func test_share() {
+        var barButtonItems: [UIBarButtonItem]? = []
+        sut.setupNavigationItems { items in
+            barButtonItems = items
+        }
+        let shareButton = barButtonItems?[0]
+        _ = shareButton?.target?.perform(shareButton!.action, with: nil)
+
+        XCTAssertEqual(view.didCallPresentViewController.count, 1)
+    }
 
     func test_addToCollection_unique_card_with_success() {
         var barButtonItems: [UIBarButtonItem]? = []

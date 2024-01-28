@@ -19,16 +19,19 @@ protocol CardDetailPresenterProtocol: AnyObject {
 final class CardDetailPresenter: CardDetailPresenterProtocol {
 
     private weak var view: CardDetailViewProtocol?
+    private let dispatchQueue: DispatchQueueType
     private let database: DatabaseProtocol?
     private var cards = [CardDTO]()
     private var cardDTO: CardDTO
     private var imageSource = [InputSource]()
 
     init(view: CardDetailViewProtocol,
+         dispatchQueue: DispatchQueueType = DispatchQueue.main,
          database: DatabaseProtocol?,
          cardList: [CardDTO],
          selected: CardDTO) {
         self.view = view
+        self.dispatchQueue = dispatchQueue
         self.database = database
         cards = cardList
         cardDTO = selected
@@ -81,8 +84,8 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
             activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
             activityVC.popoverPresentationController?.barButtonItem = sender
 
-            DispatchQueue.global(qos: .userInteractive).async {
-                DispatchQueue.main.async { [weak self] in
+            dispatchQueue.globalAsync { [weak self] in
+                self?.dispatchQueue.async {
                     self?.view?.presentViewController(activityVC, animated: true)
                 }
             }

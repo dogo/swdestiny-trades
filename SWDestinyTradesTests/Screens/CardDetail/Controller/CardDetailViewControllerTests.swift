@@ -84,7 +84,7 @@ final class CardDetailViewControllerTests: XCTestCase {
     }
 
     func test_getCurrentSlideshowItem() {
-        XCTAssertEqual(sut.getCurrentSlideshowItem(), nil)
+        XCTAssertNotNil(sut.getCurrentSlideshowItem())
     }
 
     func test_setNavigationTitle() {
