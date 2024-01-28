@@ -98,4 +98,12 @@ final class CardDetailViewControllerTests: XCTestCase {
 
         XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
     }
+
+    func test_presentViewController() {
+        let controller = UIViewControllerMock()
+
+        sut.presentViewController(controller, animated: false)
+
+        XCTAssertTrue(controller.isBeingPresented)
+    }
 }
