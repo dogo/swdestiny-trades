@@ -30,6 +30,24 @@ extension SetDTO {
             "known": 160,
             "total": 160,
             "url": "http://swdestinydb.com/set/SoR"
+        ],
+        [
+            "name": "Empire at War",
+            "code": "EaW",
+            "position": 3,
+            "available": "2017-09-14",
+            "known": 160,
+            "total": 160,
+            "url": "https://swdestinydb.com/set/EaW"
+        ],
+        [
+            "name": "Spark of Hope",
+            "code": "SoH",
+            "position": 11,
+            "available": "2019-07-05",
+            "known": 160,
+            "total": 160,
+            "url": "https://swdestinydb.com/set/SoH"
         ]
     ]
 
