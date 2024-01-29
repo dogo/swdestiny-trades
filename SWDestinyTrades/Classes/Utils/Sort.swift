@@ -25,56 +25,32 @@ enum Sort {
     }
 
     static func cardsByColor(cardsArray: [CardDTO]) -> [CardDTO] {
-        var colors = Set<String>()
-        var source = [CardDTO]()
+        let uniqueColors = Set(cardsArray.map(\.factionCode)).sorted()
 
-        func getColor(cardDTO: CardDTO) -> String {
-            return cardDTO.factionCode
+        let filteredCards = uniqueColors.flatMap { color in
+            cardsArray.filter { $0.factionCode == color }
         }
 
-        cardsArray.forEach { _ = colors.insert(getColor(cardDTO: $0)) }
-
-        for symbol in colors {
-            for card in cardsArray where symbol == card.factionCode {
-                source.append(card)
-            }
-        }
-        return source
+        return filteredCards
     }
 
     static func cardsByType(cardsArray: [CardDTO]) -> [CardDTO] {
-        var types = Set<String>()
-        var source = [CardDTO]()
+        let uniqueTypes = Set(cardsArray.map(\.typeName.capitalized)).sorted()
 
-        func getType(cardDTO: CardDTO) -> String {
-            return cardDTO.typeName.capitalized
+        let filteredCards = uniqueTypes.flatMap { type in
+            cardsArray.filter { $0.typeName.capitalized == type }
         }
 
-        cardsArray.forEach { _ = types.insert(getType(cardDTO: $0)) }
-
-        for symbol in types {
-            for card in cardsArray where symbol == getType(cardDTO: card) {
-                source.append(card)
-            }
-        }
-        return Sort.cardsAlphabetically(cardsArray: source)
+        return filteredCards
     }
 
     static func cardsByAffiliation(cardsArray: [CardDTO]) -> [CardDTO] {
-        var affiliations = Set<String>()
-        var source = [CardDTO]()
+        let uniqueAffiliations = Set(cardsArray.map(\.affiliationCode)).sorted()
 
-        func getAffiliation(cardDTO: CardDTO) -> String {
-            return cardDTO.affiliationCode
+        let filteredCards = uniqueAffiliations.flatMap { affiliation in
+            cardsArray.filter { $0.affiliationCode == affiliation }
         }
 
-        cardsArray.forEach { _ = affiliations.insert(getAffiliation(cardDTO: $0)) }
-
-        for symbol in affiliations {
-            for card in cardsArray where symbol == card.affiliationCode {
-                source.append(card)
-            }
-        }
-        return source
+        return filteredCards
     }
 }

@@ -20,7 +20,8 @@ final class SortTests: XCTestCase {
 
         let sortedCards = Sort.cardsByNumber(cardsArray: unsortedCards)
 
-        XCTAssertEqual(sortedCards.map(\.code), ["001", "002"])
+        XCTAssertEqual(sortedCards[0].code, "001")
+        XCTAssertEqual(sortedCards[1].code, "002")
     }
 
     func test_cardsAlphabetically() {
@@ -31,7 +32,8 @@ final class SortTests: XCTestCase {
 
         let sortedCards = Sort.cardsAlphabetically(cardsArray: unsortedCards)
 
-        XCTAssertEqual(sortedCards.map(\.name), ["Card A", "Card B"])
+        XCTAssertEqual(sortedCards[0].name, "Card A")
+        XCTAssertEqual(sortedCards[1].name, "Card B")
     }
 
     func test_cardsByColor() {
@@ -42,7 +44,8 @@ final class SortTests: XCTestCase {
 
         let sortedCards = Sort.cardsByColor(cardsArray: unsortedCards)
 
-        XCTAssertEqual(sortedCards.map(\.factionCode), ["blue", "red"])
+        XCTAssertEqual(sortedCards[0].factionCode, "blue")
+        XCTAssertEqual(sortedCards[1].factionCode, "red")
     }
 
     func test_cardsByType() {
@@ -53,7 +56,8 @@ final class SortTests: XCTestCase {
 
         let sortedCards = Sort.cardsByType(cardsArray: unsortedCards)
 
-        XCTAssertEqual(sortedCards.map(\.typeName), ["Character", "Upgrade"])
+        XCTAssertEqual(sortedCards[0].typeName, "Character")
+        XCTAssertEqual(sortedCards[1].typeName, "Upgrade")
     }
 
     func test_cardsByAffiliation() {
@@ -64,6 +68,7 @@ final class SortTests: XCTestCase {
 
         let sortedCards = Sort.cardsByAffiliation(cardsArray: unsortedCards)
 
-        XCTAssertEqual(sortedCards.map(\.affiliationCode), ["hero", "villain"])
+        XCTAssertEqual(sortedCards[0].affiliationCode, "hero")
+        XCTAssertEqual(sortedCards[1].affiliationCode, "villain")
     }
 }
