@@ -11,44 +11,30 @@ import Foundation
 enum Sort {
 
     static func cardsByNumber(cardsArray: [CardDTO]) -> [CardDTO] {
-        let source = cardsArray.sorted {
-            $0.code < $1.code
-        }
-        return source
+        return cardsArray.sorted { $0.code < $1.code }
     }
 
     static func cardsAlphabetically(cardsArray: [CardDTO]) -> [CardDTO] {
-        let source = cardsArray.sorted {
-            $0.name < $1.name
-        }
-        return source
+        return cardsArray.sorted { $0.name < $1.name }
     }
 
     static func cardsByColor(cardsArray: [CardDTO]) -> [CardDTO] {
-        let uniqueColors = Set(cardsArray.map(\.factionCode)).sorted()
-
-        let filteredCards = uniqueColors.flatMap { color in
-            cardsArray.filter { $0.factionCode == color }
-        }
-
-        return filteredCards
+        return sortCards(cardsArray, keyPath: \.factionCode)
     }
 
     static func cardsByType(cardsArray: [CardDTO]) -> [CardDTO] {
-        let uniqueTypes = Set(cardsArray.map(\.typeName.capitalized)).sorted()
-
-        let filteredCards = uniqueTypes.flatMap { type in
-            cardsArray.filter { $0.typeName.capitalized == type }
-        }
-
-        return filteredCards
+        return sortCards(cardsArray, keyPath: \.typeName.capitalized)
     }
 
     static func cardsByAffiliation(cardsArray: [CardDTO]) -> [CardDTO] {
-        let uniqueAffiliations = Set(cardsArray.map(\.affiliationCode)).sorted()
+        return sortCards(cardsArray, keyPath: \.affiliationCode)
+    }
 
-        let filteredCards = uniqueAffiliations.flatMap { affiliation in
-            cardsArray.filter { $0.affiliationCode == affiliation }
+    private static func sortCards(_ cardsArray: [CardDTO], keyPath: KeyPath<CardDTO, some Hashable & Comparable>) -> [CardDTO] {
+        let uniqueValues = Set(cardsArray.map { $0[keyPath: keyPath] }).sorted()
+
+        let filteredCards = uniqueValues.flatMap { value in
+            cardsArray.filter { $0[keyPath: keyPath] == value }
         }
 
         return filteredCards
