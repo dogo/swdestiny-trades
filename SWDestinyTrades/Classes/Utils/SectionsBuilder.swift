@@ -10,49 +10,32 @@ import Foundation
 
 enum SectionsBuilder {
 
+    // MARK: - Generic Sorting
+
+    private static func uniqueValues<T>(for items: [T], extractValue: (T) -> String) -> [String] {
+        let values = Set(items.map { extractValue($0) })
+        return Array(values).sorted()
+    }
+
     // MARK: - Alphabetically
 
     static func alphabetically(cardList: [CardDTO]) -> [String] {
-        func getFirstLetter(cardDTO: CardDTO) -> String {
-            return String(cardDTO.name.prefix(1))
-        }
-
-        let letters = Set(cardList.map { getFirstLetter(cardDTO: $0) })
-
-        return Array(letters).sorted()
+        return uniqueValues(for: cardList) { String($0.name.prefix(1)) }
     }
 
     static func alphabetically(setList: [SetDTO]) -> [String] {
-        func getFirstLetter(setDTO: SetDTO) -> String {
-            return String(setDTO.name.prefix(1))
-        }
-
-        let letters = Set(setList.map { getFirstLetter(setDTO: $0) })
-
-        return Array(letters).sorted()
+        return uniqueValues(for: setList) { String($0.name.prefix(1)) }
     }
 
     // MARK: - byColor
 
     static func byColor(cardList: [CardDTO]) -> [String] {
-        func getColor(cardDTO: CardDTO) -> String {
-            return cardDTO.factionCode
-        }
-
-        let colors = Set(cardList.map { getColor(cardDTO: $0) })
-        
-        return Array(colors).sorted()
+        return uniqueValues(for: cardList) { $0.factionCode }
     }
 
     // MARK: - byType
 
     static func byType(cardList: [CardDTO]) -> [String] {
-        func getType(cardDTO: CardDTO) -> String {
-            return cardDTO.typeName
-        }
-
-        let types = Set(cardList.map { getType(cardDTO: $0) })
-
-        return Array(types).sorted()
+        return uniqueValues(for: cardList) { $0.typeName }
     }
 }
