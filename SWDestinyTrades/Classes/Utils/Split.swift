@@ -29,7 +29,7 @@ enum Split {
 
     static func cardsAlphabetically(cardList: [CardDTO], sections: [String]) -> [String: [CardDTO]] {
         let sectionIdentifier: (CardDTO) -> String = { cardDTO in
-            return String(cardDTO.name[cardDTO.name.startIndex])
+            return String(cardDTO.name.prefix(1))
         }
 
         let sortFunction: (CardDTO, CardDTO) -> Bool = { $0.name < $1.name }
