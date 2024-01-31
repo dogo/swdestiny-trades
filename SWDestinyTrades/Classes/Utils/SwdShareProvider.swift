@@ -9,6 +9,7 @@
 import UIKit
 
 final class SwdShareProvider: UIActivityItemProvider {
+
     var subject: String
     var text: String
 
@@ -19,11 +20,13 @@ final class SwdShareProvider: UIActivityItemProvider {
         super.init(placeholderItem: "")
     }
 
-    override func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+    override func activityViewController(_ activityViewController: UIActivityViewController,
+                                         subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
         return subject
     }
 
-    override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+    override func activityViewController(_ activityViewController: UIActivityViewController,
+                                         itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         return text
     }
 }
