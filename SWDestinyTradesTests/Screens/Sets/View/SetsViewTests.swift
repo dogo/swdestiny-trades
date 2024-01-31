@@ -20,8 +20,19 @@ final class SetsViewTests: XCSnapshotableTestCase {
         sut = SetsView(frame: .testDevice)
     }
 
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
+
     func testInitialization() {
-        sut.updateSetList(SetDTO.stub())
+        let sets: [SetDTO] = [
+            .stub(),
+            .stub(name: "Spirit of Rebellion", code: "SoR"),
+            .stub(name: "Empire at War", code: "EaW"),
+            .stub(name: "Spark of Hope", code: "SoH")
+        ]
+        sut.updateSetList(sets)
 
         XCTAssertTrue(snapshot(sut))
     }
@@ -32,9 +43,9 @@ final class SetsViewTests: XCSnapshotableTestCase {
             didCallDidSelectSet.append(set)
         }
 
-        sut.setsTableView?.didSelectSet?(.stub().first!)
+        sut.setsTableView?.didSelectSet?(.stub())
 
         XCTAssertEqual(didCallDidSelectSet.count, 1)
-        XCTAssertEqual(didCallDidSelectSet[0].name, SetDTO.stub()[0].name)
+        XCTAssertEqual(didCallDidSelectSet[0].name, SetDTO.stub().name)
     }
 }

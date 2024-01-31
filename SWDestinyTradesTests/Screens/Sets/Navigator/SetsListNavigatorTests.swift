@@ -36,7 +36,7 @@ final class SetsListNavigatorTests: XCTestCase {
     }
 
     func testNavigateToCardListViewController() {
-        sut.navigate(to: .cardList(database: nil, with: .stub()[0]))
+        sut.navigate(to: .cardList(database: nil, with: .stub()))
 
         XCTAssertTrue(navigationController.currentPushedViewController is CardListViewController)
     }

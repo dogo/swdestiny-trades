@@ -81,7 +81,14 @@ final class SplitTests: XCTestCase {
     func test_setsByAlphabetically() {
         let sections = ["S", "A", "E"]
 
-        let result = Split.setsByAlphabetically(setList: SetDTO.stub(), sections: sections)
+        let sets: [SetDTO] = [
+            .stub(),
+            .stub(name: "Spirit of Rebellion", code: "SoR"),
+            .stub(name: "Empire at War", code: "EaW"),
+            .stub(name: "Spark of Hope", code: "SoH")
+        ]
+
+        let result = Split.setsByAlphabetically(setList: sets, sections: sections)
 
         XCTAssertEqual(result["A"]?.count, 1)
         XCTAssertEqual(result["E"]?.count, 1)

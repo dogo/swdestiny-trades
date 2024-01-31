@@ -52,7 +52,7 @@ final class SetsListPresenterTests: XCTestCase {
     }
 
     func testDidSelectSet() {
-        sut.didSelectSet(.stub()[0])
+        sut.didSelectSet(.stub())
 
         XCTAssertTrue(navigationController.currentPushedViewController is CardListViewController)
     }
