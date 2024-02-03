@@ -16,18 +16,20 @@ final class CardListPresenterTests: XCTestCase {
     private var sut: CardListPresenter!
     private var service: SWDestinyService!
     private var client: HttpClientMock!
+    private var controller: CardListViewControllerSpy!
     private var navigator: CardListNavigator!
     private var navigationController: UINavigationControllerMock!
 
     override func setUp() {
         super.setUp()
-        let controller = UIViewController()
+        controller = CardListViewControllerSpy()
         client = HttpClientMock()
         client.fileName = "card-list"
         service = SWDestinyService(client: client)
         navigationController = UINavigationControllerMock(rootViewController: controller)
-        navigator = CardListNavigator(controller.navigationController)
-        sut = CardListPresenter(interactor: CardListInteractor(service: service),
+        navigator = CardListNavigator(controller)
+        sut = CardListPresenter(controller: controller,
+                                interactor: CardListInteractor(service: service),
                                 database: nil,
                                 navigator: navigator,
                                 setDTO: .stub())
@@ -43,12 +45,21 @@ final class CardListPresenterTests: XCTestCase {
     }
 
     func test_retrieveCardsList() {
-        // sut.retrieveCardsList()
+        sut.retrieveCardsList()
+
+        XCTAssertEqual(controller.didCallStartLoading, 1)
     }
 
     func test_didSelectCard() {
         sut.didSelectCard(cardList: [], card: .stub())
 
         XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
+    }
+
+    func test_setNavigationTitle() {
+        sut.setNavigationTitle()
+
+        XCTAssertEqual(controller.didCallSetNavigationTitle.count, 1)
+        XCTAssertEqual(controller.didCallSetNavigationTitle[0], "Awakenings")
     }
 }

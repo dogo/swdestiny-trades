@@ -11,19 +11,23 @@ import Foundation
 protocol CardListPresenterProtocol {
     func retrieveCardsList()
     func didSelectCard(cardList: [CardDTO], card: CardDTO)
+    func setNavigationTitle()
 }
 
 final class CardListPresenter: CardListPresenterProtocol {
 
+    private weak var controller: CardListViewControllerProtocol?
     private let interactor: CardListInteractorProtocol
     private let database: DatabaseProtocol?
     private let navigator: CardListNavigator
     private let setDTO: SetDTO
 
-    init(interactor: CardListInteractorProtocol,
+    init(controller: CardListViewControllerProtocol,
+         interactor: CardListInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: CardListNavigator,
          setDTO: SetDTO) {
+        self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
@@ -31,20 +35,20 @@ final class CardListPresenter: CardListPresenterProtocol {
     }
 
     func retrieveCardsList() {
-        // cardListView.activityIndicator.startAnimating()
+        controller?.startLoading()
         Task { [weak self] in
-            guard let self else { return }
-
-//            defer {
-//                self.cardListView.activityIndicator.stopAnimating()
-//            }
-
             do {
+                guard let self else { return }
+
                 let cardList = try await interactor.retrieveCards(setCode: setDTO.code.lowercased())
-                // cardListView.cardListTableView.updateCardList(cardList)
+
+                await MainActor.run { [weak self] in
+                    self?.controller?.stopLoading()
+                    self?.controller?.updateCardList(cardList)
+                }
             } catch {
-                await MainActor.run {
-                    ToastMessages.showNetworkErrorMessage()
+                await MainActor.run { [weak self] in
+                    self?.controller?.showNetworkErrorMessage()
                     LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])
                 }
             }
@@ -53,5 +57,9 @@ final class CardListPresenter: CardListPresenterProtocol {
 
     func didSelectCard(cardList: [CardDTO], card: CardDTO) {
         navigator.navigate(to: .cardDetail(database: database, with: cardList, card: card))
+    }
+
+    func setNavigationTitle() {
+        controller?.setNavigationTitle(setDTO.name)
     }
 }

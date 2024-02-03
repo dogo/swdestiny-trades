@@ -21,7 +21,7 @@ final class CardListNavigatorTests: XCTestCase {
         super.setUp()
         let controller = UIViewController()
         navigationController = UINavigationControllerMock(rootViewController: controller)
-        sut = CardListNavigator(navigationController)
+        sut = CardListNavigator(controller)
     }
 
     override func tearDown() {

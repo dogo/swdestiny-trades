@@ -21,9 +21,10 @@ final class CardListViewControllerFactory: ViewControllerFactory {
 
     func createViewController() -> UIViewController {
         let viewController = CardListViewController()
-        let router = CardListNavigator(viewController.navigationController)
+        let router = CardListNavigator(viewController)
         let interactor = CardListInteractor()
-        let presenter = CardListPresenter(interactor: interactor,
+        let presenter = CardListPresenter(controller: viewController,
+                                          interactor: interactor,
                                           database: database,
                                           navigator: router,
                                           setDTO: setDTO)

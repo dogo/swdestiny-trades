@@ -43,6 +43,29 @@ final class CardListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // navigationItem.title = setDTO.name
+        presenter?.setNavigationTitle()
+    }
+}
+
+extension CardListViewController: CardListViewControllerProtocol {
+
+    func startLoading() {
+        cardListView.startLoading()
+    }
+
+    func stopLoading() {
+        cardListView.stopLoading()
+    }
+
+    func updateCardList(_ cards: [CardDTO]) {
+        cardListView.updateCardList(cards)
+    }
+
+    func showNetworkErrorMessage() {
+        ToastMessages.showNetworkErrorMessage()
+    }
+
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 }
