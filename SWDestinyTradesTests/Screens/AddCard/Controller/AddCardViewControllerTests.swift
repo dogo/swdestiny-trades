@@ -131,7 +131,7 @@ final class AddCardViewControllerTests: XCTestCase {
         let router = AddCardNavigator(viewController)
         let interactor = AddCardInteractor(service: service)
         let viewModel = AddCardViewModel(person: person, userCollection: userCollection, type: type)
-        let presenter = AddCardPresenter(view: viewController,
+        let presenter = AddCardPresenter(controller: viewController,
                                          interactor: interactor,
                                          database: database,
                                          navigator: router,

@@ -24,14 +24,14 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
     private var cards = [CardDTO]()
     private var deck: DeckDTO?
 
-    private weak var view: AddToDeckViewProtocol?
+    private weak var controller: AddToDeckViewProtocol?
 
-    init(view: AddToDeckViewProtocol,
+    init(controller: AddToDeckViewProtocol,
          interactor: AddToDeckInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: AddCardNavigator,
          deck: DeckDTO?) {
-        self.view = view
+        self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
@@ -44,7 +44,7 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
         if let deck, !deck.list.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 deck.list.append(card)
-                self?.view?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card)
             }
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
@@ -62,17 +62,17 @@ extension AddToDeckPresenter {
 
     @MainActor
     func retrieveAllCards() {
-        view?.startLoading()
+        controller?.startLoading()
         Task { [weak self] in
             guard let self else { return }
 
             defer {
-                view?.stopLoading()
+                controller?.stopLoading()
             }
 
             do {
                 let allCards = try await interactor.fetchAllCards()
-                view?.updateSearchList(allCards)
+                controller?.updateSearchList(allCards)
                 cards = allCards
             } catch APIError.requestCancelled {
                 // do nothing
@@ -92,7 +92,7 @@ extension AddToDeckPresenter {
     }
 
     func doingSearch(_ query: String) {
-        view?.doingSearch(query)
+        controller?.doingSearch(query)
     }
 
     func loadDataFromRealm() {
@@ -100,7 +100,7 @@ extension AddToDeckPresenter {
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
             guard let self, let collection = collections.first else { return }
             cards = Array(collection.myCollection)
-            view?.updateSearchList(cards)
+            controller?.updateSearchList(cards)
         }
     }
 

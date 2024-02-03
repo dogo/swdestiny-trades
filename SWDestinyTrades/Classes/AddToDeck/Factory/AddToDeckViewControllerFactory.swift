@@ -24,7 +24,7 @@ final class AddToDeckViewControllerFactory: ViewControllerFactory {
         let viewController = AddToDeckViewController()
         let router = AddCardNavigator(viewController)
         let interactor = AddToDeckInteractor()
-        let presenter = AddToDeckPresenter(view: viewController,
+        let presenter = AddToDeckPresenter(controller: viewController,
                                            interactor: interactor,
                                            database: database,
                                            navigator: router,

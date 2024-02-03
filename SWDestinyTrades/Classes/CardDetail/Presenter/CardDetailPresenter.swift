@@ -18,19 +18,19 @@ protocol CardDetailPresenterProtocol: AnyObject {
 
 final class CardDetailPresenter: CardDetailPresenterProtocol {
 
-    private weak var view: CardDetailViewProtocol?
+    private weak var controller: CardDetailViewProtocol?
     private let dispatchQueue: DispatchQueueType
     private let database: DatabaseProtocol?
     private var cards = [CardDTO]()
     private var cardDTO: CardDTO
     private var imageSource = [InputSource]()
 
-    init(view: CardDetailViewProtocol,
+    init(controller: CardDetailViewProtocol,
          dispatchQueue: DispatchQueueType = DispatchQueue.main,
          database: DatabaseProtocol?,
          cardList: [CardDTO],
          selected: CardDTO) {
-        self.view = view
+        self.controller = controller
         self.dispatchQueue = dispatchQueue
         self.database = database
         cards = cardList
@@ -42,15 +42,15 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
     func viewDidLoad() {
         setupCardCarousel()
 
-        view?.setSlideshowImageInputs(imageSource)
+        controller?.setSlideshowImageInputs(imageSource)
 
         if let index = cards.firstIndex(of: cardDTO) {
-            view?.setCurrentPage(index, animated: true)
+            controller?.setCurrentPage(index, animated: true)
         }
     }
 
     func setNavigationTitle() {
-        view?.setNavigationTitle(cards[view?.getCurrentPage() ?? 0].name)
+        controller?.setNavigationTitle(cards[controller?.getCurrentPage() ?? 0].name)
     }
 
     func setupNavigationItems(completion: ([UIBarButtonItem]?) -> Void) {
@@ -72,21 +72,21 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
 
     @objc
     private func addToCollection() {
-        let card = cards[view?.getCurrentPage() ?? 0]
+        let card = cards[controller?.getCurrentPage() ?? 0]
         saveToCollection(carDTO: card)
-        view?.showSuccessMessage(card: card)
+        controller?.showSuccessMessage(card: card)
     }
 
     @objc
     private func share(_ sender: UIBarButtonItem) {
-        if let shareImage = view?.getCurrentSlideshowItem()?.imageView.image {
+        if let shareImage = controller?.getCurrentSlideshowItem()?.imageView.image {
             let activityVC = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
             activityVC.excludedActivityTypes = [.airDrop, .addToReadingList, .openInIBooks]
             activityVC.popoverPresentationController?.barButtonItem = sender
 
             dispatchQueue.globalAsync { [weak self] in
                 self?.dispatchQueue.async {
-                    self?.view?.presentViewController(activityVC, animated: true)
+                    self?.controller?.presentViewController(activityVC, animated: true)
                 }
             }
         }

@@ -24,7 +24,7 @@ final class CardDetailPresenterTests: XCTestCase {
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
         view = CardViewSpy()
         dispatchQueue = DispatchQueueSpy()
-        sut = CardDetailPresenter(view: view,
+        sut = CardDetailPresenter(controller: view,
                                   dispatchQueue: dispatchQueue,
                                   database: database,
                                   cardList: cardList,
@@ -51,7 +51,7 @@ final class CardDetailPresenterTests: XCTestCase {
         card.imageUrl = ""
         let cardList: [CardDTO] = [card, card]
 
-        sut = CardDetailPresenter(view: view,
+        sut = CardDetailPresenter(controller: view,
                                   database: database,
                                   cardList: cardList,
                                   selected: cardList[0])

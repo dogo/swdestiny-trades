@@ -25,7 +25,7 @@ final class CardDetailViewControllerFactory: ViewControllerFactory {
 
     func createViewController() -> UIViewController {
         let viewController = CardDetailViewController()
-        let presenter = CardDetailPresenter(view: viewController,
+        let presenter = CardDetailPresenter(controller: viewController,
                                             database: database,
                                             cardList: cardList,
                                             selected: card)

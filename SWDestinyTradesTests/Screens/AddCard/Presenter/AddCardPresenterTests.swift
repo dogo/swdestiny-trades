@@ -141,7 +141,7 @@ final class AddCardPresenterTests: XCTestCase {
                            userCollection: UserCollectionDTO? = nil,
                            type: AddCardType,
                            identifier: String) -> AddCardPresenter {
-        return AddCardPresenter(view: view,
+        return AddCardPresenter(controller: view,
                                 interactor: AddCardInteractor(service: service),
                                 database: RealmDatabaseHelper.createMemoryDatabase(identifier: identifier),
                                 navigator: navigator,

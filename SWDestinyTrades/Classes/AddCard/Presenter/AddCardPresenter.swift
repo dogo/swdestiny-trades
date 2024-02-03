@@ -22,15 +22,15 @@ final class AddCardPresenter: AddCardPresenterProtocol {
     private let navigator: AddCardNavigator
     private let viewModel: AddCardViewModel
 
-    private weak var view: AddCardViewProtocol?
+    private weak var controller: AddCardViewProtocol?
     private var cards = [CardDTO]()
 
-    init(view: AddCardViewProtocol,
+    init(controller: AddCardViewProtocol,
          interactor: AddCardInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: AddCardNavigator,
          viewModel: AddCardViewModel) {
-        self.view = view
+        self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
@@ -39,16 +39,16 @@ final class AddCardPresenter: AddCardPresenterProtocol {
 
     @MainActor
     func fetchAllCards() {
-        view?.startLoading()
+        controller?.startLoading()
         Task { [weak self] in
             do {
                 let allCards = try await self?.interactor.retrieveAllCards() ?? []
-                self?.view?.stopLoading()
-                self?.view?.updateSearchList(allCards)
+                self?.controller?.stopLoading()
+                self?.controller?.updateSearchList(allCards)
                 self?.cards = allCards
             } catch {
-                self?.view?.stopLoading()
-                self?.view?.showNetworkErrorMessage()
+                self?.controller?.stopLoading()
+                self?.controller?.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
@@ -66,7 +66,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
     }
 
     func doingSearch(_ query: String) {
-        view?.doingSearch(query)
+        controller?.doingSearch(query)
     }
 
     func cardDetailButtonTouched(with card: CardDTO) {
@@ -79,12 +79,12 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let person = viewModel.person, !person.borrowed.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 person.borrowed.append(card)
-                self?.view?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card)
             }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
-            view?.showErrorMessage()
+            controller?.showErrorMessage()
         }
     }
 
@@ -92,12 +92,12 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let person = viewModel.person, !person.lentMe.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 person.lentMe.append(card)
-                self?.view?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card)
             }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
         } else {
-            view?.showErrorMessage()
+            controller?.showErrorMessage()
         }
     }
 
@@ -105,10 +105,10 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let userCollection = viewModel.userCollection, !userCollection.myCollection.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 userCollection.myCollection.append(card)
-                self?.view?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card)
             }
         } else {
-            view?.showErrorMessage()
+            controller?.showErrorMessage()
         }
     }
 }

@@ -30,7 +30,7 @@ final class AddToDeckPresenterTests: XCTestCase {
         navigationController = UINavigationControllerMock(rootViewController: controller)
         view = AddToDeckViewSpy()
         navigator = AddCardNavigator(controller)
-        sut = AddToDeckPresenter(view: view,
+        sut = AddToDeckPresenter(controller: view,
                                  interactor: AddToDeckInteractor(service: service),
                                  database: database,
                                  navigator: navigator,
