@@ -8,10 +8,17 @@
 
 import UIKit
 
-final class CardListView: UIView {
-    let cardListTableView = CardListTableView()
+final class CardListView: UIView, CardListViewType {
 
-    let activityIndicator: UIActivityIndicatorView = {
+    var didSelectCard: (([CardDTO], CardDTO) -> Void)? {
+        didSet {
+            cardListTableView.didSelectCard = didSelectCard
+        }
+    }
+
+    private let cardListTableView = CardListTableView()
+
+    private let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
@@ -26,9 +33,22 @@ final class CardListView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func startLoading() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
+
+    func updateCardList(_ cards: [CardDTO]) {
+        cardListTableView.updateCardList(cards)
+    }
 }
 
 extension CardListView: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         addSubview(cardListTableView)
         cardListTableView.addSubview(activityIndicator)

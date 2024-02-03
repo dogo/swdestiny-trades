@@ -10,7 +10,7 @@ import UIKit
 
 final class CardListViewController: UIViewController {
 
-    private let cardListView = CardListView()
+    private let cardListView: CardListViewType = CardListView()
     private let database: DatabaseProtocol?
     private let destinyService: CardListInteractorProtocol
     private var setDTO: SetDTO
@@ -39,7 +39,7 @@ final class CardListViewController: UIViewController {
 
         fetchSetCardList()
 
-        cardListView.cardListTableView.didSelectCard = { [weak self] list, card in
+        cardListView.didSelectCard = { [weak self] list, card in
             self?.navigateToNextController(cardList: list, card: card)
         }
     }
@@ -51,17 +51,17 @@ final class CardListViewController: UIViewController {
     }
 
     private func fetchSetCardList() {
-        cardListView.activityIndicator.startAnimating()
+        cardListView.startLoading()
         Task { [weak self] in
             guard let self else { return }
 
             defer {
-                self.cardListView.activityIndicator.stopAnimating()
+                self.cardListView.stopLoading()
             }
 
             do {
                 let cardList = try await destinyService.retrieveCards(setCode: setDTO.code.lowercased())
-                cardListView.cardListTableView.updateCardList(cardList)
+                cardListView.updateCardList(cardList)
             } catch {
                 ToastMessages.showNetworkErrorMessage()
                 LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])
