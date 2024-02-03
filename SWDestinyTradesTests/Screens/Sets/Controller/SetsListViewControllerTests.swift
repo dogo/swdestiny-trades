@@ -24,6 +24,7 @@ final class SetsListViewControllerTests: XCSnapshotableTestCase {
         AppearanceProxyHelper.customizeNavigationBar()
         window = UIWindow(frame: .testDevice)
         client = HttpClientMock()
+        client.fileName = "sets"
         service = SWDestinyService(client: client)
     }
 
@@ -33,8 +34,6 @@ final class SetsListViewControllerTests: XCSnapshotableTestCase {
     }
 
     func testValidLayout() {
-        client.fileName = "sets"
-
         sut = SetsListViewController()
         let router = SetsListNavigator(sut)
         let presenter = SetsListPresenter(view: sut,

@@ -1,9 +1,9 @@
 //
-//  SetsListInteractorTests.swift
+//  CardListInteractorTests.swift
 //  SWDestinyTradesTests
 //
-//  Created by Diogo Autilio on 29/11/23.
-//  Copyright © 2023 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 03/02/24.
+//  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
@@ -11,16 +11,16 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListInteractorTests: XCTestCase {
+final class CardListInteractorTests: XCTestCase {
 
-    private var sut: SetsListInteractor!
+    private var sut: CardListInteractor!
     private var service: SWDestinyService!
     private var client: HttpClientMock!
 
     override func setUpWithError() throws {
         client = HttpClientMock()
         service = SWDestinyService(client: client)
-        sut = SetsListInteractor(service: service)
+        sut = CardListInteractor(service: service)
     }
 
     override func tearDownWithError() throws {
@@ -30,17 +30,17 @@ final class SetsListInteractorTests: XCTestCase {
     }
 
     func test_retrieve_sets_with_success() async throws {
-        client.fileName = "sets"
-        let setList = try await sut.retrieveSets()
+        client.fileName = "card-list"
+        let setList = try await sut.retrieveCards(setCode: "code")
 
-        XCTAssertEqual(setList.count, 12)
+        XCTAssertEqual(setList.count, 20)
     }
 
     func test_fail_to_retrieve_sets() async throws {
         client.error = true
 
         do {
-            _ = try await sut.retrieveSets()
+            _ = try await sut.retrieveCards(setCode: "code")
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
             XCTAssertNotNil(error, "error must be not-nil")

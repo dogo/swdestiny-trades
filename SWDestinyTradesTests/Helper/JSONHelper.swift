@@ -13,6 +13,11 @@ private class BundleTestClass {}
 enum JSONHelper {
 
     static func loadJSON<Element: Decodable>(withFile fileName: String) -> Element? {
+        guard !fileName.isEmpty else {
+            debugPrint("File name is empty")
+            return nil
+        }
+
         var jsonData: Element?
         if let url = Bundle(for: BundleTestClass.self).url(forResource: fileName, withExtension: "json") {
             do {
@@ -27,6 +32,11 @@ enum JSONHelper {
     }
 
     static func loadJSONData(withFile fileName: String) -> Data? {
+        guard !fileName.isEmpty else {
+            debugPrint("File name is empty")
+            return nil
+        }
+
         var data: Data?
         if let url = Bundle(for: BundleTestClass.self).url(forResource: fileName, withExtension: "json") {
             do {

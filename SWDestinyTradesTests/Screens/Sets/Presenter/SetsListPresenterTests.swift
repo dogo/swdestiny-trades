@@ -24,6 +24,7 @@ final class SetsListPresenterTests: XCTestCase {
         super.setUp()
         let controller = UIViewController()
         client = HttpClientMock()
+        client.fileName = "sets"
         service = SWDestinyService(client: client)
         navigationController = UINavigationControllerMock(rootViewController: controller)
         view = SetsListViewSpy()

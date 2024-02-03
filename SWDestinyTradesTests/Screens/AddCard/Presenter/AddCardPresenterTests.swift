@@ -24,6 +24,7 @@ final class AddCardPresenterTests: XCTestCase {
         super.setUp()
         let controller = UIViewControllerMock()
         client = HttpClientMock()
+        client.fileName = "card-list"
         service = SWDestinyService(client: client)
         navigationController = UINavigationControllerMock(rootViewController: controller)
         view = AddCardViewSpy()

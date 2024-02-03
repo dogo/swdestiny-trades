@@ -26,7 +26,9 @@ final class AddCardViewControllerTests: XCTestCase {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: "UserCollection")
-        service = SWDestinyService(client: HttpClientMock())
+        let client = HttpClientMock()
+        client.fileName = "card-list"
+        service = SWDestinyService(client: client)
         view = AddCardViewSpy()
         sut = createSUT(database: database, person: .stub(), userCollection: .stub(), type: .collection)
         navigationController = UINavigationControllerMock(rootViewController: sut)

@@ -9,15 +9,16 @@
 import UIKit
 
 final class CardListViewController: UIViewController {
+
     private let cardListView = CardListView()
     private let database: DatabaseProtocol?
-    private let destinyService: SWDestinyServiceProtocol
+    private let destinyService: CardListInteractorProtocol
     private var setDTO: SetDTO
     private lazy var navigator = CardListNavigator(self.navigationController)
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?, with set: SetDTO) {
+    init(service: CardListInteractorProtocol = CardListInteractor(), database: DatabaseProtocol?, with set: SetDTO) {
         destinyService = service
         self.database = database
         setDTO = set
@@ -59,7 +60,7 @@ final class CardListViewController: UIViewController {
             }
 
             do {
-                let cardList = try await destinyService.retrieveSetCardList(setCode: setDTO.code.lowercased())
+                let cardList = try await destinyService.retrieveCards(setCode: setDTO.code.lowercased())
                 cardListView.cardListTableView.updateCardList(cardList)
             } catch {
                 ToastMessages.showNetworkErrorMessage()
