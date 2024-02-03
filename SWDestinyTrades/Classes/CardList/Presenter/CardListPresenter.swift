@@ -9,7 +9,6 @@
 import Foundation
 
 protocol CardListPresenterProtocol {
-    func viewDidLoad()
     func retrieveCardsList()
     func didSelectCard(cardList: [CardDTO], card: CardDTO)
 }
@@ -29,10 +28,6 @@ final class CardListPresenter: CardListPresenterProtocol {
         self.database = database
         self.navigator = navigator
         self.setDTO = setDTO
-    }
-
-    func viewDidLoad() {
-        retrieveCardsList()
     }
 
     func retrieveCardsList() {

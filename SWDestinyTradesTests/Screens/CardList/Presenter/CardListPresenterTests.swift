@@ -42,11 +42,11 @@ final class CardListPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewDidLoad() {
-        // sut.viewDidLoad()
+    func test_retrieveCardsList() {
+        // sut.retrieveCardsList()
     }
 
-    func testDidSelectSet() {
+    func test_didSelectCard() {
         sut.didSelectCard(cardList: [], card: .stub())
 
         XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
