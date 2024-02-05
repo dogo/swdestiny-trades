@@ -1,6 +1,21 @@
 // swift-tools-version: 5.9
 import PackageDescription
 
+#if TUIST
+    import ProjectDescription
+    import ProjectDescriptionHelpers
+
+    let packageSettings = PackageSettings(
+        productTypes: [
+            "ImageSlideshow": .framework,
+            "SwiftMessages": .framework
+        ],
+        targetSettings: [
+            "iOSSnapshotTestCase": ["ENABLE_TESTING_SEARCH_PATHS": "YES"]
+        ]
+    )
+#endif
+
 let package = Package(
     name: "PackageName",
     dependencies: [

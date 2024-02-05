@@ -9,7 +9,7 @@ public extension Project {
 
     static func targets() -> [Target] {
         return [
-            Target(
+            .target(
                 name: "SWDestinyTrades",
                 destinations: [.iPhone, .iPad],
                 product: .app,
@@ -38,7 +38,7 @@ public extension Project {
                 ],
                 settings: Settings.default
             ),
-            Target(
+            .target(
                 name: "SWDestinyTradesTests",
                 destinations: [.iPhone, .iPad],
                 product: .unitTests,

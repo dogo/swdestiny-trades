@@ -37,7 +37,7 @@ jobs:
 
       - name: Fetch tuist dependencies
         run: |
-          tuist fetch
+          tuist install
         shell: bash
 
       #- name: Tuist Warm Cache

@@ -9,7 +9,7 @@ public extension Project {
 
     static func schemes() -> [Scheme] {
         return [
-            Scheme(
+            .scheme(
                 name: "SWDestinyTrades",
                 buildAction: .buildAction(targets: ["SWDestinyTrades"]),
                 testAction: .targets(["SWDestinyTradesTests"], options: .options(coverage: true, codeCoverageTargets: ["SWDestinyTrades"]))

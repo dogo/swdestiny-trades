@@ -80,6 +80,7 @@ identifier_name:
 excluded:
   - Pods
   - Carthage
+  - .build
   - Tuist/Dependencies/Carthage
   - Tuist/Dependencies/SwiftPackageManager
   - Tuist/Dependencies/Cocoapods
