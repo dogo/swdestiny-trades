@@ -9,6 +9,7 @@
 import UIKit
 
 final class SetsTableView: UITableView {
+
     var didSelectSet: ((SetDTO) -> Void)?
 
     private var tableViewDatasource: SetsListDatasource?

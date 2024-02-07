@@ -20,4 +20,8 @@ extension SetsView {
     var pullToRefresh: UIRefreshControl {
         Mirror.extract(variable: "pullToRefresh", from: self)!
     }
+
+    var activityIndicator: UIActivityIndicatorView {
+        Mirror.extract(variable: "activityIndicator", from: self)!
+    }
 }

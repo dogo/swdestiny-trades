@@ -49,6 +49,31 @@ final class SetsViewTests: XCSnapshotableTestCase {
         XCTAssertEqual(didCallDidSelectSet[0].name, SetDTO.stub().name)
     }
 
+    func test_startLoading() {
+        sut.startLoading()
+
+        XCTAssertTrue(sut.activityIndicator.isAnimating)
+    }
+
+    func test_stopLoading() {
+        sut.stopLoading()
+
+        XCTAssertFalse(sut.activityIndicator.isAnimating)
+    }
+
+    func test_beginRefreshing() {
+        sut.beginRefreshing()
+
+        XCTAssertFalse(sut.pullToRefresh.isRefreshing)
+    }
+
+    func test_endRefreshControl() {
+        sut.endRefreshControl()
+
+        XCTAssertNotNil(sut.pullToRefresh.attributedTitle)
+        XCTAssertFalse(sut.pullToRefresh.isRefreshing)
+    }
+
     func test_setupPullToRefresh() {
         let viewController = SetsListViewController(with: sut)
 
