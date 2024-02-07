@@ -2,8 +2,8 @@
 //  SetsListViewSpy.swift
 //  SWDestinyTradesTests
 //
-//  Created by Diogo Autilio on 01/12/23.
-//  Copyright © 2023 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 07/02/24.
+//  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
@@ -11,16 +11,18 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class SetsListViewSpy: UIView, SetsListViewProtocol {
+final class SetsListViewSpy: UIView, SetsListViewType {
 
-    private(set) var didCallStartAnimatingCount = 0
+    var didSelectSet: ((SetDTO) -> Void)?
+
+    private(set) var didCallStartLoadingCount = 0
     func startLoading() {
-        didCallStartAnimatingCount += 1
+        didCallStartLoadingCount += 1
     }
 
-    private(set) var didCallStopAnimatingCount = 0
+    private(set) var didCallStopLoadingCount = 0
     func stopLoading() {
-        didCallStopAnimatingCount += 1
+        didCallStopLoadingCount += 1
     }
 
     private(set) var didCallEndRefreshControlCount = 0
@@ -29,17 +31,12 @@ final class SetsListViewSpy: UIView, SetsListViewProtocol {
     }
 
     private(set) var didCallUpdateSetList = [SetDTO]()
-    func updateSetList(_ setList: [SetDTO]) {
-        didCallUpdateSetList.append(contentsOf: setList)
+    func updateSetList(_ sets: [SetDTO]) {
+        didCallUpdateSetList.append(contentsOf: sets)
     }
 
-    private(set) var didCallSetupNavigationItemCount = 0
-    func setupNavigationItem() {
-        didCallSetupNavigationItemCount += 1
-    }
-
-    private(set) var didCallShowNetworkErrorMessageCount = 0
-    func showNetworkErrorMessage() {
-        didCallShowNetworkErrorMessageCount += 1
+    private(set) var didCallSetupPullToRefresh = [(target: Any, action: Selector)]()
+    func setupPullToRefresh(target: Any, action: Selector) {
+        didCallSetupPullToRefresh.append((target, action))
     }
 }

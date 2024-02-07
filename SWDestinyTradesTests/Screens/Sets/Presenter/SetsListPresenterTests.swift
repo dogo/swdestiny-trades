@@ -16,20 +16,19 @@ final class SetsListPresenterTests: XCTestCase {
     private var sut: SetsListPresenter!
     private var service: SWDestinyService!
     private var client: HttpClientMock!
-    private var view: SetsListViewSpy!
+    private var controller: SetsListViewControllerSpy!
     private var navigator: SetsListNavigator!
     private var navigationController: UINavigationControllerMock!
 
     override func setUp() {
         super.setUp()
-        let controller = UIViewController()
+        controller = SetsListViewControllerSpy()
         client = HttpClientMock()
         client.fileName = "sets"
         service = SWDestinyService(client: client)
         navigationController = UINavigationControllerMock(rootViewController: controller)
-        view = SetsListViewSpy()
         navigator = SetsListNavigator(controller)
-        sut = SetsListPresenter(view: view,
+        sut = SetsListPresenter(controller: controller,
                                 interactor: SetsListInteractor(service: service),
                                 database: nil,
                                 navigator: navigator)
@@ -39,7 +38,7 @@ final class SetsListPresenterTests: XCTestCase {
         client = nil
         service = nil
         navigationController = nil
-        view = nil
+        controller = nil
         navigator = nil
         sut = nil
         super.tearDown()
@@ -48,8 +47,8 @@ final class SetsListPresenterTests: XCTestCase {
     func test_ViewDidLoad() {
         sut.viewDidLoad()
 
-        XCTAssertEqual(view.didCallStartAnimatingCount, 1)
-        XCTAssertEqual(view.didCallSetupNavigationItemCount, 1)
+        XCTAssertEqual(controller.didCallStartLoadingCount, 1)
+        XCTAssertEqual(controller.didCallSetupNavigationItemCount, 1)
     }
 
     func test_retrieveSets_success() async {
@@ -65,9 +64,9 @@ final class SetsListPresenterTests: XCTestCase {
         await fulfillment(of: [expectation])
 
         await MainActor.run {
-            XCTAssertEqual(view.didCallUpdateSetList.count, 12)
-            XCTAssertEqual(view.didCallStopAnimatingCount, 1)
-            XCTAssertEqual(view.didCallEndRefreshControlCount, 1)
+            XCTAssertEqual(controller.didCallUpdateSetList.count, 12)
+            XCTAssertEqual(controller.didCallStopLoadingCount, 1)
+            XCTAssertEqual(controller.didCallEndRefreshControlCount, 1)
         }
     }
 
@@ -85,9 +84,9 @@ final class SetsListPresenterTests: XCTestCase {
         await fulfillment(of: [expectation])
 
         await MainActor.run {
-            XCTAssertEqual(view.didCallShowNetworkErrorMessageCount, 1)
-            XCTAssertEqual(view.didCallStopAnimatingCount, 1)
-            XCTAssertEqual(view.didCallEndRefreshControlCount, 1)
+            XCTAssertEqual(controller.didCallShowNetworkErrorMessageCount, 1)
+            XCTAssertEqual(controller.didCallStopLoadingCount, 1)
+            XCTAssertEqual(controller.didCallEndRefreshControlCount, 1)
         }
     }
 

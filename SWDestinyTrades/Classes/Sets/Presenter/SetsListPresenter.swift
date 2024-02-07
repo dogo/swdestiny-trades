@@ -18,24 +18,24 @@ protocol SetsPresenterProtocol {
 
 final class SetsListPresenter: SetsPresenterProtocol {
 
-    private weak var view: SetsListViewProtocol?
+    private weak var controller: SetsListViewControllerProtocol?
     private let interactor: SetsListInteractorProtocol
     private let database: DatabaseProtocol?
     private let navigator: SetsListNavigator
 
-    init(view: SetsListViewProtocol,
+    init(controller: SetsListViewControllerProtocol,
          interactor: SetsListInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: SetsListNavigator) {
-        self.view = view
+        self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
     }
 
     func viewDidLoad() {
-        view?.startLoading()
-        view?.setupNavigationItem()
+        controller?.startLoading()
+        controller?.setupNavigationItem()
         retrieveSets()
     }
 
@@ -47,16 +47,16 @@ final class SetsListPresenter: SetsPresenterProtocol {
                 let setList = try await interactor.retrieveSets()
 
                 await MainActor.run { [weak self] in
-                    self?.view?.updateSetList(setList)
-                    self?.view?.stopLoading()
-                    self?.view?.endRefreshControl()
+                    self?.controller?.updateSetList(setList)
+                    self?.controller?.stopLoading()
+                    self?.controller?.endRefreshControl()
                 }
             } catch {
                 await MainActor.run { [weak self] in
-                    self?.view?.showNetworkErrorMessage()
+                    self?.controller?.showNetworkErrorMessage()
                     LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
-                    self?.view?.stopLoading()
-                    self?.view?.endRefreshControl()
+                    self?.controller?.stopLoading()
+                    self?.controller?.endRefreshControl()
                 }
             }
         }

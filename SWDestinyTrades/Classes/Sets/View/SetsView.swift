@@ -8,16 +8,7 @@
 
 import UIKit
 
-protocol SetsListViewProtocol: AnyObject {
-    func startLoading()
-    func stopLoading()
-    func endRefreshControl()
-    func updateSetList(_ setList: [SetDTO])
-    func setupNavigationItem()
-    func showNetworkErrorMessage()
-}
-
-final class SetsView: UIView {
+final class SetsView: UIView, SetsListViewType {
 
     var didSelectSet: ((SetDTO) -> Void)?
 
@@ -69,8 +60,12 @@ final class SetsView: UIView {
         pullToRefresh.endRefreshing()
     }
 
-    func updateSetList(_ setList: [SetDTO]) {
-        setsTableView.updateSetList(setList)
+    func updateSetList(_ sets: [SetDTO]) {
+        setsTableView.updateSetList(sets)
+    }
+
+    func setupPullToRefresh(target: Any, action: Selector) {
+        pullToRefresh.addTarget(target, action: action, for: .valueChanged)
     }
 }
 

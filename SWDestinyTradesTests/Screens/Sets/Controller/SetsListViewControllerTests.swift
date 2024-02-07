@@ -11,9 +11,10 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListViewControllerTests: XCSnapshotableTestCase {
+final class SetsListViewControllerTests: XCTestCase {
 
     private var sut: SetsListViewController!
+    private var view: SetsListViewSpy!
     private var service: SWDestinyService!
     private var client: HttpClientMock!
     private var navigationController: UINavigationController!
@@ -23,7 +24,8 @@ final class SetsListViewControllerTests: XCSnapshotableTestCase {
     override func setUp() {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
-        sut = SetsListViewController()
+        view = SetsListViewSpy()
+        sut = SetsListViewController(with: view)
         presenter = SetsPresenterSpy()
         sut.presenter = presenter
         navigationController = UINavigationControllerMock(rootViewController: sut)
@@ -31,6 +33,7 @@ final class SetsListViewControllerTests: XCSnapshotableTestCase {
     }
 
     override func tearDown() {
+        view = nil
         presenter = nil
         navigationController = nil
         sut = nil
@@ -41,19 +44,28 @@ final class SetsListViewControllerTests: XCSnapshotableTestCase {
     func test_loadView() {
         sut.loadView()
 
-        XCTAssertTrue(sut.view is SetsView)
+        XCTAssertTrue(sut.view is SetsListViewType)
     }
 
     func test_viewDidLoad() {
         sut.viewDidLoad()
 
         XCTAssertEqual(presenter.didCallViewDidLoadCount, 1)
+        XCTAssertEqual(view.didCallSetupPullToRefresh.count, 1)
+    }
+
+    func test_didSelectSet() {
+        sut.viewDidLoad()
+        view.didSelectSet?(.stub())
+
+        XCTAssertEqual(presenter.didCallDidSelectSet.count, 1)
+        XCTAssertEqual(presenter.didCallDidSelectSet[0].name, "Awakenings")
     }
 
     func test_viewWillAppear() {
         sut.viewWillAppear(false)
 
-        // XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
+        XCTAssertEqual(sut.navigationItem.title, "Expansions")
     }
 
     func test_retrieveSets() {
@@ -64,41 +76,46 @@ final class SetsListViewControllerTests: XCSnapshotableTestCase {
 
     func test_aboutButtonTouched() {
         sut.aboutButtonTouched()
-        
+
         XCTAssertEqual(presenter.didCallAboutButtonTouchedCount, 1)
     }
 
     func test_searchButtonTouched() {
         sut.searchButtonTouched()
-        
+
         XCTAssertEqual(presenter.didCallSearchButtonTouchedCount, 1)
     }
 
     func test_startLoading() {
         sut.startLoading()
 
-        // XCTAssertEqual(view.didCallStartLoadingCount, 1)
+        XCTAssertEqual(view.didCallStartLoadingCount, 1)
     }
 
     func test_stopLoading() {
         sut.stopLoading()
 
-        // XCTAssertEqual(view.didCallStopLoadingCount, 1)
+        XCTAssertEqual(view.didCallStopLoadingCount, 1)
     }
-    
+
     func test_endRefreshControl() {
         sut.endRefreshControl()
 
-        // XCTAssertEqual(view.didCallStartLoadingCount, 1)
+        XCTAssertEqual(view.didCallEndRefreshControlCount, 1)
     }
 
     func test_updateSetList() {
         sut.updateSetList([.stub()])
 
-        // XCTAssertEqual(view.didCallUpdateCardList.count, 1)
+        XCTAssertEqual(view.didCallUpdateSetList.count, 1)
     }
 
-    func test_setupNavigationItem() {}
+    func test_setupNavigationItem() {
+        sut.setupNavigationItem()
+
+        XCTAssertNotNil(sut.navigationItem.leftBarButtonItem)
+        XCTAssertNotNil(sut.navigationItem.rightBarButtonItem)
+    }
 
     func test_showNetworkErrorMessage() {
         sut.showNetworkErrorMessage()

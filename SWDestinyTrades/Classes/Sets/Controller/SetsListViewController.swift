@@ -11,12 +11,12 @@ import UIKit
 final class SetsListViewController: UIViewController {
 
     var presenter: SetsPresenterProtocol?
-    private let setsView: SetsView
+    private let setsView: SetsListViewType
 
     // MARK: - Life Cycle
 
-    init(setsView: SetsView = SetsView()) {
-        self.setsView = setsView
+    init(with view: SetsListViewType = SetsView()) {
+        setsView = view
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -31,7 +31,9 @@ final class SetsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setsView.pullToRefresh.addTarget(self, action: #selector(retrieveSets), for: .valueChanged)
+
+        setsView.setupPullToRefresh(target: self, action: #selector(retrieveSets))
+
         presenter?.viewDidLoad()
 
         setsView.didSelectSet = { [weak self] set in
@@ -61,7 +63,7 @@ final class SetsListViewController: UIViewController {
     }
 }
 
-extension SetsListViewController: SetsListViewProtocol {
+extension SetsListViewController: SetsListViewControllerProtocol {
 
     func startLoading() {
         setsView.startLoading()

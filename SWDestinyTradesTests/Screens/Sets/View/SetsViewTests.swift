@@ -25,7 +25,7 @@ final class SetsViewTests: XCSnapshotableTestCase {
         super.tearDown()
     }
 
-    func testInitialization() {
+    func test_initialization() {
         let sets: [SetDTO] = [
             .stub(),
             .stub(name: "Spirit of Rebellion", code: "SoR"),
@@ -37,7 +37,7 @@ final class SetsViewTests: XCSnapshotableTestCase {
         XCTAssertTrue(snapshot(sut))
     }
 
-    func testDidSelectSet() {
+    func test_didSelectSet() {
         var didCallDidSelectSet = [SetDTO]()
         sut.didSelectSet = { set in
             didCallDidSelectSet.append(set)
@@ -47,5 +47,9 @@ final class SetsViewTests: XCSnapshotableTestCase {
 
         XCTAssertEqual(didCallDidSelectSet.count, 1)
         XCTAssertEqual(didCallDidSelectSet[0].name, SetDTO.stub().name)
+    }
+    
+    func test_setupPullToRefresh() {
+        // sut.setupPullToRefresh(target: Any, action: Selector)
     }
 }
