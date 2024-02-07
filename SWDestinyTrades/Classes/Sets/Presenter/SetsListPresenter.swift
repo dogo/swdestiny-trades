@@ -34,7 +34,7 @@ final class SetsListPresenter: SetsPresenterProtocol {
     }
 
     func viewDidLoad() {
-        view?.startAnimating()
+        view?.startLoading()
         view?.setupNavigationItem()
         retrieveSets()
     }
@@ -48,14 +48,14 @@ final class SetsListPresenter: SetsPresenterProtocol {
 
                 await MainActor.run { [weak self] in
                     self?.view?.updateSetList(setList)
-                    self?.view?.stopAnimating()
+                    self?.view?.stopLoading()
                     self?.view?.endRefreshControl()
                 }
             } catch {
                 await MainActor.run { [weak self] in
                     self?.view?.showNetworkErrorMessage()
                     LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
-                    self?.view?.stopAnimating()
+                    self?.view?.stopLoading()
                     self?.view?.endRefreshControl()
                 }
             }

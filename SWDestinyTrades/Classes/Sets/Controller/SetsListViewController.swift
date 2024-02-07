@@ -31,7 +31,6 @@ final class SetsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blackWhite
         setsView.pullToRefresh.addTarget(self, action: #selector(retrieveSets), for: .valueChanged)
         presenter?.viewDidLoad()
 
@@ -64,12 +63,12 @@ final class SetsListViewController: UIViewController {
 
 extension SetsListViewController: SetsListViewProtocol {
 
-    func startAnimating() {
-        setsView.startAnimating()
+    func startLoading() {
+        setsView.startLoading()
     }
 
-    func stopAnimating() {
-        setsView.stopAnimating()
+    func stopLoading() {
+        setsView.stopLoading()
     }
 
     func endRefreshControl() {

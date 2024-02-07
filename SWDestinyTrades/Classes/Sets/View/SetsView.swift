@@ -9,8 +9,8 @@
 import UIKit
 
 protocol SetsListViewProtocol: AnyObject {
-    func startAnimating()
-    func stopAnimating()
+    func startLoading()
+    func stopLoading()
     func endRefreshControl()
     func updateSetList(_ setList: [SetDTO])
     func setupNavigationItem()
@@ -47,11 +47,11 @@ final class SetsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func startAnimating() {
+    func startLoading() {
         activityIndicator.startAnimating()
     }
 
-    func stopAnimating() {
+    func stopLoading() {
         activityIndicator.stopAnimating()
     }
 

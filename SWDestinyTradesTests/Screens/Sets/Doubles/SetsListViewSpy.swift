@@ -14,12 +14,12 @@ import UIKit
 final class SetsListViewSpy: UIView, SetsListViewProtocol {
 
     private(set) var didCallStartAnimatingCount = 0
-    func startAnimating() {
+    func startLoading() {
         didCallStartAnimatingCount += 1
     }
 
     private(set) var didCallStopAnimatingCount = 0
-    func stopAnimating() {
+    func stopLoading() {
         didCallStopAnimatingCount += 1
     }
 
