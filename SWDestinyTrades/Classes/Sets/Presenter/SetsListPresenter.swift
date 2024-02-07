@@ -53,7 +53,7 @@ final class SetsListPresenter: SetsPresenterProtocol {
                 }
             } catch {
                 await MainActor.run { [weak self] in
-                    ToastMessages.showNetworkErrorMessage()
+                    self?.view?.showNetworkErrorMessage()
                     LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
                     self?.view?.stopAnimating()
                     self?.view?.endRefreshControl()

@@ -45,26 +45,65 @@ final class SetsListPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewDidLoad() {
+    func test_ViewDidLoad() {
         sut.viewDidLoad()
 
-        XCTAssertEqual(view.didCallStartAnimating, 1)
-        XCTAssertEqual(view.didCallSetupNavigationItem, 1)
+        XCTAssertEqual(view.didCallStartAnimatingCount, 1)
+        XCTAssertEqual(view.didCallSetupNavigationItemCount, 1)
     }
 
-    func testDidSelectSet() {
+    func test_retrieveSets_success() async {
+        client.fileName = "sets"
+
+        let expectation = XCTestExpectation(description: "Retrieve sets expectation")
+
+        Task {
+            sut.retrieveSets()
+            expectation.fulfill()
+        }
+
+        await fulfillment(of: [expectation])
+
+        await MainActor.run {
+            XCTAssertEqual(view.didCallUpdateSetList.count, 12)
+            XCTAssertEqual(view.didCallStopAnimatingCount, 1)
+            XCTAssertEqual(view.didCallEndRefreshControlCount, 1)
+        }
+    }
+
+    func test_retrieveSets_failure() async {
+        client.fileName = "sets"
+        client.error = true
+
+        let expectation = XCTestExpectation(description: "Retrieve sets expectation")
+
+        Task {
+            sut.retrieveSets()
+            expectation.fulfill()
+        }
+
+        await fulfillment(of: [expectation])
+
+        await MainActor.run {
+            XCTAssertEqual(view.didCallShowNetworkErrorMessageCount, 1)
+            XCTAssertEqual(view.didCallStopAnimatingCount, 1)
+            XCTAssertEqual(view.didCallEndRefreshControlCount, 1)
+        }
+    }
+
+    func test_didSelectSet() {
         sut.didSelectSet(.stub())
 
         XCTAssertTrue(navigationController.currentPushedViewController is CardListViewController)
     }
 
-    func testAboutButtonTouched() {
+    func test_aboutButtonTouched() {
         sut.aboutButtonTouched()
 
         XCTAssertTrue(navigationController.currentPushedViewController is AboutViewController)
     }
 
-    func testSearchButtonTouched() {
+    func test_searchButtonTouched() {
         sut.searchButtonTouched()
 
         XCTAssertTrue(navigationController.currentPushedViewController is SearchListViewController)

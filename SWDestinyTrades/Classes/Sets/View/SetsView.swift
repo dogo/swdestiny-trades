@@ -14,6 +14,7 @@ protocol SetsListViewProtocol: AnyObject {
     func endRefreshControl()
     func updateSetList(_ setList: [SetDTO])
     func setupNavigationItem()
+    func showNetworkErrorMessage()
 }
 
 final class SetsView: UIView {

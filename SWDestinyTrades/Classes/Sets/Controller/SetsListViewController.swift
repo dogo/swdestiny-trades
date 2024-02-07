@@ -84,4 +84,8 @@ extension SetsListViewController: SetsListViewProtocol {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icAbout.image, style: .plain, target: self, action: #selector(aboutButtonTouched))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTouched))
     }
+
+    func showNetworkErrorMessage() {
+        ToastMessages.showNetworkErrorMessage()
+    }
 }

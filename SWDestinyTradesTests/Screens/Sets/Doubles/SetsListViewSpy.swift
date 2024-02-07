@@ -13,19 +13,19 @@ import UIKit
 
 final class SetsListViewSpy: UIView, SetsListViewProtocol {
 
-    private(set) var didCallStartAnimating = 0
+    private(set) var didCallStartAnimatingCount = 0
     func startAnimating() {
-        didCallStartAnimating += 1
+        didCallStartAnimatingCount += 1
     }
 
-    private(set) var didCallStopAnimating = 0
+    private(set) var didCallStopAnimatingCount = 0
     func stopAnimating() {
-        didCallStopAnimating += 1
+        didCallStopAnimatingCount += 1
     }
 
-    private(set) var didCallEndRefreshControl = 0
+    private(set) var didCallEndRefreshControlCount = 0
     func endRefreshControl() {
-        didCallEndRefreshControl += 1
+        didCallEndRefreshControlCount += 1
     }
 
     private(set) var didCallUpdateSetList = [SetDTO]()
@@ -33,8 +33,13 @@ final class SetsListViewSpy: UIView, SetsListViewProtocol {
         didCallUpdateSetList.append(contentsOf: setList)
     }
 
-    private(set) var didCallSetupNavigationItem = 0
+    private(set) var didCallSetupNavigationItemCount = 0
     func setupNavigationItem() {
-        didCallSetupNavigationItem += 1
+        didCallSetupNavigationItemCount += 1
+    }
+
+    private(set) var didCallShowNetworkErrorMessageCount = 0
+    func showNetworkErrorMessage() {
+        didCallShowNetworkErrorMessageCount += 1
     }
 }
