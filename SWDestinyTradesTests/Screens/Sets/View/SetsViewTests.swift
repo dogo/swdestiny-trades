@@ -48,8 +48,17 @@ final class SetsViewTests: XCSnapshotableTestCase {
         XCTAssertEqual(didCallDidSelectSet.count, 1)
         XCTAssertEqual(didCallDidSelectSet[0].name, SetDTO.stub().name)
     }
-    
+
     func test_setupPullToRefresh() {
-        // sut.setupPullToRefresh(target: Any, action: Selector)
+        let viewController = SetsListViewController(with: sut)
+
+        let target = viewController
+        let action = #selector(viewController.retrieveSets)
+
+        sut.setupPullToRefresh(target: target, action: action)
+
+        XCTAssertTrue(sut.pullToRefresh.allTargets.contains(target), "Target not added to pullToRefresh")
+        let actions = sut.pullToRefresh.actions(forTarget: target, forControlEvent: .valueChanged)
+        XCTAssertTrue(actions?.contains(action.description) ?? false, "Action not added to pullToRefresh")
     }
 }

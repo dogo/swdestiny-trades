@@ -14,7 +14,7 @@ final class SetsView: UIView, SetsListViewType {
 
     private let setsTableView = SetsTableView()
 
-    let pullToRefresh = UIRefreshControl()
+    private let pullToRefresh = UIRefreshControl()
 
     private let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)

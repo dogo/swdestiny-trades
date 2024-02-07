@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 @testable import SWDestinyTrades
 
@@ -14,5 +15,9 @@ extension SetsView {
 
     var setsTableView: SetsTableView? {
         Mirror.extract(variable: "setsTableView", from: self)
+    }
+
+    var pullToRefresh: UIRefreshControl {
+        Mirror.extract(variable: "pullToRefresh", from: self)!
     }
 }
