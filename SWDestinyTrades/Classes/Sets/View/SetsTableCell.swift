@@ -9,13 +9,14 @@
 import UIKit
 
 final class SetsTableCell: UITableViewCell, Identifiable {
-    var titleLabel: UILabel = {
+
+    private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()
 
-    var expansionImageView: UIImageView = {
+    private let expansionImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         return image
@@ -33,7 +34,7 @@ final class SetsTableCell: UITableViewCell, Identifiable {
 
     func configureCell(setDTO: SetDTO) {
         titleLabel.text = setDTO.name
-        expansionImageView.image = setDTO.setIcon().withRenderingMode(.alwaysTemplate)
+        expansionImageView.image = setDTO.icon.withRenderingMode(.alwaysTemplate)
         expansionImageView.tintColor = .whiteBlack
     }
 
@@ -49,6 +50,7 @@ final class SetsTableCell: UITableViewCell, Identifiable {
 }
 
 extension SetsTableCell: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         contentView.addSubview(expansionImageView)
         contentView.addSubview(titleLabel)
