@@ -10,7 +10,7 @@ import UIKit
 
 final class DeckBuilderViewController: UIViewController {
     private lazy var deckBuilderView = DeckBuilderTableView(delegate: self)
-    private lazy var navigator = DeckBuilderNavigator(self.navigationController)
+    private lazy var navigator = DeckBuilderNavigator(self)
     private let database: DatabaseProtocol?
     private var deckDTO: DeckDTO
 
