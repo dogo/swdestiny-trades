@@ -9,14 +9,16 @@
 import UIKit
 
 final class DeckBuilderViewController: UIViewController {
-    private lazy var deckBuilderView = DeckBuilderTableView(delegate: self)
+
+    private let deckBuilderView: DeckBuilderViewType
     private lazy var navigator = DeckBuilderNavigator(self)
     private let database: DatabaseProtocol?
     private var deckDTO: DeckDTO
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?, with deck: DeckDTO) {
+    init(with view: DeckBuilderViewType, database: DatabaseProtocol?, deck: DeckDTO) {
+        deckBuilderView = view
         self.database = database
         deckDTO = deck
         super.init(nibName: nil, bundle: nil)
@@ -89,7 +91,7 @@ final class DeckBuilderViewController: UIViewController {
     func share(_ sender: UIBarButtonItem) {
         var deckList = "\(deckDTO.name)\n\n"
 
-        if let deckObject = deckBuilderView.tableViewDatasource?.deckList {
+        if let deckObject = deckBuilderView.getDeckList() {
             for section in deckObject {
                 deckList.append(String(format: "%@ (%d)\n", section.name, section.items.count))
                 for card in section.items {

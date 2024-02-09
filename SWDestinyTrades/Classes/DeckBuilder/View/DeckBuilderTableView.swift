@@ -8,15 +8,17 @@
 
 import UIKit
 
-final class DeckBuilderTableView: UITableView {
+final class DeckBuilderTableView: UITableView, DeckBuilderViewType {
+
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
-    var tableViewDatasource: DeckBuilderDatasource?
+    weak var deckBuilderDelegate: DeckBuilderProtocol?
 
-    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: DeckBuilderProtocol) {
+    private var tableViewDatasource: DeckBuilderDatasource?
+
+    override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
-        tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: delegate)
-        self.delegate = self
+        delegate = self
         tableViewDatasource?.collapsibleDelegate = self
         backgroundColor = .blackWhite
     }
@@ -27,7 +29,12 @@ final class DeckBuilderTableView: UITableView {
     }
 
     func updateTableViewData(deck: DeckDTO) {
+        tableViewDatasource = DeckBuilderDatasource(tableView: self, delegate: deckBuilderDelegate)
         tableViewDatasource?.updateTableViewData(deck: deck)
+    }
+
+    func getDeckList() -> [DeckBuilderDatasource.Section]? {
+        return tableViewDatasource?.deckList
     }
 
     func didSelectRowAt(index: IndexPath) {
@@ -38,12 +45,14 @@ final class DeckBuilderTableView: UITableView {
 }
 
 extension DeckBuilderTableView: CollapsibleTableViewHeaderDelegate {
+
     func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
         tableViewDatasource?.toggleSection(header: header, section: section)
     }
 }
 
 extension DeckBuilderTableView: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let currentDatasource = tableViewDatasource else {
             return 0

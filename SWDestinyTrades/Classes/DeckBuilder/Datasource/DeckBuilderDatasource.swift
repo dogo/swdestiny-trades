@@ -34,7 +34,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
 
     weak var collapsibleDelegate: CollapsibleTableViewHeaderDelegate?
 
-    required init(tableView: UITableView, delegate: DeckBuilderProtocol) {
+    required init(tableView: UITableView, delegate: DeckBuilderProtocol?) {
         super.init()
         self.tableView = tableView
         self.delegate = delegate
