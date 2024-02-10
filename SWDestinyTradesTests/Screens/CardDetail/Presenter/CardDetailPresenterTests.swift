@@ -15,7 +15,6 @@ final class CardDetailPresenterTests: XCTestCase {
 
     private var sut: CardDetailPresenter!
     private var view: CardViewSpy!
-    private var dispatchQueue: DispatchQueueSpy!
     private var database: RealmDatabase?
 
     override func setUp() {
@@ -23,9 +22,8 @@ final class CardDetailPresenterTests: XCTestCase {
         let cardList: [CardDTO] = [.stub(), .stub()]
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
         view = CardViewSpy()
-        dispatchQueue = DispatchQueueSpy()
         sut = CardDetailPresenter(controller: view,
-                                  dispatchQueue: dispatchQueue,
+                                  dispatchQueue: DispatchQueueSpy(),
                                   database: database,
                                   cardList: cardList,
                                   selected: cardList[0])
@@ -33,7 +31,6 @@ final class CardDetailPresenterTests: XCTestCase {
 
     override func tearDown() {
         database = nil
-        dispatchQueue = nil
         view = nil
         sut = nil
         super.tearDown()

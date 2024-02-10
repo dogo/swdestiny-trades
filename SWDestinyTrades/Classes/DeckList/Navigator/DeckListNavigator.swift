@@ -34,10 +34,7 @@ final class DeckListNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case let .deckBuilder(database, deck):
-            let view = DeckBuilderTableView()
-            let controller = DeckBuilderViewController(with: view, database: database, deck: deck)
-            view.deckBuilderDelegate = controller
-            return controller
+            return DeckBuilderViewControllerFactory(database: database, deckDTO: deck).createViewController()
         }
     }
 }

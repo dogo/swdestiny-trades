@@ -11,16 +11,13 @@ import UIKit
 final class DeckBuilderViewController: UIViewController {
 
     private let deckBuilderView: DeckBuilderViewType
-    private lazy var navigator = DeckBuilderNavigator(self)
-    private let database: DatabaseProtocol?
-    private var deckDTO: DeckDTO
+
+    var presenter: DeckBuilderPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(with view: DeckBuilderViewType, database: DatabaseProtocol?, deck: DeckDTO) {
+    init(with view: DeckBuilderViewType) {
         deckBuilderView = view
-        self.database = database
-        deckDTO = deck
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -36,99 +33,39 @@ final class DeckBuilderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationItem()
-
-        deckBuilderView.didSelectCard = { [weak self] list, card in
-            self?.navigateToCardDetailViewController(cardList: list, card: card)
+        presenter?.setupNavigationItems { [weak self] items in
+            self?.navigationItem.rightBarButtonItems = items
         }
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)
+        deckBuilderView.didSelectCard = { [weak self] list, card in
+            self?.presenter?.navigateToCardDetailViewController(cardList: list, card: card)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationItem.title = deckDTO.name
+        presenter?.setNavigationTitle()
 
-        loadData(deck: deckDTO)
-    }
-
-    private func setupNavigationItem() {
-        let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddToDeckViewController))
-        let deckGraphBarItem = UIBarButtonItem(image: Asset.NavigationBar.icChart.image, style: .plain, target: self, action: #selector(navigateToDeckGraphViewController))
-        navigationItem.rightBarButtonItems = [addCardBarItem, deckGraphBarItem, shareBarItem]
-    }
-
-    func loadData(deck: DeckDTO) {
-        deckBuilderView.updateTableViewData(deck: deck)
-    }
-
-    @objc
-    private func reloadTableView(_ notification: NSNotification) {
-        if let deck = notification.userInfo?["deckDTO"] as? DeckDTO {
-            loadData(deck: deck)
-        }
-    }
-
-    // MARK: Navigation
-
-    func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
-        navigator.navigate(to: .cardDetail(database: database, with: cardList, card: card))
-    }
-
-    @objc
-    func navigateToAddToDeckViewController() {
-        navigator.navigate(to: .addToDeck(database: database, with: deckDTO))
-    }
-
-    @objc
-    func navigateToDeckGraphViewController() {
-        navigator.navigate(to: .deckGraph(with: deckDTO))
-    }
-
-    @objc
-    func share(_ sender: UIBarButtonItem) {
-        var deckList = "\(deckDTO.name)\n\n"
-
-        if let deckObject = deckBuilderView.getDeckList() {
-            for section in deckObject {
-                deckList.append(String(format: "%@ (%d)\n", section.name, section.items.count))
-                for card in section.items {
-                    deckList.append(String(format: "%d %@\n", card.quantity, card.name))
-                }
-                deckList.append("\n")
-            }
-        }
-
-        let activityVC = UIActivityViewController(activityItems: [SwdShareProvider(subject: deckDTO.name, text: deckList), L10n.shareText], applicationActivities: nil)
-        activityVC.excludedActivityTypes = [.saveToCameraRoll, .postToFlickr, .postToVimeo, .assignToContact, .addToReadingList, .postToFacebook]
-
-        activityVC.popoverPresentationController?.barButtonItem = sender
-        DispatchQueue.global(qos: .userInteractive).async {
-            DispatchQueue.main.async {
-                self.present(activityVC, animated: true, completion: nil)
-            }
-        }
+        presenter?.loadData(deck: nil)
     }
 }
 
-extension DeckBuilderViewController: DeckBuilderProtocol {
-    func updateCardQuantity(newValue: Int, card: CardDTO) {
-        try? database?.update {
-            card.quantity = newValue
-        }
+extension DeckBuilderViewController: DeckBuilderViewControllerProtocol {
+
+    func updateTableViewData(deck: DeckDTO) {
+        deckBuilderView.updateTableViewData(deck: deck)
     }
 
-    func updateCharacterElite(newValue: Bool, card: CardDTO) {
-        try? database?.update {
-            card.isElite = newValue
-        }
+    func getDeckList() -> [DeckBuilderDatasource.Section]? {
+        return deckBuilderView.getDeckList()
     }
 
-    func remove(at index: Int) {
-        try? database?.update { [weak self] in
-            self?.deckDTO.list.remove(at: index)
-        }
+    func presentViewController(_ controller: UIViewController, animated: Bool) {
+        present(controller, animated: true, completion: nil)
+    }
+
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 }
