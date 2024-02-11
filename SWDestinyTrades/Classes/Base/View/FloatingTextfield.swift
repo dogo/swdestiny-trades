@@ -9,10 +9,10 @@
 import UIKit
 
 final class FloatingTextfield: UITextField {
-    // MARK: - Property
+    // MARK: - Properties
 
     var underlineWidth: CGFloat = 2.0
-    var underineColor: UIColor = .black
+    var underlineColor: UIColor = .black
     var underlineAlphaBefore: CGFloat = 0.5
     var underlineAlphaAfter: CGFloat = 1
 
@@ -157,7 +157,7 @@ final class FloatingTextfield: UITextField {
     private func drawUnderline() {
         let underLine = UIView(frame: CGRect(x: 0, y: frame.size.height - underlineWidth, width: frame.size.width, height: underlineWidth))
 
-        underLine.backgroundColor = underineColor
+        underLine.backgroundColor = underlineColor
         underLine.alpha = underlineAlphaBefore
 
         underlineView = underLine
