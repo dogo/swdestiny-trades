@@ -83,13 +83,7 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
 
     func getCardList() -> [CardDTO] {
-        var list = [CardDTO]()
-        for cardList in deckList {
-            for card in cardList.items {
-                list.append(card)
-            }
-        }
-        return list
+        return deckList.flatMap(\.items)
     }
 
     func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
@@ -104,15 +98,16 @@ final class DeckBuilderDatasource: NSObject, UITableViewDataSource {
     }
 
     func updateTableViewData(deck: DeckDTO?) {
-        if let currentDeck = deck {
-            self.currentDeck = deck
-            if !currentDeck.list.isEmpty {
-                let local = Split.cardsByType(cardList: Array(currentDeck.list), sections: SectionsBuilder.byType(cardList: Array(currentDeck.list)))
-                deckList.removeAll()
-                for card in local {
-                    deckList.append(Section(name: card.key, items: card.value))
-                }
-            }
+        if let currentDeck = deck, !currentDeck.list.isEmpty {
+
+            self.currentDeck = currentDeck
+
+            let cardList = Array(currentDeck.list)
+            let sectionsByType = SectionsBuilder.byType(cardList: cardList)
+            let cardsByType = Split.cardsByType(cardList: cardList, sections: sectionsByType)
+
+            deckList = cardsByType.map { Section(name: $0.key, items: $0.value) }
+                .sorted { $0.name < $1.name }
         }
         tableView?.reloadData()
     }

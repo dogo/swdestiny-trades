@@ -29,7 +29,7 @@ final class DeckGraphViewControllerTests: XCSnapshotableTestCase {
         super.tearDown()
     }
 
-    func testValidLayout() {
+    func test_validLayout() {
         let deck = DeckDTO.stub()
         let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: "DeckGraph")
         try? memoryDB?.save(object: deck)
@@ -41,7 +41,7 @@ final class DeckGraphViewControllerTests: XCSnapshotableTestCase {
         XCTAssertTrue(snapshot(navigationController, named: "DeckGraphViewController with a valid layout"))
     }
 
-    func testEmptyStateLayout() {
+    func test_emptyStateLayout() {
         let deck = DeckDTO.stub(emptyList: true)
         sut = DeckGraphViewController(deck: deck)
         navigationController = UINavigationController(rootViewController: sut)
