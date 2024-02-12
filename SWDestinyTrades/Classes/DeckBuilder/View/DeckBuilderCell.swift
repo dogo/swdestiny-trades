@@ -9,22 +9,23 @@
 import UIKit
 
 final class DeckBuilderCell: UITableViewCell, Identifiable {
+
     var stepperValueChanged: ((Int) -> Void)?
     var eliteButtonTouched: ((Bool) -> Void)?
 
-    let textContainer: UIStackView = {
+    private let textContainer: UIStackView = {
         let view = UIStackView(frame: .zero)
         view.axis = .vertical
         return view
     }()
 
-    var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         return image
     }()
 
-    var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
@@ -34,28 +35,27 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
         return label
     }()
 
-    var subtitleLabel: UILabel = {
+    private let subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
 
-    var quantityLabel: UILabel = {
+    private let quantityLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
 
-    lazy var quantityStepper: UIStepper = {
+    private let quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
-        stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return stepper
     }()
 
-    var eliteButton: ToggleButton = {
+    private let eliteButton: ToggleButton = {
         let button = ToggleButton(frame: .zero)
         button.setTitle(L10n.nonElite, for: .normal)
         button.setTitleColor(.whiteBlack, for: .normal)
@@ -95,7 +95,7 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
     }
 
     @objc
-    func valueChanged(_ sender: UIStepper) {
+    private func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
         stepperValueChanged?(value)
@@ -115,6 +115,7 @@ final class DeckBuilderCell: UITableViewCell, Identifiable {
 }
 
 extension DeckBuilderCell: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         contentView.addSubview(textContainer)
         contentView.addSubview(iconImageView)
@@ -159,8 +160,10 @@ extension DeckBuilderCell: BaseViewConfiguration {
     func configureViews() {
         accessoryType = .disclosureIndicator
 
-        eliteButton.buttonTouched = { [weak self] newVaue in
-            self?.eliteButtonTouched?(newVaue)
+        quantityStepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
+
+        eliteButton.buttonTouched = { [weak self] newValue in
+            self?.eliteButtonTouched?(newValue)
         }
     }
 }
