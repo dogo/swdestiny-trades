@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 @testable import SWDestinyTrades
 
-final class DeckBuilderPresenterSpy: DeckBuilderProtocol {
+final class DeckBuilderPresenterSpy: DeckBuilderProtocol, DeckBuilderPresenterProtocol {
 
     private(set) var didCallUpdateCardQuantity = [(newValue: Int, card: CardDTO)]()
     func updateCardQuantity(newValue: Int, card: CardDTO) {
@@ -25,5 +26,26 @@ final class DeckBuilderPresenterSpy: DeckBuilderProtocol {
     private(set) var didCallRemove = [Int]()
     func remove(at index: Int) {
         didCallRemove.append(index)
+    }
+
+    private(set) var didCallLoadData = [DeckDTO?]()
+    func loadData(deck: DeckDTO?) {
+        didCallLoadData.append(deck)
+    }
+
+    private(set) var didCallSetNavigationTitleCount = 0
+    func setNavigationTitle() {
+        didCallSetNavigationTitleCount += 1
+    }
+
+    private(set) var didCallSetupNavigationItemsCount = 0
+    func setupNavigationItems(completion: ([UIBarButtonItem]?) -> Void) {
+        didCallSetupNavigationItemsCount += 1
+        completion([])
+    }
+
+    private(set) var didCallNavigateToCardDetailViewController = [(cardList: [CardDTO], card: CardDTO)]()
+    func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
+        didCallNavigateToCardDetailViewController.append((cardList, card))
     }
 }

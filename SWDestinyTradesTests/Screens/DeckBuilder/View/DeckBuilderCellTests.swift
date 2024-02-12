@@ -60,7 +60,7 @@ final class DeckBuilderCellTests: XCTestCase {
 
     func test_eliteButtonTouched() {
         var didCallEliteButtonTouchedCount = 0
-        var didCallEliteButtonTouchedValue: Bool = false
+        var didCallEliteButtonTouchedValue = false
         sut.eliteButtonTouched = { value in
             didCallEliteButtonTouchedCount += 1
             didCallEliteButtonTouchedValue = value
