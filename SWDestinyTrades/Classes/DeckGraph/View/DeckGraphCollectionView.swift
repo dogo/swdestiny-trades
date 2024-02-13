@@ -8,7 +8,8 @@
 
 import UIKit
 
-final class DeckGraphCollectionView: UICollectionView {
+final class DeckGraphCollectionView: UICollectionView, DeckGraphViewType {
+
     private var collectionViewDatasource: DeckGraphDatasource?
 
     convenience init() {
@@ -33,6 +34,7 @@ final class DeckGraphCollectionView: UICollectionView {
 }
 
 extension DeckGraphCollectionView: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.size.width - 16)
         return CGSize(width: width, height: width * CGFloat(1.1))

@@ -9,6 +9,7 @@
 import UIKit
 
 final class DeckGraphViewController: UIViewController {
+
     private let deckDTO: DeckDTO
     private let graphView = DeckGraphCollectionView()
 
