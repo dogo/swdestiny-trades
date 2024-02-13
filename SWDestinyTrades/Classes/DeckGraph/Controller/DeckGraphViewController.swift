@@ -11,11 +11,12 @@ import UIKit
 final class DeckGraphViewController: UIViewController {
 
     private let deckDTO: DeckDTO
-    private let graphView = DeckGraphCollectionView()
+    private let graphView: DeckGraphViewType
 
     // MARK: - Life Cycle
 
-    init(deck: DeckDTO) {
+    init(with view: DeckGraphViewType = DeckGraphCollectionView(), deck: DeckDTO) {
+        graphView = view
         deckDTO = deck
         super.init(nibName: nil, bundle: nil)
     }

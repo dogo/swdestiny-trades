@@ -17,7 +17,8 @@ final class DeckGraphCollectionViewTests: XCSnapshotableTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = DeckGraphCollectionView(frame: .testDevice, collectionViewLayout: UICollectionViewFlowLayout())
+        sut = DeckGraphCollectionView(frame: CGRect(x: 0, y: 0, width: 375, height: 1350),
+                                      collectionViewLayout: UICollectionViewFlowLayout())
     }
 
     override func tearDown() {
