@@ -61,7 +61,7 @@ final class DeckGraphDatasourceTests: XCTestCase {
     func test_numberOfItemsInSection() {
         let rows = sut.collectionView(collectionView, numberOfItemsInSection: 0)
 
-        XCTAssertEqual(rows, 4)
+        XCTAssertEqual(rows, 3)
     }
 
     func test_updateCollecionViewData() {
