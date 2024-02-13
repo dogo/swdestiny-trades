@@ -75,16 +75,13 @@ final class CardCostLineChartCell: UICollectionViewCell, Identifiable {
         leftAxis.axisMaximum = 18
         leftAxis.granularity = 2.0
 
-        if let xAxisValueFormatter = cardCostChartView.xAxis.valueFormatter {
-            let marker = XYMarkerView(color: .lightGray,
-                                      font: UIFont.systemFont(ofSize: CGFloat(10.0)),
-                                      textColor: .white,
-                                      insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0),
-                                      xAxisValueFormatter: xAxisValueFormatter)
-            marker.chartView = cardCostChartView
-            marker.minimumSize = CGSize(width: 80.0, height: 40.0)
-            chartView.marker = marker
-        }
+        let marker = XYMarkerView(color: .lightGray,
+                                  font: UIFont.systemFont(ofSize: CGFloat(10.0)),
+                                  textColor: .white,
+                                  insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0))
+        marker.chartView = cardCostChartView
+        marker.minimumSize = CGSize(width: 80.0, height: 40.0)
+        chartView.marker = marker
     }
 }
 

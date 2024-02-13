@@ -80,8 +80,7 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
         let marker = XYMarkerView(color: .lightGray,
                                   font: UIFont.systemFont(ofSize: CGFloat(10.0)),
                                   textColor: .white,
-                                  insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0),
-                                  xAxisValueFormatter: self)
+                                  insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0))
         marker.chartView = chartView
         marker.minimumSize = CGSize(width: 80.0, height: 40.0)
         chartView.marker = marker
