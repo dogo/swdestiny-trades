@@ -78,10 +78,12 @@ final class DiceRadarChartCell: UICollectionViewCell, Identifiable {
 
         chartView.rotationEnabled = false
 
-        let marker = RadarMarkerView(color: .lightGray,
-                                     font: UIFont.systemFont(ofSize: CGFloat(10.0)),
-                                     textColor: .white,
-                                     insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0))
+        let marker = BalloonMarkerView(color: .lightGray,
+                                       font: UIFont.systemFont(ofSize: CGFloat(10.0)),
+                                       textColor: .white,
+                                       insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0)) { count in
+            return L10n.sidesCount(count)
+        }
         marker.chartView = diceRadarView
         marker.minimumSize = CGSize(width: 80.0, height: 40.0)
         diceRadarView.marker = marker

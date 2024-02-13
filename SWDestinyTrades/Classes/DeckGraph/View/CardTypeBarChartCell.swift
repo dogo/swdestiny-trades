@@ -77,10 +77,12 @@ final class CardTypeBarChartCell: UICollectionViewCell, Identifiable {
         leftAxis.granularity = 2.0
         leftAxis.labelTextColor = .black
 
-        let marker = XYMarkerView(color: .lightGray,
-                                  font: UIFont.systemFont(ofSize: CGFloat(10.0)),
-                                  textColor: .white,
-                                  insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0))
+        let marker = BalloonMarkerView(color: .lightGray,
+                                       font: UIFont.systemFont(ofSize: CGFloat(10.0)),
+                                       textColor: .white,
+                                       insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0)) { count in
+            return L10n.cardsCount(count)
+        }
         marker.chartView = chartView
         marker.minimumSize = CGSize(width: 80.0, height: 40.0)
         chartView.marker = marker

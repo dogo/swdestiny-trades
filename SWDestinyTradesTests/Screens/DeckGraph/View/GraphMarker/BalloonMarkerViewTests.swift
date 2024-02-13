@@ -1,5 +1,5 @@
 //
-//  RadarMarkerViewTests.swift
+//  BalloonMarkerViewTests.swift
 //  SWDestinyTradesTests
 //
 //  Created by Diogo Autilio on 13/02/24.
@@ -13,16 +13,18 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class RadarMarkerViewTests: XCTestCase {
+final class BalloonMarkerViewTests: XCTestCase {
 
-    private var sut: RadarMarkerView!
+    private var sut: BalloonMarkerView!
 
     override func setUp() {
         super.setUp()
-        sut = RadarMarkerView(color: .lightGray,
-                              font: UIFont.systemFont(ofSize: CGFloat(10.0)),
-                              textColor: .white,
-                              insets: .zero)
+        sut = BalloonMarkerView(color: .lightGray,
+                                font: UIFont.systemFont(ofSize: CGFloat(10.0)),
+                                textColor: .white,
+                                insets: .zero) { count in
+            return "\(count) sides"
+        }
     }
 
     override func tearDown() {
