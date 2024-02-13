@@ -9,6 +9,7 @@
 import UIKit
 
 final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
+
     private var cardCosts: [Int] = []
     private var cardTypes: [Int] = []
     private var dieFaces: [Int] = []
@@ -61,7 +62,7 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         collectionView?.reloadData()
     }
 
-    func generateGraphData(deck: DeckDTO) {
+    private func generateGraphData(deck: DeckDTO) {
         // BarChart
         buildBarChart(deck: deck)
 
@@ -80,16 +81,19 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
         var downgrades = 0
 
         for card in deck.list {
-            if card.typeCode == "upgrade" {
+            switch card.typeCode {
+            case "upgrade":
                 upgrades += card.quantity
-            } else if card.typeCode == "support" {
+            case "support":
                 supports += card.quantity
-            } else if card.typeCode == "event" {
+            case "event":
                 events += card.quantity
-            } else if card.typeCode == "plot" {
+            case "plot":
                 plots += card.quantity
-            } else if card.typeCode == "downgrade" {
+            case "downgrade":
                 downgrades += card.quantity
+            default:
+                break
             }
         }
 
@@ -101,33 +105,22 @@ final class DeckGraphDatasource: NSObject, UICollectionViewDataSource {
     private func buildLineChart(deck: DeckDTO) {
         if let maxCost = deck.list.max(ofProperty: "cost") as Int? {
             for cost in 0 ... maxCost {
-                var cardCost = 0
-                for card in deck.list where card.cost == cost &&
-                    card.typeCode != "character" &&
-                    card.typeCode != "battlefield" &&
-                    card.typeCode != "plot" {
-                    cardCost += card.quantity
-                }
+                let cardCost = deck.list
+                    .filter { $0.cost == cost && !["character", "battlefield", "plot"].contains($0.typeCode) }
+                    .map(\.quantity)
+                    .reduce(0, +)
+
                 cardCosts.append(cardCost)
             }
         }
     }
 
     private func buildRadarChart(deck: DeckDTO) {
-        var specialFace = 0, blankFace = 0, meleeFace = 0, rangedFace = 0, focusFace = 0
-        var disruptFace = 0, shieldFace = 0, discardFace = 0, resourceFace = 0, indirectFace = 0
-        for card in deck.list {
-            specialFace += (card.dieFaces.filter("value LIKE 'Sp'").count * card.quantity)
-            blankFace += (card.dieFaces.filter("value == '-'").count * card.quantity)
-            meleeFace += (card.dieFaces.filter("value LIKE '*MD*'").count * card.quantity)
-            rangedFace += (card.dieFaces.filter("value LIKE '*RD*'").count * card.quantity)
-            focusFace += (card.dieFaces.filter("value LIKE '*F'").count * card.quantity)
-            disruptFace += (card.dieFaces.filter("value LIKE '*Dr*'").count * card.quantity)
-            shieldFace += (card.dieFaces.filter("value LIKE '*Sh'").count * card.quantity)
-            discardFace += (card.dieFaces.filter("value LIKE '*Dc*'").count * card.quantity)
-            resourceFace += (card.dieFaces.filter("value LIKE '*R'").count * card.quantity)
-            indirectFace += (card.dieFaces.filter("value LIKE '*ID*'").count * card.quantity)
-        }
-        dieFaces = [specialFace, blankFace, meleeFace, rangedFace, focusFace, disruptFace, shieldFace, discardFace, resourceFace, indirectFace]
+        let filters = ["Sp", "-", "*MD*", "*RD*", "*F", "*Dr*", "*Sh", "*Dc*", "*R", "*ID*"]
+        dieFaces = filters.compactMap { countFaces(deck: deck, filter: "value LIKE '\($0)'") }
+    }
+
+    private func countFaces(deck: DeckDTO, filter: String) -> Int {
+        return deck.list.reduce(0) { $0 + $1.dieFaces.filter(filter).count * $1.quantity }
     }
 }

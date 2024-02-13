@@ -163,11 +163,11 @@ final class DeckBuilderPresenterTests: XCTestCase {
     // MARK: - Test remove
 
     func test_remove() {
-        XCTAssertEqual(deckDTO.list.count, 20)
+        XCTAssertEqual(deckDTO.list.count, 22)
 
         sut.remove(at: 0)
 
-        XCTAssertEqual(deckDTO.list.count, 19)
+        XCTAssertEqual(deckDTO.list.count, 21)
     }
 
     // MARK: - Test updateCardQuantity

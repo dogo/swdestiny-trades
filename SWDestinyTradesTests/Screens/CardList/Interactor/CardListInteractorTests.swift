@@ -33,7 +33,7 @@ final class CardListInteractorTests: XCTestCase {
         client.fileName = "card-list"
         let cards = try await sut.retrieveCards(setCode: "code")
 
-        XCTAssertEqual(cards.count, 20)
+        XCTAssertEqual(cards.count, 22)
     }
 
     func test_fail_to_retrieve_sets() async throws {

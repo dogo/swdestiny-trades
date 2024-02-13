@@ -35,7 +35,7 @@ final class AddToDeckInteractorTests: XCTestCase {
         client.fileName = "card-list"
         let cards = try await sut.fetchAllCards()
 
-        XCTAssertEqual(cards.count, 20)
+        XCTAssertEqual(cards.count, 22)
     }
 
     func test_cancelAllRequests() {

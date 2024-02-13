@@ -109,7 +109,7 @@ final class DeckBuilderDatasourceTests: XCTestCase {
     func test_getCardList() {
         let cards = sut.getCardList()
 
-        XCTAssertEqual(cards.count, 20)
+        XCTAssertEqual(cards.count, 22)
     }
 
     func test_toggleSection() {
@@ -124,6 +124,6 @@ final class DeckBuilderDatasourceTests: XCTestCase {
     func test_updateTableViewData() {
         sut.updateTableViewData(deck: .stub())
 
-        XCTAssertEqual(sut.deckList.count, 5)
+        XCTAssertEqual(sut.deckList.count, 7)
     }
 }

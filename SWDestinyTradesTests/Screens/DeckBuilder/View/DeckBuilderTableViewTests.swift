@@ -29,13 +29,13 @@ final class DeckBuilderTableViewTests: XCSnapshotableTestCase {
     func test_updateTableViewData() {
         sut.updateTableViewData(deck: .stub())
 
-        XCTAssertEqual(sut.tableViewDatasource.deckList.count, 5)
+        XCTAssertEqual(sut.tableViewDatasource.deckList.count, 7)
     }
 
     func test_getDeckList() {
         let deckList = sut.getDeckList()
 
-        XCTAssertEqual(deckList?.count, 5)
+        XCTAssertEqual(deckList?.count, 7)
     }
 
     func test_didSelectRowAt() {
