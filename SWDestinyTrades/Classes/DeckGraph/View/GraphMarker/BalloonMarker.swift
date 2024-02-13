@@ -18,7 +18,7 @@ open class BalloonMarker: MarkerImage {
     open var insets = UIEdgeInsets()
     open var minimumSize = CGSize()
 
-    private var labelns: NSString?
+    private(set) var labelns: NSString?
     private var _labelSize = CGSize()
     private var _paragraphStyle: NSMutableParagraphStyle?
     private var _drawAttributes = [NSAttributedString.Key: Any]()
