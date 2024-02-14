@@ -66,6 +66,14 @@ final class AddCardViewControllerTests: XCTestCase {
         XCTAssertEqual(presenter.didCallDidCardDetailButtonTouched[0].name, "Captain Phasma")
     }
 
+    func test_doingSearch() {
+        sut.viewDidLoad()
+        view.doingSearch?("jabba")
+
+        XCTAssertEqual(presenter.didCallDoingSearch.count, 1)
+        XCTAssertEqual(presenter.didCallDoingSearch[0], "jabba")
+    }
+
     func test_startLoading() {
         sut.startLoading()
 
@@ -86,12 +94,12 @@ final class AddCardViewControllerTests: XCTestCase {
         XCTAssertEqual(view.didCallUpdateSearchList[0], expectedResult)
     }
 
-    func test_doingSearch() {
+    func test_delegate_doingSearch() {
         sut.viewDidLoad()
-        view.doingSearch?("jabba")
+        sut.doingSearch("jabba")
 
-        XCTAssertEqual(presenter.didCallDoingSearch.count, 1)
-        XCTAssertEqual(presenter.didCallDoingSearch[0], "jabba")
+        XCTAssertEqual(view.didCallDoingSearch.count, 1)
+        XCTAssertEqual(view.didCallDoingSearch[0], "jabba")
     }
 
     func test_showSuccessMessage() {
