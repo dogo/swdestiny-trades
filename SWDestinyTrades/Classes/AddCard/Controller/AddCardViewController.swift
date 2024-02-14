@@ -72,8 +72,8 @@ extension AddCardViewController: AddCardViewProtocol {
         addCardView.doingSearch(query)
     }
 
-    func showSuccessMessage(card: CardDTO) {
-        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
+    func showSuccessMessage(card: CardDTO, headUpDisplay: HeadUpDisplay?) {
+        headUpDisplay?.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
 
     func showErrorMessage() {

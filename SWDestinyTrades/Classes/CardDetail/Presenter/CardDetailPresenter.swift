@@ -21,6 +21,7 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
     private weak var controller: CardDetailViewProtocol?
     private let dispatchQueue: DispatchQueueType
     private let database: DatabaseProtocol?
+    private let headUpDisplay: HeadUpDisplay
     private var cards = [CardDTO]()
     private var cardDTO: CardDTO
     private var imageSource = [InputSource]()
@@ -29,12 +30,14 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
          dispatchQueue: DispatchQueueType = DispatchQueue.main,
          database: DatabaseProtocol?,
          cardList: [CardDTO],
-         selected: CardDTO) {
+         selected: CardDTO,
+         headUpDisplay: HeadUpDisplay = HeadUpDisplay()) {
         self.controller = controller
         self.dispatchQueue = dispatchQueue
         self.database = database
         cards = cardList
         cardDTO = selected
+        self.headUpDisplay = headUpDisplay
     }
 
     // MARK: - CardDetailPresenterProtocol
@@ -74,7 +77,7 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
     private func addToCollection() {
         let card = cards[controller?.getCurrentPage() ?? 0]
         saveToCollection(carDTO: card)
-        controller?.showSuccessMessage(card: card)
+        controller?.showSuccessMessage(card: card, headUpDisplay: headUpDisplay)
     }
 
     @objc

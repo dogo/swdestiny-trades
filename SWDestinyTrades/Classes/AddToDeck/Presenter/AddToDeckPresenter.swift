@@ -23,6 +23,7 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
     private let navigator: AddCardNavigator
     private var cards = [CardDTO]()
     private var deck: DeckDTO?
+    private let headUpDisplay: HeadUpDisplay
 
     private weak var controller: AddToDeckViewProtocol?
 
@@ -30,12 +31,14 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
          interactor: AddToDeckInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: AddCardNavigator,
-         deck: DeckDTO?) {
+         deck: DeckDTO?,
+         headUpDisplay: HeadUpDisplay = HeadUpDisplay()) {
         self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
         self.deck = deck
+        self.headUpDisplay = headUpDisplay
     }
 
     // MARK: - Helpers
@@ -44,7 +47,7 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
         if let deck, !deck.list.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 deck.list.append(card)
-                self?.controller?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card, headUpDisplay: self?.headUpDisplay)
             }
             let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)

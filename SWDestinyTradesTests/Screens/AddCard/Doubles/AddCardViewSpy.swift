@@ -38,7 +38,7 @@ final class AddCardViewSpy: UIView, AddCardViewType, AddCardViewProtocol {
     }
 
     private(set) var didCallShowSuccessMessage = [CardDTO]()
-    func showSuccessMessage(card: CardDTO) {
+    func showSuccessMessage(card: CardDTO, headUpDisplay: HeadUpDisplay?) {
         didCallShowSuccessMessage.append(card)
     }
 

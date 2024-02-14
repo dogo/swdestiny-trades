@@ -21,6 +21,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
     private let database: DatabaseProtocol?
     private let navigator: AddCardNavigator
     private let viewModel: AddCardViewModel
+    private let headUpDisplay: HeadUpDisplay
 
     private weak var controller: AddCardViewProtocol?
     private var cards = [CardDTO]()
@@ -29,12 +30,14 @@ final class AddCardPresenter: AddCardPresenterProtocol {
          interactor: AddCardInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: AddCardNavigator,
-         viewModel: AddCardViewModel) {
+         viewModel: AddCardViewModel,
+         headUpDisplay: HeadUpDisplay = HeadUpDisplay()) {
         self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
         self.viewModel = viewModel
+        self.headUpDisplay = headUpDisplay
     }
 
     @MainActor
@@ -79,7 +82,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let person = viewModel.person, !person.borrowed.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 person.borrowed.append(card)
-                self?.controller?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card, headUpDisplay: self?.headUpDisplay)
             }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
@@ -92,7 +95,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let person = viewModel.person, !person.lentMe.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 person.lentMe.append(card)
-                self?.controller?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card, headUpDisplay: self?.headUpDisplay)
             }
             let personDataDict: [String: PersonDTO] = ["personDTO": person]
             NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
@@ -105,7 +108,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
         if let userCollection = viewModel.userCollection, !userCollection.myCollection.contains(where: { $0.code == card.code }) {
             try? database?.update { [weak self] in
                 userCollection.myCollection.append(card)
-                self?.controller?.showSuccessMessage(card: card)
+                self?.controller?.showSuccessMessage(card: card, headUpDisplay: self?.headUpDisplay)
             }
         } else {
             controller?.showErrorMessage()

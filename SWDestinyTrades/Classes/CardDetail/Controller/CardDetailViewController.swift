@@ -73,8 +73,8 @@ extension CardDetailViewController: CardDetailViewProtocol {
         navigationItem.title = title
     }
 
-    func showSuccessMessage(card: CardDTO) {
-        LoadingHUD.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
+    func showSuccessMessage(card: CardDTO, headUpDisplay: HeadUpDisplay? = HeadUpDisplay()) {
+        headUpDisplay?.show(.labeledSuccess(title: L10n.added, subtitle: card.name))
     }
 
     func presentViewController(_ controller: UIViewController, animated: Bool) {

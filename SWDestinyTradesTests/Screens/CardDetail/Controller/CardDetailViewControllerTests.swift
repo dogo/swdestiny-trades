@@ -9,7 +9,6 @@
 import UIKit
 import XCTest
 
-@testable import PKHUD
 @testable import SWDestinyTrades
 
 final class CardDetailViewControllerTests: XCTestCase {
@@ -94,9 +93,12 @@ final class CardDetailViewControllerTests: XCTestCase {
     }
 
     func test_showSuccessMessage() {
-        sut.showSuccessMessage(card: .stub())
+        let HUDProvider = HUDProviderSpy()
+        sut.showSuccessMessage(card: .stub(), headUpDisplay: HeadUpDisplay(provider: HUDProvider))
 
-        XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+        XCTAssertEqual(HUDProvider.didCallShowHUD.count, 1)
+        XCTAssertEqual(HUDProvider.didCallShowHUD[0].contentType, .labeledSuccess(title: "Added", subtitle: "Captain Phasma"))
+        XCTAssertEqual(HUDProvider.didCallShowHUD[0].delay, 0.2)
     }
 
     func test_presentViewController() {

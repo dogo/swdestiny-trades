@@ -9,7 +9,6 @@
 import UIKit
 import XCTest
 
-@testable import PKHUD
 @testable import SWDestinyTrades
 @testable import SwiftMessages
 
@@ -17,27 +16,22 @@ final class AddCardViewControllerTests: XCTestCase {
 
     private var sut: AddCardViewController!
     private var view: AddCardViewSpy!
-    private var database: DatabaseProtocol!
-    private var service: SWDestinyService!
+    private var presenter: AddCardPresenterSpy!
     private var keyWindow: UIWindow!
     private var navigationController: UINavigationControllerMock!
 
     override func setUp() {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
-        database = RealmDatabaseHelper.createMemoryDatabase(identifier: "UserCollection")
-        let client = HttpClientMock()
-        client.fileName = "card-list"
-        service = SWDestinyService(client: client)
         view = AddCardViewSpy()
-        sut = createSUT(database: database, person: .stub(), userCollection: .stub(), type: .collection)
+        sut = AddCardViewController(with: view)
+        presenter = AddCardPresenterSpy()
+        sut.presenter = presenter
         navigationController = UINavigationControllerMock(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
     }
 
     override func tearDown() {
-        database = nil
-        service = nil
         view = nil
         navigationController = nil
         sut = nil
@@ -57,22 +51,19 @@ final class AddCardViewControllerTests: XCTestCase {
     }
 
     func test_didSelectCard_inserts_into_collection_database() {
-        let collection = UserCollectionDTO.stub()
-        sut = createSUT(database: database, person: .stub(), userCollection: collection, type: .collection)
-        let navigationController = UINavigationController(rootViewController: sut)
-        keyWindow.showTestWindow(controller: navigationController)
-
         sut.viewDidLoad()
         view.didSelectCard?(.stub())
 
-        XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+        XCTAssertEqual(presenter.didCallInsert.count, 1)
+        XCTAssertEqual(presenter.didCallInsert[0].name, "Captain Phasma")
     }
 
     func test_didSelectAccessory() {
         sut.viewDidLoad()
         view.didSelectAccessory?(.stub())
 
-        XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
+        XCTAssertEqual(presenter.didCallDidCardDetailButtonTouched.count, 1)
+        XCTAssertEqual(presenter.didCallDidCardDetailButtonTouched[0].name, "Captain Phasma")
     }
 
     func test_startLoading() {
@@ -99,14 +90,17 @@ final class AddCardViewControllerTests: XCTestCase {
         sut.viewDidLoad()
         view.doingSearch?("jabba")
 
-        XCTAssertEqual(view.didCallDoingSearch.count, 1)
-        XCTAssertEqual(view.didCallDoingSearch[0], "jabba")
+        XCTAssertEqual(presenter.didCallDoingSearch.count, 1)
+        XCTAssertEqual(presenter.didCallDoingSearch[0], "jabba")
     }
 
     func test_showSuccessMessage() {
-        sut.showSuccessMessage(card: .stub())
+        let HUDProvider = HUDProviderSpy()
+        sut.showSuccessMessage(card: .stub(), headUpDisplay: HeadUpDisplay(provider: HUDProvider))
 
-        XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
+        XCTAssertEqual(HUDProvider.didCallShowHUD.count, 1)
+        XCTAssertEqual(HUDProvider.didCallShowHUD[0].contentType, .labeledSuccess(title: "Added", subtitle: "Captain Phasma"))
+        XCTAssertEqual(HUDProvider.didCallShowHUD[0].delay, 0.2)
     }
 
     func test_showErrorMessage() {
@@ -119,24 +113,5 @@ final class AddCardViewControllerTests: XCTestCase {
         sut.showNetworkErrorMessage()
 
         // XCTAssertTrue(keyWindow.subviews.contains { $0 is ContainerView })
-    }
-
-    // MARK: - Helpers
-
-    private func createSUT(database: DatabaseProtocol,
-                           person: PersonDTO? = nil,
-                           userCollection: UserCollectionDTO? = nil,
-                           type: AddCardType) -> AddCardViewController {
-        let viewController = AddCardViewController(with: view)
-        let router = AddCardNavigator(viewController)
-        let interactor = AddCardInteractor(service: service)
-        let viewModel = AddCardViewModel(person: person, userCollection: userCollection, type: type)
-        let presenter = AddCardPresenter(controller: viewController,
-                                         interactor: interactor,
-                                         database: database,
-                                         navigator: router,
-                                         viewModel: viewModel)
-        viewController.presenter = presenter
-        return viewController
     }
 }

@@ -8,7 +8,6 @@
 
 import XCTest
 
-@testable import PKHUD
 @testable import SWDestinyTrades
 
 final class AddToDeckViewControllerTests: XCTestCase {
@@ -119,8 +118,11 @@ final class AddToDeckViewControllerTests: XCTestCase {
     }
 
     func test_showSuccessMessage() throws {
-        sut.showSuccessMessage(card: .stub())
+        let HUDProvider = HUDProviderSpy()
+        sut.showSuccessMessage(card: .stub(), headUpDisplay: HeadUpDisplay(provider: HUDProvider))
 
-        XCTAssertTrue(window.subviews.contains { $0 is ContainerView })
+        XCTAssertEqual(HUDProvider.didCallShowHUD.count, 1)
+        XCTAssertEqual(HUDProvider.didCallShowHUD[0].contentType, .labeledSuccess(title: "Added", subtitle: "Captain Phasma"))
+        XCTAssertEqual(HUDProvider.didCallShowHUD[0].delay, 0.2)
     }
 }

@@ -40,7 +40,7 @@ final class AddToDeckViewSpy: UIView, AddToDeckViewType, AddToDeckViewProtocol {
     }
 
     private(set) var didCallShowSuccessMessage = [CardDTO]()
-    func showSuccessMessage(card: CardDTO) {
+    func showSuccessMessage(card: CardDTO, headUpDisplay: HeadUpDisplay?) {
         didCallShowSuccessMessage.append(card)
     }
 }

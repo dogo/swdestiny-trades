@@ -13,7 +13,7 @@ protocol AddToDeckViewProtocol: AnyObject {
     func stopLoading()
     func updateSearchList(_ cards: [CardDTO])
     func doingSearch(_ query: String)
-    func showSuccessMessage(card: CardDTO)
+    func showSuccessMessage(card: CardDTO, headUpDisplay: HeadUpDisplay?)
 }
 
 final class AddToDeckView: UIView, AddToDeckViewType {

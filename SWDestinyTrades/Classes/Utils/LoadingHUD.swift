@@ -10,9 +10,28 @@ import Foundation
 import PKHUD
 import UIKit
 
-enum LoadingHUD {
+protocol HUDProviderType {
+    func showHUD(_ loading: HeadUpDisplay.ContentType, delay: TimeInterval)
+}
 
-    enum LoadingType {
+final class PKHUDProvider: HUDProviderType {
+
+    func showHUD(_ loading: HeadUpDisplay.ContentType, delay: TimeInterval) {
+        PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
+        HUD.flash(loading.contentType, delay: delay)
+    }
+}
+
+final class HeadUpDisplay {
+
+    private let provider: HUDProviderType
+
+    init(provider: HUDProviderType = PKHUDProvider()) {
+        self.provider = provider
+    }
+
+    enum ContentType: Equatable {
         case success
         case error
         case progress
@@ -59,11 +78,47 @@ enum LoadingHUD {
                 return .customView(view: view)
             }
         }
+
+        static func == (lhs: ContentType, rhs: ContentType) -> Bool {
+            switch (lhs, rhs) {
+            case (.success, .success),
+                 (.error, .error),
+                 (.progress, .progress),
+                 (.systemActivity, .systemActivity):
+                return true
+
+            case let (.image(lhsImage), .image(rhsImage)),
+                 let (.rotatingImage(lhsImage), .rotatingImage(rhsImage)):
+                return lhsImage == rhsImage
+
+            case let (.labeledSuccess(lhsTitle, lhsSubtitle), .labeledSuccess(rhsTitle, rhsSubtitle)):
+                return lhsTitle == rhsTitle && lhsSubtitle == rhsSubtitle
+
+            case let (.labeledError(lhsTitle, lhsSubtitle), .labeledError(rhsTitle, rhsSubtitle)):
+                return lhsTitle == rhsTitle && lhsSubtitle == rhsSubtitle
+
+            case let (.labeledProgress(lhsTitle, lhsSubtitle), .labeledProgress(rhsTitle, rhsSubtitle)):
+                return lhsTitle == rhsTitle && lhsSubtitle == rhsSubtitle
+
+            case let (.labeledImage(lhsImage, lhsTitle, lhsSubtitle), .labeledImage(rhsImage, rhsTitle, rhsSubtitle)):
+                return lhsImage == rhsImage && lhsTitle == rhsTitle && lhsSubtitle == rhsSubtitle
+
+            case let (.labeledRotatingImage(lhsImage, lhsTitle, lhsSubtitle), .labeledRotatingImage(rhsImage, rhsTitle, rhsSubtitle)):
+                return lhsImage == rhsImage && lhsTitle == rhsTitle && lhsSubtitle == rhsSubtitle
+
+            case let (.label(lhsText), .label(rhsText)):
+                return lhsText == rhsText
+
+            case let (.customView(lhsView), .customView(rhsView)):
+                return lhsView == rhsView
+
+            default:
+                return false
+            }
+        }
     }
 
-    static func show(_ loading: LoadingType, delay: TimeInterval = 0.2) {
-        PKHUD.sharedHUD.dimsBackground = false
-        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
-        HUD.flash(loading.contentType, delay: delay)
+    func show(_ loading: ContentType, delay: TimeInterval = 0.2) {
+        provider.showHUD(loading, delay: delay)
     }
 }
