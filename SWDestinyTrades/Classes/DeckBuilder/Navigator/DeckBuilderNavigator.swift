@@ -39,7 +39,7 @@ final class DeckBuilderNavigator: Navigator {
         case let .cardDetail(database, cardList, card):
             return CardDetailViewControllerFactory(database: database, cardList: cardList, card: card).createViewController()
         case let .deckGraph(deck):
-            return DeckGraphViewController(deck: deck)
+            return DeckGraphViewControllerFactory(deck: deck).createViewController()
         }
     }
 }

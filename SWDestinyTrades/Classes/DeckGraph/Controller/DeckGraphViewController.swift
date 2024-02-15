@@ -10,14 +10,14 @@ import UIKit
 
 final class DeckGraphViewController: UIViewController {
 
-    private let deckDTO: DeckDTO
     private let graphView: DeckGraphViewType
+
+    var presenter: DeckGraphPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(with view: DeckGraphViewType = DeckGraphCollectionView(), deck: DeckDTO) {
+    init(with view: DeckGraphViewType = DeckGraphCollectionView()) {
         graphView = view
-        deckDTO = deck
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -33,12 +33,23 @@ final class DeckGraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        graphView.updateCollecionViewData(deck: deckDTO)
+        presenter?.updateCollecionViewData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationItem.title = L10n.deckStatistics
+        presenter?.setNavigationTitle()
+    }
+}
+
+extension DeckGraphViewController: DeckGraphViewControllerProtocol {
+
+    func updateCollecionViewData(deck: DeckDTO) {
+        graphView.updateCollecionViewData(deck: deck)
+    }
+
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 }

@@ -15,6 +15,7 @@ final class DeckGraphViewControllerTests: XCTestCase {
 
     private var sut: DeckGraphViewController!
     private var view: DeckGraphViewSpy!
+    private var presenter: DeckGraphPresenterSpy!
     private var navigationController: UINavigationController!
     private var keyWindow: UIWindow!
 
@@ -22,7 +23,9 @@ final class DeckGraphViewControllerTests: XCTestCase {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
         view = DeckGraphViewSpy()
-        sut = DeckGraphViewController(with: view, deck: .stub())
+        presenter = DeckGraphPresenterSpy()
+        sut = DeckGraphViewController(with: view)
+        sut.presenter = presenter
         navigationController = UINavigationControllerMock(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
     }
@@ -30,6 +33,7 @@ final class DeckGraphViewControllerTests: XCTestCase {
     override func tearDown() {
         navigationController = nil
         view = nil
+        presenter = nil
         sut = nil
         keyWindow.cleanTestWindow()
         super.tearDown()
@@ -44,11 +48,23 @@ final class DeckGraphViewControllerTests: XCTestCase {
     func test_viewDidLoad() {
         sut.viewDidLoad()
 
-        XCTAssertEqual(view.didCallUpdateCollecionViewData.count, 1)
+        XCTAssertEqual(presenter.didCallUpdateCollecionViewDataCount, 1)
     }
 
     func test_viewWillAppear() {
         sut.viewWillAppear(false)
+
+        XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
+    }
+
+    func test_updateCollecionViewData() {
+        sut.updateCollecionViewData(deck: .stub())
+
+        XCTAssertEqual(view.didCallUpdateCollecionViewData.count, 1)
+    }
+
+    func test_setNavigationTitle() {
+        sut.setNavigationTitle(L10n.deckStatistics)
 
         XCTAssertEqual(sut.navigationItem.title, "Deck Statistics")
     }
