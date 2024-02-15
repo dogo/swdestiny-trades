@@ -44,10 +44,39 @@ final class CardListPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_retrieveCardsList() {
-        sut.retrieveCardsList()
+    func test_retrieveCardsList_success() async {
+        let expectation = XCTestExpectation(description: "Retrieve cards list expectation")
 
-        XCTAssertEqual(controller.didCallStartLoading, 1)
+        Task {
+            sut.retrieveCardsList()
+            expectation.fulfill()
+        }
+
+        await fulfillment(of: [expectation])
+
+        await MainActor.run {
+            XCTAssertEqual(controller.didCallStartLoadingCount, 1)
+            // XCTAssertEqual(controller.didCallUpdateCardList.count, 22)
+            // XCTAssertEqual(controller.didCallStopLoadingCount, 1)
+        }
+    }
+
+    func test_retrieveSets_failure() async {
+        client.error = true
+
+        let expectation = XCTestExpectation(description: "Retrieve cards list expectation")
+
+        Task {
+            sut.retrieveCardsList()
+            expectation.fulfill()
+        }
+
+        await fulfillment(of: [expectation])
+
+        await MainActor.run {
+            XCTAssertEqual(controller.didCallShowNetworkErrorMessageCount, 1)
+            XCTAssertEqual(controller.didCallStopLoadingCount, 1)
+        }
     }
 
     func test_didSelectCard() {

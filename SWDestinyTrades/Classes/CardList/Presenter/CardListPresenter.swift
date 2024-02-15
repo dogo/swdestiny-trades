@@ -49,6 +49,7 @@ final class CardListPresenter: CardListPresenterProtocol {
             } catch {
                 await MainActor.run { [weak self] in
                     self?.controller?.showNetworkErrorMessage()
+                    self?.controller?.stopLoading()
                     LoggerManager.shared.log(event: .cardsList, parameters: ["error": error.localizedDescription])
                 }
             }

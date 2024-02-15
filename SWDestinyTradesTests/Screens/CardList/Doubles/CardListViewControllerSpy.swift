@@ -13,14 +13,14 @@ import UIKit
 
 final class CardListViewControllerSpy: UIViewController, CardListViewControllerProtocol {
 
-    private(set) var didCallStartLoading = 0
+    private(set) var didCallStartLoadingCount = 0
     func startLoading() {
-        didCallStartLoading += 1
+        didCallStartLoadingCount += 1
     }
 
-    private(set) var didCallStopLoading = 0
+    private(set) var didCallStopLoadingCount = 0
     func stopLoading() {
-        didCallStopLoading += 1
+        didCallStopLoadingCount += 1
     }
 
     private(set) var didCallUpdateCardList = [CardDTO]()
@@ -28,9 +28,9 @@ final class CardListViewControllerSpy: UIViewController, CardListViewControllerP
         didCallUpdateCardList.append(contentsOf: cards)
     }
 
-    private(set) var didCallShowNetworkErrorMessage = 0
+    private(set) var didCallShowNetworkErrorMessageCount = 0
     func showNetworkErrorMessage() {
-        didCallShowNetworkErrorMessage += 1
+        didCallShowNetworkErrorMessageCount += 1
     }
 
     private(set) var didCallSetNavigationTitle = [String]()
