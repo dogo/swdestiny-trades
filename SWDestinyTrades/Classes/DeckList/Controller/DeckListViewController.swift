@@ -9,13 +9,15 @@
 import UIKit
 
 final class DeckListViewController: UIViewController {
-    private lazy var deckListView = DeckListTableView(delegate: self)
+
     private lazy var navigator = DeckListNavigator(self.navigationController)
+    private let deckListView: DeckListViewType
     private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?) {
+    init(with view: DeckListViewType, database: DatabaseProtocol?) {
+        deckListView = view
         self.database = database
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,7 +53,7 @@ final class DeckListViewController: UIViewController {
         super.viewWillAppear(animated)
 
         navigationItem.title = L10n.decks
-        deckListView.reloadData()
+        // deckListView.reloadData()
     }
 
     private func setupNavigationItem() {

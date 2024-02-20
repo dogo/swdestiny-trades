@@ -19,7 +19,7 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     private var deckList: [DeckDTO] = []
     private weak var delegate: DeckListProtocol?
 
-    required init(tableView: UITableView, delegate: DeckListProtocol) {
+    required init(tableView: UITableView, delegate: DeckListProtocol?) {
         super.init()
         self.tableView = tableView
         self.delegate = delegate
