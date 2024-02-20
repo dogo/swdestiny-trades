@@ -40,7 +40,7 @@ public extension Project {
                 basedOnDependencyAnalysis: false
             ),
             TargetScript.post(
-                script: "${PROJECT_DIR}/.build/checkouts/firebase-ios-sdk/Crashlytics/run",
+                script: "${PROJECT_DIR}/Tuist/.build/checkouts/firebase-ios-sdk/Crashlytics/run",
                 name: "[Crashlytics] Run Script",
                 basedOnDependencyAnalysis: false
             )
