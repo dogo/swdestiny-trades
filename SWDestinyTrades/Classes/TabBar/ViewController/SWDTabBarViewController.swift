@@ -32,10 +32,7 @@ final class SWDTabBarViewController: UITabBarController {
         setsTab.tabBarItem = UITabBarItem(title: L10n.cards, image: Asset.Tabbar.icCards.image, selectedImage: Asset.Tabbar.icCardsFilled.image)
 
         // Create DeckListViewController Tab
-        let deckListView = DeckListTableView()
-        let controller = DeckListViewController(with: deckListView, database: database)
-        deckListView.deckListDelegate = controller
-        let decktab = UINavigationController(rootViewController: controller)
+        let decktab = UINavigationController(rootViewController: factory.makeDeckList(with: database))
         decktab.tabBarItem = UITabBarItem(title: L10n.decks, image: Asset.Tabbar.icDecks.image, selectedImage: nil)
 
         // Create PeopleListViewController Tab

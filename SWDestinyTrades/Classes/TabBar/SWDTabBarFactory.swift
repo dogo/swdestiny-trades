@@ -26,4 +26,9 @@ final class SWDTabBarFactory {
         viewController.presenter = presenter
         return viewController
     }
+
+    func makeDeckList(with database: DatabaseProtocol?) -> UIViewController {
+        let factory = DeckListViewControllerFactory(database: database)
+        return factory.createViewController()
+    }
 }
