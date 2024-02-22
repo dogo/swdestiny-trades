@@ -18,9 +18,14 @@ final class DeckListViewControllerFactory: ViewControllerFactory {
     }
 
     func createViewController() -> UIViewController {
-        let deckListView = DeckListTableView()
-        let viewController = DeckListViewController(with: deckListView, database: database)
-        deckListView.deckListDelegate = viewController
+        let view = DeckListTableView()
+        let viewController = DeckListViewController(with: view)
+        let router = DeckListNavigator(viewController)
+        let presenter = DeckListPresenter(controller: viewController,
+                                          database: database,
+                                          navigator: router)
+        viewController.presenter = presenter
+        view.deckListDelegate = presenter
         return viewController
     }
 }

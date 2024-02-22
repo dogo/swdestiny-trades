@@ -10,15 +10,14 @@ import UIKit
 
 final class DeckListViewController: UIViewController {
 
-    private lazy var navigator = DeckListNavigator(self.navigationController)
     private let deckListView: DeckListViewType
-    private let database: DatabaseProtocol?
+
+    var presenter: DeckListPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(with view: DeckListViewType, database: DatabaseProtocol?) {
+    init(with view: DeckListViewType) {
         deckListView = view
-        self.database = database
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -34,58 +33,33 @@ final class DeckListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationItem()
+        presenter?.setupNavigationItems { [weak self] items in
+            self?.navigationItem.rightBarButtonItems = items
+        }
 
-        loadDataFromRealm()
+        presenter?.loadDataFromRealm()
 
         deckListView.didSelectDeck = { [weak self] deck in
-            self?.navigateToNextController(with: deck)
-        }
-    }
-
-    func loadDataFromRealm() {
-        try? database?.fetch(DeckDTO.self, predicate: nil, sorted: nil) { [weak self] decks in
-            self?.deckListView.updateTableViewData(decksList: decks)
+            self?.presenter?.navigateToDeckBuilder(with: deck)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationItem.title = L10n.decks
-        // deckListView.reloadData()
-    }
+        presenter?.setNavigationTitle()
 
-    private func setupNavigationItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
-    }
-
-    // MARK: - Navigation
-
-    func navigateToNextController(with deck: DeckDTO) {
-        navigator.navigate(to: .deckBuilder(database: database, with: deck))
-    }
-
-    // MARK: - UIBarButton Actions
-
-    @objc
-    func addButtonTouched(_ sender: Any) {
-        deckListView.insert(deck: DeckDTO())
+        deckListView.refreshData()
     }
 }
 
-extension DeckListViewController: DeckListProtocol {
-    func remove(deck: DeckDTO) {
-        try? database?.delete(object: deck)
+extension DeckListViewController: DeckListViewControllerProtocol {
+
+    func updateTableViewData(deckList: [DeckDTO]) {
+        deckListView.updateTableViewData(decksList: deckList)
     }
 
-    func insert(deck: DeckDTO) {
-        try? database?.save(object: deck)
-    }
-
-    func rename(name: String, deck: DeckDTO) {
-        try? database?.update {
-            deck.name = name
-        }
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 }

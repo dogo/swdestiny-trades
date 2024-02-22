@@ -14,5 +14,6 @@ protocol DeckListViewType where Self: UIView {
     var didSelectDeck: ((DeckDTO) -> Void)? { get set }
 
     func updateTableViewData(decksList: [DeckDTO])
+    func refreshData()
     func insert(deck: DeckDTO)
 }

@@ -54,6 +54,23 @@ final class DeckListPresenter: DeckListPresenterProtocol {
 
     @objc
     private func addButtonTouched(_ sender: Any) {
-        controller?.insert(deck: DeckDTO())
+        insert(deck: DeckDTO())
+    }
+}
+
+extension DeckListPresenter: DeckListProtocol {
+
+    func insert(deck: DeckDTO) {
+        try? database?.save(object: deck)
+    }
+
+    func remove(deck: DeckDTO) {
+        try? database?.delete(object: deck)
+    }
+
+    func rename(name: String, deck: DeckDTO) {
+        try? database?.update {
+            deck.name = name
+        }
     }
 }

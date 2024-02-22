@@ -169,6 +169,4 @@ final class DeckBuilderPresenterTests: XCTestCase {
 
         XCTAssertEqual(deckDTO.list.count, 21)
     }
-
-    // MARK: - Test updateCardQuantity
 }

@@ -10,6 +10,5 @@ import Foundation
 
 protocol DeckListViewControllerProtocol: AnyObject {
     func updateTableViewData(deckList: [DeckDTO])
-    func insert(deck: DeckDTO)
     func setNavigationTitle(_ title: String)
 }
