@@ -18,11 +18,18 @@ final class DeckListNavigatorTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        navigationController = UINavigationControllerMock()
-        sut = DeckListNavigator(navigationController)
+        let controller = UIViewController()
+        navigationController = UINavigationControllerMock(rootViewController: controller)
+        sut = DeckListNavigator(controller)
     }
 
-    func testNavigateToDeckBuilderViewController() {
+    override func tearDown() {
+        navigationController = nil
+        sut = nil
+        super.tearDown()
+    }
+
+    func test_navigate_to_deckBuilderViewController() {
         sut.navigate(to: .deckBuilder(database: nil, with: .stub()))
 
         XCTAssertTrue(navigationController.currentPushedViewController is DeckBuilderViewController)
