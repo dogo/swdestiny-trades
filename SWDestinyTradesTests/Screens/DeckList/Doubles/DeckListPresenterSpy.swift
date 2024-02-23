@@ -29,9 +29,9 @@ final class DeckListPresenterSpy: DeckListPresenterProtocol, DeckListProtocol {
         didCallLoadDataFromRealmCount += 1
     }
 
-    private(set) var didCallUpdateTableViewData = [DeckDTO]()
+    private(set) var didCallNavigateToDeckBuilder = [DeckDTO]()
     func navigateToDeckBuilder(with deck: DeckDTO) {
-        didCallUpdateTableViewData.append(deck)
+        didCallNavigateToDeckBuilder.append(deck)
     }
 
     private(set) var didCallRemove = [DeckDTO]()
