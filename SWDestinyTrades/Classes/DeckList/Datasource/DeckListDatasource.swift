@@ -15,6 +15,7 @@ protocol DeckListProtocol: AnyObject {
 }
 
 final class DeckListDatasource: NSObject, UITableViewDataSource {
+
     private var tableView: UITableView?
     private var deckList: [DeckDTO] = []
     private weak var delegate: DeckListProtocol?
