@@ -76,7 +76,7 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
     // MARK: - Keyboard handling
 
     @objc
-    func keyboardWillShow(notification: NSNotification) {
+    private func keyboardWillShow(notification: NSNotification) {
         if let userInfo: NSDictionary = notification.userInfo as NSDictionary? {
             if let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardSize = keyboardInfo.cgRectValue.size
@@ -88,7 +88,7 @@ final class AddToDeckTableView: UITableView, SearchDelegate {
     }
 
     @objc
-    func keyboardWillHide(notification: NSNotification) {
+    private func keyboardWillHide(notification: NSNotification) {
         contentInset = .zero
         scrollIndicatorInsets = .zero
     }

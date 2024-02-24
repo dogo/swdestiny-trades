@@ -25,7 +25,7 @@ final class AddToDeckTableViewTests: XCTestCase {
         super.tearDown()
     }
 
-    func testUpdateSearchList() {
+    func test_updateSearchList() {
         sut.updateSearchList([.stub()])
 
         let datasourceCount = sut.tableDatasource.tableView(sut, numberOfRowsInSection: 0)
@@ -33,7 +33,7 @@ final class AddToDeckTableViewTests: XCTestCase {
         XCTAssertEqual(datasourceCount, 1)
     }
 
-    func testDoingSearch() {
+    func test_doingSearch() {
         sut.doingSearch("Narf")
 
         let datasource = sut.tableDatasource as AddToDeckCardDatasource
@@ -131,22 +131,20 @@ final class AddToDeckTableViewTests: XCTestCase {
         XCTAssertEqual(datasourceCount, 1)
     }
 
-    func testKeyboardWillShow() {
+    func test_keyboardWillShow() {
         let keyboardSize = CGSize(width: 320, height: 216)
         let userInfo: [AnyHashable: Any] = [
             UIResponder.keyboardFrameEndUserInfoKey: NSValue(cgRect: CGRect(x: 0, y: 0, width: keyboardSize.width, height: keyboardSize.height))
         ]
-        let notification = NSNotification(name: UIResponder.keyboardWillShowNotification, object: nil, userInfo: userInfo)
 
-        sut.keyboardWillShow(notification: notification)
+        NotificationCenter.default.post(name: UIResponder.keyboardWillShowNotification, object: nil, userInfo: userInfo)
 
         XCTAssertEqual(sut.contentInset.bottom, keyboardSize.height)
         XCTAssertEqual(sut.verticalScrollIndicatorInsets.bottom, keyboardSize.height)
     }
 
-    func testKeyboardWillHide() {
-        let notification = NSNotification(name: UIResponder.keyboardWillHideNotification, object: nil)
-        sut.keyboardWillHide(notification: notification)
+    func test_keyboardWillHide() {
+        NotificationCenter.default.post(name: UIResponder.keyboardWillHideNotification, object: nil, userInfo: nil)
 
         XCTAssertEqual(sut.contentInset, UIEdgeInsets.zero)
         XCTAssertEqual(sut.verticalScrollIndicatorInsets, UIEdgeInsets.zero)
