@@ -9,11 +9,10 @@
 import Foundation
 import UIKit
 
-protocol DeckListViewType where Self: UIView {
+protocol DeckListViewType where Self: UITableView {
 
     var didSelectDeck: ((DeckDTO) -> Void)? { get set }
 
     func updateTableViewData(decksList: [DeckDTO])
-    func refreshData()
     func insert(deck: DeckDTO)
 }

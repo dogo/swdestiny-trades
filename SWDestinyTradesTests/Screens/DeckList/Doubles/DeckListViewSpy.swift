@@ -11,7 +11,7 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class DeckListViewSpy: UIView, DeckListViewType {
+final class DeckListViewSpy: UITableView, DeckListViewType {
 
     var didSelectDeck: ((DeckDTO) -> Void)?
 
@@ -20,13 +20,14 @@ final class DeckListViewSpy: UIView, DeckListViewType {
         didCallUpdateTableViewData.append(contentsOf: decksList)
     }
 
-    private(set) var didCallRefreshDataCount = 0
-    func refreshData() {
-        didCallRefreshDataCount += 1
-    }
-
     private(set) var didCallInsert = [DeckDTO]()
     func insert(deck: DeckDTO) {
         didCallInsert.append(deck)
+    }
+
+    private(set) var didCallReloadDataCount = 0
+    override func reloadData() {
+        super.reloadData()
+        didCallReloadDataCount += 1
     }
 }

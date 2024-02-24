@@ -49,7 +49,7 @@ final class DeckListViewController: UIViewController {
 
         presenter?.setNavigationTitle()
 
-        deckListView.refreshData()
+        deckListView.reloadData()
     }
 }
 

@@ -36,10 +36,6 @@ final class DeckListTableView: UITableView, DeckListViewType {
         tableViewDatasource?.updateTableViewData(list: decksList)
     }
 
-    func refreshData() {
-        reloadData()
-    }
-
     func insert(deck: DeckDTO) {
         tableViewDatasource?.insert(deck: deck)
     }

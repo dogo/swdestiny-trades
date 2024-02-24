@@ -56,7 +56,7 @@ final class DeckListDatasourceTests: XCTestCase {
     func test_rename() {
         let cell = sut.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as? DeckListCell
 
-        cell?.accessoryButtonTouched?("Panda", DeckDTO.stub())
+        cell?.editButtonTouched?("Panda", DeckDTO.stub())
 
         XCTAssertEqual(delegate.didCallRenameValues.count, 1)
         XCTAssertEqual(delegate.didCallRenameValues[0].name, "Panda")

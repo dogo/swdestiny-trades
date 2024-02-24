@@ -63,7 +63,7 @@ final class DeckListViewControllerTests: XCTestCase {
         sut.viewWillAppear(false)
 
         XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
-        XCTAssertEqual(view.didCallRefreshDataCount, 1)
+        XCTAssertEqual(view.didCallReloadDataCount, 1)
     }
 
     func test_updateCollecionViewData() {

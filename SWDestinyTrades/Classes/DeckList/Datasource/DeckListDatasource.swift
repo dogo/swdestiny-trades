@@ -32,7 +32,7 @@ final class DeckListDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DeckListCell.self)
         cell.configureCell(deck: getDeck(at: indexPath))
-        cell.accessoryButtonTouched = { [weak self] name, deck in
+        cell.editButtonTouched = { [weak self] name, deck in
             self?.delegate?.rename(name: name, deck: deck)
         }
         return cell
