@@ -11,8 +11,8 @@ import UIKit
 final class LoansDetailViewController: UIViewController {
     private let database: DatabaseProtocol?
     private var personDTO: PersonDTO
-    private lazy var loanDetailView = LoanDetailTableView(delegate: self)
-    private lazy var navigator = LoanDetailNavigator(self.navigationController)
+    private lazy var loanDetailView: LoanDetailViewType = LoanDetailTableView(delegate: self)
+    private lazy var navigator = LoanDetailNavigator(self)
 
     // MARK: - Life Cycle
 

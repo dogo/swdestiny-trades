@@ -8,7 +8,8 @@
 
 import UIKit
 
-final class LoanDetailTableView: UITableView {
+final class LoanDetailTableView: UITableView, LoanDetailViewType {
+
     var didSelectCard: ((CardDTO, AddCardType) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
 

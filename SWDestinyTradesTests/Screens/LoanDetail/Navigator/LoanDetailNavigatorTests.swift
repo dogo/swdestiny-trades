@@ -18,8 +18,15 @@ final class LoanDetailNavigatorTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        navigationController = UINavigationControllerMock()
-        sut = LoanDetailNavigator(navigationController)
+        let controller = UIViewController()
+        navigationController = UINavigationControllerMock(rootViewController: controller)
+        sut = LoanDetailNavigator(controller)
+    }
+
+    override func tearDown() {
+        navigationController = nil
+        sut = nil
+        super.tearDown()
     }
 
     func testNavigateToCardDetailViewController() {
