@@ -77,11 +77,11 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     private func configureLentMe(indexPath: IndexPath, cell: LoanDetailCell) {
         if indexPath.row == lentMe.count {
-            cell.quantityStepper.isHidden = true
+            cell.setStepperVisibility(true)
             cell.textLabel?.text = L10n.addCard.appending("...")
             cell.textLabel?.textColor = .secondaryLabel
         } else {
-            cell.quantityStepper.isHidden = false
+            cell.setStepperVisibility(false)
             cell.textLabel?.text = nil
             cell.configureCell(cardDTO: lentMe[indexPath.row])
             cell.stepperValueChanged = { [weak self] value in
@@ -94,11 +94,11 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
 
     private func configureBorrowed(indexPath: IndexPath, cell: LoanDetailCell) {
         if indexPath.row == borrowed.count {
-            cell.quantityStepper.isHidden = true
+            cell.setStepperVisibility(true)
             cell.textLabel?.text = L10n.addMyCard
             cell.textLabel?.textColor = .secondaryLabel
         } else {
-            cell.quantityStepper.isHidden = false
+            cell.setStepperVisibility(false)
             cell.textLabel?.text = nil
             cell.configureCell(cardDTO: borrowed[indexPath.row])
             cell.stepperValueChanged = { [weak self] value in

@@ -9,15 +9,16 @@
 import UIKit
 
 final class LoanDetailCell: UITableViewCell, Identifiable {
+
     var stepperValueChanged: ((Int) -> Void)?
 
-    var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let image = UIImageView(frame: .zero)
         image.contentMode = .scaleAspectFit
         return image
     }()
 
-    var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 1
@@ -27,24 +28,23 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
         return label
     }()
 
-    var subtitleLabel: UILabel = {
+    private let subtitleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textColor = .secondaryLabel
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
 
-    var quantityLabel: UILabel = {
+    private let quantityLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
 
-    lazy var quantityStepper: UIStepper = {
+    private let quantityStepper: UIStepper = {
         let stepper = UIStepper(frame: .zero)
         stepper.minimumValue = 1
         stepper.tintColor = ColorPalette.appTheme
-        stepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
         return stepper
     }()
 
@@ -66,6 +66,10 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
         quantityStepper.value = Double(cardDTO.quantity)
     }
 
+    func setStepperVisibility(_ isHidden: Bool) {
+        quantityStepper.isHidden = isHidden
+    }
+
     private func setIconImage(card: CardDTO) {
         let imageForRendering = UIImage(named: "ic_\(card.typeCode)")?.withRenderingMode(.alwaysTemplate)
         iconImageView.image = imageForRendering
@@ -73,7 +77,7 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
     }
 
     @objc
-    func valueChanged(_ sender: UIStepper) {
+    private func valueChanged(_ sender: UIStepper) {
         let value = Int(sender.value)
         quantityLabel.text = String(value)
         stepperValueChanged?(value)
@@ -85,6 +89,7 @@ final class LoanDetailCell: UITableViewCell, Identifiable {
         titleLabel.text = nil
         subtitleLabel.text = nil
         quantityLabel.text = nil
+        quantityStepper.value = 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -134,5 +139,6 @@ extension LoanDetailCell: BaseViewConfiguration {
 
     func configureViews() {
         accessoryType = .disclosureIndicator
+        quantityStepper.addTarget(self, action: #selector(valueChanged(_:)), for: .valueChanged)
     }
 }
