@@ -27,6 +27,6 @@ final class SearchBar: UISearchBar {
 extension SearchBar: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        doingSearch?(searchBar.text ?? "")
+        doingSearch?(searchBar.nonOptionalText)
     }
 }

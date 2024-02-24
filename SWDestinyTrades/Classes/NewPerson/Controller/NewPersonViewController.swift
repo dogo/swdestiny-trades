@@ -46,8 +46,8 @@ final class NewPersonViewController: UIViewController {
 
     @objc
     func doneButtonTouched(_ sender: Any) {
-        let name = newPersonView.firstNameTextField.text ?? ""
-        let lastName = newPersonView.lastNameTextField.text ?? ""
+        let name = newPersonView.firstNameTextField.nonOptionalText
+        let lastName = newPersonView.lastNameTextField.nonOptionalText
 
         if !name.isEmpty {
             let person = PersonDTO()

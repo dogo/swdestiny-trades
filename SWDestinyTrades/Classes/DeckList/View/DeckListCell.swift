@@ -80,7 +80,7 @@ final class DeckListCell: UITableViewCell, Identifiable {
         if titleEditText.isUserInteractionEnabled {
             titleEditText.becomeFirstResponder()
         } else if let deck = deckDTO {
-            editButtonTouched?(titleEditText.text ?? "", deck)
+            editButtonTouched?(titleEditText.nonOptionalText, deck)
         }
     }
 }
