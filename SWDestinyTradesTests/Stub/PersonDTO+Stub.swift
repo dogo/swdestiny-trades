@@ -10,10 +10,15 @@ import Foundation
 @testable import SWDestinyTrades
 
 extension PersonDTO {
-    static func stub() -> PersonDTO {
+    static func stub(name: String = "User",
+                     lastName: String = "Mock",
+                     lentMe: [CardDTO] = [],
+                     borrowed: [CardDTO] = []) -> PersonDTO {
         let person = PersonDTO()
-        person.name = "User"
-        person.lastName = "Mock"
+        person.name = name
+        person.lastName = lastName
+        person.lentMe.append(objectsIn: lentMe)
+        person.borrowed.append(objectsIn: borrowed)
         return person
     }
 }

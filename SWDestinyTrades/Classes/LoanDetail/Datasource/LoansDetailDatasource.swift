@@ -14,11 +14,12 @@ protocol LoansDetailsProtocol: AnyObject {
 }
 
 final class LoansDetailDatasource: NSObject, UITableViewDataSource {
+
     private var tableView: UITableView?
     private var currentPerson: PersonDTO?
     private weak var delegate: LoansDetailsProtocol?
-    var lentMe: [CardDTO] = []
-    var borrowed: [CardDTO] = []
+    private var lentMe: [CardDTO] = []
+    private var borrowed: [CardDTO] = []
 
     required init(tableView: UITableView, delegate: LoansDetailsProtocol) {
         super.init()
@@ -117,6 +118,14 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
             delegate?.remove(from: .borrow, at: indexPath.row)
         }
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
+    }
+
+    func getLentMeCards() -> [CardDTO] {
+        return lentMe
+    }
+
+    func getBorrowedCards() -> [CardDTO] {
+        return borrowed
     }
 
     func getCard(at index: IndexPath) -> CardDTO? {
