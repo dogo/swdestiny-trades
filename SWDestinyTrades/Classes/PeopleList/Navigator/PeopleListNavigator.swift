@@ -34,7 +34,7 @@ final class PeopleListNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case let .loanDetail(database, person):
-            return LoansDetailViewController(database: database, person: person)
+            return LoansDetailViewControllerFactory(database: database, person: person).createViewController()
         case let .newPerson(delegate):
             let viewController = NewPersonViewController()
             viewController.delegate = delegate

@@ -17,17 +17,17 @@ final class LoansDetailsPresenterSpy: LoansDetailPresenterProtocol, LoansDetails
     func loadDataFromRealm() {
         didCallLoadDataFromRealmCount += 1
     }
-    
+
     private(set) var didCallSetNavigationTitleCount = 0
     func setNavigationTitle() {
         didCallSetNavigationTitleCount += 1
     }
-    
+
     private(set) var didCallNavigateToCardDetailValues: [(card: CardDTO, destination: AddCardType)] = []
     func navigateToCardDetail(with card: CardDTO, destination: AddCardType) {
         didCallNavigateToCardDetailValues.append((card, destination))
     }
-    
+
     private(set) var didCallNavigateToAddCardValues: [AddCardType] = []
     func navigateToAddCard(type: AddCardType) {
         didCallNavigateToAddCardValues.append(type)
