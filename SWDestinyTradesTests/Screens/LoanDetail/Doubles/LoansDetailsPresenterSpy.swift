@@ -11,7 +11,27 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class LoansDetailsPresenterSpy: LoansDetailsProtocol {
+final class LoansDetailsPresenterSpy: LoansDetailPresenterProtocol, LoansDetailsProtocol {
+
+    private(set) var didCallLoadDataFromRealmCount = 0
+    func loadDataFromRealm() {
+        didCallLoadDataFromRealmCount += 1
+    }
+    
+    private(set) var didCallSetNavigationTitleCount = 0
+    func setNavigationTitle() {
+        didCallSetNavigationTitleCount += 1
+    }
+    
+    private(set) var didCallNavigateToCardDetailValues: [(card: CardDTO, destination: AddCardType)] = []
+    func navigateToCardDetail(with card: CardDTO, destination: AddCardType) {
+        didCallNavigateToCardDetailValues.append((card, destination))
+    }
+    
+    private(set) var didCallNavigateToAddCardValues: [AddCardType] = []
+    func navigateToAddCard(type: AddCardType) {
+        didCallNavigateToAddCardValues.append(type)
+    }
 
     private(set) var didCallStepperValueChangedValues: [(newValue: Int, card: CardDTO)] = []
     func stepperValueChanged(newValue: Int, card: CardDTO) {

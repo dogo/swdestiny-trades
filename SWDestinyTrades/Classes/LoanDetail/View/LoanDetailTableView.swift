@@ -12,14 +12,14 @@ final class LoanDetailTableView: UITableView, LoanDetailViewType {
 
     var didSelectCard: ((CardDTO, AddCardType) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
-    
+
     weak var loansDetailDelegate: LoansDetailsProtocol?
-    
+
     private var tableViewDatasource: LoansDetailDatasource?
 
     override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
-        self.delegate = self
+        delegate = self
         backgroundColor = .blackWhite
     }
 
