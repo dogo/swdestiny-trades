@@ -51,14 +51,14 @@ final class LoansDetailViewControllerTests: XCTestCase {
         sut.viewDidLoad()
         // view.didSelectCard?(.stub())
 
-        //XCTAssertEqual(presenter.didCallNavigateToDeckBuilder.count, 1)
+        // XCTAssertEqual(presenter.didCallNavigateToDeckBuilder.count, 1)
     }
-    
+
     func test_didSelectAddItem() {
         sut.viewDidLoad()
         // view.didSelectCard?(.stub())
 
-        //XCTAssertEqual(presenter.didCallNavigateToDeckBuilder.count, 1)
+        // XCTAssertEqual(presenter.didCallNavigateToDeckBuilder.count, 1)
     }
 
     func test_viewWillAppear() {
