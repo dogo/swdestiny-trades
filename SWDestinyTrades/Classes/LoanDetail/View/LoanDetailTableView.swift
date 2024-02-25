@@ -12,13 +12,14 @@ final class LoanDetailTableView: UITableView, LoanDetailViewType {
 
     var didSelectCard: ((CardDTO, AddCardType) -> Void)?
     var didSelectAddItem: ((AddCardType) -> Void)?
-
+    
+    weak var loansDetailDelegate: LoansDetailsProtocol?
+    
     private var tableViewDatasource: LoansDetailDatasource?
 
-    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: LoansDetailsProtocol) {
+    override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
         self.delegate = self
-        tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: delegate)
         backgroundColor = .blackWhite
     }
 
@@ -28,6 +29,7 @@ final class LoanDetailTableView: UITableView, LoanDetailViewType {
     }
 
     func updateTableViewData(person: PersonDTO) {
+        tableViewDatasource = LoansDetailDatasource(tableView: self, delegate: loansDetailDelegate)
         tableViewDatasource?.updateTableViewData(person: person)
     }
 

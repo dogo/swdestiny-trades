@@ -21,7 +21,7 @@ final class LoansDetailDatasource: NSObject, UITableViewDataSource {
     private var lentMe: [CardDTO] = []
     private var borrowed: [CardDTO] = []
 
-    required init(tableView: UITableView, delegate: LoansDetailsProtocol) {
+    required init(tableView: UITableView, delegate: LoansDetailsProtocol?) {
         super.init()
         self.tableView = tableView
         self.delegate = delegate

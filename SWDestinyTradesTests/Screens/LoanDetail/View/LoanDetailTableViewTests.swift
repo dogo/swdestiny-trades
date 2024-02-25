@@ -19,12 +19,12 @@ final class LoanDetailTableViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
         delegate = LoansDetailsPresenterSpy()
-        sut = LoanDetailTableView(frame: .testDevice, delegate: delegate)
+        sut = LoanDetailTableView(frame: .testDevice)
         let cards: [CardDTO] = [
             .stub(),
             .stub()
         ]
-
+        sut.loansDetailDelegate = delegate
         sut.updateTableViewData(person: .stub(lentMe: cards,
                                               borrowed: cards))
     }
