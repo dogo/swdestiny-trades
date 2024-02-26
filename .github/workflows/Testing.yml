@@ -40,9 +40,9 @@ jobs:
           tuist install
         shell: bash
 
-      #- name: Tuist Warm Cache
+      #- name: Tuist Cache
       #  run: |
-      #    tuist cache warm
+      #    tuist cache 
       #  shell: bash
 
       - name: Generate project with tuist
@@ -64,4 +64,5 @@ jobs:
         with:
           swift: true
           swift_project: SWDestinyTrades
+          exclude: SWDestinyTrades/Classes/Generated
           verbose: true        
