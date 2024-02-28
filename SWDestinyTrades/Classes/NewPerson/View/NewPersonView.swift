@@ -9,6 +9,7 @@
 import UIKit
 
 final class NewPersonView: UIView {
+
     lazy var firstNameTextField: FloatingTextfield = {
         let textField = FloatingTextfield(frame: .zero)
         textField.textColor = .whiteBlack
@@ -42,6 +43,7 @@ final class NewPersonView: UIView {
 }
 
 extension NewPersonView: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         addSubview(firstNameTextField)
         addSubview(lastNameTextField)
@@ -69,6 +71,7 @@ extension NewPersonView: BaseViewConfiguration {
 }
 
 extension NewPersonView: UITextFieldDelegate {
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if firstNameTextField == textField {
             lastNameTextField.becomeFirstResponder()

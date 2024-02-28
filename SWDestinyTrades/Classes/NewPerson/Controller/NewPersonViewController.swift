@@ -9,13 +9,16 @@
 import UIKit
 
 final class NewPersonViewController: UIViewController {
-    private let newPersonView = NewPersonView()
-    weak var delegate: UpdateTableDataDelegate?
+
+    private let newPersonView: NewPersonView
+
+    var presenter: NewPersonPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(with view: NewPersonView = NewPersonView()) {
+        newPersonView = view
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -30,31 +33,31 @@ final class NewPersonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationItem()
+        presenter?.setupNavigationItems { [weak self] items in
+            self?.navigationItem.rightBarButtonItems = items
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = L10n.newPerson
+
+        presenter?.setNavigationTitle()
+    }
+}
+
+extension NewPersonViewController: NewPersonViewControllerProtocol {
+
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 
-    func setupNavigationItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTouched(_:)))
-    }
-
-    // MARK: - UIBarButton Actions
-
-    @objc
-    func doneButtonTouched(_ sender: Any) {
+    func retriveUserInput() -> (name: String, lastName: String) {
         let name = newPersonView.firstNameTextField.nonOptionalText
         let lastName = newPersonView.lastNameTextField.nonOptionalText
+        return (name, lastName)
+    }
 
-        if !name.isEmpty {
-            let person = PersonDTO()
-            person.name = name
-            person.lastName = lastName
-            delegate?.insertNew(person: person)
-        }
-        _ = navigationController?.popViewController(animated: true)
+    func closeViewController() {
+        navigationController?.popViewController(animated: true)
     }
 }
