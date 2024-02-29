@@ -34,6 +34,7 @@ final class LoansDetailViewControllerTests: XCTestCase {
 
     override func tearDown() {
         navigationController = nil
+        database = nil
         sut = nil
         view = nil
         keyWindow.cleanTestWindow()
