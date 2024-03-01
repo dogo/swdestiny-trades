@@ -8,15 +8,17 @@
 
 import UIKit
 
-final class PeopleListTableView: UITableView {
+final class PeopleListTableView: UITableView, PeopleListViewType {
+
     var didSelectPerson: ((PersonDTO) -> Void)?
+
+    weak var peopleListDelegate: PeopleListProtocol?
 
     private var tableViewDatasource: PeopleListDatasource?
 
-    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: PeopleListProtocol) {
+    override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
-        self.delegate = self
-        tableViewDatasource = PeopleListDatasource(tableView: self, delegate: delegate)
+        delegate = self
         backgroundColor = .blackWhite
     }
 
@@ -25,7 +27,8 @@ final class PeopleListTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updatePeopleList(_ peopleList: [PersonDTO]) {
+    func updateTableViewData(_ peopleList: [PersonDTO]) {
+        tableViewDatasource = PeopleListDatasource(tableView: self, delegate: peopleListDelegate)
         tableViewDatasource?.insert(personArray: peopleList)
     }
 
@@ -47,6 +50,7 @@ final class PeopleListTableView: UITableView {
 }
 
 extension PeopleListTableView: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

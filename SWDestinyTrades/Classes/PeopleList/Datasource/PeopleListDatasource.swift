@@ -14,11 +14,12 @@ protocol PeopleListProtocol: AnyObject {
 }
 
 final class PeopleListDatasource: NSObject, UITableViewDataSource {
+
     private var tableView: UITableView?
     private var persons: [PersonDTO] = []
     private weak var delegate: PeopleListProtocol?
 
-    required init(tableView: UITableView, delegate: PeopleListProtocol) {
+    required init(tableView: UITableView, delegate: PeopleListProtocol?) {
         super.init()
         self.tableView = tableView
         self.delegate = delegate

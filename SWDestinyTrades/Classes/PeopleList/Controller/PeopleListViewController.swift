@@ -14,7 +14,7 @@ protocol UpdateTableDataDelegate: AnyObject {
 
 final class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
 
-    private lazy var peopleListView = PeopleListTableView(delegate: self)
+    private lazy var peopleListView: PeopleListViewType = PeopleListTableView()
     private lazy var navigator = PeopleListNavigator(self)
     private let database: DatabaseProtocol?
 
@@ -23,6 +23,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
     init(database: DatabaseProtocol?) {
         self.database = database
         super.init(nibName: nil, bundle: nil)
+        peopleListView.peopleListDelegate = self
     }
 
     @available(*, unavailable)
@@ -64,7 +65,7 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
 
     func loadDataFromRealm() {
         try? database?.fetch(PersonDTO.self, predicate: nil, sorted: nil) { [weak self] persons in
-            self?.peopleListView.updatePeopleList(persons)
+            self?.peopleListView.updateTableViewData(persons)
         }
     }
 
