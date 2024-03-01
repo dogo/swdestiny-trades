@@ -10,13 +10,13 @@ import UIKit
 
 final class NewPersonViewController: UIViewController {
 
-    private let newPersonView: NewPersonView
+    private let newPersonView: NewPersonViewType
 
     var presenter: NewPersonPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(with view: NewPersonView = NewPersonView()) {
+    init(with view: NewPersonViewType) {
         newPersonView = view
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,9 +52,7 @@ extension NewPersonViewController: NewPersonViewControllerProtocol {
     }
 
     func retriveUserInput() -> (name: String, lastName: String) {
-        let name = newPersonView.firstNameTextField.nonOptionalText
-        let lastName = newPersonView.lastNameTextField.nonOptionalText
-        return (name, lastName)
+        return newPersonView.retriveUserInput()
     }
 
     func closeViewController() {

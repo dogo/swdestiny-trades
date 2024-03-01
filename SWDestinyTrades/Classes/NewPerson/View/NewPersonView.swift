@@ -8,20 +8,19 @@
 
 import UIKit
 
-final class NewPersonView: UIView {
+final class NewPersonView: UIView, NewPersonViewType {
 
-    lazy var firstNameTextField: FloatingTextfield = {
+    private let firstNameTextField: FloatingTextfield = {
         let textField = FloatingTextfield(frame: .zero)
         textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
         textField.font = UIFont.systemFont(ofSize: 17)
         textField.placeholder = L10n.firstName
         textField.placeholderTextColor = .secondaryLabel
-        textField.delegate = self
         return textField
     }()
 
-    var lastNameTextField: FloatingTextfield = {
+    private let lastNameTextField: FloatingTextfield = {
         let textField = FloatingTextfield(frame: .zero)
         textField.textColor = .whiteBlack
         textField.autocapitalizationType = .sentences
@@ -39,6 +38,12 @@ final class NewPersonView: UIView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func retriveUserInput() -> (name: String, lastName: String) {
+        let name = firstNameTextField.nonOptionalText
+        let lastName = lastNameTextField.nonOptionalText
+        return (name, lastName)
     }
 }
 
@@ -67,6 +72,7 @@ extension NewPersonView: BaseViewConfiguration {
 
     func configureViews() {
         backgroundColor = .blackWhite
+        firstNameTextField.delegate = self
     }
 }
 

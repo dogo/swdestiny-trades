@@ -15,6 +15,7 @@ final class NewPersonViewControllerTests: XCTestCase {
 
     private var sut: NewPersonViewController!
     private var presenter: NewPersonPresenterSpy!
+    private var view: NewPersonViewSpy!
     private var navigationController: UINavigationControllerMock!
     private var keyWindow: UIWindow!
 
@@ -22,7 +23,8 @@ final class NewPersonViewControllerTests: XCTestCase {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
         presenter = NewPersonPresenterSpy()
-        sut = NewPersonViewController()
+        view = NewPersonViewSpy()
+        sut = NewPersonViewController(with: view)
         sut.presenter = presenter
         navigationController = UINavigationControllerMock(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
@@ -30,6 +32,7 @@ final class NewPersonViewControllerTests: XCTestCase {
 
     override func tearDown() {
         navigationController = nil
+        view = nil
         sut = nil
         keyWindow.cleanTestWindow()
         super.tearDown()
@@ -38,7 +41,7 @@ final class NewPersonViewControllerTests: XCTestCase {
     func test_loadView() {
         sut.loadView()
 
-        XCTAssertTrue(sut.view is NewPersonView)
+        XCTAssertTrue(sut.view is NewPersonViewType)
     }
 
     func test_viewDidLoad() {
@@ -60,10 +63,12 @@ final class NewPersonViewControllerTests: XCTestCase {
     }
 
     func test_retriveUserInput() {
+        view.userInput = ("Darth", "Vader")
+
         let userInput = sut.retriveUserInput()
 
-        XCTAssertEqual(userInput.name, "")
-        XCTAssertEqual(userInput.lastName, "")
+        XCTAssertEqual(userInput.name, "Darth")
+        XCTAssertEqual(userInput.lastName, "Vader")
     }
 
     func test_closeViewController() {
