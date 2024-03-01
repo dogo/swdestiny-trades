@@ -36,10 +36,7 @@ final class PeopleListNavigator: Navigator {
         case let .loanDetail(database, person):
             return LoansDetailViewControllerFactory(database: database, person: person).createViewController()
         case let .newPerson(delegate):
-            let viewController = NewPersonViewController(with: NewPersonView())
-            let presenter = NewPersonPresenter(controller: viewController, delegate: delegate)
-            viewController.presenter = presenter
-            return viewController
+            return NewPersonViewControllerFactory(delegate: delegate).createViewController()
         }
     }
 }
