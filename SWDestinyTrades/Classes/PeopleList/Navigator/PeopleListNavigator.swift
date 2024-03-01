@@ -9,24 +9,24 @@
 import UIKit
 
 final class PeopleListNavigator: Navigator {
+
     enum Destination {
         case loanDetail(database: DatabaseProtocol?, with: PersonDTO)
         case newPerson(with: UpdateTableDataDelegate)
     }
 
-    private weak var navigationController: UINavigationController?
+    private weak var viewController: UIViewController?
 
     // MARK: - Initializer
 
-    init(_ navigationController: UINavigationController?) {
-        self.navigationController = navigationController
+    init(_ viewController: UIViewController?) {
+        self.viewController = viewController
     }
 
     // MARK: - Navigator
 
     func navigate(to destination: Destination) {
-        let viewController = makeViewController(for: destination)
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController?.navigationController?.pushViewController(makeViewController(for: destination), animated: true)
     }
 
     // MARK: - Private
