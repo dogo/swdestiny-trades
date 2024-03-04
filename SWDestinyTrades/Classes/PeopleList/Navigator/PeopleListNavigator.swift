@@ -12,7 +12,7 @@ final class PeopleListNavigator: Navigator {
 
     enum Destination {
         case loanDetail(database: DatabaseProtocol?, with: PersonDTO)
-        case newPerson(with: UpdateTableDataDelegate)
+        case newPerson(with: UpdateTableDataDelegate?)
     }
 
     private weak var viewController: UIViewController?
