@@ -11,7 +11,7 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class PeopleListViewControllerSpy: UIViewController, PeopleListViewControllerProtocol {
+final class PeopleListViewControllerSpy: UIViewController, PeopleListViewControllerProtocol, UpdateTableDataDelegate {
 
     private(set) var didCallUpdateTableViewDataValues: [PersonDTO] = []
     func updateTableViewData(_ peopleList: [PersonDTO]) {
@@ -31,5 +31,10 @@ final class PeopleListViewControllerSpy: UIViewController, PeopleListViewControl
     private(set) var didCallInsertValues: [PersonDTO] = []
     func insert(_ person: PersonDTO) {
         didCallInsertValues.append(person)
+    }
+
+    private(set) var didCallInsertNewPersonValues: [PersonDTO] = []
+    func insertNew(person: PersonDTO) {
+        didCallInsertNewPersonValues.append(person)
     }
 }

@@ -57,7 +57,7 @@ final class PeopleListPresenterTests: XCTestCase {
     func test_loadDataFromRealm() {
         sut.loadDataFromRealm()
 
-        XCTAssertEqual(controller.didCallUpdateTableViewDataValues.count, 7)
+        XCTAssertEqual(controller.didCallUpdateTableViewDataValues.count, 8)
         XCTAssertNotNil(controller.didCallUpdateTableViewDataValues[0])
     }
 
@@ -145,7 +145,7 @@ final class PeopleListPresenterTests: XCTestCase {
     func test_reloadTableView() {
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: nil)
 
-        XCTAssertEqual(controller.didCallUpdateTableViewDataValues.count, 9)
+        XCTAssertEqual(controller.didCallUpdateTableViewDataValues.count, 10)
         XCTAssertNotNil(controller.didCallUpdateTableViewDataValues[0])
     }
 
@@ -179,6 +179,15 @@ final class PeopleListPresenterTests: XCTestCase {
         sut.remove(person: person)
 
         XCTAssertNil(findObject(PersonDTO.self, predicate: predicate))
+    }
+
+    // MARK: - Test insert New Person
+
+    func test_insertNewPerson() {
+        sut.insertNew(person: .stub())
+
+        XCTAssertEqual(controller.didCallInsertValues.count, 1)
+        XCTAssertNotNil(controller.didCallInsertValues[0])
     }
 
     // MARK: - Utils
