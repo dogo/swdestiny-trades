@@ -31,4 +31,9 @@ final class SWDTabBarFactory {
         let factory = DeckListViewControllerFactory(database: database)
         return factory.createViewController()
     }
+
+    func makePeopleList(with database: DatabaseProtocol?) -> UIViewController {
+        let factory = PeopleListViewControllerFactory(database: database)
+        return factory.createViewController()
+    }
 }

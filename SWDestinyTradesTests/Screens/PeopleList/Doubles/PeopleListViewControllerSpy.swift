@@ -27,4 +27,9 @@ final class PeopleListViewControllerSpy: UIViewController, PeopleListViewControl
     func toggleTableViewEditable(editable: Bool, title: String) {
         didCallToggleTableViewEditableValues.append((editable, title))
     }
+
+    private(set) var didCallInsertValues: [PersonDTO] = []
+    func insert(_ person: PersonDTO) {
+        didCallInsertValues.append(person)
+    }
 }

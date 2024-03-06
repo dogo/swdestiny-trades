@@ -12,18 +12,17 @@ protocol UpdateTableDataDelegate: AnyObject {
     func insertNew(person: PersonDTO)
 }
 
-final class PeopleListViewController: UIViewController, UpdateTableDataDelegate {
+final class PeopleListViewController: UIViewController {
 
-    private lazy var peopleListView: PeopleListViewType = PeopleListTableView()
-    private lazy var navigator = PeopleListNavigator(self)
-    private let database: DatabaseProtocol?
+    private let peopleListView: PeopleListViewType
+
+    var presenter: PeopleListPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?) {
-        self.database = database
+    init(with view: PeopleListViewType) {
+        peopleListView = view
         super.init(nibName: nil, bundle: nil)
-        peopleListView.peopleListDelegate = self
     }
 
     @available(*, unavailable)
@@ -38,84 +37,43 @@ final class PeopleListViewController: UIViewController, UpdateTableDataDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNavigationItem()
+        presenter?.setupNavigationItems { [weak self] items in
+            self?.navigationItem.leftBarButtonItem = items?.first
+            self?.navigationItem.rightBarButtonItem = items?.last
+        }
 
-        loadDataFromRealm()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NotificationKey.reloadTableViewNotification, object: nil)
+        presenter?.loadDataFromRealm()
 
         peopleListView.didSelectPerson = { [weak self] person in
-            self?.navigateToLoansDetailViewController(person: person)
+            self?.presenter?.navigateToLoansDetail(person: person)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationItem.title = L10n.people
+        presenter?.setNavigationTitle()
         peopleListView.reloadData()
-    }
-
-    // MARK: - Private
-
-    func setupNavigationItem() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: L10n.edit, style: .plain, target: self, action: #selector(editButtonTouched(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToNextController(_:)))
-    }
-
-    func loadDataFromRealm() {
-        try? database?.fetch(PersonDTO.self, predicate: nil, sorted: nil) { [weak self] persons in
-            self?.peopleListView.updateTableViewData(persons)
-        }
-    }
-
-    @objc
-    private func reloadTableView(_ notification: NSNotification) {
-        loadDataFromRealm()
-    }
-
-    // MARK: - <UpdateTableDataDelegate>
-
-    func insertNew(person: PersonDTO) {
-        peopleListView.insert(person)
-    }
-
-    // MARK: - UIBarButton Actions
-
-    @objc
-    func editButtonTouched(_ sender: Any) {
-        toggleTableViewEditable(editable: isEditing)
-    }
-
-    // MARK: - Helper
-
-    private func toggleTableViewEditable(editable: Bool) {
-        super.setEditing(!editable, animated: true)
-        peopleListView.toggleTableViewEditable(editable: editable)
-        navigationItem.leftBarButtonItem?.title = !editable ? L10n.done : L10n.edit
-    }
-
-    // MARK: - Navigation
-
-    @objc
-    func navigateToNextController(_ sender: Any) {
-        if isEditing {
-            toggleTableViewEditable(editable: isEditing)
-        }
-        navigator.navigate(to: .newPerson(with: self))
-    }
-
-    func navigateToLoansDetailViewController(person: PersonDTO) {
-        navigator.navigate(to: .loanDetail(database: database, with: person))
     }
 }
 
-extension PeopleListViewController: PeopleListProtocol {
-    func remove(person: PersonDTO) {
-        try? database?.delete(object: person)
+extension PeopleListViewController: PeopleListViewControllerProtocol {
+
+    func updateTableViewData(_ peopleList: [PersonDTO]) {
+        peopleListView.updateTableViewData(peopleList)
     }
 
-    func insert(person: PersonDTO) {
-        try? database?.save(object: person)
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
+    }
+
+    func toggleTableViewEditable(editable: Bool, title: String) {
+        super.setEditing(!editable, animated: true)
+        peopleListView.toggleTableViewEditable(editable: editable)
+        navigationItem.leftBarButtonItem?.title = title
+    }
+
+    func insert(_ person: PersonDTO) {
+        peopleListView.insert(person)
     }
 }

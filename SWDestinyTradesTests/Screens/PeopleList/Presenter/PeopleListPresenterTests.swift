@@ -23,12 +23,10 @@ final class PeopleListPresenterTests: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = PeopleListViewControllerSpy()
-        delegate = UpdateTableDataDelegateSpy()
         navigationController = UINavigationControllerMock(rootViewController: controller)
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
         navigator = PeopleListNavigator(controller)
         sut = PeopleListPresenter(controller: controller,
-                                  delegate: delegate,
                                   database: database,
                                   navigator: navigator)
         sut.insert(person: .stub())

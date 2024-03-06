@@ -11,79 +11,106 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class PeopleListViewControllerTests: XCSnapshotableTestCase {
+final class PeopleListViewControllerTests: XCTestCase {
 
     private var sut: PeopleListViewController!
+    private var presenter: PeopleListPresenterSpy!
+    private var view: PeopleListViewSpy!
     private var database: DatabaseProtocol!
-    private var navigation: UINavigationController!
-    private var window: UIWindow!
+    private var navigationController: UINavigationControllerMock!
+    private var keyWindow: UIWindow!
 
     override func setUp() {
         super.setUp()
-        AppearanceProxyHelper.customizeNavigationBar()
-        window = UIWindow(frame: .testDevice)
-        database = RealmDatabaseHelper.createMemoryDatabase(identifier: "PeopleList")
+        keyWindow = UIWindow(frame: .testDevice)
+        view = PeopleListViewSpy()
+        presenter = PeopleListPresenterSpy()
+        sut = PeopleListViewController(with: view)
+        sut.presenter = presenter
+        database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
+        navigationController = UINavigationControllerMock(rootViewController: sut)
+        keyWindow.showTestWindow(controller: navigationController)
     }
 
     override func tearDown() {
-        try! database.reset()
-        window.cleanTestWindow()
+        sut = nil
+        database = nil
+        view = nil
+        navigationController = nil
+        keyWindow = nil
         super.tearDown()
     }
 
-    func testEmptyStateLayout() {
-        sut = PeopleListViewController(database: database)
-        navigation = UINavigationController(rootViewController: sut)
-        window.showTestWindow(controller: navigation)
+    func test_loadView() {
+        sut.loadView()
 
-        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with an empty state layout"))
+        XCTAssertTrue(sut.view is PeopleListViewType)
     }
 
-    func testPersonWithNoLoansLayout() {
-        let person = PersonDTO.stub()
-        try! database.save(object: person)
+    func test_viewDidLoad() {
+        sut.viewDidLoad()
 
-        sut = PeopleListViewController(database: database)
-        navigation = UINavigationController(rootViewController: sut)
-        window.showTestWindow(controller: navigation)
-
-        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with no loans"))
+        XCTAssertEqual(presenter.didCallSetupNavigationItemsCount, 1)
+        XCTAssertEqual(presenter.didCallLoadDataFromRealmCount, 1)
     }
 
-    func testPersonWithLentCardsLayout() {
-        let person = PersonDTO.stub()
-        person.lentMe.append(CardDTO.stub())
-        try! database.save(object: person)
+    func test_didSelectPerson() {
+        sut.viewDidLoad()
+        view.didSelectPerson?(.stub())
 
-        sut = PeopleListViewController(database: database)
-        navigation = UINavigationController(rootViewController: sut)
-        window.showTestWindow(controller: navigation)
-
-        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with lent cards"))
+        XCTAssertEqual(presenter.didCallNavigateToLoansDetailValues.count, 1)
+        XCTAssertNotNil(presenter.didCallNavigateToLoansDetailValues[0])
     }
 
-    func testPersonWithBorrowedCardsLayout() {
-        let person = PersonDTO.stub()
-        person.borrowed.append(CardDTO.stub())
-        try! database.save(object: person)
+    func test_viewWillAppear() {
+        sut.viewWillAppear(false)
 
-        sut = PeopleListViewController(database: database)
-        navigation = UINavigationController(rootViewController: sut)
-        window.showTestWindow(controller: navigation)
-
-        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with borrowed cards"))
+        XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
     }
 
-    func testPersonWithLentAndBorrowedCardsLayout() {
-        let person = PersonDTO.stub()
-        person.lentMe.append(CardDTO.stub())
-        person.borrowed.append(CardDTO.stub())
-        try! database.save(object: person)
+    func test_updateTableViewData() {
+        sut.updateTableViewData([.stub()])
 
-        sut = PeopleListViewController(database: database)
-        navigation = UINavigationController(rootViewController: sut)
-        window.showTestWindow(controller: navigation)
+        XCTAssertEqual(view.didCallUpdateTableViewDataValues.count, 1)
+        XCTAssertNotNil(view.didCallUpdateTableViewDataValues[0])
+    }
 
-        XCTAssertTrue(snapshot(navigation, named: "PeopleListViewController with a person with lent and borrowed cards"))
+    func test_setNavigationTitle() {
+        sut.setNavigationTitle("Darth Vader")
+
+        XCTAssertEqual(sut.navigationItem.title, "Darth Vader")
+    }
+
+    func test_toggleTableViewEditable_true() {
+        sut.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Test",
+                                                               style: .plain,
+                                                               target: nil,
+                                                               action: nil)
+        sut.toggleTableViewEditable(editable: true, title: "Edit")
+
+        XCTAssertFalse(sut.isEditing)
+        XCTAssertEqual(view.didICallToggleTableViewEditableValues.count, 1)
+        XCTAssertTrue(view.didICallToggleTableViewEditableValues[0])
+        XCTAssertEqual(sut.navigationItem.leftBarButtonItem?.title, "Edit")
+    }
+
+    func test_toggleTableViewEditable_false() {
+        sut.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Test",
+                                                               style: .plain,
+                                                               target: nil,
+                                                               action: nil)
+        sut.toggleTableViewEditable(editable: false, title: "Done")
+
+        XCTAssertTrue(sut.isEditing)
+        XCTAssertEqual(view.didICallToggleTableViewEditableValues.count, 1)
+        XCTAssertFalse(view.didICallToggleTableViewEditableValues[0])
+        XCTAssertEqual(sut.navigationItem.leftBarButtonItem?.title, "Done")
+    }
+
+    func test_insert() {
+        sut.insert(.stub())
+
+        XCTAssertEqual(view.didICallnsertValues.count, 1)
+        XCTAssertNotNil(view.didICallnsertValues[0])
     }
 }

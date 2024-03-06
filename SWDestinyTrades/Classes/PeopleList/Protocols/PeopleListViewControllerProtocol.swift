@@ -13,4 +13,5 @@ protocol PeopleListViewControllerProtocol where Self: UIViewController {
     func updateTableViewData(_ peopleList: [PersonDTO])
     func setNavigationTitle(_ title: String)
     func toggleTableViewEditable(editable: Bool, title: String)
+    func insert(_ person: PersonDTO)
 }

@@ -22,14 +22,11 @@ final class PeopleListPresenter: PeopleListPresenterProtocol {
     private let navigator: PeopleListNavigator
 
     private weak var controller: PeopleListViewControllerProtocol?
-    private weak var delegate: UpdateTableDataDelegate?
 
     init(controller: PeopleListViewControllerProtocol?,
-         delegate: UpdateTableDataDelegate?,
          database: DatabaseProtocol?,
          navigator: PeopleListNavigator) {
         self.controller = controller
-        self.delegate = delegate
         self.database = database
         self.navigator = navigator
 
@@ -73,7 +70,7 @@ final class PeopleListPresenter: PeopleListPresenterProtocol {
         if isEditing {
             toggleTableViewEditable(editable: isEditing)
         }
-        navigator.navigate(to: .newPerson(with: delegate))
+        navigator.navigate(to: .newPerson(with: self))
     }
 
     // MARK: - Helper
@@ -97,5 +94,12 @@ extension PeopleListPresenter: PeopleListProtocol {
 
     func insert(person: PersonDTO) {
         try? database?.save(object: person)
+    }
+}
+
+extension PeopleListPresenter: UpdateTableDataDelegate {
+
+    func insertNew(person: PersonDTO) {
+        controller?.insert(person)
     }
 }

@@ -11,7 +11,28 @@ import UIKit
 
 @testable import SWDestinyTrades
 
-final class PeopleListPresenterSpy: PeopleListProtocol {
+final class PeopleListPresenterSpy: PeopleListPresenterProtocol, PeopleListProtocol {
+
+    private(set) var didCallSetupNavigationItemsCount = 0
+    func setupNavigationItems(completion: ([UIBarButtonItem]?) -> Void) {
+        didCallSetupNavigationItemsCount += 1
+        completion([])
+    }
+
+    private(set) var didCallLoadDataFromRealmCount = 0
+    func loadDataFromRealm() {
+        didCallLoadDataFromRealmCount += 1
+    }
+
+    private(set) var didCallSetNavigationTitleCount = 0
+    func setNavigationTitle() {
+        didCallSetNavigationTitleCount += 1
+    }
+
+    private(set) var didCallNavigateToLoansDetailValues: [PersonDTO] = []
+    func navigateToLoansDetail(person: PersonDTO) {
+        didCallNavigateToLoansDetailValues.append(person)
+    }
 
     private(set) var didCallRemoveValues: [PersonDTO] = []
     func remove(person: PersonDTO) {
