@@ -64,5 +64,4 @@ jobs:
         with:
           swift: true
           swift_project: SWDestinyTrades
-          exclude: SWDestinyTrades/Classes/Generated
           verbose: true        
