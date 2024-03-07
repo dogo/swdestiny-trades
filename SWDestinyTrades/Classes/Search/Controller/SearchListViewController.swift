@@ -24,7 +24,7 @@ final class SearchListViewController: UIViewController {
     private let database: DatabaseProtocol?
     private let searchView = SearchView()
     private var cards = [CardDTO]()
-    private lazy var navigator = SearchNavigator(self.navigationController)
+    private lazy var navigator = SearchNavigator(self)
 
     // MARK: - Life Cycle
 
