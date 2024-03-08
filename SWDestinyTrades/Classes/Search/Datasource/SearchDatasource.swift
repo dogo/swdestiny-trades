@@ -9,6 +9,7 @@
 import UIKit
 
 final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelegate {
+
     private var tableView: UITableView?
     private var cardsData: [CardDTO] = []
 
@@ -42,7 +43,7 @@ final class SearchDatasource: NSObject, UITableViewDataSource, UISearchBarDelega
     }
 }
 
-class Search: NSObject, UITableViewDelegate {
+final class Search: NSObject, UITableViewDelegate {
     weak var delegate: SearchDelegate?
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
