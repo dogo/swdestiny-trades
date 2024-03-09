@@ -9,8 +9,8 @@
 import UIKit
 
 final class SearchTableView: UITableView, SearchDelegate {
+
     var didSelectCard: ((CardDTO) -> Void)?
-    var doingSearch: ((String) -> Void)?
 
     private var searchDatasource: SearchDatasource?
     private let search = Search()
@@ -35,7 +35,7 @@ final class SearchTableView: UITableView, SearchDelegate {
         searchDatasource?.updateSearchList(cards)
     }
 
-    // MARK: <SearchDelegate>
+    // MARK: - <SearchDelegate>
 
     func didSelectRow(at index: IndexPath) {
         if let card = searchDatasource?.getCard(at: index) {
@@ -43,10 +43,10 @@ final class SearchTableView: UITableView, SearchDelegate {
         }
     }
 
-    // MARK: Keyboard handling
+    // MARK: - Keyboard handling
 
     @objc
-    func keyboardWillShow(notification: NSNotification) {
+    private func keyboardWillShow(notification: NSNotification) {
         if let userInfo: NSDictionary = notification.userInfo as NSDictionary? {
             if let keyboardInfo = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardSize = keyboardInfo.cgRectValue.size
@@ -58,7 +58,7 @@ final class SearchTableView: UITableView, SearchDelegate {
     }
 
     @objc
-    func keyboardWillHide(notification: NSNotification) {
+    private func keyboardWillHide(notification: NSNotification) {
         contentInset = .zero
         scrollIndicatorInsets = .zero
     }
