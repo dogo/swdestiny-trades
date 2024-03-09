@@ -9,6 +9,7 @@
 import UIKit
 
 final class SearchBar: UISearchBar {
+
     var doingSearch: ((String) -> Void)?
 
     override init(frame: CGRect) {
@@ -25,6 +26,7 @@ final class SearchBar: UISearchBar {
 }
 
 extension SearchBar: UISearchBarDelegate {
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         doingSearch?(searchBar.nonOptionalText)
