@@ -9,7 +9,8 @@
 import UIKit
 
 final class CardSearchCell: UITableViewCell, Identifiable {
-    let baseViewCell = BaseViewCell(frame: .zero)
+
+    private let baseViewCell = BaseViewCell(frame: .zero)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,6 +40,7 @@ final class CardSearchCell: UITableViewCell, Identifiable {
         baseViewCell.titleLabel.text = nil
         baseViewCell.subtitleLabel.text = nil
         baseViewCell.accessoryLabel.text = nil
+        baseViewCell.iconImageView.image = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,6 +49,7 @@ final class CardSearchCell: UITableViewCell, Identifiable {
 }
 
 extension CardSearchCell: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         contentView.addSubview(baseViewCell)
     }
