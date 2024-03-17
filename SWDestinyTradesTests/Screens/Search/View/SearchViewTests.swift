@@ -45,7 +45,7 @@ final class SearchViewTests: XCSnapshotableTestCase {
         sut.updateSearchList([.stub()])
 
         let datasourceCount = sut.searchTableView.searchDatasource?.tableView(sut.searchTableView,
-                                                                             numberOfRowsInSection: 0)
+                                                                              numberOfRowsInSection: 0)
 
         XCTAssertEqual(datasourceCount, 1)
     }

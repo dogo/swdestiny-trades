@@ -44,6 +44,7 @@ final class DeckBuilderPresenterSpy: DeckBuilderProtocol, DeckBuilderPresenterPr
         completion([])
     }
 
+    // swiftlint:disable:next identifier_name
     private(set) var didCallNavigateToCardDetailViewController = [(cardList: [CardDTO], card: CardDTO)]()
     func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
         didCallNavigateToCardDetailViewController.append((cardList, card))
