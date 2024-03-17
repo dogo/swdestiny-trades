@@ -8,12 +8,25 @@
 
 import UIKit
 
-final class SearchView: UIView {
-    let searchBar = SearchBar()
+final class SearchView: UIView, SearchViewType {
 
-    let searchTableView = SearchTableView()
+    var didSelectCard: ((CardDTO) -> Void)? {
+        didSet {
+            searchTableView.didSelectCard = didSelectCard
+        }
+    }
 
-    let activityIndicator: UIActivityIndicatorView = {
+    var doingSearch: ((String) -> Void)? {
+        didSet {
+            searchBar.doingSearch = doingSearch
+        }
+    }
+
+    private let searchBar = SearchBar()
+
+    private let searchTableView = SearchTableView()
+
+    private let activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .medium)
         view.color = .whiteBlack
         return view
@@ -28,9 +41,22 @@ final class SearchView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func startLoading() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
+
+    func updateSearchList(_ cards: [CardDTO]) {
+        searchTableView.updateSearchList(cards)
+    }
 }
 
 extension SearchView: BaseViewConfiguration {
+
     func buildViewHierarchy() {
         addSubview(searchBar)
         addSubview(searchTableView)

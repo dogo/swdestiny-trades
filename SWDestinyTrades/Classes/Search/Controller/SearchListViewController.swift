@@ -22,7 +22,7 @@ protocol SearchDelegate: AnyObject {
 final class SearchListViewController: UIViewController {
     private let destinyService: SWDestinyServiceProtocol
     private let database: DatabaseProtocol?
-    private let searchView = SearchView()
+    private let searchView: SearchViewType = SearchView()
     private var cards = [CardDTO]()
     private lazy var navigator = SearchNavigator(self)
 
@@ -46,11 +46,11 @@ final class SearchListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        searchView.searchTableView.didSelectCard = { [weak self] card in
+        searchView.didSelectCard = { [weak self] card in
             self?.navigateToNextController(with: card)
         }
 
-        searchView.searchBar.doingSearch = { [weak self] query in
+        searchView.doingSearch = { [weak self] query in
             self?.search(query: query)
         }
     }
@@ -62,17 +62,17 @@ final class SearchListViewController: UIViewController {
     }
 
     private func search(query: String) {
-        searchView.activityIndicator.startAnimating()
+        searchView.startLoading()
         Task { [weak self] in
             guard let self else { return }
 
             defer {
-                self.searchView.activityIndicator.stopAnimating()
+                self.searchView.stopLoading()
             }
 
             do {
                 let allCards = try await destinyService.search(query: query)
-                searchView.searchTableView.updateSearchList(allCards)
+                searchView.updateSearchList(allCards)
                 cards = allCards
             } catch {
                 ToastMessages.showNetworkErrorMessage()
