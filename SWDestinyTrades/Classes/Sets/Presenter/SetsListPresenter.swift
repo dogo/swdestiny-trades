@@ -54,9 +54,9 @@ final class SetsListPresenter: SetsPresenterProtocol {
             } catch {
                 await MainActor.run { [weak self] in
                     self?.controller?.showNetworkErrorMessage()
-                    LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
                     self?.controller?.stopLoading()
                     self?.controller?.endRefreshControl()
+                    LoggerManager.shared.log(event: .setsList, parameters: ["error": error.localizedDescription])
                 }
             }
         }
