@@ -18,14 +18,14 @@ final class SearchListViewControllerFactory: ViewControllerFactory {
     }
 
     func createViewController() -> UIViewController {
-        let viewController = SearchListViewController(database: database)
+        let viewController = SearchListViewController()
         let router = SearchNavigator(viewController)
         let interactor = SearchListInteractor()
-        let presenter = SearchListPresenter(controller: nil,
+        let presenter = SearchListPresenter(controller: viewController,
                                             interactor: interactor,
                                             database: database,
                                             navigator: router)
-        // viewController.presenter = presenter
+        viewController.presenter = presenter
         return viewController
     }
 }

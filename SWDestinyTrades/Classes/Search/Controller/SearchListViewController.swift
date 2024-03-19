@@ -20,17 +20,15 @@ protocol SearchDelegate: AnyObject {
 }
 
 final class SearchListViewController: UIViewController {
-    private let destinyService: SWDestinyServiceProtocol
-    private let database: DatabaseProtocol?
-    private let searchView: SearchViewType = SearchView()
-    private var cards = [CardDTO]()
-    private lazy var navigator = SearchNavigator(self)
+
+    private let searchView: SearchViewType
+
+    var presenter: SearchLisPresenterProtocol?
 
     // MARK: - Life Cycle
 
-    init(service: SWDestinyServiceProtocol = SWDestinyService(), database: DatabaseProtocol?) {
-        destinyService = service
-        self.database = database
+    init(with view: SearchViewType = SearchView()) {
+        searchView = view
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -47,43 +45,40 @@ final class SearchListViewController: UIViewController {
         super.viewDidLoad()
 
         searchView.didSelectCard = { [weak self] card in
-            self?.navigateToNextController(with: card)
+            self?.presenter?.navigateToCardDetail(with: card)
         }
 
         searchView.doingSearch = { [weak self] query in
-            self?.search(query: query)
+            self?.presenter?.search(query: query)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationItem.title = L10n.search
+        presenter?.setNavigationTitle()
+    }
+}
+
+extension SearchListViewController: SearchListViewControllerProtocol {
+
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
     }
 
-    private func search(query: String) {
+    func startLoading() {
         searchView.startLoading()
-        Task { [weak self] in
-            guard let self else { return }
-
-            defer {
-                self.searchView.stopLoading()
-            }
-
-            do {
-                let allCards = try await destinyService.search(query: query)
-                searchView.updateSearchList(allCards)
-                cards = allCards
-            } catch {
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-            }
-        }
     }
 
-    // MARK: Navigation
+    func stopLoading() {
+        searchView.stopLoading()
+    }
 
-    func navigateToNextController(with card: CardDTO) {
-        navigator.navigate(to: .cardDetail(database: database, with: cards, card: card))
+    func updateTableViewData(_ cardList: [CardDTO]) {
+        searchView.updateSearchList(cardList)
+    }
+
+    func showNetworkErrorMessage() {
+        ToastMessages.showNetworkErrorMessage()
     }
 }
