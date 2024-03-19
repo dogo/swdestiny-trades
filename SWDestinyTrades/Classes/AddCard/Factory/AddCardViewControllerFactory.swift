@@ -30,7 +30,9 @@ final class AddCardViewControllerFactory: ViewControllerFactory {
         let viewController = AddCardViewController()
         let router = AddCardNavigator(viewController)
         let interactor = AddCardInteractor()
-        let viewModel = AddCardViewModel(person: personDTO, userCollection: userCollectionDTO, type: addCardType)
+        let viewModel = AddCardViewModel(person: personDTO,
+                                         userCollection: userCollectionDTO,
+                                         type: addCardType)
         let presenter = AddCardPresenter(controller: viewController,
                                          interactor: interactor,
                                          database: database,
