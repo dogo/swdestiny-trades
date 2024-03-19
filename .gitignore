@@ -56,7 +56,6 @@ Carthage/Build
 FailureDiffs
 
 ## Tuist
-Tuist/Dependencies/graph.json
 Tuist/.build/
 
 ## Fastlane
