@@ -10,9 +10,10 @@ import FTPopOverMenu
 import UIKit
 
 final class UserCollectionViewController: UIViewController {
+
     private var currentSortIndex = 0
     private lazy var userCollectionView = UserCollectionTableView(delegate: self)
-    private lazy var navigator = UserCollectionNavigator(self.navigationController)
+    private lazy var navigator = UserCollectionNavigator(self)
     private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle

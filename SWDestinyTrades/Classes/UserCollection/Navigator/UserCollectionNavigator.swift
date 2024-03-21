@@ -9,24 +9,24 @@
 import UIKit
 
 final class UserCollectionNavigator: Navigator {
+
     enum Destination {
         case cardDetail(database: DatabaseProtocol?, with: [CardDTO], card: CardDTO)
         case addCard(database: DatabaseProtocol?, with: UserCollectionDTO)
     }
 
-    private weak var navigationController: UINavigationController?
+    private weak var viewController: UIViewController?
 
     // MARK: - Initializer
 
-    init(_ navigationController: UINavigationController?) {
-        self.navigationController = navigationController
+    init(_ viewController: UIViewController) {
+        self.viewController = viewController
     }
 
     // MARK: - Navigator
 
     func navigate(to destination: Destination) {
-        let viewController = makeViewController(for: destination)
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController?.navigationController?.pushViewController(makeViewController(for: destination), animated: true)
     }
 
     // MARK: - Private
@@ -34,7 +34,10 @@ final class UserCollectionNavigator: Navigator {
     private func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {
         case let .cardDetail(database, cardList, card):
-            return CardDetailViewControllerFactory(database: database, cardList: cardList, card: card).createViewController()
+            return CardDetailViewControllerFactory(database: database,
+                                                   cardList: cardList,
+                                                   card: card)
+                .createViewController()
         case let .addCard(database, userCollection):
             return AddCardViewControllerFactory(database: database,
                                                 addCardType: .collection,
