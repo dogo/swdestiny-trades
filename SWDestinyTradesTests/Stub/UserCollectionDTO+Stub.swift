@@ -12,11 +12,9 @@ import Foundation
 
 extension UserCollectionDTO {
 
-    static func stub() -> UserCollectionDTO {
-        return UserCollectionDTO()
-    }
-
-    func addCard(_ card: CardDTO) {
-        myCollection.append(card)
+    static func stub(collection: [CardDTO] = []) -> UserCollectionDTO {
+        let userCollection = UserCollectionDTO()
+        userCollection.myCollection.append(objectsIn: collection)
+        return userCollection
     }
 }

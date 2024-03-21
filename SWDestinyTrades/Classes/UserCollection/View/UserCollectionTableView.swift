@@ -9,14 +9,16 @@
 import UIKit
 
 final class UserCollectionTableView: UITableView {
+
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 
-    var tableViewDatasource: UserCollectionDatasource?
+    weak var userCollectionDelegate: UserCollectionProtocol?
 
-    required init(frame: CGRect = .zero, style: UITableView.Style = .plain, delegate: UserCollectionProtocol) {
+    private var tableViewDatasource: UserCollectionDatasource?
+
+    override init(frame: CGRect = .zero, style: UITableView.Style = .plain) {
         super.init(frame: frame, style: style)
-        self.delegate = self
-        tableViewDatasource = UserCollectionDatasource(tableView: self, delegate: delegate)
+        delegate = self
         backgroundColor = .blackWhite
     }
 
@@ -26,7 +28,12 @@ final class UserCollectionTableView: UITableView {
     }
 
     func updateTableViewData(collection: UserCollectionDTO) {
+        tableViewDatasource = UserCollectionDatasource(tableView: self, delegate: userCollectionDelegate)
         tableViewDatasource?.updateTableViewData(collection: collection)
+    }
+
+    func getCardList() -> [CardDTO]? {
+        return tableViewDatasource?.getCardList()
     }
 
     // MARK: <BaseDelegate>
@@ -59,6 +66,7 @@ final class UserCollectionTableView: UITableView {
 }
 
 extension UserCollectionTableView: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BaseViewCell.height()
     }

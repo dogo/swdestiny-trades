@@ -12,7 +12,7 @@ import UIKit
 final class UserCollectionViewController: UIViewController {
 
     private var currentSortIndex = 0
-    private lazy var userCollectionView = UserCollectionTableView(delegate: self)
+    private let userCollectionView = UserCollectionTableView()
     private lazy var navigator = UserCollectionNavigator(self)
     private let database: DatabaseProtocol?
 
@@ -21,6 +21,7 @@ final class UserCollectionViewController: UIViewController {
     init(database: DatabaseProtocol?) {
         self.database = database
         super.init(nibName: nil, bundle: nil)
+        userCollectionView.userCollectionDelegate = self
     }
 
     @available(*, unavailable)
@@ -119,7 +120,7 @@ final class UserCollectionViewController: UIViewController {
     func share(_ sender: UIBarButtonItem) {
         var collectionList = ""
 
-        if let cardList = userCollectionView.tableViewDatasource?.getCardList() {
+        if let cardList = userCollectionView.getCardList() {
             for card in cardList {
                 collectionList.append(String(format: "%d %@\n", card.quantity, card.name))
             }
