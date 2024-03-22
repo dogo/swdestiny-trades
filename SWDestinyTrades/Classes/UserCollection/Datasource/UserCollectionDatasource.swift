@@ -18,7 +18,7 @@ final class UserCollectionDatasource: NSObject, UITableViewDataSource {
     private var tableView: UITableView?
     private var userCollection: UserCollectionDTO?
     private weak var delegate: UserCollectionProtocol?
-    var collectionList: [CardDTO] = []
+    private var collectionList: [CardDTO] = []
 
     required init(tableView: UITableView, delegate: UserCollectionProtocol?) {
         super.init()

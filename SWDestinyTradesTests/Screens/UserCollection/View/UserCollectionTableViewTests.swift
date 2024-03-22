@@ -31,7 +31,7 @@ final class UserCollectionTableViewTests: XCTestCase {
     func test_updateTableViewData() {
         sut.updateTableViewData(collection: .stub(collection: [.stub(), .stub()]))
 
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList.count, 2)
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?.count, 2)
     }
 
     func test_getCardList() {
@@ -65,8 +65,8 @@ final class UserCollectionTableViewTests: XCTestCase {
 
         sut.sort(0)
 
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].name, "Card A")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].name, "Card B")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].name, "Card A")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].name, "Card B")
     }
 
     func test_sort_numerically() {
@@ -79,8 +79,8 @@ final class UserCollectionTableViewTests: XCTestCase {
 
         sut.sort(1)
 
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].code, "001")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].code, "002")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].code, "001")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].code, "002")
     }
 
     func test_sort_byColor() {
@@ -93,8 +93,8 @@ final class UserCollectionTableViewTests: XCTestCase {
 
         sut.sort(2)
 
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].factionCode, "blue")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].factionCode, "red")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].factionCode, "blue")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].factionCode, "red")
     }
 
     func test_sort_wrong_index() {
@@ -109,21 +109,21 @@ final class UserCollectionTableViewTests: XCTestCase {
 
         sut.updateTableViewData(collection: .stub(collection: unsortedCards))
 
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].name, "Card B")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].name, "Card A")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].factionCode, "red")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].factionCode, "blue")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].code, "002")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].code, "001")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].name, "Card B")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].name, "Card A")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].factionCode, "red")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].factionCode, "blue")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].code, "002")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].code, "001")
 
         sut.sort(3)
 
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].name, "Card B")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].name, "Card A")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].factionCode, "red")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].factionCode, "blue")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[0].code, "002")
-        XCTAssertEqual(sut.tableViewDatasource?.collectionList[1].code, "001")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].name, "Card B")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].name, "Card A")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].factionCode, "red")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].factionCode, "blue")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[0].code, "002")
+        XCTAssertEqual(sut.tableViewDatasource?.collectionList?[1].code, "001")
     }
 
     func test_heightForRowAt() {
