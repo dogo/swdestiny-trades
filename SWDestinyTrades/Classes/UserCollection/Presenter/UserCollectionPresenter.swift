@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FTPopOverMenu
 import UIKit
 
 protocol UserCollectionPresenterProtocol {
@@ -69,16 +68,6 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
         try? database?.save(object: object)
     }
 
-    private func popOverMenuConfiguration() -> FTConfiguration {
-        let config = FTConfiguration()
-        config.backgoundTintColor = ColorPalette.appTheme
-        config.borderColor = ColorPalette.appTheme
-        config.menuSeparatorColor = .lightGray
-        config.textColor = .white
-        config.textAlignment = .center
-        return config
-    }
-
     private func getUserCollection() -> UserCollectionDTO {
         var user = UserCollectionDTO()
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
@@ -125,13 +114,12 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
 
     @objc
     private func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        FTPopOverMenu.showForEvent(event: event,
-                                   with: [L10n.aToZ, L10n.cardNumber, L10n.color],
-                                   config: popOverMenuConfiguration(),
-                                   done: { [weak self] selectedIndex in
-                                       self?.controller?.sort(selectedIndex)
-                                       self?.currentSortIndex = selectedIndex
-                                   }, cancel: {})
+        let manager = PopoverMenuManager()
+        manager.showPopoverMenu(forEvent: event,
+                                with: [L10n.aToZ, L10n.cardNumber, L10n.color]) { [weak self] selectedIndex in
+            self?.controller?.sort(selectedIndex)
+            self?.currentSortIndex = selectedIndex
+        }
     }
 }
 
