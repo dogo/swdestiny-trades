@@ -23,14 +23,17 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     private let dispatchQueue: DispatchQueueType
     private let database: DatabaseProtocol?
     private let navigator: UserCollectionNavigator
+    private let manager: PopoverMenuManagerType
     private var currentSortIndex = 0
 
     init(controller: UserCollectionViewControllerProtocol,
          dispatchQueue: DispatchQueueType = DispatchQueue.main,
+         manager: PopoverMenuManagerType = PopoverMenuManager(),
          database: DatabaseProtocol?,
          navigator: UserCollectionNavigator) {
         self.controller = controller
         self.dispatchQueue = dispatchQueue
+        self.manager = manager
         self.database = database
         self.navigator = navigator
     }
@@ -114,12 +117,12 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
 
     @objc
     private func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        let manager = PopoverMenuManager()
         manager.showPopoverMenu(forEvent: event,
-                                with: [L10n.aToZ, L10n.cardNumber, L10n.color]) { [weak self] selectedIndex in
-            self?.controller?.sort(selectedIndex)
-            self?.currentSortIndex = selectedIndex
-        }
+                                with: [L10n.aToZ, L10n.cardNumber, L10n.color],
+                                done: { [weak self] selectedIndex in
+                                    self?.controller?.sort(selectedIndex)
+                                    self?.currentSortIndex = selectedIndex
+                                }, cancel: {})
     }
 }
 

@@ -18,15 +18,18 @@ final class UserCollectionPresenterTests: XCTestCase {
     private var controller: UserCollectionViewControllerSpy!
     private var navigator: UserCollectionNavigator!
     private var database: RealmDatabase?
+    private var manager: PopoverMenuManagerSpy!
 
     override func setUp() {
         super.setUp()
         controller = UserCollectionViewControllerSpy()
         navigationController = UINavigationControllerMock(rootViewController: controller)
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
+        manager = PopoverMenuManagerSpy()
         navigator = UserCollectionNavigator(controller)
         sut = UserCollectionPresenter(controller: controller,
                                       dispatchQueue: DispatchQueueSpy(),
+                                      manager: manager,
                                       database: database,
                                       navigator: navigator)
     }
@@ -71,7 +74,22 @@ final class UserCollectionPresenterTests: XCTestCase {
         let sortButton = barButtonItems?.0?[0]
         _ = sortButton?.target?.perform(sortButton!.action, with: nil)
 
-        // XCTAssertTrue(navigationController.currentPushedViewController is AddCardViewController)
+        XCTAssertEqual(manager.didCallShowPopoverMenuCount, 1)
+    }
+
+    func test_sort_selecting_item() {
+        manager.executeDoneBlock = true
+
+        var barButtonItems: ([UIBarButtonItem]?, [UIBarButtonItem]?)?
+        sut.setupNavigationItems { leftItems, rightItems in
+            barButtonItems = (leftItems, rightItems)
+        }
+        let sortButton = barButtonItems?.0?[0]
+        _ = sortButton?.target?.perform(sortButton!.action, with: nil)
+
+        XCTAssertEqual(manager.didCallShowPopoverMenuCount, 1)
+        XCTAssertEqual(controller.didCallSort.count, 1)
+        XCTAssertEqual(controller.didCallSort[0], 0)
     }
 
     // MARK: - Test addCard
