@@ -81,19 +81,6 @@ final class UserCollectionViewController: UIViewController {
         return config
     }
 
-    private func addToCollection(carDTO: CardDTO) {
-        let user = getUserCollection()
-        try? database?.update {
-            let predicate = NSPredicate(format: "code == %@", carDTO.code)
-            if let index = user.myCollection.index(matching: predicate) {
-                let newCard = user.myCollection[index]
-                newCard.quantity += 1
-            } else {
-                user.myCollection.append(carDTO)
-            }
-        }
-    }
-
     private func getUserCollection() -> UserCollectionDTO {
         var user = UserCollectionDTO()
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
