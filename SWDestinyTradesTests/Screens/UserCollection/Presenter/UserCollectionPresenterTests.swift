@@ -140,10 +140,24 @@ final class UserCollectionPresenterTests: XCTestCase {
     // MARK: - Test remove
 
     func test_remove() {
-        // XCTAssertEqual(deckDTO.list.count, 22)
+        let userCollection = findObject(UserCollectionDTO.self)
 
-        // sut.remove(at: 0)
+        XCTAssertEqual(userCollection?.myCollection.count, 1)
 
-        // XCTAssertEqual(deckDTO.list.count, 21)
+        sut.remove(at: 0)
+
+        XCTAssertEqual(userCollection?.myCollection.count, 0)
+    }
+
+    // MARK: - Utils
+
+    private func findObject<T: Storable>(_ model: T.Type) -> T? {
+        var foundObject: T?
+
+        try? database?.fetch(model, predicate: nil, sorted: nil) { results in
+            foundObject = results.first
+        }
+
+        return foundObject
     }
 }
