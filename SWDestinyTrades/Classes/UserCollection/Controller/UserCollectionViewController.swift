@@ -64,13 +64,13 @@ final class UserCollectionViewController: UIViewController {
         try? database?.save(object: object)
     }
 
-    func loadDataFromRealm() {
+    private func loadDataFromRealm() {
         let user = getUserCollection()
         userCollectionView.updateTableViewData(collection: user)
         userCollectionView.sort(currentSortIndex)
     }
 
-    func popOverMenuConfiguration() -> FTConfiguration {
+    private func popOverMenuConfiguration() -> FTConfiguration {
         let config = FTConfiguration()
         config.backgoundTintColor = ColorPalette.appTheme
         config.borderColor = ColorPalette.appTheme
@@ -80,7 +80,7 @@ final class UserCollectionViewController: UIViewController {
         return config
     }
 
-    func addToCollection(carDTO: CardDTO) {
+    private func addToCollection(carDTO: CardDTO) {
         let user = getUserCollection()
         try? database?.update {
             let predicate = NSPredicate(format: "code == %@", carDTO.code)
@@ -93,7 +93,7 @@ final class UserCollectionViewController: UIViewController {
         }
     }
 
-    func getUserCollection() -> UserCollectionDTO {
+    private func getUserCollection() -> UserCollectionDTO {
         var user = UserCollectionDTO()
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] results in
             if let userCollection = results.first {
@@ -107,17 +107,17 @@ final class UserCollectionViewController: UIViewController {
 
     // MARK: - Navigation
 
-    func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
+    private func navigateToCardDetailViewController(cardList: [CardDTO], card: CardDTO) {
         navigator.navigate(to: .cardDetail(database: database, with: cardList, card: card))
     }
 
     @objc
-    func navigateToAddCardViewController() {
+    private func navigateToAddCardViewController() {
         navigator.navigate(to: .addCard(database: database, with: getUserCollection()))
     }
 
     @objc
-    func share(_ sender: UIBarButtonItem) {
+    private func share(_ sender: UIBarButtonItem) {
         var collectionList = ""
 
         if let cardList = userCollectionView.getCardList() {
@@ -143,7 +143,7 @@ final class UserCollectionViewController: UIViewController {
     }
 
     @objc
-    func sort(_ sender: UIBarButtonItem, event: UIEvent) {
+    private func sort(_ sender: UIBarButtonItem, event: UIEvent) {
         FTPopOverMenu.showForEvent(event: event,
                                    with: [L10n.aToZ, L10n.cardNumber, L10n.color],
                                    config: popOverMenuConfiguration(),
@@ -155,6 +155,7 @@ final class UserCollectionViewController: UIViewController {
 }
 
 extension UserCollectionViewController: UserCollectionProtocol {
+
     func stepperValueChanged(newValue: Int, card: CardDTO) {
         try? database?.update {
             card.quantity = newValue
