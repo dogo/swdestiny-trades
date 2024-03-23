@@ -19,7 +19,13 @@ final class UserCollectionViewControllerFactory: ViewControllerFactory {
 
     func createViewController() -> UIViewController {
         let view = UserCollectionTableView()
-        let viewController = UserCollectionViewController(with: view, database: database)
+        let viewController = UserCollectionViewController(with: view)
+        let router = UserCollectionNavigator(viewController)
+        let presenter = UserCollectionPresenter(controller: viewController,
+                                                database: database,
+                                                navigator: router)
+        viewController.presenter = presenter
+        view.userCollectionDelegate = presenter
         return viewController
     }
 }

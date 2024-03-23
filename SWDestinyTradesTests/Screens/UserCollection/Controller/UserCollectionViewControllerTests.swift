@@ -14,22 +14,25 @@ import XCTest
 final class UserCollectionViewControllerTests: XCTestCase {
 
     private var sut: UserCollectionViewController!
+    private var presenter: UserCollectionPresenterSpy!
     private var view: UserCollectionViewSpy!
-    private var database: RealmDatabase?
     private var navigationController: UINavigationControllerMock!
     private var keyWindow: UIWindow!
 
     override func setUp() {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
-        database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
         view = UserCollectionViewSpy()
-        sut = UserCollectionViewController(with: view, database: database)
+        presenter = UserCollectionPresenterSpy()
+        sut = UserCollectionViewController(with: view)
+        sut.presenter = presenter
         navigationController = UINavigationControllerMock(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
     }
 
     override func tearDown() {
+        view = nil
+        presenter = nil
         navigationController = nil
         sut = nil
         keyWindow.cleanTestWindow()
@@ -45,35 +48,55 @@ final class UserCollectionViewControllerTests: XCTestCase {
     func test_viewDidLoad() {
         sut.viewDidLoad()
 
-        XCTAssertEqual(sut.navigationItem.rightBarButtonItems?.count, 2)
-        XCTAssertNotNil(sut.navigationItem.leftBarButtonItem)
+        XCTAssertEqual(presenter.didCallSetupNavigationItemsCount, 1)
     }
 
     func test_didSelectCard() {
         sut.viewDidLoad()
         view.didSelectCard?([.stub()], .stub())
 
-        XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
+        XCTAssertEqual(presenter.didCallNavigateToCardDetail.count, 1)
     }
 
     func test_viewWillAppear() {
         sut.viewWillAppear(false)
 
-        XCTAssertEqual(sut.navigationItem.title, "My Collection")
+        XCTAssertEqual(presenter.didCallSetNavigationTitleCount, 1)
+        XCTAssertEqual(presenter.didCallLoadDataFromRealmCount, 1)
     }
 
-    func test_stepperValueChanged() {
-        let card: CardDTO = .stub()
-        sut.stepperValueChanged(newValue: 4, card: card)
+    func test_setNavigationTitle() {
+        sut.setNavigationTitle("Collection Title")
 
-        XCTAssertEqual(card.quantity, 4)
+        XCTAssertEqual(sut.navigationItem.title, "Collection Title")
     }
 
-    func test_remove() {
-        // XCTAssertEqual(person.borrowed.count, 2)
+    func test_updateTableViewData() {
+        let collection = UserCollectionDTO.stub()
+        sut.updateTableViewData(collection: collection)
 
-        sut.remove(at: 0)
+        XCTAssertEqual(view.didCallUpdateTableViewData.count, 1)
+        XCTAssertEqual(view.didCallUpdateTableViewData[0], collection)
+    }
 
-        // XCTAssertEqual(person.borrowed.count, 1)
+    func test_sort() {
+        sut.sort(0)
+
+        XCTAssertEqual(view.didCallSort.count, 1)
+        XCTAssertEqual(view.didCallSort[0], 0)
+    }
+
+    func test_getCardList() {
+        _ = sut.getCardList()
+
+        XCTAssertEqual(view.didCallGetCardListCount, 1)
+    }
+
+    func test_presentViewController() {
+        let controller = UIViewControllerMock()
+
+        sut.presentViewController(controller, animated: false)
+
+        XCTAssertTrue(controller.isBeingPresented)
     }
 }
