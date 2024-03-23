@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class UserCollectionTableView: UITableView {
+final class UserCollectionTableView: UITableView, UserCollectionViewType {
 
     var didSelectCard: (([CardDTO], CardDTO) -> Void)?
 

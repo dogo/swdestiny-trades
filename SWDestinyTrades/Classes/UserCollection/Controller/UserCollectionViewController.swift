@@ -12,13 +12,14 @@ import UIKit
 final class UserCollectionViewController: UIViewController {
 
     private var currentSortIndex = 0
-    private let userCollectionView = UserCollectionTableView()
+    private let userCollectionView: UserCollectionViewType
     private lazy var navigator = UserCollectionNavigator(self)
     private let database: DatabaseProtocol?
 
     // MARK: - Life Cycle
 
-    init(database: DatabaseProtocol?) {
+    init(with view: UserCollectionViewType = UserCollectionTableView(), database: DatabaseProtocol?) {
+        userCollectionView = view
         self.database = database
         super.init(nibName: nil, bundle: nil)
         userCollectionView.userCollectionDelegate = self

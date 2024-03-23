@@ -14,15 +14,17 @@ import XCTest
 final class UserCollectionViewControllerTests: XCTestCase {
 
     private var sut: UserCollectionViewController!
+    private var view: UserCollectionViewSpy!
     private var database: RealmDatabase?
-    private var navigationController: UINavigationController!
+    private var navigationController: UINavigationControllerMock!
     private var keyWindow: UIWindow!
 
     override func setUp() {
         super.setUp()
         keyWindow = UIWindow(frame: .testDevice)
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
-        sut = UserCollectionViewController(database: database)
+        view = UserCollectionViewSpy()
+        sut = UserCollectionViewController(with: view, database: database)
         navigationController = UINavigationControllerMock(rootViewController: sut)
         keyWindow.showTestWindow(controller: navigationController)
     }
@@ -37,7 +39,7 @@ final class UserCollectionViewControllerTests: XCTestCase {
     func test_loadView() {
         sut.loadView()
 
-        XCTAssertTrue(sut.view is UserCollectionTableView)
+        XCTAssertTrue(sut.view is UserCollectionViewType)
     }
 
     func test_viewDidLoad() {
@@ -49,10 +51,9 @@ final class UserCollectionViewControllerTests: XCTestCase {
 
     func test_didSelectCard() {
         sut.viewDidLoad()
-        // view.didSelectCard(cardList: [.stub()], card: .stub())
+        view.didSelectCard?([.stub()], .stub())
 
-        // XCTAssertEqual(presenter.didCallDidSelectSet.count, 1)
-        // XCTAssertEqual(presenter.didCallDidSelectSet[0].name, "Awakenings")
+        XCTAssertTrue(navigationController.currentPushedViewController is CardDetailViewController)
     }
 
     func test_viewWillAppear() {
