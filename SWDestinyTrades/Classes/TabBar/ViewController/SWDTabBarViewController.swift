@@ -40,7 +40,7 @@ final class SWDTabBarViewController: UITabBarController {
         loansTab.tabBarItem = UITabBarItem(title: L10n.loans, image: Asset.Tabbar.icLoans.image, selectedImage: nil)
 
         // Create UserCollectionViewController Tab
-        let collectionTab = UINavigationController(rootViewController: UserCollectionViewController(database: database))
+        let collectionTab = UINavigationController(rootViewController: factory.makeUserCollection(with: database))
         collectionTab.tabBarItem = UITabBarItem(title: L10n.collection, image: Asset.Tabbar.icCollection.image, selectedImage: nil)
 
         viewControllers = [setsTab, decktab, loansTab, collectionTab]

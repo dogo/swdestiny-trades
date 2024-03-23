@@ -36,4 +36,9 @@ final class SWDTabBarFactory {
         let factory = PeopleListViewControllerFactory(database: database)
         return factory.createViewController()
     }
+
+    func makeUserCollection(with database: DatabaseProtocol?) -> UIViewController {
+        let factory = UserCollectionViewControllerFactory(database: database)
+        return factory.createViewController()
+    }
 }

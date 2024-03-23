@@ -36,4 +36,8 @@ final class SWDTabBarFactoryTests: XCTestCase {
     func test_makePeopleList() {
         XCTAssertNotNil(sut.makePeopleList(with: nil))
     }
+
+    func test_makeUserCollection() {
+        XCTAssertNotNil(sut.makeUserCollection(with: nil))
+    }
 }
