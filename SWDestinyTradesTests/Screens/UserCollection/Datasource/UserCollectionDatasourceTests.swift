@@ -39,6 +39,15 @@ final class UserCollectionDatasourceTests: XCTestCase {
         XCTAssertTrue(cell is LoanDetailCell)
     }
 
+    func test_stepperValueChanged() {
+        let cell = sut.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as? LoanDetailCell
+        cell?.stepperValueChanged?(2)
+
+        XCTAssertEqual(delegate.didCallStepperValueChanged.count, 1)
+        XCTAssertEqual(delegate.didCallStepperValueChanged[0].newValue, 2)
+        XCTAssertNotNil(delegate.didCallStepperValueChanged[0].card)
+    }
+
     func test_deleteRow() {
         XCTAssertEqual(sut.collectionList?.count, 2)
 

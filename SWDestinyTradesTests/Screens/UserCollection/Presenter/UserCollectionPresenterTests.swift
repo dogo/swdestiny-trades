@@ -120,7 +120,19 @@ final class UserCollectionPresenterTests: XCTestCase {
 
     // MARK: - Test loadDataFromRealm
 
-    func test_loadDataFromRealm() {
+    func test_loadDataFromRealm_creating_new_database() {
+        createSUT(databaseName: "EmptyDatabase")
+
+        sut.loadDataFromRealm()
+
+        XCTAssertEqual(controller.didCallUpdateTableViewData.count, 1)
+        XCTAssertNotNil(controller.didCallUpdateTableViewData[0])
+
+        XCTAssertEqual(controller.didCallSort.count, 1)
+        XCTAssertEqual(controller.didCallSort[0], 0)
+    }
+
+    func test_loadDataFromRealm_using_existing_database() {
         sut.loadDataFromRealm()
 
         XCTAssertEqual(controller.didCallUpdateTableViewData.count, 1)
@@ -177,5 +189,18 @@ final class UserCollectionPresenterTests: XCTestCase {
         }
 
         return foundObject
+    }
+
+    private func createSUT(databaseName: String = #function) {
+        controller = UserCollectionViewControllerSpy()
+        navigationController = UINavigationControllerMock(rootViewController: controller)
+        database = RealmDatabaseHelper.createMemoryDatabase(identifier: databaseName)
+        manager = PopoverMenuManagerSpy()
+        navigator = UserCollectionNavigator(controller)
+        sut = UserCollectionPresenter(controller: controller,
+                                      dispatchQueue: DispatchQueueSpy(),
+                                      manager: manager,
+                                      database: database,
+                                      navigator: navigator)
     }
 }
