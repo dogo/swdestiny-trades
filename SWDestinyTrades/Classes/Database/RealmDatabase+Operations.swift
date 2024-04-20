@@ -22,7 +22,7 @@ extension RealmDatabase {
         }
     }
 
-    func save(object: Storable) throws {
+    func save(object: Storable, completion: (() -> Void)?) throws {
         guard let storable = object as? Object else {
             throw RealmDatabaseError.objectCouldNotBeParsed
         }
@@ -30,6 +30,7 @@ extension RealmDatabase {
         try writeSafely { [weak self] in
             self?.realm.add(storable)
         }
+        completion?()
     }
 
     func update(block: @escaping () -> Void) throws {

@@ -68,7 +68,7 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     }
 
     private func createDatabase(object: UserCollectionDTO) {
-        try? database?.save(object: object)
+        try? database?.save(object: object, completion: nil)
     }
 
     private func getUserCollection() -> UserCollectionDTO {

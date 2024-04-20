@@ -61,7 +61,9 @@ final class DeckListPresenter: DeckListPresenterProtocol {
 extension DeckListPresenter: DeckListProtocol {
 
     func insert(deck: DeckDTO) {
-        try? database?.save(object: deck)
+        try? database?.save(object: deck) { [weak self] in
+            self?.loadDataFromRealm()
+        }
     }
 
     func remove(deck: DeckDTO) {

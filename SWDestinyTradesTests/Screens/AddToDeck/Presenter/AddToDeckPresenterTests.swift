@@ -86,7 +86,7 @@ final class AddToDeckPresenterTests: XCTestCase {
 
     func test_loadDataFromRealm() {
         let userCollection = UserCollectionDTO()
-        try? database?.save(object: userCollection)
+        try? database?.save(object: userCollection, completion: nil)
 
         sut.loadDataFromRealm()
 

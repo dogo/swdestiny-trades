@@ -93,7 +93,7 @@ extension PeopleListPresenter: PeopleListProtocol {
     }
 
     func insert(person: PersonDTO) {
-        try? database?.save(object: person)
+        try? database?.save(object: person, completion: nil)
     }
 }
 

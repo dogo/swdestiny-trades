@@ -18,7 +18,7 @@ struct Sorted {
 protocol DatabaseProtocol: AnyObject {
     func create<T: Storable>(_ model: T.Type, completion: @escaping ((T) -> Void)) throws
 
-    func save(object: Storable) throws
+    func save(object: Storable, completion: (() -> Void)?) throws
 
     func update(block: @escaping () -> Void) throws
 

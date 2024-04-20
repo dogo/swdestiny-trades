@@ -121,6 +121,7 @@ final class DeckListPresenterTests: XCTestCase {
         sut.remove(deck: deck)
 
         XCTAssertNil(findObject(DeckDTO.self, predicate: predicate))
+        XCTAssertEqual(controller.didCallUpdateTableViewData.count, 12)
     }
 
     // MARK: - Test rename

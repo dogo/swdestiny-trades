@@ -23,7 +23,7 @@ final class DeckGraphDatasourceTests: XCTestCase {
 
         let deck = DeckDTO.stub()
         let memoryDB = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
-        try? memoryDB?.save(object: deck)
+        try? memoryDB?.save(object: deck, completion: nil)
 
         sut.updateCollecionViewData(deck: deck)
     }

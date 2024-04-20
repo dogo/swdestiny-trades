@@ -114,7 +114,7 @@ final class CardDetailPresenter: CardDetailPresenterProtocol {
             if let userCollection = results.first {
                 user = userCollection
             } else {
-                try? self?.database?.save(object: user)
+                try? self?.database?.save(object: user, completion: nil)
             }
         }
         return user
