@@ -40,6 +40,7 @@ final class AddToDeckPresenterTests: XCTestCase {
     override func tearDown() {
         client = nil
         service = nil
+        navigationController = nil
         sut = nil
         super.tearDown()
     }
@@ -54,13 +55,23 @@ final class AddToDeckPresenterTests: XCTestCase {
     }
 
     @MainActor
-    func test_retrieveAllCardsfailing() async {
+    func test_retrieveAllCards_failing() async {
         client.error = true
-        sut.retrieveAllCards()
 
-        XCTAssertEqual(view.didCallStartLoading, 1)
-        // XCTAssertEqual(view.didCallStopLoading, 1)
-        // XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
+        let expectation = XCTestExpectation(description: "Retrieve all cards expectation")
+
+        Task {
+            sut.retrieveAllCards()
+            expectation.fulfill()
+        }
+
+        await fulfillment(of: [expectation])
+
+        await MainActor.run {
+            XCTAssertEqual(view.didCallStartLoading, 1)
+            XCTAssertEqual(view.didCallStopLoading, 1)
+            // XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
+        }
     }
 
     func test_insert_card_into_deck_database_successfuly() {
