@@ -34,9 +34,8 @@ public extension Project {
                     .external(name: "PKHUD"),
                     .external(name: "SketchKit"),
                     .external(name: "SwiftMessages"),
-                    .package(product: "RealmSwift")
-                ],
-                settings: Settings.default
+                    .external(name: "RealmSwift")
+                ]
             ),
             .target(
                 name: "SWDestinyTradesTests",
@@ -51,19 +50,9 @@ public extension Project {
                 ],
                 dependencies: [
                     .target(name: "SWDestinyTrades"),
-                    .external(name: "iOSSnapshotTestCase"),
-                    .package(product: "Realm") // Fix unit test linkage issue
+                    .external(name: "iOSSnapshotTestCase")
                 ]
             )
         ]
     }
-}
-
-public extension Settings {
-
-    static let `default`: Settings = .settings(
-        base: SettingsDictionary().otherLinkerFlags(["-ObjC"]),
-        configurations: [],
-        defaultSettings: .recommended
-    )
 }

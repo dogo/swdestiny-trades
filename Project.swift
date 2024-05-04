@@ -12,10 +12,6 @@ let project = Project(
     name: "swdestiny-trades",
     organizationName: "Diogo Autilio",
     options: options,
-    packages: [
-        .remote(url: "https://github.com/realm/realm-swift",
-                requirement: .upToNextMajor(from: "10.42.0"))
-    ],
     settings: Project.settings(),
     targets: Project.targets(),
     schemes: Project.schemes(),
