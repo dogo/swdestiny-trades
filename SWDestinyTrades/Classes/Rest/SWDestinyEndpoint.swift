@@ -19,7 +19,7 @@ enum SWDestinyEndpoint {
 extension SWDestinyEndpoint: EndpointProtocol {
     /// The scheme subcomponent of the `URL`.
     var scheme: HttpScheme {
-        return .https
+        return .http
     }
 
     /// The target's host `URL`.
