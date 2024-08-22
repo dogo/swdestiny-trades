@@ -28,7 +28,7 @@ final class HttpClientMock: HttpClientProtocol {
         return decodable
     }
 
-    func cancelAllRequests() {
+    func cancelRequest(_ request: URLRequest?) {
         isCancelled = true
     }
 }

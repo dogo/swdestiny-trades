@@ -15,7 +15,7 @@ import XCTest
 final class KingfisherSourceTests: XCTestCase {
 
     func test_imageLoading() {
-        let url = URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!
+        let url = URL(string: "http://swdestinydb.com/bundles/cards/en/01/01001.jpg")!
         let kingfisherSource = KingfisherSource(url: url, placeholder: Asset.ic404.image, options: nil)
         let imageView = UIImageView()
 

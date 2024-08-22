@@ -131,7 +131,8 @@ final class HttpClientTests: XCTestCase {
     }
 
     func testCancelAllRequests() {
-        sut.cancelAllRequests()
+        request = URLRequest(with: URL(string: "https://base.url.com")!)
+        sut.cancelRequest(request)
         // Uncomment once cancellation handling is implemented in the HttpClient
         // XCTAssertTrue(session.tasksCancelled)
     }

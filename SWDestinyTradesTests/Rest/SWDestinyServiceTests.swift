@@ -44,13 +44,17 @@ final class SWDestinyServiceTests: XCTestCase {
 
     func testRetrieveAllCardsWithSuccess() async throws {
         client.fileName = "card-list"
-        let result = try await sut.retrieveAllCards()
+        let endpoint: SWDestinyEndpoint = .allCards
+        let request = endpoint.request
+
+        let result = try await sut.retrieveAllCards(request: request)
 
         XCTAssertNotNil(result)
     }
 
-    func testCancelAllRequests() {
-        sut.cancelAllRequests()
+    func testCancelRequest() {
+        let request = URLRequest(with: URL(string: "https://base.url.com")!)
+        sut.cancelRequest(request)
 
         XCTAssertTrue(client.isCancelled)
     }

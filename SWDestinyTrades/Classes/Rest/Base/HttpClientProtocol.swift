@@ -13,7 +13,7 @@ protocol HttpClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T
 
-    func cancelAllRequests()
+    func cancelRequest(_ request: URLRequest?)
 }
 
 extension HttpClientProtocol {

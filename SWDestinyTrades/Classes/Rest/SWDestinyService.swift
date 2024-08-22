@@ -37,10 +37,7 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         return try await client.request(request, decode: [CardDTO].self)
     }
 
-    func retrieveAllCards() async throws -> [CardDTO] {
-        let endpoint: SWDestinyEndpoint = .allCards
-        let request = endpoint.request
-
+    func retrieveAllCards(request: URLRequest) async throws -> [CardDTO] {
         return try await client.request(request, decode: [CardDTO].self)
     }
 
@@ -51,7 +48,7 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         return try await client.request(request, decode: CardDTO.self)
     }
 
-    func cancelAllRequests() {
-        client.cancelAllRequests()
+    func cancelRequest(_ request: URLRequest?) {
+        client.cancelRequest(request)
     }
 }

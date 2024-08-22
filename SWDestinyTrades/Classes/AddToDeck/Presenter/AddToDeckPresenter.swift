@@ -24,6 +24,7 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
     private var cards = [CardDTO]()
     private var deck: DeckDTO?
     private let headUpDisplay: HeadUpDisplay
+    private var cancelableTask: Task<Void, Error>?
 
     private weak var controller: AddToDeckViewProtocol?
 
@@ -66,7 +67,7 @@ extension AddToDeckPresenter {
     @MainActor
     func retrieveAllCards() {
         controller?.startLoading()
-        Task { [weak self] in
+        cancelableTask = Task { [weak self] in
             guard let self else { return }
 
             defer {
@@ -99,7 +100,8 @@ extension AddToDeckPresenter {
     }
 
     func loadDataFromRealm() {
-        interactor.cancelAllRequests()
+        cancelableTask?.cancel()
+        interactor.cancelRequest()
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
             guard let self, let collection = collections.first else { return }
             cards = Array(collection.myCollection)

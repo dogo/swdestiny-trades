@@ -10,6 +10,7 @@ import Foundation
 
 final class HttpClient: HttpClientProtocol {
     private let session: URLSession
+    private var activeTasks: [URLSessionDataTask] = []
 
     init(session: URLSession = .shared) {
         self.session = session
@@ -27,6 +28,14 @@ extension HttpClient {
         logger.log(request: request)
 
         let requestDate = Date()
+
+        let task = session.dataTask(with: request)
+        activeTasks.append(task)
+        task.resume()
+
+        defer {
+            activeTasks.removeAll { $0.originalRequest == request }
+        }
 
         do {
             let (data, response) = try await session.data(for: request)
@@ -51,11 +60,10 @@ extension HttpClient {
         }
     }
 
-    func cancelAllRequests() {
-        session.getTasksWithCompletionHandler { dataTasks, uploadTasks, downloadTasks in
-            dataTasks.forEach { $0.cancel() }
-            uploadTasks.forEach { $0.cancel() }
-            downloadTasks.forEach { $0.cancel() }
+    func cancelRequest(_ request: URLRequest?) {
+        if let taskIndex = activeTasks.firstIndex(where: { $0.originalRequest == request }) {
+            activeTasks[taskIndex].cancel()
+            activeTasks.remove(at: taskIndex)
         }
     }
 

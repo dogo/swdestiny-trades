@@ -10,22 +10,29 @@ import Foundation
 
 protocol AddToDeckInteractorProtocol {
     func fetchAllCards() async throws -> [CardDTO]
-    func cancelAllRequests()
+    func cancelRequest()
 }
 
 final class AddToDeckInteractor: AddToDeckInteractorProtocol {
 
     private let service: SWDestinyServiceProtocol
+    private var currentRequest: URLRequest?
 
     init(service: SWDestinyServiceProtocol = SWDestinyService()) {
         self.service = service
     }
 
     func fetchAllCards() async throws -> [CardDTO] {
-        return try await service.retrieveAllCards()
+        let endpoint: SWDestinyEndpoint = .allCards
+        let request = endpoint.request
+
+        currentRequest = request
+
+        return try await service.retrieveAllCards(request: request)
     }
 
-    func cancelAllRequests() {
-        service.cancelAllRequests()
+    func cancelRequest() {
+        service.cancelRequest(currentRequest)
+        currentRequest = nil
     }
 }
