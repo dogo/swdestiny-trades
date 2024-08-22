@@ -37,10 +37,4 @@ final class AddToDeckInteractorTests: XCTestCase {
 
         XCTAssertEqual(cards.count, 22)
     }
-
-    func test_cancelRequest() {
-        sut.cancelRequest()
-
-        XCTAssertTrue(client.isCancelled)
-    }
 }

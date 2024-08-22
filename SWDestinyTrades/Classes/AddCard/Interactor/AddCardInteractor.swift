@@ -21,9 +21,6 @@ final class AddCardInteractor: AddCardInteractorProtocol {
     }
 
     func retrieveAllCards() async throws -> [CardDTO] {
-        let endpoint: SWDestinyEndpoint = .allCards
-        let request = endpoint.request
-
-        return try await service.retrieveAllCards(request: request)
+        return try await service.retrieveAllCards()
     }
 }

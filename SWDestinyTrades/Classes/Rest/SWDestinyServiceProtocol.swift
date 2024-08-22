@@ -16,7 +16,7 @@ protocol SWDestinyServiceProtocol {
 
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO]
 
-    func retrieveAllCards(request: URLRequest) async throws -> [CardDTO]
+    func retrieveAllCards() async throws -> [CardDTO]
 
     func retrieveCard(cardId: String) async throws -> CardDTO
 

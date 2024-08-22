@@ -44,10 +44,7 @@ final class SWDestinyServiceTests: XCTestCase {
 
     func testRetrieveAllCardsWithSuccess() async throws {
         client.fileName = "card-list"
-        let endpoint: SWDestinyEndpoint = .allCards
-        let request = endpoint.request
-
-        let result = try await sut.retrieveAllCards(request: request)
+        let result = try await sut.retrieveAllCards()
 
         XCTAssertNotNil(result)
     }

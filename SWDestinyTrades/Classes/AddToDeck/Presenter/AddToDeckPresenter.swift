@@ -101,7 +101,6 @@ extension AddToDeckPresenter {
 
     func loadDataFromRealm() {
         cancelableTask?.cancel()
-        interactor.cancelRequest()
         try? database?.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
             guard let self, let collection = collections.first else { return }
             cards = Array(collection.myCollection)

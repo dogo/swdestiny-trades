@@ -37,7 +37,10 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         return try await client.request(request, decode: [CardDTO].self)
     }
 
-    func retrieveAllCards(request: URLRequest) async throws -> [CardDTO] {
+    func retrieveAllCards() async throws -> [CardDTO] {
+        let endpoint: SWDestinyEndpoint = .allCards
+        let request = endpoint.request
+
         return try await client.request(request, decode: [CardDTO].self)
     }
 
