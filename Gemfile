@@ -1,6 +1,6 @@
 source "https://www.rubygems.org"
 
-ruby '3.1.2'
+ruby '3.3.0'
 
 gem 'coveralls', require: false
 gem 'fastlane', '2.221.0'
