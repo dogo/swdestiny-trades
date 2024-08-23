@@ -10,15 +10,12 @@ import UIKit
 
 extension CardDTO {
     func factionColor() -> UIColor {
-        if factionCode == "red" {
-            return ColorPalette.red
-        } else if factionCode == "yellow" {
-            return ColorPalette.yellow
-        } else if factionCode == "blue" {
-            return ColorPalette.blue
-        } else if factionCode == "gray" {
-            return ColorPalette.gray
-        }
-        return .clear
+        let colorMapping: [String: UIColor] = [
+            "red": ColorPalette.red,
+            "yellow": ColorPalette.yellow,
+            "blue": ColorPalette.blue,
+            "gray": ColorPalette.gray
+        ]
+        return colorMapping[factionCode] ?? .clear
     }
 }

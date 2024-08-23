@@ -1,5 +1,5 @@
 //
-//  SetDTO+UtilsTest.swift
+//  SetDTO+UtilsTests.swift
 //  SWDestinyTradesTests
 //
 //  Created by Diogo Autilio on 23/08/24.
@@ -36,7 +36,7 @@ final class SetDTOTests: XCTestCase {
         ]
 
         for testCase in testCases {
-            let setDTO = SetDTO(name: "Test", code: testCase.code)
+            let setDTO = SetDTO.stub(name: "Test", code: testCase.code)
             XCTAssertEqual(setDTO.icon, testCase.expectedIcon, "Icon for code \(testCase.code) did not match expected icon.")
         }
     }
