@@ -19,7 +19,7 @@ final class URLSessionMock {
 
 final class URLProtocolMock: URLProtocol {
 
-    static var response: ((URLRequest) throws -> (HTTPResponse?))?
+    static var response: ((URLRequest) throws -> HTTPResponse?)?
 
     override class func canInit(with request: URLRequest) -> Bool {
         return true
@@ -32,18 +32,23 @@ final class URLProtocolMock: URLProtocol {
     override func startLoading() {
 
         do {
-            guard var urlRequest = try Self.response?(request) else {
-                client?.urlProtocol(self, didFailWithError: NSError(domain: "MyErrorDomain",
-                                                                    code: 1,
-                                                                    userInfo: ["reason": "Response creation failed"]))
+            guard let httpResponse = try Self.response?(request) else {
+                client?.urlProtocol(self, didFailWithError: NSError(domain: "MockErrorDomain",
+                                                                    code: -1,
+                                                                    userInfo: [NSLocalizedDescriptionKey: "No response provided"]))
                 return
             }
 
-            if let response = urlRequest.response {
+            if let response = httpResponse.response {
                 client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            } else {
+                client?.urlProtocol(self, didFailWithError: NSError(domain: "MockErrorDomain",
+                                                                    code: -1,
+                                                                    userInfo: [NSLocalizedDescriptionKey: "Invalid HTTP response"]))
+                return
             }
 
-            if let data = urlRequest.data {
+            if let data = httpResponse.data {
                 client?.urlProtocol(self, didLoad: data)
             }
             client?.urlProtocolDidFinishLoading(self)
@@ -58,13 +63,20 @@ final class URLProtocolMock: URLProtocol {
 struct HTTPResponse {
 
     var data: Data?
-    let statusCode: Int
+    var response: URLResponse?
 
-    lazy var response: HTTPURLResponse? = {
-        let response = HTTPURLResponse(url: URL(string: "http://base.url.com")!,
+    init(data: Data?, statusCode: Int, isHTTP: Bool = true) {
+        if isHTTP {
+            response = HTTPURLResponse(url: URL(string: "http://base.url.com")!,
                                        statusCode: statusCode,
                                        httpVersion: nil,
                                        headerFields: nil)
-        return response
-    }()
+        } else {
+            response = URLResponse(url: URL(string: "http://base.url.com")!,
+                                   mimeType: nil,
+                                   expectedContentLength: 0,
+                                   textEncodingName: nil)
+        }
+        self.data = data
+    }
 }

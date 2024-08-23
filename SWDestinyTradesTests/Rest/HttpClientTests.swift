@@ -25,9 +25,9 @@ final class HttpClientTests: XCTestCase {
         request.httpMethod = HttpMethod.get.toString()
     }
 
-    func testRequestWithSuccess() async throws {
+    func test_request_with_success() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(data: "{ \"bar\": true }".data(using: .utf8),
+            HTTPResponse(data: Data("{ \"bar\": true }".utf8),
                          statusCode: 200)
         }
 
@@ -35,63 +35,69 @@ final class HttpClientTests: XCTestCase {
         XCTAssertTrue(result.bar)
     }
 
-    func testRequestWithFailureInvalidData() async throws {
+    func test_request_with_failure_invalidData() async throws {
+        let url = URL(string: "https://example.com")!
+        let request = URLRequest(url: url)
+
         URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 200)
+            return HTTPResponse(data: nil, statusCode: 200, isHTTP: false)
+        }
+
+        do {
+            _ = try await sut.request(request, decode: Foo.self)
+            XCTFail("Expected to throw APIError.invalidData, but succeeded.")
+        } catch {
+            XCTAssertEqual(error as? APIError, .invalidData, "Expected APIError.invalidData but got \(error)")
+        }
+    }
+
+    func test_request_with_failure_responseUnsuccessful() async throws {
+        URLProtocolMock.response = { _ in
+            HTTPResponse(data: nil, statusCode: 404)
         }
 
         do {
             _ = try await sut.request(request, decode: Foo.self)
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
-            // XCTAssertEqual(error as? APIError, .invalidData)
+            XCTAssertEqual(error as? APIError, .responseUnsuccessful, "Expected APIError.responseUnsuccessful but got \(error)")
         }
     }
 
-    func testRequestWithFailureResponseUnsuccessful() async throws {
+    func test_request_with_failure_requestCancelled() async throws {
+        request = URLRequest(with: URL(string: "https://base.url.com")!)
+
         URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 404)
+            throw URLError(.cancelled)
         }
 
         do {
             _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
+            XCTFail("Expected to throw APIError.requestCancelled, but succeeded.")
         } catch {
-            XCTAssertEqual(error as? APIError, .responseUnsuccessful)
+            XCTAssertEqual(error as? APIError, .requestCancelled, "Expected APIError.requestCancelled but got \(error)")
         }
     }
 
-    func testRequestWithFailureRequestCancelled() async throws {
+    func test_request_with_failure_keyNotFound() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 200)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch {
-            // XCTAssertEqual(error as? APIError, .requestCancelled)
-        }
-    }
-
-    func testRequestWithFailureKeyNotFound() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(data: "{ \"id\": 3465 }".data(using: .utf8),
+            HTTPResponse(data: Data("{ \"id\": 3465 }".utf8),
                          statusCode: 200)
         }
 
         do {
             _ = try await sut.request(request, decode: Foo.self)
             XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch let error as APIError {
-            XCTAssertEqual(error, .keyNotFound(key: Foo.CodingKeys.bar,
-                                               context: "No value associated with key CodingKeys(stringValue: \"bar\", intValue: nil) (\"bar\")."))
+        } catch {
+            XCTAssertEqual(error as? APIError,
+                           .keyNotFound(key: Foo.CodingKeys.bar, context: "No value associated with key CodingKeys(stringValue: \"bar\", intValue: nil) (\"bar\")."),
+                           "Expected APIError.requestCancelled but got \(error)")
         }
     }
 
-    func testRequestWithFailureValueNotFound() async throws {
+    func test_request_with_failure_valueNotFound() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(data: "{ \"bar\": \"invalid_value\" }".data(using: .utf8),
+            HTTPResponse(data: Data("{ \"bar\": \"invalid_value\" }".utf8),
                          statusCode: 200)
         }
 
@@ -103,9 +109,9 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func testRequestWithFailureTypeMismatch() async throws {
+    func test_request_with_failure_typeMismatch() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(data: "{ \"bar\": \"invalid_value\" }".data(using: .utf8),
+            HTTPResponse(data: Data("{ \"bar\": \"invalid_value\" }".utf8),
                          statusCode: 200)
         }
 
@@ -117,20 +123,20 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func testRequestWithFailureDataCorrupted() async throws {
+    func test_request_with_failure_dataCorrupted() async throws {
         URLProtocolMock.response = { _ in
-            HTTPResponse(statusCode: 200)
+            HTTPResponse(data: nil, statusCode: 200)
         }
 
         do {
             _ = try await sut.request(request, decode: Foo.self)
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
-            XCTAssertEqual(error as? APIError, .dataCorrupted(context: "The given data was not valid JSON."))
+            XCTAssertEqual(error as? APIError, .dataCorrupted(context: "The given data was not valid JSON."), "Expected APIError.dataCorrupted but got \(error)")
         }
     }
 
-    func testCancelAllRequests() {
+    func test_cancelRequest() {
         request = URLRequest(with: URL(string: "https://base.url.com")!)
         sut.cancelRequest(request)
         // Uncomment once cancellation handling is implemented in the HttpClient
