@@ -21,164 +21,158 @@ final class HttpClientTests: XCTestCase {
         super.setUp()
         session = URLSessionMock().build()
         sut = HttpClient(session: session)
-        request = URLRequest(with: URL(string: "https://base.url.com")!)
+        request = URLRequest(url: URL(string: "https://base.url.com")!)
         request.httpMethod = HttpMethod.get.toString()
     }
 
+    override func tearDown() {
+        sut = nil
+        session = nil
+        request = nil
+        super.tearDown()
+    }
+
     func test_request_with_success() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(data: Data("{ \"bar\": true }".utf8),
-                         statusCode: 200)
-        }
+        setupURLProtocolMock(with: Data("{ \"bar\": true }".utf8), statusCode: 200)
 
         let result = try await sut.request(request, decode: Foo.self)
         XCTAssertTrue(result.bar)
     }
 
     func test_request_with_failure_invalidData() async throws {
-        let url = URL(string: "https://example.com")!
-        let request = URLRequest(url: url)
+        setupURLProtocolMock(with: nil, statusCode: 200, isHTTP: false)
 
-        URLProtocolMock.response = { _ in
-            return HTTPResponse(data: nil, statusCode: 200, isHTTP: false)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw APIError.invalidData, but succeeded.")
-        } catch {
-            XCTAssertEqual(error as? APIError, .invalidData, "Expected APIError.invalidData but got \(error)")
+        await assertThrowsError(of: .invalidData) {
+            _ = try await self.sut.request(self.request, decode: Foo.self)
         }
     }
 
     func test_request_with_failure_responseUnsuccessful() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(data: nil, statusCode: 404)
-        }
+        setupURLProtocolMock(with: nil, statusCode: 404)
 
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch {
-            XCTAssertEqual(error as? APIError, .responseUnsuccessful, "Expected APIError.responseUnsuccessful but got \(error)")
+        await assertThrowsError(of: .responseUnsuccessful) {
+            _ = try await self.sut.request(self.request, decode: Foo.self)
         }
     }
 
     func test_request_with_failure_requestCancelled() async throws {
-        request = URLRequest(with: URL(string: "https://base.url.com")!)
+        setupURLProtocolMock(with: nil, statusCode: 200, error: URLError(.cancelled))
 
-        URLProtocolMock.response = { _ in
-            throw URLError(.cancelled)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw APIError.requestCancelled, but succeeded.")
-        } catch {
-            XCTAssertEqual(error as? APIError, .requestCancelled, "Expected APIError.requestCancelled but got \(error)")
+        await assertThrowsError(of: .requestCancelled) {
+            _ = try await self.sut.request(self.request, decode: Foo.self)
         }
     }
 
     func test_request_with_failure_keyNotFound() async throws {
-        struct DummyResponse: Decodable {
-            let id: Int
-            let name: String
-        }
-
         let missingKeyJson = Data("{ \"id\": 123 }".utf8)
+        setupURLProtocolMock(with: missingKeyJson, statusCode: 200)
 
-        URLProtocolMock.response = { _ in
-            return HTTPResponse(data: missingKeyJson, statusCode: 200)
+        await assertKeyNotFound(in: {
+            _ = try await self.sut.request(self.request, decode: DummyResponse.self)
+        }, missingKey: "name")
+    }
+
+    func test_request_with_failure_valueNotFound() async throws {
+        let missingValueJson = Data("{ \"id\": 123, \"name\": null }".utf8)
+        setupURLProtocolMock(with: missingValueJson, statusCode: 200)
+
+        await assertValueNotFound(of: String.self) {
+            _ = try await self.sut.request(self.request, decode: DummyResponse.self)
+        }
+    }
+
+    func test_request_with_failure_typeMismatch() async throws {
+        setupURLProtocolMock(with: Data("{ \"bar\": \"invalid_value\" }".utf8), statusCode: 200)
+
+        await assertThrowsError(of: .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead.")) {
+            _ = try await self.sut.request(self.request, decode: Foo.self)
+        }
+    }
+
+    func test_request_with_failure_dataCorrupted() async throws {
+        setupURLProtocolMock(with: nil, statusCode: 200)
+
+        await assertThrowsError(of: .dataCorrupted(context: "The given data was not valid JSON.")) {
+            _ = try await self.sut.request(self.request, decode: Foo.self)
+        }
+    }
+
+    func test_cancelRequest() async {
+        setupURLProtocolMock(with: nil, statusCode: 200)
+
+        Task {
+            _ = try? await self.sut.request(self.request, decode: Foo.self)
         }
 
+        await Task.yield() // Allow the request to start
+
+        XCTAssertNoThrow(try {
+            let activeTasksCount = try XCTUnwrap(self.sut.activeTasks).count
+            XCTAssertEqual(activeTasksCount, 1, "Expected 1 active task before cancellation.")
+        }())
+
+        sut.cancelRequest(request)
+
+        XCTAssertNoThrow(try {
+            let areTasksEmpty = try XCTUnwrap(self.sut.activeTasks).isEmpty
+            XCTAssertTrue(areTasksEmpty, "Expected no active tasks after cancelling the request.")
+        }())
+    }
+
+    // MARK: - Helper Methods
+
+    private func setupURLProtocolMock(with data: Data?, statusCode: Int, isHTTP: Bool = true, error: Error? = nil) {
+        URLProtocolMock.response = { _ in
+            if let error {
+                throw error
+            }
+            return HTTPResponse(data: data, statusCode: statusCode, isHTTP: isHTTP)
+        }
+    }
+
+    private func assertThrowsError(of expectedError: APIError, in block: @escaping () async throws -> Void) async {
         do {
-            _ = try await sut.request(request, decode: DummyResponse.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
+            try await block()
+            XCTFail("Expected to throw \(expectedError), but succeeded.")
+        } catch {
+            XCTAssertEqual(error as? APIError, expectedError, "Expected \(expectedError) but got \(error) instead.")
+        }
+    }
+
+    private func assertKeyNotFound(in block: @escaping () async throws -> Void, missingKey: String) async {
+        do {
+            try await block()
+            XCTFail("Expected to throw APIError.keyNotFound, but succeeded.")
         } catch {
             if let apiError = error as? APIError, case let .keyNotFound(key, context) = apiError {
-                XCTAssertEqual(key.stringValue, "name", "Expected 'name' key to be missing.")
-                XCTAssertTrue(context.contains("No value associated with key CodingKeys(stringValue: \"name\", intValue: nil) (\"name\")."), "Unexpected context message.")
+                XCTAssertEqual(key.stringValue, missingKey, "Expected '\(missingKey)' key to be missing.")
+                XCTAssertTrue(context.contains("No value associated with key CodingKeys(stringValue: \"\(missingKey)\", intValue: nil) (\"\(missingKey)\")."), "Unexpected context message.")
             } else {
                 XCTFail("Expected APIError.keyNotFound, but got \(error) instead.")
             }
         }
     }
 
-    func test_request_with_failure_valueNotFound() async throws {
-        struct DummyResponse: Decodable {
-            let id: Int
-            let name: String
-        }
-
-        let missingValueJson = Data("{ \"id\": 123, \"name\": null }".utf8)
-
-        URLProtocolMock.response = { _ in
-            return HTTPResponse(data: missingValueJson, statusCode: 200)
-        }
-
+    private func assertValueNotFound(of expectedType: (some Any).Type, in block: @escaping () async throws -> Void) async {
         do {
-            _ = try await sut.request(request, decode: DummyResponse.self)
+            try await block()
             XCTFail("Expected to throw APIError.valueNotFound, but succeeded.")
         } catch {
             if let apiError = error as? APIError, case let .valueNotFound(type, context) = apiError {
-                XCTAssertEqual(String(describing: type), String(describing: String.self), "Expected type String for 'name'.")
+                XCTAssertEqual(String(describing: type), String(describing: expectedType), "Expected type \(expectedType) for the value.")
                 XCTAssertTrue(context.contains("Cannot get unkeyed decoding container -- found null value instead"), "Unexpected context message: \(context)")
             } else {
                 XCTFail("Expected APIError.valueNotFound, but got \(error) instead.")
             }
         }
     }
+}
 
-    func test_request_with_failure_typeMismatch() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(data: Data("{ \"bar\": \"invalid_value\" }".utf8),
-                         statusCode: 200)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch {
-            XCTAssertEqual(error as? APIError, .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead."))
-        }
-    }
-
-    func test_request_with_failure_dataCorrupted() async throws {
-        URLProtocolMock.response = { _ in
-            HTTPResponse(data: nil, statusCode: 200)
-        }
-
-        do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-        } catch {
-            XCTAssertEqual(error as? APIError, .dataCorrupted(context: "The given data was not valid JSON."), "Expected APIError.dataCorrupted but got \(error)")
-        }
-    }
-
-    func test_cancelRequest() async {
-        URLProtocolMock.response = { _ in
-            return HTTPResponse(data: nil, statusCode: 200)
-        }
-
-        Task {
-            _ = try? await sut.request(request, decode: Foo.self)
-        }
-
-        await Task.yield() // Allow the request to start
-
-        XCTAssertEqual(sut.activeTasks?.count, 1, "Expected 1 active task before cancellation.")
-
-        sut.cancelRequest(request)
-
-        XCTAssertTrue(sut.activeTasks!.isEmpty, "Expected no active tasks after cancelling the request.")
-    }
+struct DummyResponse: Decodable {
+    let id: Int
+    let name: String
 }
 
 struct Foo: Codable {
     var bar: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case bar
-    }
 }
