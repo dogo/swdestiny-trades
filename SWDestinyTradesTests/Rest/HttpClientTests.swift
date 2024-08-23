@@ -80,18 +80,27 @@ final class HttpClientTests: XCTestCase {
     }
 
     func test_request_with_failure_keyNotFound() async throws {
+        struct DummyResponse: Decodable {
+            let id: Int
+            let name: String
+        }
+
+        let missingKeyJson = Data("{ \"id\": 123 }".utf8)
+
         URLProtocolMock.response = { _ in
-            HTTPResponse(data: Data("{ \"id\": 3465 }".utf8),
-                         statusCode: 200)
+            return HTTPResponse(data: missingKeyJson, statusCode: 200)
         }
 
         do {
-            _ = try await sut.request(request, decode: Foo.self)
+            _ = try await sut.request(request, decode: DummyResponse.self)
             XCTFail("Expected to throw while awaiting, but succeeded")
         } catch {
-            XCTAssertEqual(error as? APIError,
-                           .keyNotFound(key: Foo.CodingKeys.bar, context: "No value associated with key CodingKeys(stringValue: \"bar\", intValue: nil) (\"bar\")."),
-                           "Expected APIError.requestCancelled but got \(error)")
+            if let apiError = error as? APIError, case let .keyNotFound(key, context) = apiError {
+                XCTAssertEqual(key.stringValue, "name", "Expected 'name' key to be missing.")
+                XCTAssertTrue(context.contains("No value associated with key CodingKeys(stringValue: \"name\", intValue: nil) (\"name\")."), "Unexpected context message.")
+            } else {
+                XCTFail("Expected APIError.keyNotFound, but got \(error) instead.")
+            }
         }
     }
 
