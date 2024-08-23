@@ -11,44 +11,26 @@ import UIKit
 extension SetDTO {
 
     var icon: UIImage {
-        if code.lowercased() == "aw" {
-            return Asset.Sets.icAwakenings.image
-        } else if code.lowercased() == "sor" {
-            return Asset.Sets.icSpiritOfRebellion.image
-        } else if code.lowercased() == "eaw" {
-            return Asset.Sets.icEmpireAtWar.image
-        } else if code.lowercased() == "tpg" {
-            return Asset.Sets.icTwoPlayerGame.image
-        } else if code.lowercased() == "leg" {
-            return Asset.Sets.icLegacies.image
-        } else if code.lowercased() == "riv" {
-            return Asset.Sets.icRivals.image
-        } else if code.lowercased() == "wotf" {
-            return Asset.Sets.icWayOfTheForce.image
-        } else if code.lowercased() == "atg" {
-            return Asset.Sets.icAcrossTheGalaxy.image
-        } else if code.lowercased() == "conv" {
-            return Asset.Sets.icConvergence.image
-        } else if code.lowercased() == "aon" {
-            return Asset.Sets.icAlliesOfNecessity.image
-        } else if code.lowercased() == "soh" {
-            return Asset.Sets.icSparkOfHope.image
-        } else if code.lowercased() == "cm" {
-            return Asset.Sets.icCovertMissions.image
-        } else if code.lowercased() == "tr" {
-            return Asset.Sets.icTransformations.image
-        } else if code.lowercased() == "fa" {
-            return Asset.Sets.icFalteringAllegiances.image
-        } else if code.lowercased() == "ec" {
-            return Asset.Sets.icEternalConflict.image
-        } else if code.lowercased() == "rm" {
-            return Asset.Sets.icRedemption.image
-        } else if code.lowercased() == "hs" {
-            return Asset.Sets.icHighStakes.image
-        } else if code.lowercased() == "pw" {
-            return Asset.Sets.icPartingWords.image
-        } else {
-            return Asset.Sets.icNotFound.image
-        }
+        let icons: [String: UIImage] = [
+            "aw": Asset.Sets.icAwakenings.image,
+            "sor": Asset.Sets.icSpiritOfRebellion.image,
+            "eaw": Asset.Sets.icEmpireAtWar.image,
+            "tpg": Asset.Sets.icTwoPlayerGame.image,
+            "leg": Asset.Sets.icLegacies.image,
+            "riv": Asset.Sets.icRivals.image,
+            "wotf": Asset.Sets.icWayOfTheForce.image,
+            "atg": Asset.Sets.icAcrossTheGalaxy.image,
+            "conv": Asset.Sets.icConvergence.image,
+            "aon": Asset.Sets.icAlliesOfNecessity.image,
+            "soh": Asset.Sets.icSparkOfHope.image,
+            "cm": Asset.Sets.icCovertMissions.image,
+            "tr": Asset.Sets.icTransformations.image,
+            "fa": Asset.Sets.icFalteringAllegiances.image,
+            "ec": Asset.Sets.icEternalConflict.image,
+            "rm": Asset.Sets.icRedemption.image,
+            "hs": Asset.Sets.icHighStakes.image,
+            "pw": Asset.Sets.icPartingWords.image
+        ]
+        return icons[code.lowercased()] ?? Asset.Sets.icNotFound.image
     }
 }
