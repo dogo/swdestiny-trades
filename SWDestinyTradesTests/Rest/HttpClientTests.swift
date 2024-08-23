@@ -136,11 +136,22 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_cancelRequest() {
-        request = URLRequest(with: URL(string: "https://base.url.com")!)
+    func test_cancelRequest() async {
+        URLProtocolMock.response = { _ in
+            return HTTPResponse(data: nil, statusCode: 200)
+        }
+
+        Task {
+            _ = try? await sut.request(request, decode: Foo.self)
+        }
+
+        await Task.yield() // Allow the request to start
+
+        XCTAssertEqual(sut.activeTasks?.count, 1, "Expected 1 active task before cancellation.")
+
         sut.cancelRequest(request)
-        // Uncomment once cancellation handling is implemented in the HttpClient
-        // XCTAssertTrue(session.tasksCancelled)
+
+        XCTAssertTrue(sut.activeTasks!.isEmpty, "Expected no active tasks after cancelling the request.")
     }
 }
 
