@@ -9,7 +9,7 @@
 import UIKit
 
 final class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable {
-    private var tableView: UITableView?
+    private weak var tableView: UITableView?
     private var colorCards: [String: [CardDTO]] = [:]
     private var sections: [String] = []
 
@@ -35,27 +35,20 @@ final class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let rows = colorCards[sections[section]] else {
-            return 0
-        }
-        return rows.count
+        return colorCards[sections[section]]?.count ?? 0
     }
 
-    // MARK: <CardReturnable>
+    // MARK: - CardReturnable
 
-    func getCard(at index: IndexPath) -> CardDTO? {
-        return colorCards[sections[index.section]]?[index.row]
+    func getCard(at indexPath: IndexPath) -> CardDTO? {
+        return colorCards[sections[indexPath.section]]?[indexPath.row]
     }
 
     func getCardList() -> [CardDTO] {
-        var list = [CardDTO]()
-        for cardList in colorCards.values {
-            list.append(contentsOf: Array(cardList))
-        }
-        return list
+        return colorCards.values.flatMap { $0 }
     }
 
-    // MARK: Sort options
+    // MARK: - Sorting
 
     func sortByColor(cardList: [CardDTO]) {
         sections = SectionsBuilder.byColor(cardList: cardList)
@@ -65,7 +58,7 @@ final class ColorListDatasource: NSObject, UITableViewDataSource, CardReturnable
     }
 
     private func insertHeaderToDataSource() {
-        colorCards[" "] = [CardDTO]()
+        colorCards[" "] = []
         sections.insert(" ", at: 0)
     }
 }
