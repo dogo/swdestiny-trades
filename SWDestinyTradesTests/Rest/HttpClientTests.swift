@@ -105,16 +105,27 @@ final class HttpClientTests: XCTestCase {
     }
 
     func test_request_with_failure_valueNotFound() async throws {
+        struct DummyResponse: Decodable {
+            let id: Int
+            let name: String
+        }
+
+        let missingValueJson = Data("{ \"id\": 123, \"name\": null }".utf8)
+
         URLProtocolMock.response = { _ in
-            HTTPResponse(data: Data("{ \"bar\": \"invalid_value\" }".utf8),
-                         statusCode: 200)
+            return HTTPResponse(data: missingValueJson, statusCode: 200)
         }
 
         do {
-            _ = try await sut.request(request, decode: Foo.self)
-            XCTFail("Expected to throw while awaiting, but succeeded")
+            _ = try await sut.request(request, decode: DummyResponse.self)
+            XCTFail("Expected to throw APIError.valueNotFound, but succeeded.")
         } catch {
-            // XCTAssertEqual(error as? APIError, .valueNotFound(type: Foo.self, context: "Value for 'Foo' could not be decoded."))
+            if let apiError = error as? APIError, case let .valueNotFound(type, context) = apiError {
+                XCTAssertEqual(String(describing: type), String(describing: String.self), "Expected type String for 'name'.")
+                XCTAssertTrue(context.contains("Cannot get unkeyed decoding container -- found null value instead"), "Unexpected context message: \(context)")
+            } else {
+                XCTFail("Expected APIError.valueNotFound, but got \(error) instead.")
+            }
         }
     }
 
