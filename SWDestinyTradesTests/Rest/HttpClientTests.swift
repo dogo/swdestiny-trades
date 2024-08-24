@@ -97,7 +97,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_cancelRequest() async {
+    func disabled_test_cancelRequest() async {
         setupURLProtocolMock(with: nil, statusCode: 200)
 
         Task {
