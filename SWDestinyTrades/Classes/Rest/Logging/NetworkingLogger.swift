@@ -16,9 +16,11 @@ final class NetworkingLogger {
     }
 
     private let loglevel: LogLevel
+    private let outputStream: TextOutputStream
 
-    required init(level: LogLevel) {
+    init(level: LogLevel, outputStream: TextOutputStream = StandardOutputStream()) {
         loglevel = level
+        self.outputStream = outputStream
     }
 
     // MARK: - Log Request
@@ -73,13 +75,11 @@ final class NetworkingLogger {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
             let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
 
-            if let prettyString = String(data: prettyData, encoding: .utf8) {
-                prettyJSON(prettyString)
-            }
+            let prettyString = String(decoding: prettyData, as: UTF8.self)
+            prettyJSON(prettyString)
         } catch {
-            if let string = String(data: data, encoding: .utf8) {
-                printTagged(string)
-            }
+            let string = String(decoding: data, as: UTF8.self)
+            printTagged(string)
         }
     }
 
@@ -100,7 +100,8 @@ final class NetworkingLogger {
     // MARK: - Log Body
 
     private func log(body: Data?) {
-        if let httpBody = body, let bodyStr = String(data: httpBody, encoding: .utf8) {
+        if let httpBody = body {
+            let bodyStr = String(decoding: httpBody, as: UTF8.self)
             printTagged("Body: \(bodyStr)")
         }
     }
@@ -108,17 +109,27 @@ final class NetworkingLogger {
     // MARK: - Log Tag
 
     private func printTagged(_ string: String) {
-        print("LOGGER | " + string)
+        outputStream.write("LOGGER | " + string + "\n")
     }
 
     private func printSeparator() {
-        print("LOGGER |---------------------------------------------------")
+        outputStream.write("LOGGER |---------------------------------------------------\n")
     }
 
     private func prettyJSON(_ string: String) {
         let components = string.components(separatedBy: "\n")
         printTagged("JSON:")
         components.forEach { printTagged($0) }
+    }
+}
+
+protocol TextOutputStream {
+    func write(_ string: String)
+}
+
+struct StandardOutputStream: TextOutputStream {
+    func write(_ string: String) {
+        print(string)
     }
 }
 
