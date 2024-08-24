@@ -25,7 +25,7 @@ final class AddToDeckViewTests: XCSnapshotableTestCase {
         super.tearDown()
     }
 
-    func testAboutViewLayout() {
+    func testAddToDeckViewLayout() {
         XCTAssertTrue(snapshot(sut, named: "Add To Deck View"))
     }
 

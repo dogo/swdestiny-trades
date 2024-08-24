@@ -25,7 +25,7 @@ final class AddCardViewTests: XCSnapshotableTestCase {
         super.tearDown()
     }
 
-    func testAboutViewLayout() {
+    func testAddCardViewLayout() {
         XCTAssertTrue(snapshot(sut, named: "Add Card View"))
     }
 

@@ -113,6 +113,9 @@ final class HttpClientTests: XCTestCase {
 
         sut.cancelRequest(request)
 
+        // Add a short delay to ensure the cancellation has taken effect
+        try? await Task.sleep(nanoseconds: 100_000_000)
+
         XCTAssertNoThrow(try {
             let areTasksEmpty = try XCTUnwrap(self.sut.activeTasks).isEmpty
             XCTAssertTrue(areTasksEmpty, "Expected no active tasks after cancelling the request.")

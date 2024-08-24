@@ -31,6 +31,21 @@ extension UIView: Snapshotable {
 
 public extension FBSnapshotTestCase {
 
+    /// Validates a snapshot of the specified view or layer against a reference image.
+    /// - Parameters:
+    ///   - instance: The view or layer to snapshot.
+    ///   - isDeviceAgnostic: A Boolean value indicating whether the snapshot should account for device-specific traits such as device model, OS version, screen size, and screen scale. The default is `false`.
+    ///   - usesDrawRect: A Boolean value indicating whether to use the `draw(_:)` method to capture the snapshot. The default is `false`.
+    ///   - snapshot: The name of the snapshot to validate.
+    ///   - record: A Boolean value indicating whether to record a new reference image if no matching snapshot is found. If `false`, the method compares the snapshot against the existing reference image.
+    ///   - referenceDirectory: The directory where reference images are stored.
+    ///   - imageDiffDirectory: The directory where image differences are stored when the snapshot comparison fails.
+    ///   - perPixelTolerance: The percentage by which a pixel's R, G, B, and A components can differ from the reference image and still be considered identical. The default is `0.02`.
+    ///   - overallTolerance: The percentage of pixels that can differ from the reference image and still be considered identical.
+    ///   - filename: The file path of the test, used to parse the test name.
+    ///   - identifier: An optional identifier to distinguish between multiple snapshots of the same view or layer. The default is `nil`.
+    ///   - shouldIgnoreScale: A Boolean value indicating whether to ignore screen scale differences when comparing snapshots. The default is `false`.
+    /// - Returns: `true` if the snapshot validation succeeds; otherwise, `false`.
     // swiftlint:disable:next function_parameter_count
     static func validateSnapshot(_ instance: AnyObject,
                                  isDeviceAgnostic: Bool = false,
@@ -39,7 +54,7 @@ public extension FBSnapshotTestCase {
                                  record: Bool,
                                  referenceDirectory: String,
                                  imageDiffDirectory: String,
-                                 perPixelTolerance: CGFloat,
+                                 perPixelTolerance: CGFloat = 0.02,
                                  overallTolerance: CGFloat,
                                  filename: StaticString,
                                  identifier: String? = nil,
