@@ -80,4 +80,37 @@ final class BalloonMarkerTests: XCTestCase {
 
         XCTAssertEqual(sut.labelns, "10.0")
     }
+
+    func test_refreshContent_withNegativeValues() {
+        let entry = ChartDataEntry(x: 0, y: -10)
+        let highlight = Highlight(x: 0, dataSetIndex: 0, stackIndex: 0)
+        sut.refreshContent(entry: entry, highlight: highlight)
+
+        XCTAssertEqual(sut.labelns, "-10.0")
+    }
+
+    func test_draw_withLabel() {
+        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
+        let context = UIGraphicsGetCurrentContext()!
+
+        sut.setLabel("Test Label")
+        sut.draw(context: context, point: CGPoint(x: 50, y: 50))
+
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        XCTAssertNotNil(drawnImage)
+        UIGraphicsEndImageContext()
+    }
+
+    func test_draw_with_backgroundColor() {
+        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
+        let context = UIGraphicsGetCurrentContext()!
+
+        sut.setLabel("Test Label")
+        sut.color = .blue
+        sut.draw(context: context, point: CGPoint(x: 50, y: 50))
+
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        XCTAssertNotNil(drawnImage)
+        UIGraphicsEndImageContext()
+    }
 }
