@@ -101,13 +101,49 @@ final class BalloonMarkerTests: XCTestCase {
         UIGraphicsEndImageContext()
     }
 
-    func test_draw_with_backgroundColor() {
+    func test_draw_noLabel_doesNotDraw() {
+        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
+        let context = UIGraphicsGetCurrentContext()!
+
+        let initialImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        sut.draw(context: context, point: CGPoint(x: 50, y: 50))
+
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        XCTAssertEqual(drawnImage?.pngData(), initialImage?.pngData())
+        UIGraphicsEndImageContext()
+    }
+
+    func test_drawBackground_drawDownwardArrow() {
         UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
         let context = UIGraphicsGetCurrentContext()!
 
         sut.setLabel("Test Label")
         sut.color = .blue
         sut.draw(context: context, point: CGPoint(x: 50, y: 50))
+
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        XCTAssertNotNil(drawnImage)
+        UIGraphicsEndImageContext()
+    }
+
+    func test_drawBackground_upwardArrow() {
+        UIGraphicsBeginImageContext(CGSize(width: 100, height: 100))
+        let context = UIGraphicsGetCurrentContext()!
+
+        let point = CGPoint(x: 50, y: 10)
+        sut.size = CGSize(width: 40, height: 30)
+
+        let chartView = ChartViewBase()
+        sut.chartView = chartView
+
+        sut.setLabel("Test Label")
+        sut.color = .blue
+
+        let offset = sut.offsetForDrawing(atPoint: point)
+
+        sut.draw(context: context, point: point)
 
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         XCTAssertNotNil(drawnImage)

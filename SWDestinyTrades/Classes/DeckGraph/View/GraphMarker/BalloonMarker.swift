@@ -42,11 +42,11 @@ open class BalloonMarker: MarkerImage {
 
         var size = size
 
-        if size.width == 0.0, image != nil {
-            size.width = image?.size.width ?? 0.0
+        if size.width == 0.0, let image {
+            size.width = image.size.width
         }
-        if size.height == 0.0, image != nil {
-            size.height = image?.size.height ?? 0.0
+        if size.height == 0.0, let image {
+            size.height = image.size.height
         }
 
         let width = size.width
@@ -216,7 +216,9 @@ open class BalloonMarker: MarkerImage {
         _drawAttributes[NSAttributedString.Key.paragraphStyle] = _paragraphStyle
         _drawAttributes[NSAttributedString.Key.foregroundColor] = textColor
 
-        _labelSize = labelns?.size(withAttributes: _drawAttributes) ?? CGSize.zero
+        if let labelns {
+            _labelSize = labelns.size(withAttributes: _drawAttributes)
+        }
 
         var size = CGSize()
         size.width = _labelSize.width + insets.left + insets.right
