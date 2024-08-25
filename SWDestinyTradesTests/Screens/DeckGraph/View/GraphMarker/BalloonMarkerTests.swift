@@ -134,15 +134,8 @@ final class BalloonMarkerTests: XCTestCase {
 
         let point = CGPoint(x: 50, y: 10)
         sut.size = CGSize(width: 40, height: 30)
-
-        let chartView = ChartViewBase()
-        sut.chartView = chartView
-
         sut.setLabel("Test Label")
         sut.color = .blue
-
-        let offset = sut.offsetForDrawing(atPoint: point)
-
         sut.draw(context: context, point: point)
 
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
