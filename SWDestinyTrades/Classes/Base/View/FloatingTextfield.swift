@@ -9,7 +9,10 @@
 import UIKit
 
 final class FloatingTextfield: UITextField {
+
     // MARK: - Properties
+
+    private let notificationCenter: NotificationCenterProtocol
 
     var underlineWidth: CGFloat = 2.0
     var underlineColor: UIColor = .black
@@ -31,7 +34,8 @@ final class FloatingTextfield: UITextField {
 
     // MARK: - Life Cycle
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, notificationCenter: NotificationCenterProtocol = NotificationCenter.default) {
+        self.notificationCenter = notificationCenter
         super.init(frame: frame)
         setupObserver()
     }
@@ -149,7 +153,11 @@ final class FloatingTextfield: UITextField {
 
     @objc
     func didEndChangingText() {
-        liftDownPlaceholderIfTextIsEmpty()
+        if let text, text.isEmpty {
+            liftDownPlaceholderIfTextIsEmpty()
+        } else {
+            liftUpPlaceholder()
+        }
     }
 
     // MARK: - Private
@@ -194,8 +202,12 @@ final class FloatingTextfield: UITextField {
     // MARK: - Animations
 
     private func animateUnderline(withAlpha alpha: CGFloat) {
-        UIView.animate(withDuration: animationDuration) {
-            self.underlineView.alpha = alpha
+        if animationDuration > 0 {
+            UIView.animate(withDuration: animationDuration) {
+                self.underlineView.alpha = alpha
+            }
+        } else {
+            underlineView.alpha = alpha
         }
     }
 
@@ -204,12 +216,19 @@ final class FloatingTextfield: UITextField {
                                     newAlpha: CGFloat,
                                     underlineAlpha: CGFloat,
                                     isLiftedAfterFinishing: Bool) {
-        UIView.animate(withDuration: animationDuration,
-                       animations: {
-                           self.placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)
-                           self.placeholderLabel.alpha = newAlpha
-                           self.underlineView.alpha = underlineAlpha
-                       }, completion: isLiftedCompletion(withNewValue: isLiftedAfterFinishing))
+        if animationDuration > 0 {
+            UIView.animate(withDuration: animationDuration,
+                           animations: {
+                               self.placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)
+                               self.placeholderLabel.alpha = newAlpha
+                               self.underlineView.alpha = underlineAlpha
+                           }, completion: isLiftedCompletion(withNewValue: isLiftedAfterFinishing))
+        } else {
+            placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)
+            placeholderLabel.alpha = newAlpha
+            underlineView.alpha = underlineAlpha
+            isLiftedCompletion(withNewValue: isLiftedAfterFinishing)?(true)
+        }
     }
 
     private func isLiftedCompletion(withNewValue value: Bool) -> ((Bool) -> Void)? {
@@ -223,24 +242,24 @@ final class FloatingTextfield: UITextField {
     // MARK: - Notification
 
     private func setupObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didBeginChangeText),
-                                               name: UITextField.textDidBeginEditingNotification,
-                                               object: self)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didChangeText),
-                                               name: UITextField.textDidChangeNotification,
-                                               object: self)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didEndChangingText),
-                                               name: UITextField.textDidEndEditingNotification,
-                                               object: self)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(didBeginChangeText),
+                                       name: UITextField.textDidBeginEditingNotification,
+                                       object: self)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(didChangeText),
+                                       name: UITextField.textDidChangeNotification,
+                                       object: self)
+        notificationCenter.addObserver(self,
+                                       selector: #selector(didEndChangingText),
+                                       name: UITextField.textDidEndEditingNotification,
+                                       object: self)
     }
 
     // MARK: - deinit
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        notificationCenter.removeObserver(self)
     }
 }
 
