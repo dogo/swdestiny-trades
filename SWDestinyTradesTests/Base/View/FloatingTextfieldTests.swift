@@ -76,6 +76,7 @@ final class FloatingTextfieldTests: XCTestCase {
 
     func testLiftDownPlaceholderIfTextIsNotEmpty() {
         sut.text = "Some text"
+        sut.didBeginChangeText()
         sut.didEndChangingText()
 
         XCTAssertEqual(sut.isLifted, true)
@@ -120,6 +121,7 @@ final class FloatingTextfieldTests: XCTestCase {
 
     func testPlaceholderRemainsLiftedWhenTextIsNotEmptyAfterEditing() {
         sut.text = "Some text"
+        sut.didBeginChangeText()
         sut.didEndChangingText()
 
         XCTAssertEqual(sut.isLifted, true)

@@ -153,11 +153,7 @@ final class FloatingTextfield: UITextField {
 
     @objc
     func didEndChangingText() {
-        if let text, text.isEmpty {
-            liftDownPlaceholderIfTextIsEmpty()
-        } else {
-            liftUpPlaceholder()
-        }
+        liftDownPlaceholderIfTextIsEmpty()
     }
 
     // MARK: - Private
