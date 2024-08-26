@@ -47,6 +47,47 @@ final class FloatingTextfieldTests: XCTestCase {
         XCTAssertEqual(sut.underlineView.alpha, sut.underlineAlphaBefore)
     }
 
+    func testDrawTextInRectWhenTextExists() {
+        sut.placeholder = "Test Placeholder"
+        sut.text = "Test Text"
+
+        sut.drawText(in: CGRect(x: 0, y: 0, width: 100, height: 50))
+
+        XCTAssertEqual(sut.placeholderLabel.text, "Test Placeholder")
+        XCTAssertEqual(sut.placeholderLabel.alpha, sut.placeholderAlphaAfter, accuracy: 0.0001)
+        XCTAssertTrue(sut.isLifted)
+    }
+
+    func testDrawTextInRectWhenTextIsEmpty() {
+        sut.placeholder = "Test Placeholder"
+        sut.text = ""
+
+        sut.drawPlaceholder(in: CGRect(x: 0, y: 0, width: 100, height: 50))
+        sut.drawText(in: CGRect(x: 0, y: 0, width: 100, height: 50))
+
+        XCTAssertEqual(sut.placeholderLabel.text, "Test Placeholder")
+        XCTAssertEqual(sut.placeholderLabel.alpha, sut.placeholderAlphaBefore)
+        XCTAssertFalse(sut.isLifted)
+    }
+
+    func testTextRectCalculation() {
+        let bounds = CGRect(x: 0, y: 0, width: 200, height: 50)
+
+        let textRect = sut.textRect(forBounds: bounds)
+
+        let expectedRect = bounds.insetBy(dx: sut.textInsetX, dy: sut.underlineWidth + 2.0)
+        XCTAssertEqual(textRect, expectedRect)
+    }
+
+    func testEditingRectCalculation() {
+        let bounds = CGRect(x: 0, y: 0, width: 200, height: 50)
+
+        let editingRect = sut.editingRect(forBounds: bounds)
+
+        let expectedRect = bounds.insetBy(dx: sut.textInsetX, dy: sut.underlineWidth + 2.0)
+        XCTAssertEqual(editingRect, expectedRect)
+    }
+
     func testPlaceholderLabelSetup() {
         let placeholderText = "Test Placeholder"
         sut.placeholder = placeholderText
@@ -62,6 +103,13 @@ final class FloatingTextfieldTests: XCTestCase {
 
         XCTAssertEqual(sut.isLifted, true)
         XCTAssertEqual(sut.placeholderLabel.alpha, sut.placeholderAlphaAfter, accuracy: 0.0001)
+        XCTAssertEqual(sut.underlineView.alpha, sut.underlineAlphaAfter)
+    }
+
+    func testDidBeginChangeTextWhenLifted() {
+        sut.isLifted = true
+        sut.didBeginChangeText()
+
         XCTAssertEqual(sut.underlineView.alpha, sut.underlineAlphaAfter)
     }
 
@@ -98,6 +146,16 @@ final class FloatingTextfieldTests: XCTestCase {
         sut.didChangeText()
 
         XCTAssertEqual(sut.isLifted, false)
+        XCTAssertEqual(sut.underlineView.alpha, sut.underlineAlphaBefore)
+    }
+
+    func testPlaceholderTextChangesWhenLiftedAndTextIsEmpty() {
+        sut.isLifted = true
+        sut.text = ""
+        sut.didChangeText()
+
+        XCTAssertEqual(sut.isLifted, false)
+        XCTAssertEqual(sut.placeholderLabel.alpha, sut.placeholderAlphaBefore)
         XCTAssertEqual(sut.underlineView.alpha, sut.underlineAlphaBefore)
     }
 
