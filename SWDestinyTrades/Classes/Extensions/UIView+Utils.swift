@@ -19,5 +19,8 @@ extension UIView {
         animation.fillMode = CAMediaTimingFillMode.forwards
 
         layer.add(animation, forKey: nil)
+
+        // Update the transform to reflect the final state after animation
+        transform = CGAffineTransform(rotationAngle: toValue)
     }
 }

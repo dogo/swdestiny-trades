@@ -12,7 +12,7 @@ protocol Storable {}
 
 struct Sorted {
     var key: String
-    var ascending: Bool = true
+    var ascending: Bool
 }
 
 protocol DatabaseProtocol: AnyObject {
