@@ -32,7 +32,12 @@ final class DeckListPresenter: DeckListPresenterProtocol {
     }
 
     func setupNavigationItems(completion: ([UIBarButtonItem]?) -> Void) {
-        let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTouched(_:)))
+        let primaryAction = UIAction { [weak self] _ in
+            self?.insert(deck: DeckDTO())
+        }
+
+        let addCardBarItem = UIBarButtonItem(systemItem: .add, primaryAction: primaryAction)
+
         completion([addCardBarItem])
     }
 
@@ -48,13 +53,6 @@ final class DeckListPresenter: DeckListPresenterProtocol {
 
     func navigateToDeckBuilder(with deck: DeckDTO) {
         navigator.navigate(to: .deckBuilder(database: database, with: deck))
-    }
-
-    // MARK: - UIBarButton Actions
-
-    @objc
-    private func addButtonTouched(_ sender: Any) {
-        insert(deck: DeckDTO())
     }
 }
 
