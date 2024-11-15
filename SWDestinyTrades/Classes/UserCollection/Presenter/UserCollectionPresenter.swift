@@ -19,11 +19,17 @@ protocol UserCollectionPresenterProtocol {
 
 final class UserCollectionPresenter: UserCollectionPresenterProtocol {
 
+    enum SortType {
+        case alphabetical
+        case number
+        case color
+    }
+
     private weak var controller: UserCollectionViewControllerProtocol?
     private let dispatchQueue: DispatchQueueType
     private let database: DatabaseProtocol?
     private let navigator: UserCollectionNavigator
-    private var currentSortIndex = 0
+    private var currentSortIndex: SortType = .alphabetical
 
     init(controller: UserCollectionViewControllerProtocol,
          dispatchQueue: DispatchQueueType = DispatchQueue.main,
@@ -57,18 +63,18 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
         let rightBarButtonItems = [addCardBarItem, shareBarItem]
 
         let sortAZAction = UIAction(title: L10n.aToZ) { [weak self] _ in
-            self?.controller?.sort(0)
-            self?.currentSortIndex = 0
+            self?.controller?.sort(.alphabetical)
+            self?.currentSortIndex = .alphabetical
         }
 
         let sortCardNumberAction = UIAction(title: L10n.cardNumber) { [weak self] _ in
-            self?.controller?.sort(1)
-            self?.currentSortIndex = 1
+            self?.controller?.sort(.number)
+            self?.currentSortIndex = .number
         }
 
         let sortColorAction = UIAction(title: L10n.color) { [weak self] _ in
-            self?.controller?.sort(2)
-            self?.currentSortIndex = 2
+            self?.controller?.sort(.color)
+            self?.currentSortIndex = .color
         }
 
         let sortMenu = UIMenu(children: [sortAZAction, sortCardNumberAction, sortColorAction])

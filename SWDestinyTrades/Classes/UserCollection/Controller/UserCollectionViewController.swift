@@ -63,8 +63,8 @@ extension UserCollectionViewController: UserCollectionViewControllerProtocol {
         userCollectionView.updateTableViewData(collection: collection)
     }
 
-    func sort(_ selectedIndex: Int) {
-        userCollectionView.sort(selectedIndex)
+    func sort(_ type: UserCollectionPresenter.SortType) {
+        userCollectionView.sort(type)
     }
 
     func getCardList() -> [CardDTO]? {

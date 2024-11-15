@@ -14,6 +14,6 @@ protocol UserCollectionViewType where Self: UITableView {
     var didSelectCard: (([CardDTO], CardDTO) -> Void)? { get set }
 
     func updateTableViewData(collection: UserCollectionDTO)
-    func sort(_ selectedIndex: Int)
+    func sort(_ selectedIndex: UserCollectionPresenter.SortType)
     func getCardList() -> [CardDTO]?
 }

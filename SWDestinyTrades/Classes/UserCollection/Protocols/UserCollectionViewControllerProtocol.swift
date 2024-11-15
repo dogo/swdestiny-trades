@@ -12,7 +12,7 @@ import UIKit
 protocol UserCollectionViewControllerProtocol: AnyObject {
     func setNavigationTitle(_ title: String)
     func updateTableViewData(collection: UserCollectionDTO)
-    func sort(_ selectedIndex: Int)
+    func sort(_ type: UserCollectionPresenter.SortType)
     func getCardList() -> [CardDTO]?
     func presentViewController(_ controller: UIViewController, animated: Bool)
 }
