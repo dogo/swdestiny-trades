@@ -55,15 +55,6 @@
       }
     },
     {
-      "identity" : "ftpopovermenu_swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/liufengting/FTPopOverMenu_Swift",
-      "state" : {
-        "revision" : "3ace7adc009b39ad0cc9dd5e1df256264828d115",
-        "version" : "0.4.5"
-      }
-    },
-    {
       "identity" : "googleappmeasurement",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",

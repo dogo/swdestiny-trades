@@ -23,17 +23,14 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     private let dispatchQueue: DispatchQueueType
     private let database: DatabaseProtocol?
     private let navigator: UserCollectionNavigator
-    private let manager: PopoverMenuManagerType
     private var currentSortIndex = 0
 
     init(controller: UserCollectionViewControllerProtocol,
          dispatchQueue: DispatchQueueType = DispatchQueue.main,
-         manager: PopoverMenuManagerType = PopoverMenuManager(),
          database: DatabaseProtocol?,
          navigator: UserCollectionNavigator) {
         self.controller = controller
         self.dispatchQueue = dispatchQueue
-        self.manager = manager
         self.database = database
         self.navigator = navigator
     }
@@ -43,11 +40,39 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
     }
 
     func setupNavigationItems(completion: ([UIBarButtonItem]?, [UIBarButtonItem]?) -> Void) {
-        let shareBarItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
-        let addCardBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(navigateToAddCard))
+        let shareAction = UIAction { [weak self] action in
+            if let barButtonItem = action.sender as? UIBarButtonItem {
+                self?.share(barButtonItem)
+            }
+        }
+
+        let shareBarItem = UIBarButtonItem(systemItem: .action, primaryAction: shareAction)
+
+        let addCardAction = UIAction { [weak self] _ in
+            self?.navigateToAddCard()
+        }
+
+        let addCardBarItem = UIBarButtonItem(systemItem: .add, primaryAction: addCardAction)
 
         let rightBarButtonItems = [addCardBarItem, shareBarItem]
-        let leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icSort.image, style: .plain, target: self, action: #selector(sort(_:event:)))
+
+        let sortAZAction = UIAction(title: L10n.aToZ) { [weak self] _ in
+            self?.controller?.sort(0)
+            self?.currentSortIndex = 0
+        }
+
+        let sortCardNumberAction = UIAction(title: L10n.cardNumber) { [weak self] _ in
+            self?.controller?.sort(1)
+            self?.currentSortIndex = 1
+        }
+
+        let sortColorAction = UIAction(title: L10n.color) { [weak self] _ in
+            self?.controller?.sort(2)
+            self?.currentSortIndex = 2
+        }
+
+        let sortMenu = UIMenu(children: [sortAZAction, sortCardNumberAction, sortColorAction])
+        let leftBarButtonItem = UIBarButtonItem(image: Asset.NavigationBar.icSort.image, menu: sortMenu)
 
         completion([leftBarButtonItem], rightBarButtonItems)
     }
@@ -62,7 +87,6 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
         navigator.navigate(to: .cardDetail(database: database, with: cardList, card: card))
     }
 
-    @objc
     func navigateToAddCard() {
         navigator.navigate(to: .addCard(database: database, with: getUserCollection()))
     }
@@ -83,7 +107,6 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
         return user
     }
 
-    @objc
     private func share(_ sender: UIBarButtonItem) {
         var collectionList = ""
 
@@ -113,16 +136,6 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
                 self?.controller?.presentViewController(activityVC, animated: true)
             }
         }
-    }
-
-    @objc
-    private func sort(_ sender: UIBarButtonItem, event: UIEvent) {
-        manager.showPopoverMenu(forEvent: event,
-                                with: [L10n.aToZ, L10n.cardNumber, L10n.color],
-                                done: { [weak self] selectedIndex in
-                                    self?.controller?.sort(selectedIndex)
-                                    self?.currentSortIndex = selectedIndex
-                                }, cancel: {})
     }
 }
 
