@@ -80,10 +80,10 @@ final class UserCollectionViewControllerTests: XCTestCase {
     }
 
     func test_sort() {
-        sut.sort(0)
+        sut.sort(.alphabetical)
 
         XCTAssertEqual(view.didCallSort.count, 1)
-        XCTAssertEqual(view.didCallSort[0], 0)
+        XCTAssertEqual(view.didCallSort[0], .alphabetical)
     }
 
     func test_getCardList() {

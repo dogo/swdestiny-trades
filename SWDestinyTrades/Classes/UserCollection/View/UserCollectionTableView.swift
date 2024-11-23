@@ -48,19 +48,14 @@ final class UserCollectionTableView: UITableView, UserCollectionViewType {
 
     // MARK: Sort
 
-    func sort(_ selectedIndex: UserCollectionPresenter.SortType) {
-        switch selectedIndex {
+    func sort(_ type: UserCollectionPresenter.SortType) {
+        switch type {
         case .alphabetical:
             tableViewDatasource?.sortAlphabetically()
-
         case .number:
             tableViewDatasource?.sortNumerically()
-
         case .color:
             tableViewDatasource?.sortByColor()
-
-        default:
-            break
         }
     }
 }

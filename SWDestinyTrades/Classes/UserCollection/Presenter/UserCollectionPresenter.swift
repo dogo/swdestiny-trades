@@ -63,18 +63,15 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
         let rightBarButtonItems = [addCardBarItem, shareBarItem]
 
         let sortAZAction = UIAction(title: L10n.aToZ) { [weak self] _ in
-            self?.controller?.sort(.alphabetical)
-            self?.currentSortIndex = .alphabetical
+            self?.performSort(.alphabetical)
         }
 
         let sortCardNumberAction = UIAction(title: L10n.cardNumber) { [weak self] _ in
-            self?.controller?.sort(.number)
-            self?.currentSortIndex = .number
+            self?.performSort(.number)
         }
 
         let sortColorAction = UIAction(title: L10n.color) { [weak self] _ in
-            self?.controller?.sort(.color)
-            self?.currentSortIndex = .color
+            self?.performSort(.color)
         }
 
         let sortMenu = UIMenu(children: [sortAZAction, sortCardNumberAction, sortColorAction])
@@ -95,6 +92,11 @@ final class UserCollectionPresenter: UserCollectionPresenterProtocol {
 
     func navigateToAddCard() {
         navigator.navigate(to: .addCard(database: database, with: getUserCollection()))
+    }
+
+    private func performSort(_ sortType: SortType) {
+        controller?.sort(sortType)
+        currentSortIndex = sortType
     }
 
     private func createDatabase(object: UserCollectionDTO) {

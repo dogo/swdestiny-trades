@@ -21,9 +21,9 @@ final class UserCollectionViewSpy: UITableView, UserCollectionViewType {
         didCallUpdateTableViewData.append(collection)
     }
 
-    private(set) var didCallSort = [Int]()
-    func sort(_ selectedIndex: Int) {
-        didCallSort.append(selectedIndex)
+    private(set) var didCallSort = [UserCollectionPresenter.SortType]()
+    func sort(_ type: UserCollectionPresenter.SortType) {
+        didCallSort.append(type)
     }
 
     private(set) var didCallGetCardListCount = 0

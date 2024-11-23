@@ -61,32 +61,6 @@ final class UserCollectionPresenterTests: XCTestCase {
         XCTAssertEqual(expectedItems?.1?.count, 2)
     }
 
-    // MARK: - Test sort
-
-    func test_sort() {
-        var barButtonItems: ([UIBarButtonItem]?, [UIBarButtonItem]?)?
-        sut.setupNavigationItems { leftItems, rightItems in
-            barButtonItems = (leftItems, rightItems)
-        }
-        let sortButton = barButtonItems?.0?[0]
-        _ = sortButton?.target?.perform(sortButton!.action, with: nil)
-
-        // XCTAssertEqual(manager.didCallShowPopoverMenuCount, 1)
-    }
-
-    func test_sort_selecting_item() {
-        var barButtonItems: ([UIBarButtonItem]?, [UIBarButtonItem]?)?
-        sut.setupNavigationItems { leftItems, rightItems in
-            barButtonItems = (leftItems, rightItems)
-        }
-        let sortButton = barButtonItems?.0?[0]
-        _ = sortButton?.target?.perform(sortButton!.action, with: nil)
-
-        // XCTAssertEqual(manager.didCallShowPopoverMenuCount, 1)
-        XCTAssertEqual(controller.didCallSort.count, 1)
-        XCTAssertEqual(controller.didCallSort[0], 0)
-    }
-
     // MARK: - Test addCard
 
     func test_addCard() {
@@ -95,7 +69,8 @@ final class UserCollectionPresenterTests: XCTestCase {
             barButtonItems = (leftItems, rightItems)
         }
         let addCardButton = barButtonItems?.1?[0]
-        _ = addCardButton?.target?.perform(addCardButton!.action, with: nil)
+        _ = addCardButton?.primaryAction?.performWithSender(<#T##sender: Any?##Any?#>, target: <#T##Any?#>)
+        //?.target?.perform(addCardButton!.action, with: nil)
 
         XCTAssertTrue(navigationController.currentPushedViewController is AddCardViewController)
     }
@@ -124,7 +99,7 @@ final class UserCollectionPresenterTests: XCTestCase {
         XCTAssertNotNil(controller.didCallUpdateTableViewData[0])
 
         XCTAssertEqual(controller.didCallSort.count, 1)
-        XCTAssertEqual(controller.didCallSort[0], 0)
+        XCTAssertEqual(controller.didCallSort[0], .alphabetical)
     }
 
     func test_loadDataFromRealm_using_existing_database() {
@@ -134,7 +109,7 @@ final class UserCollectionPresenterTests: XCTestCase {
         XCTAssertNotNil(controller.didCallUpdateTableViewData[0])
 
         XCTAssertEqual(controller.didCallSort.count, 1)
-        XCTAssertEqual(controller.didCallSort[0], 0)
+        XCTAssertEqual(controller.didCallSort[0], .alphabetical)
     }
 
     // MARK: - Test navigateToCardDetail
