@@ -24,7 +24,7 @@ public extension Project {
                 """
                 # Add Mise to the PATH
                 export PATH="$HOME/.local/share/mise/shims:$PATH"
-                swiftformat --config .swiftformat .
+                swiftformat --swiftversion 5.10 --config .swiftformat .
                 """,
                 name: "[SwiftFormat] Run Script",
                 basedOnDependencyAnalysis: false
