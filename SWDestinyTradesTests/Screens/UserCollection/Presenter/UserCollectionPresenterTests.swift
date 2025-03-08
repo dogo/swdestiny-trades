@@ -70,7 +70,7 @@ final class UserCollectionPresenterTests: XCTestCase {
         }
         let addCardButton = barButtonItems?.1?[0]
         _ = addCardButton?.primaryAction?.performWithSender(<#T##sender: Any?##Any?#>, target: <#T##Any?#>)
-        //?.target?.perform(addCardButton!.action, with: nil)
+        // ?.target?.perform(addCardButton!.action, with: nil)
 
         XCTAssertTrue(navigationController.currentPushedViewController is AddCardViewController)
     }
