@@ -65,9 +65,7 @@ opt_in_rules:
  - yoda_condition
 
 disabled_rules:
-  - opening_brace  
-
-line_length: 160
+  - opening_brace
 
 function_body_length: 80
 

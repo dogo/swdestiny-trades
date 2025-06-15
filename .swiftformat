@@ -1,5 +1,6 @@
 # file options
 --exclude Pods
+--exclude Tuist/.build
 --exclude SWDestinyTrades/Classes/Generated
 
 # Rules
