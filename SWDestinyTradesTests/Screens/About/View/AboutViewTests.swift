@@ -17,9 +17,7 @@ final class AboutViewTests: XCSnapshotableTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = AboutView(frame: .zero)
-        sut.translatesAutoresizingMaskIntoConstraints = false
-        sut.widthAnchor.constraint(equalToConstant: 320).isActive = true
+        sut = AboutView(frame: .testDevice)
     }
 
     override func tearDown() {
