@@ -24,7 +24,7 @@ protocol DatabaseProtocol: AnyObject {
 
     func delete(object: Storable) throws
 
-    func deleteAll<T: Storable>(_ model: T.Type) throws
+    func deleteAll(_ model: (some Storable).Type) throws
 
     func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?, completion: ([T]) -> Void) throws
 
