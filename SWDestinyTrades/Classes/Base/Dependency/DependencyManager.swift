@@ -24,6 +24,12 @@ extension DependencyManager: DependencyManagerProtocol {
         dependencyInitializer[key] = dependency
     }
 
+    func remove(type: (some Any).Type) {
+        let key = dependencyKey(for: type)
+        dependencyInitializer[key] = nil
+        dependencyShared[key] = nil
+    }
+
     func resolve<DependencyType>(type: DependencyType.Type, mode: InstanceMode) -> DependencyType {
         return resolve(key: dependencyKey(for: type), mode: mode)
     }

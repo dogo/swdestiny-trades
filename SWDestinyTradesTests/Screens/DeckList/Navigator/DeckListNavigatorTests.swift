@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckListNavigatorTests: XCTestCase {
+final class DeckListNavigatorTests: BaseTestCase {
 
     private var sut: DeckListNavigator!
     private var navigationController: UINavigationControllerMock!

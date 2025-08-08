@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class LoanDetailNavigatorTests: XCTestCase {
+final class LoanDetailNavigatorTests: BaseTestCase {
 
     private var sut: LoanDetailNavigator!
     private var navigationController: UINavigationControllerMock!

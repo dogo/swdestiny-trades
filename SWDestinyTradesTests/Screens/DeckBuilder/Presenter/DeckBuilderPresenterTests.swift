@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckBuilderPresenterTests: XCTestCase {
+final class DeckBuilderPresenterTests: BaseTestCase {
 
     private var sut: DeckBuilderPresenter!
     private var controller: DeckBuilderViewControllerSpy!

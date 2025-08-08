@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class NetworkingLoggerTests: XCTestCase {
+final class NetworkingLoggerTests: BaseTestCase {
 
     private class TestOutputStream: TextOutputStream {
         private(set) var output: [String] = []

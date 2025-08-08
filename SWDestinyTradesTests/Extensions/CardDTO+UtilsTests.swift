@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardDTOTests: XCTestCase {
+final class CardDTOTests: BaseTestCase {
 
     func test_factionColor() {
         let testCases: [(factionCode: String, expectedColor: UIColor)] = [

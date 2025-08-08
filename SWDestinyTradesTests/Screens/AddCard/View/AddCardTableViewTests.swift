@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardTableViewTests: XCTestCase {
+final class AddCardTableViewTests: BaseTestCase {
 
     private var sut: AddCardTableView!
     private var datasource: AddCardDatasourceSpy!

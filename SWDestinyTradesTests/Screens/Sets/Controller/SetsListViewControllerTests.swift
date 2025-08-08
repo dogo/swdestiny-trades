@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListViewControllerTests: XCTestCase {
+final class SetsListViewControllerTests: BaseTestCase {
 
     private var sut: SetsListViewController!
     private var view: SetsListViewSpy!

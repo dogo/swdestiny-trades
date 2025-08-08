@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class UICollectionViewIdentifiableTests: XCTestCase {
+final class UICollectionViewIdentifiableTests: BaseTestCase {
 
     private var sut: UICollectionView!
 

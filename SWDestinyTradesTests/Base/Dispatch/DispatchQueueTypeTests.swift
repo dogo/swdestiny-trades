@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DispatchQueueTypeTests: XCTestCase {
+final class DispatchQueueTypeTests: BaseTestCase {
 
     func testAsync() {
 

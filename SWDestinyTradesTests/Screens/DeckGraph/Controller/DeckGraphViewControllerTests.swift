@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckGraphViewControllerTests: XCTestCase {
+final class DeckGraphViewControllerTests: BaseTestCase {
 
     private var sut: DeckGraphViewController!
     private var view: DeckGraphViewSpy!

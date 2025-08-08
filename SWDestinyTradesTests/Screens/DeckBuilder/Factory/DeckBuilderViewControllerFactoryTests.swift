@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckBuilderViewControllerFactoryTests: XCTestCase {
+final class DeckBuilderViewControllerFactoryTests: BaseTestCase {
 
     private var sut: DeckBuilderViewControllerFactory!
 

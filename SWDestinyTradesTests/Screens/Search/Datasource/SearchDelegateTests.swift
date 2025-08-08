@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SearchDelegateTests: XCTestCase {
+final class SearchDelegateTests: BaseTestCase {
 
     private var sut: Search!
     private var delegate: SearchDelegateSpy!

@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class NewPersonViewControllerTests: XCTestCase {
+final class NewPersonViewControllerTests: BaseTestCase {
 
     private var sut: NewPersonViewController!
     private var presenter: NewPersonPresenterSpy!

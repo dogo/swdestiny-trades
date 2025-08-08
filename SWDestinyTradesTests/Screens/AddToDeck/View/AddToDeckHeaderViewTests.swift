@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddToDeckHeaderViewTests: XCTestCase {
+final class AddToDeckHeaderViewTests: BaseTestCase {
 
     private var sut: AddToDeckHeaderView!
 

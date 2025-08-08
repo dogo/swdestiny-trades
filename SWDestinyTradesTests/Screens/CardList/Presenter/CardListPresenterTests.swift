@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardListPresenterTests: XCTestCase {
+final class CardListPresenterTests: BaseTestCase {
 
     private var sut: CardListPresenter!
     private var service: SWDestinyService!
@@ -23,9 +23,9 @@ final class CardListPresenterTests: XCTestCase {
     override func setUp() {
         super.setUp()
         controller = CardListViewControllerSpy()
-        client = HttpClientMock()
+        client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
         client.fileName = "card-list"
-        service = SWDestinyService(client: client)
+        service = SWDestinyService()
         navigationController = UINavigationControllerMock(rootViewController: controller)
         navigator = CardListNavigator(controller)
         sut = CardListPresenter(controller: controller,

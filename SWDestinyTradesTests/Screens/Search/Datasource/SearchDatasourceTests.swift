@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SearchDatasourceTests: XCTestCase {
+final class SearchDatasourceTests: BaseTestCase {
 
     private var sut: SearchDatasource!
     private var tableView: UITableView!

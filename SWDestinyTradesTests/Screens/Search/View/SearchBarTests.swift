@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SearchBarTests: XCTestCase {
+final class SearchBarTests: BaseTestCase {
 
     private var sut: SearchBar!
     private var delegate: PeopleListPresenterSpy!

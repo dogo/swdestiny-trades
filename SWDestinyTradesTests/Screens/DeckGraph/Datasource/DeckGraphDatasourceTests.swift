@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckGraphDatasourceTests: XCTestCase {
+final class DeckGraphDatasourceTests: BaseTestCase {
 
     private var collectionView: UICollectionView!
     private var sut: DeckGraphDatasource!

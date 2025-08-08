@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutPresenterTests: XCTestCase {
+final class AboutPresenterTests: BaseTestCase {
 
     private var sut: AboutPresenter!
     private var navigator: AboutNavigator!

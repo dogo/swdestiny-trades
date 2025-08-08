@@ -17,6 +17,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         database = try? RealmDatabase()
         RealmMigrations.performMigrations(with: database)
 
+        DependencyManager.shared.register(type: HttpClientProtocol.self) {
+            HttpClient()
+        }
+
         AppearanceProxyHelper.customizeTabBar()
         AppearanceProxyHelper.customizeNavigationBar()
         AppearanceProxyHelper.customizeUITableView()

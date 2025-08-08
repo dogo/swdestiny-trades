@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardListViewControllerTests: XCTestCase {
+final class CardListViewControllerTests: BaseTestCase {
 
     private var sut: CardListViewController!
     private var view: CardListViewSpy!

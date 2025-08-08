@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutViewControllerFactoryTests: XCTestCase {
+final class AboutViewControllerFactoryTests: BaseTestCase {
 
     private var sut: AboutViewControllerFactory!
 

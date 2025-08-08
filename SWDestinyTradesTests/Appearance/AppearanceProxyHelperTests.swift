@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AppearanceProxyHelperTests: XCTestCase {
+final class AppearanceProxyHelperTests: BaseTestCase {
 
     func test_customize_tabBar() {
         AppearanceProxyHelper.customizeTabBar()

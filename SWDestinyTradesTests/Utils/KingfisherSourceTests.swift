@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class KingfisherSourceTests: XCTestCase {
+final class KingfisherSourceTests: BaseTestCase {
 
     func test_imageLoading() {
         let url = URL(string: "http://swdestinydb.com/bundles/cards/en/01/01001.jpg")!

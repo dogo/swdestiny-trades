@@ -12,7 +12,7 @@ import XCTest
 @testable import SWDestinyTrades
 @testable import SwiftMessages
 
-final class AddCardViewControllerTests: XCTestCase {
+final class AddCardViewControllerTests: BaseTestCase {
 
     private var sut: AddCardViewController!
     private var view: AddCardViewSpy!

@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SortTests: XCTestCase {
+final class SortTests: BaseTestCase {
 
     func test_cardsByNumber() {
         let unsortedCards: [CardDTO] = [

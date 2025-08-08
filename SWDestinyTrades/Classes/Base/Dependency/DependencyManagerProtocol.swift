@@ -16,6 +16,7 @@ enum InstanceMode {
 protocol DependencyManagerProtocol {
     func register<DependencyType>(type: DependencyType.Type, dependency: @escaping () -> DependencyType)
     func register(key: String, dependency: @escaping () -> some Any)
+    func remove(type: (some Any).Type)
 
     func resolve<DependencyType>(type: DependencyType.Type, mode: InstanceMode) -> DependencyType
     func resolve<DependencyType>(key: String, mode: InstanceMode) -> DependencyType

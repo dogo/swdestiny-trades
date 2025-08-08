@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class UserCollectionViewControllerFactoryTests: XCTestCase {
+final class UserCollectionViewControllerFactoryTests: BaseTestCase {
 
     private var sut: UserCollectionViewControllerFactory!
 

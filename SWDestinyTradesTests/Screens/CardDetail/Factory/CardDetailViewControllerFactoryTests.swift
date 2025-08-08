@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardDetailViewControllerFactoryTests: XCTestCase {
+final class CardDetailViewControllerFactoryTests: BaseTestCase {
 
     private var sut: CardDetailViewControllerFactory!
 

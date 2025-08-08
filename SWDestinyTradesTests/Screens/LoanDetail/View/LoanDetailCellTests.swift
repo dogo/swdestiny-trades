@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class LoanDetailCellTests: XCTestCase {
+final class LoanDetailCellTests: BaseTestCase {
 
     private var sut: LoanDetailCell!
 

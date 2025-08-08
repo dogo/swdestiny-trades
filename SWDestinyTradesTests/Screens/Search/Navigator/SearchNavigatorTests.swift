@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SearchNavigatorTests: XCTestCase {
+final class SearchNavigatorTests: BaseTestCase {
 
     private var sut: SearchNavigator!
     private var navigationController: UINavigationControllerMock!

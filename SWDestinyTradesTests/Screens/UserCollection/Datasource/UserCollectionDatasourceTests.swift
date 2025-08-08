@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class UserCollectionDatasourceTests: XCTestCase {
+final class UserCollectionDatasourceTests: BaseTestCase {
 
     private var sut: UserCollectionDatasource!
     private var delegate: UserCollectionPresenterSpy!

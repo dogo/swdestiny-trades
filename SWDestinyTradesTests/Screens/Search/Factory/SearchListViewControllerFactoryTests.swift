@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SearchListViewControllerFactoryTests: XCTestCase {
+final class SearchListViewControllerFactoryTests: BaseTestCase {
 
     private var sut: SearchListViewControllerFactory!
 

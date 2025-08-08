@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutViewControllerTests: XCTestCase {
+final class AboutViewControllerTests: BaseTestCase {
 
     private var window: UIWindow!
     private var sut: AboutViewController!

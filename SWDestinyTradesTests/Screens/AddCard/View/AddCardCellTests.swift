@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardCellTests: XCTestCase {
+final class AddCardCellTests: BaseTestCase {
 
     private var sut: AddCardCell!
 

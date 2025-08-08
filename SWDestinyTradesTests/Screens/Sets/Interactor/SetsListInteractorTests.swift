@@ -11,22 +11,24 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListInteractorTests: XCTestCase {
+final class SetsListInteractorTests: BaseTestCase {
 
     private var sut: SetsListInteractor!
     private var service: SWDestinyService!
     private var client: HttpClientMock!
 
-    override func setUpWithError() throws {
-        client = HttpClientMock()
-        service = SWDestinyService(client: client)
+    override func setUp() {
+        super.setUp()
+        client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
+        service = SWDestinyService()
         sut = SetsListInteractor(service: service)
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         client = nil
         service = nil
         sut = nil
+        super.tearDown()
     }
 
     func test_retrieve_sets_with_success() async throws {

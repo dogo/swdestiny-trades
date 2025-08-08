@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SWDTabBarViewControllerTests: XCTestCase {
+final class SWDTabBarViewControllerTests: BaseTestCase {
 
     private var sut: SWDTabBarViewController!
 

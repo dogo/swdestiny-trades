@@ -10,15 +10,15 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddToDeckViewControllerTests: XCTestCase {
+final class AddToDeckViewControllerTests: BaseTestCase {
 
     private var window: UIWindow!
     private var sut: AddToDeckViewController!
     private var view: AddToDeckViewSpy!
     private var presenter: AddToDeckPresenterSpy!
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
+    override func setUp() {
+        super.setUp()
         window = UIWindow(frame: .testDevice)
         view = AddToDeckViewSpy()
         presenter = AddToDeckPresenterSpy()
@@ -28,11 +28,11 @@ final class AddToDeckViewControllerTests: XCTestCase {
         window.showTestWindow(controller: navigationController)
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         window = nil
         sut = nil
         view = nil
-        try super.tearDownWithError()
+        super.tearDown()
     }
 
     func test_navigationTitle() throws {

@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class BodyParametersTests: XCTestCase {
+final class BodyParametersTests: BaseTestCase {
 
     func test_dataEncoded() {
         let bodyParameters: BodyParameters = [

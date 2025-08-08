@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardDetailPresenterTests: XCTestCase {
+final class CardDetailPresenterTests: BaseTestCase {
 
     private var sut: CardDetailPresenter!
     private var view: CardViewSpy!

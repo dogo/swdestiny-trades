@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class LoadingHUDTests: XCTestCase {
+final class LoadingHUDTests: BaseTestCase {
 
     private var keyWindow: UIWindow!
     private var controlller: UIViewController!

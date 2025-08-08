@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckBuilderDatasourceTests: XCTestCase {
+final class DeckBuilderDatasourceTests: BaseTestCase {
 
     private var tableView: UITableView!
     private var delegate: DeckBuilderPresenterSpy!

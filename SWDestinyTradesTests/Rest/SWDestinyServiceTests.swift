@@ -10,15 +10,15 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SWDestinyServiceTests: XCTestCase {
+final class SWDestinyServiceTests: BaseTestCase {
 
     private var sut: SWDestinyService!
     private var client: HttpClientMock!
 
     override func setUp() {
         super.setUp()
-        client = HttpClientMock()
-        sut = SWDestinyService(client: client)
+        sut = SWDestinyService()
+        client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
     }
 
     func testRetrieveSetListWithSuccess() async throws {

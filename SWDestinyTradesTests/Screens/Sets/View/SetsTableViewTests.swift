@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsTableViewTests: XCTestCase {
+final class SetsTableViewTests: BaseTestCase {
 
     private var sut: SetsTableView!
 

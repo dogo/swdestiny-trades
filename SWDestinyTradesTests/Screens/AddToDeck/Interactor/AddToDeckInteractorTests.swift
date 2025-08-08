@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddToDeckInteractorTests: XCTestCase {
+final class AddToDeckInteractorTests: BaseTestCase {
 
     private var sut: AddToDeckInteractor!
     private var service: SWDestinyService!
@@ -19,8 +19,8 @@ final class AddToDeckInteractorTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        client = HttpClientMock()
-        service = SWDestinyService(client: client)
+        client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
+        service = SWDestinyService()
         sut = AddToDeckInteractor(service: service)
     }
 

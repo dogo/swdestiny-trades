@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SearchListViewControllerTests: XCTestCase {
+final class SearchListViewControllerTests: BaseTestCase {
 
     private var sut: SearchListViewController!
     private var presenter: SearchLisPresenterSpy!

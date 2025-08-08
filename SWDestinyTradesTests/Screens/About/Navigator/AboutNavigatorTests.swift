@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AboutNavigatorTests: XCTestCase {
+final class AboutNavigatorTests: BaseTestCase {
 
     private var sut: AboutNavigator!
     private var controller: UIViewControllerMock!

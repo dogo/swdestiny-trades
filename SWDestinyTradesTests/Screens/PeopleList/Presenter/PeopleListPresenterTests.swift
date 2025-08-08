@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class PeopleListPresenterTests: XCTestCase {
+final class PeopleListPresenterTests: BaseTestCase {
 
     private var sut: PeopleListPresenter!
     private var navigationController: UINavigationControllerMock!

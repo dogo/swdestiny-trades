@@ -13,7 +13,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class BalloonMarkerViewTests: XCTestCase {
+final class BalloonMarkerViewTests: BaseTestCase {
 
     private var sut: BalloonMarkerView!
 

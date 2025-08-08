@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddCardTableDelegateTests: XCTestCase {
+final class AddCardTableDelegateTests: BaseTestCase {
 
     private var sut: AddCardTableDelegate!
     private var delegate: SearchDelegateSpy!

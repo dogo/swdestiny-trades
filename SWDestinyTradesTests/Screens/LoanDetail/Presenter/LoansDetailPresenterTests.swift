@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class LoansDetailPresenterTests: XCTestCase {
+final class LoansDetailPresenterTests: BaseTestCase {
 
     private var sut: LoansDetailPresenter!
     private var controller: LoansDetailViewControllerSpy!

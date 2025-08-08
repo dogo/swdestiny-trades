@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddToDeckCardDatasourceTests: XCTestCase {
+final class AddToDeckCardDatasourceTests: BaseTestCase {
 
     private var sut: AddToDeckCardDatasource!
     private var tableView: UITableView!

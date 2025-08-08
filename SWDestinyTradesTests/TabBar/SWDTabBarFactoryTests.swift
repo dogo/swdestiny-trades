@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SWDTabBarFactoryTests: XCTestCase {
+final class SWDTabBarFactoryTests: BaseTestCase {
 
     private var sut: SWDTabBarFactory!
 

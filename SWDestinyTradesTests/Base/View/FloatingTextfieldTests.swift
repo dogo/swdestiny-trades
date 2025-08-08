@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class FloatingTextfieldTests: XCTestCase {
+final class FloatingTextfieldTests: BaseTestCase {
 
     private var sut: FloatingTextfield!
     private var notificationCenter: NotificationCenterMock!

@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class UserCollectionTableViewTests: XCTestCase {
+final class UserCollectionTableViewTests: BaseTestCase {
 
     private var sut: UserCollectionTableView!
     private var delegate: PeopleListPresenterSpy!

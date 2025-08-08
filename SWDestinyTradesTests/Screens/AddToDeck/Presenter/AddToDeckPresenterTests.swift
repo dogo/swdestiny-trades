@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class AddToDeckPresenterTests: XCTestCase {
+final class AddToDeckPresenterTests: BaseTestCase {
 
     private var sut: AddToDeckPresenter!
     private var service: SWDestinyService!
@@ -25,8 +25,8 @@ final class AddToDeckPresenterTests: XCTestCase {
         super.setUp()
         let controller = UIViewControllerMock()
         database = RealmDatabaseHelper.createMemoryDatabase(identifier: #function)
-        client = HttpClientMock()
-        service = SWDestinyService(client: client)
+        client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
+        service = SWDestinyService()
         navigationController = UINavigationControllerMock(rootViewController: controller)
         view = AddToDeckViewSpy()
         navigator = AddCardNavigator(controller)

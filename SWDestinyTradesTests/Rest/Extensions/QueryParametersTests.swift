@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class QueryParametersTests: XCTestCase {
+final class QueryParametersTests: BaseTestCase {
 
     func test_items_Empty_Parameters() {
         let queryParameters: QueryParameters = [:]

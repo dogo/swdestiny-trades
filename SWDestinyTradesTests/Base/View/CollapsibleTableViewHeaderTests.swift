@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CollapsibleTableViewHeaderTests: XCTestCase {
+final class CollapsibleTableViewHeaderTests: BaseTestCase {
 
     func test_initialization() {
         let header = CollapsibleTableViewHeader(reuseIdentifier: "header")

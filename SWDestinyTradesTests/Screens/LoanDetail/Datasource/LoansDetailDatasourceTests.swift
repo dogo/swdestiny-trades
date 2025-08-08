@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class LoansDetailDatasourceTests: XCTestCase {
+final class LoansDetailDatasourceTests: BaseTestCase {
 
     private var sut: LoansDetailDatasource!
     private var delegate: LoansDetailsPresenterSpy!

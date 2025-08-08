@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckListDatasourceTests: XCTestCase {
+final class DeckListDatasourceTests: BaseTestCase {
 
     private var sut: DeckListDatasource!
     private var delegate: DeckListPresenterSpy!

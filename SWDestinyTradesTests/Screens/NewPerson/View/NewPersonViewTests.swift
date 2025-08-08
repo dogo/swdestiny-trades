@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class NewPersonViewTests: XCTestCase {
+final class NewPersonViewTests: BaseTestCase {
 
     private var sut: NewPersonView!
 

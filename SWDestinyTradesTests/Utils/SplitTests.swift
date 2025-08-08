@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SplitTests: XCTestCase {
+final class SplitTests: BaseTestCase {
 
     func test_cardsAlphabetically() {
         let cardList: [CardDTO] = [

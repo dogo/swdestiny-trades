@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class ColorListDatasourceTests: XCTestCase {
+final class ColorListDatasourceTests: BaseTestCase {
 
     private var tableView: UITableView!
     private var datasource: ColorListDatasource!

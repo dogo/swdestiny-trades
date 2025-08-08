@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckListPresenterTests: XCTestCase {
+final class DeckListPresenterTests: BaseTestCase {
 
     private var sut: DeckListPresenter!
     private var database: RealmDatabase?

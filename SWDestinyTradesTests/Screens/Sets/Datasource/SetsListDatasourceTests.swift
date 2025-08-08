@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetsListDatasourceTests: XCTestCase {
+final class SetsListDatasourceTests: BaseTestCase {
 
     private var sut: SetsListDatasource!
     private var tableView: UITableView!

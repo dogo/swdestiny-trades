@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class DeckListTableViewTests: XCTestCase {
+final class DeckListTableViewTests: BaseTestCase {
 
     private var sut: DeckListTableView!
 

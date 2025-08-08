@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class UserCollectionViewControllerTests: XCTestCase {
+final class UserCollectionViewControllerTests: BaseTestCase {
 
     private var sut: UserCollectionViewController!
     private var presenter: UserCollectionPresenterSpy!

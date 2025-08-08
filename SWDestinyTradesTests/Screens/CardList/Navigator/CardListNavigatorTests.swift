@@ -12,7 +12,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardListNavigatorTests: XCTestCase {
+final class CardListNavigatorTests: BaseTestCase {
 
     private var sut: CardListNavigator!
     private var navigationController: UINavigationControllerMock!

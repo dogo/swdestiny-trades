@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class PeopleListViewControllerTests: XCTestCase {
+final class PeopleListViewControllerTests: BaseTestCase {
 
     private var sut: PeopleListViewController!
     private var presenter: PeopleListPresenterSpy!
