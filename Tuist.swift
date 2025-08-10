@@ -1,3 +1,3 @@
 import ProjectDescription
 
-let tuist = Tuist(fullHandle: "AnyKey Entertainment/swdestiny-trades")
+let tuist = Tuist(fullHandle: "AnyKey/swdestiny-trades")
