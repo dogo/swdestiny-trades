@@ -75,11 +75,17 @@ final class NetworkingLogger {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
             let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
 
-            let prettyString = String(decoding: prettyData, as: UTF8.self)
-            prettyJSON(prettyString)
+            if let prettyString = String(data: prettyData, encoding: .utf8) {
+                prettyJSON(prettyString)
+            } else {
+                printTagged("JSON: <non-UTF8 data, \(prettyData.count) bytes>")
+            }
         } catch {
-            let string = String(decoding: data, as: UTF8.self)
-            printTagged(string)
+            if let string = String(data: data, encoding: .utf8) {
+                printTagged(string)
+            } else {
+                printTagged("<non-UTF8 response body, \(data.count) bytes>")
+            }
         }
     }
 
@@ -101,8 +107,11 @@ final class NetworkingLogger {
 
     private func log(body: Data?) {
         if let httpBody = body {
-            let bodyStr = String(decoding: httpBody, as: UTF8.self)
-            printTagged("Body: \(bodyStr)")
+            if let bodyStr = String(data: httpBody, encoding: .utf8) {
+                printTagged("Body: \(bodyStr)")
+            } else {
+                printTagged("Body: <non-UTF8 data, \(httpBody.count) bytes>")
+            }
         }
     }
 

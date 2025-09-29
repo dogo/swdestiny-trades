@@ -103,8 +103,6 @@ final class FloatingTextfield: UITextField {
     }
 
     override func drawText(in rect: CGRect) {
-        super.drawText(in: rect)
-
         if placeholder != nil, let textString = text, !textString.isEmpty {
             drawPlaceholderIfTextExistInRect(rect: rect)
         }
