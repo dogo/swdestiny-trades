@@ -8,10 +8,15 @@
 
 import Foundation
 import UIKit
+import XCTest
 
 @testable import SWDestinyTrades
 
 final class SearchListViewControllerSpy: UIViewController, SearchListViewControllerProtocol {
+
+    var updateExpectation: XCTestExpectation?
+    var stopLoadingExpectation: XCTestExpectation?
+    var errorExpectation: XCTestExpectation?
 
     private(set) var didCallSetNavigationTitle = [String]()
     func setNavigationTitle(_ title: String) {
@@ -26,15 +31,18 @@ final class SearchListViewControllerSpy: UIViewController, SearchListViewControl
     private(set) var didCallStopLoadingCount = 0
     func stopLoading() {
         didCallStopLoadingCount += 1
+        stopLoadingExpectation?.fulfill()
     }
 
     private(set) var didCallUpdateTableViewData = [CardDTO]()
     func updateTableViewData(_ cardList: [CardDTO]) {
         didCallUpdateTableViewData.append(contentsOf: cardList)
+        updateExpectation?.fulfill()
     }
 
     private(set) var didCallShowNetworkErrorMessageCount = 0
     func showNetworkErrorMessage() {
         didCallShowNetworkErrorMessageCount += 1
+        errorExpectation?.fulfill()
     }
 }

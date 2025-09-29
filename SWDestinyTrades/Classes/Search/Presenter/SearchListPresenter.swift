@@ -40,24 +40,20 @@ final class SearchListPresenter: SearchLisPresenterProtocol {
     }
 
     func search(query: String) {
-        controller?.startLoading()
-        Task { [weak self] in
+        Task { @MainActor [weak self] in
             guard let self else { return }
 
+            controller?.startLoading()
             do {
                 let allCards = try await interactor.search(query: query)
                 cards = allCards
 
-                await MainActor.run { [weak self] in
-                    self?.controller?.updateTableViewData(allCards)
-                    self?.controller?.stopLoading()
-                }
+                controller?.updateTableViewData(allCards)
+                controller?.stopLoading()
             } catch {
-                await MainActor.run { [weak self] in
-                    self?.controller?.showNetworkErrorMessage()
-                    self?.controller?.stopLoading()
-                    LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
-                }
+                controller?.showNetworkErrorMessage()
+                controller?.stopLoading()
+                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
             }
         }
     }

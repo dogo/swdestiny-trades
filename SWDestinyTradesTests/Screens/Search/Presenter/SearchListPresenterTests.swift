@@ -54,38 +54,42 @@ final class SearchListPresenterTests: BaseTestCase {
     func test_search_card_with_success() async {
         client.fileName = "card-list"
 
-        let expectation = XCTestExpectation(description: "Search cards expectation")
-
-        Task {
-            sut.search(query: "panda")
-            expectation.fulfill()
-        }
-
-        await fulfillment(of: [expectation])
-
+        let stopExp = expectation(description: "stopLoading fulfilled")
         await MainActor.run {
-            XCTAssertEqual(controller.didCallUpdateTableViewData.count, 22)
-            XCTAssertEqual(controller.didCallStopLoadingCount, 1)
+            controller.stopLoadingExpectation = stopExp
         }
+
+        sut.search(query: "panda")
+
+        await fulfillment(of: [stopExp], timeout: 3.0)
+
+        let updateCount = await MainActor.run { controller.didCallUpdateTableViewData.count }
+        let stopCount = await MainActor.run { controller.didCallStopLoadingCount }
+
+        XCTAssertEqual(updateCount, 22)
+        XCTAssertEqual(stopCount, 1)
     }
 
     func test_search_card_with_failure() async {
         client.fileName = "card-list"
         client.error = true
 
-        let expectation = XCTestExpectation(description: "Search cards expectation")
-
-        Task {
-            sut.search(query: "panda")
-            expectation.fulfill()
-        }
-
-        await fulfillment(of: [expectation])
-
+        let errorExp = expectation(description: "error message shown")
+        let stopExp = expectation(description: "stopLoading fulfilled")
         await MainActor.run {
-            XCTAssertEqual(controller.didCallShowNetworkErrorMessageCount, 1)
-            XCTAssertEqual(controller.didCallStopLoadingCount, 1)
+            controller.errorExpectation = errorExp
+            controller.stopLoadingExpectation = stopExp
         }
+
+        sut.search(query: "panda")
+
+        await fulfillment(of: [errorExp, stopExp], timeout: 3.0)
+
+        let errorCount = await MainActor.run { controller.didCallShowNetworkErrorMessageCount }
+        let stopCount = await MainActor.run { controller.didCallStopLoadingCount }
+
+        XCTAssertEqual(errorCount, 1)
+        XCTAssertEqual(stopCount, 1)
     }
 
     func test_navigateToCardDetail() {
