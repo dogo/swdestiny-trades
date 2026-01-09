@@ -21,27 +21,28 @@ final class CardListPresenter: CardListPresenterProtocol {
     private let database: DatabaseProtocol?
     private let navigator: CardListNavigator
     private let setDTO: SetDTO
+    private let taskProvider: TaskProvider
 
     init(controller: CardListViewControllerProtocol,
          interactor: CardListInteractorProtocol,
          database: DatabaseProtocol?,
          navigator: CardListNavigator,
-         setDTO: SetDTO) {
+         setDTO: SetDTO,
+         taskProvider: TaskProvider = TaskProviderImpl()) {
         self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
         self.setDTO = setDTO
+        self.taskProvider = taskProvider
     }
 
     func retrieveCardsList() {
         controller?.startLoading()
-        Task { [weak self] in
+        taskProvider.task(priority: nil) { [weak self] in
             do {
                 guard let self else { return }
-
                 let cardList = try await interactor.retrieveCards(setCode: setDTO.code.lowercased())
-
                 await MainActor.run { [weak self] in
                     self?.controller?.stopLoading()
                     self?.controller?.updateCardList(cardList)

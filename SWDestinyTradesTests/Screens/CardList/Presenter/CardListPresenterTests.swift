@@ -19,6 +19,7 @@ final class CardListPresenterTests: BaseTestCase {
     private var controller: CardListViewControllerSpy!
     private var navigator: CardListNavigator!
     private var navigationController: UINavigationControllerMock!
+    private var taskProviderMock: TaskProviderMock!
 
     override func setUp() {
         super.setUp()
@@ -28,11 +29,13 @@ final class CardListPresenterTests: BaseTestCase {
         service = SWDestinyService()
         navigationController = UINavigationControllerMock(rootViewController: controller)
         navigator = CardListNavigator(controller)
+        taskProviderMock = TaskProviderMock()
         sut = CardListPresenter(controller: controller,
                                 interactor: CardListInteractor(service: service),
                                 database: nil,
                                 navigator: navigator,
-                                setDTO: .stub())
+                                setDTO: .stub(),
+                                taskProvider: taskProviderMock)
     }
 
     override func tearDown() {
@@ -41,42 +44,24 @@ final class CardListPresenterTests: BaseTestCase {
         navigationController = nil
         navigator = nil
         sut = nil
+        taskProviderMock = nil
         super.tearDown()
     }
 
     func test_retrieveCardsList_success() async {
-        let expectation = XCTestExpectation(description: "Retrieve cards list expectation")
-
-        Task {
-            sut.retrieveCardsList()
-            expectation.fulfill()
-        }
-
-        await fulfillment(of: [expectation])
-
-        await MainActor.run {
-            XCTAssertEqual(controller.didCallStartLoadingCount, 1)
-            // XCTAssertEqual(controller.didCallUpdateCardList.count, 22)
-            // XCTAssertEqual(controller.didCallStopLoadingCount, 1)
-        }
+        sut.retrieveCardsList()
+        await taskProviderMock.waitForTasks()
+        XCTAssertEqual(controller.didCallStartLoadingCount, 1)
+        XCTAssertEqual(controller.didCallUpdateCardList.count, 22)
+        XCTAssertEqual(controller.didCallStopLoadingCount, 1)
     }
 
     func test_retrieveSets_failure() async {
         client.error = true
-
-        let expectation = XCTestExpectation(description: "Retrieve cards list expectation")
-
-        Task {
-            sut.retrieveCardsList()
-            expectation.fulfill()
-        }
-
-        await fulfillment(of: [expectation])
-
-        await MainActor.run {
-            XCTAssertEqual(controller.didCallShowNetworkErrorMessageCount, 1)
-            XCTAssertEqual(controller.didCallStopLoadingCount, 1)
-        }
+        sut.retrieveCardsList()
+        await taskProviderMock.waitForTasks()
+        XCTAssertEqual(controller.didCallShowNetworkErrorMessageCount, 1)
+        XCTAssertEqual(controller.didCallStopLoadingCount, 1)
     }
 
     func test_didSelectCard() {
