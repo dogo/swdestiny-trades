@@ -24,7 +24,7 @@ extension SWDestinyEndpoint: EndpointProtocol {
 
     /// The target's host `URL`.
     var host: String {
-        return "swdestinydb.com"
+        return "swdb.coruscant-initiative.org"
     }
 
     /// The path to be appended to `host` to form the full `URL`.

@@ -25,6 +25,7 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
     private var deck: DeckDTO?
     private let headUpDisplay: HeadUpDisplay
     private var cancelableTask: Task<Void, Error>?
+    private let taskProvider: TaskProvider
 
     private weak var controller: AddToDeckViewProtocol?
 
@@ -33,13 +34,15 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
          database: DatabaseProtocol?,
          navigator: AddCardNavigator,
          deck: DeckDTO?,
-         headUpDisplay: HeadUpDisplay = HeadUpDisplay()) {
+         headUpDisplay: HeadUpDisplay = HeadUpDisplay(),
+         taskProvider: TaskProvider = TaskProviderImpl()) {
         self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
         self.deck = deck
         self.headUpDisplay = headUpDisplay
+        self.taskProvider = taskProvider
     }
 
     // MARK: - Helpers
@@ -64,25 +67,28 @@ final class AddToDeckPresenter: AddToDeckPresenterProtocol {
 
 extension AddToDeckPresenter {
 
-    @MainActor
     func retrieveAllCards() {
         controller?.startLoading()
-        cancelableTask = Task { [weak self] in
+        cancelableTask = taskProvider.task(priority: nil) { [weak self] in
             guard let self else { return }
-
             defer {
-                controller?.stopLoading()
+                Task { @MainActor in
+                    self.controller?.stopLoading()
+                }
             }
-
             do {
                 let allCards = try await interactor.fetchAllCards()
-                controller?.updateSearchList(allCards)
-                cards = allCards
+                await MainActor.run {
+                    self.controller?.updateSearchList(allCards)
+                    self.cards = allCards
+                }
             } catch APIError.requestCancelled {
                 // do nothing
             } catch {
-                ToastMessages.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
+                await MainActor.run {
+                    ToastMessages.showNetworkErrorMessage()
+                    LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
+                }
             }
         }
     }

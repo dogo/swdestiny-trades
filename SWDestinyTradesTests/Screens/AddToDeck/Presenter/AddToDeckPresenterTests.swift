@@ -20,6 +20,7 @@ final class AddToDeckPresenterTests: BaseTestCase {
     private var navigator: AddCardNavigator!
     private var navigationController: UINavigationControllerMock!
     private var database: RealmDatabase?
+    private var taskProviderMock: TaskProviderMock!
 
     override func setUp() {
         super.setUp()
@@ -30,11 +31,13 @@ final class AddToDeckPresenterTests: BaseTestCase {
         navigationController = UINavigationControllerMock(rootViewController: controller)
         view = AddToDeckViewSpy()
         navigator = AddCardNavigator(controller)
+        taskProviderMock = TaskProviderMock()
         sut = AddToDeckPresenter(controller: view,
                                  interactor: AddToDeckInteractor(service: service),
                                  database: database,
                                  navigator: navigator,
-                                 deck: .stub())
+                                 deck: .stub(),
+                                 taskProvider: taskProviderMock)
     }
 
     override func tearDown() {
@@ -42,36 +45,28 @@ final class AddToDeckPresenterTests: BaseTestCase {
         service = nil
         navigationController = nil
         sut = nil
+        taskProviderMock = nil
         super.tearDown()
     }
 
     @MainActor
     func test_retrieveAllCards() async {
+        client.fileName = "card-list"
         sut.retrieveAllCards()
-
+        await taskProviderMock.waitForTasks()
         XCTAssertEqual(view.didCallStartLoading, 1)
-        // XCTAssertEqual(view.didCallStopLoading, 1)
-        // XCTAssertEqual(view.didCallUpdateSearchList.count, 1)
+        XCTAssertEqual(view.didCallStopLoading, 1)
+        XCTAssertEqual(view.didCallUpdateSearchList.count, 22)
     }
 
     @MainActor
     func test_retrieveAllCards_failing() async {
         client.error = true
-
-        let expectation = XCTestExpectation(description: "Retrieve all cards expectation")
-
-        Task {
-            sut.retrieveAllCards()
-            expectation.fulfill()
-        }
-
-        await fulfillment(of: [expectation])
-
-        await MainActor.run {
-            XCTAssertEqual(view.didCallStartLoading, 1)
-            XCTAssertEqual(view.didCallStopLoading, 1)
-            // XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
-        }
+        sut.retrieveAllCards()
+        await taskProviderMock.waitForTasks()
+        XCTAssertEqual(view.didCallStartLoading, 1)
+        XCTAssertEqual(view.didCallStopLoading, 1)
+        // XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
     }
 
     func test_insert_card_into_deck_database_successfuly() {

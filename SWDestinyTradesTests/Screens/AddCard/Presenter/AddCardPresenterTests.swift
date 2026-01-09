@@ -19,6 +19,7 @@ final class AddCardPresenterTests: BaseTestCase {
     private var view: AddCardViewSpy!
     private var navigator: AddCardNavigator!
     private var navigationController: UINavigationControllerMock!
+    private var taskProviderMock: TaskProviderMock!
 
     override func setUp() {
         super.setUp()
@@ -29,6 +30,7 @@ final class AddCardPresenterTests: BaseTestCase {
         navigationController = UINavigationControllerMock(rootViewController: controller)
         view = AddCardViewSpy()
         navigator = AddCardNavigator(controller)
+        taskProviderMock = TaskProviderMock()
     }
 
     override func tearDown() {
@@ -38,30 +40,29 @@ final class AddCardPresenterTests: BaseTestCase {
         view = nil
         navigator = nil
         sut = nil
+        taskProviderMock = nil
         super.tearDown()
     }
 
     @MainActor
     func test_fetchAllCards_successfully() async {
         sut = createSUT(type: .borrow, identifier: #function)
-
         sut.fetchAllCards()
-
+        await taskProviderMock.waitForTasks()
         XCTAssertEqual(view.didCallStartLoading, 1)
-        // XCTAssertEqual(view.didCallStopLoading, 1)
-        // XCTAssertEqual(view.didCallUpdateSearchList.count, 1)
+        XCTAssertEqual(view.didCallStopLoading, 1)
+        XCTAssertEqual(view.didCallUpdateSearchList.count, 22)
     }
 
     @MainActor
     func test_fetchAllCards_failing() async {
         sut = createSUT(type: .borrow, identifier: #function)
-
         client.error = true
         sut.fetchAllCards()
-
+        await taskProviderMock.waitForTasks()
         XCTAssertEqual(view.didCallStartLoading, 1)
-        // XCTAssertEqual(view.didCallStopLoading, 1)
-        // XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
+        XCTAssertEqual(view.didCallStopLoading, 1)
+        XCTAssertEqual(view.didCallShowNetworkErrorMessage, 1)
     }
 
     func test_insert_card_into_lentMe_database_successfully() {
@@ -145,6 +146,7 @@ final class AddCardPresenterTests: BaseTestCase {
                                 interactor: AddCardInteractor(service: service),
                                 database: RealmDatabaseHelper.createMemoryDatabase(identifier: identifier),
                                 navigator: navigator,
-                                viewModel: .stub(person: person, userCollection: userCollection, type: type))
+                                viewModel: .stub(person: person, userCollection: userCollection, type: type),
+                                taskProvider: taskProviderMock)
     }
 }

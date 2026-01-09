@@ -22,6 +22,7 @@ final class AddCardPresenter: AddCardPresenterProtocol {
     private let navigator: AddCardNavigator
     private let viewModel: AddCardViewModel
     private let headUpDisplay: HeadUpDisplay
+    private let taskProvider: TaskProvider
 
     private weak var controller: AddCardViewProtocol?
     private var cards = [CardDTO]()
@@ -31,28 +32,33 @@ final class AddCardPresenter: AddCardPresenterProtocol {
          database: DatabaseProtocol?,
          navigator: AddCardNavigator,
          viewModel: AddCardViewModel,
-         headUpDisplay: HeadUpDisplay = HeadUpDisplay()) {
+         headUpDisplay: HeadUpDisplay = HeadUpDisplay(),
+         taskProvider: TaskProvider = TaskProviderImpl()) {
         self.controller = controller
         self.interactor = interactor
         self.database = database
         self.navigator = navigator
         self.viewModel = viewModel
         self.headUpDisplay = headUpDisplay
+        self.taskProvider = taskProvider
     }
 
-    @MainActor
     func fetchAllCards() {
         controller?.startLoading()
-        Task { [weak self] in
+        taskProvider.task(priority: nil) { [weak self] in
             do {
                 let allCards = try await self?.interactor.retrieveAllCards() ?? []
-                self?.controller?.stopLoading()
-                self?.controller?.updateSearchList(allCards)
-                self?.cards = allCards
+                await MainActor.run {
+                    self?.controller?.stopLoading()
+                    self?.controller?.updateSearchList(allCards)
+                    self?.cards = allCards
+                }
             } catch {
-                self?.controller?.stopLoading()
-                self?.controller?.showNetworkErrorMessage()
-                LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
+                await MainActor.run {
+                    self?.controller?.stopLoading()
+                    self?.controller?.showNetworkErrorMessage()
+                    LoggerManager.shared.log(event: .allCards, parameters: ["error": error.localizedDescription])
+                }
             }
         }
     }
