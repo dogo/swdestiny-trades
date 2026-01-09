@@ -163,7 +163,7 @@ final class HttpClientTests: BaseTestCase {
         } catch {
             if let apiError = error as? APIError, case let .valueNotFound(type, context) = apiError {
                 XCTAssertEqual(String(describing: type), String(describing: expectedType), "Expected type \(expectedType) for the value.")
-                XCTAssertTrue(context.contains("Cannot get unkeyed decoding container -- found null value instead"), "Unexpected context message: \(context)")
+                XCTAssertTrue(context.contains("Cannot get value of type String -- found null value instead"), "Unexpected context message: \(context)")
             } else {
                 XCTFail("Expected APIError.valueNotFound, but got \(error) instead.")
             }
