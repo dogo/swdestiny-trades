@@ -11,7 +11,9 @@ import Foundation
 final class LoggerManager: LoggerProtocol {
     static let shared: LoggerManager = {
         var manager = LoggerManager()
-        manager.loggers.append(FirebaseLogger())
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
+            manager.loggers.append(FirebaseLogger())
+        }
         manager.setup()
         return manager
     }()
