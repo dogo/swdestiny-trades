@@ -64,6 +64,23 @@ opt_in_rules:
  - vertical_whitespace_closing_braces
  - yoda_condition
 
+attributes:
+  attributes_with_arguments_always_on_line_above: false
+  always_on_same_line:
+    - "@State"
+    - "@Binding"
+    - "@Environment"
+    - "@EnvironmentObject"
+    - "@ObservedObject"
+    - "@StateObject"
+    - "@FocusState"
+  
+  always_on_line_above:
+    - "@available"
+    - "@MainActor"
+    - "@discardableResult"
+    - "@objc"    
+
 disabled_rules:
   - opening_brace
 

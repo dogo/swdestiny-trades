@@ -1,0 +1,74 @@
+//
+//  AppState.swift
+//  SWDestiny Trades
+//
+//  Created by Diogo Autilio on 11/01/26.
+//  Copyright © 2026 Diogo Autilio. All rights reserved.
+//
+
+import Combine
+import SwiftUI
+
+final class AppState: ObservableObject {
+    @Published var database: DatabaseProtocol?
+    @Published var isInitialized = false
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    let dependencyContainer = DependencyContainer.shared
+
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        setupInitialState()
+    }
+
+    func initialize() {
+        guard !isInitialized, !isLoading else { return }
+
+        isLoading = true
+        initializeDatabase()
+    }
+
+    private func setupInitialState() {
+        isLoading = false
+        isInitialized = false
+    }
+
+    private func initializeDatabase() {
+        do {
+            let database = try RealmDatabase()
+            RealmMigrations.performMigrations(with: database)
+            self.database = database
+            isInitialized = true
+            errorMessage = nil
+
+            dependencyContainer.register(type: DatabaseProtocol.self) {
+                database
+            }
+
+            registerServices()
+        } catch {
+            errorMessage = "Failed to initialize database: \(error.localizedDescription)"
+            isInitialized = false
+        }
+        isLoading = false
+    }
+
+    private func registerServices() {
+        dependencyContainer.register(type: HttpClientProtocol.self) {
+            HttpClient()
+        }
+
+        dependencyContainer.register(type: SWDestinyServiceProtocol.self) {
+            SWDestinyService()
+        }
+    }
+
+    func reset() {
+        database = nil
+        isInitialized = false
+        isLoading = false
+        errorMessage = nil
+    }
+}

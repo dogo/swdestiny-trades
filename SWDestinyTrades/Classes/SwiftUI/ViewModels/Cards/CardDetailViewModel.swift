@@ -1,0 +1,141 @@
+//
+//  CardDetailViewModel.swift
+//  SWDestiny Trades
+//
+//  Created by Diogo Autilio on 11/01/26.
+//  Copyright © 2026 Diogo Autilio. All rights reserved.
+//
+
+import Combine
+import ImageSlideshow
+import SwiftUI
+
+final class CardDetailViewModel: BaseViewModel {
+
+    @Published var cards: [CardDTO] = []
+    @Published var selectedCard: CardDTO
+    @Published var currentIndex: Int = 0
+    @Published var showingShareSheet = false
+    @Published var showingSuccessMessage = false
+    @Published var successMessage = ""
+
+    // Toast properties
+    @Published var showToast = false
+    @Published var toastTitle = ""
+    @Published var toastMessage = ""
+    @Published var toastType: ToastType = .info
+
+    private var database: DatabaseProtocol? {
+        dependencyContainer.resolve(type: DatabaseProtocol.self)
+    }
+
+    var imageInputs: [InputSource] {
+        return cards.compactMap { card in
+            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
+                return remoteSource
+            } else {
+                return ImageSource(image: Asset.icCardback.image)
+            }
+        }
+    }
+
+    var currentCard: CardDTO {
+        guard currentIndex < cards.count else { return selectedCard }
+        return cards[currentIndex]
+    }
+
+    var navigationTitle: String {
+        return currentCard.name
+    }
+
+    init(cards: [CardDTO], selectedCard: CardDTO, dependencyContainer: DependencyContainer = .shared) {
+        self.cards = cards
+        self.selectedCard = selectedCard
+        super.init(dependencyContainer: dependencyContainer)
+
+        if let index = cards.firstIndex(of: selectedCard) {
+            currentIndex = index
+        }
+    }
+
+    required init(dependencyContainer: DependencyContainer = .shared) {
+        cards = []
+        selectedCard = CardDTO()
+        super.init(dependencyContainer: dependencyContainer)
+    }
+
+    override func handleError(_ error: Error) {
+        DispatchQueue.main.async {
+            self.showToast = false
+
+            self.toastTitle = "Error"
+            self.toastMessage = error.localizedDescription
+            self.toastType = .error
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.showToast = true
+            }
+        }
+    }
+
+    func updateCurrentIndex(_ index: Int) {
+        guard index < cards.count else { return }
+        currentIndex = index
+    }
+
+    func addToCollection() {
+        let card = currentCard
+
+        guard let database else {
+            handleError(ViewModelError.databaseNotAvailable)
+            return
+        }
+
+        DispatchQueue.main.async {
+            do {
+                var userCollection: UserCollectionDTO?
+
+                try database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { results in
+                    if let existingCollection = results.first {
+                        userCollection = existingCollection
+                    } else {
+                        let newCollection = UserCollectionDTO()
+                        try? database.save(object: newCollection, completion: nil)
+                        userCollection = newCollection
+                    }
+                }
+
+                guard let user = userCollection else {
+                    self.handleError(ViewModelError.dataLoadingFailed("Failed to get user collection"))
+                    return
+                }
+
+                try database.update {
+                    let predicate = NSPredicate(format: "code == %@", card.code)
+                    if let index = user.myCollection.index(matching: predicate) {
+                        let existingCard = user.myCollection[index]
+                        existingCard.quantity += 1
+                    } else {
+                        user.myCollection.append(card)
+                    }
+                }
+
+                self.showToast = false
+
+                self.toastTitle = L10n.added
+                self.toastMessage = card.name
+                self.toastType = .success
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.showToast = true
+                }
+            } catch {
+                self.handleError(error)
+            }
+        }
+    }
+
+    func shareCard() {
+        showingShareSheet = true
+    }
+}

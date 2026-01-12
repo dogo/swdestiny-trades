@@ -34,7 +34,6 @@ internal enum Asset {
     internal static let largeIconTransparent = ImageAsset(name: "Logo/LargeIconTransparent")
   }
   internal enum NavigationBar {
-    internal static let icAbout = ImageAsset(name: "NavigationBar/ic_about")
     internal static let icAccount = ImageAsset(name: "NavigationBar/ic_account")
     internal static let icAddCollection = ImageAsset(name: "NavigationBar/ic_add_collection")
     internal static let icChart = ImageAsset(name: "NavigationBar/ic_chart")

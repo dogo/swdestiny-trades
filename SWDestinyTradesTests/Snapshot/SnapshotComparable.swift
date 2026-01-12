@@ -30,8 +30,9 @@ extension UIView: Snapshotable {
 }
 
 public extension FBSnapshotTestCase {
-
+    // swiftlint:disable function_parameter_count
     /// Validates a snapshot of the specified view or layer against a reference image.
+    ///
     /// - Parameters:
     ///   - instance: The view or layer to snapshot.
     ///   - isDeviceAgnostic: A Boolean value indicating whether the snapshot should account for device-specific traits such as device model, OS version, screen size, and screen scale. The default is `false`.
@@ -46,7 +47,6 @@ public extension FBSnapshotTestCase {
     ///   - identifier: An optional identifier to distinguish between multiple snapshots of the same view or layer. The default is `nil`.
     ///   - shouldIgnoreScale: A Boolean value indicating whether to ignore screen scale differences when comparing snapshots. The default is `false`.
     /// - Returns: `true` if the snapshot validation succeeds; otherwise, `false`.
-    // swiftlint:disable:next function_parameter_count
     static func validateSnapshot(_ instance: AnyObject,
                                  isDeviceAgnostic: Bool = false,
                                  usesDrawRect: Bool = false,
@@ -99,6 +99,8 @@ public extension FBSnapshotTestCase {
         }
         return true
     }
+
+    // swiftlint:enable function_parameter_count
 
     private static func attach(image: UIImage, named name: String) {
         XCTContext.runActivity(named: name) { activity in

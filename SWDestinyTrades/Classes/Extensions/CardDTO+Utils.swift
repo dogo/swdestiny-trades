@@ -6,11 +6,11 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 extension CardDTO {
-    func factionColor() -> UIColor {
-        let colorMapping: [String: UIColor] = [
+    func factionColor() -> Color {
+        let colorMapping: [String: Color] = [
             "red": ColorPalette.red,
             "yellow": ColorPalette.yellow,
             "blue": ColorPalette.blue,

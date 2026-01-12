@@ -35,7 +35,7 @@ platform :ios do
       html: true,
       show: true,
       use_bundle_exec: true,
-      ignore: ["SWDestiny Trades/Classes/Resources/*", "SWDestiny Trades/Classes/AppDelegate/main.swift", "Pods/*"],
+      ignore: ["SWDestiny Trades/Classes/Resources/*", "Pods/*"],
       output_directory: "CoverageReport",
       scheme: "SWDestiny-Trades",
       proj: "swdestiny-trades.xcodeproj",

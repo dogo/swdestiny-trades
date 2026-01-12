@@ -6,6 +6,7 @@
 //  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
+import SwiftUI
 import XCTest
 
 @testable import SWDestinyTrades
@@ -13,12 +14,12 @@ import XCTest
 final class CardDTOTests: BaseTestCase {
 
     func test_factionColor() {
-        let testCases: [(factionCode: String, expectedColor: UIColor)] = [
+        let testCases: [(factionCode: String, expectedColor: Color)] = [
             ("red", ColorPalette.red),
             ("yellow", ColorPalette.yellow),
             ("blue", ColorPalette.blue),
             ("gray", ColorPalette.gray),
-            ("unknown", UIColor.clear)
+            ("unknown", Color.clear)
         ]
 
         for testCase in testCases {

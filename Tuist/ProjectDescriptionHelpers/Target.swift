@@ -14,7 +14,7 @@ public extension Project {
                 destinations: [.iPhone, .iPad],
                 product: .app,
                 bundleId: "br.com.anykey.SWDestiny-Trades",
-                deploymentTargets: .iOS("15.0"),
+                deploymentTargets: .iOS("16.0"),
                 infoPlist: "SWDestinyTrades/Info.plist",
                 sources: ["SWDestinyTrades/Classes/**"],
                 resources: [
@@ -41,7 +41,7 @@ public extension Project {
                 destinations: [.iPhone, .iPad],
                 product: .unitTests,
                 bundleId: "br.com.anykey.SWDestiny-TradesTests",
-                deploymentTargets: .iOS("15.0"),
+                deploymentTargets: .iOS("16.0"),
                 infoPlist: "SWDestinyTradesTests/Info.plist",
                 sources: ["SWDestinyTradesTests/**"],
                 resources: [

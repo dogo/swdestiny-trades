@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol TaskProvider: Sendable {
+public protocol TaskProviderProtocol: Sendable {
     @discardableResult
     func task<Success: Sendable>(priority: TaskPriority?, operation: @escaping @Sendable () async -> Success) -> Task<Success, Never>
 
@@ -22,7 +22,7 @@ public protocol TaskProvider: Sendable {
     func detachedTask<Success: Sendable>(priority: TaskPriority?, operation: @escaping @Sendable () async throws -> Success) -> Task<Success, Error>
 }
 
-public struct TaskProviderImpl: TaskProvider {
+public struct TaskProvider: TaskProviderProtocol {
     public init() {}
 
     @discardableResult
