@@ -199,7 +199,7 @@ struct DeckRowView: View {
             Spacer()
 
             if isEditing {
-                Button(L10n.done1) {
+                Button(L10n.done) {
                     saveName()
                 }
                 .buttonStyle(.borderedProminent)
@@ -276,7 +276,7 @@ struct DeckRowView: View {
                 .buttonStyle(.borderedProminent)
         }
         .padding()
-        .navigationTitle(L10n.decks1)
+        .navigationTitle(L10n.decks)
     }
 }
 
@@ -290,6 +290,6 @@ struct DeckRowView: View {
                 .padding(.top)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationTitle(L10n.decks1)
+        .navigationTitle(L10n.decks)
     }
 }

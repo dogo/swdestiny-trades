@@ -260,7 +260,7 @@ struct FilterOptionsView: View {
 
                 Section("Cost Range") {
                     HStack {
-                        Text(L10n.minCost1)
+                        Text(L10n.minCost)
                         Spacer()
                         TextField("Min", value: $tempFilterOptions.minCost, format: .number)
                             .textFieldStyle(.roundedBorder)
@@ -268,7 +268,7 @@ struct FilterOptionsView: View {
                     }
 
                     HStack {
-                        Text(L10n.maxCost1)
+                        Text(L10n.maxCost)
                         Spacer()
                         TextField("Max", value: $tempFilterOptions.maxCost, format: .number)
                             .textFieldStyle(.roundedBorder)

@@ -83,7 +83,7 @@ struct NewPersonView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(L10n.done1) {
+                Button(L10n.done) {
                     viewModel.savePerson()
                 }
                 .disabled(!viewModel.isFormValid || viewModel.isLoading)
@@ -92,7 +92,7 @@ struct NewPersonView: View {
         .overlay(alignment: .top) {
             if viewModel.showSuccessToast {
                 ToastView(
-                    title: "Added",
+                    title: L10n.added,
                     message: viewModel.addedPersonName,
                     type: .success,
                     isPresented: $viewModel.showSuccessToast

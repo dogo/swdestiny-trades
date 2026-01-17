@@ -115,7 +115,7 @@ struct CardDetailViewWrapper: View {
 struct SearchViewWrapper: View {
     var body: some View {
         SearchView()
-            .navigationTitle(L10n.search1)
+            .navigationTitle(L10n.search)
             .navigationBarTitleDisplayMode(.large)
     }
 }
@@ -123,7 +123,7 @@ struct SearchViewWrapper: View {
 struct DeckListViewWrapper: View {
     var body: some View {
         DeckListView()
-            .navigationTitle(L10n.decks1)
+            .navigationTitle(L10n.decks)
             .navigationBarTitleDisplayMode(.large)
     }
 }
@@ -160,7 +160,7 @@ struct AddToDeckViewWrapper: View {
 struct NewPersonViewWrapper: View {
     var body: some View {
         NewPersonView()
-            .navigationTitle(L10n.newPerson1)
+            .navigationTitle(L10n.newPerson)
             .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -168,7 +168,7 @@ struct NewPersonViewWrapper: View {
 struct UserCollectionViewWrapper: View {
     var body: some View {
         UserCollectionView()
-            .navigationTitle(L10n.myCollection1)
+            .navigationTitle(L10n.myCollection)
             .navigationBarTitleDisplayMode(.large)
     }
 }
@@ -179,7 +179,7 @@ struct AddCardViewWrapper: View {
     var body: some View {
         let userCollection = getUserCollection()
         AddCardView(context: .collection(userCollection))
-            .navigationTitle(L10n.addCard1)
+            .navigationTitle(L10n.addCard)
             .navigationBarTitleDisplayMode(.inline)
     }
 

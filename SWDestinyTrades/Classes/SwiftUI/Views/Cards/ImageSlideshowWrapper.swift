@@ -102,7 +102,7 @@ struct FullScreenImageViewer: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(L10n.done1) {
+                    Button(L10n.done) {
                         isPresented = false
                     }
                 }
