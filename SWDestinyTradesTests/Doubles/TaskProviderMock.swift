@@ -52,7 +52,7 @@ public extension SynchronizedValue where Value == Int {
     }
 }
 
-public final class TaskProviderMock: TaskProvider, Sendable {
+public final class TaskProviderMock: TaskProviderProtocol, Sendable {
     public enum MethodCall: Equatable, Sendable {
         case task(priority: TaskPriority?)
         case detachedTask(priority: TaskPriority?)
