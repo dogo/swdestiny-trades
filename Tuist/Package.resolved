@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/danielgindi/Charts",
       "state" : {
-        "revision" : "0a229f8c914b0ec93798cee058cf75b339297513",
-        "version" : "5.0.0"
+        "revision" : "dd9c72e3d7e751e769971092a6bd72d39198ae63",
+        "version" : "5.1.0"
       }
     },
     {
@@ -163,15 +163,6 @@
       }
     },
     {
-      "identity" : "pkhud",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dogo/PKHUD",
-      "state" : {
-        "branch" : "fix/spm-resource",
-        "revision" : "c76d4ac8790608d49e946f87cfe9278770a670f9"
-      }
-    },
-    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
@@ -185,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "a5e87a39cffdcc591f3203c11cfca68100d0b9a6",
-        "version" : "13.26.0"
+        "revision" : "cccb3ca9e26ec452a29f2f0d4050d1e38b8a3d43",
+        "version" : "14.14.0"
       }
     },
     {
@@ -194,8 +185,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "eafdd3720a8cc750bdd38bf776082d2c8cf743fc",
-        "version" : "10.46.0"
+        "revision" : "1c105d34f25af7851c5a3ff146be006de247a6b4",
+        "version" : "10.54.6"
       }
     },
     {
@@ -208,30 +199,12 @@
       }
     },
     {
-      "identity" : "sketchkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dogo/SketchKit",
-      "state" : {
-        "revision" : "edbe488e7272aefc52d3f878a71f6e61e4bda6d1",
-        "version" : "2.0.0"
-      }
-    },
-    {
       "identity" : "swift-protobuf",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
         "revision" : "7dade5ea5ab0d05a2dd28f9cc6a6ea0d50588857",
         "version" : "1.25.0"
-      }
-    },
-    {
-      "identity" : "swiftmessages",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftKickMobile/SwiftMessages",
-      "state" : {
-        "revision" : "e2b1254a973dd954663ff7aa2d8b9abff8dc01da",
-        "version" : "10.0.0-beta2"
       }
     }
   ],

@@ -30,9 +30,7 @@ public extension Project {
                     .external(name: "FirebaseCrashlytics"),
                     .external(name: "ImageSlideshow"),
                     .external(name: "Kingfisher"),
-                    .external(name: "PKHUD"),
-                    .external(name: "SketchKit"),
-                    .external(name: "SwiftMessages"),
+                    .external(name: "Realm"),
                     .external(name: "RealmSwift")
                 ]
             ),
