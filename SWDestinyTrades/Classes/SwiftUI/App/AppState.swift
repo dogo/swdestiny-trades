@@ -36,23 +36,25 @@ final class AppState: ObservableObject {
     }
 
     private func initializeDatabase() {
-        do {
-            let database = try RealmDatabase()
-            RealmMigrations.performMigrations(with: database)
-            self.database = database
-            isInitialized = true
-            errorMessage = nil
+        Task { @MainActor in
+            do {
+                let database = try await RealmManager.create(configuration: .basic(url: nil))
+                RealmMigrations.performMigrations(with: database)
+                self.database = database
+                isInitialized = true
+                errorMessage = nil
 
-            dependencyContainer.register(type: DatabaseProtocol.self) {
-                database
+                dependencyContainer.register(type: DatabaseProtocol.self) {
+                    database
+                }
+
+                registerServices()
+            } catch {
+                errorMessage = "Failed to initialize database: \(error.localizedDescription)"
+                isInitialized = false
             }
-
-            registerServices()
-        } catch {
-            errorMessage = "Failed to initialize database: \(error.localizedDescription)"
-            isInitialized = false
+            isLoading = false
         }
-        isLoading = false
     }
 
     private func registerServices() {

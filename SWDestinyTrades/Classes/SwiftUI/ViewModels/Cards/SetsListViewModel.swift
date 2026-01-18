@@ -12,7 +12,6 @@ import SwiftUI
 @MainActor
 final class SetsListViewModel: ListViewModel<SetDTO> {
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""

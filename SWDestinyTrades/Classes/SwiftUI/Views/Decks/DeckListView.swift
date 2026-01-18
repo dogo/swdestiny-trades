@@ -114,7 +114,9 @@ struct DeckListView: View {
                 } onDelete: {
                     viewModel.prepareToDelete(deck)
                 } onRename: { newName in
-                    viewModel.renameDeck(deck, newName: newName)
+                    Task {
+                        await viewModel.renameDeck(deck, newName: newName)
+                    }
                 }
             }
         }
@@ -132,7 +134,9 @@ struct DeckListView: View {
     private var deleteConfirmationAlert: some View {
         Group {
             Button("Delete", role: .destructive) {
-                viewModel.confirmDelete()
+                Task {
+                    await viewModel.confirmDelete()
+                }
             }
             Button("Cancel", role: .cancel) {
                 viewModel.cancelDelete()

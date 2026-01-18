@@ -9,15 +9,10 @@
 import Foundation
 import RealmSwift
 
-// swiftlint:disable attributes
-class SetDTO: Object, Codable, Storable, Identifiable, @unchecked Sendable {
-    @objc dynamic var id = NSUUID().uuidString
-    @objc dynamic var name: String = ""
-    @objc dynamic var code: String = ""
-
-    override static func primaryKey() -> String? {
-        return "code"
-    }
+class SetDTO: Object, Codable, Storable, Identifiable {
+    @Persisted var id: String = UUID().uuidString
+    @Persisted var name: String = ""
+    @Persisted(primaryKey: true) var code: String = ""
 
     // MARK: - Codable
 
@@ -37,17 +32,4 @@ class SetDTO: Object, Codable, Storable, Identifiable, @unchecked Sendable {
         try container.encode(name, forKey: .name)
         try container.encode(code, forKey: .code)
     }
-
-    // MARK: - Hashable
-
-    override var hash: Int {
-        return code.hashValue
-    }
-
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? SetDTO else { return false }
-        return code == other.code
-    }
 }
-
-// swiftlint:enable attributes

@@ -10,6 +10,7 @@ import Combine
 import ImageSlideshow
 import SwiftUI
 
+@MainActor
 final class CardDetailViewModel: BaseViewModel {
 
     @Published var cards: [CardDTO] = []
@@ -18,8 +19,6 @@ final class CardDetailViewModel: BaseViewModel {
     @Published var showingShareSheet = false
     @Published var showingSuccessMessage = false
     @Published var successMessage = ""
-
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
@@ -65,16 +64,15 @@ final class CardDetailViewModel: BaseViewModel {
     }
 
     override func handleError(_ error: Error) {
-        DispatchQueue.main.async {
-            self.showToast = false
+        showToast = false
 
-            self.toastTitle = "Error"
-            self.toastMessage = error.localizedDescription
-            self.toastType = .error
+        toastTitle = "Error"
+        toastMessage = error.localizedDescription
+        toastType = .error
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.showToast = true
-            }
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+            showToast = true
         }
     }
 
@@ -83,7 +81,7 @@ final class CardDetailViewModel: BaseViewModel {
         currentIndex = index
     }
 
-    func addToCollection() {
+    func addToCollection() async {
         let card = currentCard
 
         guard let database else {
@@ -91,47 +89,45 @@ final class CardDetailViewModel: BaseViewModel {
             return
         }
 
-        DispatchQueue.main.async {
-            do {
-                var userCollection: UserCollectionDTO?
+        setLoading(true)
+        defer { setLoading(false) }
 
-                try database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { results in
-                    if let existingCollection = results.first {
-                        userCollection = existingCollection
-                    } else {
-                        let newCollection = UserCollectionDTO()
-                        try? database.save(object: newCollection, completion: nil)
-                        userCollection = newCollection
-                    }
-                }
+        do {
+            let results = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
 
-                guard let user = userCollection else {
-                    self.handleError(ViewModelError.dataLoadingFailed("Failed to get user collection"))
-                    return
-                }
-
-                try database.update {
-                    let predicate = NSPredicate(format: "code == %@", card.code)
-                    if let index = user.myCollection.index(matching: predicate) {
-                        let existingCard = user.myCollection[index]
-                        existingCard.quantity += 1
-                    } else {
-                        user.myCollection.append(card)
-                    }
-                }
-
-                self.showToast = false
-
-                self.toastTitle = L10n.added
-                self.toastMessage = card.name
-                self.toastType = .success
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.showToast = true
-                }
-            } catch {
-                self.handleError(error)
+            let userCollection: UserCollectionDTO = if let existingCollection = results.first {
+                existingCollection
+            } else {
+                try await database.create(
+                    UserCollectionDTO.self,
+                    value: [:],
+                    update: .error
+                )
             }
+
+            try await database.update {
+                let predicate = NSPredicate(format: "code == %@", card.code)
+                if let index = userCollection.myCollection.index(matching: predicate) {
+                    let existingCard = userCollection.myCollection[index]
+                    existingCard.quantity += 1
+                } else {
+                    userCollection.myCollection.append(card)
+                }
+            }
+
+            showToast = false
+            toastTitle = L10n.added
+            toastMessage = card.name
+            toastType = .success
+
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+                showToast = true
+            }
+
+            setLoaded()
+        } catch {
+            handleError(error)
         }
     }
 

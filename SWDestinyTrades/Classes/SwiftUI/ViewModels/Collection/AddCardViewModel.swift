@@ -15,13 +15,12 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     @Published var selectedFilters: AddCardFilters = .init()
     @Published var availableSets: [SetDTO] = []
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
     @Published var toastType: ToastType = .info
 
-    let addCardContext: AddCardContext
+    var addCardContext: AddCardContext
 
     private var service: SWDestinyServiceProtocol? {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
@@ -42,30 +41,16 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             }
             .store(in: &cancellables)
 
+        Task { @MainActor in
+            await loadOrCreateUserCollection()
+        }
+
         loadAllCards()
         loadAvailableSets()
     }
 
     init(personId: String, type: AddCardType, dependencyContainer: DependencyContainer = .shared) {
-        let database = dependencyContainer.resolve(type: DatabaseProtocol.self)
-        var person: PersonDTO?
-
-        try? database.fetch(PersonDTO.self, predicate: nil, sorted: nil) { people in
-            person = people.first { $0.id == personId }
-        }
-
-        if let person {
-            switch type {
-            case .lent:
-                addCardContext = .lentToPerson(person)
-            case .borrow:
-                addCardContext = .borrowedFromPerson(person)
-            case .collection:
-                addCardContext = .collection(UserCollectionDTO())
-            }
-        } else {
-            addCardContext = .collection(UserCollectionDTO())
-        }
+        addCardContext = .collection(UserCollectionDTO())
 
         super.init(dependencyContainer: dependencyContainer)
 
@@ -76,6 +61,20 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             }
             .store(in: &cancellables)
 
+        Task { @MainActor in
+            let people = await database?.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+            if let person = people?.first(where: { $0.id == personId }) {
+                switch type {
+                case .lent:
+                    self.addCardContext = .lentToPerson(person)
+                case .borrow:
+                    self.addCardContext = .borrowedFromPerson(person)
+                case .collection:
+                    await self.loadOrCreateUserCollection()
+                }
+            }
+        }
+
         loadAllCards()
         loadAvailableSets()
     }
@@ -83,10 +82,32 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     required init(dependencyContainer: DependencyContainer = .shared) {
         addCardContext = .collection(UserCollectionDTO())
         super.init(dependencyContainer: dependencyContainer)
+
+        Task { @MainActor in
+            await loadOrCreateUserCollection()
+        }
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) {
         loadAllCards()
+    }
+
+    private func loadOrCreateUserCollection() async {
+        guard let database else { return }
+
+        let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
+
+        if let existingCollection = collections.first {
+            addCardContext = .collection(existingCollection)
+        } else {
+            let newCollection = UserCollectionDTO()
+            do {
+                _ = try await database.create(UserCollectionDTO.self, value: newCollection, update: .error)
+                addCardContext = .collection(newCollection)
+            } catch {
+                handleError(error)
+            }
+        }
     }
 
     func loadAllCards() {
@@ -122,20 +143,15 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         guard let database else { return }
 
         Task { @MainActor in
-            do {
-                try database.fetch(SetDTO.self, predicate: nil, sorted: nil) { [weak self] sets in
-                    let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
-                    let sortedData = setData.sorted { $0.name < $1.name }
+            let sets = await database.fetch(SetDTO.self, predicate: nil, sorted: nil)
+            let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
+            let sortedData = setData.sorted { $0.name < $1.name }
 
-                    let sortedSets = sortedData.compactMap { setData in
-                        sets.first { $0.id == setData.id }
-                    }
-
-                    self?.availableSets = sortedSets
-                }
-            } catch {
-                print("Failed to load sets for filtering: \(error)")
+            let sortedSets = sortedData.compactMap { setData in
+                sets.first { $0.id == setData.id }
             }
+
+            self.availableSets = sortedSets
         }
     }
 
@@ -213,11 +229,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
                 switch addCardContext {
                 case let .collection(userCollection):
-                    try addCardToCollection(card, userCollection: userCollection, database: database)
+                    try await addCardToCollection(card, userCollection: userCollection, database: database)
                 case let .lentToPerson(person):
-                    try addCardToLentMe(card, person: person, database: database)
+                    try await addCardToLentMe(card, person: person, database: database)
                 case let .borrowedFromPerson(person):
-                    try addCardToBorrowed(card, person: person, database: database)
+                    try await addCardToBorrowed(card, person: person, database: database)
                 }
 
                 self.showToast = false
@@ -246,22 +262,22 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    private func addCardToCollection(_ card: CardDTO, userCollection: UserCollectionDTO, database: DatabaseProtocol) throws {
+    private func addCardToCollection(_ card: CardDTO, userCollection: UserCollectionDTO, database: DatabaseProtocol) async throws {
         if userCollection.myCollection.contains(where: { $0.code == card.code }) {
             throw AddCardError.alreadyAdded
         }
 
-        try database.update {
+        try await database.update {
             userCollection.myCollection.append(card)
         }
     }
 
-    private func addCardToLentMe(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) throws {
+    private func addCardToLentMe(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) async throws {
         if person.lentMe.contains(where: { $0.code == card.code }) {
             throw AddCardError.alreadyAdded
         }
 
-        try database.update {
+        try await database.update {
             person.lentMe.append(card)
         }
 
@@ -269,12 +285,12 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
     }
 
-    private func addCardToBorrowed(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) throws {
+    private func addCardToBorrowed(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) async throws {
         if person.borrowed.contains(where: { $0.code == card.code }) {
             throw AddCardError.alreadyAdded
         }
 
-        try database.update {
+        try await database.update {
             person.borrowed.append(card)
         }
 

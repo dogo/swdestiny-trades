@@ -9,41 +9,40 @@
 import Foundation
 import RealmSwift
 
-// swiftlint:disable attributes
-class CardDTO: Object, Decodable, Storable, Identifiable, @unchecked Sendable {
-    let dieFaces = List<StringObject>()
-    @objc dynamic var id = NSUUID().uuidString
-    @objc dynamic var setCode: String = ""
-    @objc dynamic var setName: String = ""
-    @objc dynamic var typeCode: String = ""
-    @objc dynamic var typeName: String = ""
-    @objc dynamic var factionCode: String = ""
-    @objc dynamic var factionName: String = ""
-    @objc dynamic var affiliationCode: String = ""
-    @objc dynamic var affiliationName: String = ""
-    @objc dynamic var rarityCode: String = ""
-    @objc dynamic var rarityName: String = ""
-    @objc dynamic var position: Int = 0
-    @objc dynamic var code: String = ""
-    @objc dynamic var ttscardid: String = ""
-    @objc dynamic var name: String = ""
-    @objc dynamic var subtitle: String = ""
-    @objc dynamic var cost: Int = 0
-    @objc dynamic var health: Int = 0
-    @objc dynamic var points: String = ""
-    @objc dynamic var text: String = ""
-    @objc dynamic var deckLimit: Int = 0
-    @objc dynamic var flavor: String = ""
-    @objc dynamic var illustrator: String = ""
-    @objc dynamic var isUnique: Bool = false
-    @objc dynamic var hasDie: Bool = false
-    @objc dynamic var externalUrl: String = ""
-    @objc dynamic var imageUrl: String = ""
-    @objc dynamic var label: String = ""
-    @objc dynamic var cp: Int = 0 // swiftlint:disable:this identifier_name
+class CardDTO: Object, Decodable, Storable, Identifiable {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var dieFaces = List<StringObject>()
+    @Persisted var setCode: String = ""
+    @Persisted var setName: String = ""
+    @Persisted var typeCode: String = ""
+    @Persisted var typeName: String = ""
+    @Persisted var factionCode: String = ""
+    @Persisted var factionName: String = ""
+    @Persisted var affiliationCode: String = ""
+    @Persisted var affiliationName: String = ""
+    @Persisted var rarityCode: String = ""
+    @Persisted var rarityName: String = ""
+    @Persisted var position: Int = 0
+    @Persisted var code: String = ""
+    @Persisted var ttscardid: String = ""
+    @Persisted var name: String = ""
+    @Persisted var subtitle: String = ""
+    @Persisted var cost: Int = 0
+    @Persisted var health: Int = 0
+    @Persisted var points: String = ""
+    @Persisted var text: String = ""
+    @Persisted var deckLimit: Int = 0
+    @Persisted var flavor: String = ""
+    @Persisted var illustrator: String = ""
+    @Persisted var isUnique: Bool = false
+    @Persisted var hasDie: Bool = false
+    @Persisted var externalUrl: String = ""
+    @Persisted var imageUrl: String = ""
+    @Persisted var label: String = ""
+    @Persisted var cp: Int = 0 // swiftlint:disable:this identifier_name
     // Non API properties
-    @objc dynamic var quantity: Int = 1
-    @objc dynamic var isElite: Bool = false
+    @Persisted var quantity: Int = 1
+    @Persisted var isElite: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case dieFaces = "sides"
@@ -121,14 +120,8 @@ class CardDTO: Object, Decodable, Storable, Identifiable, @unchecked Sendable {
         }
         // End hack
     }
-
-    override class func primaryKey() -> String {
-        return "id"
-    }
 }
 
 class StringObject: Object, Storable {
-    @objc dynamic var value: String?
+    @Persisted var value: String?
 }
-
-// swiftlint:enable attributes

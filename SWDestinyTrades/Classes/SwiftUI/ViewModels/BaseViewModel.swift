@@ -7,7 +7,6 @@
 //
 
 import Combine
-import RealmSwift
 import SwiftUI
 
 @MainActor
@@ -68,7 +67,10 @@ class BaseViewModel: ObservableObject {
 class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
     @Published private(set) var items: [T] = []
     @Published var searchText = ""
-    @Published private(set) var filteredItems: [T] = []
+
+    var filteredItems: [T] {
+        filterItems(searchText: searchText)
+    }
 
     @Published private(set) var hasMoreItems = true
     @Published private(set) var currentPage = 0
@@ -76,30 +78,10 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        setupCombinedObserver()
-    }
-
-    private func setupCombinedObserver() {
-        Publishers.CombineLatest(
-            $items,
-            $searchText.debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
-        )
-        .receive(on: DispatchQueue.main)
-        .removeDuplicates { prev, curr in
-            prev.0 == curr.0 && prev.1 == curr.1
-        }
-        .sink { [weak self] _, searchText in
-            guard let self else { return }
-            performFiltering(searchText: searchText)
-        }
-        .store(in: &cancellables)
     }
 
     func performFiltering(searchText: String) {
-        let filtered = filterItems(searchText: searchText)
-        if filteredItems != filtered {
-            filteredItems = filtered
-        }
+        objectWillChange.send()
     }
 
     func filterItems(searchText: String) -> [T] {

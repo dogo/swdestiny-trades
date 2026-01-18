@@ -11,12 +11,8 @@ import Foundation
 @testable import SWDestinyTrades
 
 enum RealmDatabaseHelper {
-    static func createMemoryDatabase(identifier: String) -> RealmDatabase? {
-        return try? RealmDatabase(configuration: .inMemory(identifier: identifier))
-    }
-
     @MainActor
-    static func createMemoryRealmManager(identifier: String) -> RealmManager? {
-        return try? RealmManager(configuration: .inMemory(identifier: identifier))
+    static func createMemoryRealmManager(identifier: String) async -> RealmManager? {
+        return try? await RealmManager.create(configuration: .inMemory(identifier: identifier))
     }
 }

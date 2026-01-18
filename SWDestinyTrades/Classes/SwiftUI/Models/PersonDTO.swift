@@ -9,26 +9,10 @@
 import Foundation
 import RealmSwift
 
-// swiftlint:disable attributes
 class PersonDTO: Object, Storable, Identifiable {
-    @objc dynamic var id = NSUUID().uuidString
-    @objc dynamic var name = ""
-    @objc dynamic var lastName = ""
-    let lentMe = List<CardDTO>()
-    let borrowed = List<CardDTO>()
-
-    override class func primaryKey() -> String {
-        return "id"
-    }
-
-    override var hash: Int {
-        return id.hashValue
-    }
-
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? PersonDTO else { return false }
-        return id == other.id
-    }
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var name: String = ""
+    @Persisted var lastName: String = ""
+    @Persisted var lentMe = List<CardDTO>()
+    @Persisted var borrowed = List<CardDTO>()
 }
-
-// swiftlint:enable attributes

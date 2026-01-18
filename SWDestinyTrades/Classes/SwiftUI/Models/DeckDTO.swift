@@ -9,15 +9,8 @@
 import Foundation
 import RealmSwift
 
-// swiftlint:disable attributes
 class DeckDTO: Object, Storable, Identifiable {
-    @objc dynamic var id = NSUUID().uuidString
-    @objc dynamic var name = ""
-    let list = List<CardDTO>()
-
-    override class func primaryKey() -> String {
-        return "id"
-    }
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var name: String = ""
+    @Persisted var list = List<CardDTO>()
 }
-
-// swiftlint:enable attributes

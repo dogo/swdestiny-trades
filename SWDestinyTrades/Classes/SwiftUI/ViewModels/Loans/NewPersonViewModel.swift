@@ -19,7 +19,6 @@ final class NewPersonViewModel: BaseViewModel {
     @Published var addedPersonName = ""
     @Published var validationErrors: [ValidationError] = []
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
@@ -60,7 +59,7 @@ final class NewPersonViewModel: BaseViewModel {
         return validationErrors.isEmpty
     }
 
-    func savePerson() {
+    func savePerson() async {
         guard isFormValid else {
             return
         }
@@ -71,24 +70,22 @@ final class NewPersonViewModel: BaseViewModel {
         }
 
         setLoading(true)
+        defer { setLoading(false) }
 
         let person = PersonDTO()
         person.name = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
         person.lastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        Task { @MainActor in
-            do {
-                try database.save(object: person, completion: nil)
+        do {
+            try await database.save(object: person, update: .modified)
 
-                self.setLoading(false)
-                self.addedPersonName = "\(person.name) \(person.lastName)".trimmingCharacters(in: .whitespaces)
-                self.showSuccessToast = true
-                self.resetForm()
+            addedPersonName = "\(person.name) \(person.lastName)".trimmingCharacters(in: .whitespaces)
+            showSuccessToast = true
+            resetForm()
 
-                NotificationCenter.default.post(name: .personAdded, object: person)
-            } catch {
-                self.handleError(error)
-            }
+            NotificationCenter.default.post(name: .personAdded, object: person)
+        } catch {
+            handleError(error)
         }
     }
 

@@ -13,22 +13,19 @@ import SwiftUI
 final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
     @Published var sortOption: CollectionSortOption = .name
-
     @Published var filterOptions: CollectionFilterOptions = .init()
-
     @Published var selectedSet: SetDTO?
-
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
     @Published var toastType: ToastType = .info
+    @Published var availableSets: [SetDTO] = []
 
     private var database: DatabaseProtocol? {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    @Published var availableSets: [SetDTO] = []
+    private var observationTask: Task<Void, Never>?
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
@@ -49,16 +46,14 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     override func handleError(_ error: Error) {
         super.handleError(error)
 
-        DispatchQueue.main.async {
-            self.showToast = false
+        showToast = false
+        toastTitle = "Error"
+        toastMessage = error.localizedDescription
+        toastType = .error
 
-            self.toastTitle = "Error"
-            self.toastMessage = error.localizedDescription
-            self.toastType = .error
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.showToast = true
-            }
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+            showToast = true
         }
     }
 
@@ -81,16 +76,26 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
             return
         }
 
-        DispatchQueue.main.async {
-            do {
-                try database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { userCollections in
-                    let allCards = userCollections.flatMap(\.myCollection)
+        observationTask?.cancel()
 
-                    self.updateItems(Array(allCards))
-                    self.setLoaded()
+        observationTask = Task { @MainActor in
+            let collectionStream = database.observe(
+                UserCollectionDTO.self,
+                predicate: nil,
+                sorted: nil
+            )
+
+            for await userCollections in collectionStream {
+                guard !Task.isCancelled else { break }
+
+                if let userCollection = userCollections.first {
+                    let allCards = Array(userCollection.myCollection)
+                    updateItems(allCards)
+                } else {
+                    updateItems([])
                 }
-            } catch {
-                self.handleError(error)
+
+                setLoaded()
             }
         }
     }
@@ -98,22 +103,19 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     private func loadAvailableSets() {
         guard let database else { return }
 
-        DispatchQueue.main.async {
-            do {
-                try database.fetch(SetDTO.self, predicate: nil, sorted: nil) { sets in
-                    let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
-                    let sortedData = setData.sorted { $0.name < $1.name }
+        Task { @MainActor in
+            let sets = await database.fetch(
+                SetDTO.self,
+                predicate: nil,
+                sorted: Sorted(key: "name", ascending: true)
+            )
 
-                    let sortedSets = sortedData.compactMap { setData in
-                        sets.first { $0.id == setData.id }
-                    }
-
-                    self.availableSets = sortedSets
-                }
-            } catch {
-                print("Failed to load sets for filtering: \(error)")
-            }
+            availableSets = sets
         }
+    }
+
+    deinit {
+        observationTask?.cancel()
     }
 
     private func applySorting(to collection: [CardDTO]) -> [CardDTO] {
@@ -186,21 +188,26 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         selectedSet = set
     }
 
-    func updateCardQuantity(_ card: CardDTO, quantity: Int) {
+    func updateCardQuantity(_ card: CardDTO, quantity: Int) async {
         guard let database else {
             handleError(ViewModelError.databaseNotAvailable)
             return
         }
 
-        DispatchQueue.main.async {
-            do {
-                try database.update {
-                    card.quantity = max(0, quantity)
-                }
-                self.loadCollection()
-            } catch {
-                self.handleError(error)
+        do {
+            guard let managedCard = await database.fetchByKey(CardDTO.self, key: card.id) else {
+                handleError(ViewModelError.objectNotFound)
+                return
             }
+
+            let newQuantity = max(0, quantity)
+
+            try await database.update {
+                managedCard.quantity = newQuantity
+            }
+            objectWillChange.send()
+        } catch {
+            handleError(error)
         }
     }
 }

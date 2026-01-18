@@ -33,27 +33,30 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         Task { @MainActor in
             do {
                 try Task.checkCancellation()
-                try await self.loadDecksFromDatabase()
+                await loadDecksFromDatabase()
             } catch is CancellationError {
-                self.setLoaded()
+                setLoaded()
             } catch {
-                self.handleError(ConcurrencyError.from(error))
+                handleError(error)
             }
         }
     }
 
-    private func loadDecksFromDatabase() async throws {
+    private func loadDecksFromDatabase() async {
         guard let database else {
             handleError(ViewModelError.databaseNotAvailable)
             return
         }
 
-        try Task.checkCancellation()
-        _ = try database.fetch(DeckDTO.self, predicate: nil, sorted: nil) { fetchedDecks in
-            self.updateItems(fetchedDecks)
-            self.applySorting()
-            self.setLoaded()
-        }
+        let fetchedDecks = await database.fetch(
+            DeckDTO.self,
+            predicate: nil,
+            sorted: Sorted(key: "name", ascending: true)
+        )
+
+        updateItems(fetchedDecks)
+        applySorting()
+        setLoaded()
     }
 
     private func applySorting() {
@@ -61,20 +64,15 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
     }
 
     private func filterDecks() -> [DeckDTO] {
-        let deckData = items.threadSafeMap { $0.toThreadSafe() }
-        var filteredData = deckData
+        var filtered = items
 
         if !searchText.isEmpty {
-            filteredData = filteredData.filter { deck in
+            filtered = filtered.filter { deck in
                 deck.name.localizedCaseInsensitiveContains(searchText)
             }
         }
 
-        let filteredDecks = filteredData.compactMap { deckData in
-            items.first { $0.id == deckData.id }
-        }
-
-        return filteredDecks
+        return filtered
     }
 
     override func filterItems(searchText: String) -> [DeckDTO] {
@@ -86,36 +84,21 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         showingDeleteConfirmation = true
     }
 
-    func confirmDelete() {
+    func confirmDelete() async {
         guard let deck = deckToDelete,
               let database else {
             return
         }
 
-        let deckData = deck.toThreadSafe()
+        do {
+            try await database.delete(object: deck)
 
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
+            deckToDelete = nil
+            showingDeleteConfirmation = false
 
-                let itemsData = self.items.threadSafeMap { $0.toThreadSafe() }
-
-                try database.delete(object: deck)
-
-                let filteredData = itemsData.filter { $0.id != deckData.id }
-
-                let newItems = filteredData.compactMap { deckData in
-                    self.items.first { $0.id == deckData.id }
-                }
-
-                self.updateItems(newItems)
-                self.deckToDelete = nil
-                self.showingDeleteConfirmation = false
-            } catch is CancellationError {
-                return
-            } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
-            }
+            await loadDecksFromDatabase()
+        } catch {
+            handleError(error)
         }
     }
 
@@ -124,7 +107,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         showingDeleteConfirmation = false
     }
 
-    func renameDeck(_ deck: DeckDTO, newName: String) {
+    func renameDeck(_ deck: DeckDTO, newName: String) async {
         guard let database else {
             handleError(ViewModelError.databaseNotAvailable)
             return
@@ -133,39 +116,14 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         let trimmedName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else { return }
 
-        let deckId = deck.id
-
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
-
-                try database.fetch(DeckDTO.self, predicate: NSPredicate(format: "id == %@", deckId), sorted: nil) { fetchedDecks in
-                    guard let deckToUpdate = fetchedDecks.first else { return }
-
-                    do {
-                        try database.update {
-                            deckToUpdate.name = trimmedName
-                        }
-
-                        Task { @MainActor in
-                            do {
-                                try Task.checkCancellation()
-                                try await self.loadDecksFromDatabase()
-                            } catch is CancellationError {
-                                return
-                            } catch {
-                                self.handleError(ConcurrencyError.from(error))
-                            }
-                        }
-                    } catch {
-                        self.handleError(ConcurrencyError.realmAccessError(error))
-                    }
-                }
-            } catch is CancellationError {
-                return
-            } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
+        do {
+            try await database.update {
+                deck.name = trimmedName
             }
+
+            await loadDecksFromDatabase()
+        } catch {
+            handleError(error)
         }
     }
 }

@@ -20,7 +20,6 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     @Published var showingDeleteConfirmation = false
     @Published var personToDelete: PersonDTO?
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
@@ -66,16 +65,11 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
             return
         }
 
-        DispatchQueue.main.async {
-            do {
-                try database.fetch(PersonDTO.self, predicate: nil, sorted: nil) { people in
-                    let peopleArray = Array(people)
-                    self.updateItems(peopleArray)
-                    self.setLoaded()
-                }
-            } catch {
-                self.handleError(error)
-            }
+        Task { @MainActor in
+            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+            let peopleArray = Array(people)
+            self.updateItems(peopleArray)
+            self.setLoaded()
         }
     }
 
@@ -118,11 +112,11 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
         let personData = person.toThreadSafe()
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             do {
                 let itemsData = self.items.threadSafeMap { $0.toThreadSafe() }
 
-                try database.delete(object: person)
+                try await database.delete(object: person)
 
                 let filteredData = itemsData.filter { $0.id != personData.id }
 
@@ -148,11 +142,11 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
         let personData = person.toThreadSafe()
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
             do {
                 let itemsData = self.items.threadSafeMap { $0.toThreadSafe() }
 
-                try database.delete(object: person)
+                try await database.delete(object: person)
 
                 let filteredData = itemsData.filter { $0.id != personData.id }
 

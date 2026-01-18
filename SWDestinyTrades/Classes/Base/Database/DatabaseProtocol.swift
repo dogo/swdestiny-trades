@@ -15,18 +15,75 @@ struct Sorted {
     var ascending: Bool
 }
 
+/// Update policy for database operations
+/// Determines how conflicts are handled when saving objects
+enum UpdatePolicy {
+    /// Throw an error if an object with the same primary key already exists
+    case error
+    /// Update only properties that have changed
+    case modified
+    /// Update all properties, even if unchanged
+    case all
+}
+
+/// Protocol defining the database abstraction layer
 protocol DatabaseProtocol: AnyObject {
-    func create<T: Storable>(_ model: T.Type, completion: @escaping ((T) -> Void)) throws
 
-    func save(object: Storable, completion: (() -> Void)?) throws
+    /// Fetch objects with optional predicate and sorting (async)
+    /// - Parameters:
+    ///   - model: The type of object to fetch
+    ///   - predicate: Optional predicate to filter results
+    ///   - sorted: Optional sorting configuration
+    /// - Returns: Array of fetched objects
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) async -> [T]
 
-    func update(block: @escaping () -> Void) throws
+    /// Fetch a single object by primary key (async)
+    /// - Parameters:
+    ///   - model: The type of object to fetch
+    ///   - key: The primary key value
+    /// - Returns: The fetched object, or nil if not found
+    func fetchByKey<T: Storable>(_ model: T.Type, key: Any) async -> T?
 
-    func delete(object: Storable) throws
+    /// Create a new object (async)
+    /// - Parameters:
+    ///   - model: The type of object to create
+    ///   - value: The values to initialize the object with
+    ///   - update: The update policy to use if object already exists
+    /// - Returns: The created object
+    /// - Throws: Database errors if creation fails
+    func create<T: Storable>(_ model: T.Type, value: Any, update: UpdatePolicy) async throws -> T
 
-    func deleteAll(_ model: (some Storable).Type) throws
+    /// Save an object (async)
+    /// - Parameters:
+    ///   - object: The object to save
+    ///   - update: The update policy to use
+    /// - Throws: Database errors if save fails
+    func save(object: Storable, update: UpdatePolicy) async throws
 
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?, completion: ([T]) -> Void) throws
+    /// Update objects within a transaction (async)
+    /// - Parameter block: The block containing update operations
+    /// - Throws: Database errors if update fails
+    func update(_ block: @escaping () throws -> Void) async throws
 
-    func reset() throws
+    /// Delete an object (async)
+    /// - Parameter object: The object to delete
+    /// - Throws: Database errors if deletion fails
+    func delete(object: Storable) async throws
+
+    /// Delete all objects of a type (async)
+    /// - Parameter model: The type of objects to delete
+    /// - Throws: Database errors if deletion fails
+    func deleteAll(_ model: (some Storable).Type) async throws
+
+    /// Reset/delete all data (async)
+    /// - Throws: Database errors if reset fails
+    func reset() async throws
+
+    /// Observe changes to a query (returns AsyncStream)
+    /// - Parameters:
+    ///   - model: The type of object to observe
+    ///   - predicate: Optional predicate to filter results
+    ///   - sorted: Optional sorting configuration
+    /// - Returns: AsyncStream that emits arrays of objects when changes occur
+    func observe<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) -> AsyncStream<[T]>
 }

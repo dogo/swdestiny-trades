@@ -16,7 +16,6 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     @Published var hasSearched = false
     @Published var currentQuery = ""
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""

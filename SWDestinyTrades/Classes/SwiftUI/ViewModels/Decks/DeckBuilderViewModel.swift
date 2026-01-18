@@ -60,7 +60,9 @@ final class DeckBuilderViewModel: BaseViewModel {
     @objc
     private func handleDeckReload(_ notification: Notification) {
         if isNewDeck, !deck.list.isEmpty {
-            saveDeck()
+            Task {
+                await saveDeck()
+            }
         }
         loadDeckData()
     }
@@ -89,27 +91,21 @@ final class DeckBuilderViewModel: BaseViewModel {
             .sorted { $0.name < $1.name }
     }
 
-    func saveDeck() {
+    func saveDeck() async {
         guard let database else {
             handleError(ViewModelError.databaseNotAvailable)
             return
         }
 
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
-
-                if self.isNewDeck {
-                    try database.save(object: self.deck, completion: nil)
-                    self.isNewDeck = false
-                } else {
-                    try database.update {}
-                }
-            } catch is CancellationError {
-                return
-            } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
+        do {
+            if isNewDeck {
+                try await database.save(object: deck, update: .modified)
+                isNewDeck = false
+            } else {
+                try await database.update {}
             }
+        } catch {
+            handleError(ConcurrencyError.realmAccessError(error))
         }
     }
 
@@ -123,7 +119,7 @@ final class DeckBuilderViewModel: BaseViewModel {
             do {
                 try Task.checkCancellation()
 
-                try database.update {
+                try await database.update {
                     card.quantity = quantity
                 }
 
@@ -146,7 +142,7 @@ final class DeckBuilderViewModel: BaseViewModel {
             do {
                 try Task.checkCancellation()
 
-                try database.update {
+                try await database.update {
                     card.isElite = isElite
                 }
 
@@ -170,7 +166,7 @@ final class DeckBuilderViewModel: BaseViewModel {
                 try Task.checkCancellation()
 
                 if let index = self.deck.list.index(of: card) {
-                    try database.update {
+                    try await database.update {
                         self.deck.list.remove(at: index)
                     }
 

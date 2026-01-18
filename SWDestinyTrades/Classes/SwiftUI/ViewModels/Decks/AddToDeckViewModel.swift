@@ -15,7 +15,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     @Published private(set) var isLoadingFromRemote = false
     @Published private(set) var dataSource: DataSource = .remote
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
@@ -99,16 +98,15 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
                     return
                 }
 
-                try database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil) { [weak self] collections in
-                    guard let self, let collection = collections.first else {
-                        self?.setLoaded()
-                        return
-                    }
-
-                    let cards = Array(collection.myCollection)
-                    updateItems(cards)
-                    setLoaded()
+                let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
+                guard let collection = collections.first else {
+                    self.setLoaded()
+                    return
                 }
+
+                let cards = Array(collection.myCollection)
+                self.updateItems(cards)
+                self.setLoaded()
             } catch is CancellationError {
                 self.setLoaded()
             } catch {
@@ -144,29 +142,25 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
             return
         }
 
-        do {
-            try database.update { [weak self] in
-                self?.deck.list.append(cardCopy)
-            }
-
-            showToast = false
-            toastTitle = L10n.added
-            toastMessage = card.name
-            toastType = .success
-
-            Task { @MainActor in
-                do {
-                    try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                    self.showToast = true
-                } catch {
-                    // Ignore cancellation during toast delay
+        Task { @MainActor in
+            do {
+                try await database.update { [weak self] in
+                    self?.deck.list.append(cardCopy)
                 }
-            }
 
-            let deckDataDict: [String: DeckDTO] = ["deckDTO": deck]
-            NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
-        } catch {
-            handleError(ConcurrencyError.realmAccessError(error))
+                self.showToast = false
+                self.toastTitle = L10n.added
+                self.toastMessage = card.name
+                self.toastType = .success
+
+                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+                self.showToast = true
+
+                let deckDataDict: [String: DeckDTO] = ["deckDTO": self.deck]
+                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
+            } catch {
+                self.handleError(ConcurrencyError.realmAccessError(error))
+            }
         }
     }
 

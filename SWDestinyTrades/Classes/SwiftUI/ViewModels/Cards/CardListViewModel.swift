@@ -15,7 +15,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     @Published var selectedSet: SetDTO?
     @Published var filterOptions: CardFilterOptions = .init()
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
@@ -102,15 +101,14 @@ final class CardListViewModel: ListViewModel<CardDTO> {
             do {
                 try Task.checkCancellation()
 
-                try database.fetch(CardDTO.self, predicate: nil, sorted: nil) { [weak self] allCards in
-                    let setCards = allCards.filter { $0.setCode == setCode }
+                let allCards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
+                let setCards = allCards.filter { $0.setCode == setCode }
 
-                    self?.updateItems(setCards)
-                    self?.setLoaded()
+                self.updateItems(setCards)
+                self.setLoaded()
 
-                    if setCards.isEmpty {
-                        self?.fetchCardsFromAPI(for: set)
-                    }
+                if setCards.isEmpty {
+                    self.fetchCardsFromAPI(for: set)
                 }
             } catch is CancellationError {
                 self.setLoaded()

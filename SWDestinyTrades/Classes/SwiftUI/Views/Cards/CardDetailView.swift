@@ -61,7 +61,9 @@ struct CardDetailView: View {
                     }
 
                     Button {
-                        viewModel.addToCollection()
+                        Task {
+                            await viewModel.addToCollection()
+                        }
                     } label: {
                         Image(asset: Asset.NavigationBar.icAddCollection)
                     }

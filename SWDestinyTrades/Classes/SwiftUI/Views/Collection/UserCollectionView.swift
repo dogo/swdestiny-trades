@@ -102,7 +102,9 @@ struct UserCollectionView: View {
     @ViewBuilder private var collectionList: some View {
         List(viewModel.filteredItems, id: \.code) { card in
             CollectionCardRowView(card: card) { updatedCard, quantity in
-                viewModel.updateCardQuantity(updatedCard, quantity: quantity)
+                Task {
+                    await viewModel.updateCardQuantity(updatedCard, quantity: quantity)
+                }
             } onTap: {
                 navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
             }

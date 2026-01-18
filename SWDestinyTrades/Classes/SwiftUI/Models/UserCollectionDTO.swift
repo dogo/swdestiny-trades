@@ -9,16 +9,7 @@
 import Foundation
 import RealmSwift
 
-// swiftlint:disable attributes
 final class UserCollectionDTO: Object, Storable, Identifiable {
-
-    @objc dynamic var id = NSUUID().uuidString
-    let myCollection = List<CardDTO>()
-
-    // swiftlint:disable:next static_over_final_class
-    override class func primaryKey() -> String {
-        return "id"
-    }
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var myCollection = List<CardDTO>()
 }
-
-// swiftlint:enable attributes

@@ -25,6 +25,6 @@ let package = Package(
         .package(url: "https://github.com/zvonicek/ImageSlideshow", from: "1.9.1"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "12.7.0"),
         .package(url: "https://github.com/uber/ios-snapshot-test-case", from: "8.0.0"),
-        .package(url: "https://github.com/realm/realm-swift", exact: "10.54.6")
+        .package(url: "https://github.com/realm/realm-swift", from: "20.0.3")
     ]
 )

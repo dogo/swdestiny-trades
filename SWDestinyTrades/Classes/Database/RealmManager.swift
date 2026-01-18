@@ -9,23 +9,70 @@
 import Foundation
 import RealmSwift
 
-/// Modern async/await-based Realm manager that ensures Main Actor isolation
+// MARK: - RealmDatabaseError
+
+/// Errors that can occur during Realm database operations
+enum RealmDatabaseError: Error {
+    case invalidMemory(identifier: String?)
+    case objectCouldNotBeParsed
+}
+
+// MARK: - ConfigurationType
+
+/// Configuration types for Realm database
+enum ConfigurationType {
+    case basic(url: String?)
+    case inMemory(identifier: String?)
+
+    var associated: String? {
+        switch self {
+        case let .basic(url):
+            return url
+        case let .inMemory(identifier):
+            return identifier
+        }
+    }
+}
+
+// MARK: - RealmManagerError
+
+/// Errors that can occur during RealmManager operations
+enum RealmManagerError: Error, LocalizedError {
+    case initializationFailed(underlying: Error)
+    case writeOperationFailed(underlying: Error)
+    case objectNotFound(type: String, key: Any)
+    case invalidConfiguration
+
+    var errorDescription: String? {
+        switch self {
+        case let .initializationFailed(error):
+            return "Failed to initialize Realm: \(error.localizedDescription)"
+        case let .writeOperationFailed(error):
+            return "Write operation failed: \(error.localizedDescription)"
+        case let .objectNotFound(type, key):
+            return "Object of type \(type) with key \(key) not found"
+        case .invalidConfiguration:
+            return "Invalid Realm configuration"
+        }
+    }
+}
+
 @MainActor
-final class RealmManager {
+final class RealmManager: DatabaseProtocol {
     private let realm: Realm
 
-    /// Initialize with default configuration
-    convenience init() throws {
-        #if targetEnvironment(simulator)
-            let configuration = ConfigurationType.basic(url: "\(RealmManager.realHomeDirectory())/Desktop/default.realm")
-            try self.init(configuration: configuration)
-        #else
-            try self.init(configuration: .basic(url: nil))
-        #endif
+    // Internal access for migrations only
+    var realmInstance: Realm {
+        return realm
     }
 
-    /// Initialize with specific configuration
-    init(configuration: ConfigurationType = .basic(url: nil)) throws {
+    // MARK: - Initialization
+
+    /// This is the preferred way to create a RealmManager instance
+    /// - Parameter configuration: The configuration type (basic or inMemory)
+    /// - Returns: A new RealmManager instance
+    /// - Throws: RealmDatabaseError if initialization fails
+    static func create(configuration: ConfigurationType = .basic(url: nil)) async throws -> RealmManager {
         var rmConfig = Realm.Configuration()
 
         switch configuration {
@@ -44,19 +91,22 @@ final class RealmManager {
         }
 
         rmConfig.schemaVersion = RealmMigrations.schemaVersion
-        realm = try Realm(configuration: rmConfig)
+
+        // Use async Realm.open() for better actor isolation
+        let realm = try await Realm(configuration: rmConfig, actor: MainActor.shared)
+        return RealmManager(realm: realm)
     }
 
-    // MARK: - Async Fetch Methods
+    /// Private initializer - use create(configuration:) instead
+    private init(realm: Realm) {
+        self.realm = realm
+    }
 
-    /// Fetch objects of a specific type with optional predicate and sorting
-    /// - Parameters:
-    ///   - type: The type of object to fetch
-    ///   - predicate: Optional predicate to filter results
-    ///   - sorted: Optional sorting configuration
-    /// - Returns: Array of fetched objects converted to Sendable types
-    func fetch<T: Object>(_ type: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil) async -> [T] {
-        var objects = realm.objects(type)
+    /// Fetch objects with optional predicate and sorting (async)
+    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) async -> [T] {
+        guard let objectType = model as? Object.Type else { return [] }
+
+        var objects = realm.objects(objectType)
 
         if let predicate {
             objects = objects.filter(predicate)
@@ -66,82 +116,114 @@ final class RealmManager {
             objects = objects.sorted(byKeyPath: sorted.key, ascending: sorted.ascending)
         }
 
-        return Array(objects)
+        return objects.compactMap { $0 as? T }
     }
 
-    /// Fetch objects with a completion handler (for compatibility with existing code)
-    /// - Parameters:
-    ///   - type: The type of object to fetch
-    ///   - predicate: Optional predicate to filter results
-    ///   - sorted: Optional sorting configuration
-    ///   - completion: Completion handler with fetched results
-    func fetch<T: Object>(_ type: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil, completion: @escaping ([T]) -> Void) {
-        Task {
-            let results = await fetch(type, predicate: predicate, sorted: sorted)
-            completion(results)
+    /// Fetch a single object by primary key (async)
+    func fetchByKey<T: Storable>(_ model: T.Type, key: Any) async -> T? {
+        guard let objectType = model as? Object.Type else { return nil }
+        return realm.object(ofType: objectType, forPrimaryKey: key) as? T
+    }
+
+    /// Create a new object (async)
+    func create<T: Storable>(_ model: T.Type, value: Any, update: UpdatePolicy) async throws -> T {
+        guard let objectType = model as? Object.Type else {
+            throw RealmDatabaseError.objectCouldNotBeParsed
+        }
+
+        let realmPolicy = update.toRealmPolicy()
+
+        return try await write {
+            guard let result = self.realm.create(objectType, value: value, update: realmPolicy) as? T else {
+                throw RealmDatabaseError.objectCouldNotBeParsed
+            }
+            return result
         }
     }
 
-    /// Fetch a single object by primary key
-    /// - Parameters:
-    ///   - type: The type of object to fetch
-    ///   - key: The primary key value
-    /// - Returns: The object if found, nil otherwise
-    func fetchByKey<T: Object>(_ type: T.Type, key: Any) async -> T? {
-        return realm.object(ofType: type, forPrimaryKey: key)
-    }
+    /// Save an object to the database (async)
+    func save(object: Storable, update: UpdatePolicy) async throws {
+        guard let realmObject = object as? Object else {
+            throw RealmDatabaseError.objectCouldNotBeParsed
+        }
 
-    // MARK: - Async Write Methods
-
-    /// Create a new object
-    /// - Parameters:
-    ///   - type: The type of object to create
-    ///   - value: The value to initialize the object with
-    ///   - update: Update policy
-    /// - Returns: The created object
-    func create<T: Object>(_ type: T.Type, value: Any = [:], update: Realm.UpdatePolicy = .error) async throws -> T {
         try await write {
-            return self.realm.create(type, value: value, update: update)
+            self.realm.add(realmObject, update: update.toRealmPolicy())
         }
     }
 
-    /// Save an object to the database
-    /// - Parameters:
-    ///   - object: The object to save
-    ///   - update: Update policy
-    func save(_ object: some Object, update: Realm.UpdatePolicy = .modified) async throws {
-        try await write {
-            self.realm.add(object, update: update)
-        }
-    }
-
-    /// Update objects within a write transaction
-    /// - Parameter block: The update block to execute
+    /// Update objects within a write transaction (async)
     func update(_ block: @escaping () throws -> Void) async throws {
         try await write(block)
     }
 
-    /// Delete an object from the database
-    /// - Parameter object: The object to delete
-    func delete(_ object: some Object) async throws {
+    /// Delete an object from the database (async)
+    func delete(object: Storable) async throws {
+        guard let realmObject = object as? Object else {
+            throw RealmDatabaseError.objectCouldNotBeParsed
+        }
+
         try await write {
-            self.realm.delete(object)
+            self.realm.delete(realmObject)
         }
     }
 
-    /// Delete all objects of a specific type
-    /// - Parameter type: The type of objects to delete
-    func deleteAll(_ type: (some Object).Type) async throws {
+    /// Delete all objects of a specific type (async)
+    func deleteAll(_ model: (some Storable).Type) async throws {
+        guard let objectType = model as? Object.Type else {
+            throw RealmDatabaseError.objectCouldNotBeParsed
+        }
+
         try await write {
-            let objects = self.realm.objects(type)
+            let objects = self.realm.objects(objectType)
             self.realm.delete(objects)
         }
     }
 
-    /// Delete all objects in the database
+    /// Delete all objects in the database (async)
     func reset() async throws {
         try await write {
             self.realm.deleteAll()
+        }
+    }
+
+    /// Observe changes to a query (returns AsyncStream)
+    func observe<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) -> AsyncStream<[T]> {
+        guard let objectType = model as? Object.Type else {
+            return AsyncStream { continuation in
+                continuation.finish()
+            }
+        }
+
+        return AsyncStream { continuation in
+            var objects = realm.objects(objectType)
+
+            if let predicate {
+                objects = objects.filter(predicate)
+            }
+
+            if let sorted {
+                objects = objects.sorted(byKeyPath: sorted.key, ascending: sorted.ascending)
+            }
+
+            // Send initial value
+            continuation.yield(objects.compactMap { $0 as? T })
+
+            // Observe changes
+            let token = objects.observe { changes in
+                switch changes {
+                case let .initial(results):
+                    continuation.yield(results.compactMap { $0 as? T })
+                case let .update(results, _, _, _):
+                    continuation.yield(results.compactMap { $0 as? T })
+                case .error:
+                    continuation.finish()
+                }
+            }
+
+            continuation.onTermination = { _ in
+                token.invalidate()
+            }
         }
     }
 
@@ -159,14 +241,6 @@ final class RealmManager {
             }
         }
     }
-
-    // MARK: - Utility
-
-    private static func realHomeDirectory() -> String {
-        let homeDirectory = NSHomeDirectory()
-        let pathComponents = homeDirectory.components(separatedBy: "/")
-        return "/\(pathComponents[1])/\(pathComponents[2])"
-    }
 }
 
 // MARK: - Sendable Conversion Helpers
@@ -175,18 +249,34 @@ final class RealmManager {
 extension RealmManager {
     /// Fetch objects and convert them to Sendable types using a transform
     /// - Parameters:
-    ///   - type: The type of object to fetch
+    ///   - model: The type of object to fetch
     ///   - predicate: Optional predicate to filter results
     ///   - sorted: Optional sorting configuration
-    ///   - transform: Transform function to convert Realm objects to Sendable types
+    ///   - transform: Transform function to convert objects to Sendable types
     /// - Returns: Array of transformed Sendable objects
-    func fetchAndConvert<T: Object, U: Sendable>(
-        _ type: T.Type,
+    func fetchAndConvert<T: Storable, U: Sendable>(
+        _ model: T.Type,
         predicate: NSPredicate? = nil,
         sorted: Sorted? = nil,
         transform: @escaping (T) -> U
     ) async -> [U] {
-        let objects = await fetch(type, predicate: predicate, sorted: sorted)
+        let objects = await fetch(model, predicate: predicate, sorted: sorted)
         return objects.map(transform)
+    }
+}
+
+// MARK: - UpdatePolicy Extension
+
+extension UpdatePolicy {
+    /// Convert UpdatePolicy to Realm.UpdatePolicy
+    func toRealmPolicy() -> Realm.UpdatePolicy {
+        switch self {
+        case .error:
+            return .error
+        case .modified:
+            return .modified
+        case .all:
+            return .all
+        }
     }
 }

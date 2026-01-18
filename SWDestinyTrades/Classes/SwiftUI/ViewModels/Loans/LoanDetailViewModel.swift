@@ -18,7 +18,6 @@ final class LoanDetailViewModel: BaseViewModel {
     @Published var showingDeleteConfirmation = false
     @Published var cardToDelete: (card: CardDTO, type: AddCardType)?
 
-    // Toast properties
     @Published var showToast = false
     @Published var toastTitle = ""
     @Published var toastMessage = ""
@@ -53,15 +52,12 @@ final class LoanDetailViewModel: BaseViewModel {
             return
         }
 
-        do {
-            try database.fetch(PersonDTO.self, predicate: nil, sorted: nil) { [weak self] people in
-                if let foundPerson = people.first(where: { $0.id == personId }) {
-                    self?.person = foundPerson
-                    self?.loadLoanData()
-                }
+        Task { @MainActor in
+            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+            if let foundPerson = people.first(where: { $0.id == personId }) {
+                self.person = foundPerson
+                self.loadLoanData()
             }
-        } catch {
-            showErrorToast(error.localizedDescription)
         }
     }
 
@@ -91,7 +87,7 @@ final class LoanDetailViewModel: BaseViewModel {
 
         Task { @MainActor in
             do {
-                try database.update {
+                try await database.update {
                     card.quantity = newQuantity
                 }
                 self.loadLoanData()
@@ -114,7 +110,7 @@ final class LoanDetailViewModel: BaseViewModel {
 
         Task { @MainActor in
             do {
-                try database.update { [weak self] in
+                try await database.update { [weak self] in
                     switch cardToDelete.type {
                     case .lent:
                         if let index = self?.person.lentMe.firstIndex(of: cardToDelete.card) {

@@ -44,7 +44,9 @@ struct NewPersonView: View {
                         .focused($focusedField, equals: .lastName)
                         .onSubmit {
                             if viewModel.isFormValid {
-                                viewModel.savePerson()
+                                Task {
+                                    await viewModel.savePerson()
+                                }
                             }
                         }
 
@@ -64,7 +66,9 @@ struct NewPersonView: View {
 
             Section {
                 Button(action: {
-                    viewModel.savePerson()
+                    Task {
+                        await viewModel.savePerson()
+                    }
                 }, label: {
                     HStack {
                         if viewModel.isLoading {
@@ -84,7 +88,9 @@ struct NewPersonView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(L10n.done) {
-                    viewModel.savePerson()
+                    Task {
+                        await viewModel.savePerson()
+                    }
                 }
                 .disabled(!viewModel.isFormValid || viewModel.isLoading)
             }
