@@ -49,6 +49,8 @@ jobs:
         run: |
           tuist generate --no-open
         shell: bash
+        env:
+          TUIST_CLOUD_DISABLED: "1"
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
         run: |
