@@ -10,7 +10,9 @@ import PackageDescription
             "ImageSlideshow": .framework
         ],
         targetSettings: [
-            "iOSSnapshotTestCase": ["ENABLE_TESTING_SEARCH_PATHS": "YES"]
+            "iOSSnapshotTestCase": .settings(base: [
+                "ENABLE_TESTING_SEARCH_PATHS": "YES"
+            ])
         ]
     )
 #endif
