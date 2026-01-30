@@ -7,6 +7,8 @@ import ProjectDescription
 
 public extension Project {
 
+    static let deploymentTarget: DeploymentTargets = .iOS("18.0")
+
     static func targets() -> [Target] {
         return [
             .target(
@@ -14,7 +16,7 @@ public extension Project {
                 destinations: [.iPhone, .iPad],
                 product: .app,
                 bundleId: "br.com.anykey.SWDestiny-Trades",
-                deploymentTargets: .iOS("16.0"),
+                deploymentTargets: deploymentTarget,
                 infoPlist: "SWDestinyTrades/Info.plist",
                 sources: ["SWDestinyTrades/Classes/**"],
                 resources: [
@@ -39,7 +41,7 @@ public extension Project {
                 destinations: [.iPhone, .iPad],
                 product: .unitTests,
                 bundleId: "br.com.anykey.SWDestiny-TradesTests",
-                deploymentTargets: .iOS("16.0"),
+                deploymentTargets: deploymentTarget,
                 infoPlist: "SWDestinyTradesTests/Info.plist",
                 sources: ["SWDestinyTradesTests/**"],
                 resources: [

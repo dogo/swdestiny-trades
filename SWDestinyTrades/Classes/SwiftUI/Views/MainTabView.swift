@@ -16,53 +16,69 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $navigationCoordinator.selectedTab) {
-            NavigationStack(path: navigationCoordinator.path(for: .cards)) {
-                CardsRootView()
-                    .navigationDestination(for: AppDestination.self) { destination in
-                        NavigationDestinationBuilder.build(destination: destination)
-                    }
+            // Cards Tab
+            Tab(value: AppTab.cards) {
+                NavigationStack(path: navigationCoordinator.path(for: .cards)) {
+                    CardsRootView()
+                        .navigationDestination(for: AppDestination.self) { destination in
+                            NavigationDestinationBuilder.build(destination: destination)
+                        }
+                }
+            } label: {
+                Label {
+                    Text(L10n.cards)
+                } icon: {
+                    Asset.Tabbar.icCards.swiftUIImage
+                }
             }
-            .tabItem {
-                Image(asset: Asset.Tabbar.icCards)
-                Text(L10n.cards)
-            }
-            .tag(AppTab.cards)
 
-            NavigationStack(path: navigationCoordinator.path(for: .decks)) {
-                DecksRootView()
-                    .navigationDestination(for: AppDestination.self) { destination in
-                        NavigationDestinationBuilder.build(destination: destination)
-                    }
+            // Decks Tab
+            Tab(value: AppTab.decks) {
+                NavigationStack(path: navigationCoordinator.path(for: .decks)) {
+                    DecksRootView()
+                        .navigationDestination(for: AppDestination.self) { destination in
+                            NavigationDestinationBuilder.build(destination: destination)
+                        }
+                }
+            } label: {
+                Label {
+                    Text(L10n.decks)
+                } icon: {
+                    Asset.Tabbar.icDecks.swiftUIImage
+                }
             }
-            .tabItem {
-                Image(asset: Asset.Tabbar.icDecks)
-                Text(L10n.decks)
-            }
-            .tag(AppTab.decks)
 
-            NavigationStack(path: navigationCoordinator.path(for: .loans)) {
-                LoansRootView()
-                    .navigationDestination(for: AppDestination.self) { destination in
-                        NavigationDestinationBuilder.build(destination: destination)
-                    }
+            // Loans Tab
+            Tab(value: AppTab.loans) {
+                NavigationStack(path: navigationCoordinator.path(for: .loans)) {
+                    LoansRootView()
+                        .navigationDestination(for: AppDestination.self) { destination in
+                            NavigationDestinationBuilder.build(destination: destination)
+                        }
+                }
+            } label: {
+                Label {
+                    Text(L10n.loans)
+                } icon: {
+                    Asset.Tabbar.icLoans.swiftUIImage
+                }
             }
-            .tabItem {
-                Image(asset: Asset.Tabbar.icLoans)
-                Text(L10n.loans)
-            }
-            .tag(AppTab.loans)
 
-            NavigationStack(path: navigationCoordinator.path(for: .collection)) {
-                CollectionRootView()
-                    .navigationDestination(for: AppDestination.self) { destination in
-                        NavigationDestinationBuilder.build(destination: destination)
-                    }
+            // Collection Tab
+            Tab(value: AppTab.collection) {
+                NavigationStack(path: navigationCoordinator.path(for: .collection)) {
+                    CollectionRootView()
+                        .navigationDestination(for: AppDestination.self) { destination in
+                            NavigationDestinationBuilder.build(destination: destination)
+                        }
+                }
+            } label: {
+                Label {
+                    Text(L10n.collection)
+                } icon: {
+                    Asset.Tabbar.icCollection.swiftUIImage
+                }
             }
-            .tabItem {
-                Image(asset: Asset.Tabbar.icCollection)
-                Text(L10n.collection)
-            }
-            .tag(AppTab.collection)
         }
         .environmentObject(navigationCoordinator)
         .onAppear {
@@ -96,7 +112,7 @@ struct MainTabView: View {
     }
 }
 
-// MARK: - Optimized Root Views for Each Tab
+// MARK: - Root Views for Each Tab
 
 struct CardsRootView: View {
     var body: some View {
