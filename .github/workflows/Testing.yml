@@ -16,34 +16,42 @@ jobs:
         ]
         workspace: [
           swdestiny-trades.xcworkspace
-        ]        
+        ]
         destination: [
-          'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1'
+          'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2'
         ]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup Xcode version
-        uses: maxim-lobanov/setup-xcode@v1.6.0
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_$(cat .xcode-version).app
+
+      - name: Restore cache
+        id: cache-restore
+        uses: actions/cache/restore@v4
         with:
-          xcode-version: 26.1.1
+          path: Tuist/.build
+          key: ${{ runner.os }}-app-${{ hashFiles('Package.resolved') }}
 
       - name: Install Project Tools
         uses: jdx/mise-action@v3
         with:
           experimental: true
 
+      - name: Authenticate with Tuist
+        if: github.event.pull_request.head.repo.fork != true
+        run: tuist auth login
+
+      - name: Tuist Cache
+        if: github.event.pull_request.head.repo.fork != true
+        run: tuist setup cache
+
       - name: Fetch tuist dependencies
         run: |
           tuist install
         shell: bash
-
-      #- name: Tuist Cache
-      #  run: |
-      #    tuist cache 
-      #  shell: bash
 
       - name: Generate project with tuist
         run: |
@@ -57,13 +65,13 @@ jobs:
             -destination '${{ matrix.destination }}' \
             -resultBundlePath ./coverage/SwdUnitTests.xcresult \
             -enableCodeCoverage YES \
-            test | xcpretty && exit ${PIPESTATUS[0]}        
+            test | xcpretty && exit ${PIPESTATUS[0]}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
           swift_project: SWDestinyTrades
-          verbose: true        
+          verbose: true
 
       - name: Upload Snapshot Failures
         if: failure()
@@ -71,3 +79,10 @@ jobs:
         with:
           name: snapshot-failures
           path: SWDestinyTradesTests/FailureDiffs/
+
+      - name: Save cache
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: Tuist/.build
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
