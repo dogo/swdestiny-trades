@@ -40,13 +40,13 @@ jobs:
         with:
           experimental: true
 
-      - name: Authenticate with Tuist
-        if: github.event.pull_request.head.repo.fork != true
-        run: tuist auth login
+      # - name: Authenticate with Tuist
+      #   if: github.event.pull_request.head.repo.fork != true
+      #   run: tuist auth login
 
-      - name: Tuist Cache
-        if: github.event.pull_request.head.repo.fork != true
-        run: tuist setup cache
+      # - name: Tuist Cache
+      #   if: github.event.pull_request.head.repo.fork != true
+      #   run: tuist setup cache
 
       - name: Fetch tuist dependencies
         run: |
