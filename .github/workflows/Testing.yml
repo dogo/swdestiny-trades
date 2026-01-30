@@ -8,7 +8,7 @@ env:
 jobs:
   test:
     name: Testing SWDestiny Trades app
-    runs-on: macos-15
+    runs-on: macos-26
     strategy:
       matrix:
         scheme: [
@@ -48,10 +48,9 @@ jobs:
       #   if: github.event.pull_request.head.repo.fork != true
       #   run: tuist setup cache
 
-      - name: Fetch tuist dependencies
-        run: |
-          tuist install
-        shell: bash
+      - name: Install Tuist dependencies
+        if: steps.cache-restore.outputs.cache-matched-key == ''
+        run: tuist install
 
       - name: Generate project with tuist
         run: |
