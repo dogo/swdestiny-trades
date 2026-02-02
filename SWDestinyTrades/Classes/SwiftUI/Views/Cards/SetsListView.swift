@@ -108,7 +108,8 @@ struct SetRowView: View {
     var body: some View {
         Button(action: onTap) {
             HStack {
-                Image(uiImage: set.icon.withRenderingMode(.alwaysTemplate))
+                set.icon
+                    .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 40, height: 40)

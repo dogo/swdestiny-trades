@@ -6,31 +6,31 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 extension SetDTO {
 
-    var icon: UIImage {
-        let icons: [String: UIImage] = [
-            "aw": Asset.Sets.icAwakenings.image,
-            "sor": Asset.Sets.icSpiritOfRebellion.image,
-            "eaw": Asset.Sets.icEmpireAtWar.image,
-            "tpg": Asset.Sets.icTwoPlayerGame.image,
-            "leg": Asset.Sets.icLegacies.image,
-            "riv": Asset.Sets.icRivals.image,
-            "wotf": Asset.Sets.icWayOfTheForce.image,
-            "atg": Asset.Sets.icAcrossTheGalaxy.image,
-            "conv": Asset.Sets.icConvergence.image,
-            "aon": Asset.Sets.icAlliesOfNecessity.image,
-            "soh": Asset.Sets.icSparkOfHope.image,
-            "cm": Asset.Sets.icCovertMissions.image,
-            "tr": Asset.Sets.icTransformations.image,
-            "fa": Asset.Sets.icFalteringAllegiances.image,
-            "ec": Asset.Sets.icEternalConflict.image,
-            "rm": Asset.Sets.icRedemption.image,
-            "hs": Asset.Sets.icHighStakes.image,
-            "pw": Asset.Sets.icPartingWords.image
+    var icon: Image {
+        let icons: [String: Image] = [
+            "aw": Asset.Sets.icAwakenings.swiftUIImage,
+            "sor": Asset.Sets.icSpiritOfRebellion.swiftUIImage,
+            "eaw": Asset.Sets.icEmpireAtWar.swiftUIImage,
+            "tpg": Asset.Sets.icTwoPlayerGame.swiftUIImage,
+            "leg": Asset.Sets.icLegacies.swiftUIImage,
+            "riv": Asset.Sets.icRivals.swiftUIImage,
+            "wotf": Asset.Sets.icWayOfTheForce.swiftUIImage,
+            "atg": Asset.Sets.icAcrossTheGalaxy.swiftUIImage,
+            "conv": Asset.Sets.icConvergence.swiftUIImage,
+            "aon": Asset.Sets.icAlliesOfNecessity.swiftUIImage,
+            "soh": Asset.Sets.icSparkOfHope.swiftUIImage,
+            "cm": Asset.Sets.icCovertMissions.swiftUIImage,
+            "tr": Asset.Sets.icTransformations.swiftUIImage,
+            "fa": Asset.Sets.icFalteringAllegiances.swiftUIImage,
+            "ec": Asset.Sets.icEternalConflict.swiftUIImage,
+            "rm": Asset.Sets.icRedemption.swiftUIImage,
+            "hs": Asset.Sets.icHighStakes.swiftUIImage,
+            "pw": Asset.Sets.icPartingWords.swiftUIImage
         ]
-        return icons[code.lowercased()] ?? Asset.Sets.icNotFound.image
+        return icons[code.lowercased()] ?? Asset.Sets.icNotFound.swiftUIImage
     }
 }
