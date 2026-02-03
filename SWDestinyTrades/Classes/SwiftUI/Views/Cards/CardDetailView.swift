@@ -49,8 +49,6 @@ struct CardDetailView: View {
                     cardInfoSection
                 }
             }
-            .navigationTitle(viewModel.navigationTitle)
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {

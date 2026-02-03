@@ -97,8 +97,6 @@ struct CardListViewWrapper: View {
 
     var body: some View {
         CardListView(set: setDTO)
-            .navigationTitle(setDTO.name)
-            .navigationBarTitleDisplayMode(.large)
     }
 }
 
@@ -107,24 +105,18 @@ struct CardDetailViewWrapper: View {
 
     var body: some View {
         CardDetailView(cards: [cardDTO], selectedCard: cardDTO)
-            .navigationTitle(cardDTO.name)
-            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct SearchViewWrapper: View {
     var body: some View {
         SearchView()
-            .navigationTitle(L10n.search)
-            .navigationBarTitleDisplayMode(.large)
     }
 }
 
 struct DeckListViewWrapper: View {
     var body: some View {
         DeckListView()
-            .navigationTitle(L10n.decks)
-            .navigationBarTitleDisplayMode(.large)
     }
 }
 
@@ -133,8 +125,6 @@ struct DeckBuilderViewWrapper: View {
 
     var body: some View {
         DeckBuilderView(deck: deckDTO)
-            .navigationTitle(deckDTO?.name ?? "New Deck")
-            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -143,8 +133,6 @@ struct DeckGraphViewWrapper: View {
 
     var body: some View {
         DeckGraphView(deck: deckDTO)
-            .navigationTitle(L10n.deckGraph)
-            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -160,16 +148,12 @@ struct AddToDeckViewWrapper: View {
 struct NewPersonViewWrapper: View {
     var body: some View {
         NewPersonView()
-            .navigationTitle(L10n.newPerson)
-            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct UserCollectionViewWrapper: View {
     var body: some View {
         UserCollectionView()
-            .navigationTitle(L10n.myCollection)
-            .navigationBarTitleDisplayMode(.large)
     }
 }
 
@@ -179,8 +163,6 @@ struct AddCardViewWrapper: View {
     var body: some View {
         let userCollection = getUserCollection()
         AddCardView(context: .collection(userCollection))
-            .navigationTitle(L10n.addCard)
-            .navigationBarTitleDisplayMode(.inline)
     }
 
     private func getUserCollection() -> UserCollectionDTO {

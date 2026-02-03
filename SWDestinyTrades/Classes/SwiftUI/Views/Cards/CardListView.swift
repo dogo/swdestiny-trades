@@ -304,13 +304,25 @@ struct FilterOptionsView: View {
 }
 
 #Preview {
-    let sampleSet = SetDTO()
-    sampleSet.name = "Awakenings"
-    sampleSet.code = "AW"
+    @Previewable @State var container: DependencyContainer?
+    @Previewable @State var appState: AppState?
 
-    return NavigationView {
-        CardListView(set: sampleSet)
+    if let container, let appState {
+        NavigationView {
+            CardListView(set: SampleData.sets[0])
+        }
+        .environmentObject(NavigationCoordinator())
+        .environmentObject(appState)
+        .environment(\.dependencyContainer, container)
+    } else {
+        ProgressView()
+            .task {
+                do {
+                    container = try await PreviewHelper.createContainer()
+                    appState = try await PreviewHelper.createAppState()
+                } catch {
+                    print("Preview setup failed: \(error)")
+                }
+            }
     }
-    .environmentObject(NavigationCoordinator())
-    .environment(\.dependencyContainer, DependencyContainer.shared)
 }

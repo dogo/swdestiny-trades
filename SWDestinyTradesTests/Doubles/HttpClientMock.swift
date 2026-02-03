@@ -24,7 +24,13 @@ final class HttpClientMock: HttpClientProtocol {
             throw APIError.invalidData
         }
 
-        let decodable: T = JSONHelper.loadJSON(withFile: fileName)!
+        guard !fileName.isEmpty else {
+            throw APIError.invalidData
+        }
+
+        guard let decodable: T = JSONHelper.loadJSON(withFile: fileName) else {
+            throw APIError.invalidData
+        }
         return decodable
     }
 

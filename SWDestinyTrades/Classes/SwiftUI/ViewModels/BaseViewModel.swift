@@ -67,10 +67,7 @@ class BaseViewModel: ObservableObject {
 class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
     @Published private(set) var items: [T] = []
     @Published var searchText = ""
-
-    var filteredItems: [T] {
-        filterItems(searchText: searchText)
-    }
+    @Published private(set) var filteredItems: [T] = []
 
     @Published private(set) var hasMoreItems = true
     @Published private(set) var currentPage = 0
@@ -81,7 +78,8 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
     }
 
     func performFiltering(searchText: String) {
-        objectWillChange.send()
+        self.searchText = searchText
+        filteredItems = filterItems(searchText: searchText)
     }
 
     func filterItems(searchText: String) -> [T] {
@@ -113,6 +111,7 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
 
         objectWillChange.send()
         items = updatedItems
+        filteredItems = filterItems(searchText: searchText)
         if append {
             currentPage += 1
             hasMoreItems = newItems.count >= itemsPerPage

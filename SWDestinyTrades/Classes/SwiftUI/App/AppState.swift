@@ -63,7 +63,8 @@ final class AppState: ObservableObject {
         }
 
         dependencyContainer.register(type: SWDestinyServiceProtocol.self) {
-            SWDestinyService()
+            let httpClient: HttpClientProtocol = self.dependencyContainer.resolve(type: HttpClientProtocol.self)
+            return SWDestinyService(client: httpClient)
         }
     }
 

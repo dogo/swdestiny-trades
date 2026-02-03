@@ -17,24 +17,22 @@ struct DeckGraphView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if viewModel.isLoading {
-                    loadingView
-                } else if !viewModel.hasData {
-                    emptyStateView
-                } else {
-                    chartsScrollView
-                }
+        VStack {
+            if viewModel.isLoading {
+                loadingView
+            } else if !viewModel.hasData {
+                emptyStateView
+            } else {
+                chartsScrollView
             }
-            .navigationTitle(L10n.deckStatistics)
-            .navigationBarTitleDisplayMode(.inline)
-            .refreshable {
-                await refreshData()
-            }
-            .onAppear {
-                viewModel.generateGraphData()
-            }
+        }
+        .navigationTitle(L10n.deckStatistics)
+        .navigationBarTitleDisplayMode(.large)
+        .refreshable {
+            await refreshData()
+        }
+        .onAppear {
+            viewModel.generateGraphData()
         }
     }
 

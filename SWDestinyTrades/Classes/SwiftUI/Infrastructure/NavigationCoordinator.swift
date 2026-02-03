@@ -9,7 +9,7 @@
 import SwiftUI
 
 @MainActor
-final class NavigationCoordinator: ObservableObject {
+final class NavigationCoordinator: NavigationCoordinatorProtocol {
 
     @Published var path = NavigationPath()
 

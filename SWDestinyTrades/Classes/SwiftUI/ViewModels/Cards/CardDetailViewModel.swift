@@ -43,10 +43,6 @@ final class CardDetailViewModel: BaseViewModel {
         return cards[currentIndex]
     }
 
-    var navigationTitle: String {
-        return currentCard.name
-    }
-
     init(cards: [CardDTO], selectedCard: CardDTO, dependencyContainer: DependencyContainer = .shared) {
         self.cards = cards
         self.selectedCard = selectedCard

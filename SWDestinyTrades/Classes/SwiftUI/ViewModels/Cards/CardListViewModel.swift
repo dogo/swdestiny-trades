@@ -38,8 +38,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
                 self?.applyFilters()
             }
             .store(in: &cancellables)
-
-        loadCards()
     }
 
     private func applyFilters() {
@@ -48,7 +46,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
 
     override func handleError(_ error: Error) {
         showToast = false
-
         toastTitle = "Error"
 
         if ConcurrencyError.isCancellation(error) {
@@ -58,16 +55,7 @@ final class CardListViewModel: ListViewModel<CardDTO> {
 
         toastMessage = error.localizedDescription
         toastType = .error
-
-        Task { @MainActor in
-            do {
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                self.showToast = true
-            } catch {
-                // Ignore cancellation during toast delay
-            }
-        }
-
+        showToast = true
         setLoaded()
     }
 
@@ -76,49 +64,46 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) {
-        loadCards()
+        Task {
+            await loadCardsAsync()
+        }
     }
 
     func loadCards() {
+        Task {
+            await loadCardsAsync()
+        }
+    }
+
+    func loadCardsAsync() async {
         guard let set = selectedSet else {
             handleError(ViewModelError.dataLoadingFailed("No set selected"))
             return
         }
 
         setLoading(true)
-        loadCardsFromDatabase(for: set)
+        await loadCardsFromDatabase(for: set)
     }
 
-    private func loadCardsFromDatabase(for set: SetDTO) {
+    private func loadCardsFromDatabase(for set: SetDTO) async {
         guard let database else {
             handleError(ViewModelError.databaseNotAvailable)
             return
         }
 
         let setCode = set.code
+        let allCards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
+        let setCards = allCards.filter { $0.setCode == setCode }
 
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
+        updateItems(setCards)
+        setLoaded()
 
-                let allCards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
-                let setCards = allCards.filter { $0.setCode == setCode }
-
-                self.updateItems(setCards)
-                self.setLoaded()
-
-                if setCards.isEmpty {
-                    self.fetchCardsFromAPI(for: set)
-                }
-            } catch is CancellationError {
-                self.setLoaded()
-            } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
-            }
+        if setCards.isEmpty {
+            await fetchCardsFromAPI(for: set)
         }
     }
 
-    private func fetchCardsFromAPI(for set: SetDTO) {
+    private func fetchCardsFromAPI(for set: SetDTO) async {
         guard let service = swDestinyService else {
             handleError(ViewModelError.serviceNotAvailable)
             return
@@ -128,21 +113,12 @@ final class CardListViewModel: ListViewModel<CardDTO> {
 
         let setCode = set.code.lowercased()
 
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
-
-                let cards = try await service.retrieveSetCardList(setCode: setCode)
-
-                try Task.checkCancellation()
-
-                self.updateItems(cards)
-                self.setLoaded()
-            } catch is CancellationError {
-                self.setLoaded()
-            } catch {
-                self.handleError(error)
-            }
+        do {
+            let cards = try await service.retrieveSetCardList(setCode: setCode)
+            updateItems(cards)
+            setLoaded()
+        } catch {
+            handleError(error)
         }
     }
 

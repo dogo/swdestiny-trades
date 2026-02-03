@@ -19,31 +19,29 @@ struct DeckBuilderView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if viewModel.isLoading {
-                    loadingView
-                } else if viewModel.isDeckEmpty {
-                    emptyDeckView
-                } else {
-                    deckBuilderContent
-                }
+        VStack {
+            if viewModel.isLoading {
+                loadingView
+            } else if viewModel.isDeckEmpty {
+                emptyDeckView
+            } else {
+                deckBuilderContent
             }
-            .navigationTitle(viewModel.deck.name)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    addCardButton
-                    deckGraphButton
-                    shareButton
-                }
+        }
+        .navigationTitle(viewModel.deck.name)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                addCardButton
+                deckGraphButton
+                shareButton
             }
-            .sheet(isPresented: $viewModel.showingShareSheet) {
-                ShareSheet(items: [viewModel.shareText])
-            }
-            .onAppear {
-                viewModel.loadDeckData()
-            }
+        }
+        .sheet(isPresented: $viewModel.showingShareSheet) {
+            ShareSheet(items: [viewModel.shareText])
+        }
+        .onAppear {
+            viewModel.loadDeckData()
         }
     }
 
@@ -205,10 +203,13 @@ struct DeckSectionView: View {
                         onRemoveCard(section.cards[index])
                     }
                 }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         } header: {
             Button {
-                onToggleCollapse()
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    onToggleCollapse()
+                }
             } label: {
                 HStack {
                     Text(section.name)
@@ -221,9 +222,11 @@ struct DeckSectionView: View {
 
                     Spacer()
 
-                    Image(systemName: section.isCollapsed ? "chevron.right" : "chevron.down")
+                    Image(systemName: section.isCollapsed ? "chevron.up" : "chevron.down")
                         .foregroundColor(.secondary)
                         .font(.caption)
+                        .rotationEffect(.degrees(section.isCollapsed ? 0 : 0))
+                        .animation(.easeInOut(duration: 0.3), value: section.isCollapsed)
                 }
             }
             .buttonStyle(.plain)

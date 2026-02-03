@@ -182,7 +182,12 @@ final class DeckBuilderViewModel: BaseViewModel {
 
     func toggleSection(_ section: DeckSection) {
         if let index = deckSections.firstIndex(where: { $0.id == section.id }) {
-            deckSections[index].isCollapsed.toggle()
+            let updatedSection = deckSections[index]
+            updatedSection.isCollapsed.toggle()
+
+            var newSections = deckSections
+            newSections[index] = updatedSection
+            deckSections = newSections
         }
     }
 

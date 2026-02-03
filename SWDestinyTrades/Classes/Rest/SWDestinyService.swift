@@ -10,7 +10,11 @@ import Foundation
 
 final class SWDestinyService: SWDestinyServiceProtocol {
 
-    @Inject private var client: HttpClientProtocol
+    private let client: HttpClientProtocol
+
+    init(client: HttpClientProtocol) {
+        self.client = client
+    }
 
     func search(query: String) async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .search(query: query)

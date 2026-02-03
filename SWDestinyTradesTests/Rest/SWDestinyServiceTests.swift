@@ -17,8 +17,8 @@ final class SWDestinyServiceTests: BaseTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = SWDestinyService()
         client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
+        sut = SWDestinyService(client: client)
     }
 
     func testRetrieveSetListWithSuccess() async throws {
