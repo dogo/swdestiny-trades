@@ -9,16 +9,18 @@
 import Combine
 import SwiftUI
 
+@MainActor
+@Observable
 final class AddToDeckViewModel: ListViewModel<CardDTO> {
 
-    @Published private(set) var deck: DeckDTO
-    @Published private(set) var isLoadingFromRemote = false
-    @Published private(set) var dataSource: DataSource = .remote
+    private(set) var deck: DeckDTO
+    private(set) var isLoadingFromRemote = false
+    private(set) var dataSource: DataSource = .remote
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
     enum DataSource {
         case remote

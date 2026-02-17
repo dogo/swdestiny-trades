@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct DeckGraphView: View {
-    @StateObject private var viewModel: DeckGraphViewModel
+    @State private var viewModel: DeckGraphViewModel
     @Environment(\.dependencyContainer) private var dependencyContainer
 
     init(deck: DeckDTO, dependencyContainer: DependencyContainer = .shared) {
-        _viewModel = StateObject(wrappedValue: DeckGraphViewModel(deck: deck, dependencyContainer: dependencyContainer))
+        _viewModel = State(wrappedValue: DeckGraphViewModel(deck: deck, dependencyContainer: dependencyContainer))
     }
 
     var body: some View {
@@ -170,7 +170,7 @@ struct ChartCardView<Content: View>: View {
     sampleDeck.list.append(sampleCard1)
     sampleDeck.list.append(sampleCard2)
 
-    return NavigationView {
+    return NavigationStack {
         DeckGraphView(deck: sampleDeck)
             .environment(\.dependencyContainer, DependencyContainer.shared)
     }
@@ -180,7 +180,7 @@ struct ChartCardView<Content: View>: View {
     let emptyDeck = DeckDTO()
     emptyDeck.name = "Empty Deck"
 
-    return NavigationView {
+    return NavigationStack {
         DeckGraphView(deck: emptyDeck)
             .environment(\.dependencyContainer, DependencyContainer.shared)
     }

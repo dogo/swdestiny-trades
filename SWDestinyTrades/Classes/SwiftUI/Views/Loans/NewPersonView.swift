@@ -10,8 +10,8 @@ import SwiftUI
 
 struct NewPersonView: View {
 
-    @StateObject private var viewModel = NewPersonViewModel()
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel = NewPersonViewModel()
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusedField: FormField?
     @State private var showToast = false
@@ -123,8 +123,14 @@ struct NewPersonView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
+        }
+        .onChange(of: viewModel.firstName) { _, _ in
+            viewModel.validate()
+        }
+        .onChange(of: viewModel.lastName) { _, _ in
+            viewModel.validate()
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -138,12 +144,12 @@ struct NewPersonView: View {
 
 struct NewPersonView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             NewPersonView()
         }
         .previewDisplayName("New Person - Light")
 
-        NavigationView {
+        NavigationStack {
             NewPersonView()
         }
         .preferredColorScheme(.dark)

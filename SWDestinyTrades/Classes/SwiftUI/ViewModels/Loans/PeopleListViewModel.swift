@@ -15,15 +15,16 @@ extension Notification.Name {
 }
 
 @MainActor
+@Observable
 final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
-    @Published var showingDeleteConfirmation = false
-    @Published var personToDelete: PersonDTO?
+    var showingDeleteConfirmation = false
+    var personToDelete: PersonDTO?
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
     private var database: DatabaseProtocol? {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -31,7 +32,6 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        loadPeople()
     }
 
     override func handleError(_ error: Error) {

@@ -10,20 +10,20 @@ import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class SetsListViewModel: ListViewModel<SetDTO> {
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
-    private var swDestinyService: SWDestinyServiceProtocol? {
+    private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        loadItems()
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) {
@@ -32,11 +32,6 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
     }
 
     private func fetchSetsFromAPI() {
-        guard let service = swDestinyService else {
-            handleError(ViewModelError.serviceNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             do {
                 try Task.checkCancellation()
@@ -57,18 +52,8 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
 
     func refreshSets() async {
         setLoading(true)
-        guard let service = swDestinyService else {
-            handleError(ViewModelError.serviceNotAvailable)
-            return
-        }
-
         do {
-            try Task.checkCancellation()
-
             let sets = try await service.retrieveSetList()
-
-            try Task.checkCancellation()
-
             updateItems(sets)
             setLoaded()
         } catch is CancellationError {

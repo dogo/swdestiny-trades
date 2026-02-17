@@ -10,16 +10,16 @@ import SwiftUI
 
 struct LoanDetailView: View {
 
-    @StateObject private var viewModel: LoanDetailViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: LoanDetailViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @State private var showToast = false
 
     init(personId: String) {
-        _viewModel = StateObject(wrappedValue: LoanDetailViewModel(personId: personId))
+        _viewModel = State(wrappedValue: LoanDetailViewModel(personId: personId))
     }
 
     init(person: PersonDTO) {
-        _viewModel = StateObject(wrappedValue: LoanDetailViewModel(person: person))
+        _viewModel = State(wrappedValue: LoanDetailViewModel(person: person))
     }
 
     var body: some View {
@@ -125,7 +125,7 @@ struct LoanDetailView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
         }
         .onAppear {
@@ -176,7 +176,7 @@ struct LoanCardRowView: View {
 
             Stepper("", value: $quantity, in: 1 ... 99)
                 .labelsHidden()
-                .onChange(of: quantity) { newValue in
+                .onChange(of: quantity) { _, newValue in
                     onQuantityChanged(newValue)
                 }
 

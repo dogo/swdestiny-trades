@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct SearchView: View {
-    @StateObject private var viewModel: SearchViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: SearchViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
 
     @FocusState private var isSearchFocused: Bool
@@ -18,9 +18,9 @@ struct SearchView: View {
 
     init(viewModel: SearchViewModel? = nil) {
         if let viewModel {
-            _viewModel = StateObject(wrappedValue: viewModel)
+            _viewModel = State(wrappedValue: viewModel)
         } else {
-            _viewModel = StateObject(wrappedValue: SearchViewModel())
+            _viewModel = State(wrappedValue: SearchViewModel())
         }
     }
 
@@ -50,8 +50,11 @@ struct SearchView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
+        }
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.onSearchTextChanged(newValue)
         }
     }
 
@@ -302,6 +305,6 @@ struct SearchLoadingView: View {
 
 #Preview {
     SearchView()
-        .environmentObject(NavigationCoordinator())
+        .environment(NavigationCoordinator())
         .environment(\.dependencyContainer, DependencyContainer.shared)
 }

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AboutView: View {
-    @EnvironmentObject var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
 
     var body: some View {
         ScrollView {
@@ -80,5 +80,5 @@ struct AboutView: View {
     NavigationStack {
         AboutView()
     }
-    .environmentObject(NavigationCoordinator())
+    .environment(NavigationCoordinator())
 }

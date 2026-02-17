@@ -57,7 +57,7 @@ final class ContainerSharingTests: BaseTestCase {
         try await populateTestData(objects: [card])
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel1.loadCardsAsync()
+        await viewModel1.loadCards()
 
         XCTAssertEqual(viewModel1.items.count, 1)
         XCTAssertEqual(viewModel1.items.first?.name, "Original Name")
@@ -66,7 +66,7 @@ final class ContainerSharingTests: BaseTestCase {
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel2.loadCardsAsync()
+        await viewModel2.loadCards()
 
         XCTAssertEqual(viewModel2.items.count, 1)
         XCTAssertEqual(viewModel2.items.first?.name, "Modified Name")
@@ -97,7 +97,7 @@ final class ContainerSharingTests: BaseTestCase {
         try await populateTestData(objects: [card1, card2])
 
         let viewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel.loadCardsAsync()
+        await viewModel.loadCards()
 
         XCTAssertEqual(viewModel.items.count, 2)
 
@@ -127,10 +127,10 @@ final class ContainerSharingTests: BaseTestCase {
         try await populateTestData(objects: [card1, card2])
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel1.loadCardsAsync()
+        await viewModel1.loadCards()
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel2.loadCardsAsync()
+        await viewModel2.loadCards()
 
         XCTAssertEqual(viewModel1.items.count, 2)
         XCTAssertEqual(viewModel2.items.count, 2)
@@ -152,7 +152,7 @@ final class ContainerSharingTests: BaseTestCase {
         try await populateTestData(objects: [card])
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel1.loadCardsAsync()
+        await viewModel1.loadCards()
         XCTAssertEqual(viewModel1.items.count, 1)
         XCTAssertEqual(viewModel1.items.first?.name, "Initial")
 
@@ -160,14 +160,14 @@ final class ContainerSharingTests: BaseTestCase {
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel2.loadCardsAsync()
+        await viewModel2.loadCards()
         XCTAssertEqual(viewModel2.items.first?.name, "Updated Once")
 
         card.name = "Updated Twice"
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel3 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel3.loadCardsAsync()
+        await viewModel3.loadCards()
         XCTAssertEqual(viewModel3.items.first?.name, "Updated Twice")
     }
 

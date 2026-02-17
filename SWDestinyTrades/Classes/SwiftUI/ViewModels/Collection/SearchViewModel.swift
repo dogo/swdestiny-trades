@@ -7,29 +7,50 @@
 //
 
 import Combine
+import Observation
 import SwiftUI
 
 @MainActor
+@Observable
 final class SearchViewModel: ListViewModel<CardDTO> {
 
-    @Published var searchResults: [CardDTO] = []
-    @Published var hasSearched = false
-    @Published var currentQuery = ""
+    var searchResults: [CardDTO] = []
+    var hasSearched = false
+    var currentQuery = ""
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
-    private var service: SWDestinyServiceProtocol? {
+    private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
 
-    private var searchCancellable: AnyCancellable?
+    private var searchSubject = PassthroughSubject<String, Never>()
+    private var searchCancellable = Set<AnyCancellable>()
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
         setupSearchDebouncing()
+    }
+
+    private func setupSearchDebouncing() {
+        searchSubject
+            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] searchText in
+                if !searchText.isEmpty {
+                    self?.performSearch(query: searchText)
+                } else {
+                    self?.clearSearch()
+                }
+            }
+            .store(in: &searchCancellable)
+    }
+
+    func onSearchTextChanged(_ searchText: String) {
+        searchSubject.send(searchText)
     }
 
     override func handleError(_ error: Error) {
@@ -55,21 +76,6 @@ final class SearchViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    private func setupSearchDebouncing() {
-        searchCancellable = $searchText
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-            .receive(on: DispatchQueue.main)
-            .removeDuplicates()
-            .sink { [weak self] searchText in
-                guard let self else { return }
-                if !searchText.isEmpty {
-                    performSearch(query: searchText)
-                } else {
-                    clearSearch()
-                }
-            }
-    }
-
     func performSearch(query: String) {
         guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             clearSearch()
@@ -82,15 +88,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
 
         Task { @MainActor in
             do {
-                try Task.checkCancellation()
-
-                guard let service else {
-                    throw ViewModelError.serviceNotAvailable
-                }
-
                 let results = try await service.search(query: query)
-
-                try Task.checkCancellation()
 
                 if self.currentQuery == query {
                     self.searchResults = results

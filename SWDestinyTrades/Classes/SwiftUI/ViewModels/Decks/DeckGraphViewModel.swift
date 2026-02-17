@@ -40,7 +40,7 @@ final class DeckGraphViewModel: BaseViewModel {
                 typeCode: card.typeCode,
                 cost: card.cost,
                 quantity: card.quantity,
-                dieFaces: Array(card.dieFaces.compactMap(\.value))
+                dieFaces: Array(card.dieFaces)
             )
         }
 

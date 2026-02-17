@@ -219,11 +219,12 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 }
 
-final class DeckSection: ObservableObject, Identifiable {
+@Observable
+final class DeckSection: Identifiable {
     let id = UUID()
     let name: String
     let cards: [CardDTO]
-    @Published var isCollapsed: Bool
+    var isCollapsed: Bool
 
     init(name: String, cards: [CardDTO], isCollapsed: Bool) {
         self.name = name

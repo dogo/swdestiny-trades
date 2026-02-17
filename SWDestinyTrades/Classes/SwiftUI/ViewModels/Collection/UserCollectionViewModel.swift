@@ -10,37 +10,26 @@ import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
-    @Published var sortOption: CollectionSortOption = .name
-    @Published var filterOptions: CollectionFilterOptions = .init()
-    @Published var selectedSet: SetDTO?
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
-    @Published var availableSets: [SetDTO] = []
+    var sortOption: CollectionSortOption = .name
+    var filterOptions: CollectionFilterOptions = .init()
+    var selectedSet: SetDTO?
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
+    var availableSets: [SetDTO] = []
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    private var observationTask: Task<Void, Never>?
+    @ObservationIgnored private nonisolated(unsafe) var observationTask: Task<Void, Never>?
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        setupFilterObserver()
-        loadCollection()
-        loadAvailableSets()
-    }
-
-    private func setupFilterObserver() {
-        Publishers.CombineLatest3($sortOption, $filterOptions, $selectedSet)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _, _, _ in
-                self?.applyFilters()
-            }
-            .store(in: &cancellables)
     }
 
     override func handleError(_ error: Error) {
@@ -71,11 +60,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     }
 
     private func loadCollectionFromDatabase() {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         observationTask?.cancel()
 
         observationTask = Task { @MainActor in
@@ -100,9 +84,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    private func loadAvailableSets() {
-        guard let database else { return }
-
+    func loadAvailableSets() {
         Task { @MainActor in
             let sets = await database.fetch(
                 SetDTO.self,
@@ -189,11 +171,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     }
 
     func updateCardQuantity(_ card: CardDTO, quantity: Int) async {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         do {
             guard let managedCard = await database.fetchByKey(CardDTO.self, key: card.id) else {
                 handleError(ViewModelError.objectNotFound)
@@ -205,7 +182,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
             try await database.update {
                 managedCard.quantity = newQuantity
             }
-            objectWillChange.send()
         } catch {
             handleError(error)
         }

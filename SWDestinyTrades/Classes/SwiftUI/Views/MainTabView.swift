@@ -9,16 +9,16 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @StateObject private var navigationCoordinator = NavigationCoordinator()
-    @EnvironmentObject var appState: AppState
+    @State private var navigationCoordinator = NavigationCoordinator()
+    @Environment(AppState.self) var appState
     @Environment(\.dependencyContainer) var dependencyContainer
     @Environment(\.viewModelFactory) var viewModelFactory
 
     var body: some View {
         TabView(selection: $navigationCoordinator.selectedTab) {
-            // Cards Tab
-            Tab(value: AppTab.cards) {
-                NavigationStack(path: navigationCoordinator.path(for: .cards)) {
+            // Sets Tab
+            Tab(value: AppTab.sets) {
+                NavigationStack(path: $navigationCoordinator.setsPath) {
                     CardsRootView()
                         .navigationDestination(for: AppDestination.self) { destination in
                             NavigationDestinationBuilder.build(destination: destination)
@@ -34,7 +34,7 @@ struct MainTabView: View {
 
             // Decks Tab
             Tab(value: AppTab.decks) {
-                NavigationStack(path: navigationCoordinator.path(for: .decks)) {
+                NavigationStack(path: $navigationCoordinator.deckPath) {
                     DecksRootView()
                         .navigationDestination(for: AppDestination.self) { destination in
                             NavigationDestinationBuilder.build(destination: destination)
@@ -50,7 +50,7 @@ struct MainTabView: View {
 
             // Loans Tab
             Tab(value: AppTab.loans) {
-                NavigationStack(path: navigationCoordinator.path(for: .loans)) {
+                NavigationStack(path: $navigationCoordinator.loanPath) {
                     LoansRootView()
                         .navigationDestination(for: AppDestination.self) { destination in
                             NavigationDestinationBuilder.build(destination: destination)
@@ -66,7 +66,7 @@ struct MainTabView: View {
 
             // Collection Tab
             Tab(value: AppTab.collection) {
-                NavigationStack(path: navigationCoordinator.path(for: .collection)) {
+                NavigationStack(path: $navigationCoordinator.collectionPath) {
                     CollectionRootView()
                         .navigationDestination(for: AppDestination.self) { destination in
                             NavigationDestinationBuilder.build(destination: destination)
@@ -80,7 +80,7 @@ struct MainTabView: View {
                 }
             }
         }
-        .environmentObject(navigationCoordinator)
+        .environment(navigationCoordinator)
         .onAppear {
             setupTabBarAppearance()
         }
@@ -115,8 +115,10 @@ struct MainTabView: View {
 // MARK: - Root Views for Each Tab
 
 struct CardsRootView: View {
+    @State private var viewModel = SetsListViewModel()
+
     var body: some View {
-        SetsListView()
+        SetsListView(viewModel: viewModel)
     }
 }
 
@@ -127,20 +129,24 @@ struct DecksRootView: View {
 }
 
 struct LoansRootView: View {
+    @State private var viewModel = PeopleListViewModel()
+
     var body: some View {
-        PeopleListView()
+        PeopleListView(viewModel: viewModel)
     }
 }
 
 struct CollectionRootView: View {
+    @State private var viewModel = UserCollectionViewModel()
+
     var body: some View {
-        UserCollectionView()
+        UserCollectionView(viewModel: viewModel)
     }
 }
 
 #Preview {
     MainTabView()
-        .environmentObject(AppState())
+        .environment(AppState())
         .environment(\.dependencyContainer, DependencyContainer.shared)
         .environment(\.viewModelFactory, ViewModelFactory(container: DependencyContainer.shared))
 }

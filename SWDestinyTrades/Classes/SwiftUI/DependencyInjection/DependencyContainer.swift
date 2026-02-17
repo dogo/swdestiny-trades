@@ -6,10 +6,9 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
-final class DependencyContainer: ObservableObject {
+final class DependencyContainer {
 
     static let shared = DependencyContainer()
 
@@ -32,14 +31,8 @@ final class DependencyContainer: ObservableObject {
     }
 
     @MainActor
-    func createViewModel<T: ObservableObject>(_ viewModelType: T.Type) -> T {
-        if let baseViewModelType = viewModelType as? BaseViewModel.Type {
-            guard let viewModel = baseViewModelType.init(dependencyContainer: self) as? T else {
-                fatalError("Failed to create ViewModel of type \(viewModelType)")
-            }
-            return viewModel
-        }
-        fatalError("ViewModel type \(viewModelType) must inherit from BaseViewModel or provide a default initializer")
+    func createViewModel<T: BaseViewModel>(_ viewModelType: T.Type) -> T {
+        return viewModelType.init(dependencyContainer: self)
     }
 }
 

@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct DeckBuilderView: View {
-    @StateObject private var viewModel: DeckBuilderViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: DeckBuilderViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var dependencyContainer
     @Environment(\.dismiss) private var dismiss
 
     init(deck: DeckDTO?, dependencyContainer: DependencyContainer = .shared) {
-        _viewModel = StateObject(wrappedValue: DeckBuilderViewModel(deck: deck, dependencyContainer: dependencyContainer))
+        _viewModel = State(wrappedValue: DeckBuilderViewModel(deck: deck, dependencyContainer: dependencyContainer))
     }
 
     var body: some View {
@@ -340,17 +340,17 @@ struct EliteToggleButton: View {
     let sampleDeck = DeckDTO()
     sampleDeck.name = "Sample Deck"
 
-    return NavigationView {
+    return NavigationStack {
         DeckBuilderView(deck: sampleDeck)
-            .environmentObject(NavigationCoordinator())
+            .environment(NavigationCoordinator())
             .environment(\.dependencyContainer, DependencyContainer.shared)
     }
 }
 
 #Preview("Empty Deck") {
-    return NavigationView {
+    return NavigationStack {
         DeckBuilderView(deck: nil)
-            .environmentObject(NavigationCoordinator())
+            .environment(NavigationCoordinator())
             .environment(\.dependencyContainer, DependencyContainer.shared)
     }
 }

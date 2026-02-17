@@ -30,14 +30,14 @@ struct ViewTestHelper {
                 content()
                     .environment(\.dependencyContainer, container)
                     .environment(\.viewModelFactory, ViewModelFactory(container: container))
-                    .environmentObject(mock)
-                    .environmentObject(appState)
+                    .environment(mock)
+                    .environment(appState)
             } else {
                 content()
                     .environment(\.dependencyContainer, container)
                     .environment(\.viewModelFactory, ViewModelFactory(container: container))
-                    .environmentObject(navigationCoordinator)
-                    .environmentObject(appState)
+                    .environment(navigationCoordinator)
+                    .environment(appState)
             }
         }
     }

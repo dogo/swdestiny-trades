@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-final class ViewModelFactory: ObservableObject {
+final class ViewModelFactory {
 
     private let container: DependencyContainer
 
@@ -17,8 +17,8 @@ final class ViewModelFactory: ObservableObject {
     }
 
     @MainActor
-    func create<T: ObservableObject>(_ viewModelType: T.Type) -> T {
-        return container.createViewModel(viewModelType)
+    func create<T: BaseViewModel>(_ viewModelType: T.Type) -> T {
+        container.createViewModel(viewModelType)
     }
 }
 

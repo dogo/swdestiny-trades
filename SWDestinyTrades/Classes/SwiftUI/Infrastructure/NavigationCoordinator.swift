@@ -6,70 +6,45 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Observation
 import SwiftUI
 
 @MainActor
+@Observable
 final class NavigationCoordinator: NavigationCoordinatorProtocol {
 
-    @Published var path = NavigationPath()
+    var selectedTab: AppTab = .sets
 
-    @Published var selectedTab: AppTab = .cards
+    var setsPath = NavigationPath()
+    var deckPath = NavigationPath()
+    var loanPath = NavigationPath()
+    var collectionPath = NavigationPath()
 
-    @Published var cardPath = NavigationPath()
-    @Published var deckPath = NavigationPath()
-    @Published var loanPath = NavigationPath()
-    @Published var collectionPath = NavigationPath()
+    // MARK: - Navigation
 
     func navigate(to destination: AppDestination) {
-        switch selectedTab {
-        case .cards:
-            cardPath.append(destination)
-        case .decks:
-            deckPath.append(destination)
-        case .loans:
-            loanPath.append(destination)
-        case .collection:
-            collectionPath.append(destination)
-        }
+        navigate(to: destination, on: selectedTab)
     }
 
     func navigate(to destination: AppDestination, on tab: AppTab) {
-        selectedTab = tab
-
-        Task {
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-            self.navigate(to: destination)
-        }
-    }
-
-    func path(for tab: AppTab) -> Binding<NavigationPath> {
         switch tab {
-        case .cards:
-            return Binding(
-                get: { self.cardPath },
-                set: { self.cardPath = $0 }
-            )
+        case .sets:
+            setsPath.append(destination)
+
         case .decks:
-            return Binding(
-                get: { self.deckPath },
-                set: { self.deckPath = $0 }
-            )
+            deckPath.append(destination)
+
         case .loans:
-            return Binding(
-                get: { self.loanPath },
-                set: { self.loanPath = $0 }
-            )
+            loanPath.append(destination)
+
         case .collection:
-            return Binding(
-                get: { self.collectionPath },
-                set: { self.collectionPath = $0 }
-            )
+            collectionPath.append(destination)
         }
     }
 }
 
 enum AppTab: CaseIterable {
-    case cards
+    case sets
     case decks
     case loans
     case collection
@@ -97,16 +72,4 @@ enum AppDestination: Hashable {
 
     case about
     case webview(url: URL)
-}
-
-struct NavigationCoordinatorKey: EnvironmentKey {
-    @MainActor
-    static let defaultValue = NavigationCoordinator()
-}
-
-extension EnvironmentValues {
-    var navigationCoordinator: NavigationCoordinator {
-        get { self[NavigationCoordinatorKey.self] }
-        set { self[NavigationCoordinatorKey.self] = newValue }
-    }
 }

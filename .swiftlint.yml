@@ -91,6 +91,7 @@ line_length: 180
 identifier_name:
   excluded:
     - id
+    - cp
 
 excluded:
   - Pods

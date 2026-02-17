@@ -9,17 +9,17 @@
 import SwiftUI
 
 struct AddToDeckView: View {
-    @StateObject private var viewModel: AddToDeckViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: AddToDeckViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
 
     @State private var showToast = false
 
     init(deck: DeckDTO, viewModel: AddToDeckViewModel? = nil) {
         if let viewModel {
-            _viewModel = StateObject(wrappedValue: viewModel)
+            _viewModel = State(wrappedValue: viewModel)
         } else {
-            _viewModel = StateObject(wrappedValue: AddToDeckViewModel(deck: deck))
+            _viewModel = State(wrappedValue: AddToDeckViewModel(deck: deck))
         }
     }
 
@@ -51,7 +51,7 @@ struct AddToDeckView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
         }
     }

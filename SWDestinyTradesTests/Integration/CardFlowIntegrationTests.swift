@@ -61,7 +61,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
 
-        await viewModel1.loadCardsAsync()
+        await viewModel1.loadCards()
 
         XCTAssertEqual(viewModel1.items.count, 1)
         XCTAssertEqual(viewModel1.items.first?.name, "Initial Name")
@@ -71,7 +71,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
         }
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel2.loadCardsAsync()
+        await viewModel2.loadCards()
 
         XCTAssertEqual(viewModel2.items.count, 1)
         XCTAssertEqual(viewModel2.items.first?.name, "Updated Name")
@@ -97,7 +97,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
         }
 
         let viewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await viewModel.loadCardsAsync()
+        await viewModel.loadCards()
 
         XCTAssertEqual(viewModel.items.count, 1)
 
@@ -131,7 +131,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
         try await populateTestData(objects: [card1, card2])
 
         let listViewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
-        await listViewModel.loadCardsAsync()
+        await listViewModel.loadCards()
 
         XCTAssertEqual(listViewModel.items.count, 2)
         XCTAssertFalse(listViewModel.isLoading)

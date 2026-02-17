@@ -6,10 +6,12 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Observation
 @testable import SWDestinyTrades
 import SwiftUI
 
 @MainActor
+@Observable
 final class NavigationCoordinatorMock: NavigationCoordinatorProtocol {
 
     struct NavigationCall: Equatable {
@@ -24,12 +26,11 @@ final class NavigationCoordinatorMock: NavigationCoordinatorProtocol {
         }
     }
 
-    @Published var path = NavigationPath()
-    @Published var selectedTab: AppTab = .cards
-    @Published var cardPath = NavigationPath()
-    @Published var deckPath = NavigationPath()
-    @Published var loanPath = NavigationPath()
-    @Published var collectionPath = NavigationPath()
+    var selectedTab: AppTab = .cards
+    var cardPath = NavigationPath()
+    var deckPath = NavigationPath()
+    var loanPath = NavigationPath()
+    var collectionPath = NavigationPath()
 
     private(set) var navigationCalls: [NavigationCall] = []
 
@@ -47,31 +48,6 @@ final class NavigationCoordinatorMock: NavigationCoordinatorProtocol {
             timestamp: Date(),
             tab: tab
         ))
-    }
-
-    func path(for tab: AppTab) -> Binding<NavigationPath> {
-        switch tab {
-        case .cards:
-            return Binding(
-                get: { self.cardPath },
-                set: { self.cardPath = $0 }
-            )
-        case .decks:
-            return Binding(
-                get: { self.deckPath },
-                set: { self.deckPath = $0 }
-            )
-        case .loans:
-            return Binding(
-                get: { self.loanPath },
-                set: { self.loanPath = $0 }
-            )
-        case .collection:
-            return Binding(
-                get: { self.collectionPath },
-                set: { self.collectionPath = $0 }
-            )
-        }
     }
 
     func didNavigate(to destination: AppDestination) -> Bool {

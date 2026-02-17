@@ -10,12 +10,12 @@ import SwiftUI
 
 @main
 struct SWDestinyTradesApp: App {
-    @StateObject private var appState = AppState()
+    @State private var appState = AppState()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(appState)
+                .environment(appState)
                 .environment(\.dependencyContainer, appState.dependencyContainer)
                 .environment(\.viewModelFactory, ViewModelFactory(container: appState.dependencyContainer))
                 .onAppear {

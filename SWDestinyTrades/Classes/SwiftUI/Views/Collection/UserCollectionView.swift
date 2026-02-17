@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct UserCollectionView: View {
-    @StateObject private var viewModel: UserCollectionViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: UserCollectionViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
 
     @State private var showingFilterSheet = false
@@ -19,71 +19,80 @@ struct UserCollectionView: View {
 
     init(viewModel: UserCollectionViewModel? = nil) {
         if let viewModel {
-            _viewModel = StateObject(wrappedValue: viewModel)
+            _viewModel = State(wrappedValue: viewModel)
         } else {
-            _viewModel = StateObject(wrappedValue: UserCollectionViewModel())
+            _viewModel = State(wrappedValue: UserCollectionViewModel())
         }
     }
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if viewModel.isLoading, viewModel.items.isEmpty {
-                    LoadingView()
-                } else {
-                    collectionContent
-                }
+        VStack {
+            if viewModel.isLoading, viewModel.items.isEmpty {
+                LoadingView()
+            } else {
+                collectionContent
             }
-            .navigationTitle(L10n.myCollection)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    filterButton
-                }
+        }
+        .navigationTitle(L10n.myCollection)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                filterButton
+            }
 
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    shareButton
-                    addButton
-                }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                shareButton
+                addButton
             }
-            .refreshable {
-                await refreshCollection()
+        }
+        .refreshable {
+            await refreshCollection()
+        }
+        .searchable(text: $viewModel.searchText, prompt: "Search collection...")
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.performFiltering(searchText: newValue)
+        }
+        .onChange(of: viewModel.sortOption) { _, _ in
+            viewModel.applyFilters()
+        }
+        .onChange(of: viewModel.filterOptions) { _, _ in
+            viewModel.applyFilters()
+        }
+        .onChange(of: viewModel.selectedSet) { _, _ in
+            viewModel.applyFilters()
+        }
+        .onChange(of: viewModel.showToast) { _, newValue in
+            showToast = newValue
+        }
+        .overlay(alignment: .top) {
+            if showToast {
+                ToastView(
+                    title: viewModel.toastTitle,
+                    message: viewModel.toastMessage,
+                    type: viewModel.toastType,
+                    isPresented: $showToast,
+                    duration: 2.5
+                )
+                .padding(.top, 8)
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
-            .searchable(text: $viewModel.searchText, prompt: "Search collection...")
-            .overlay(alignment: .top) {
-                if showToast {
-                    ToastView(
-                        title: viewModel.toastTitle,
-                        message: viewModel.toastMessage,
-                        type: viewModel.toastType,
-                        isPresented: $showToast,
-                        duration: 2.5
-                    )
-                    .padding(.top, 8)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                }
-            }
-            .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-            .onChange(of: viewModel.showToast) { newValue in
-                showToast = newValue
-            }
-            .sheet(isPresented: $showingFilterSheet) {
-                CollectionFilterView(
-                    filterOptions: $viewModel.filterOptions,
-                    selectedSet: $viewModel.selectedSet,
-                    sortOption: $viewModel.sortOption,
-                    availableSets: viewModel.availableSets
-                ) {
-                    viewModel.updateFilterOptions(viewModel.filterOptions)
-                    viewModel.updateSelectedSet(viewModel.selectedSet)
-                    viewModel.updateSortOption(viewModel.sortOption)
-                }
-            }
-            .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(items: [generateShareTextForSheet()])
+        }
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
+        .sheet(isPresented: $showingFilterSheet) {
+            filterSheet
+        }
+        .sheet(isPresented: $showingShareSheet) {
+            ShareSheet(items: [generateShareTextForSheet()])
+        }
+        .onAppear {
+            if viewModel.items.isEmpty {
+                viewModel.loadCollection()
+                viewModel.loadAvailableSets()
             }
         }
     }
+
+    // MARK: - View Components
 
     @ViewBuilder private var collectionContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
@@ -111,6 +120,19 @@ struct UserCollectionView: View {
             .listRowSeparator(.visible)
         }
         .listStyle(.plain)
+    }
+
+    @ViewBuilder private var filterSheet: some View {
+        CollectionFilterView(
+            filterOptions: $viewModel.filterOptions,
+            selectedSet: $viewModel.selectedSet,
+            sortOption: $viewModel.sortOption,
+            availableSets: viewModel.availableSets
+        ) {
+            viewModel.updateFilterOptions(viewModel.filterOptions)
+            viewModel.updateSelectedSet(viewModel.selectedSet)
+            viewModel.updateSortOption(viewModel.sortOption)
+        }
     }
 
     // MARK: - Toolbar Items
@@ -256,7 +278,7 @@ struct CollectionFilterView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("Sort By") {
                     ForEach(CollectionSortOption.allCases, id: \.self) { option in
@@ -309,9 +331,9 @@ struct CollectionFilterView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         UserCollectionView()
     }
-    .environmentObject(NavigationCoordinator())
+    .environment(NavigationCoordinator())
     .environment(\.dependencyContainer, DependencyContainer.shared)
 }

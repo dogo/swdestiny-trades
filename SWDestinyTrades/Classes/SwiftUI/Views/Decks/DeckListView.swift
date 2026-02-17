@@ -9,44 +9,45 @@
 import SwiftUI
 
 struct DeckListView: View {
-    @StateObject private var viewModel: DeckListViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: DeckListViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var dependencyContainer
 
     init(dependencyContainer: DependencyContainer = .shared) {
-        _viewModel = StateObject(wrappedValue: DeckListViewModel(dependencyContainer: dependencyContainer))
+        _viewModel = State(wrappedValue: DeckListViewModel(dependencyContainer: dependencyContainer))
     }
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if viewModel.loadingState.isLoading {
-                    loadingView
-                } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
-                    emptySearchView
-                } else if viewModel.filteredItems.isEmpty {
-                    emptyStateView
-                } else {
-                    deckListView
-                }
+        VStack {
+            if viewModel.loadingState.isLoading {
+                loadingView
+            } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
+                emptySearchView
+            } else if viewModel.filteredItems.isEmpty {
+                emptyStateView
+            } else {
+                deckListView
             }
-            .navigationTitle(L10n.decks)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    addButton
-                }
+        }
+        .navigationTitle(L10n.decks)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                addButton
             }
-            .searchable(text: $viewModel.searchText, prompt: "Search decks...")
-            .refreshable {
-                await refreshDecks()
-            }
-            .alert(L10n.deleteDeck, isPresented: $viewModel.showingDeleteConfirmation) {
-                deleteConfirmationAlert
-            }
-            .onAppear {
-                viewModel.loadDecks()
-            }
+        }
+        .searchable(text: $viewModel.searchText, prompt: "Search decks...")
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.performFiltering(searchText: newValue)
+        }
+        .refreshable {
+            await refreshDecks()
+        }
+        .alert(L10n.deleteDeck, isPresented: $viewModel.showingDeleteConfirmation) {
+            deleteConfirmationAlert
+        }
+        .onAppear {
+            viewModel.loadDecks()
         }
     }
 
@@ -258,15 +259,15 @@ struct DeckRowView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         DeckListView()
-            .environmentObject(NavigationCoordinator())
+            .environment(NavigationCoordinator())
             .environment(\.dependencyContainer, DependencyContainer.shared)
     }
 }
 
 #Preview("Empty State") {
-    NavigationView {
+    NavigationStack {
         VStack {
             Text(L10n.noDecksYet)
                 .font(.title2)
@@ -285,7 +286,7 @@ struct DeckRowView: View {
 }
 
 #Preview("Loading State") {
-    NavigationView {
+    NavigationStack {
         VStack {
             ProgressView()
                 .scaleEffect(1.2)

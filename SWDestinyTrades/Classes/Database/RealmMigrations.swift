@@ -33,11 +33,9 @@ enum RealmMigrations {
 
                             if let id = oldObject["code"] as? String {
                                 if kDices[id] != nil {
-                                    let dieFaces = List<StringObject>()
+                                    let dieFaces = List<String>()
                                     kDices[id]?.forEach { side in
-                                        let string = StringObject()
-                                        string.value = side
-                                        dieFaces.append(string)
+                                        dieFaces.append(side)
                                     }
                                     newObject["dieFaces"] = dieFaces
                                 }

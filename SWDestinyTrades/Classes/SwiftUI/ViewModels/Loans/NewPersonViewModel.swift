@@ -10,19 +10,20 @@ import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class NewPersonViewModel: BaseViewModel {
 
-    @Published var firstName = ""
-    @Published var lastName = ""
-    @Published var isFormValid = false
-    @Published var showSuccessToast = false
-    @Published var addedPersonName = ""
-    @Published var validationErrors: [ValidationError] = []
+    var firstName = ""
+    var lastName = ""
+    var isFormValid = false
+    var showSuccessToast = false
+    var addedPersonName = ""
+    var validationErrors: [ValidationError] = []
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
     private var database: DatabaseProtocol? {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -30,17 +31,10 @@ final class NewPersonViewModel: BaseViewModel {
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        setupValidation()
     }
 
-    private func setupValidation() {
-        Publishers.CombineLatest($firstName, $lastName)
-            .receive(on: DispatchQueue.main)
-            .map { firstName, lastName in
-                self.validateForm(firstName: firstName, lastName: lastName)
-            }
-            .assign(to: \.isFormValid, on: self)
-            .store(in: &cancellables)
+    func validate() {
+        isFormValid = validateForm(firstName: firstName, lastName: lastName)
     }
 
     private func validateForm(firstName: String, lastName: String) -> Bool {

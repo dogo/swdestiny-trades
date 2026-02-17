@@ -7,13 +7,16 @@
 //
 
 import Combine
+import Observation
 import SwiftUI
 
-final class AppState: ObservableObject {
-    @Published var database: DatabaseProtocol?
-    @Published var isInitialized = false
-    @Published var isLoading = false
-    @Published var errorMessage: String?
+@MainActor
+@Observable
+final class AppState {
+    var database: DatabaseProtocol?
+    var isInitialized = false
+    var isLoading = false
+    var errorMessage: String?
 
     let dependencyContainer = DependencyContainer.shared
 

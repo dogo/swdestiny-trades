@@ -10,10 +10,11 @@ import Combine
 import SwiftUI
 
 @MainActor
-class BaseViewModel: ObservableObject {
-    @Published private(set) var isLoading = false
-    @Published private(set) var errorMessage: String?
-    @Published private(set) var loadingState: LoadingState<Void> = .idle
+@Observable
+class BaseViewModel {
+    private(set) var isLoading = false
+    private(set) var errorMessage: String?
+    private(set) var loadingState: LoadingState<Void> = .idle
 
     let dependencyContainer: DependencyContainer
 
@@ -26,7 +27,6 @@ class BaseViewModel: ObservableObject {
     func handleError(_ error: Error) {
         guard errorMessage != error.localizedDescription || isLoading || !loadingState.hasError else { return }
 
-        objectWillChange.send()
         errorMessage = error.localizedDescription
         isLoading = false
         loadingState = .error(error)
@@ -35,7 +35,6 @@ class BaseViewModel: ObservableObject {
     func clearError() {
         guard errorMessage != nil || loadingState.hasError else { return }
 
-        objectWillChange.send()
         errorMessage = nil
         if case .error = loadingState {
             loadingState = .idle
@@ -47,7 +46,6 @@ class BaseViewModel: ObservableObject {
             return
         }
 
-        objectWillChange.send()
         isLoading = loading
         if loading {
             loadingState = .loading
@@ -57,21 +55,22 @@ class BaseViewModel: ObservableObject {
     func setLoaded() {
         guard isLoading || !loadingState.isLoaded else { return }
 
-        objectWillChange.send()
         isLoading = false
         loadingState = .loaded(())
     }
 }
 
 @MainActor
+@Observable
 class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
-    @Published private(set) var items: [T] = []
-    @Published var searchText = ""
-    @Published private(set) var filteredItems: [T] = []
+    private(set) var items: [T] = []
+    private(set) var filteredItems: [T] = []
 
-    @Published private(set) var hasMoreItems = true
-    @Published private(set) var currentPage = 0
+    private(set) var hasMoreItems = true
+    private(set) var currentPage = 0
     private let itemsPerPage = 50
+
+    var searchText = ""
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
@@ -109,7 +108,6 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
 
         guard updatedItems != items else { return }
 
-        objectWillChange.send()
         items = updatedItems
         filteredItems = filterItems(searchText: searchText)
         if append {

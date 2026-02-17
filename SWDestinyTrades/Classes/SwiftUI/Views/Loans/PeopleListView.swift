@@ -10,10 +10,18 @@ import SwiftUI
 
 struct PeopleListView: View {
 
-    @StateObject private var viewModel = PeopleListViewModel()
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: PeopleListViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @State private var isEditing = false
     @State private var showToast = false
+
+    init(viewModel: PeopleListViewModel? = nil) {
+        if let viewModel {
+            _viewModel = State(wrappedValue: viewModel)
+        } else {
+            _viewModel = State(wrappedValue: PeopleListViewModel())
+        }
+    }
 
     var body: some View {
         VStack {
@@ -76,7 +84,12 @@ struct PeopleListView: View {
                 }
             }
         }
+        .navigationTitle(L10n.loans)
+        .navigationBarTitleDisplayMode(.large)
         .searchable(text: $viewModel.searchText, prompt: "Search people...")
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.performFiltering(searchText: newValue)
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 if !viewModel.filteredItems.isEmpty {
@@ -141,7 +154,7 @@ struct PeopleListView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
         }
     }
@@ -210,12 +223,12 @@ struct PersonRowView: View {
 struct PeopleListView_Previews: PreviewProvider {
     static var previews: some View {
         PeopleListView()
-            .environmentObject(NavigationCoordinator())
+            .environment(NavigationCoordinator())
             .environment(\.dependencyContainer, DependencyContainer.shared)
             .previewDisplayName("People List - Light")
 
         PeopleListView()
-            .environmentObject(NavigationCoordinator())
+            .environment(NavigationCoordinator())
             .environment(\.dependencyContainer, DependencyContainer.shared)
             .preferredColorScheme(.dark)
             .previewDisplayName("People List - Dark")

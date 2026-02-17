@@ -9,19 +9,19 @@
 import SwiftUI
 
 struct AddCardView: View {
-    @StateObject private var viewModel: AddCardViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: AddCardViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dismiss) private var dismiss
 
     @State private var showingFilterSheet = false
     @State private var showToast = false
 
     init(context: AddCardContext) {
-        _viewModel = StateObject(wrappedValue: AddCardViewModel(context: context))
+        _viewModel = State(wrappedValue: AddCardViewModel(context: context))
     }
 
     init(personId: String, type: AddCardType) {
-        _viewModel = StateObject(wrappedValue: AddCardViewModel(personId: personId, type: type))
+        _viewModel = State(wrappedValue: AddCardViewModel(personId: personId, type: type))
     }
 
     var body: some View {
@@ -65,8 +65,14 @@ struct AddCardView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
+        }
+        .onChange(of: viewModel.selectedFilters) { _, _ in
+            viewModel.applyFilters()
+        }
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.performFiltering(searchText: newValue)
         }
     }
 
@@ -195,7 +201,7 @@ struct AddCardFilterView: View {
     private let cardColors = ["red", "blue", "yellow", "gray"]
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("Set Filter") {
                     Picker("Set", selection: $filters.selectedSet) {
@@ -285,6 +291,6 @@ struct AddCardFilterView: View {
     let mockCollection = UserCollectionDTO()
 
     AddCardView(context: .collection(mockCollection))
-        .environmentObject(NavigationCoordinator())
+        .environment(NavigationCoordinator())
         .environment(\.dependencyContainer, DependencyContainer.shared)
 }

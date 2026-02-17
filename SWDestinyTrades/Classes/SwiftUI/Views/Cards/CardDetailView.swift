@@ -10,7 +10,7 @@ import ImageSlideshow
 import SwiftUI
 
 struct CardDetailView: View {
-    @StateObject private var viewModel: CardDetailViewModel
+    @State private var viewModel: CardDetailViewModel
     @Environment(\.dependencyContainer) private var container
     @State private var showingFullScreenImage = false
     @State private var showingShareSheet = false
@@ -24,9 +24,9 @@ struct CardDetailView: View {
         self.cards = cards
         self.selectedCard = selectedCard
         if let viewModel {
-            _viewModel = StateObject(wrappedValue: viewModel)
+            _viewModel = State(wrappedValue: viewModel)
         } else {
-            _viewModel = StateObject(wrappedValue: CardDetailViewModel(cards: cards, selectedCard: selectedCard))
+            _viewModel = State(wrappedValue: CardDetailViewModel(cards: cards, selectedCard: selectedCard))
         }
     }
 
@@ -96,7 +96,7 @@ struct CardDetailView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
         }
     }
@@ -241,7 +241,7 @@ struct InfoRow: View {
     sampleCard.isUnique = true
     sampleCard.hasDie = true
 
-    return NavigationView {
+    return NavigationStack {
         CardDetailView(cards: [sampleCard], selectedCard: sampleCard)
     }
     .environment(\.dependencyContainer, DependencyContainer.shared)

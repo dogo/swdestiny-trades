@@ -13,6 +13,8 @@ import XCTest
 @MainActor
 final class CardListViewModelTests: BaseTestCase {
 
+    // MARK: - Properties
+
     var sut: CardListViewModel!
     var testSet: SetDTO!
 
@@ -44,7 +46,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [card1, card2])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         XCTAssertEqual(sut.items.count, 2)
         XCTAssertEqual(sut.items[0].code, "01001")
@@ -53,7 +55,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     func testLoadCardsWithEmptyDatabase() async throws {
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         XCTAssertEqual(sut.items.count, 0)
         XCTAssertFalse(sut.isLoading)
@@ -73,7 +75,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [awCard, sokCard])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         XCTAssertEqual(sut.items.count, 1)
         XCTAssertEqual(sut.items[0].code, "01001")
@@ -84,7 +86,7 @@ final class CardListViewModelTests: BaseTestCase {
         mockHttpClient.fileName = "card-list"
         mockHttpClient.error = false
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         XCTAssertFalse(sut.isLoading)
         XCTAssertGreaterThan(sut.items.count, 0, "Should have loaded cards from mock data")
@@ -93,12 +95,9 @@ final class CardListViewModelTests: BaseTestCase {
     func testLoadCardsHandlesHttpError() async throws {
         mockSWDestinyService.retrieveSetCardListError = APIError.invalidData
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         XCTAssertFalse(sut.isLoading)
-
-        try await Task.sleep(nanoseconds: 150_000_000)
-
         XCTAssertTrue(sut.showToast)
         XCTAssertEqual(sut.toastType, .error)
     }
@@ -107,9 +106,7 @@ final class CardListViewModelTests: BaseTestCase {
         let card = CardDTO.stub(setCode: "AW", code: "01001")
         try await populateTestData(objects: [card])
 
-        XCTAssertTrue(sut.isLoading)
-
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         XCTAssertFalse(sut.isLoading)
     }
@@ -130,7 +127,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [card1, card2])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         sut.performFiltering(searchText: "Phasma")
 
@@ -154,7 +151,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [card1, card2])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         sut.performFiltering(searchText: "Vader")
 
@@ -178,11 +175,10 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [redCard, blueCard])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         sut.filterOptions.selectedColors.insert("red")
-
-        try await Task.sleep(nanoseconds: 50_000_000)
+        sut.performFiltering(searchText: "")
 
         XCTAssertEqual(sut.filteredItems.count, 1)
         XCTAssertEqual(sut.filteredItems[0].factionCode, "red")
@@ -204,11 +200,10 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [character, upgrade])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         sut.filterOptions.selectedTypes.insert("character")
-
-        try await Task.sleep(nanoseconds: 50_000_000)
+        sut.performFiltering(searchText: "")
 
         XCTAssertEqual(sut.filteredItems.count, 1)
         XCTAssertEqual(sut.filteredItems[0].typeCode, "character")
@@ -236,12 +231,11 @@ final class CardListViewModelTests: BaseTestCase {
 
         try await populateTestData(objects: [lowCostCard, midCostCard, highCostCard])
 
-        await sut.loadCardsAsync()
+        await sut.loadCards()
 
         sut.filterOptions.minCost = 2
         sut.filterOptions.maxCost = 4
-
-        try await Task.sleep(nanoseconds: 50_000_000)
+        sut.performFiltering(searchText: "")
 
         XCTAssertEqual(sut.filteredItems.count, 1)
         XCTAssertEqual(sut.filteredItems[0].cost, 3)
@@ -263,7 +257,7 @@ final class CardListViewModelTests: BaseTestCase {
 
             try await populateTestData(objects: randomCards)
 
-            await sut.loadCardsAsync()
+            await sut.loadCards()
 
             XCTAssertFalse(sut.isLoading, "Loading should complete on iteration \(iteration)")
             XCTAssertEqual(sut.items.count, randomCardCount, "Should load correct number of cards on iteration \(iteration)")

@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct CardListView: View {
-    @StateObject private var viewModel: CardListViewModel
-    @EnvironmentObject private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: CardListViewModel
+    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
     @State private var showingFilterOptions = false
     @State private var showToast = false
@@ -20,9 +20,9 @@ struct CardListView: View {
     init(set: SetDTO, viewModel: CardListViewModel? = nil) {
         self.set = set
         if let viewModel {
-            _viewModel = StateObject(wrappedValue: viewModel)
+            _viewModel = State(wrappedValue: viewModel)
         } else {
-            _viewModel = StateObject(wrappedValue: CardListViewModel(set: set))
+            _viewModel = State(wrappedValue: CardListViewModel(set: set))
         }
     }
 
@@ -53,8 +53,8 @@ struct CardListView: View {
         .sheet(isPresented: $showingFilterOptions) {
             FilterOptionsView(
                 filterOptions: $viewModel.filterOptions,
-                availableColors: availableColors,
-                availableTypes: availableTypes
+                availableColors: viewModel.availableColors,
+                availableTypes: viewModel.availableTypes
             ) {
                 showingFilterOptions = false
             }
@@ -73,8 +73,14 @@ struct CardListView: View {
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { newValue in
+        .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
+        }
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.performFiltering(searchText: newValue)
+        }
+        .task {
+            await viewModel.loadCards()
         }
     }
 
@@ -98,23 +104,13 @@ struct CardListView: View {
         }
     }
 
-    private var availableColors: [String] {
-        Array(Set(viewModel.filteredItems.map(\.factionCode))).sorted()
-    }
-
-    private var availableTypes: [String] {
-        Array(Set(viewModel.filteredItems.map(\.typeCode))).sorted()
-    }
-
     @MainActor
     private func refreshCards() async {
-        viewModel.loadCards()
-
-        while viewModel.isLoading {
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-        }
+        await viewModel.loadCards()
     }
 }
+
+// MARK: - CardRowView
 
 struct CardRowView: View {
     let card: CardDTO
@@ -206,6 +202,8 @@ struct CardRowView: View {
     }
 }
 
+// MARK: - FilterOptionsView
+
 struct FilterOptionsView: View {
     @Binding var filterOptions: CardFilterOptions
     let availableColors: [String]
@@ -226,7 +224,7 @@ struct FilterOptionsView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section("Colors") {
                     ForEach(availableColors, id: \.self) { color in
@@ -308,11 +306,11 @@ struct FilterOptionsView: View {
     @Previewable @State var appState: AppState?
 
     if let container, let appState {
-        NavigationView {
+        NavigationStack {
             CardListView(set: SampleData.sets[0])
         }
-        .environmentObject(NavigationCoordinator())
-        .environmentObject(appState)
+        .environment(NavigationCoordinator())
+        .environment(appState)
         .environment(\.dependencyContainer, container)
     } else {
         ProgressView()

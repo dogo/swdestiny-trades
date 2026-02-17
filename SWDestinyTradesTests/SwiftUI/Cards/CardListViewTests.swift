@@ -65,9 +65,7 @@ final class CardListViewTests: BaseTestCase {
 
         let viewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
-        viewModel.loadCards()
-
-        try await Task.sleep(nanoseconds: 100_000_000)
+        await viewModel.loadCards()
 
         XCTAssertEqual(viewModel.items.count, 1)
         XCTAssertEqual(viewModel.items.first?.code, "01001")
@@ -132,9 +130,7 @@ final class CardListViewTests: BaseTestCase {
 
         let viewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
-        viewModel.loadCards()
-
-        try await Task.sleep(nanoseconds: 100_000_000)
+        await viewModel.loadCards()
 
         XCTAssertEqual(viewModel.items.count, 5)
     }
@@ -174,18 +170,14 @@ final class CardListViewTests: BaseTestCase {
         try await populateTestData(objects: [awCard, sorCard])
 
         let awViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
-        awViewModel.loadCards()
-
-        try await Task.sleep(nanoseconds: 100_000_000)
+        await awViewModel.loadCards()
 
         XCTAssertEqual(awViewModel.items.count, 1)
         XCTAssertEqual(awViewModel.items.first?.setCode, "AW")
 
         let sorSet = SetDTO.stub(name: "Spirit of Rebellion", code: "SOR")
         let sorViewModel = CardListViewModel(set: sorSet, dependencyContainer: testContainer.container)
-        sorViewModel.loadCards()
-
-        try await Task.sleep(nanoseconds: 100_000_000)
+        await sorViewModel.loadCards()
 
         XCTAssertEqual(sorViewModel.items.count, 1)
         XCTAssertEqual(sorViewModel.items.first?.setCode, "SOR")

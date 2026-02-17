@@ -10,10 +10,11 @@ import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class DeckListViewModel: ListViewModel<DeckDTO> {
 
-    @Published var showingDeleteConfirmation = false
-    @Published var deckToDelete: DeckDTO?
+    var showingDeleteConfirmation = false
+    var deckToDelete: DeckDTO?
 
     private var database: DatabaseProtocol? {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -21,7 +22,6 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        loadDecks()
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) {

@@ -9,40 +9,50 @@
 import Combine
 import SwiftUI
 
+// MARK: - CardListViewModel
+
 @MainActor
+@Observable
 final class CardListViewModel: ListViewModel<CardDTO> {
 
-    @Published var selectedSet: SetDTO?
-    @Published var filterOptions: CardFilterOptions = .init()
+    var selectedSet: SetDTO?
+    var filterOptions: CardFilterOptions = .init()
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
-    private var database: DatabaseProtocol? {
+    // MARK: - Computed Properties
+
+    var availableColors: [String] {
+        Array(Set(items.map(\.factionCode))).sorted()
+    }
+
+    var availableTypes: [String] {
+        Array(Set(items.map(\.typeCode))).sorted()
+    }
+
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    private var swDestinyService: SWDestinyServiceProtocol? {
+    private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
+
+    // MARK: - Initialization
 
     init(set: SetDTO, dependencyContainer: DependencyContainer = .shared) {
         selectedSet = set
         super.init(dependencyContainer: dependencyContainer)
-
-        $filterOptions
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.applyFilters()
-            }
-            .store(in: &cancellables)
     }
 
-    private func applyFilters() {
-        performFiltering(searchText: searchText)
+    required init(dependencyContainer: DependencyContainer = .shared) {
+        super.init(dependencyContainer: dependencyContainer)
     }
+
+    // MARK: - Error handling
 
     override func handleError(_ error: Error) {
         showToast = false
@@ -59,25 +69,17 @@ final class CardListViewModel: ListViewModel<CardDTO> {
         setLoaded()
     }
 
-    required init(dependencyContainer: DependencyContainer = .shared) {
-        super.init(dependencyContainer: dependencyContainer)
-    }
+    // MARK: - Internal Methods
 
     override func loadItems(page: Int = 0, reset: Bool = false) {
         Task {
-            await loadCardsAsync()
+            await loadCards()
         }
     }
 
-    func loadCards() {
-        Task {
-            await loadCardsAsync()
-        }
-    }
-
-    func loadCardsAsync() async {
+    func loadCards() async {
         guard let set = selectedSet else {
-            handleError(ViewModelError.dataLoadingFailed("No set selected"))
+            handleError(CardListError.noSetSelected)
             return
         }
 
@@ -85,15 +87,15 @@ final class CardListViewModel: ListViewModel<CardDTO> {
         await loadCardsFromDatabase(for: set)
     }
 
-    private func loadCardsFromDatabase(for set: SetDTO) async {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
+    // MARK: - Private Methods
 
-        let setCode = set.code
+    private func applyFilters() {
+        performFiltering(searchText: searchText)
+    }
+
+    private func loadCardsFromDatabase(for set: SetDTO) async {
         let allCards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        let setCards = allCards.filter { $0.setCode == setCode }
+        let setCards = allCards.filter { $0.setCode == set.code }
 
         updateItems(setCards)
         setLoaded()
@@ -104,11 +106,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     }
 
     private func fetchCardsFromAPI(for set: SetDTO) async {
-        guard let service = swDestinyService else {
-            handleError(ViewModelError.serviceNotAvailable)
-            return
-        }
-
         setLoading(true)
 
         let setCode = set.code.lowercased()
@@ -125,55 +122,58 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     // MARK: - Filtering
 
     override func filterItems(searchText: String) -> [CardDTO] {
-        var filtered = items
-
-        // Apply search filter first
-        if !searchText.isEmpty {
-            filtered = filtered.filter { card in
+        items.filter { card in
+            let matchesSearch = searchText.isEmpty ||
                 card.name.localizedCaseInsensitiveContains(searchText) ||
-                    card.subtitle.localizedCaseInsensitiveContains(searchText)
-            }
-        }
+                card.subtitle.localizedCaseInsensitiveContains(searchText)
 
-        // Apply color filters
-        if !filterOptions.selectedColors.isEmpty {
-            filtered = filtered.filter { card in
+            let matchesColor = filterOptions.selectedColors.isEmpty ||
                 filterOptions.selectedColors.contains(card.factionCode)
-            }
-        }
 
-        // Apply type filters
-        if !filterOptions.selectedTypes.isEmpty {
-            filtered = filtered.filter { card in
+            let matchesType = filterOptions.selectedTypes.isEmpty ||
                 filterOptions.selectedTypes.contains(card.typeCode)
-            }
-        }
 
-        // Apply cost filters
-        if let minCost = filterOptions.minCost {
-            filtered = filtered.filter { card in
-                card.cost >= minCost
-            }
-        }
+            let matchesMinCost = filterOptions.minCost.map { card.cost >= $0 } ?? true
+            let matchesMaxCost = filterOptions.maxCost.map { card.cost <= $0 } ?? true
 
-        if let maxCost = filterOptions.maxCost {
-            filtered = filtered.filter { card in
-                card.cost <= maxCost
-            }
+            return matchesSearch && matchesColor && matchesType &&
+                matchesMinCost && matchesMaxCost
         }
-
-        return filtered
     }
 }
 
-struct CardFilterOptions {
+// MARK: - CardListError
+
+enum CardListError: Error, LocalizedError {
+    case noSetSelected
+    case databaseNotAvailable
+    case serviceNotAvailable
+    case dataLoadingFailed(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .noSetSelected:
+            return "No set selected"
+        case .databaseNotAvailable:
+            return "Database not available"
+        case .serviceNotAvailable:
+            return "Service not available"
+        case let .dataLoadingFailed(message):
+            return message
+        }
+    }
+}
+
+// MARK: - CardFilterOptions
+
+struct CardFilterOptions: Equatable {
     var selectedColors: Set<String> = []
     var selectedTypes: Set<String> = []
     var minCost: Int?
     var maxCost: Int?
 
     var hasActiveFilters: Bool {
-        return !selectedColors.isEmpty ||
+        !selectedColors.isEmpty ||
             !selectedTypes.isEmpty ||
             minCost != nil ||
             maxCost != nil

@@ -10,15 +10,16 @@ import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class AddCardViewModel: ListViewModel<CardDTO> {
 
-    @Published var selectedFilters: AddCardFilters = .init()
-    @Published var availableSets: [SetDTO] = []
+    var selectedFilters: AddCardFilters = .init()
+    var availableSets: [SetDTO] = []
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
     var addCardContext: AddCardContext
 
@@ -34,13 +35,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         addCardContext = context
         super.init(dependencyContainer: dependencyContainer)
 
-        $selectedFilters
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.applyFilters()
-            }
-            .store(in: &cancellables)
-
         Task { @MainActor in
             await loadOrCreateUserCollection()
         }
@@ -53,13 +47,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         addCardContext = .collection(UserCollectionDTO())
 
         super.init(dependencyContainer: dependencyContainer)
-
-        $selectedFilters
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.applyFilters()
-            }
-            .store(in: &cancellables)
 
         Task { @MainActor in
             let people = await database?.fetch(PersonDTO.self, predicate: nil, sorted: nil)
@@ -135,7 +122,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    private func applyFilters() {
+    func applyFilters() {
         performFiltering(searchText: searchText)
     }
 
@@ -339,7 +326,7 @@ enum AddCardContext {
     }
 }
 
-struct AddCardFilters {
+struct AddCardFilters: Equatable {
     var selectedSet: SetDTO?
     var selectedTypes: Set<String> = []
     var selectedColors: Set<String> = []

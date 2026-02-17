@@ -11,7 +11,7 @@ import RealmSwift
 
 class CardDTO: Object, Decodable, Storable, Identifiable {
     @Persisted(primaryKey: true) var id: String = UUID().uuidString
-    @Persisted var dieFaces = List<StringObject>()
+    @Persisted var dieFaces = List<String>()
     @Persisted var setCode: String = ""
     @Persisted var setName: String = ""
     @Persisted var typeCode: String = ""
@@ -39,7 +39,7 @@ class CardDTO: Object, Decodable, Storable, Identifiable {
     @Persisted var externalUrl: String = ""
     @Persisted var imageUrl: String = ""
     @Persisted var label: String = ""
-    @Persisted var cp: Int = 0 // swiftlint:disable:this identifier_name
+    @Persisted var cp: Int = 0
     // Non API properties
     @Persisted var quantity: Int = 1
     @Persisted var isElite: Bool = false
@@ -73,7 +73,7 @@ class CardDTO: Object, Decodable, Storable, Identifiable {
         case externalUrl = "url"
         case imageUrl = "imagesrc"
         case label
-        case cp // swiftlint:disable:this identifier_name
+        case cp
     }
 
     required convenience init(from decoder: Decoder) throws {
@@ -108,20 +108,7 @@ class CardDTO: Object, Decodable, Storable, Identifiable {
         label = try container.decode(String.self, forKey: .label)
         cp = try container.decode(Int.self, forKey: .cp)
 
-        // Dogo : Realm Hack
-        let sides: [String]? = try? container.decode([String].self, forKey: .dieFaces) // Maps to local variable
-
-        dieFaces.removeAll()
-
-        sides?.forEach { side in // Then fill sides to `List`
-            let string = StringObject()
-            string.value = side
-            dieFaces.append(string)
-        }
-        // End hack
+        let faces: [String] = try container.decodeSafely(key: .dieFaces, defaultValue: [])
+        dieFaces.append(objectsIn: faces)
     }
-}
-
-class StringObject: Object, Storable {
-    @Persisted var value: String?
 }
