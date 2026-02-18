@@ -22,6 +22,10 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
 
+    private var database: DatabaseProtocol {
+        dependencyContainer.resolve(type: DatabaseProtocol.self)
+    }
+
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
     }
@@ -40,6 +44,10 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
 
                 try Task.checkCancellation()
 
+                for set in sets {
+                    try await database.save(object: set, update: .modified)
+                }
+
                 self.updateItems(sets)
                 self.setLoaded()
             } catch is CancellationError {
@@ -54,6 +62,11 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
         setLoading(true)
         do {
             let sets = try await service.retrieveSetList()
+
+            for set in sets {
+                try await database.save(object: set, update: .modified)
+            }
+
             updateItems(sets)
             setLoaded()
         } catch is CancellationError {

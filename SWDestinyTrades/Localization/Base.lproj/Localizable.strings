@@ -7,7 +7,7 @@
 */
 
 "ABOUT" = "About";
-"ABOUT_TEXT" = "By Diogo Autilio\n\nAPI Data by Paco %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.";
+"ABOUT_TEXT" = "By Diogo Autilio\n\nAPI Data by Lanoix %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.";
 "ADDED" = "Added";
 "ADD_CARD" = "Add card";
 "ADD_CARDS" = "Add cards";
@@ -60,7 +60,7 @@
 "ENTER_A_CARD_NAME_TYPE_OR_ANY_KEYWORD_TO_SEARCH" = "Enter a card name, type, or any keyword to search through all available cards";
 "ENTER_THE_PERSONS_NAME_TO_TRACK_LOANS_WITH_THEM" = "Enter the person's name to track loans with them.";
 "ERROR" = "Error";
-"ERROR_MESSAGE" = "Something went wrong! Tap here to check if swdestinydb.com is online.";
+"ERROR_MESSAGE" = "Something went wrong! Tap here to check if swdb.coruscant-initiative.org is online.";
 "EVENT" = "Event";
 "EXPANSIONS" = "Expansions";
 "FILTER_CARDS" = "Filter cards";
@@ -93,6 +93,7 @@
 "NO_RESULTS" = "No results";
 "NO_RESULTS_FOUND" = "No results found";
 "NO_CARDS_FOUND" = "No Cards Found";
+"NO_SETS_FOUND" = "No Sets Found";
 "PEOPLE" = "People";
 "PERSON_INFORMATION" = "Person information";
 "PLOT" = "Plot";
@@ -104,7 +105,7 @@
 "SHARE_TEXT" = "Shared with SWD Trades for iOS";
 "SUGGESTIONS" = "Suggestions";
 "SUPPORT" = "Support";
-"SWDESTINYDB_WEBSITE" = "https://swdestinydb.com";
+"SWDESTINYDB_WEBSITE" = "https://swdb.coruscant-initiative.org";
 "SWDESTINY_TRADES" = "SWDestiny Trades";
 "SWIFTUI_MIGRATION_IN_PROGRESS" = "SwiftUI migration in progress";
 "TOTAL_CARDS_VIEWMODELTOTALCARDCOUNT" = "Total cards: %@";
@@ -129,8 +130,12 @@
 "SEARCH_DECKS" = "Search decks...";
 "SEARCH_CARDS" = "Search cards...";
 "SEARCH_SETS" = "Search sets...";
+"SEARCH_PEOPLE" = "Search people...";
 "PULL_TO_REFRESH_TO_LOAD_CARDS" = "Pull to refresh to load cards";
 "NO_CARDS_IN_COLLECTION" = "No cards in your collection";
 "NO_CARDS_MATCH_SEARCH" = "No cards match your search";
 "PULL_TO_REFRESH_TO_LOAD_SETS" = "Pull to refresh to load sets";
 "NO_SETS_MATCH_SEARCH" = "No sets match your search";
+"FIRST_NAME_REQUIRED" = "First name is required";
+"FIRST_NAME_MIN_LENGTH" = "First name must be at least 2 characters";
+"LAST_NAME_MIN_LENGTH" = "Last name must be at least 2 characters";

@@ -92,13 +92,13 @@ final class NewPersonViewModel: BaseViewModel {
         switch field {
         case .firstName:
             if hasValidationError(.emptyFirstName) {
-                return "First name is required"
+                return L10n.firstNameRequired
             } else if hasValidationError(.firstNameTooShort) {
-                return "First name must be at least 2 characters"
+                return L10n.firstNameMinLength
             }
         case .lastName:
             if hasValidationError(.lastNameTooShort) {
-                return "Last name must be at least 2 characters"
+                return L10n.lastNameMinLength
             }
         }
         return nil

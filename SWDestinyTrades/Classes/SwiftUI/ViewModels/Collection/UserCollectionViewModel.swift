@@ -22,6 +22,10 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     var toastType: ToastType = .info
     var availableSets: [SetDTO] = []
 
+    var hasActiveFilters: Bool {
+        filterOptions.hasActiveFilters || selectedSet != nil
+    }
+
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }

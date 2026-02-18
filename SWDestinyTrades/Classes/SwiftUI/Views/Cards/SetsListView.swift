@@ -84,7 +84,7 @@ struct SetsListView: View {
     @ViewBuilder private var setsListContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             EmptyStateView(
-                title: "No Sets Found",
+                title: L10n.noSetsFound,
                 message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadSets : L10n.noSetsMatchSearch,
                 systemImage: "rectangle.stack"
             )

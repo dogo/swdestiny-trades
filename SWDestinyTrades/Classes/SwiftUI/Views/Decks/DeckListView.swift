@@ -232,12 +232,6 @@ struct DeckRowView: View {
             }
             .tint(.green)
         }
-        .contextMenu {
-            Button(L10n.edit, action: onEdit)
-            Button("Show Graph", action: onGraph)
-            Divider()
-            Button(L10n.delete, role: .destructive, action: onDelete)
-        }
     }
 
     // MARK: - Private Methods

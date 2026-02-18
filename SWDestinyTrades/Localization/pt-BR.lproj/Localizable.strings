@@ -7,7 +7,7 @@
 */
 
 "ABOUT" = "Sobre";
-"ABOUT_TEXT" = "Por Diogo Autilio\n\nInformação de API por Paco https://swdestinydb.com\n\nAs informações apresentadas neste aplicativo sobre Star Wars Destiny, tanto literal quanto gráfica, são protegidas por direitos autorais por Fantasy Flight Games. Este aplicativo não é produzido, endossado, apoiado ou afiliado a Fantasy Flight Games.";
+"ABOUT_TEXT" = "Por Diogo Autilio\n\nInformação de API por Lanoix %@\n\nAs informações apresentadas neste aplicativo sobre Star Wars Destiny, tanto literal quanto gráfica, são protegidas por direitos autorais por Fantasy Flight Games. Este aplicativo não é produzido, endossado, apoiado ou afiliado a Fantasy Flight Games.";
 "ADDED" = "Adicionado";
 "ADD_CARD" = "Adicionar carta";
 "ADD_CARDS" = "Adicionar cartas";
@@ -60,7 +60,7 @@
 "ENTER_A_CARD_NAME_TYPE_OR_ANY_KEYWORD_TO_SEARCH" = "Digite o nome de uma carta, seu tipo ou qualquer palavra-chave para buscar entre todas as cartas disponíveis";
 "ENTER_THE_PERSONS_NAME_TO_TRACK_LOANS_WITH_THEM" = "Digite o nome da pessoa para controlar os empréstimos com ela.";
 "ERROR" = "Erro";
-"ERROR_MESSAGE" = "Algo deu errado! Toque aqui para verificar se swdestinydb.com está online.";
+"ERROR_MESSAGE" = "Algo deu errado! Toque aqui para verificar se swdb.coruscant-initiative.org está online.";
 "EVENT" = "Evento";
 "EXPANSIONS" = "Expansões";
 "FILTER_CARDS" = "Filtrar cartas";
@@ -92,6 +92,7 @@
 "NO_PEOPLE_YET" = "Ainda não há pessoas";
 "NO_RESULTS" = "Sem resultados";
 "NO_RESULTS_FOUND" = "Nenhum resultado encontrado";
+"NO_SETS_FOUND" = "Nenhuma expansão encontrada";
 "PEOPLE" = "Pessoas";
 "PERSON_INFORMATION" = "Informações da pessoa";
 "NO_CARDS_FOUND" = "Nenhuma carta encontrada";
@@ -105,7 +106,7 @@
 "SHARE_TEXT" = "Compartilhado com SWD Trades para iOS";
 "SUGGESTIONS" = "Sugestões";
 "SUPPORT" = "Suporte";
-"SWDESTINYDB_WEBSITE" = "https://swdestinydb.com";
+"SWDESTINYDB_WEBSITE" = "https://swdb.coruscant-initiative.org";
 "SWDESTINY_TRADES" = "SWDestiny Trades";
 "SWIFTUI_MIGRATION_IN_PROGRESS" = "Migração para SwiftUI em andamento";
 "TOTAL_CARDS_VIEWMODELTOTALCARDCOUNT" = "Total de cartas: %@";
@@ -130,8 +131,12 @@
 "SEARCH_DECKS" = "Buscar baralhos...";
 "SEARCH_CARDS" = "Buscar cartas...";
 "SEARCH_SETS" = "Buscar expansões...";
+"SEARCH_PEOPLE" = "Buscar pessoas...";
 "PULL_TO_REFRESH_TO_LOAD_CARDS" = "Puxe para atualizar e carregar as cartas";
 "NO_CARDS_IN_COLLECTION" = "Nenhuma carta na sua coleção";
 "NO_CARDS_MATCH_SEARCH" = "Nenhuma carta corresponde à sua busca";
 "PULL_TO_REFRESH_TO_LOAD_SETS" = "Puxe para atualizar e carregar as expansões";
 "NO_SETS_MATCH_SEARCH" = "Nenhuma expansão corresponde à sua busca";
+"FIRST_NAME_REQUIRED" = "O nome é obrigatório";
+"FIRST_NAME_MIN_LENGTH" = "O nome deve ter pelo menos 2 caracteres";
+"LAST_NAME_MIN_LENGTH" = "O sobrenome deve ter pelo menos 2 caracteres";

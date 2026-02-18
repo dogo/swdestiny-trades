@@ -86,7 +86,7 @@ struct PeopleListView: View {
         }
         .navigationTitle(L10n.loans)
         .navigationBarTitleDisplayMode(.large)
-        .searchable(text: $viewModel.searchText, prompt: "Search people...")
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchPeople)
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)
         }

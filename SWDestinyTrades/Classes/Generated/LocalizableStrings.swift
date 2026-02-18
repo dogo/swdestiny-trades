@@ -20,11 +20,11 @@ internal enum L10n {
   internal static let about = L10n.tr("Localizable", "ABOUT", fallback: "About")
   /// By Diogo Autilio
   /// 
-  /// API Data by Paco %@
+  /// API Data by Lanoix %@
   /// 
   /// The information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.
   internal static func aboutText(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "ABOUT_TEXT", String(describing: p1), fallback: "By Diogo Autilio\n\nAPI Data by Paco %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.")
+    return L10n.tr("Localizable", "ABOUT_TEXT", String(describing: p1), fallback: "By Diogo Autilio\n\nAPI Data by Lanoix %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.")
   }
   /// Add Borrowed Card
   internal static let addBorrowedCard = L10n.tr("Localizable", "ADD_BORROWED_CARD", fallback: "Add Borrowed Card")
@@ -146,8 +146,8 @@ internal enum L10n {
   internal static let enterThePersonsNameToTrackLoansWithThem = L10n.tr("Localizable", "ENTER_THE_PERSONS_NAME_TO_TRACK_LOANS_WITH_THEM", fallback: "Enter the person's name to track loans with them.")
   /// Error
   internal static let error = L10n.tr("Localizable", "ERROR", fallback: "Error")
-  /// Something went wrong! Tap here to check if swdestinydb.com is online.
-  internal static let errorMessage = L10n.tr("Localizable", "ERROR_MESSAGE", fallback: "Something went wrong! Tap here to check if swdestinydb.com is online.")
+  /// Something went wrong! Tap here to check if swdb.coruscant-initiative.org is online.
+  internal static let errorMessage = L10n.tr("Localizable", "ERROR_MESSAGE", fallback: "Something went wrong! Tap here to check if swdb.coruscant-initiative.org is online.")
   /// Event
   internal static let event = L10n.tr("Localizable", "EVENT", fallback: "Event")
   /// Expansions
@@ -158,6 +158,10 @@ internal enum L10n {
   internal static let filterCollection = L10n.tr("Localizable", "FILTER_COLLECTION", fallback: "Filter collection")
   /// First name
   internal static let firstName = L10n.tr("Localizable", "FIRST_NAME", fallback: "First name")
+  /// First name must be at least 2 characters
+  internal static let firstNameMinLength = L10n.tr("Localizable", "FIRST_NAME_MIN_LENGTH", fallback: "First name must be at least 2 characters")
+  /// First name is required
+  internal static let firstNameRequired = L10n.tr("Localizable", "FIRST_NAME_REQUIRED", fallback: "First name is required")
   /// Flavor text
   internal static let flavorText = L10n.tr("Localizable", "FLAVOR_TEXT", fallback: "Flavor text")
   /// Generating charts…
@@ -172,6 +176,8 @@ internal enum L10n {
   internal static let hasLentMe = L10n.tr("Localizable", "HAS_LENT_ME", fallback: "Has lent me:")
   /// Last name
   internal static let lastName = L10n.tr("Localizable", "LAST_NAME", fallback: "Last name")
+  /// Last name must be at least 2 characters
+  internal static let lastNameMinLength = L10n.tr("Localizable", "LAST_NAME_MIN_LENGTH", fallback: "Last name must be at least 2 characters")
   /// Last update: %@
   internal static func lastUpdate(_ p1: Any) -> String {
     return L10n.tr("Localizable", "LAST_UPDATE", String(describing: p1), fallback: "Last update: %@")
@@ -232,6 +238,8 @@ internal enum L10n {
   internal static let noResults = L10n.tr("Localizable", "NO_RESULTS", fallback: "No results")
   /// No results found
   internal static let noResultsFound = L10n.tr("Localizable", "NO_RESULTS_FOUND", fallback: "No results found")
+  /// No Sets Found
+  internal static let noSetsFound = L10n.tr("Localizable", "NO_SETS_FOUND", fallback: "No Sets Found")
   /// No sets match your search
   internal static let noSetsMatchSearch = L10n.tr("Localizable", "NO_SETS_MATCH_SEARCH", fallback: "No sets match your search")
   /// Non-elite
@@ -266,6 +274,8 @@ internal enum L10n {
   internal static let searchCollection = L10n.tr("Localizable", "SEARCH_COLLECTION", fallback: "Search collection...")
   /// Search decks...
   internal static let searchDecks = L10n.tr("Localizable", "SEARCH_DECKS", fallback: "Search decks...")
+  /// Search people...
+  internal static let searchPeople = L10n.tr("Localizable", "SEARCH_PEOPLE", fallback: "Search people...")
   /// Search sets...
   internal static let searchSets = L10n.tr("Localizable", "SEARCH_SETS", fallback: "Search sets...")
   /// Searching for “%@”…
@@ -290,8 +300,8 @@ internal enum L10n {
   internal static let support = L10n.tr("Localizable", "SUPPORT", fallback: "Support")
   /// SWDestiny Trades
   internal static let swdestinyTrades = L10n.tr("Localizable", "SWDESTINY_TRADES", fallback: "SWDestiny Trades")
-  /// https://swdestinydb.com
-  internal static let swdestinydbWebsite = L10n.tr("Localizable", "SWDESTINYDB_WEBSITE", fallback: "https://swdestinydb.com")
+  /// https://swdb.coruscant-initiative.org
+  internal static let swdestinydbWebsite = L10n.tr("Localizable", "SWDESTINYDB_WEBSITE", fallback: "https://swdb.coruscant-initiative.org")
   /// SwiftUI migration in progress
   internal static let swiftuiMigrationInProgress = L10n.tr("Localizable", "SWIFTUI_MIGRATION_IN_PROGRESS", fallback: "SwiftUI migration in progress")
   /// Total cards: %@

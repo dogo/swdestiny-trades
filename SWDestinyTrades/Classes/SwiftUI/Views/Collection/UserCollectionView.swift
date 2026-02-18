@@ -63,6 +63,8 @@ struct UserCollectionView: View {
         .onAppear {
             if viewModel.items.isEmpty {
                 viewModel.loadCollection()
+            }
+            if viewModel.availableSets.isEmpty {
                 viewModel.loadAvailableSets()
             }
         }
@@ -140,7 +142,7 @@ struct UserCollectionView: View {
         Button {
             showingFilterSheet = true
         } label: {
-            Image(systemName: viewModel.filterOptions.hasActiveFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
+            Image(systemName: viewModel.hasActiveFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
         }
     }
 

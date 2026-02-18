@@ -20,7 +20,7 @@ struct NewPersonView: View {
         Form {
             Section {
                 VStack(alignment: .leading, spacing: 8) {
-                    TextField("First Name", text: $viewModel.firstName)
+                    TextField(L10n.firstName, text: $viewModel.firstName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.words)
                         .disableAutocorrection(false)
@@ -37,7 +37,7 @@ struct NewPersonView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    TextField("Last Name", text: $viewModel.lastName)
+                    TextField(L10n.lastName, text: $viewModel.lastName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.words)
                         .disableAutocorrection(false)
