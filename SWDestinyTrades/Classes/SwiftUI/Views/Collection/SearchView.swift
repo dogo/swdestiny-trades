@@ -30,7 +30,7 @@ struct SearchView: View {
         }
         .navigationTitle(L10n.search)
         .navigationBarTitleDisplayMode(.large)
-        .searchable(text: $viewModel.searchText, prompt: "Search for cards...")
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
         .onSubmit(of: .search) {
             if !viewModel.searchText.isEmpty {
                 viewModel.performSearch(query: viewModel.searchText)
@@ -79,7 +79,7 @@ struct SearchView: View {
                 .foregroundColor(.secondary)
 
             VStack(spacing: 8) {
-                Text(L10n.searchForCards)
+                Text(L10n.searchCards)
                     .font(.title2)
                     .fontWeight(.semibold)
 

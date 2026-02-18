@@ -252,10 +252,12 @@ internal enum L10n {
   internal static let savePerson = L10n.tr("Localizable", "SAVE_PERSON", fallback: "Save person")
   /// Search
   internal static let search = L10n.tr("Localizable", "SEARCH", fallback: "Search")
+  /// Search cards...
+  internal static let searchCards = L10n.tr("Localizable", "SEARCH_CARDS", fallback: "Search cards...")
   /// Search collection...
   internal static let searchCollection = L10n.tr("Localizable", "SEARCH_COLLECTION", fallback: "Search collection...")
-  /// Search for cards
-  internal static let searchForCards = L10n.tr("Localizable", "SEARCH_FOR_CARDS", fallback: "Search for cards")
+  /// Search decks...
+  internal static let searchDecks = L10n.tr("Localizable", "SEARCH_DECKS", fallback: "Search decks...")
   /// Searching for “%@”…
   internal static func searchingForQuery(_ p1: Any) -> String {
     return L10n.tr("Localizable", "SEARCHING_FOR_QUERY", String(describing: p1), fallback: "Searching for “%@”…")

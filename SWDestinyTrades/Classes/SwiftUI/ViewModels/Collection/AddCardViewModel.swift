@@ -37,10 +37,9 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
         Task { @MainActor in
             await loadOrCreateUserCollection()
+            loadAllCards()
+            loadAvailableSets()
         }
-
-        loadAllCards()
-        loadAvailableSets()
     }
 
     init(personId: String, type: AddCardType, dependencyContainer: DependencyContainer = .shared) {
@@ -60,10 +59,10 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                     await self.loadOrCreateUserCollection()
                 }
             }
-        }
 
-        loadAllCards()
-        loadAvailableSets()
+            loadAllCards()
+            loadAvailableSets()
+        }
     }
 
     required init(dependencyContainer: DependencyContainer = .shared) {
@@ -204,12 +203,14 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                 }
 
                 self.showToast = false
-                self.toastTitle = L10n.cardAddedSuccessfully(card.name)
+                self.toastTitle = L10n.cardAdded
+                self.toastMessage = L10n.cardAddedSuccessfully(card.name)
                 self.toastType = .success
 
                 try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
                 self.showToast = true
-                self.refresh()
+
+                self.performFiltering(searchText: self.searchText)
             } catch is CancellationError {
                 return
             } catch {

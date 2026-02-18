@@ -101,7 +101,6 @@
 "SAVE_PERSON" = "Save person";
 "SEARCH" = "Search";
 "SEARCHING_FOR_QUERY" = "Searching for “%@”…";
-"SEARCH_FOR_CARDS" = "Search for cards";
 "SHARE_TEXT" = "Shared with SWD Trades for iOS";
 "SUGGESTIONS" = "Suggestions";
 "SUPPORT" = "Support";
@@ -128,3 +127,5 @@
 "ADD_BORROWED_CARD" = "Add Borrowed Card";
 "CARD_ADDED" = "Card Added";
 "CARD_ADDED_SUCCESSFULLY" = "%@ has been added successfully!";
+"SEARCH_DECKS" = "Search decks...";
+"SEARCH_CARDS" = "Search cards...";

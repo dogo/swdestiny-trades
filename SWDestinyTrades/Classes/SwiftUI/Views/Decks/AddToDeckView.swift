@@ -35,7 +35,7 @@ struct AddToDeckView: View {
         }
         .navigationTitle(L10n.addCard)
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $viewModel.searchText, prompt: "Search cards...")
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
         .onSubmit(of: .search) {}
         .overlay(alignment: .top) {
             if showToast {

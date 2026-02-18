@@ -49,7 +49,7 @@ struct CardListView: View {
         .refreshable {
             await refreshCards()
         }
-        .searchable(text: $viewModel.searchText, prompt: "Search cards...")
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
         .sheet(isPresented: $showingFilterOptions) {
             FilterOptionsView(
                 filterOptions: $viewModel.filterOptions,

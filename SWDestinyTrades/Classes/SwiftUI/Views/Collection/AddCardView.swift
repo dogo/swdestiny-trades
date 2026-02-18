@@ -40,7 +40,7 @@ struct AddCardView: View {
                     filterButton
                 }
             }
-            .searchable(text: $viewModel.searchText, prompt: "Search cards...")
+            .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
             .refreshable {
                 await refreshCards()
             }
@@ -48,7 +48,9 @@ struct AddCardView: View {
                 AddCardFilterView(
                     filters: $viewModel.selectedFilters,
                     availableSets: viewModel.availableSets,
-                    onApply: {}
+                    onApply: {
+                        viewModel.applyFilters()
+                    }
                 )
             }
 
@@ -67,9 +69,6 @@ struct AddCardView: View {
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
         .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
-        }
-        .onChange(of: viewModel.selectedFilters) { _, _ in
-            viewModel.applyFilters()
         }
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)

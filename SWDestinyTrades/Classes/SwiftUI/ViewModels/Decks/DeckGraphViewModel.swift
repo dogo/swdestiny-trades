@@ -9,13 +9,14 @@
 import Combine
 import SwiftUI
 
+@Observable
 final class DeckGraphViewModel: BaseViewModel {
 
-    @Published var deck: DeckDTO
-    @Published var cardTypeData: [Int] = []
-    @Published var cardCostData: [Int] = []
-    @Published var diceFaceData: [Int] = []
-    @Published var hasData = false
+    var deck: DeckDTO
+    var cardTypeData: [Int] = []
+    var cardCostData: [Int] = []
+    var diceFaceData: [Int] = []
+    var hasData = false
 
     let cardTypeLabels = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
     let diceFaceLabels = ["Special", "Blank", "Melee", "Ranged", "Focus",

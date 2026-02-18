@@ -36,7 +36,7 @@ struct DeckListView: View {
                 addButton
             }
         }
-        .searchable(text: $viewModel.searchText, prompt: "Search decks...")
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchDecks)
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)
         }

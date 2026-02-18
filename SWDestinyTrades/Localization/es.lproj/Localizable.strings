@@ -128,3 +128,5 @@
 "ADD_BORROWED_CARD" = "Añadir carta prestada por alguien";
 "CARD_ADDED" = "Carta añadida";
 "CARD_ADDED_SUCCESSFULLY" = "¡%@ se ha añadido correctamente!";
+"SEARCH_DECKS" = "Buscar barajas...";
+"SEARCH_CARDS" = "Buscar cartas...";
