@@ -54,6 +54,9 @@ struct AddToDeckView: View {
         .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
         }
+        .task {
+            viewModel.loadRemoteCards()
+        }
     }
 
     @ViewBuilder private var dataSourceSelector: some View {

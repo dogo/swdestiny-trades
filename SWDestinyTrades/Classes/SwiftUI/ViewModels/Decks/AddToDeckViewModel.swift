@@ -22,6 +22,8 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     var toastMessage = ""
     var toastType: ToastType = .info
 
+    private var loadTask: Task<Void, Never>?
+
     enum DataSource {
         case remote
         case local
@@ -38,13 +40,11 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     init(deck: DeckDTO, dependencyContainer: DependencyContainer = .shared) {
         self.deck = deck
         super.init(dependencyContainer: dependencyContainer)
-        loadRemoteCards()
     }
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         deck = DeckDTO()
         super.init(dependencyContainer: dependencyContainer)
-        loadRemoteCards()
     }
 
     override func filterItems(searchText: String) -> [CardDTO] {
@@ -61,10 +61,11 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     }
 
     func loadRemoteCards() {
+        loadTask?.cancel()
         dataSource = .remote
         setLoading(true)
 
-        Task { @MainActor in
+        loadTask = Task { @MainActor in
             do {
                 try Task.checkCancellation()
 
@@ -83,10 +84,11 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     }
 
     func loadLocalCards() {
+        loadTask?.cancel()
         dataSource = .local
         setLoading(true)
 
-        Task { @MainActor in
+        loadTask = Task { @MainActor in
             do {
                 try Task.checkCancellation()
                 let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
