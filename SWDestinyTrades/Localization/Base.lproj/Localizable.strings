@@ -139,3 +139,13 @@
 "FIRST_NAME_REQUIRED" = "First name is required";
 "FIRST_NAME_MIN_LENGTH" = "First name must be at least 2 characters";
 "LAST_NAME_MIN_LENGTH" = "Last name must be at least 2 characters";
+"FACTION" = "Faction";
+"RARITY" = "Rarity";
+"AFFILIATION" = "Affiliation";
+"ILLUSTRATOR" = "Illustrator";
+"DECK_LIMIT" = "Deck Limit";
+"UNIQUE" = "Unique";
+"HAS_DIE" = "Has Die";
+"YES" = "Yes";
+"HEALTH" = "Health";
+"POINTS" = "Points";

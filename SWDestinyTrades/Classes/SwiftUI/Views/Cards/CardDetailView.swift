@@ -158,15 +158,15 @@ struct CardDetailView: View {
             GridItem(.flexible())
         ], spacing: 12) {
             if viewModel.currentCard.cost > 0 {
-                StatView(title: "Cost", value: "\(viewModel.currentCard.cost)", color: .orange)
+                StatView(title: L10n.cost, value: "\(viewModel.currentCard.cost)", color: .orange)
             }
 
             if viewModel.currentCard.health > 0 {
-                StatView(title: "Health", value: "\(viewModel.currentCard.health)", color: .red)
+                StatView(title: L10n.health, value: "\(viewModel.currentCard.health)", color: .red)
             }
 
             if !viewModel.currentCard.points.isEmpty {
-                StatView(title: "Points", value: viewModel.currentCard.points, color: .blue)
+                StatView(title: L10n.points, value: viewModel.currentCard.points, color: .blue)
             }
         }
     }
@@ -178,26 +178,26 @@ struct CardDetailView: View {
                 .foregroundColor(.primary)
 
             InfoRow(title: L10n.set, value: viewModel.currentCard.setName)
-            InfoRow(title: "Type", value: viewModel.currentCard.typeName)
-            InfoRow(title: "Faction", value: viewModel.currentCard.factionName)
-            InfoRow(title: "Rarity", value: viewModel.currentCard.rarityName)
+            InfoRow(title: L10n.type, value: viewModel.currentCard.typeName)
+            InfoRow(title: L10n.faction, value: viewModel.currentCard.factionName)
+            InfoRow(title: L10n.rarity, value: viewModel.currentCard.rarityName)
 
             if !viewModel.currentCard.affiliationName.isEmpty {
-                InfoRow(title: "Affiliation", value: viewModel.currentCard.affiliationName)
+                InfoRow(title: L10n.affiliation, value: viewModel.currentCard.affiliationName)
             }
 
             if !viewModel.currentCard.illustrator.isEmpty {
-                InfoRow(title: "Illustrator", value: viewModel.currentCard.illustrator)
+                InfoRow(title: L10n.illustrator, value: viewModel.currentCard.illustrator)
             }
 
-            InfoRow(title: "Deck Limit", value: "\(viewModel.currentCard.deckLimit)")
+            InfoRow(title: L10n.deckLimit, value: "\(viewModel.currentCard.deckLimit)")
 
             if viewModel.currentCard.isUnique {
-                InfoRow(title: "Unique", value: "Yes")
+                InfoRow(title: L10n.unique, value: L10n.yes)
             }
 
             if viewModel.currentCard.hasDie {
-                InfoRow(title: "Has Die", value: "Yes")
+                InfoRow(title: L10n.hasDie, value: L10n.yes)
             }
         }
     }

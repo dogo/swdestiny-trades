@@ -46,6 +46,8 @@ internal enum L10n {
   internal static let addPerson = L10n.tr("Localizable", "ADD_PERSON", fallback: "Add person")
   /// Added
   internal static let added = L10n.tr("Localizable", "ADDED", fallback: "Added")
+  /// Affiliation
+  internal static let affiliation = L10n.tr("Localizable", "AFFILIATION", fallback: "Affiliation")
   /// All cards
   internal static let allCards = L10n.tr("Localizable", "ALL_CARDS", fallback: "All cards")
   /// All sets
@@ -116,6 +118,8 @@ internal enum L10n {
   internal static let createYourFirstDeckToGetStarted = L10n.tr("Localizable", "CREATE_YOUR_FIRST_DECK_TO_GET_STARTED", fallback: "Create your first deck to get started")
   /// Deck graph
   internal static let deckGraph = L10n.tr("Localizable", "DECK_GRAPH", fallback: "Deck graph")
+  /// Deck Limit
+  internal static let deckLimit = L10n.tr("Localizable", "DECK_LIMIT", fallback: "Deck Limit")
   /// Deck name
   internal static let deckName = L10n.tr("Localizable", "DECK_NAME", fallback: "Deck name")
   /// Deck statistics
@@ -152,6 +156,8 @@ internal enum L10n {
   internal static let event = L10n.tr("Localizable", "EVENT", fallback: "Event")
   /// Expansions
   internal static let expansions = L10n.tr("Localizable", "EXPANSIONS", fallback: "Expansions")
+  /// Faction
+  internal static let faction = L10n.tr("Localizable", "FACTION", fallback: "Faction")
   /// Filter cards
   internal static let filterCards = L10n.tr("Localizable", "FILTER_CARDS", fallback: "Filter cards")
   /// Filter collection
@@ -172,8 +178,14 @@ internal enum L10n {
   internal static let gray = L10n.tr("Localizable", "GRAY", fallback: "Gray")
   /// Has borrowed my:
   internal static let hasBorrowedMy = L10n.tr("Localizable", "HAS_BORROWED_MY", fallback: "Has borrowed my:")
+  /// Has Die
+  internal static let hasDie = L10n.tr("Localizable", "HAS_DIE", fallback: "Has Die")
   /// Has lent me:
   internal static let hasLentMe = L10n.tr("Localizable", "HAS_LENT_ME", fallback: "Has lent me:")
+  /// Health
+  internal static let health = L10n.tr("Localizable", "HEALTH", fallback: "Health")
+  /// Illustrator
+  internal static let illustrator = L10n.tr("Localizable", "ILLUSTRATOR", fallback: "Illustrator")
   /// Last name
   internal static let lastName = L10n.tr("Localizable", "LAST_NAME", fallback: "Last name")
   /// Last name must be at least 2 characters
@@ -250,6 +262,8 @@ internal enum L10n {
   internal static let personInformation = L10n.tr("Localizable", "PERSON_INFORMATION", fallback: "Person information")
   /// Plot
   internal static let plot = L10n.tr("Localizable", "PLOT", fallback: "Plot")
+  /// Points
+  internal static let points = L10n.tr("Localizable", "POINTS", fallback: "Points")
   /// Popular searches
   internal static let popularSearches = L10n.tr("Localizable", "POPULAR_SEARCHES", fallback: "Popular searches")
   /// Pull to refresh to load cards
@@ -258,6 +272,8 @@ internal enum L10n {
   internal static let pullToRefreshToLoadSets = L10n.tr("Localizable", "PULL_TO_REFRESH_TO_LOAD_SETS", fallback: "Pull to refresh to load sets")
   /// Quantity
   internal static let quantity = L10n.tr("Localizable", "QUANTITY", fallback: "Quantity")
+  /// Rarity
+  internal static let rarity = L10n.tr("Localizable", "RARITY", fallback: "Rarity")
   /// Red
   internal static let red = L10n.tr("Localizable", "RED", fallback: "Red")
   /// Remote
@@ -312,6 +328,8 @@ internal enum L10n {
   internal static let tryAdjustingYourSearchTerms = L10n.tr("Localizable", "TRY_ADJUSTING_YOUR_SEARCH_TERMS", fallback: "Try adjusting your search terms")
   /// Type
   internal static let type = L10n.tr("Localizable", "TYPE", fallback: "Type")
+  /// Unique
+  internal static let unique = L10n.tr("Localizable", "UNIQUE", fallback: "Unique")
   /// Unique cards: %@
   internal static func uniqueCardsViewmodeluniquecardcount(_ p1: Any) -> String {
     return L10n.tr("Localizable", "UNIQUE_CARDS_VIEWMODELUNIQUECARDCOUNT", String(describing: p1), fallback: "Unique cards: %@")
@@ -328,6 +346,8 @@ internal enum L10n {
   }
   /// Yellow
   internal static let yellow = L10n.tr("Localizable", "YELLOW", fallback: "Yellow")
+  /// Yes
+  internal static let yes = L10n.tr("Localizable", "YES", fallback: "Yes")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

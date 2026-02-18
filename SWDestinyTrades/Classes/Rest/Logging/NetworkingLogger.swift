@@ -30,9 +30,11 @@ final class NetworkingLogger {
 
         if let method = request.httpMethod, let url = request.url {
             printSeparator()
-            log(method: method, url: url.absoluteString)
-            log(headers: request.allHTTPHeaderFields)
-            log(body: request.httpBody)
+            printTagged("🚀 \(method) \(url.absoluteString)")
+            if loglevel == .debug {
+                log(headers: request.allHTTPHeaderFields)
+                log(body: request.httpBody)
+            }
         }
     }
 
@@ -42,12 +44,14 @@ final class NetworkingLogger {
         guard loglevel != .none else { return }
 
         if let response = response as? HTTPURLResponse, let url = response.url {
-            log(statusCode: response.statusCode, url: url.absoluteString, time: time)
+            let emoji = response.statusCode < 400 ? "✅" : "❌"
+            printTagged("\(emoji) \(response.statusCode) • \(time.toCompactString())")
         }
 
         if loglevel == .debug {
             logJSON(data)
         }
+        printSeparator()
     }
 
     // MARK: - Log Error
@@ -56,8 +60,10 @@ final class NetworkingLogger {
         guard let method = request.httpMethod,
               let url = request.url,
               let error else { return }
-        printTagged("[Error] \(statusCode) \(method) '\(url)':")
-        printTagged("Description: \(error.localizedDescription)")
+        printSeparator()
+        printTagged("💥 \(statusCode) \(method) \(url.absoluteString)")
+        printTagged("   \(error.localizedDescription)")
+        printSeparator()
     }
 
     // MARK: - Log Body
@@ -78,13 +84,13 @@ final class NetworkingLogger {
             if let prettyString = String(data: prettyData, encoding: .utf8) {
                 prettyJSON(prettyString)
             } else {
-                printTagged("JSON: <non-UTF8 data, \(prettyData.count) bytes>")
+                printTagged("📄 Response: <\(prettyData.count) bytes>")
             }
         } catch {
             if let string = String(data: data, encoding: .utf8) {
-                printTagged(string)
+                printTagged("📄 Response: \(string)")
             } else {
-                printTagged("<non-UTF8 response body, \(data.count) bytes>")
+                printTagged("📄 Response: <\(data.count) bytes>")
             }
         }
     }
@@ -98,20 +104,19 @@ final class NetworkingLogger {
     // MARK: - Log Headers
 
     private func log(headers: [String: String]?) {
-        printTagged("Headers: [")
-        headers?.forEach { printTagged("  \($0): \($1)") }
-        printTagged("]")
+        guard let headers, !headers.isEmpty else { return }
+        printTagged("📋 Headers:")
+        headers.forEach { printTagged("   \($0): \($1)") }
     }
 
     // MARK: - Log Body
 
     private func log(body: Data?) {
-        if let httpBody = body {
-            if let bodyStr = String(data: httpBody, encoding: .utf8) {
-                printTagged("Body: \(bodyStr)")
-            } else {
-                printTagged("Body: <non-UTF8 data, \(httpBody.count) bytes>")
-            }
+        guard let httpBody = body else { return }
+        if let bodyStr = String(data: httpBody, encoding: .utf8) {
+            printTagged("📦 Body: \(bodyStr)")
+        } else {
+            printTagged("📦 Body: <\(httpBody.count) bytes>")
         }
     }
 
@@ -122,13 +127,13 @@ final class NetworkingLogger {
     }
 
     private func printSeparator() {
-        outputStream.write("LOGGER |---------------------------------------------------\n")
+        outputStream.write("LOGGER | ───────────────────────────────────────────────────\n")
     }
 
     private func prettyJSON(_ string: String) {
-        let components = string.components(separatedBy: "\n")
-        printTagged("JSON:")
-        components.forEach { printTagged($0) }
+        let components = string.components(separatedBy: "\n").filter { !$0.isEmpty }
+        printTagged("📄 Response:")
+        components.forEach { printTagged("   \($0)") }
     }
 }
 
@@ -138,11 +143,12 @@ protocol TextOutputStream {
 
 struct StandardOutputStream: TextOutputStream {
     func write(_ string: String) {
-        print(string)
+        print(string, terminator: "")
     }
 }
 
 extension TimeInterval {
+    /// Convert to full timestamp format
     func toString() -> String {
         let time = NSInteger(self)
 
@@ -152,5 +158,14 @@ extension TimeInterval {
         let hours = (time / 3600)
 
         return String(format: "%00.2d:%0.2d:%0.2d.%0.3d", hours, minutes, seconds, milliseconds)
+    }
+
+    /// Convert to compact format (e.g., "18ms" or "1.23s")
+    func toCompactString() -> String {
+        if self < 1 {
+            return String(format: "%.0fms", self * 1000)
+        } else {
+            return String(format: "%.2fs", self)
+        }
     }
 }

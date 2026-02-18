@@ -140,3 +140,13 @@
 "FIRST_NAME_REQUIRED" = "El nombre es obligatorio";
 "FIRST_NAME_MIN_LENGTH" = "El nombre debe tener al menos 2 caracteres";
 "LAST_NAME_MIN_LENGTH" = "El apellido debe tener al menos 2 caracteres";
+"FACTION" = "Facción";
+"RARITY" = "Rareza";
+"AFFILIATION" = "Afiliación";
+"ILLUSTRATOR" = "Ilustrador";
+"DECK_LIMIT" = "Límite en la baraja";
+"UNIQUE" = "Única";
+"HAS_DIE" = "Tiene dado";
+"YES" = "Sí";
+"HEALTH" = "Salud";
+"POINTS" = "Puntos";

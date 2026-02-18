@@ -140,3 +140,13 @@
 "FIRST_NAME_REQUIRED" = "O nome é obrigatório";
 "FIRST_NAME_MIN_LENGTH" = "O nome deve ter pelo menos 2 caracteres";
 "LAST_NAME_MIN_LENGTH" = "O sobrenome deve ter pelo menos 2 caracteres";
+"FACTION" = "Facção";
+"RARITY" = "Raridade";
+"AFFILIATION" = "Afiliação";
+"ILLUSTRATOR" = "Ilustrador";
+"DECK_LIMIT" = "Limite no deck";
+"UNIQUE" = "Única";
+"HAS_DIE" = "Possui dado";
+"YES" = "Sim";
+"HEALTH" = "Vida";
+"POINTS" = "Pontos";
