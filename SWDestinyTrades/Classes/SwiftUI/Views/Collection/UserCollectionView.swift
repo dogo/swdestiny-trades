@@ -189,6 +189,15 @@ struct CollectionCardRowView: View {
     let onQuantityChange: (CardDTO, Int) -> Void
     let onTap: () -> Void
 
+    @State private var quantity: Int
+
+    init(card: CardDTO, onQuantityChange: @escaping (CardDTO, Int) -> Void, onTap: @escaping () -> Void) {
+        self.card = card
+        self.onQuantityChange = onQuantityChange
+        self.onTap = onTap
+        _quantity = State(initialValue: card.quantity)
+    }
+
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 12) {
@@ -240,20 +249,24 @@ struct CollectionCardRowView: View {
 
                 HStack {
                     Button {
-                        onQuantityChange(card, max(0, card.quantity - 1))
+                        let newQuantity = max(0, quantity - 1)
+                        quantity = newQuantity
+                        onQuantityChange(card, newQuantity)
                     } label: {
                         Image(systemName: "minus.circle")
                     }
-                    .disabled(card.quantity <= 0)
+                    .disabled(quantity <= 0)
                     .buttonStyle(.plain)
 
-                    Text("\(card.quantity)")
+                    Text("\(quantity)")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .frame(minWidth: 30)
 
                     Button {
-                        onQuantityChange(card, card.quantity + 1)
+                        let newQuantity = quantity + 1
+                        quantity = newQuantity
+                        onQuantityChange(card, newQuantity)
                     } label: {
                         Image(systemName: "plus.circle")
                     }
@@ -264,6 +277,9 @@ struct CollectionCardRowView: View {
             .padding(.vertical, 8)
         }
         .buttonStyle(.plain)
+        .onChange(of: card.quantity) { _, newValue in
+            quantity = newValue
+        }
     }
 }
 
