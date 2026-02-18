@@ -25,12 +25,22 @@ final class CardListViewModel: ListViewModel<CardDTO> {
 
     // MARK: - Computed Properties
 
-    var availableColors: [String] {
-        Array(Set(items.map(\.factionCode))).sorted()
+    var availableColorNames: [FilterOption] {
+        let uniqueColors = Dictionary(grouping: items) { $0.factionCode }
+            .compactMap { code, cards -> FilterOption? in
+                guard let first = cards.first else { return nil }
+                return FilterOption(code: code, name: first.factionCode)
+            }
+        return uniqueColors.sorted { $0.name < $1.name }
     }
 
-    var availableTypes: [String] {
-        Array(Set(items.map(\.typeCode))).sorted()
+    var availableTypeNames: [FilterOption] {
+        let uniqueTypes = Dictionary(grouping: items) { $0.typeCode }
+            .compactMap { code, cards -> FilterOption? in
+                guard let first = cards.first else { return nil }
+                return FilterOption(code: code, name: first.typeName)
+            }
+        return uniqueTypes.sorted { $0.name < $1.name }
     }
 
     private var database: DatabaseProtocol {
@@ -185,4 +195,13 @@ struct CardFilterOptions: Equatable {
         minCost = nil
         maxCost = nil
     }
+}
+
+// MARK: - FilterOption
+
+struct FilterOption: Identifiable, Equatable {
+    let code: String
+    let name: String
+
+    var id: String { code }
 }

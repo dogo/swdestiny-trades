@@ -53,8 +53,8 @@ struct CardListView: View {
         .sheet(isPresented: $showingFilterOptions) {
             FilterOptionsView(
                 filterOptions: $viewModel.filterOptions,
-                availableColors: viewModel.availableColors,
-                availableTypes: viewModel.availableTypes
+                availableColors: viewModel.availableColorNames,
+                availableTypes: viewModel.availableTypeNames
             ) {
                 showingFilterOptions = false
             }
@@ -167,8 +167,8 @@ struct CardRowView: View {
                             .font(.caption)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
-                            .background(factionColor.opacity(0.2))
-                            .foregroundColor(factionColor)
+                            .background(card.factionColor().opacity(0.2))
+                            .foregroundColor(card.factionColor())
                             .clipShape(Capsule())
 
                         Spacer()
@@ -185,36 +185,21 @@ struct CardRowView: View {
         }
         .buttonStyle(.plain)
     }
-
-    private var factionColor: Color {
-        switch card.factionCode.lowercased() {
-        case "red":
-            return .red
-        case "blue":
-            return .blue
-        case "yellow":
-            return .yellow
-        case "gray", "grey":
-            return .gray
-        default:
-            return .secondary
-        }
-    }
 }
 
 // MARK: - FilterOptionsView
 
 struct FilterOptionsView: View {
     @Binding var filterOptions: CardFilterOptions
-    let availableColors: [String]
-    let availableTypes: [String]
+    let availableColors: [FilterOption]
+    let availableTypes: [FilterOption]
     let onDismiss: () -> Void
 
     @State private var tempFilterOptions: CardFilterOptions
 
     init(filterOptions: Binding<CardFilterOptions>,
-         availableColors: [String],
-         availableTypes: [String],
+         availableColors: [FilterOption],
+         availableTypes: [FilterOption],
          onDismiss: @escaping () -> Void) {
         _filterOptions = filterOptions
         self.availableColors = availableColors
@@ -226,77 +211,94 @@ struct FilterOptionsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Colors") {
-                    ForEach(availableColors, id: \.self) { color in
-                        Toggle(color.capitalized, isOn: Binding(
-                            get: { tempFilterOptions.selectedColors.contains(color) },
-                            set: { isSelected in
-                                if isSelected {
-                                    tempFilterOptions.selectedColors.insert(color)
-                                } else {
-                                    tempFilterOptions.selectedColors.remove(color)
-                                }
-                            }
-                        ))
-                    }
-                }
-
-                Section("Types") {
-                    ForEach(availableTypes, id: \.self) { type in
-                        Toggle(type.capitalized, isOn: Binding(
-                            get: { tempFilterOptions.selectedTypes.contains(type) },
-                            set: { isSelected in
-                                if isSelected {
-                                    tempFilterOptions.selectedTypes.insert(type)
-                                } else {
-                                    tempFilterOptions.selectedTypes.remove(type)
-                                }
-                            }
-                        ))
-                    }
-                }
-
-                Section("Cost Range") {
-                    HStack {
-                        Text(L10n.minCost)
-                        Spacer()
-                        TextField("Min", value: $tempFilterOptions.minCost, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                    }
-
-                    HStack {
-                        Text(L10n.maxCost)
-                        Spacer()
-                        TextField("Max", value: $tempFilterOptions.maxCost, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                    }
-                }
-
-                Section {
-                    Button(L10n.clearAllFilters) {
-                        tempFilterOptions.clearAll()
-                    }
-                    .foregroundColor(.red)
-                }
+                colorSection
+                typeSection
+                costSection
+                clearSection
             }
             .navigationTitle(L10n.filterCards)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(L10n.cancel) {
-                        onDismiss()
-                    }
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(L10n.apply) {
-                        filterOptions = tempFilterOptions
-                        onDismiss()
-                    }
-                }
+                toolbarContent
             }
+        }
+    }
+
+    @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button(L10n.cancel) {
+                onDismiss()
+            }
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(L10n.apply) {
+                filterOptions = tempFilterOptions
+                onDismiss()
+            }
+        }
+    }
+
+    @ViewBuilder private var colorSection: some View {
+        Section(L10n.color) {
+            ForEach(availableColors) { color in
+                Toggle(color.name.capitalized, isOn: Binding(
+                    get: { tempFilterOptions.selectedColors.contains(color.code) },
+                    set: { isSelected in
+                        if isSelected {
+                            tempFilterOptions.selectedColors.insert(color.code)
+                        } else {
+                            tempFilterOptions.selectedColors.remove(color.code)
+                        }
+                    }
+                ))
+            }
+        }
+    }
+
+    @ViewBuilder private var typeSection: some View {
+        Section(L10n.type) {
+            ForEach(availableTypes) { type in
+                Toggle(type.name.capitalized, isOn: Binding(
+                    get: { tempFilterOptions.selectedTypes.contains(type.code) },
+                    set: { isSelected in
+                        if isSelected {
+                            tempFilterOptions.selectedTypes.insert(type.code)
+                        } else {
+                            tempFilterOptions.selectedTypes.remove(type.code)
+                        }
+                    }
+                ))
+            }
+        }
+    }
+
+    @ViewBuilder private var costSection: some View {
+        Section(L10n.costRange) {
+            HStack {
+                Text(L10n.minCost)
+                Spacer()
+                TextField(L10n.min, value: $tempFilterOptions.minCost, format: .number)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 80)
+            }
+
+            HStack {
+                Text(L10n.maxCost)
+                Spacer()
+                TextField(L10n.max, value: $tempFilterOptions.maxCost, format: .number)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 80)
+            }
+        }
+    }
+
+    @ViewBuilder private var clearSection: some View {
+        Section {
+            Button(L10n.clearAllFilters) {
+                tempFilterOptions.clearAll()
+            }
+            .foregroundColor(.red)
         }
     }
 }

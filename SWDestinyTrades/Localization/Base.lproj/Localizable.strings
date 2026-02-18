@@ -149,3 +149,6 @@
 "YES" = "Yes";
 "HEALTH" = "Health";
 "POINTS" = "Points";
+"COST_RANGE" = "Cost Range";
+"MIN" = "Min";
+"MAX" = "Max";

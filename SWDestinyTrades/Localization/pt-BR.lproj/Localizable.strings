@@ -150,3 +150,6 @@
 "YES" = "Sim";
 "HEALTH" = "Vida";
 "POINTS" = "Pontos";
+"COST_RANGE" = "Faixa de custo";
+"MIN" = "Mín";
+"MAX" = "Máx";

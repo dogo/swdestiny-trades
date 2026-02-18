@@ -112,6 +112,8 @@ internal enum L10n {
   internal static let color = L10n.tr("Localizable", "COLOR", fallback: "Color")
   /// Cost
   internal static let cost = L10n.tr("Localizable", "COST", fallback: "Cost")
+  /// Cost Range
+  internal static let costRange = L10n.tr("Localizable", "COST_RANGE", fallback: "Cost Range")
   /// Create new deck
   internal static let createNewDeck = L10n.tr("Localizable", "CREATE_NEW_DECK", fallback: "Create new deck")
   /// Create your first deck to get started
@@ -212,8 +214,12 @@ internal enum L10n {
   internal static let loans = L10n.tr("Localizable", "LOANS", fallback: "Loans")
   /// Local
   internal static let local = L10n.tr("Localizable", "LOCAL", fallback: "Local")
+  /// Max
+  internal static let max = L10n.tr("Localizable", "MAX", fallback: "Max")
   /// Max cost
   internal static let maxCost = L10n.tr("Localizable", "MAX_COST", fallback: "Max cost")
+  /// Min
+  internal static let min = L10n.tr("Localizable", "MIN", fallback: "Min")
   /// Min cost
   internal static let minCost = L10n.tr("Localizable", "MIN_COST", fallback: "Min cost")
   /// My collection
