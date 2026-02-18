@@ -152,3 +152,7 @@
 "COST_RANGE" = "Cost Range";
 "MIN" = "Min";
 "MAX" = "Max";
+"NO_LENT_CARDS" = "No cards lent";
+"NO_BORROWED_CARDS" = "No cards borrowed";
+"DELETE_PERSON" = "Delete Person";
+"LOADING_PEOPLE" = "Loading people...";

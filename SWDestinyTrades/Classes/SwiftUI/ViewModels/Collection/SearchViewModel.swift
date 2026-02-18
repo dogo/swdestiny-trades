@@ -110,6 +110,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     }
 
     func clearSearch() {
+        searchText = ""
         currentQuery = ""
         searchResults = []
         updateItems([])

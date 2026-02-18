@@ -27,7 +27,7 @@ struct LoanDetailView: View {
             Section {
                 if viewModel.lentCards.isEmpty {
                     EmptyLoanRowView(
-                        message: "No cards lent",
+                        message: L10n.noLentCards,
                         actionText: L10n.addCard
                     ) {
                         navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .lent))
@@ -62,7 +62,7 @@ struct LoanDetailView: View {
             Section {
                 if viewModel.borrowedCards.isEmpty {
                     EmptyLoanRowView(
-                        message: "No cards borrowed",
+                        message: L10n.noBorrowedCards,
                         actionText: L10n.addMyCard
                     ) {
                         navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .borrow))

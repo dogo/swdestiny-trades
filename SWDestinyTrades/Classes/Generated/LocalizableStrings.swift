@@ -134,6 +134,8 @@ internal enum L10n {
   internal static let deleteCard = L10n.tr("Localizable", "DELETE_CARD", fallback: "Delete card")
   /// Delete deck
   internal static let deleteDeck = L10n.tr("Localizable", "DELETE_DECK", fallback: "Delete deck")
+  /// Delete Person
+  internal static let deletePerson = L10n.tr("Localizable", "DELETE_PERSON", fallback: "Delete Person")
   /// Dice symbols
   internal static let diceSymbols = L10n.tr("Localizable", "DICE_SYMBOLS", fallback: "Dice symbols")
   /// Done
@@ -210,6 +212,8 @@ internal enum L10n {
   internal static let loadingDeck = L10n.tr("Localizable", "LOADING_DECK", fallback: "Loading deck…")
   /// Loading decks…
   internal static let loadingDecks = L10n.tr("Localizable", "LOADING_DECKS", fallback: "Loading decks…")
+  /// Loading people...
+  internal static let loadingPeople = L10n.tr("Localizable", "LOADING_PEOPLE", fallback: "Loading people...")
   /// Loans
   internal static let loans = L10n.tr("Localizable", "LOANS", fallback: "Loans")
   /// Local
@@ -228,6 +232,8 @@ internal enum L10n {
   internal static let name = L10n.tr("Localizable", "NAME", fallback: "Name")
   /// New person
   internal static let newPerson = L10n.tr("Localizable", "NEW_PERSON", fallback: "New person")
+  /// No cards borrowed
+  internal static let noBorrowedCards = L10n.tr("Localizable", "NO_BORROWED_CARDS", fallback: "No cards borrowed")
   /// No Cards Found
   internal static let noCardsFound = L10n.tr("Localizable", "NO_CARDS_FOUND", fallback: "No Cards Found")
   /// No cards in your collection
@@ -246,6 +252,8 @@ internal enum L10n {
   }
   /// No decks yet
   internal static let noDecksYet = L10n.tr("Localizable", "NO_DECKS_YET", fallback: "No decks yet")
+  /// No cards lent
+  internal static let noLentCards = L10n.tr("Localizable", "NO_LENT_CARDS", fallback: "No cards lent")
   /// No loans
   internal static let noLoans = L10n.tr("Localizable", "NO_LOANS", fallback: "No loans")
   /// No people found

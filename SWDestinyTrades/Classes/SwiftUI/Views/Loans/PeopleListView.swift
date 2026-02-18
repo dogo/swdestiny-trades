@@ -26,7 +26,7 @@ struct PeopleListView: View {
     var body: some View {
         VStack {
             if viewModel.isLoading {
-                ProgressView("Loading people...")
+                ProgressView(L10n.loadingPeople)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
                 VStack(spacing: 16) {
@@ -115,7 +115,7 @@ struct PeopleListView: View {
             }
         }
         .alert(
-            "Delete Person",
+            L10n.deletePerson,
             isPresented: $viewModel.showingDeleteConfirmation,
             actions: {
                 Button(L10n.delete, role: .destructive) {
@@ -207,14 +207,13 @@ struct PersonRowView: View {
         let borrowedCount = loanSummary.borrowedCount
 
         if lentMeCount > 0, borrowedCount > 0 {
-            return "Lent \(lentMeCount) and borrowed \(borrowedCount) cards"
+            return L10n.lentMeAndBorrowedCards(lentMeCount, borrowedCount)
         } else if lentMeCount > 0 {
-            return "Lent \(lentMeCount) cards"
+            return L10n.lentMeCard(lentMeCount)
         } else if borrowedCount > 0 {
-            return "Borrowed \(borrowedCount) cards"
-        } else {
-            return "No loans"
+            return L10n.borrowedCard(borrowedCount)
         }
+        return L10n.noLoans
     }
 }
 

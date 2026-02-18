@@ -153,3 +153,7 @@
 "COST_RANGE" = "Faixa de custo";
 "MIN" = "Mín";
 "MAX" = "Máx";
+"NO_LENT_CARDS" = "Nenhuma carta emprestada";
+"NO_BORROWED_CARDS" = "Nenhuma carta emprestada de alguém";
+"DELETE_PERSON" = "Excluir pessoa";
+"LOADING_PEOPLE" = "Carregando pessoas...";
