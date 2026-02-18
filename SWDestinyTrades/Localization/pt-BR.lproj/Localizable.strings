@@ -17,7 +17,7 @@
 "ADD_PEOPLE_TO_TRACK_LOANS" = "Adicionar pessoas para controlar empréstimos";
 "ADD_PERSON" = "Adicionar pessoa";
 "ALL_CARDS" = "Todas as cartas";
-"ALL_SETS" = "Todos os conjuntos";
+"ALL_SETS" = "Todas as expansões";
 "ALREADY_ADDED" = "Esta carta já foi adicionada. Use o controle de quantidade na tela anterior.";
 "APPLY" = "Aplicar";
 "APP_INITIALIZED_SUCCESSFULLY" = "Aplicativo inicializado com sucesso!";
@@ -39,7 +39,6 @@
 "CARD_NUMBER" = "Carta #";
 "CARD_TEXT" = "Texto da carta";
 "CARD_TYPES" = "Tipos de carta";
-"CARDQUANTITY" = "%@";
 "COLLECTION" = "Coleção";
 "COLOR" = "Cor";
 "CREATE_NEW_DECK" = "Criar novo baralho";
@@ -95,16 +94,14 @@
 "NO_RESULTS_FOUND" = "Nenhum resultado encontrado";
 "PEOPLE" = "Pessoas";
 "PERSON_INFORMATION" = "Informações da pessoa";
-"PERSONNAME_PERSONLASTNAME" = "%@ %@";
+"NO_CARDS_FOUND" = "Nenhuma carta encontrada";
 "PLOT" = "Trama";
 "POPULAR_SEARCHES" = "Buscas populares";
-"QUANTITY" = "%@";
 "RETRY" = "Tentar novamente";
 "SAVE_PERSON" = "Salvar pessoa";
 "SEARCH" = "Buscar";
 "SEARCHING_FOR_QUERY" = "Buscando «%@»…";
 "SEARCH_FOR_CARDS" = "Buscar cartas";
-"SECTIONCARDCOUNT" = "(%@)";
 "SHARE_TEXT" = "Compartilhado com SWD Trades para iOS";
 "SUGGESTIONS" = "Sugestões";
 "SUPPORT" = "Suporte";
@@ -116,3 +113,20 @@
 "TRY_ADJUSTING_YOUR_SEARCH_TERMS" = "Tente ajustar os termos de busca";
 "VERSION" = "Versão %@ (%@)";
 "VIEWMODELSEARCHRESULTSCOUNT_RESULTS_FOR" = "%@ resultados para «%@»";
+"SEARCH_COLLECTION" = "Buscar na coleção...";
+"COLLECTION_EMPTY" = "Sua coleção está vazia. Toque em + para adicionar cartas.";
+"NO_CARDS_MATCH_SEARCH" = "Nenhuma carta corresponde aos seus critérios de busca.";
+"SORT_BY" = "Ordenar por";
+"SET_FILTER" = "Filtro de expansão";
+"NAME" = "Nome";
+"SET" = "Expansão";
+"TYPE" = "Tipo";
+"QUANTITY" = "Quantidade";
+"COST" = "Custo";
+"DELETE" = "Excluir";
+"ADD_LENT_CARD" = "Adicionar carta emprestada a alguém";
+"ADD_BORROWED_CARD" = "Adicionar carta emprestada de alguém";
+"CARD_ADDED" = "Carta adicionada";
+"CARD_ADDED_SUCCESSFULLY" = "%@ foi adicionada com sucesso!";
+
+

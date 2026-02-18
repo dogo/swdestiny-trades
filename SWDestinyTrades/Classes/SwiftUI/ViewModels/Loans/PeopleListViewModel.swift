@@ -26,7 +26,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     var toastMessage = ""
     var toastType: ToastType = .info
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -38,7 +38,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
         DispatchQueue.main.async {
             self.showToast = false
 
-            self.toastTitle = "Error"
+            self.toastTitle = L10n.error
             self.toastMessage = error.localizedDescription
             self.toastType = .error
 
@@ -60,11 +60,6 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     private func loadPeopleFromDatabase() {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
             let peopleArray = Array(people)
@@ -105,8 +100,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     func confirmDelete() {
-        guard let person = personToDelete,
-              let database else {
+        guard let person = personToDelete else {
             return
         }
 
@@ -136,10 +130,6 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     func confirmDelete(person: PersonDTO) {
-        guard let database else {
-            return
-        }
-
         let personData = person.toThreadSafe()
 
         Task { @MainActor in

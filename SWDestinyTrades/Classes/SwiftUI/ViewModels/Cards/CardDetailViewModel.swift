@@ -11,20 +11,21 @@ import ImageSlideshow
 import SwiftUI
 
 @MainActor
+@Observable
 final class CardDetailViewModel: BaseViewModel {
 
-    @Published var cards: [CardDTO] = []
-    @Published var selectedCard: CardDTO
-    @Published var currentIndex: Int = 0
-    @Published var showingShareSheet = false
-    @Published var showingSuccessMessage = false
-    @Published var successMessage = ""
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var cards: [CardDTO] = []
+    var selectedCard: CardDTO
+    var currentIndex: Int = 0
+    var showingShareSheet = false
+    var showingSuccessMessage = false
+    var successMessage = ""
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -62,7 +63,7 @@ final class CardDetailViewModel: BaseViewModel {
     override func handleError(_ error: Error) {
         showToast = false
 
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
 
@@ -79,11 +80,6 @@ final class CardDetailViewModel: BaseViewModel {
 
     func addToCollection() async {
         let card = currentCard
-
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
 
         setLoading(true)
         defer { setLoading(false) }

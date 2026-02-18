@@ -100,10 +100,10 @@ struct LoanDetailView: View {
             viewModel.loadLoanData()
         }
         .confirmationDialog("Delete Card", isPresented: $viewModel.showingDeleteConfirmation) {
-            Button("Delete", role: .destructive) {
+            Button(L10n.delete, role: .destructive) {
                 viewModel.confirmDelete()
             }
-            Button("Cancel", role: .cancel) {
+            Button(L10n.cancel, role: .cancel) {
                 viewModel.cancelDelete()
             }
         } message: {
@@ -157,7 +157,7 @@ struct LoanCardRowView: View {
                 .frame(width: 25, height: 25)
                 .foregroundColor(card.factionColor())
 
-            Text(L10n.quantity(quantity))
+            Text("\(quantity)")
                 .font(.system(size: 18, weight: .medium))
                 .frame(minWidth: 30)
 

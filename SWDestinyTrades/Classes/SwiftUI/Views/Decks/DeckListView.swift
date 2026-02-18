@@ -134,12 +134,12 @@ struct DeckListView: View {
 
     private var deleteConfirmationAlert: some View {
         Group {
-            Button("Delete", role: .destructive) {
+            Button(L10n.delete, role: .destructive) {
                 Task {
                     await viewModel.confirmDelete()
                 }
             }
-            Button("Cancel", role: .cancel) {
+            Button(L10n.cancel, role: .cancel) {
                 viewModel.cancelDelete()
             }
         }
@@ -221,7 +221,7 @@ struct DeckRowView: View {
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button("Delete", role: .destructive) {
+            Button(L10n.delete, role: .destructive) {
                 onDelete()
             }
 
@@ -233,10 +233,10 @@ struct DeckRowView: View {
             .tint(.green)
         }
         .contextMenu {
-            Button("Edit", action: onEdit)
+            Button(L10n.edit, action: onEdit)
             Button("Show Graph", action: onGraph)
             Divider()
-            Button("Delete", role: .destructive, action: onDelete)
+            Button(L10n.delete, role: .destructive, action: onDelete)
         }
     }
 

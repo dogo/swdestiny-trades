@@ -56,7 +56,7 @@ final class CardListViewModel: ListViewModel<CardDTO> {
 
     override func handleError(_ error: Error) {
         showToast = false
-        toastTitle = "Error"
+        toastTitle = L10n.error
 
         if ConcurrencyError.isCancellation(error) {
             setLoaded()

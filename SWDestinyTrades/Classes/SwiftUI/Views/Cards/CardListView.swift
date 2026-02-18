@@ -87,7 +87,7 @@ struct CardListView: View {
     @ViewBuilder private var cardListContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             EmptyStateView(
-                title: "No Cards Found",
+                title: L10n.noCardsFound,
                 message: viewModel.searchText.isEmpty ?
                     "Pull to refresh to load cards" :
                     "No cards match your search criteria",

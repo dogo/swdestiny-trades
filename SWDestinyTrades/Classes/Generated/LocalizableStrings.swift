@@ -26,6 +26,8 @@ internal enum L10n {
   internal static func aboutText(_ p1: Any) -> String {
     return L10n.tr("Localizable", "ABOUT_TEXT", String(describing: p1), fallback: "By Diogo Autilio\n\nAPI Data by Paco %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.")
   }
+  /// Add Borrowed Card
+  internal static let addBorrowedCard = L10n.tr("Localizable", "ADD_BORROWED_CARD", fallback: "Add Borrowed Card")
   /// Add card
   internal static let addCard = L10n.tr("Localizable", "ADD_CARD", fallback: "Add card")
   /// Add cards
@@ -34,6 +36,8 @@ internal enum L10n {
   internal static let addCardsToStartBuildingYourDeck = L10n.tr("Localizable", "ADD_CARDS_TO_START_BUILDING_YOUR_DECK", fallback: "Add cards to start building your deck")
   /// Add cards to your deck to see statistics
   internal static let addCardsToYourDeckToSeeStatistics = L10n.tr("Localizable", "ADD_CARDS_TO_YOUR_DECK_TO_SEE_STATISTICS", fallback: "Add cards to your deck to see statistics")
+  /// Add Lent Card
+  internal static let addLentCard = L10n.tr("Localizable", "ADD_LENT_CARD", fallback: "Add Lent Card")
   /// Add my card…
   internal static let addMyCard = L10n.tr("Localizable", "ADD_MY_CARD", fallback: "Add my card…")
   /// Add people to track loans
@@ -68,6 +72,12 @@ internal enum L10n {
   }
   /// Cancel
   internal static let cancel = L10n.tr("Localizable", "CANCEL", fallback: "Cancel")
+  /// Card Added
+  internal static let cardAdded = L10n.tr("Localizable", "CARD_ADDED", fallback: "Card Added")
+  /// %@ has been added successfully!
+  internal static func cardAddedSuccessfully(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "CARD_ADDED_SUCCESSFULLY", String(describing: p1), fallback: "%@ has been added successfully!")
+  }
   /// Card cost
   internal static let cardCost = L10n.tr("Localizable", "CARD_COST", fallback: "Card cost")
   /// Card information
@@ -78,10 +88,6 @@ internal enum L10n {
   internal static let cardText = L10n.tr("Localizable", "CARD_TEXT", fallback: "Card text")
   /// Card types
   internal static let cardTypes = L10n.tr("Localizable", "CARD_TYPES", fallback: "Card types")
-  /// %@
-  internal static func cardquantity(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "CARDQUANTITY", String(describing: p1), fallback: "%@")
-  }
   /// Cards
   internal static let cards = L10n.tr("Localizable", "CARDS", fallback: "Cards")
   /// Plural format key: "%#@card@"
@@ -98,8 +104,12 @@ internal enum L10n {
   internal static let close = L10n.tr("Localizable", "CLOSE", fallback: "Close")
   /// Collection
   internal static let collection = L10n.tr("Localizable", "COLLECTION", fallback: "Collection")
+  /// Your collection is empty. Tap + to add cards.
+  internal static let collectionEmpty = L10n.tr("Localizable", "COLLECTION_EMPTY", fallback: "Your collection is empty. Tap + to add cards.")
   /// Color
   internal static let color = L10n.tr("Localizable", "COLOR", fallback: "Color")
+  /// Cost
+  internal static let cost = L10n.tr("Localizable", "COST", fallback: "Cost")
   /// Create new deck
   internal static let createNewDeck = L10n.tr("Localizable", "CREATE_NEW_DECK", fallback: "Create new deck")
   /// Create your first deck to get started
@@ -112,6 +122,8 @@ internal enum L10n {
   internal static let deckStatistics = L10n.tr("Localizable", "DECK_STATISTICS", fallback: "Deck statistics")
   /// Decks
   internal static let decks = L10n.tr("Localizable", "DECKS", fallback: "Decks")
+  /// Delete
+  internal static let delete = L10n.tr("Localizable", "DELETE", fallback: "Delete")
   /// Delete card
   internal static let deleteCard = L10n.tr("Localizable", "DELETE_CARD", fallback: "Delete card")
   /// Delete deck
@@ -188,8 +200,14 @@ internal enum L10n {
   internal static let minCost = L10n.tr("Localizable", "MIN_COST", fallback: "Min cost")
   /// My collection
   internal static let myCollection = L10n.tr("Localizable", "MY_COLLECTION", fallback: "My collection")
+  /// Name
+  internal static let name = L10n.tr("Localizable", "NAME", fallback: "Name")
   /// New person
   internal static let newPerson = L10n.tr("Localizable", "NEW_PERSON", fallback: "New person")
+  /// No Cards Found
+  internal static let noCardsFound = L10n.tr("Localizable", "NO_CARDS_FOUND", fallback: "No Cards Found")
+  /// No cards match your search criteria
+  internal static let noCardsMatchSearch = L10n.tr("Localizable", "NO_CARDS_MATCH_SEARCH", fallback: "No cards match your search criteria")
   /// No cards match “%@”. Try a different search term.
   internal static func noCardsMatchViewmodelcurrentqueryTryA(_ p1: Any) -> String {
     return L10n.tr("Localizable", "NO_CARDS_MATCH_VIEWMODELCURRENTQUERY_TRY_A", String(describing: p1), fallback: "No cards match “%@”. Try a different search term.")
@@ -218,18 +236,12 @@ internal enum L10n {
   internal static let people = L10n.tr("Localizable", "PEOPLE", fallback: "People")
   /// Person information
   internal static let personInformation = L10n.tr("Localizable", "PERSON_INFORMATION", fallback: "Person information")
-  /// %@ %@
-  internal static func personnamePersonlastname(_ p1: Any, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "PERSONNAME_PERSONLASTNAME", String(describing: p1), String(describing: p2), fallback: "%@ %@")
-  }
   /// Plot
   internal static let plot = L10n.tr("Localizable", "PLOT", fallback: "Plot")
   /// Popular searches
   internal static let popularSearches = L10n.tr("Localizable", "POPULAR_SEARCHES", fallback: "Popular searches")
-  /// %@
-  internal static func quantity(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "QUANTITY", String(describing: p1), fallback: "%@")
-  }
+  /// Quantity
+  internal static let quantity = L10n.tr("Localizable", "QUANTITY", fallback: "Quantity")
   /// Red
   internal static let red = L10n.tr("Localizable", "RED", fallback: "Red")
   /// Remote
@@ -240,22 +252,26 @@ internal enum L10n {
   internal static let savePerson = L10n.tr("Localizable", "SAVE_PERSON", fallback: "Save person")
   /// Search
   internal static let search = L10n.tr("Localizable", "SEARCH", fallback: "Search")
+  /// Search collection...
+  internal static let searchCollection = L10n.tr("Localizable", "SEARCH_COLLECTION", fallback: "Search collection...")
   /// Search for cards
   internal static let searchForCards = L10n.tr("Localizable", "SEARCH_FOR_CARDS", fallback: "Search for cards")
   /// Searching for “%@”…
   internal static func searchingForQuery(_ p1: Any) -> String {
     return L10n.tr("Localizable", "SEARCHING_FOR_QUERY", String(describing: p1), fallback: "Searching for “%@”…")
   }
-  /// (%@)
-  internal static func sectioncardcount(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "SECTIONCARDCOUNT", String(describing: p1), fallback: "(%@)")
-  }
+  /// Set
+  internal static let `set` = L10n.tr("Localizable", "SET", fallback: "Set")
+  /// Set Filter
+  internal static let setFilter = L10n.tr("Localizable", "SET_FILTER", fallback: "Set Filter")
   /// Shared with SWD Trades for iOS
   internal static let shareText = L10n.tr("Localizable", "SHARE_TEXT", fallback: "Shared with SWD Trades for iOS")
   /// Plural format key: "%#@side@"
   internal static func sidesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "SIDES_COUNT", p1, fallback: "Plural format key: \"%#@side@\"")
   }
+  /// Sort By
+  internal static let sortBy = L10n.tr("Localizable", "SORT_BY", fallback: "Sort By")
   /// Suggestions
   internal static let suggestions = L10n.tr("Localizable", "SUGGESTIONS", fallback: "Suggestions")
   /// Support
@@ -272,6 +288,8 @@ internal enum L10n {
   }
   /// Try adjusting your search terms
   internal static let tryAdjustingYourSearchTerms = L10n.tr("Localizable", "TRY_ADJUSTING_YOUR_SEARCH_TERMS", fallback: "Try adjusting your search terms")
+  /// Type
+  internal static let type = L10n.tr("Localizable", "TYPE", fallback: "Type")
   /// Unique cards: %@
   internal static func uniqueCardsViewmodeluniquecardcount(_ p1: Any) -> String {
     return L10n.tr("Localizable", "UNIQUE_CARDS_VIEWMODELUNIQUECARDCOUNT", String(describing: p1), fallback: "Unique cards: %@")

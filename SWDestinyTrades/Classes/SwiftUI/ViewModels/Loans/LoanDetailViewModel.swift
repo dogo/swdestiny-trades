@@ -6,24 +6,24 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class LoanDetailViewModel: BaseViewModel {
 
-    @Published var person: PersonDTO
-    @Published var lentCards: [CardDTO] = []
-    @Published var borrowedCards: [CardDTO] = []
-    @Published var showingDeleteConfirmation = false
-    @Published var cardToDelete: (card: CardDTO, type: AddCardType)?
+    var person: PersonDTO
+    var lentCards: [CardDTO] = []
+    var borrowedCards: [CardDTO] = []
+    var showingDeleteConfirmation = false
+    var cardToDelete: (card: CardDTO, type: AddCardType)?
 
-    @Published var showToast = false
-    @Published var toastTitle = ""
-    @Published var toastMessage = ""
-    @Published var toastType: ToastType = .info
+    var showToast = false
+    var toastTitle = ""
+    var toastMessage = ""
+    var toastType: ToastType = .info
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -47,11 +47,6 @@ final class LoanDetailViewModel: BaseViewModel {
     }
 
     private func loadPerson(byId personId: String) {
-        guard let database else {
-            showErrorToast(ViewModelError.databaseNotAvailable.localizedDescription)
-            return
-        }
-
         Task { @MainActor in
             let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
             if let foundPerson = people.first(where: { $0.id == personId }) {
@@ -80,11 +75,6 @@ final class LoanDetailViewModel: BaseViewModel {
     }
 
     func updateCardQuantity(_ card: CardDTO, newQuantity: Int) {
-        guard let database else {
-            showErrorToast(ViewModelError.databaseNotAvailable.localizedDescription)
-            return
-        }
-
         Task { @MainActor in
             do {
                 try await database.update {
@@ -103,8 +93,7 @@ final class LoanDetailViewModel: BaseViewModel {
     }
 
     func confirmDelete() {
-        guard let cardToDelete,
-              let database else {
+        guard let cardToDelete else {
             return
         }
 
@@ -162,7 +151,7 @@ final class LoanDetailViewModel: BaseViewModel {
     }
 
     private func showErrorToast(_ message: String) {
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = message
         toastType = .error
         showToast = true

@@ -36,7 +36,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         super.handleError(error)
 
         showToast = false
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
 
@@ -188,16 +188,29 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     }
 }
 
-enum CollectionSortOption: String, CaseIterable {
-    case name = "Name"
-    case set = "Set"
-    case type = "Type"
-    case color = "Color"
-    case quantity = "Quantity"
-    case cost = "Cost"
+enum CollectionSortOption: CaseIterable {
+    case name
+    case set
+    case type
+    case color
+    case quantity
+    case cost
 
     var displayName: String {
-        return rawValue
+        switch self {
+        case .name:
+            L10n.name
+        case .set:
+            L10n.set
+        case .type:
+            L10n.type
+        case .color:
+            L10n.color
+        case .quantity:
+            L10n.quantity
+        case .cost:
+            L10n.cost
+        }
     }
 }
 

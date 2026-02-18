@@ -16,7 +16,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
     var showingDeleteConfirmation = false
     var deckToDelete: DeckDTO?
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -43,11 +43,6 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
     }
 
     private func loadDecksFromDatabase() async {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         let fetchedDecks = await database.fetch(
             DeckDTO.self,
             predicate: nil,
@@ -85,8 +80,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
     }
 
     func confirmDelete() async {
-        guard let deck = deckToDelete,
-              let database else {
+        guard let deck = deckToDelete else {
             return
         }
 
@@ -108,11 +102,6 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
     }
 
     func renameDeck(_ deck: DeckDTO, newName: String) async {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         let trimmedName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else { return }
 

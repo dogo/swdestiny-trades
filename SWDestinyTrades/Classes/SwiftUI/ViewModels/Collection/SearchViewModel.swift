@@ -62,7 +62,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
             return
         }
 
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
 

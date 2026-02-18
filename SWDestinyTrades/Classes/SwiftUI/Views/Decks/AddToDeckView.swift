@@ -91,7 +91,7 @@ struct AddToDeckView: View {
     @ViewBuilder private var cardsList: some View {
         if viewModel.filteredItems.isEmpty {
             EmptyStateView(
-                title: "No Cards Found",
+                title: L10n.noCardsFound,
                 message: viewModel.searchText.isEmpty ?
                     (viewModel.dataSource == .remote ? "Pull to refresh to load cards" : "No cards in your collection") :
                     "No cards match your search",

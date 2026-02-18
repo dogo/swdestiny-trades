@@ -79,7 +79,7 @@ struct AddCardView: View {
     @ViewBuilder private var cardListContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             EmptyStateView(
-                title: "No Cards Found",
+                title: L10n.noCardsFound,
                 message: viewModel.searchText.isEmpty ?
                     "Pull to refresh to load cards" :
                     "No cards match your search criteria",
@@ -203,8 +203,8 @@ struct AddCardFilterView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Set Filter") {
-                    Picker("Set", selection: $filters.selectedSet) {
+                Section(L10n.setFilter) {
+                    Picker(L10n.set, selection: $filters.selectedSet) {
                         Text(L10n.allSets).tag(SetDTO?.none)
                         ForEach(availableSets, id: \.code) { set in
                             Text(set.name).tag(SetDTO?.some(set))

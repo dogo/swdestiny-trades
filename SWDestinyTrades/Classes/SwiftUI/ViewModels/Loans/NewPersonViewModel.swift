@@ -25,7 +25,7 @@ final class NewPersonViewModel: BaseViewModel {
     var toastMessage = ""
     var toastType: ToastType = .info
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -55,11 +55,6 @@ final class NewPersonViewModel: BaseViewModel {
 
     func savePerson() async {
         guard isFormValid else {
-            return
-        }
-
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
             return
         }
 
@@ -113,7 +108,7 @@ final class NewPersonViewModel: BaseViewModel {
         setLoading(false)
         showToast = false
 
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
 

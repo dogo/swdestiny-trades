@@ -204,8 +204,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                 }
 
                 self.showToast = false
-                self.toastTitle = "Card Added"
-                self.toastMessage = "\(card.name) has been added successfully!"
+                self.toastTitle = L10n.cardAddedSuccessfully(card.name)
                 self.toastType = .success
 
                 try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
@@ -215,7 +214,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                 return
             } catch {
                 self.showToast = false
-                self.toastTitle = "Error"
+                self.toastTitle = L10n.error
                 self.toastMessage = (error as? AddCardError)?.localizedDescription ?? error.localizedDescription
                 self.toastType = .error
 
@@ -274,7 +273,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             return
         }
 
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
 
@@ -299,9 +298,9 @@ enum AddCardContext {
         case .collection:
             return L10n.addCard
         case .lentToPerson:
-            return "Add Lent Card"
+            return L10n.addLentCard
         case .borrowedFromPerson:
-            return "Add Borrowed Card"
+            return L10n.addBorrowedCard
         }
     }
 }

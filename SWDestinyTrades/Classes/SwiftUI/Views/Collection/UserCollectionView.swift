@@ -31,7 +31,7 @@ struct UserCollectionView: View {
             .navigationBarTitleDisplayMode(.large)
             .toolbar { toolbarContent }
             .refreshable { await refreshCollection() }
-            .searchable(text: $viewModel.searchText, prompt: "Search collection...")
+            .searchable(text: $viewModel.searchText, prompt: L10n.searchCollection)
             .onChange(of: viewModel.searchText) { _, newValue in
                 viewModel.performFiltering(searchText: newValue)
             }
@@ -79,8 +79,7 @@ struct UserCollectionView: View {
         }
     }
 
-    @ViewBuilder
-    private var toastView: some View {
+    @ViewBuilder private var toastView: some View {
         if showToast {
             ToastView(
                 title: viewModel.toastTitle,
@@ -99,10 +98,8 @@ struct UserCollectionView: View {
     @ViewBuilder private var collectionContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             EmptyStateView(
-                title: "No Cards Found",
-                message: viewModel.searchText.isEmpty ?
-                    "Your collection is empty. Tap + to add cards." :
-                    "No cards match your search criteria",
+                title: L10n.noCardsFound,
+                message: viewModel.searchText.isEmpty ? L10n.collectionEmpty : L10n.noCardsMatchSearch,
                 systemImage: "rectangle.stack"
             )
         } else {
@@ -250,7 +247,7 @@ struct CollectionCardRowView: View {
                     .disabled(card.quantity <= 0)
                     .buttonStyle(.plain)
 
-                    Text(L10n.cardquantity(card.quantity))
+                    Text("\(card.quantity)")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .frame(minWidth: 30)
@@ -282,7 +279,7 @@ struct CollectionFilterView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Sort By") {
+                Section(L10n.sortBy) {
                     ForEach(CollectionSortOption.allCases, id: \.self) { option in
                         Toggle(option.displayName, isOn: Binding(
                             get: { sortOption == option },
@@ -295,8 +292,8 @@ struct CollectionFilterView: View {
                     }
                 }
 
-                Section("Set Filter") {
-                    Picker("Set", selection: $selectedSet) {
+                Section(L10n.setFilter) {
+                    Picker(L10n.set, selection: $selectedSet) {
                         Text(L10n.allSets).tag(SetDTO?.none)
                         ForEach(availableSets, id: \.code) { set in
                             Text(set.name).tag(SetDTO?.some(set))

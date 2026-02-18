@@ -177,7 +177,7 @@ struct CardDetailView: View {
                 .font(.headline)
                 .foregroundColor(.primary)
 
-            InfoRow(title: "Set", value: viewModel.currentCard.setName)
+            InfoRow(title: L10n.set, value: viewModel.currentCard.setName)
             InfoRow(title: "Type", value: viewModel.currentCard.typeName)
             InfoRow(title: "Faction", value: viewModel.currentCard.factionName)
             InfoRow(title: "Rarity", value: viewModel.currentCard.rarityName)

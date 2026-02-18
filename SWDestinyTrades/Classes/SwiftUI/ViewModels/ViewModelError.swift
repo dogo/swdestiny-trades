@@ -9,8 +9,6 @@
 import Foundation
 
 enum ViewModelError: Error, LocalizedError {
-    case serviceNotAvailable
-    case databaseNotAvailable
     case objectNotFound
     case dataLoadingFailed(String)
     case networkError(Error)
@@ -21,10 +19,6 @@ enum ViewModelError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .serviceNotAvailable:
-            return "Service is not available"
-        case .databaseNotAvailable:
-            return "Database is not available"
         case .objectNotFound:
             return "Object not found in database"
         case let .dataLoadingFailed(message):

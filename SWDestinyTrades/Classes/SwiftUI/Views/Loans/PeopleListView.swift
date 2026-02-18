@@ -93,7 +93,7 @@ struct PeopleListView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 if !viewModel.filteredItems.isEmpty {
-                    Button(isEditing ? "Done" : "Edit") {
+                    Button(isEditing ? L10n.done : L10n.edit) {
                         withAnimation {
                             isEditing.toggle()
                         }
@@ -118,10 +118,10 @@ struct PeopleListView: View {
             "Delete Person",
             isPresented: $viewModel.showingDeleteConfirmation,
             actions: {
-                Button("Delete", role: .destructive) {
+                Button(L10n.delete, role: .destructive) {
                     viewModel.confirmDelete()
                 }
-                Button("Cancel", role: .cancel) {
+                Button(L10n.cancel, role: .cancel) {
                     viewModel.cancelDelete()
                 }
             },
@@ -181,7 +181,7 @@ struct PersonRowView: View {
         Button(action: onTap) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.personnamePersonlastname(person.name, person.lastName))
+                    Text("\(person.name) \(person.lastName)")
                         .font(.headline)
                         .foregroundColor(.primary)
 

@@ -27,11 +27,11 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         case local
     }
 
-    private var swDestinyService: SWDestinyServiceProtocol? {
+    private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -68,11 +68,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
             do {
                 try Task.checkCancellation()
 
-                guard let service = swDestinyService else {
-                    handleError(ViewModelError.serviceNotAvailable)
-                    return
-                }
-
                 let cards = try await service.retrieveAllCards()
 
                 try Task.checkCancellation()
@@ -94,12 +89,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         Task { @MainActor in
             do {
                 try Task.checkCancellation()
-
-                guard let database else {
-                    handleError(ViewModelError.databaseNotAvailable)
-                    return
-                }
-
                 let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
                 guard let collection = collections.first else {
                     self.setLoaded()
@@ -139,11 +128,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         cardCopy.id = NSUUID().uuidString
         cardCopy.quantity = 1
 
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             do {
                 try await database.update { [weak self] in
@@ -175,7 +159,7 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
             return
         }
 
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = L10n.errorMessage
         toastType = .error
 

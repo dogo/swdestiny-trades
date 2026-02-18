@@ -83,7 +83,7 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
             return
         }
 
-        toastTitle = "Error"
+        toastTitle = L10n.error
         toastMessage = L10n.errorMessage
         toastType = .error
 

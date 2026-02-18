@@ -216,7 +216,7 @@ struct DeckSectionView: View {
                         .font(.headline)
                         .foregroundColor(.primary)
 
-                    Text(L10n.sectioncardcount(section.cardCount))
+                    Text("(\(section.cardCount))")
                         .font(.caption)
                         .foregroundColor(.secondary)
 
@@ -264,7 +264,7 @@ struct DeckCardRowView: View {
                 .foregroundColor(card.factionColor())
                 .frame(width: 25, height: 25)
 
-            Text(L10n.quantity(quantity))
+            Text("\(quantity)")
                 .font(.system(size: 18, weight: .medium))
                 .frame(minWidth: 30)
 
@@ -300,7 +300,7 @@ struct DeckCardRowView: View {
             onTap()
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button("Delete", role: .destructive) {
+            Button(L10n.delete, role: .destructive) {
                 onRemove()
             }
         }

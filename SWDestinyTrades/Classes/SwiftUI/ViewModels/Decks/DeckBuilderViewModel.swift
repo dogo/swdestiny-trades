@@ -10,15 +10,16 @@ import Combine
 import SwiftUI
 
 @MainActor
+@Observable
 final class DeckBuilderViewModel: BaseViewModel {
 
-    @Published var deck: DeckDTO
-    @Published var deckSections: [DeckSection] = []
-    @Published var isNewDeck: Bool
-    @Published var showingShareSheet = false
-    @Published var shareText = ""
+    var deck: DeckDTO
+    var deckSections: [DeckSection] = []
+    var isNewDeck: Bool
+    var showingShareSheet = false
+    var shareText = ""
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -92,11 +93,6 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 
     func saveDeck() async {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         do {
             if isNewDeck {
                 try await database.save(object: deck, update: .modified)
@@ -110,11 +106,6 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 
     func updateCardQuantity(_ card: CardDTO, quantity: Int) {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             do {
                 try Task.checkCancellation()
@@ -133,11 +124,6 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 
     func updateCharacterElite(_ card: CardDTO, isElite: Bool) {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             do {
                 try Task.checkCancellation()
@@ -156,11 +142,6 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 
     func removeCard(_ card: CardDTO) {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             do {
                 try Task.checkCancellation()
