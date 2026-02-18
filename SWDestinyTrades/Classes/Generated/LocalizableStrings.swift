@@ -206,8 +206,10 @@ internal enum L10n {
   internal static let newPerson = L10n.tr("Localizable", "NEW_PERSON", fallback: "New person")
   /// No Cards Found
   internal static let noCardsFound = L10n.tr("Localizable", "NO_CARDS_FOUND", fallback: "No Cards Found")
-  /// No cards match your search criteria
-  internal static let noCardsMatchSearch = L10n.tr("Localizable", "NO_CARDS_MATCH_SEARCH", fallback: "No cards match your search criteria")
+  /// No cards in your collection
+  internal static let noCardsInCollection = L10n.tr("Localizable", "NO_CARDS_IN_COLLECTION", fallback: "No cards in your collection")
+  /// No cards match your search
+  internal static let noCardsMatchSearch = L10n.tr("Localizable", "NO_CARDS_MATCH_SEARCH", fallback: "No cards match your search")
   /// No cards match “%@”. Try a different search term.
   internal static func noCardsMatchViewmodelcurrentqueryTryA(_ p1: Any) -> String {
     return L10n.tr("Localizable", "NO_CARDS_MATCH_VIEWMODELCURRENTQUERY_TRY_A", String(describing: p1), fallback: "No cards match “%@”. Try a different search term.")
@@ -230,6 +232,8 @@ internal enum L10n {
   internal static let noResults = L10n.tr("Localizable", "NO_RESULTS", fallback: "No results")
   /// No results found
   internal static let noResultsFound = L10n.tr("Localizable", "NO_RESULTS_FOUND", fallback: "No results found")
+  /// No sets match your search
+  internal static let noSetsMatchSearch = L10n.tr("Localizable", "NO_SETS_MATCH_SEARCH", fallback: "No sets match your search")
   /// Non-elite
   internal static let nonElite = L10n.tr("Localizable", "NON_ELITE", fallback: "Non-elite")
   /// People
@@ -240,6 +244,10 @@ internal enum L10n {
   internal static let plot = L10n.tr("Localizable", "PLOT", fallback: "Plot")
   /// Popular searches
   internal static let popularSearches = L10n.tr("Localizable", "POPULAR_SEARCHES", fallback: "Popular searches")
+  /// Pull to refresh to load cards
+  internal static let pullToRefreshToLoadCards = L10n.tr("Localizable", "PULL_TO_REFRESH_TO_LOAD_CARDS", fallback: "Pull to refresh to load cards")
+  /// Pull to refresh to load sets
+  internal static let pullToRefreshToLoadSets = L10n.tr("Localizable", "PULL_TO_REFRESH_TO_LOAD_SETS", fallback: "Pull to refresh to load sets")
   /// Quantity
   internal static let quantity = L10n.tr("Localizable", "QUANTITY", fallback: "Quantity")
   /// Red
@@ -258,6 +266,8 @@ internal enum L10n {
   internal static let searchCollection = L10n.tr("Localizable", "SEARCH_COLLECTION", fallback: "Search collection...")
   /// Search decks...
   internal static let searchDecks = L10n.tr("Localizable", "SEARCH_DECKS", fallback: "Search decks...")
+  /// Search sets...
+  internal static let searchSets = L10n.tr("Localizable", "SEARCH_SETS", fallback: "Search sets...")
   /// Searching for “%@”…
   internal static func searchingForQuery(_ p1: Any) -> String {
     return L10n.tr("Localizable", "SEARCHING_FOR_QUERY", String(describing: p1), fallback: "Searching for “%@”…")

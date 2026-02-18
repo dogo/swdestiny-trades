@@ -114,7 +114,6 @@
 "VIEWMODELSEARCHRESULTSCOUNT_RESULTS_FOR" = "%@ results for “%@”";
 "SEARCH_COLLECTION" = "Search collection...";
 "COLLECTION_EMPTY" = "Your collection is empty. Tap + to add cards.";
-"NO_CARDS_MATCH_SEARCH" = "No cards match your search criteria";
 "SORT_BY" = "Sort By";
 "SET_FILTER" = "Set Filter";
 "NAME" = "Name";
@@ -129,3 +128,9 @@
 "CARD_ADDED_SUCCESSFULLY" = "%@ has been added successfully!";
 "SEARCH_DECKS" = "Search decks...";
 "SEARCH_CARDS" = "Search cards...";
+"SEARCH_SETS" = "Search sets...";
+"PULL_TO_REFRESH_TO_LOAD_CARDS" = "Pull to refresh to load cards";
+"NO_CARDS_IN_COLLECTION" = "No cards in your collection";
+"NO_CARDS_MATCH_SEARCH" = "No cards match your search";
+"PULL_TO_REFRESH_TO_LOAD_SETS" = "Pull to refresh to load sets";
+"NO_SETS_MATCH_SEARCH" = "No sets match your search";

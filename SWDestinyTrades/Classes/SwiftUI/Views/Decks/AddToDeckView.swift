@@ -99,8 +99,8 @@ struct AddToDeckView: View {
             EmptyStateView(
                 title: L10n.noCardsFound,
                 message: viewModel.searchText.isEmpty ?
-                    (viewModel.dataSource == .remote ? "Pull to refresh to load cards" : "No cards in your collection") :
-                    "No cards match your search",
+                    (viewModel.dataSource == .remote ? L10n.pullToRefreshToLoadCards : L10n.noCardsInCollection) :
+                    L10n.noCardsMatchSearch,
                 systemImage: "rectangle.stack"
             )
         } else {

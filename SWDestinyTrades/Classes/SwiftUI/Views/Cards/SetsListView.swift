@@ -73,7 +73,7 @@ struct SetsListView: View {
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)
         }
-        .searchable(text: $viewModel.searchText, prompt: "Search sets...")
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchSets)
         .onAppear {
             if viewModel.items.isEmpty {
                 viewModel.loadItems()
@@ -85,9 +85,7 @@ struct SetsListView: View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             EmptyStateView(
                 title: "No Sets Found",
-                message: viewModel.searchText.isEmpty ?
-                    "Pull to refresh to load sets" :
-                    "No sets match your search",
+                message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadSets : L10n.noSetsMatchSearch,
                 systemImage: "rectangle.stack"
             )
         } else {

@@ -115,7 +115,6 @@
 "VIEWMODELSEARCHRESULTSCOUNT_RESULTS_FOR" = "%@ resultados para «%@»";
 "SEARCH_COLLECTION" = "Buscar en la colección...";
 "COLLECTION_EMPTY" = "Tu colección está vacía. Toca + para añadir cartas.";
-"NO_CARDS_MATCH_SEARCH" = "Ninguna carta coincide con tus criterios de búsqueda.";
 "SORT_BY" = "Ordenar por";
 "SET_FILTER" = "Filtro de colección";
 "NAME" = "Nombre";
@@ -130,3 +129,9 @@
 "CARD_ADDED_SUCCESSFULLY" = "¡%@ se ha añadido correctamente!";
 "SEARCH_DECKS" = "Buscar barajas...";
 "SEARCH_CARDS" = "Buscar cartas...";
+"SEARCH_SETS" = "Buscar colecciones...";
+"PULL_TO_REFRESH_TO_LOAD_CARDS" = "Desliza hacia abajo para actualizar y cargar las cartas";
+"NO_CARDS_IN_COLLECTION" = "No hay cartas en tu colección";
+"NO_CARDS_MATCH_SEARCH" = "Ninguna carta coincide con tu búsqueda";
+"PULL_TO_REFRESH_TO_LOAD_SETS" = "Desliza hacia abajo para actualizar y cargar las colecciones";
+"NO_SETS_MATCH_SEARCH" = "Ninguna colección coincide con tu búsqueda";
