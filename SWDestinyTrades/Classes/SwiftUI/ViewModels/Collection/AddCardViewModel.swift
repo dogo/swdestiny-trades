@@ -23,11 +23,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
     var addCardContext: AddCardContext
 
-    private var service: SWDestinyServiceProtocol? {
+    private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
 
-    private var database: DatabaseProtocol? {
+    private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
@@ -49,8 +49,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         super.init(dependencyContainer: dependencyContainer)
 
         Task { @MainActor in
-            let people = await database?.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-            if let person = people?.first(where: { $0.id == personId }) {
+            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+            if let person = people.first(where: { $0.id == personId }) {
                 switch type {
                 case .lent:
                     self.addCardContext = .lentToPerson(person)
@@ -80,8 +80,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     }
 
     private func loadOrCreateUserCollection() async {
-        guard let database else { return }
-
         let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
 
         if let existingCollection = collections.first {
@@ -102,16 +100,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
         Task { @MainActor in
             do {
-                try Task.checkCancellation()
-
-                guard let service else {
-                    throw ViewModelError.serviceNotAvailable
-                }
-
                 let allCards = try await service.retrieveAllCards()
-
-                try Task.checkCancellation()
-
                 self.updateItems(allCards)
                 self.setLoaded()
             } catch is CancellationError {
@@ -127,8 +116,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     }
 
     private func loadAvailableSets() {
-        guard let database else { return }
-
         Task { @MainActor in
             let sets = await database.fetch(SetDTO.self, predicate: nil, sorted: nil)
             let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
@@ -205,15 +192,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     }
 
     func addCard(_ card: CardDTO) {
-        guard let database else {
-            handleError(ViewModelError.databaseNotAvailable)
-            return
-        }
-
         Task { @MainActor in
             do {
-                try Task.checkCancellation()
-
                 switch addCardContext {
                 case let .collection(userCollection):
                     try await addCardToCollection(card, userCollection: userCollection, database: database)

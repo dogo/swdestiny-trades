@@ -26,6 +26,33 @@ struct UserCollectionView: View {
     }
 
     var body: some View {
+        content
+            .navigationTitle(L10n.myCollection)
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar { toolbarContent }
+            .refreshable { await refreshCollection() }
+            .searchable(text: $viewModel.searchText, prompt: "Search collection...")
+            .onChange(of: viewModel.searchText) { _, newValue in
+                viewModel.performFiltering(searchText: newValue)
+            }
+            .onChange(of: viewModel.sortOption) { _, _ in viewModel.applyFilters() }
+            .onChange(of: viewModel.filterOptions) { _, _ in viewModel.applyFilters() }
+            .onChange(of: viewModel.selectedSet) { _, _ in viewModel.applyFilters() }
+            .onChange(of: viewModel.showToast) { _, newValue in
+                showToast = newValue
+            }
+            .overlay(alignment: .top) {
+                toastView
+            }
+            .sheet(isPresented: $showingFilterSheet) {
+                filterSheet
+            }
+            .sheet(isPresented: $showingShareSheet) {
+                ShareSheet(items: [generateShareTextForSheet()])
+            }
+    }
+
+    @ViewBuilder private var content: some View {
         VStack {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 LoadingView()
@@ -33,62 +60,37 @@ struct UserCollectionView: View {
                 collectionContent
             }
         }
-        .navigationTitle(L10n.myCollection)
-        .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                filterButton
-            }
-
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                shareButton
-                addButton
-            }
-        }
-        .refreshable {
-            await refreshCollection()
-        }
-        .searchable(text: $viewModel.searchText, prompt: "Search collection...")
-        .onChange(of: viewModel.searchText) { _, newValue in
-            viewModel.performFiltering(searchText: newValue)
-        }
-        .onChange(of: viewModel.sortOption) { _, _ in
-            viewModel.applyFilters()
-        }
-        .onChange(of: viewModel.filterOptions) { _, _ in
-            viewModel.applyFilters()
-        }
-        .onChange(of: viewModel.selectedSet) { _, _ in
-            viewModel.applyFilters()
-        }
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
-        }
-        .overlay(alignment: .top) {
-            if showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $showToast,
-                    duration: 2.5
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .sheet(isPresented: $showingFilterSheet) {
-            filterSheet
-        }
-        .sheet(isPresented: $showingShareSheet) {
-            ShareSheet(items: [generateShareTextForSheet()])
-        }
         .onAppear {
             if viewModel.items.isEmpty {
                 viewModel.loadCollection()
                 viewModel.loadAvailableSets()
             }
+        }
+    }
+
+    @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarLeading) {
+            filterButton
+        }
+
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            shareButton
+            addButton
+        }
+    }
+
+    @ViewBuilder
+    private var toastView: some View {
+        if showToast {
+            ToastView(
+                title: viewModel.toastTitle,
+                message: viewModel.toastMessage,
+                type: viewModel.toastType,
+                isPresented: $showToast,
+                duration: 2.5
+            )
+            .padding(.top, 8)
+            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 

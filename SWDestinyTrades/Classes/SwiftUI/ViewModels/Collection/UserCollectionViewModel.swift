@@ -55,7 +55,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         loadCollectionFromDatabase()
     }
 
-    private func applyFilters() {
+    func applyFilters() {
         performFiltering(searchText: searchText)
     }
 
