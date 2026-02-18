@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class HttpStatusCodeTests: BaseTestCase {
+final class HttpStatusCodeTests: XCTestCase {
 
     func testInitFromStringValue_withValidString_shouldReturnCorrectStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "200")

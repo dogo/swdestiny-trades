@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class APIErrorTests: BaseTestCase {
+final class APIErrorTests: XCTestCase {
 
     func test_invalid_data_error_description() {
         let error = APIError.invalidData

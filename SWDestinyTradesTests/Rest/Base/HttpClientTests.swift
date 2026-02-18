@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class HttpClientTests: BaseTestCase {
+final class HttpClientTests: XCTestCase {
 
     private var sut: HttpClient!
     private var session: URLSession!

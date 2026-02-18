@@ -11,13 +11,17 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class NetworkingLoggerTests: BaseTestCase {
+final class NetworkingLoggerTests: XCTestCase {
 
     private class TestOutputStream: TextOutputStream {
         private(set) var output: [String] = []
 
         func write(_ string: String) {
             output.append(string)
+        }
+
+        var joined: String {
+            output.joined()
         }
     }
 
@@ -43,13 +47,13 @@ final class NetworkingLoggerTests: BaseTestCase {
         request.httpBody = Data("{\"key\": \"value\"}".utf8)
         logger.log(request: request)
 
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER |---------------------------------------------------\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | GET 'https://example.com':\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | Headers: [\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER |   Authorization: Bearer token\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER |   Content-Type: application/json\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | ]\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | Body: {\"key\": \"value\"}\n"))
+        let output = testOutputStream.output.joined()
+        XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
+        XCTAssertTrue(output.contains("LOGGER | 🚀 GET https://example.com"))
+        XCTAssertTrue(output.contains("LOGGER | 📋 Headers:"))
+        XCTAssertTrue(output.contains("LOGGER |    Authorization: Bearer token"))
+        XCTAssertTrue(output.contains("LOGGER |    Content-Type: application/json"))
+        XCTAssertTrue(output.contains("LOGGER | 📦 Body: {\"key\": \"value\"}"))
     }
 
     func test_log_response() {
@@ -60,12 +64,13 @@ final class NetworkingLoggerTests: BaseTestCase {
         let data = Data("{\"key\": \"value\"}".utf8)
         logger.log(response: response, data: data, time: 1.234)
 
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | 200 'https://example.com'\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | Duration: '00:00:01.234'\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | JSON:\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | {\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER |   \"key\" : \"value\"\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | }\n"))
+        let output = testOutputStream.output.joined()
+        XCTAssertTrue(output.contains("LOGGER | ✅ 200 • 1.23s"))
+        XCTAssertTrue(output.contains("LOGGER | 📄 Response:"))
+        XCTAssertTrue(output.contains("LOGGER |    {"))
+        XCTAssertTrue(output.contains("LOGGER |      \"key\" : \"value\""))
+        XCTAssertTrue(output.contains("LOGGER |    }"))
+        XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
     }
 
     func test_log_response_with_invalid_json() {
@@ -76,9 +81,9 @@ final class NetworkingLoggerTests: BaseTestCase {
         let data = Data("\"key\": \"value\"".utf8)
         logger.log(response: response, data: data, time: 1.234)
 
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | 200 'https://example.com'\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | Duration: '00:00:01.234'\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | \"key\": \"value\"\n"))
+        let output = testOutputStream.output.joined()
+        XCTAssertTrue(output.contains("LOGGER | ✅ 200 • 1.23s"))
+        XCTAssertTrue(output.contains("LOGGER | 📄 Response: \"key\": \"value\""))
     }
 
     func test_log_error() {
@@ -86,7 +91,9 @@ final class NetworkingLoggerTests: BaseTestCase {
         let error = NSError(domain: "TestDomain", code: 123, userInfo: [NSLocalizedDescriptionKey: "Test error"])
         logger.logError(request: request, statusCode: 500, error: error)
 
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | [Error] 500 GET 'https://example.com':\n"))
-        XCTAssertTrue(testOutputStream.output.contains("LOGGER | Description: Test error\n"))
+        let output = testOutputStream.output.joined()
+        XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
+        XCTAssertTrue(output.contains("LOGGER | 💥 500 GET https://example.com"))
+        XCTAssertTrue(output.contains("LOGGER |    Test error"))
     }
 }

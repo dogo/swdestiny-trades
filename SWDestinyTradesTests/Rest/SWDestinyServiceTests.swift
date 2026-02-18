@@ -13,37 +13,35 @@ import XCTest
 final class SWDestinyServiceTests: BaseTestCase {
 
     private var sut: SWDestinyService!
-    private var client: HttpClientMock!
 
-    override func setUp() {
-        super.setUp()
-        client = DependencyManager.shared.resolve(type: HttpClientProtocol.self, mode: .shared) as? HttpClientMock
-        sut = SWDestinyService(client: client)
+    override func setUp() async throws {
+        try await super.setUp()
+        sut = SWDestinyService(client: mockHttpClient)
     }
 
     func testRetrieveSetListWithSuccess() async throws {
-        client.fileName = "sets"
+        mockHttpClient.fileName = "sets"
         let result = try await sut.retrieveSetList()
 
         XCTAssertNotNil(result)
     }
 
     func testRetrieveSetCardListWithSuccess() async throws {
-        client.fileName = "card-list"
+        mockHttpClient.fileName = "card-list"
         let result = try await sut.retrieveSetCardList(setCode: "anyString")
 
         XCTAssertNotNil(result)
     }
 
     func testRetrieveSpecificCardWithSuccess() async throws {
-        client.fileName = "card"
+        mockHttpClient.fileName = "card"
         let result = try await sut.retrieveCard(cardId: "anyString")
 
         XCTAssertNotNil(result)
     }
 
     func testRetrieveAllCardsWithSuccess() async throws {
-        client.fileName = "card-list"
+        mockHttpClient.fileName = "card-list"
         let result = try await sut.retrieveAllCards()
 
         XCTAssertNotNil(result)
@@ -53,6 +51,6 @@ final class SWDestinyServiceTests: BaseTestCase {
         let request = URLRequest(with: URL(string: "https://base.url.com")!)
         sut.cancelRequest(request)
 
-        XCTAssertTrue(client.isCancelled)
+        XCTAssertTrue(mockHttpClient.isCancelled)
     }
 }

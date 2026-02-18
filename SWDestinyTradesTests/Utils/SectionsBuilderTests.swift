@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SectionsBuilderTests: BaseTestCase {
+final class SectionsBuilderTests: XCTestCase {
 
     // MARK: - alphabetically
 

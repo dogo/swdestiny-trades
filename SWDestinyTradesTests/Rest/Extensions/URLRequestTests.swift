@@ -10,7 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class URLRequestTests: BaseTestCase {
+final class URLRequestTests: XCTestCase {
 
     func test_init_with_URL_valid_URL_should_create_URLRequest() {
         let validURL = URL(string: "https://example.com")!

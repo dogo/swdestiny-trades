@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class CardDTOTests: BaseTestCase {
+final class CardDTOTests: XCTestCase {
 
     func test_factionColor() {
         let testCases: [(factionCode: String, expectedColor: Color)] = [

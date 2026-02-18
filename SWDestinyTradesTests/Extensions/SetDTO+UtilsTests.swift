@@ -11,7 +11,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
-final class SetDTOTests: BaseTestCase {
+final class SetDTOTests: XCTestCase {
 
     func test_icon() {
         let testCases: [(code: String, expectedIcon: Image)] = [

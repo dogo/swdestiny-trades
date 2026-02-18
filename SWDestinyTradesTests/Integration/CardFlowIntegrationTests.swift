@@ -40,9 +40,6 @@ final class CardFlowIntegrationTests: BaseTestCase {
             CardDetailView(cards: [card1], selectedCard: card1)
         }
 
-        let viewModel1 = helper.createViewModel(CardListViewModel.self)
-        let viewModel2 = helper.createViewModel(CardListViewModel.self)
-
         XCTAssertNotNil(cardListView)
         XCTAssertNotNil(cardDetailView)
     }

@@ -7,8 +7,9 @@
 //
 
 import Observation
-@testable import SWDestinyTrades
 import SwiftUI
+
+@testable import SWDestinyTrades
 
 @MainActor
 @Observable
@@ -26,8 +27,8 @@ final class NavigationCoordinatorMock: NavigationCoordinatorProtocol {
         }
     }
 
-    var selectedTab: AppTab = .cards
-    var cardPath = NavigationPath()
+    var selectedTab: AppTab = .sets
+    var setsPath = NavigationPath()
     var deckPath = NavigationPath()
     var loanPath = NavigationPath()
     var collectionPath = NavigationPath()
