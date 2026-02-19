@@ -61,7 +61,7 @@ final class CardListViewTests: BaseTestCase {
             name: "Test Card"
         )
 
-        try await populateTestData(objects: [card])
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         let viewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
@@ -126,7 +126,7 @@ final class CardListViewTests: BaseTestCase {
             )
         }
 
-        try await populateTestData(objects: cards)
+        mockSWDestinyService.retrieveSetCardListResult = cards
 
         let viewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
@@ -167,13 +167,15 @@ final class CardListViewTests: BaseTestCase {
             name: "Spirit of Rebellion Card"
         )
 
-        try await populateTestData(objects: [awCard, sorCard])
+        mockSWDestinyService.retrieveSetCardListResult = [awCard]
 
         let awViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
         await awViewModel.loadCards()
 
         XCTAssertEqual(awViewModel.items.count, 1)
         XCTAssertEqual(awViewModel.items.first?.setCode, "AW")
+
+        mockSWDestinyService.retrieveSetCardListResult = [sorCard]
 
         let sorSet = SetDTO.stub(name: "Spirit of Rebellion", code: "SOR")
         let sorViewModel = CardListViewModel(set: sorSet, dependencyContainer: testContainer.container)

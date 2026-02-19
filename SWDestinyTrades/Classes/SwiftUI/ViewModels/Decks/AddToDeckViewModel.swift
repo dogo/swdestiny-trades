@@ -110,19 +110,10 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
 
     func addCardToDeck(_ card: CardDTO) {
         if deck.list.contains(where: { $0.code == card.code }) {
-            showToast = false
             toastTitle = ""
             toastMessage = L10n.alreadyAdded
             toastType = .info
-
-            Task { @MainActor in
-                do {
-                    try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                    self.showToast = true
-                } catch {
-                    // Ignore cancellation during toast delay
-                }
-            }
+            showToast = true
             return
         }
 
@@ -136,12 +127,9 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
                     self?.deck.list.append(cardCopy)
                 }
 
-                self.showToast = false
                 self.toastTitle = L10n.added
                 self.toastMessage = card.name
                 self.toastType = .success
-
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
                 self.showToast = true
 
                 let deckDataDict: [String: DeckDTO] = ["deckDTO": self.deck]
@@ -155,8 +143,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     override func handleError(_ error: Error) {
         super.handleError(error)
 
-        showToast = false
-
         if ConcurrencyError.isCancellation(error) {
             return
         }
@@ -164,14 +150,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         toastTitle = L10n.error
         toastMessage = L10n.errorMessage
         toastType = .error
-
-        Task { @MainActor in
-            do {
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                self.showToast = true
-            } catch {
-                // Ignore cancellation during toast delay
-            }
-        }
+        showToast = true
     }
 }

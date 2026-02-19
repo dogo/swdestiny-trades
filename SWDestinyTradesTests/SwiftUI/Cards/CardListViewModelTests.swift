@@ -44,7 +44,7 @@ final class CardListViewModelTests: BaseTestCase {
             subtitle: "Vader's Disciple"
         )
 
-        try await populateTestData(objects: [card1, card2])
+        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
 
         await sut.loadCards()
 
@@ -73,7 +73,7 @@ final class CardListViewModelTests: BaseTestCase {
             name: "Luke Skywalker"
         )
 
-        try await populateTestData(objects: [awCard, sokCard])
+        mockSWDestinyService.retrieveSetCardListResult = [awCard]
 
         await sut.loadCards()
 
@@ -104,7 +104,8 @@ final class CardListViewModelTests: BaseTestCase {
 
     func testAsyncOperationCompletesLoading() async throws {
         let card = CardDTO.stub(setCode: "AW", code: "01001")
-        try await populateTestData(objects: [card])
+
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         await sut.loadCards()
 
@@ -125,7 +126,7 @@ final class CardListViewModelTests: BaseTestCase {
             subtitle: "Vader's Disciple"
         )
 
-        try await populateTestData(objects: [card1, card2])
+        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
 
         await sut.loadCards()
 
@@ -149,7 +150,7 @@ final class CardListViewModelTests: BaseTestCase {
             subtitle: "Vader's Disciple"
         )
 
-        try await populateTestData(objects: [card1, card2])
+        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
 
         await sut.loadCards()
 
@@ -173,7 +174,7 @@ final class CardListViewModelTests: BaseTestCase {
             name: "Rey"
         )
 
-        try await populateTestData(objects: [redCard, blueCard])
+        mockSWDestinyService.retrieveSetCardListResult = [redCard, blueCard]
 
         await sut.loadCards()
 
@@ -198,7 +199,7 @@ final class CardListViewModelTests: BaseTestCase {
             name: "Lightsaber"
         )
 
-        try await populateTestData(objects: [character, upgrade])
+        mockSWDestinyService.retrieveSetCardListResult = [character, upgrade]
 
         await sut.loadCards()
 
@@ -229,7 +230,7 @@ final class CardListViewModelTests: BaseTestCase {
             cost: 5
         )
 
-        try await populateTestData(objects: [lowCostCard, midCostCard, highCostCard])
+        mockSWDestinyService.retrieveSetCardListResult = [lowCostCard, midCostCard, highCostCard]
 
         await sut.loadCards()
 
@@ -255,14 +256,13 @@ final class CardListViewModelTests: BaseTestCase {
                 randomCards.append(card)
             }
 
-            try await populateTestData(objects: randomCards)
+            mockSWDestinyService.retrieveSetCardListResult = randomCards
 
-            await sut.loadCards()
+            let testViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
+            await testViewModel.loadCards()
 
-            XCTAssertFalse(sut.isLoading, "Loading should complete on iteration \(iteration)")
-            XCTAssertEqual(sut.items.count, randomCardCount, "Should load correct number of cards on iteration \(iteration)")
-
-            try await testDatabase.reset()
+            XCTAssertFalse(testViewModel.isLoading, "Loading should complete on iteration \(iteration)")
+            XCTAssertEqual(testViewModel.items.count, randomCardCount, "Should load correct number of cards on iteration \(iteration)")
         }
     }
 }

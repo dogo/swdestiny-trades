@@ -56,8 +56,6 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     override func handleError(_ error: Error) {
         super.handleError(error)
 
-        showToast = false
-
         if ConcurrencyError.isCancellation(error) {
             return
         }
@@ -65,15 +63,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
         toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
-
-        Task { @MainActor in
-            do {
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                self.showToast = true
-            } catch {
-                // Ignore cancellation during toast delay
-            }
-        }
+        showToast = true
     }
 
     func performSearch(query: String) {

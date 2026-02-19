@@ -88,9 +88,7 @@ struct CardListView: View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             EmptyStateView(
                 title: L10n.noCardsFound,
-                message: viewModel.searchText.isEmpty ?
-                    "Pull to refresh to load cards" :
-                    "No cards match your search criteria",
+                message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadCards : L10n.noCardsMatchSearch,
                 systemImage: "rectangle.stack"
             )
         } else {

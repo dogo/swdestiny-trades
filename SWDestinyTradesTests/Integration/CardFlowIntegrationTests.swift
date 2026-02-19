@@ -54,7 +54,8 @@ final class CardFlowIntegrationTests: BaseTestCase {
         card.code = "card1"
         card.name = "Initial Name"
         card.setCode = "AW"
-        try await populateTestData(objects: [card])
+
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
 
@@ -63,9 +64,8 @@ final class CardFlowIntegrationTests: BaseTestCase {
         XCTAssertEqual(viewModel1.items.count, 1)
         XCTAssertEqual(viewModel1.items.first?.name, "Initial Name")
 
-        try await testDatabase.update {
-            card.name = "Updated Name"
-        }
+        card.name = "Updated Name"
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel2.loadCards()
@@ -87,7 +87,8 @@ final class CardFlowIntegrationTests: BaseTestCase {
         card.code = "card1"
         card.name = "Test Card"
         card.setCode = "AW"
-        try await populateTestData(objects: [card])
+
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         let view = helper.createView {
             CardListView(set: set)
@@ -125,7 +126,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
         card2.name = "Card Two"
         card2.setCode = "AW"
 
-        try await populateTestData(objects: [card1, card2])
+        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
 
         let listViewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await listViewModel.loadCards()

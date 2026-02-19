@@ -106,20 +106,11 @@ final class NewPersonViewModel: BaseViewModel {
 
     override func handleError(_ error: Error) {
         setLoading(false)
-        showToast = false
 
         toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
-
-        Task { @MainActor in
-            do {
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                self.showToast = true
-            } catch {
-                // Ignore cancellation during toast delay
-            }
-        }
+        showToast = true
     }
 }
 

@@ -78,6 +78,12 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         await loadAllCards()
     }
 
+    func loadData() async {
+        await loadOrCreateUserCollection()
+        await loadAllCards()
+        await loadAvailableSets()
+    }
+
     private func loadOrCreateUserCollection() async {
         let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
 
@@ -198,29 +204,19 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                     try await addCardToBorrowed(card, person: person, database: database)
                 }
 
-                self.showToast = false
                 self.toastTitle = L10n.cardAdded
                 self.toastMessage = L10n.cardAddedSuccessfully(card.name)
                 self.toastType = .success
-
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
                 self.showToast = true
 
                 self.performFiltering(searchText: self.searchText)
             } catch is CancellationError {
                 return
             } catch {
-                self.showToast = false
                 self.toastTitle = L10n.error
                 self.toastMessage = (error as? AddCardError)?.localizedDescription ?? error.localizedDescription
                 self.toastType = .error
-
-                do {
-                    try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                    self.showToast = true
-                } catch {
-                    // Ignore cancellation during toast delay
-                }
+                self.showToast = true
             }
         }
     }
@@ -264,8 +260,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     override func handleError(_ error: Error) {
         super.handleError(error)
 
-        showToast = false
-
         if ConcurrencyError.isCancellation(error) {
             return
         }
@@ -273,15 +267,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
-
-        Task { @MainActor in
-            do {
-                try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                self.showToast = true
-            } catch {
-                // Ignore cancellation during toast delay
-            }
-        }
+        showToast = true
     }
 }
 

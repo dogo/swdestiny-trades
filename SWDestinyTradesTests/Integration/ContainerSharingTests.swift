@@ -54,7 +54,8 @@ final class ContainerSharingTests: BaseTestCase {
         card.code = "card1"
         card.name = "Original Name"
         card.setCode = "AW"
-        try await populateTestData(objects: [card])
+
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
@@ -63,6 +64,7 @@ final class ContainerSharingTests: BaseTestCase {
         XCTAssertEqual(viewModel1.items.first?.name, "Original Name")
 
         card.name = "Modified Name"
+        mockSWDestinyService.retrieveSetCardListResult = [card]
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
@@ -94,7 +96,7 @@ final class ContainerSharingTests: BaseTestCase {
         card2.name = "Card Two"
         card2.setCode = "AW"
 
-        try await populateTestData(objects: [card1, card2])
+        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
 
         let viewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel.loadCards()
@@ -124,7 +126,7 @@ final class ContainerSharingTests: BaseTestCase {
         card2.name = "Card Two"
         card2.setCode = "AW"
 
-        try await populateTestData(objects: [card1, card2])
+        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
@@ -149,7 +151,8 @@ final class ContainerSharingTests: BaseTestCase {
         card.code = "card1"
         card.name = "Initial"
         card.setCode = "AW"
-        try await populateTestData(objects: [card])
+
+        mockSWDestinyService.retrieveSetCardListResult = [card]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
@@ -157,6 +160,7 @@ final class ContainerSharingTests: BaseTestCase {
         XCTAssertEqual(viewModel1.items.first?.name, "Initial")
 
         card.name = "Updated Once"
+        mockSWDestinyService.retrieveSetCardListResult = [card]
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
@@ -164,6 +168,7 @@ final class ContainerSharingTests: BaseTestCase {
         XCTAssertEqual(viewModel2.items.first?.name, "Updated Once")
 
         card.name = "Updated Twice"
+        mockSWDestinyService.retrieveSetCardListResult = [card]
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel3 = CardListViewModel(set: set, dependencyContainer: testContainer.container)

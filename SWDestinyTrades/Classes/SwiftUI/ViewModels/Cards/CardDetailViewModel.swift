@@ -61,16 +61,10 @@ final class CardDetailViewModel: BaseViewModel {
     }
 
     override func handleError(_ error: Error) {
-        showToast = false
-
         toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
-
-        Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-            showToast = true
-        }
+        showToast = true
     }
 
     func updateCurrentIndex(_ index: Int) {
@@ -107,15 +101,10 @@ final class CardDetailViewModel: BaseViewModel {
                 }
             }
 
-            showToast = false
             toastTitle = L10n.added
             toastMessage = card.name
             toastType = .success
-
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-                showToast = true
-            }
+            showToast = true
 
             setLoaded()
         } catch {

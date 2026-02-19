@@ -39,15 +39,10 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     override func handleError(_ error: Error) {
         super.handleError(error)
 
-        showToast = false
         toastTitle = L10n.error
         toastMessage = error.localizedDescription
         toastType = .error
-
-        Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-            showToast = true
-        }
+        showToast = true
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) async {
