@@ -184,6 +184,38 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
             handleError(error)
         }
     }
+
+    func removeCard(_ card: CardDTO) {
+        Task { @MainActor in
+            do {
+                try Task.checkCancellation()
+
+                let collections = await database.fetch(
+                    UserCollectionDTO.self,
+                    predicate: nil,
+                    sorted: nil
+                )
+
+                guard let userCollection = collections.first else {
+                    handleError(ViewModelError.objectNotFound)
+                    return
+                }
+
+                guard let cardIndex = userCollection.myCollection.firstIndex(where: { $0.id == card.id }) else {
+                    handleError(ViewModelError.objectNotFound)
+                    return
+                }
+
+                try await database.update {
+                    userCollection.myCollection.remove(at: cardIndex)
+                }
+            } catch is CancellationError {
+                return
+            } catch {
+                self.handleError(ConcurrencyError.realmAccessError(error))
+            }
+        }
+    }
 }
 
 enum CollectionSortOption: CaseIterable {
