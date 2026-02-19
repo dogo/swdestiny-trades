@@ -88,19 +88,19 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
         return items
     }
 
-    func loadItems(page: Int = 0, reset: Bool = false) {
+    func loadItems(page: Int = 0, reset: Bool = false) async {
         // Override in subclasses
     }
 
-    func loadMoreItems() {
+    func loadMoreItems() async {
         guard hasMoreItems, !isLoading else { return }
-        loadItems(page: currentPage + 1, reset: false)
+        await loadItems(page: currentPage + 1, reset: false)
     }
 
-    func refresh() {
+    func refresh() async {
         currentPage = 0
         hasMoreItems = true
-        loadItems(page: 0, reset: true)
+        await loadItems(page: 0, reset: true)
     }
 
     func updateItems(_ newItems: [T], append: Bool = false) {

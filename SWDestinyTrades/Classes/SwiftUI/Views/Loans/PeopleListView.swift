@@ -80,7 +80,7 @@ struct PeopleListView: View {
                 .environment(\.editMode, .constant(isEditing ? EditMode.active : EditMode.inactive))
                 .listStyle(PlainListStyle())
                 .refreshable {
-                    viewModel.refresh()
+                    await viewModel.refresh()
                 }
             }
         }
@@ -131,14 +131,18 @@ struct PeopleListView: View {
                 }
             }
         )
-        .onAppear {
-            viewModel.loadPeople()
+        .task {
+            await viewModel.loadPeople()
         }
         .onReceive(NotificationCenter.default.publisher(for: .personAdded)) { _ in
-            viewModel.refresh()
+            Task {
+                await viewModel.refresh()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: .personDeleted)) { _ in
-            viewModel.refresh()
+            Task {
+                await viewModel.refresh()
+            }
         }
         .overlay(alignment: .top) {
             if showToast {

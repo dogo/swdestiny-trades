@@ -19,7 +19,7 @@ struct MainTabView: View {
             // Sets Tab
             Tab(value: AppTab.sets) {
                 NavigationStack(path: $navigationCoordinator.setsPath) {
-                    CardsRootView()
+                    SetsRootView()
                         .navigationDestination(for: AppDestination.self) { destination in
                             NavigationDestinationBuilder.build(destination: destination)
                         }
@@ -114,7 +114,7 @@ struct MainTabView: View {
 
 // MARK: - Root Views for Each Tab
 
-struct CardsRootView: View {
+struct SetsRootView: View {
     @State private var viewModel = SetsListViewModel()
 
     var body: some View {

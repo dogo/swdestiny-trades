@@ -171,9 +171,13 @@ struct AddToDeckCardRowView: View {
                             .background(Color(.systemGray5))
                             .clipShape(RoundedRectangle(cornerRadius: 4))
 
-                        Text(card.typeCode.capitalized)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                        Text(card.typeName.capitalized)
+                            .font(.caption)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(Color.blue.opacity(0.2))
+                            .foregroundColor(.blue)
+                            .clipShape(Capsule())
                     }
                 }
 

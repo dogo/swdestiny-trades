@@ -30,7 +30,7 @@ struct UserCollectionView: View {
             .navigationTitle(L10n.myCollection)
             .navigationBarTitleDisplayMode(.large)
             .toolbar { toolbarContent }
-            .refreshable { await refreshCollection() }
+            .refreshable { viewModel.loadCollection() }
             .searchable(text: $viewModel.searchText, prompt: L10n.searchCollection)
             .onChange(of: viewModel.searchText) { _, newValue in
                 viewModel.performFiltering(searchText: newValue)
@@ -164,15 +164,6 @@ struct UserCollectionView: View {
 
     // MARK: - Helper Methods
 
-    @MainActor
-    private func refreshCollection() async {
-        viewModel.loadCollection()
-
-        while viewModel.isLoading {
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-        }
-    }
-
     private func generateShareTextForSheet() -> String {
         var collectionText = "\(L10n.myCollection)\n\n"
 
@@ -241,9 +232,13 @@ struct CollectionCardRowView: View {
                             .background(Color(.systemGray5))
                             .clipShape(RoundedRectangle(cornerRadius: 4))
 
-                        Text(card.typeCode.capitalized)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                        Text(card.typeName.capitalized)
+                            .font(.caption)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(Color.blue.opacity(0.2))
+                            .foregroundColor(.blue)
+                            .clipShape(Capsule())
                     }
                 }
 

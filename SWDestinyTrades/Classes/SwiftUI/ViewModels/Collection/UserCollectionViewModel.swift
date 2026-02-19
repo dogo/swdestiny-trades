@@ -50,7 +50,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    override func loadItems(page: Int = 0, reset: Bool = false) {
+    override func loadItems(page: Int = 0, reset: Bool = false) async {
         loadCollection()
     }
 
@@ -95,7 +95,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
                 predicate: nil,
                 sorted: Sorted(key: "name", ascending: true)
             )
-
             availableSets = sets
         }
     }

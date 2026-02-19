@@ -155,7 +155,7 @@ struct CardRowView: View {
                     }
 
                     HStack {
-                        Text(card.typeName)
+                        Text(card.typeName.capitalized)
                             .font(.caption)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
@@ -163,7 +163,7 @@ struct CardRowView: View {
                             .foregroundColor(.blue)
                             .clipShape(Capsule())
 
-                        Text(card.factionName)
+                        Text(card.factionName.capitalized)
                             .font(.caption)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)

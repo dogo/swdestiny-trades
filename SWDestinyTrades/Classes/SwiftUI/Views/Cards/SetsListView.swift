@@ -74,9 +74,9 @@ struct SetsListView: View {
             viewModel.performFiltering(searchText: newValue)
         }
         .searchable(text: $viewModel.searchText, prompt: L10n.searchSets)
-        .onAppear {
+        .task {
             if viewModel.items.isEmpty {
-                viewModel.loadItems()
+                await viewModel.loadItems()
             }
         }
     }

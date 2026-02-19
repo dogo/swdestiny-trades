@@ -37,8 +37,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
         Task { @MainActor in
             await loadOrCreateUserCollection()
-            loadAllCards()
-            loadAvailableSets()
+            await loadAllCards()
+            await loadAvailableSets()
         }
     }
 
@@ -60,8 +60,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                 }
             }
 
-            loadAllCards()
-            loadAvailableSets()
+            await loadAllCards()
+            await loadAvailableSets()
         }
     }
 
@@ -74,8 +74,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    override func loadItems(page: Int = 0, reset: Bool = false) {
-        loadAllCards()
+    override func loadItems(page: Int = 0, reset: Bool = false) async {
+        await loadAllCards()
     }
 
     private func loadOrCreateUserCollection() async {
@@ -94,19 +94,17 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    func loadAllCards() {
+    func loadAllCards() async {
         setLoading(true)
 
-        Task { @MainActor in
-            do {
-                let allCards = try await service.retrieveAllCards()
-                self.updateItems(allCards)
-                self.setLoaded()
-            } catch is CancellationError {
-                self.setLoaded()
-            } catch {
-                self.handleError(error)
-            }
+        do {
+            let allCards = try await service.retrieveAllCards()
+            updateItems(allCards)
+            setLoaded()
+        } catch is CancellationError {
+            setLoaded()
+        } catch {
+            handleError(error)
         }
     }
 
@@ -114,18 +112,16 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         performFiltering(searchText: searchText)
     }
 
-    private func loadAvailableSets() {
-        Task { @MainActor in
-            let sets = await database.fetch(SetDTO.self, predicate: nil, sorted: nil)
-            let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
-            let sortedData = setData.sorted { $0.name < $1.name }
+    private func loadAvailableSets() async {
+        let sets = await database.fetch(SetDTO.self, predicate: nil, sorted: nil)
+        let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
+        let sortedData = setData.sorted { $0.name < $1.name }
 
-            let sortedSets = sortedData.compactMap { setData in
-                sets.first { $0.id == setData.id }
-            }
-
-            self.availableSets = sortedSets
+        let sortedSets = sortedData.compactMap { setData in
+            sets.first { $0.id == setData.id }
         }
+
+        availableSets = sortedSets
     }
 
     override func filterItems(searchText: String) -> [CardDTO] {

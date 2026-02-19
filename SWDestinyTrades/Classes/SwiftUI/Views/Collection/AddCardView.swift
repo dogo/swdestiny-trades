@@ -109,11 +109,7 @@ struct AddCardView: View {
 
     @MainActor
     private func refreshCards() async {
-        viewModel.loadAllCards()
-
-        while viewModel.isLoading {
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-        }
+        await viewModel.loadAllCards()
     }
 }
 
@@ -166,9 +162,13 @@ struct AddCardItemRowView: View {
                             .background(Color(.systemGray5))
                             .clipShape(RoundedRectangle(cornerRadius: 4))
 
-                        Text(card.typeCode.capitalized)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                        Text(card.typeName.capitalized)
+                            .font(.caption)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(Color.blue.opacity(0.2))
+                            .foregroundColor(.blue)
+                            .clipShape(Capsule())
                     }
                 }
 

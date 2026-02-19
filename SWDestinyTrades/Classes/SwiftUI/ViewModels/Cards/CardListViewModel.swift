@@ -81,10 +81,8 @@ final class CardListViewModel: ListViewModel<CardDTO> {
 
     // MARK: - Internal Methods
 
-    override func loadItems(page: Int = 0, reset: Bool = false) {
-        Task {
-            await loadCards()
-        }
+    override func loadItems(page: Int = 0, reset: Bool = false) async {
+        await loadCards()
     }
 
     func loadCards() async {
@@ -94,25 +92,13 @@ final class CardListViewModel: ListViewModel<CardDTO> {
         }
 
         setLoading(true)
-        await loadCardsFromDatabase(for: set)
+        await fetchCardsFromAPI(for: set)
     }
 
     // MARK: - Private Methods
 
     private func applyFilters() {
         performFiltering(searchText: searchText)
-    }
-
-    private func loadCardsFromDatabase(for set: SetDTO) async {
-        let allCards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        let setCards = allCards.filter { $0.setCode == set.code }
-
-        updateItems(setCards)
-        setLoaded()
-
-        if setCards.isEmpty {
-            await fetchCardsFromAPI(for: set)
-        }
     }
 
     private func fetchCardsFromAPI(for set: SetDTO) async {

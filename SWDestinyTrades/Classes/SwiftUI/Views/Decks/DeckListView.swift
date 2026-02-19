@@ -46,8 +46,8 @@ struct DeckListView: View {
         .alert(L10n.deleteDeck, isPresented: $viewModel.showingDeleteConfirmation) {
             deleteConfirmationAlert
         }
-        .onAppear {
-            viewModel.loadDecks()
+        .task {
+            await viewModel.loadDecks()
         }
     }
 
@@ -160,9 +160,7 @@ struct DeckListView: View {
     }
 
     private func refreshDecks() async {
-        await MainActor.run {
-            viewModel.loadDecks()
-        }
+        await viewModel.loadDecks()
     }
 }
 

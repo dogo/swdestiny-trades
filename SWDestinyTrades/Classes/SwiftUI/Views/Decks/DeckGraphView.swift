@@ -109,9 +109,7 @@ struct DeckGraphView: View {
     // MARK: - Actions
 
     private func refreshData() async {
-        await MainActor.run {
-            viewModel.refresh()
-        }
+        await viewModel.refresh()
     }
 }
 

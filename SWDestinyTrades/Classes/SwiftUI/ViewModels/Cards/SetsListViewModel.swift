@@ -30,31 +30,29 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
         super.init(dependencyContainer: dependencyContainer)
     }
 
-    override func loadItems(page: Int = 0, reset: Bool = false) {
+    override func loadItems(page: Int = 0, reset: Bool = false) async {
         setLoading(true)
-        fetchSetsFromAPI()
+        await fetchSetsFromAPI()
     }
 
-    private func fetchSetsFromAPI() {
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
+    private func fetchSetsFromAPI() async {
+        do {
+            try Task.checkCancellation()
 
-                let sets = try await service.retrieveSetList()
+            let sets = try await service.retrieveSetList()
 
-                try Task.checkCancellation()
+            try Task.checkCancellation()
 
-                for set in sets {
-                    try await database.save(object: set, update: .modified)
-                }
-
-                self.updateItems(sets)
-                self.setLoaded()
-            } catch is CancellationError {
-                self.setLoaded()
-            } catch {
-                self.handleError(error)
+            for set in sets {
+                try await database.save(object: set, update: .modified)
             }
+
+            updateItems(sets)
+            setLoaded()
+        } catch is CancellationError {
+            setLoaded()
+        } catch {
+            handleError(error)
         }
     }
 

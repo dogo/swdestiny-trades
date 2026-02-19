@@ -24,21 +24,19 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         super.init(dependencyContainer: dependencyContainer)
     }
 
-    override func loadItems(page: Int = 0, reset: Bool = false) {
-        loadDecks()
+    override func loadItems(page: Int = 0, reset: Bool = false) async {
+        await loadDecks()
     }
 
-    func loadDecks() {
+    func loadDecks() async {
         setLoading(true)
-        Task { @MainActor in
-            do {
-                try Task.checkCancellation()
-                await loadDecksFromDatabase()
-            } catch is CancellationError {
-                setLoaded()
-            } catch {
-                handleError(error)
-            }
+        do {
+            try Task.checkCancellation()
+            await loadDecksFromDatabase()
+        } catch is CancellationError {
+            setLoaded()
+        } catch {
+            handleError(error)
         }
     }
 

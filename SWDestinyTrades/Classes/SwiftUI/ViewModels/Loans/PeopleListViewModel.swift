@@ -50,22 +50,20 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
         }
     }
 
-    override func loadItems(page: Int = 0, reset: Bool = false) {
-        loadPeople()
+    override func loadItems(page: Int = 0, reset: Bool = false) async {
+        await loadPeople()
     }
 
-    func loadPeople() {
+    func loadPeople() async {
         setLoading(true)
-        loadPeopleFromDatabase()
+        await loadPeopleFromDatabase()
     }
 
-    private func loadPeopleFromDatabase() {
-        Task { @MainActor in
-            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-            let peopleArray = Array(people)
-            self.updateItems(peopleArray)
-            self.setLoaded()
-        }
+    private func loadPeopleFromDatabase() async {
+        let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+        let peopleArray = Array(people)
+        updateItems(peopleArray)
+        setLoaded()
     }
 
     override func filterItems(searchText: String) -> [PersonDTO] {
