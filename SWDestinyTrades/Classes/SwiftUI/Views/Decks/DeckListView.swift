@@ -222,13 +222,10 @@ struct DeckRowView: View {
             Button(L10n.delete, role: .destructive) {
                 onDelete()
             }
-
-            .tint(.blue)
-
             Button(L10n.graph) {
                 onGraph()
             }
-            .tint(.green)
+            .tint(.blue)
         }
     }
 
