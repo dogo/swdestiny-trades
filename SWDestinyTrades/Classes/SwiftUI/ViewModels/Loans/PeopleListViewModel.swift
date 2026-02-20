@@ -81,30 +81,29 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
     func viewPersonDetails(_ person: PersonDTO) {}
 
-    func deletePerson(_ person: PersonDTO) {
-        let personData = person.toThreadSafe()
+    func deletePerson(_ person: PersonDTO) async {
+        do {
+            let personId = person.id
+            let allItemIds = items.map(\.id)
 
-        Task { @MainActor in
-            do {
-                let itemsData = self.items.threadSafeMap { $0.toThreadSafe() }
+            try await database.delete(object: person)
 
-                try await database.delete(object: person)
+            let remainingIds = allItemIds.filter { $0 != personId }
 
-                let filteredData = itemsData.filter { $0.id != personData.id }
+            let freshPeople = await database.fetch(
+                PersonDTO.self,
+                predicate: NSPredicate(format: "id IN %@", remainingIds),
+                sorted: nil
+            )
 
-                let newItems = filteredData.compactMap { personData in
-                    self.items.first { $0.id == personData.id }
-                }
+            updateItems(Array(freshPeople))
 
-                self.updateItems(newItems)
-
-                self.toastTitle = L10n.deletedPerson
-                self.toastMessage = L10n.personDeletedSuccessfully(personData.name, personData.lastName)
-                self.toastType = .success
-                self.showToast = true
-            } catch {
-                self.handleError(error)
-            }
+            toastTitle = L10n.deletedPerson
+            toastMessage = L10n.personDeletedSuccessfully(person.name, person.lastName)
+            toastType = .success
+            showToast = true
+        } catch {
+            handleError(error)
         }
     }
 

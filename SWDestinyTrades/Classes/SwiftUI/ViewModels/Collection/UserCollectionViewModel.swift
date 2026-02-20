@@ -30,7 +30,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    @ObservationIgnored private nonisolated(unsafe) var observationTask: Task<Void, Never>?
+    @ObservationIgnored private var observationTask: Task<Void, Never>?
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)

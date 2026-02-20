@@ -73,7 +73,9 @@ struct PeopleListView: View {
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(L10n.delete, role: .destructive) {
-                                viewModel.deletePerson(person)
+                                Task {
+                                    await viewModel.deletePerson(person)
+                                }
                             }
                         }
                     }

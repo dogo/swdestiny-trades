@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 
+@MainActor
 @Observable
 final class DeckGraphViewModel: BaseViewModel {
 

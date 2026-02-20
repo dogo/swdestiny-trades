@@ -104,7 +104,12 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         setLoading(true)
 
         do {
+            try Task.checkCancellation()
+
             let allCards = try await service.retrieveAllCards()
+
+            try Task.checkCancellation()
+
             updateItems(allCards)
             setLoaded()
         } catch is CancellationError {
