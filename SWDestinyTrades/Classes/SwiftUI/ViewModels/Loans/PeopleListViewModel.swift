@@ -31,19 +31,12 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     override func handleError(_ error: Error) {
-        DispatchQueue.main.async {
-            self.showToast = false
+        toastTitle = L10n.error
+        toastMessage = error.localizedDescription
+        toastType = .error
 
-            self.toastTitle = L10n.error
-            self.toastMessage = error.localizedDescription
-            self.toastType = .error
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.showToast = true
-            }
-
-            self.setLoaded()
-        }
+        showToast = true
+        setLoaded()
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) async {
