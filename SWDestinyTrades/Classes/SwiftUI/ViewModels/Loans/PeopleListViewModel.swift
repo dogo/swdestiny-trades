@@ -11,15 +11,11 @@ import SwiftUI
 
 extension Notification.Name {
     static let personAdded = Notification.Name("personAdded")
-    static let personDeleted = Notification.Name("personDeleted")
 }
 
 @MainActor
 @Observable
 final class PeopleListViewModel: ListViewModel<PersonDTO> {
-
-    var showingDeleteConfirmation = false
-    var personToDelete: PersonDTO?
 
     var showToast = false
     var toastTitle = ""
@@ -92,42 +88,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
     func viewPersonDetails(_ person: PersonDTO) {}
 
-    func prepareToDelete(_ person: PersonDTO) {
-        personToDelete = person
-        showingDeleteConfirmation = true
-    }
-
-    func confirmDelete() {
-        guard let person = personToDelete else {
-            return
-        }
-
-        let personData = person.toThreadSafe()
-
-        Task { @MainActor in
-            do {
-                let itemsData = self.items.threadSafeMap { $0.toThreadSafe() }
-
-                try await database.delete(object: person)
-
-                let filteredData = itemsData.filter { $0.id != personData.id }
-
-                let newItems = filteredData.compactMap { personData in
-                    self.items.first { $0.id == personData.id }
-                }
-
-                self.updateItems(newItems)
-                self.personToDelete = nil
-                self.showingDeleteConfirmation = false
-
-                NotificationCenter.default.post(name: .personDeleted, object: person)
-            } catch {
-                self.handleError(error)
-            }
-        }
-    }
-
-    func confirmDelete(person: PersonDTO) {
+    func deletePerson(_ person: PersonDTO) {
         let personData = person.toThreadSafe()
 
         Task { @MainActor in
@@ -144,16 +105,14 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
                 self.updateItems(newItems)
 
-                NotificationCenter.default.post(name: .personDeleted, object: person)
+                self.toastTitle = L10n.deletedPerson
+                self.toastMessage = L10n.personDeletedSuccessfully(personData.name, personData.lastName)
+                self.toastType = .success
+                self.showToast = true
             } catch {
                 self.handleError(error)
             }
         }
-    }
-
-    func cancelDelete() {
-        personToDelete = nil
-        showingDeleteConfirmation = false
     }
 
     func getLoanSummary(for person: PersonDTO) -> LoanSummary {

@@ -21,7 +21,7 @@
 "ALREADY_ADDED" = "Esta carta já foi adicionada. Use o controle de quantidade na tela anterior.";
 "APPLY" = "Aplicar";
 "APP_INITIALIZED_SUCCESSFULLY" = "Aplicativo inicializado com sucesso!";
-"ARE_YOU_SURE_YOU_WANT_TO_DELETE_PERSONNAME" = "Tem certeza de que deseja excluir %@ %@? Isso também removerá todos os registros de empréstimos associados.";
+"PERSON_DELETED_SUCCESSFULLY" = "A pessoa %@ %@ foi excluída com sucesso.";
 "ARE_YOU_SURE_YOU_WANT_TO_REMOVE" = "Tem certeza de que deseja remover %@ da lista de empréstimos?";
 "A_TO_Z" = "A–Z";
 "BLUE" = "Azul";
@@ -53,7 +53,6 @@
 "DONE" = "Concluído";
 "DOWNGRADE" = "Desvantagem";
 "UPGRADE" = "Melhoria";
-"EDIT" = "Editar";
 "ELITE" = "Elite";
 "NON_ELITE" = "Não elite";
 "EMPTY_DECK" = "Baralho vazio";
@@ -155,5 +154,5 @@
 "MAX" = "Máx";
 "NO_LENT_CARDS" = "Nenhuma carta emprestada";
 "NO_BORROWED_CARDS" = "Nenhuma carta emprestada de alguém";
-"DELETE_PERSON" = "Excluir pessoa";
+"DELETED_PERSON" = "Pessoa excluida";
 "LOADING_PEOPLE" = "Carregando pessoas...";

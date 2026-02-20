@@ -21,7 +21,7 @@
 "ALREADY_ADDED" = "This card has already been added. Please use the quantity control on the previous screen.";
 "APPLY" = "Apply";
 "APP_INITIALIZED_SUCCESSFULLY" = "App initialized successfully!";
-"ARE_YOU_SURE_YOU_WANT_TO_DELETE_PERSONNAME" = "Are you sure you want to delete %@ %@? This will also remove all associated loan records.";
+"PERSON_DELETED_SUCCESSFULLY" = "%@ %@ was successfully deleted.";
 "ARE_YOU_SURE_YOU_WANT_TO_REMOVE" = "Are you sure you want to remove %@ from the loan list?";
 "A_TO_Z" = "A–Z";
 "BLUE" = "Blue";
@@ -53,7 +53,6 @@
 "DONE" = "Done";
 "DOWNGRADE" = "Downgrade";
 "UPGRADE" = "Upgrade";
-"EDIT" = "Edit";
 "ELITE" = "Elite";
 "NON_ELITE" = "Non-elite";
 "EMPTY_DECK" = "Empty deck";
@@ -154,5 +153,5 @@
 "MAX" = "Max";
 "NO_LENT_CARDS" = "No cards lent";
 "NO_BORROWED_CARDS" = "No cards borrowed";
-"DELETE_PERSON" = "Delete Person";
+"DELETED_PERSON" = "Deleted Person";
 "LOADING_PEOPLE" = "Loading people...";

@@ -39,7 +39,7 @@ extension CardDTO {
                      externalUrl: String,
                      imageUrl: String,
                      label: String,
-                     cp: Int, // swiftlint:disable:this identifier_name
+                     cp: Int,
                      quantity: Int,
                      isElite: Bool) {
         self.init()
@@ -102,7 +102,7 @@ extension CardDTO {
                      externalUrl: String = "https://swdestinydb.com/card/01001",
                      imageUrl: String = "https://swdestinydb.com/bundles/cards/en/01/01001.jpg",
                      label: String = "Captain Phasma - Elite Trooper",
-                     cp: Int = 1215, // swiftlint:disable:this identifier_name
+                     cp: Int = 1215,
                      quantity: Int = 1,
                      isElite: Bool = false) -> CardDTO {
         return CardDTO(setCode: setCode,

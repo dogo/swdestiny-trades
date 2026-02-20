@@ -12,7 +12,6 @@ struct PeopleListView: View {
 
     @State private var viewModel: PeopleListViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @State private var isEditing = false
     @State private var showToast = false
 
     init(viewModel: PeopleListViewModel? = nil) {
@@ -70,14 +69,15 @@ struct PeopleListView: View {
                             person: person,
                             loanSummary: viewModel.getLoanSummary(for: person)
                         ) {
-                            if !isEditing {
-                                navigationCoordinator.navigate(to: .loanDetail(person.id))
+                            navigationCoordinator.navigate(to: .loanDetail(person.id))
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(L10n.delete, role: .destructive) {
+                                viewModel.deletePerson(person)
                             }
                         }
                     }
-                    .onDelete(perform: deletePeople)
                 }
-                .environment(\.editMode, .constant(isEditing ? EditMode.active : EditMode.inactive))
                 .listStyle(PlainListStyle())
                 .refreshable {
                     await viewModel.refresh()
@@ -91,55 +91,18 @@ struct PeopleListView: View {
             viewModel.performFiltering(searchText: newValue)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                if !viewModel.filteredItems.isEmpty {
-                    Button(isEditing ? L10n.done : L10n.edit) {
-                        withAnimation {
-                            isEditing.toggle()
-                        }
-                    }
-                }
-            }
-
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    if isEditing {
-                        withAnimation {
-                            isEditing = false
-                        }
-                    }
                     navigationCoordinator.navigate(to: .newPerson)
                 }, label: {
                     Image(systemName: "plus")
                 })
             }
         }
-        .alert(
-            L10n.deletePerson,
-            isPresented: $viewModel.showingDeleteConfirmation,
-            actions: {
-                Button(L10n.delete, role: .destructive) {
-                    viewModel.confirmDelete()
-                }
-                Button(L10n.cancel, role: .cancel) {
-                    viewModel.cancelDelete()
-                }
-            },
-            message: {
-                if let person = viewModel.personToDelete {
-                    Text(L10n.areYouSureYouWantToDeletePersonname(person.name, person.lastName))
-                }
-            }
-        )
         .task {
             await viewModel.loadPeople()
         }
         .onReceive(NotificationCenter.default.publisher(for: .personAdded)) { _ in
-            Task {
-                await viewModel.refresh()
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .personDeleted)) { _ in
             Task {
                 await viewModel.refresh()
             }
@@ -160,18 +123,6 @@ struct PeopleListView: View {
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
         .onChange(of: viewModel.showToast) { _, newValue in
             showToast = newValue
-        }
-    }
-
-    private func deletePeople(at offsets: IndexSet) {
-        let peopleToDelete = offsets.map { viewModel.filteredItems[$0] }
-
-        if peopleToDelete.count == 1 {
-            viewModel.prepareToDelete(peopleToDelete[0])
-        } else {
-            for person in peopleToDelete {
-                viewModel.confirmDelete(person: person)
-            }
         }
     }
 }

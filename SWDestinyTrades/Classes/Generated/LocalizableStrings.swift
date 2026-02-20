@@ -58,10 +58,6 @@ internal enum L10n {
   internal static let appInitializedSuccessfully = L10n.tr("Localizable", "APP_INITIALIZED_SUCCESSFULLY", fallback: "App initialized successfully!")
   /// Apply
   internal static let apply = L10n.tr("Localizable", "APPLY", fallback: "Apply")
-  /// Are you sure you want to delete %@ %@? This will also remove all associated loan records.
-  internal static func areYouSureYouWantToDeletePersonname(_ p1: Any, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "ARE_YOU_SURE_YOU_WANT_TO_DELETE_PERSONNAME", String(describing: p1), String(describing: p2), fallback: "Are you sure you want to delete %@ %@? This will also remove all associated loan records.")
-  }
   /// Are you sure you want to remove %@ from the loan list?
   internal static func areYouSureYouWantToRemove(_ p1: Any) -> String {
     return L10n.tr("Localizable", "ARE_YOU_SURE_YOU_WANT_TO_REMOVE", String(describing: p1), fallback: "Are you sure you want to remove %@ from the loan list?")
@@ -134,16 +130,14 @@ internal enum L10n {
   internal static let deleteCard = L10n.tr("Localizable", "DELETE_CARD", fallback: "Delete card")
   /// Delete deck
   internal static let deleteDeck = L10n.tr("Localizable", "DELETE_DECK", fallback: "Delete deck")
-  /// Delete Person
-  internal static let deletePerson = L10n.tr("Localizable", "DELETE_PERSON", fallback: "Delete Person")
+  /// Deleted Person
+  internal static let deletedPerson = L10n.tr("Localizable", "DELETED_PERSON", fallback: "Deleted Person")
   /// Dice symbols
   internal static let diceSymbols = L10n.tr("Localizable", "DICE_SYMBOLS", fallback: "Dice symbols")
   /// Done
   internal static let done = L10n.tr("Localizable", "DONE", fallback: "Done")
   /// Downgrade
   internal static let downgrade = L10n.tr("Localizable", "DOWNGRADE", fallback: "Downgrade")
-  /// Edit
-  internal static let edit = L10n.tr("Localizable", "EDIT", fallback: "Edit")
   /// Elite
   internal static let elite = L10n.tr("Localizable", "ELITE", fallback: "Elite")
   /// Empty deck
@@ -272,6 +266,10 @@ internal enum L10n {
   internal static let nonElite = L10n.tr("Localizable", "NON_ELITE", fallback: "Non-elite")
   /// People
   internal static let people = L10n.tr("Localizable", "PEOPLE", fallback: "People")
+  /// %@ %@ was successfully deleted.
+  internal static func personDeletedSuccessfully(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "PERSON_DELETED_SUCCESSFULLY", String(describing: p1), String(describing: p2), fallback: "%@ %@ was successfully deleted.")
+  }
   /// Person information
   internal static let personInformation = L10n.tr("Localizable", "PERSON_INFORMATION", fallback: "Person information")
   /// Plot
