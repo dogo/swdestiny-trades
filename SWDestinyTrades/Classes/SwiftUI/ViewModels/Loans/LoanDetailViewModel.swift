@@ -77,10 +77,14 @@ final class LoanDetailViewModel: BaseViewModel {
     func updateCardQuantity(_ card: CardDTO, newQuantity: Int) {
         Task { @MainActor in
             do {
+                try Task.checkCancellation()
+
                 try await database.update {
                     card.quantity = newQuantity
                 }
                 self.loadLoanData()
+            } catch is CancellationError {
+                // Silently cancel
             } catch {
                 self.showErrorToast(error.localizedDescription)
             }

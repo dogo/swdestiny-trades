@@ -66,13 +66,19 @@ final class NewPersonViewModel: BaseViewModel {
         person.lastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
 
         do {
+            try Task.checkCancellation()
+
             try await database.save(object: person, update: .modified)
+
+            try Task.checkCancellation()
 
             addedPersonName = "\(person.name) \(person.lastName)".trimmingCharacters(in: .whitespaces)
             showSuccessToast = true
             resetForm()
 
             NotificationCenter.default.post(name: .personAdded, object: person)
+        } catch is CancellationError {
+            // Silently cancel
         } catch {
             handleError(error)
         }

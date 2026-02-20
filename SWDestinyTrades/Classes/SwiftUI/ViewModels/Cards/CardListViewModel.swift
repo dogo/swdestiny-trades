@@ -107,8 +107,15 @@ final class CardListViewModel: ListViewModel<CardDTO> {
         let setCode = set.code.lowercased()
 
         do {
+            try Task.checkCancellation()
+
             let cards = try await service.retrieveSetCardList(setCode: setCode)
+
+            try Task.checkCancellation()
+
             updateItems(cards)
+            setLoaded()
+        } catch is CancellationError {
             setLoaded()
         } catch {
             handleError(error)

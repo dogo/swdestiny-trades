@@ -79,7 +79,11 @@ final class CardDetailViewModel: BaseViewModel {
         defer { setLoading(false) }
 
         do {
+            try Task.checkCancellation()
+
             let results = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
+
+            try Task.checkCancellation()
 
             let userCollection: UserCollectionDTO = if let existingCollection = results.first {
                 existingCollection
@@ -90,6 +94,8 @@ final class CardDetailViewModel: BaseViewModel {
                     update: .error
                 )
             }
+
+            try Task.checkCancellation()
 
             try await database.update {
                 let predicate = NSPredicate(format: "code == %@", card.code)
@@ -107,6 +113,8 @@ final class CardDetailViewModel: BaseViewModel {
             showToast = true
 
             setLoaded()
+        } catch is CancellationError {
+            // Silently cancel
         } catch {
             handleError(error)
         }

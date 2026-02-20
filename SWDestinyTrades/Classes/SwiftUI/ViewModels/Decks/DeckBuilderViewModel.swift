@@ -94,12 +94,16 @@ final class DeckBuilderViewModel: BaseViewModel {
 
     func saveDeck() async {
         do {
+            try Task.checkCancellation()
+
             if isNewDeck {
                 try await database.save(object: deck, update: .modified)
                 isNewDeck = false
             } else {
                 try await database.update {}
             }
+        } catch is CancellationError {
+            // Silently cancel
         } catch {
             handleError(ConcurrencyError.realmAccessError(error))
         }
