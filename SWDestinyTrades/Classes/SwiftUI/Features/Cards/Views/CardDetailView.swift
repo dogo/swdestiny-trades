@@ -207,26 +207,6 @@ struct CardDetailView: View {
     }
 }
 
-struct InfoRow: View {
-    let title: String
-    let value: String
-
-    var body: some View {
-        HStack {
-            Text(title)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .frame(width: 100, alignment: .leading)
-
-            Text(value)
-                .font(.subheadline)
-                .foregroundColor(.primary)
-
-            Spacer()
-        }
-    }
-}
-
 #Preview {
     let sampleCard = CardDTO()
     sampleCard.name = "Luke Skywalker"
