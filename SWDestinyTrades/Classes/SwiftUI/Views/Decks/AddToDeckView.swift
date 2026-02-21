@@ -108,7 +108,7 @@ struct AddToDeckView: View {
                 AddToDeckCardRowView(card: card) {
                     viewModel.addCardToDeck(card)
                 } onDetailTap: {
-                    navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
+                    navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card, false))
                 }
                 .listRowSeparator(.visible)
             }

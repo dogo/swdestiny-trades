@@ -21,6 +21,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     var toastMessage = ""
     var toastType: ToastType = .info
 
+    private var isInitialLoadComplete = false
+
     var addCardContext: AddCardContext
 
     private var service: SWDestinyServiceProtocol {
@@ -39,6 +41,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             await loadOrCreateUserCollection()
             await loadAllCards()
             await loadAvailableSets()
+            isInitialLoadComplete = true
         }
     }
 
@@ -62,6 +65,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
             await loadAllCards()
             await loadAvailableSets()
+            isInitialLoadComplete = true
         }
     }
 
@@ -79,7 +83,14 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     }
 
     func loadData() async {
-        await loadOrCreateUserCollection()
+        guard !isInitialLoadComplete else { return }
+
+        switch addCardContext {
+        case .collection:
+            await loadOrCreateUserCollection()
+        case .lentToPerson, .borrowedFromPerson:
+            break
+        }
         await loadAllCards()
         await loadAvailableSets()
     }
@@ -231,8 +242,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             throw AddCardError.alreadyAdded
         }
 
+        let cardCopy = CardDTO(value: card)
+        cardCopy.id = NSUUID().uuidString
+
         try await database.update {
-            userCollection.myCollection.append(card)
+            userCollection.myCollection.append(cardCopy)
         }
     }
 
@@ -241,8 +255,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             throw AddCardError.alreadyAdded
         }
 
+        let cardCopy = CardDTO(value: card)
+        cardCopy.id = NSUUID().uuidString
+
         try await database.update {
-            person.lentMe.append(card)
+            person.lentMe.append(cardCopy)
         }
 
         let personDataDict: [String: PersonDTO] = ["personDTO": person]
@@ -254,8 +271,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             throw AddCardError.alreadyAdded
         }
 
+        let cardCopy = CardDTO(value: card)
+        cardCopy.id = NSUUID().uuidString
+
         try await database.update {
-            person.borrowed.append(card)
+            person.borrowed.append(cardCopy)
         }
 
         let personDataDict: [String: PersonDTO] = ["personDTO": person]

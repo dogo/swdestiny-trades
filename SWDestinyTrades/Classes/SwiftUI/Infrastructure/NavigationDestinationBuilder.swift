@@ -26,8 +26,8 @@ enum NavigationDestinationBuilder {
         case let .cardList(setDTO):
             CardListView(set: setDTO)
 
-        case let .cardDetail(cards, selectedCard):
-            CardDetailView(cards: cards, selectedCard: selectedCard)
+        case let .cardDetail(cards, selectedCard, showAddToCollection):
+            CardDetailView(cards: cards, selectedCard: selectedCard, showAddToCollection: showAddToCollection)
 
         case .search:
             SearchView()

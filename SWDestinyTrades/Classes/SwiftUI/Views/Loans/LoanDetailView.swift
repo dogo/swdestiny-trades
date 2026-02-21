@@ -40,7 +40,7 @@ struct LoanDetailView: View {
                                 viewModel.updateCardQuantity(card, newQuantity: newQuantity)
                             },
                             onTap: {
-                                navigationCoordinator.navigate(to: .cardDetail([card], card))
+                                navigationCoordinator.navigate(to: .cardDetail([card], card, false))
                             }
                         )
                     }
@@ -75,7 +75,7 @@ struct LoanDetailView: View {
                                 viewModel.updateCardQuantity(card, newQuantity: newQuantity)
                             },
                             onTap: {
-                                navigationCoordinator.navigate(to: .cardDetail([card], card))
+                                navigationCoordinator.navigate(to: .cardDetail([card], card, false))
                             }
                         )
                     }

@@ -103,7 +103,9 @@ final class CardDetailViewModel: BaseViewModel {
                     let existingCard = userCollection.myCollection[index]
                     existingCard.quantity += 1
                 } else {
-                    userCollection.myCollection.append(card)
+                    let cardCopy = CardDTO(value: card)
+                    cardCopy.id = NSUUID().uuidString
+                    userCollection.myCollection.append(cardCopy)
                 }
             }
 

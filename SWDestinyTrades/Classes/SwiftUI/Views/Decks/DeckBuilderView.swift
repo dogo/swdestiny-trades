@@ -168,7 +168,7 @@ struct DeckBuilderView: View {
 
     private func navigateToCardDetail(_ card: CardDTO) {
         let allCards = viewModel.deckSections.flatMap(\.cards)
-        navigationCoordinator.navigate(to: .cardDetail(allCards, card))
+        navigationCoordinator.navigate(to: .cardDetail(allCards, card, false))
     }
 }
 

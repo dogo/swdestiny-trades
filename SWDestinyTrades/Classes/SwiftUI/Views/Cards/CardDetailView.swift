@@ -19,10 +19,12 @@ struct CardDetailView: View {
 
     let cards: [CardDTO]
     let selectedCard: CardDTO
+    let showAddToCollection: Bool
 
-    init(cards: [CardDTO], selectedCard: CardDTO, viewModel: CardDetailViewModel? = nil) {
+    init(cards: [CardDTO], selectedCard: CardDTO, showAddToCollection: Bool = true, viewModel: CardDetailViewModel? = nil) {
         self.cards = cards
         self.selectedCard = selectedCard
+        self.showAddToCollection = showAddToCollection
         if let viewModel {
             _viewModel = State(wrappedValue: viewModel)
         } else {
@@ -58,12 +60,14 @@ struct CardDetailView: View {
                         Image(systemName: "square.and.arrow.up")
                     }
 
-                    Button {
-                        Task {
-                            await viewModel.addToCollection()
+                    if showAddToCollection {
+                        Button {
+                            Task {
+                                await viewModel.addToCollection()
+                            }
+                        } label: {
+                            Image(asset: Asset.NavigationBar.icAddCollection)
                         }
-                    } label: {
-                        Image(asset: Asset.NavigationBar.icAddCollection)
                     }
                 }
             }

@@ -53,7 +53,7 @@ enum AppTab: CaseIterable {
 enum AppDestination: Hashable {
     case setsList
     case cardList(SetDTO)
-    case cardDetail([CardDTO], CardDTO)
+    case cardDetail([CardDTO], CardDTO, Bool = true)
     case search
 
     case deckList
