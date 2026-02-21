@@ -56,11 +56,11 @@ struct DeckSectionView: View {
 
                     Spacer()
 
-                    Image(systemName: section.isCollapsed ? "chevron.up" : "chevron.down")
+                    Image(systemName: "chevron.right")
                         .foregroundColor(.secondary)
                         .font(.caption)
-                        .rotationEffect(.degrees(section.isCollapsed ? 0 : 0))
-                        .animation(.easeInOut(duration: 0.3), value: section.isCollapsed)
+                        .rotationEffect(.degrees(section.isCollapsed ? 0 : 90))
+                        .animation(.easeInOut(duration: 0.2), value: section.isCollapsed)
                 }
             }
             .buttonStyle(.plain)
