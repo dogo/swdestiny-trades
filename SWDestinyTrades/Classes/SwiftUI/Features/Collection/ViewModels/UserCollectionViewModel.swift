@@ -14,8 +14,7 @@ import SwiftUI
 final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
     var sortOption: CollectionSortOption = .name
-    var filterOptions: CollectionFilterOptions = .init()
-    var selectedSet: SetDTO?
+    var filter: UnifiedCardFilter = .init()
     var showToast = false
     var toastTitle = ""
     var toastMessage = ""
@@ -23,7 +22,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     var availableSets: [SetDTO] = []
 
     var hasActiveFilters: Bool {
-        filterOptions.hasActiveFilters || selectedSet != nil
+        filter.hasActiveFilters
     }
 
     private var database: DatabaseProtocol {
@@ -123,23 +122,23 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         var filtered = items
 
         // Apply set filter
-        if let selectedSet {
+        if let selectedSet = filter.selectedSet {
             filtered = filtered.filter { card in
                 card.setCode == selectedSet.code
             }
         }
 
         // Apply color filters
-        if !filterOptions.selectedColors.isEmpty {
+        if !filter.selectedColors.isEmpty {
             filtered = filtered.filter { card in
-                filterOptions.selectedColors.contains(card.factionCode)
+                filter.selectedColors.contains(card.factionCode)
             }
         }
 
         // Apply type filters
-        if !filterOptions.selectedTypes.isEmpty {
+        if !filter.selectedTypes.isEmpty {
             filtered = filtered.filter { card in
-                filterOptions.selectedTypes.contains(card.typeCode)
+                filter.selectedTypes.contains(card.typeCode)
             }
         }
 
@@ -158,14 +157,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
     func updateSortOption(_ option: CollectionSortOption) {
         sortOption = option
-    }
-
-    func updateFilterOptions(_ options: CollectionFilterOptions) {
-        filterOptions = options
-    }
-
-    func updateSelectedSet(_ set: SetDTO?) {
-        selectedSet = set
     }
 
     func updateCardQuantity(_ card: CardDTO, quantity: Int) async {
@@ -241,20 +232,5 @@ enum CollectionSortOption: CaseIterable {
         case .cost:
             L10n.cost
         }
-    }
-}
-
-struct CollectionFilterOptions: Equatable {
-    var selectedColors: Set<String> = []
-    var selectedTypes: Set<String> = []
-
-    var hasActiveFilters: Bool {
-        return !selectedColors.isEmpty ||
-            !selectedTypes.isEmpty
-    }
-
-    mutating func clearAll() {
-        selectedColors.removeAll()
-        selectedTypes.removeAll()
     }
 }

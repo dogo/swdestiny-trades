@@ -45,13 +45,12 @@ struct AddCardView: View {
                 await refreshCards()
             }
             .sheet(isPresented: $showingFilterSheet) {
-                AddCardFilterView(
-                    filters: $viewModel.selectedFilters,
-                    availableSets: viewModel.availableSets,
-                    onApply: {
-                        viewModel.applyFilters()
-                    }
-                )
+                UnifiedFilterView(
+                    filter: $viewModel.filter,
+                    availableSets: viewModel.availableSets
+                ) {
+                    viewModel.applyFilters()
+                }
             }
 
             if showToast {
@@ -99,12 +98,8 @@ struct AddCardView: View {
     }
 
     @ViewBuilder private var filterButton: some View {
-        Button {
+        FilterToolbarButton(hasActiveFilters: viewModel.filter.hasActiveFilters) {
             showingFilterSheet = true
-        } label: {
-            Image(systemName: viewModel.selectedFilters.hasActiveFilters ?
-                "line.3.horizontal.decrease.circle.fill" :
-                "line.3.horizontal.decrease.circle")
         }
     }
 
@@ -187,103 +182,6 @@ struct AddCardItemRowView: View {
             .padding(.vertical, 8)
         }
         .buttonStyle(.plain)
-    }
-}
-
-struct AddCardFilterView: View {
-    @Binding var filters: AddCardFilters
-    let availableSets: [SetDTO]
-    let onApply: () -> Void
-
-    @Environment(\.dismiss) private var dismiss
-
-    private let cardTypes = ["character", "upgrade", "support", "event", "plot", "battlefield"]
-    private let cardColors = ["red", "blue", "yellow", "gray"]
-
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section(L10n.setFilter) {
-                    Picker(L10n.set, selection: $filters.selectedSet) {
-                        Text(L10n.allSets).tag(SetDTO?.none)
-                        ForEach(availableSets, id: \.code) { set in
-                            Text(set.name).tag(SetDTO?.some(set))
-                        }
-                    }
-                }
-
-                Section("Type Filter") {
-                    ForEach(cardTypes, id: \.self) { type in
-                        Toggle(type.capitalized, isOn: Binding(
-                            get: { filters.selectedTypes.contains(type) },
-                            set: { isSelected in
-                                if isSelected {
-                                    filters.selectedTypes.insert(type)
-                                } else {
-                                    filters.selectedTypes.remove(type)
-                                }
-                            }
-                        ))
-                    }
-                }
-
-                Section("Color Filter") {
-                    ForEach(cardColors, id: \.self) { color in
-                        Toggle(color.capitalized, isOn: Binding(
-                            get: { filters.selectedColors.contains(color) },
-                            set: { isSelected in
-                                if isSelected {
-                                    filters.selectedColors.insert(color)
-                                } else {
-                                    filters.selectedColors.remove(color)
-                                }
-                            }
-                        ))
-                    }
-                }
-
-                Section("Cost Filter") {
-                    HStack {
-                        Text(L10n.minCost)
-                        Spacer()
-                        TextField(L10n.min, value: $filters.minCost, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                    }
-
-                    HStack {
-                        Text(L10n.maxCost)
-                        Spacer()
-                        TextField(L10n.max, value: $filters.maxCost, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                    }
-                }
-
-                Section {
-                    Button(L10n.clearAllFilters) {
-                        filters.clearAll()
-                    }
-                    .foregroundColor(.red)
-                }
-            }
-            .navigationTitle(L10n.filterCards)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(L10n.cancel) {
-                        dismiss()
-                    }
-                }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(L10n.apply) {
-                        onApply()
-                        dismiss()
-                    }
-                }
-            }
-        }
     }
 }
 

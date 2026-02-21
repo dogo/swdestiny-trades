@@ -13,7 +13,7 @@ import SwiftUI
 @Observable
 final class AddCardViewModel: ListViewModel<CardDTO> {
 
-    var selectedFilters: AddCardFilters = .init()
+    var filter: UnifiedCardFilter = .init()
     var availableSets: [SetDTO] = []
 
     var showToast = false
@@ -156,33 +156,21 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             }
         }
 
-        if let selectedSet = selectedFilters.selectedSet {
+        if let selectedSet = filter.selectedSet {
             filtered = filtered.filter { card in
                 card.setCode == selectedSet.code
             }
         }
 
-        if !selectedFilters.selectedTypes.isEmpty {
+        if !filter.selectedTypes.isEmpty {
             filtered = filtered.filter { card in
-                selectedFilters.selectedTypes.contains(card.typeCode)
+                filter.selectedTypes.contains(card.typeCode)
             }
         }
 
-        if !selectedFilters.selectedColors.isEmpty {
+        if !filter.selectedColors.isEmpty {
             filtered = filtered.filter { card in
-                selectedFilters.selectedColors.contains(card.factionCode)
-            }
-        }
-
-        if let minCost = selectedFilters.minCost {
-            filtered = filtered.filter { card in
-                card.cost >= minCost
-            }
-        }
-
-        if let maxCost = selectedFilters.maxCost {
-            filtered = filtered.filter { card in
-                card.cost <= maxCost
+                filter.selectedColors.contains(card.factionCode)
             }
         }
 
@@ -310,30 +298,6 @@ enum AddCardContext {
         case .borrowedFromPerson:
             return L10n.addBorrowedCard
         }
-    }
-}
-
-struct AddCardFilters: Equatable {
-    var selectedSet: SetDTO?
-    var selectedTypes: Set<String> = []
-    var selectedColors: Set<String> = []
-    var minCost: Int?
-    var maxCost: Int?
-
-    var hasActiveFilters: Bool {
-        return selectedSet != nil ||
-            !selectedTypes.isEmpty ||
-            !selectedColors.isEmpty ||
-            minCost != nil ||
-            maxCost != nil
-    }
-
-    mutating func clearAll() {
-        selectedSet = nil
-        selectedTypes.removeAll()
-        selectedColors.removeAll()
-        minCost = nil
-        maxCost = nil
     }
 }
 

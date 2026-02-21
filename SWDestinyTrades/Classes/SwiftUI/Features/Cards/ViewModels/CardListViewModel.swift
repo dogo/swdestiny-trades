@@ -16,7 +16,7 @@ import SwiftUI
 final class CardListViewModel: ListViewModel<CardDTO> {
 
     var selectedSet: SetDTO?
-    var filterOptions: CardFilterOptions = .init()
+    var filter: UnifiedCardFilter = .init()
 
     var showToast = false
     var toastTitle = ""
@@ -24,24 +24,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     var toastType: ToastType = .info
 
     // MARK: - Computed Properties
-
-    var availableColorNames: [FilterOption] {
-        let uniqueColors = Dictionary(grouping: items) { $0.factionCode }
-            .compactMap { code, cards -> FilterOption? in
-                guard let first = cards.first else { return nil }
-                return FilterOption(code: code, name: first.factionCode)
-            }
-        return uniqueColors.sorted { $0.name < $1.name }
-    }
-
-    var availableTypeNames: [FilterOption] {
-        let uniqueTypes = Dictionary(grouping: items) { $0.typeCode }
-            .compactMap { code, cards -> FilterOption? in
-                guard let first = cards.first else { return nil }
-                return FilterOption(code: code, name: first.typeName)
-            }
-        return uniqueTypes.sorted { $0.name < $1.name }
-    }
 
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -130,17 +112,13 @@ final class CardListViewModel: ListViewModel<CardDTO> {
                 card.name.localizedCaseInsensitiveContains(searchText) ||
                 card.subtitle.localizedCaseInsensitiveContains(searchText)
 
-            let matchesColor = filterOptions.selectedColors.isEmpty ||
-                filterOptions.selectedColors.contains(card.factionCode)
+            let matchesColor = filter.selectedColors.isEmpty ||
+                filter.selectedColors.contains(card.factionCode)
 
-            let matchesType = filterOptions.selectedTypes.isEmpty ||
-                filterOptions.selectedTypes.contains(card.typeCode)
+            let matchesType = filter.selectedTypes.isEmpty ||
+                filter.selectedTypes.contains(card.typeCode)
 
-            let matchesMinCost = filterOptions.minCost.map { card.cost >= $0 } ?? true
-            let matchesMaxCost = filterOptions.maxCost.map { card.cost <= $0 } ?? true
-
-            return matchesSearch && matchesColor && matchesType &&
-                matchesMinCost && matchesMaxCost
+            return matchesSearch && matchesColor && matchesType
         }
     }
 }
@@ -165,36 +143,4 @@ enum CardListError: Error, LocalizedError {
             return message
         }
     }
-}
-
-// MARK: - CardFilterOptions
-
-struct CardFilterOptions: Equatable {
-    var selectedColors: Set<String> = []
-    var selectedTypes: Set<String> = []
-    var minCost: Int?
-    var maxCost: Int?
-
-    var hasActiveFilters: Bool {
-        !selectedColors.isEmpty ||
-            !selectedTypes.isEmpty ||
-            minCost != nil ||
-            maxCost != nil
-    }
-
-    mutating func clearAll() {
-        selectedColors.removeAll()
-        selectedTypes.removeAll()
-        minCost = nil
-        maxCost = nil
-    }
-}
-
-// MARK: - FilterOption
-
-struct FilterOption: Identifiable, Equatable {
-    let code: String
-    let name: String
-
-    var id: String { code }
 }

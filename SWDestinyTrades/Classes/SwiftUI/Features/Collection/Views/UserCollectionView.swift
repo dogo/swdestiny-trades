@@ -36,8 +36,7 @@ struct UserCollectionView: View {
                 viewModel.performFiltering(searchText: newValue)
             }
             .onChange(of: viewModel.sortOption) { _, _ in viewModel.applyFilters() }
-            .onChange(of: viewModel.filterOptions) { _, _ in viewModel.applyFilters() }
-            .onChange(of: viewModel.selectedSet) { _, _ in viewModel.applyFilters() }
+            .onChange(of: viewModel.filter) { _, _ in viewModel.applyFilters() }
             .onChange(of: viewModel.showToast) { _, newValue in
                 showToast = newValue
             }
@@ -127,24 +126,17 @@ struct UserCollectionView: View {
 
     @ViewBuilder private var filterSheet: some View {
         CollectionFilterView(
-            filterOptions: $viewModel.filterOptions,
-            selectedSet: $viewModel.selectedSet,
+            filter: $viewModel.filter,
             sortOption: $viewModel.sortOption,
             availableSets: viewModel.availableSets
-        ) {
-            viewModel.updateFilterOptions(viewModel.filterOptions)
-            viewModel.updateSelectedSet(viewModel.selectedSet)
-            viewModel.updateSortOption(viewModel.sortOption)
-        }
+        )
     }
 
     // MARK: - Toolbar Items
 
     @ViewBuilder private var filterButton: some View {
-        Button {
+        FilterToolbarButton(hasActiveFilters: viewModel.hasActiveFilters) {
             showingFilterSheet = true
-        } label: {
-            Image(systemName: viewModel.hasActiveFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
         }
     }
 
@@ -299,13 +291,34 @@ struct CollectionCardRowView: View {
 }
 
 struct CollectionFilterView: View {
-    @Binding var filterOptions: CollectionFilterOptions
-    @Binding var selectedSet: SetDTO?
+    @Binding var filter: UnifiedCardFilter
     @Binding var sortOption: CollectionSortOption
     let availableSets: [SetDTO]
-    let onApply: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+
+    @State private var tempFilter: UnifiedCardFilter
+    @State private var tempSortOption: CollectionSortOption
+
+    init(
+        filter: Binding<UnifiedCardFilter>,
+        sortOption: Binding<CollectionSortOption>,
+        availableSets: [SetDTO]
+    ) {
+        _filter = filter
+        _sortOption = sortOption
+        self.availableSets = availableSets
+        _tempFilter = State(initialValue: filter.wrappedValue)
+        _tempSortOption = State(initialValue: sortOption.wrappedValue)
+    }
+
+    private let cardTypes = ["character", "upgrade", "support", "event", "plot", "battlefield", "downgrade"]
+    private let cardColors: [(code: String, name: String)] = [
+        ("red", "Red"),
+        ("blue", "Blue"),
+        ("yellow", "Yellow"),
+        ("gray", "Gray")
+    ]
 
     var body: some View {
         NavigationStack {
@@ -313,18 +326,18 @@ struct CollectionFilterView: View {
                 Section(L10n.sortBy) {
                     ForEach(CollectionSortOption.allCases, id: \.self) { option in
                         Toggle(option.displayName, isOn: Binding(
-                            get: { sortOption == option },
+                            get: { tempSortOption == option },
                             set: { isSelected in
                                 if isSelected {
-                                    sortOption = option
+                                    tempSortOption = option
                                 }
                             }
                         ))
                     }
                 }
 
-                Section(L10n.setFilter) {
-                    Picker(L10n.set, selection: $selectedSet) {
+                Section(L10n.expansions) {
+                    Picker(L10n.set, selection: $tempFilter.selectedSet) {
                         Text(L10n.allSets).tag(SetDTO?.none)
                         ForEach(availableSets, id: \.code) { set in
                             Text(set.name).tag(SetDTO?.some(set))
@@ -332,10 +345,39 @@ struct CollectionFilterView: View {
                     }
                 }
 
+                Section(L10n.cardTypes) {
+                    ForEach(cardTypes, id: \.self) { type in
+                        Toggle(type.capitalized, isOn: Binding(
+                            get: { tempFilter.selectedTypes.contains(type) },
+                            set: { isSelected in
+                                if isSelected {
+                                    tempFilter.selectedTypes.insert(type)
+                                } else {
+                                    tempFilter.selectedTypes.remove(type)
+                                }
+                            }
+                        ))
+                    }
+                }
+
+                Section(L10n.color) {
+                    ForEach(cardColors, id: \.code) { color in
+                        Toggle(color.name, isOn: Binding(
+                            get: { tempFilter.selectedColors.contains(color.code) },
+                            set: { isSelected in
+                                if isSelected {
+                                    tempFilter.selectedColors.insert(color.code)
+                                } else {
+                                    tempFilter.selectedColors.remove(color.code)
+                                }
+                            }
+                        ))
+                    }
+                }
+
                 Section {
                     Button(L10n.clearAllFilters) {
-                        filterOptions.clearAll()
-                        selectedSet = nil
+                        tempFilter.clearAll()
                     }
                     .foregroundColor(.red)
                 }
@@ -351,7 +393,8 @@ struct CollectionFilterView: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(L10n.apply) {
-                        onApply()
+                        filter = tempFilter
+                        sortOption = tempSortOption
                         dismiss()
                     }
                 }

@@ -178,7 +178,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         await sut.loadCards()
 
-        sut.filterOptions.selectedColors.insert("red")
+        sut.filter.selectedColors.insert("red")
         sut.performFiltering(searchText: "")
 
         XCTAssertEqual(sut.filteredItems.count, 1)
@@ -203,7 +203,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         await sut.loadCards()
 
-        sut.filterOptions.selectedTypes.insert("character")
+        sut.filter.selectedTypes.insert("character")
         sut.performFiltering(searchText: "")
 
         XCTAssertEqual(sut.filteredItems.count, 1)
@@ -213,18 +213,21 @@ final class CardListViewModelTests: BaseTestCase {
     func testCostFiltering() async throws {
         let lowCostCard = CardDTO.stub(
             setCode: "AW",
+            factionCode: "red",
             code: "01001",
             name: "Card 1",
             cost: 1
         )
         let midCostCard = CardDTO.stub(
             setCode: "AW",
+            factionCode: "blue",
             code: "01002",
             name: "Card 2",
             cost: 3
         )
         let highCostCard = CardDTO.stub(
             setCode: "AW",
+            factionCode: "red",
             code: "01003",
             name: "Card 3",
             cost: 5
@@ -234,8 +237,7 @@ final class CardListViewModelTests: BaseTestCase {
 
         await sut.loadCards()
 
-        sut.filterOptions.minCost = 2
-        sut.filterOptions.maxCost = 4
+        sut.filter.selectedColors.insert("blue")
         sut.performFiltering(searchText: "")
 
         XCTAssertEqual(sut.filteredItems.count, 1)

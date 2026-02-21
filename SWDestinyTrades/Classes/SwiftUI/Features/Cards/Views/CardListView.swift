@@ -38,11 +38,8 @@ struct CardListView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
+                FilterToolbarButton(hasActiveFilters: viewModel.filter.hasActiveFilters) {
                     showingFilterOptions = true
-                } label: {
-                    Image(systemName: "line.3.horizontal.decrease.circle")
-                        .foregroundColor(viewModel.filterOptions.hasActiveFilters ? .blue : .primary)
                 }
             }
         }
@@ -51,12 +48,11 @@ struct CardListView: View {
         }
         .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
         .sheet(isPresented: $showingFilterOptions) {
-            FilterOptionsView(
-                filterOptions: $viewModel.filterOptions,
-                availableColors: viewModel.availableColorNames,
-                availableTypes: viewModel.availableTypeNames
+            UnifiedFilterView(
+                filter: $viewModel.filter,
+                showExpansionFilter: false
             ) {
-                showingFilterOptions = false
+                viewModel.performFiltering(searchText: viewModel.searchText)
             }
         }
         .overlay(alignment: .top) {
@@ -182,122 +178,6 @@ struct CardRowView: View {
             .padding(.vertical, 8)
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - FilterOptionsView
-
-struct FilterOptionsView: View {
-    @Binding var filterOptions: CardFilterOptions
-    let availableColors: [FilterOption]
-    let availableTypes: [FilterOption]
-    let onDismiss: () -> Void
-
-    @State private var tempFilterOptions: CardFilterOptions
-
-    init(filterOptions: Binding<CardFilterOptions>,
-         availableColors: [FilterOption],
-         availableTypes: [FilterOption],
-         onDismiss: @escaping () -> Void) {
-        _filterOptions = filterOptions
-        self.availableColors = availableColors
-        self.availableTypes = availableTypes
-        self.onDismiss = onDismiss
-        _tempFilterOptions = State(initialValue: filterOptions.wrappedValue)
-    }
-
-    var body: some View {
-        NavigationStack {
-            Form {
-                colorSection
-                typeSection
-                costSection
-                clearSection
-            }
-            .navigationTitle(L10n.filterCards)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                toolbarContent
-            }
-        }
-    }
-
-    @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            Button(L10n.cancel) {
-                onDismiss()
-            }
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button(L10n.apply) {
-                filterOptions = tempFilterOptions
-                onDismiss()
-            }
-        }
-    }
-
-    @ViewBuilder private var colorSection: some View {
-        Section(L10n.color) {
-            ForEach(availableColors) { color in
-                Toggle(color.name.capitalized, isOn: Binding(
-                    get: { tempFilterOptions.selectedColors.contains(color.code) },
-                    set: { isSelected in
-                        if isSelected {
-                            tempFilterOptions.selectedColors.insert(color.code)
-                        } else {
-                            tempFilterOptions.selectedColors.remove(color.code)
-                        }
-                    }
-                ))
-            }
-        }
-    }
-
-    @ViewBuilder private var typeSection: some View {
-        Section(L10n.type) {
-            ForEach(availableTypes) { type in
-                Toggle(type.name.capitalized, isOn: Binding(
-                    get: { tempFilterOptions.selectedTypes.contains(type.code) },
-                    set: { isSelected in
-                        if isSelected {
-                            tempFilterOptions.selectedTypes.insert(type.code)
-                        } else {
-                            tempFilterOptions.selectedTypes.remove(type.code)
-                        }
-                    }
-                ))
-            }
-        }
-    }
-
-    @ViewBuilder private var costSection: some View {
-        Section(L10n.costRange) {
-            HStack {
-                Text(L10n.minCost)
-                Spacer()
-                TextField(L10n.min, value: $tempFilterOptions.minCost, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 80)
-            }
-
-            HStack {
-                Text(L10n.maxCost)
-                Spacer()
-                TextField(L10n.max, value: $tempFilterOptions.maxCost, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 80)
-            }
-        }
-    }
-
-    @ViewBuilder private var clearSection: some View {
-        Section {
-            Button(L10n.clearAllFilters) {
-                tempFilterOptions.clearAll()
-            }
-            .foregroundColor(.red)
-        }
     }
 }
 
