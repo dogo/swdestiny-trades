@@ -13,7 +13,6 @@ import SwiftUI
 @Observable
 final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
-    var sortOption: CollectionSortOption = .name
     var filter: UnifiedCardFilter = .init()
     var showToast = false
     var toastTitle = ""
@@ -97,27 +96,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         observationTask?.cancel()
     }
 
-    private func applySorting(to collection: [CardDTO]) -> [CardDTO] {
-        switch sortOption {
-        case .name:
-            return collection.sorted { $0.name < $1.name }
-        case .set:
-            return collection.sorted { $0.setCode < $1.setCode }
-        case .type:
-            return collection.sorted { $0.typeCode < $1.typeCode }
-        case .color:
-            return collection.sorted { $0.factionCode < $1.factionCode }
-        case .quantity:
-            return collection.sorted { card1, card2 in
-                ThreadSafeRealmWrapper.execute {
-                    card1.quantity > card2.quantity
-                }
-            }
-        case .cost:
-            return collection.sorted { $0.cost < $1.cost }
-        }
-    }
-
     override func filterItems(searchText: String) -> [CardDTO] {
         var filtered = items
 
@@ -149,14 +127,10 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
             }
         }
 
-        // Apply sorting
-        filtered = applySorting(to: filtered)
+        // Sort by name
+        filtered = filtered.sorted { $0.name < $1.name }
 
         return filtered
-    }
-
-    func updateSortOption(_ option: CollectionSortOption) {
-        sortOption = option
     }
 
     func updateCardQuantity(_ card: CardDTO, quantity: Int) async {
@@ -205,32 +179,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
             } catch {
                 self.handleError(ConcurrencyError.realmAccessError(error))
             }
-        }
-    }
-}
-
-enum CollectionSortOption: CaseIterable {
-    case name
-    case set
-    case type
-    case color
-    case quantity
-    case cost
-
-    var displayName: String {
-        switch self {
-        case .name:
-            L10n.name
-        case .set:
-            L10n.set
-        case .type:
-            L10n.type
-        case .color:
-            L10n.color
-        case .quantity:
-            L10n.quantity
-        case .cost:
-            L10n.cost
         }
     }
 }
