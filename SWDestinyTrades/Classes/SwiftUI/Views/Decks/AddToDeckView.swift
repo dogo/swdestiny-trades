@@ -183,25 +183,14 @@ struct AddToDeckCardRowView: View {
 
                 Spacer()
 
-                HStack(spacing: 8) {
-                    Button {
-                        onDetailTap()
-                    } label: {
-                        Image(systemName: "info.circle")
-                            .font(.title3)
-                            .foregroundColor(.blue)
-                    }
-                    .buttonStyle(.plain)
-
-                    Button {
-                        onAddTap()
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                    }
-                    .buttonStyle(.plain)
+                Button {
+                    onAddTap()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.green)
                 }
+                .buttonStyle(.plain)
             }
             .padding(.vertical, 8)
         }
