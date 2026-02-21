@@ -137,15 +137,12 @@ struct PersonRowView: View {
     var body: some View {
         Button(action: onTap) {
             HStack {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 6) {
                     Text("\(person.name) \(person.lastName)")
                         .font(.headline)
                         .foregroundColor(.primary)
 
-                    Text(loanStatusText)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
+                    loanStatusView
                 }
 
                 Spacer()
@@ -159,18 +156,28 @@ struct PersonRowView: View {
         .buttonStyle(.plain)
     }
 
-    private var loanStatusText: String {
-        let lentMeCount = loanSummary.lentCount
+    @ViewBuilder private var loanStatusView: some View {
+        let lentCount = loanSummary.lentCount
         let borrowedCount = loanSummary.borrowedCount
 
-        if lentMeCount > 0, borrowedCount > 0 {
-            return L10n.lentMeAndBorrowedCards(lentMeCount, borrowedCount)
-        } else if lentMeCount > 0 {
-            return L10n.lentMeCard(lentMeCount)
-        } else if borrowedCount > 0 {
-            return L10n.borrowedCard(borrowedCount)
+        if lentCount == 0, borrowedCount == 0 {
+            Label(L10n.noLoans, systemImage: "checkmark.circle")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        } else {
+            VStack(alignment: .leading, spacing: 2) {
+                if lentCount > 0 {
+                    Label(L10n.lentMeCard(lentCount), systemImage: "arrow.up.right")
+                        .font(.subheadline)
+                        .foregroundColor(.blue)
+                }
+                if borrowedCount > 0 {
+                    Label(L10n.borrowedCard(borrowedCount), systemImage: "arrow.down.left")
+                        .font(.subheadline)
+                        .foregroundColor(.orange)
+                }
+            }
         }
-        return L10n.noLoans
     }
 }
 
