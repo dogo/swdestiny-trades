@@ -71,3 +71,9 @@ CoverageReport
 
 ## Firebase Config file
 firebase-crashreporting.json
+
+# Realm database (simulator debug)
+default.realm
+default.realm.lock
+default.realm.management/
+default.realm.note

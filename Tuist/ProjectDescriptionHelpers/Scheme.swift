@@ -12,7 +12,14 @@ public extension Project {
             .scheme(
                 name: "SWDestinyTrades",
                 buildAction: .buildAction(targets: ["SWDestinyTrades"]),
-                testAction: .targets(["SWDestinyTradesTests"], options: .options(coverage: true, codeCoverageTargets: ["SWDestinyTrades"]))
+                testAction: .targets(["SWDestinyTradesTests"], options: .options(coverage: true, codeCoverageTargets: ["SWDestinyTrades"])),
+                runAction: .runAction(
+                    arguments: .arguments(
+                        environmentVariables: [
+                            "SRCROOT": .environmentVariable(value: "$(SRCROOT)", isEnabled: true)
+                        ]
+                    )
+                )
             )
         ]
     }

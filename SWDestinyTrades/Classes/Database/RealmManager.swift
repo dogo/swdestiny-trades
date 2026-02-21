@@ -75,18 +75,20 @@ final class RealmManager: DatabaseProtocol {
     static func create(configuration: ConfigurationType = .basic(url: nil)) async throws -> RealmManager {
         var rmConfig = Realm.Configuration()
 
-        switch configuration {
+        let resolvedConfiguration = RealmManager.realmConfiguration(configuration)
+
+        switch resolvedConfiguration {
         case .basic:
             rmConfig = Realm.Configuration.defaultConfiguration
-            if let url = configuration.associated {
-                rmConfig.fileURL = URL(string: url)
+            if let url = resolvedConfiguration.associated {
+                rmConfig.fileURL = URL(fileURLWithPath: url)
             }
         case .inMemory:
             rmConfig = Realm.Configuration()
-            if let identifier = configuration.associated {
+            if let identifier = resolvedConfiguration.associated {
                 rmConfig.inMemoryIdentifier = identifier
             } else {
-                throw RealmDatabaseError.invalidMemory(identifier: configuration.associated)
+                throw RealmDatabaseError.invalidMemory(identifier: resolvedConfiguration.associated)
             }
         }
 
@@ -94,7 +96,27 @@ final class RealmManager: DatabaseProtocol {
 
         // Use async Realm.open() for better actor isolation
         let realm = try await Realm(configuration: rmConfig, actor: MainActor.shared)
+        print("Realm file: \(realm.configuration.fileURL?.path ?? "in-memory")")
         return RealmManager(realm: realm)
+    }
+
+    private static func realmConfiguration(_ configuration: ConfigurationType) -> ConfigurationType {
+        let resolvedConfiguration: ConfigurationType
+        #if targetEnvironment(simulator)
+            if case .basic(nil) = configuration {
+                let projectDir = ProcessInfo.processInfo.environment["SRCROOT"] ?? ""
+                if !projectDir.isEmpty {
+                    resolvedConfiguration = .basic(url: "\(projectDir)/default.realm")
+                } else {
+                    resolvedConfiguration = configuration
+                }
+            } else {
+                resolvedConfiguration = configuration
+            }
+        #else
+            resolvedConfiguration = configuration
+        #endif
+        return resolvedConfiguration
     }
 
     /// Private initializer - use create(configuration:) instead
