@@ -69,6 +69,10 @@ final class AppState {
             let httpClient: HttpClientProtocol = self.dependencyContainer.resolve(type: HttpClientProtocol.self)
             return SWDestinyService(client: httpClient)
         }
+
+        dependencyContainer.register(type: ImageLoadingService.self) {
+            KingfisherImageLoader()
+        }
     }
 
     func reset() {

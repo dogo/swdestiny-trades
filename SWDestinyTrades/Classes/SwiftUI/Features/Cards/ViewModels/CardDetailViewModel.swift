@@ -7,7 +7,6 @@
 //
 
 import Combine
-import ImageSlideshow
 import SwiftUI
 
 @MainActor
@@ -29,12 +28,14 @@ final class CardDetailViewModel: BaseViewModel {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    var imageInputs: [InputSource] {
-        return cards.compactMap { card in
-            if let remoteSource = KingfisherSource(urlString: card.imageUrl, placeholder: Asset.icCardback.image) {
-                return remoteSource
+    var imageSources: [ImageSource] {
+        return cards.map { card in
+            if let url = URL(string: card.imageUrl),
+               let scheme = url.scheme?.lowercased(),
+               scheme == "http" || scheme == "https" {
+                return .remote(url)
             } else {
-                return ImageSource(image: Asset.icCardback.image)
+                return .local(Asset.icCardback.image)
             }
         }
     }

@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import ImageSlideshow
 import SwiftUI
 
 struct CardDetailView: View {
@@ -36,21 +35,20 @@ struct CardDetailView: View {
         ZStack(alignment: .top) {
             ScrollView {
                 VStack(spacing: 0) {
-                    ImageSlideshowWrapper(
-                        imageInputs: viewModel.imageInputs,
-                        currentIndex: viewModel.currentIndex,
-                        onPageChanged: { index in
-                            viewModel.updateCurrentIndex(index)
-                        },
-                        onImageTapped: {
-                            showingFullScreenImage = true
-                        }
+                    CarouselView(
+                        items: viewModel.imageSources,
+                        imageLoader: container.resolve(type: ImageLoadingService.self),
+                        currentPage: $viewModel.currentIndex,
+                        placeholder: Asset.icCardback.image,
+                        showsPageIndicator: false,
+                        onItemTapped: { _ in showingFullScreenImage = true }
                     )
                     .frame(height: 400)
 
                     cardInfoSection
                 }
             }
+
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
@@ -72,11 +70,13 @@ struct CardDetailView: View {
                 }
             }
             .sheet(isPresented: $showingFullScreenImage) {
-                FullScreenImageViewer(
-                    imageInputs: viewModel.imageInputs,
-                    initialIndex: viewModel.currentIndex,
-                    isPresented: $showingFullScreenImage
-                )
+                if viewModel.currentIndex < viewModel.imageSources.count {
+                    FullScreenCarouselViewer(
+                        source: viewModel.imageSources[viewModel.currentIndex],
+                        imageLoader: container.resolve(type: ImageLoadingService.self),
+                        isPresented: $showingFullScreenImage
+                    )
+                }
             }
             .sheet(isPresented: $showingShareSheet) {
                 if let shareImage {
