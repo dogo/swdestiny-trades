@@ -23,7 +23,8 @@ public extension Project {
                     "GoogleService-Info.plist",
                     "SWDestinyTrades/Assets.xcassets",
                     "SWDestinyTrades/Base.lproj/**",
-                    "SWDestinyTrades/Localization/**"
+                    "SWDestinyTrades/Localization/**",
+                    "SWDestinyTrades/Resources/**"
                 ],
                 scripts: Project.targetScripts(),
                 dependencies: [

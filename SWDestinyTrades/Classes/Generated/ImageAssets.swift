@@ -40,25 +40,7 @@ internal enum Asset {
     internal static let icSort = ImageAsset(name: "NavigationBar/ic_sort")
   }
   internal enum Sets {
-    internal static let icAcrossTheGalaxy = ImageAsset(name: "Sets/ic_across_the_galaxy")
-    internal static let icAlliesOfNecessity = ImageAsset(name: "Sets/ic_allies_of_necessity")
-    internal static let icAwakenings = ImageAsset(name: "Sets/ic_awakenings")
-    internal static let icConvergence = ImageAsset(name: "Sets/ic_convergence")
-    internal static let icCovertMissions = ImageAsset(name: "Sets/ic_covert_missions")
-    internal static let icEmpireAtWar = ImageAsset(name: "Sets/ic_empire_at_war")
-    internal static let icEternalConflict = ImageAsset(name: "Sets/ic_eternal_conflict")
-    internal static let icFalteringAllegiances = ImageAsset(name: "Sets/ic_faltering_allegiances")
-    internal static let icHighStakes = ImageAsset(name: "Sets/ic_high_stakes")
-    internal static let icLegacies = ImageAsset(name: "Sets/ic_legacies")
     internal static let icNotFound = ImageAsset(name: "Sets/ic_not_found")
-    internal static let icPartingWords = ImageAsset(name: "Sets/ic_parting_words")
-    internal static let icRedemption = ImageAsset(name: "Sets/ic_redemption")
-    internal static let icRivals = ImageAsset(name: "Sets/ic_rivals")
-    internal static let icSparkOfHope = ImageAsset(name: "Sets/ic_spark_of_hope")
-    internal static let icSpiritOfRebellion = ImageAsset(name: "Sets/ic_spirit_of_rebellion")
-    internal static let icTransformations = ImageAsset(name: "Sets/ic_transformations")
-    internal static let icTwoPlayerGame = ImageAsset(name: "Sets/ic_two_player_game")
-    internal static let icWayOfTheForce = ImageAsset(name: "Sets/ic_way_of_the_force")
   }
   internal enum Tabbar {
     internal static let icCards = ImageAsset(name: "Tabbar/ic_cards")

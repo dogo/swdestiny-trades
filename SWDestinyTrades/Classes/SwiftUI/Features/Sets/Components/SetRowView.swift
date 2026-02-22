@@ -15,13 +15,8 @@ struct SetRowView: View {
     var body: some View {
         Button(action: onTap) {
             HStack {
-                set.icon
-                    .renderingMode(.template)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                Text.swdIcon(set.icon, size: 28)
                     .frame(width: 40, height: 40)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .foregroundColor(.primary)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(set.name)
