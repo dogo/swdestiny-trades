@@ -69,7 +69,7 @@ def generate_enum():
     lines.append('    case icUnknown = "\\u{2753}"')
 
     lines.append("\n    var unicode: String { rawValue }")
-    lines.append("}")
+    lines.append("}\n")
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text("\n".join(lines))

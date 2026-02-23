@@ -43,7 +43,7 @@ final class NetworkingLogger {
     func log(response: URLResponse?, data: Data?, time: TimeInterval) {
         guard loglevel != .none else { return }
 
-        if let response = response as? HTTPURLResponse, let url = response.url {
+        if let response = response as? HTTPURLResponse {
             let emoji = response.statusCode < 400 ? "✅" : "❌"
             printTagged("\(emoji) \(response.statusCode) • \(time.toCompactString())")
         }

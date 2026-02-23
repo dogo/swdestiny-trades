@@ -72,9 +72,10 @@ struct CarouselView: View {
                         source: source,
                         state: viewModel.imageStates[source] ?? .idle,
                         placeholder: placeholder,
-                        errorImage: errorImage,
-                        onRetry: { viewModel.retryLoad(for: source, placeholder: placeholder) }
-                    )
+                        errorImage: errorImage
+                    ) {
+                        viewModel.retryLoad(for: source, placeholder: placeholder)
+                    }
                     .tag(index)
                     .onTapGesture { onItemTapped?(index) }
                     .onAppear { viewModel.loadImage(for: source, placeholder: placeholder) }

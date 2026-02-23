@@ -29,7 +29,7 @@ struct DeckGraphView: View {
         .navigationTitle(L10n.deckStatistics)
         .navigationBarTitleDisplayMode(.large)
         .refreshable {
-            await refreshData()
+            refreshData()
         }
         .onAppear {
             viewModel.generateGraphData()
@@ -108,8 +108,8 @@ struct DeckGraphView: View {
 
     // MARK: - Actions
 
-    private func refreshData() async {
-        await viewModel.refresh()
+    private func refreshData() {
+        viewModel.refresh()
     }
 }
 
