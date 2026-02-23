@@ -16,7 +16,6 @@ final class CardDetailViewModel: BaseViewModel {
     var cards: [CardDTO] = []
     var selectedCard: CardDTO
     var currentIndex: Int = 0
-    var showingShareSheet = false
     var showingSuccessMessage = false
     var successMessage = ""
     var showToast = false
@@ -121,9 +120,5 @@ final class CardDetailViewModel: BaseViewModel {
         } catch {
             handleError(error)
         }
-    }
-
-    func shareCard() {
-        showingShareSheet = true
     }
 }

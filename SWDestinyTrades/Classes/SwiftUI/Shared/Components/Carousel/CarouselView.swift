@@ -16,6 +16,7 @@ import SwiftUI
 struct CarouselView: View {
     @State private var viewModel: CarouselViewModel
     @Binding var currentPage: Int
+    @Binding var currentImage: UIImage?
 
     let placeholder: UIImage?
     let errorImage: UIImage?
@@ -40,6 +41,7 @@ struct CarouselView: View {
         items: [ImageSource],
         imageLoader: ImageLoadingService,
         currentPage: Binding<Int> = .constant(0),
+        currentImage: Binding<UIImage?> = .constant(nil),
         placeholder: UIImage? = nil,
         errorImage: UIImage? = nil,
         autoScrollInterval: TimeInterval? = nil,
@@ -57,6 +59,7 @@ struct CarouselView: View {
             preloadOffset: preloadOffset
         ))
         _currentPage = currentPage
+        _currentImage = currentImage
         self.placeholder = placeholder
         self.errorImage = errorImage
         self.showsPageIndicator = showsPageIndicator
@@ -105,6 +108,20 @@ struct CarouselView: View {
         }
         .onDisappear {
             viewModel.cancelAllLoads()
+        }
+        .onChange(of: viewModel.imageStates) { _, _ in
+            updateCurrentImage()
+        }
+        .onChange(of: currentPage) { _, _ in
+            updateCurrentImage()
+        }
+    }
+
+    private func updateCurrentImage() {
+        guard currentPage < viewModel.items.count else { return }
+        let source = viewModel.items[currentPage]
+        if case let .loaded(image) = viewModel.imageStates[source] {
+            currentImage = image
         }
     }
 }

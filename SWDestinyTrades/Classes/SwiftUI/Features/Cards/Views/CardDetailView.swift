@@ -39,6 +39,7 @@ struct CardDetailView: View {
                         items: viewModel.imageSources,
                         imageLoader: container.resolve(type: ImageLoadingService.self),
                         currentPage: $viewModel.currentIndex,
+                        currentImage: $shareImage,
                         placeholder: Asset.icCardback.image,
                         showsPageIndicator: false,
                         onItemTapped: { _ in showingFullScreenImage = true }
@@ -52,11 +53,11 @@ struct CardDetailView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
-                        viewModel.shareCard()
                         showingShareSheet = true
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                     }
+                    .disabled(shareImage == nil)
 
                     if showAddToCollection {
                         Button {
