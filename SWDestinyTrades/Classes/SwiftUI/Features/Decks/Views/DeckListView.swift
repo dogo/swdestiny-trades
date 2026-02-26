@@ -46,8 +46,10 @@ struct DeckListView: View {
         .alert(L10n.deleteDeck, isPresented: $viewModel.showingDeleteConfirmation) {
             deleteConfirmationAlert
         }
-        .task {
-            await viewModel.loadDecks()
+        .onAppear {
+            Task {
+                await viewModel.loadDecks()
+            }
         }
     }
 
@@ -108,7 +110,7 @@ struct DeckListView: View {
     private var deckListView: some View {
         List {
             ForEach(viewModel.filteredItems, id: \.id) { deck in
-                DeckRowView(deck: deck) {
+                DeckRowView(deck: deck, cardCount: viewModel.cardCounts[deck.id] ?? 0) {
                     editDeck(deck)
                 } onGraph: {
                     showDeckGraph(deck)
@@ -168,6 +170,7 @@ struct DeckListView: View {
 
 struct DeckRowView: View {
     let deck: DeckDTO
+    let cardCount: Int
     let onEdit: () -> Void
     let onGraph: () -> Void
     let onDelete: () -> Void
@@ -194,7 +197,7 @@ struct DeckRowView: View {
                     .buttonStyle(.plain)
                 }
 
-                Text(L10n.cardsCount(deck.list.sum(ofProperty: "quantity") as Int))
+                Text(L10n.cardsCount(cardCount))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

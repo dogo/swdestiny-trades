@@ -15,6 +15,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
 
     var showingDeleteConfirmation = false
     var deckToDelete: DeckDTO?
+    private(set) var cardCounts: [String: Int] = [:]
 
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -46,6 +47,12 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
             predicate: nil,
             sorted: Sorted(key: "name", ascending: true)
         )
+
+        var counts: [String: Int] = [:]
+        for deck in fetchedDecks {
+            counts[deck.id] = deck.list.sum(ofProperty: "quantity") as Int
+        }
+        cardCounts = counts
 
         updateItems(fetchedDecks)
         applySorting()
