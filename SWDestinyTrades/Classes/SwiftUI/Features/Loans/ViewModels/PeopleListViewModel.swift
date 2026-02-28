@@ -6,12 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
-
-extension Notification.Name {
-    static let personAdded = Notification.Name("personAdded")
-}
 
 @MainActor
 @Observable

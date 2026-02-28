@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 @MainActor
@@ -75,8 +74,6 @@ final class NewPersonViewModel: BaseViewModel {
             addedPersonName = "\(person.name) \(person.lastName)".trimmingCharacters(in: .whitespaces)
             showSuccessToast = true
             resetForm()
-
-            NotificationCenter.default.post(name: .personAdded, object: person)
         } catch is CancellationError {
             // Silently cancel
         } catch {

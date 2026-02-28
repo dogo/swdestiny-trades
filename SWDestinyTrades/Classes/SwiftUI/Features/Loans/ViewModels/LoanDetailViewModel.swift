@@ -31,14 +31,12 @@ final class LoanDetailViewModel: BaseViewModel {
         person = PersonDTO()
         super.init(dependencyContainer: dependencyContainer)
         loadPerson(byId: personId)
-        setupNotifications()
     }
 
     init(person: PersonDTO, dependencyContainer: DependencyContainer = .shared) {
         self.person = person
         super.init(dependencyContainer: dependencyContainer)
         loadLoanData()
-        setupNotifications()
     }
 
     required init(dependencyContainer: DependencyContainer = .shared) {
@@ -59,19 +57,6 @@ final class LoanDetailViewModel: BaseViewModel {
     func loadLoanData() {
         lentCards = Array(person.lentMe)
         borrowedCards = Array(person.borrowed)
-    }
-
-    private func setupNotifications() {
-        NotificationCenter.default.publisher(for: NotificationKey.reloadTableViewNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] notification in
-                guard let self else { return }
-                if let personDTO = notification.userInfo?["personDTO"] as? PersonDTO {
-                    person = personDTO
-                    loadLoanData()
-                }
-            }
-            .store(in: &cancellables)
     }
 
     func updateCardQuantity(_ card: CardDTO, newQuantity: Int) {
@@ -119,12 +104,6 @@ final class LoanDetailViewModel: BaseViewModel {
                 }
 
                 self.loadLoanData()
-                NotificationCenter.default.post(
-                    name: NotificationKey.reloadTableViewNotification,
-                    object: nil,
-                    userInfo: nil
-                )
-
                 self.cardToDelete = nil
                 self.showingDeleteConfirmation = false
             } catch {

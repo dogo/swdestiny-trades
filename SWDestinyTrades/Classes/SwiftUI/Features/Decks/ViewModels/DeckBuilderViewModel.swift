@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 @MainActor
@@ -36,7 +35,6 @@ final class DeckBuilderViewModel: BaseViewModel {
 
         super.init(dependencyContainer: dependencyContainer)
         loadDeckData()
-        setupNotificationObserver()
     }
 
     required init(dependencyContainer: DependencyContainer = .shared) {
@@ -46,24 +44,11 @@ final class DeckBuilderViewModel: BaseViewModel {
         isNewDeck = true
         super.init(dependencyContainer: dependencyContainer)
         loadDeckData()
-        setupNotificationObserver()
     }
 
-    private func setupNotificationObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleDeckReload(_:)),
-            name: NotificationKey.reloadTableViewNotification,
-            object: nil
-        )
-    }
-
-    @objc
-    private func handleDeckReload(_ notification: Notification) {
+    func handleViewAppear() async {
         if isNewDeck, !deck.list.isEmpty {
-            Task {
-                await saveDeck()
-            }
+            await saveDeck()
         }
         loadDeckData()
     }

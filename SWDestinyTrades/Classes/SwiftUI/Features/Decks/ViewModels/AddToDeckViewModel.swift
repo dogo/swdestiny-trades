@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 @MainActor
@@ -131,9 +130,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
                 self.toastMessage = card.name
                 self.toastType = .success
                 self.showToast = true
-
-                let deckDataDict: [String: DeckDTO] = ["deckDTO": self.deck]
-                NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: deckDataDict)
             } catch {
                 self.handleError(ConcurrencyError.realmAccessError(error))
             }

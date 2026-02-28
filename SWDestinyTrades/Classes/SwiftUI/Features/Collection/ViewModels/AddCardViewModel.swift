@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 @MainActor
@@ -249,9 +248,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         try await database.update {
             person.lentMe.append(cardCopy)
         }
-
-        let personDataDict: [String: PersonDTO] = ["personDTO": person]
-        NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
     }
 
     private func addCardToBorrowed(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) async throws {
@@ -265,9 +261,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         try await database.update {
             person.borrowed.append(cardCopy)
         }
-
-        let personDataDict: [String: PersonDTO] = ["personDTO": person]
-        NotificationCenter.default.post(name: NotificationKey.reloadTableViewNotification, object: nil, userInfo: personDataDict)
     }
 
     override func handleError(_ error: Error) {

@@ -101,12 +101,9 @@ struct PeopleListView: View {
                 })
             }
         }
-        .task {
-            await viewModel.loadPeople()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .personAdded)) { _ in
+        .onAppear {
             Task {
-                await viewModel.refresh()
+                await viewModel.loadPeople()
             }
         }
         .overlay(alignment: .top) {

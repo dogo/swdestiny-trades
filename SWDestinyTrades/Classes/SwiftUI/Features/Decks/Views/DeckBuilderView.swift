@@ -41,7 +41,9 @@ struct DeckBuilderView: View {
             ShareSheet(items: [viewModel.shareText])
         }
         .onAppear {
-            viewModel.loadDeckData()
+            Task {
+                await viewModel.handleViewAppear()
+            }
         }
     }
 
