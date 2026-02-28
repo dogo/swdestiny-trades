@@ -18,8 +18,6 @@ class BaseViewModel {
 
     let dependencyContainer: DependencyContainer
 
-    var cancellables = Set<AnyCancellable>()
-
     required init(dependencyContainer: DependencyContainer = .shared) {
         self.dependencyContainer = dependencyContainer
     }
