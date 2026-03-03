@@ -1,5 +1,5 @@
 //
-//  CardFilterOptions.swift
+//  UnifiedCardFilter.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 20/02/26.
