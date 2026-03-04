@@ -93,7 +93,9 @@ final class RealmManager: @MainActor DatabaseProtocol {
 
         // Use async Realm.open() for better actor isolation
         let realm = try await Realm(configuration: rmConfig, actor: MainActor.shared)
+        #if DEBUG
         print("Realm file: \(realm.configuration.fileURL?.path ?? "in-memory")")
+        #endif
         return RealmManager(realm: realm)
     }
 
