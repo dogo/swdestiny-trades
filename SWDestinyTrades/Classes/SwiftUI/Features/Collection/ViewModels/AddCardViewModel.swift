@@ -135,14 +135,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
     private func loadAvailableSets() async {
         let sets = await database.fetch(SetDTO.self, predicate: nil, sorted: nil)
-        let setData = Array(sets).threadSafeMap { $0.toThreadSafe() }
-        let sortedData = setData.sorted { $0.name < $1.name }
-
-        let sortedSets = sortedData.compactMap { setData in
-            sets.first { $0.id == setData.id }
-        }
-
-        availableSets = sortedSets
+        availableSets = Array(sets).sorted { $0.name < $1.name }
     }
 
     override func filterItems(searchText: String) -> [CardDTO] {

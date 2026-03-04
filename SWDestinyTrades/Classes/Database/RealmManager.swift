@@ -58,8 +58,10 @@ enum RealmManagerError: Error, LocalizedError {
 }
 
 @MainActor
-final class RealmManager: DatabaseProtocol {
+final class RealmManager: @MainActor DatabaseProtocol {
     private let realm: Realm
+
+    private static let schemaVersion: UInt64 = 1
 
     // Internal access for migrations only
     var realmInstance: Realm {
@@ -92,7 +94,7 @@ final class RealmManager: DatabaseProtocol {
             }
         }
 
-        rmConfig.schemaVersion = RealmMigrations.schemaVersion
+        rmConfig.schemaVersion = Self.schemaVersion
 
         // Use async Realm.open() for better actor isolation
         let realm = try await Realm(configuration: rmConfig, actor: MainActor.shared)
@@ -262,28 +264,6 @@ final class RealmManager: DatabaseProtocol {
                 try block()
             }
         }
-    }
-}
-
-// MARK: - Sendable Conversion Helpers
-
-@MainActor
-extension RealmManager {
-    /// Fetch objects and convert them to Sendable types using a transform
-    /// - Parameters:
-    ///   - model: The type of object to fetch
-    ///   - predicate: Optional predicate to filter results
-    ///   - sorted: Optional sorting configuration
-    ///   - transform: Transform function to convert objects to Sendable types
-    /// - Returns: Array of transformed Sendable objects
-    func fetchAndConvert<T: Storable, U: Sendable>(
-        _ model: T.Type,
-        predicate: NSPredicate? = nil,
-        sorted: Sorted? = nil,
-        transform: @escaping (T) -> U
-    ) async -> [U] {
-        let objects = await fetch(model, predicate: predicate, sorted: sorted)
-        return objects.map(transform)
     }
 }
 

@@ -37,7 +37,7 @@ final class DeckGraphViewModel: BaseViewModel {
     func generateGraphData() {
         setLoading(true)
 
-        let deckListData = Array(deck.list).threadSafeMap { card in
+        let deckListData = Array(deck.list).map { card in
             DeckCardData(
                 typeCode: card.typeCode,
                 cost: card.cost,

@@ -51,23 +51,17 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     override func filterItems(searchText: String) -> [PersonDTO] {
-        let peopleData = items.threadSafeMap { $0.toThreadSafe() }
-
-        var filteredData = peopleData
+        var filteredPeople = items
 
         if !searchText.isEmpty {
-            filteredData = filteredData.filter { personData in
-                personData.name.localizedCaseInsensitiveContains(searchText) ||
-                    personData.lastName.localizedCaseInsensitiveContains(searchText)
+            filteredPeople = filteredPeople.filter { person in
+                person.name.localizedCaseInsensitiveContains(searchText) ||
+                    person.lastName.localizedCaseInsensitiveContains(searchText)
             }
         }
 
         // Sort by name by default
-        filteredData = filteredData.sorted { $0.name < $1.name }
-
-        let filteredPeople = filteredData.compactMap { personData in
-            items.first { $0.id == personData.id }
-        }
+        filteredPeople = filteredPeople.sorted { $0.name < $1.name }
 
         return filteredPeople
     }
@@ -103,11 +97,9 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     func getLoanSummary(for person: PersonDTO) -> LoanSummary {
-        let personData = person.toThreadSafe()
-
         return LoanSummary(
-            borrowedCount: personData.borrowedCount,
-            lentCount: personData.lentCount,
+            borrowedCount: person.borrowedCount,
+            lentCount: person.lentCount,
             totalValue: 0.0
         )
     }

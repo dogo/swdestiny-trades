@@ -42,7 +42,6 @@ final class AppState {
         Task { @MainActor in
             do {
                 let database = try await RealmManager.create(configuration: .basic(url: nil))
-                RealmMigrations.performMigrations(with: database)
                 self.database = database
                 isInitialized = true
                 errorMessage = nil
