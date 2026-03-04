@@ -38,7 +38,8 @@ extension DependencyManager: DependencyManagerProtocol {
         switch mode {
         case .new:
             guard let newDependency = dependencyInitializer[key]?() as? DependencyType else {
-                preconditionFailure("DependencyManager.resolve. There is no dependency registered for this type \(DependencyType.self).")
+                assertionFailure("DependencyManager.resolve. There is no dependency registered for this type \(DependencyType.self).")
+                fatalError("DependencyManager.resolve. There is no dependency registered for this type \(DependencyType.self).")
             }
 
             return newDependency
@@ -50,7 +51,8 @@ extension DependencyManager: DependencyManagerProtocol {
             }
 
             guard let sharedDependency = dependencyShared[key] as? DependencyType else {
-                preconditionFailure("DependencyManager.resolve. There is no dependency registered for this type \(DependencyType.self).")
+                assertionFailure("DependencyManager.resolve. There is no dependency registered for this type \(DependencyType.self).")
+                fatalError("DependencyManager.resolve. There is no dependency registered for this type \(DependencyType.self).")
             }
 
             return sharedDependency
