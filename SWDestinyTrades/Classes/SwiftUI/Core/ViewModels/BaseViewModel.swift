@@ -78,6 +78,7 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
         if searchText.isEmpty {
             return items
         }
+        assertionFailure("ListViewModel subclasses must override filterItems(searchText:) to implement filtering.")
         return items
     }
 
