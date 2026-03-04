@@ -63,11 +63,6 @@ final class RealmManager: @MainActor DatabaseProtocol {
 
     private static let schemaVersion: UInt64 = 1
 
-    // Internal access for migrations only
-    var realmInstance: Realm {
-        return realm
-    }
-
     // MARK: - Initialization
 
     /// This is the preferred way to create a RealmManager instance

@@ -83,8 +83,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     }
 
     private func fetchCardsFromAPI(for set: SetDTO) async {
-        setLoading(true)
-
         let setCode = set.code.lowercased()
 
         do {
