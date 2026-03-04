@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import Observation
 import SwiftUI
 
@@ -27,30 +26,26 @@ final class SearchViewModel: ListViewModel<CardDTO> {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
 
-    private var searchSubject = PassthroughSubject<String, Never>()
-    private var searchCancellable = Set<AnyCancellable>()
+    @ObservationIgnored private var searchTask: Task<Void, Never>?
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-        setupSearchDebouncing()
-    }
-
-    private func setupSearchDebouncing() {
-        searchSubject
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .sink { [weak self] searchText in
-                if !searchText.isEmpty {
-                    self?.performSearch(query: searchText)
-                } else {
-                    self?.clearSearch()
-                }
-            }
-            .store(in: &searchCancellable)
     }
 
     func onSearchTextChanged(_ searchText: String) {
-        searchSubject.send(searchText)
+        searchTask?.cancel()
+        searchTask = Task { @MainActor in
+            do {
+                try await Task.sleep(for: .milliseconds(500))
+                if !searchText.isEmpty {
+                    performSearch(query: searchText)
+                } else {
+                    clearSearch()
+                }
+            } catch {
+                // Task cancelled by a new keystroke — ignore
+            }
+        }
     }
 
     override func handleError(_ error: Error) {

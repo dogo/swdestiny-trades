@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import Observation
 import SwiftUI
 
@@ -19,8 +18,6 @@ final class AppState {
     var errorMessage: String?
 
     let dependencyContainer = DependencyContainer.shared
-
-    private var cancellables = Set<AnyCancellable>()
 
     init() {
         setupInitialState()

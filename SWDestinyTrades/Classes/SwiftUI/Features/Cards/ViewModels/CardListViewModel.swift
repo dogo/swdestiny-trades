@@ -6,7 +6,6 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 // MARK: - CardListViewModel
