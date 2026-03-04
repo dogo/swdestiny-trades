@@ -6,13 +6,12 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import Combine
 import SwiftUI
 
 @MainActor
 @Observable
 class BaseViewModel {
-    private(set) var isLoading = false
+    var isLoading: Bool { loadingState.isLoading }
     private(set) var errorMessage: String?
     private(set) var loadingState: LoadingState<Void> = .idle
 
@@ -23,10 +22,9 @@ class BaseViewModel {
     }
 
     func handleError(_ error: Error) {
-        guard errorMessage != error.localizedDescription || isLoading || !loadingState.hasError else { return }
+        guard errorMessage != error.localizedDescription || !loadingState.hasError else { return }
 
         errorMessage = error.localizedDescription
-        isLoading = false
         loadingState = .error(error)
     }
 
@@ -40,20 +38,17 @@ class BaseViewModel {
     }
 
     func setLoading(_ loading: Bool) {
-        guard isLoading != loading else {
-            return
-        }
-
-        isLoading = loading
         if loading {
+            guard !loadingState.isLoading else { return }
             loadingState = .loading
+        } else {
+            guard case .loading = loadingState else { return }
+            loadingState = .idle
         }
     }
 
     func setLoaded() {
-        guard isLoading || !loadingState.isLoaded else { return }
-
-        isLoading = false
+        guard !loadingState.isLoaded else { return }
         loadingState = .loaded(())
     }
 }
