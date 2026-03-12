@@ -25,7 +25,7 @@ struct EliteToggleButton: View {
                     RoundedRectangle(cornerRadius: 15)
                         .fill(isElite ? Color.primary : Color.clear)
                 )
-                .foregroundColor(isElite ? Color(.systemBackground) : Color.primary)
+                .foregroundStyle(isElite ? Color(.systemBackground) : Color.primary)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.primary, lineWidth: 1)

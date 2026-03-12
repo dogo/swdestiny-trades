@@ -16,7 +16,7 @@ struct AboutView: View {
             VStack(spacing: 20) {
                 Image(asset: Asset.Logo.largeIconBlack)
                     .renderingMode(.template)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                     .frame(width: 280, height: 150)
                     .aspectRatio(contentMode: .fit)
                     .padding(.top, 34)
@@ -25,7 +25,7 @@ struct AboutView: View {
                     Spacer()
                     Text(L10n.version(Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber))
                         .font(.footnote)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .padding(.trailing, 15)
                 }
 
@@ -54,14 +54,14 @@ struct AboutView: View {
                 Button(action: openWebsite) {
                     Text(L10n.swdestinydbWebsite)
                         .font(.body)
-                        .foregroundColor(.blue)
+                        .foregroundStyle(.blue)
                         .underline()
                 }
                 .buttonStyle(.plain)
 
                 Text(components[1])
                     .font(.body)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             } else {
                 Text(aboutText)
                     .font(.body)

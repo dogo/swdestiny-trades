@@ -51,7 +51,7 @@ struct ErrorView: View {
         VStack(spacing: 20) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.largeTitle)
-                .foregroundColor(.orange)
+                .foregroundStyle(.orange)
 
             Text(L10n.error)
                 .font(.title)
@@ -79,11 +79,11 @@ struct PlaceholderMainView: View {
 
             Text(L10n.swiftuiMigrationInProgress)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.appInitializedSuccessfully)
                 .padding(.top)
-                .foregroundColor(.green)
+                .foregroundStyle(.green)
         }
     }
 }

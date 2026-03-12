@@ -32,7 +32,7 @@ struct NewPersonView: View {
                     if let errorMessage = viewModel.getValidationMessage(for: .firstName) {
                         Text(errorMessage)
                             .font(.caption)
-                            .foregroundColor(.red)
+                            .foregroundStyle(.red)
                     }
                 }
 
@@ -53,7 +53,7 @@ struct NewPersonView: View {
                     if let errorMessage = viewModel.getValidationMessage(for: .lastName) {
                         Text(errorMessage)
                             .font(.caption)
-                            .foregroundColor(.red)
+                            .foregroundStyle(.red)
                     }
                 }
             } header: {
@@ -61,7 +61,7 @@ struct NewPersonView: View {
             } footer: {
                 Text(L10n.enterThePersonsNameToTrackLoansWithThem)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
 
             Section {

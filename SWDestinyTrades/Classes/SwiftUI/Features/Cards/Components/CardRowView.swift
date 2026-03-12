@@ -40,13 +40,13 @@ struct CardRowView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(card.name)
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                         .multilineTextAlignment(.leading)
 
                     if !card.subtitle.isEmpty {
                         Text(card.subtitle)
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                             .multilineTextAlignment(.leading)
                     }
 
@@ -56,7 +56,7 @@ struct CardRowView: View {
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
                             .background(Color.blue.opacity(0.2))
-                            .foregroundColor(.blue)
+                            .foregroundStyle(.blue)
                             .clipShape(Capsule())
 
                         Text(card.factionName.capitalized)
@@ -64,7 +64,7 @@ struct CardRowView: View {
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
                             .background(card.factionColor().opacity(0.2))
-                            .foregroundColor(card.factionColor())
+                            .foregroundStyle(card.factionColor())
                             .clipShape(Capsule())
 
                         Spacer()
@@ -75,7 +75,7 @@ struct CardRowView: View {
 
                 Image(systemName: "chevron.right")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
             .padding(.vertical, 8)
         }

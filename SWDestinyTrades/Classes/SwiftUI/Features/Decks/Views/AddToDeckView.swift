@@ -70,7 +70,7 @@ struct AddToDeckView: View {
                 Text(L10n.remote)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(viewModel.dataSource == .remote ? .white : .primary)
+                    .foregroundStyle(viewModel.dataSource == .remote ? .white : .primary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .background(viewModel.dataSource == .remote ? Color.blue : Color.clear)
@@ -82,7 +82,7 @@ struct AddToDeckView: View {
                 Text(L10n.local)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(viewModel.dataSource == .local ? .white : .primary)
+                    .foregroundStyle(viewModel.dataSource == .local ? .white : .primary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .background(viewModel.dataSource == .local ? Color.blue : Color.clear)
@@ -153,13 +153,13 @@ struct AddToDeckCardRowView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(card.name)
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                         .multilineTextAlignment(.leading)
 
                     if !card.subtitle.isEmpty {
                         Text(card.subtitle)
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }
 
@@ -176,7 +176,7 @@ struct AddToDeckCardRowView: View {
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
                             .background(Color.blue.opacity(0.2))
-                            .foregroundColor(.blue)
+                            .foregroundStyle(.blue)
                             .clipShape(Capsule())
                     }
                 }
@@ -188,7 +188,7 @@ struct AddToDeckCardRowView: View {
                 } label: {
                     Image(systemName: "plus.circle.fill")
                         .font(.title2)
-                        .foregroundColor(.green)
+                        .foregroundStyle(.green)
                 }
                 .buttonStyle(.plain)
             }

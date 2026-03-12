@@ -33,7 +33,7 @@ struct DeckCardRowView: View {
             Image("ic_\(card.typeCode)")
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(card.factionColor())
+                .foregroundStyle(card.factionColor())
                 .frame(width: 25, height: 25)
 
             Text("\(quantity)")
@@ -48,7 +48,7 @@ struct DeckCardRowView: View {
                 if !card.subtitle.isEmpty {
                     Text(card.subtitle)
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
             }

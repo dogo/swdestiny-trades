@@ -16,12 +16,12 @@ struct InfoRow: View {
         HStack {
             Text(title)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .frame(width: 100, alignment: .leading)
 
             Text(value)
                 .font(.subheadline)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
 
             Spacer()
         }

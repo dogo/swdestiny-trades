@@ -25,18 +25,18 @@ struct ToastView: View {
                     .frame(width: 40, height: 40)
 
                 Image(systemName: type.icon)
-                    .foregroundColor(type.backgroundColor)
+                    .foregroundStyle(type.backgroundColor)
                     .font(.title3)
             }
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .font(.headline)
                     .fontWeight(.semibold)
 
                 Text(message)
-                    .foregroundColor(.white.opacity(0.95))
+                    .foregroundStyle(.white.opacity(0.95))
                     .font(.subheadline)
             }
 

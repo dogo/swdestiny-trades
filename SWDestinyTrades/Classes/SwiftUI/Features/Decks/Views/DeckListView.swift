@@ -60,7 +60,7 @@ struct DeckListView: View {
             ProgressView()
                 .scaleEffect(1.2)
             Text(L10n.loadingDecks)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .padding(.top)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -70,14 +70,14 @@ struct DeckListView: View {
         VStack(spacing: 20) {
             Image(systemName: "rectangle.stack")
                 .font(.largeTitle)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.noDecksYet)
                 .font(.title2)
                 .fontWeight(.semibold)
 
             Text(L10n.createYourFirstDeckToGetStarted)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
             Button(L10n.createNewDeck) {
@@ -93,14 +93,14 @@ struct DeckListView: View {
         VStack(spacing: 20) {
             Image(systemName: "magnifyingglass")
                 .font(.largeTitle)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.noResults)
                 .font(.title2)
                 .fontWeight(.semibold)
 
             Text(L10n.noDecksMatchViewmodelsearchtext(viewModel.searchText))
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
         .padding()
@@ -188,14 +188,14 @@ struct DeckRowView: View {
                     Button(action: onEdit) {
                         Text(deck.name.isEmpty ? "Unnamed Deck" : deck.name)
                             .font(.headline)
-                            .foregroundColor(.primary)
+                            .foregroundStyle(.primary)
                     }
                     .buttonStyle(.plain)
                 }
 
                 Text(L10n.cardsCount(cardCount))
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
 
             Spacer()
@@ -258,7 +258,7 @@ struct DeckRowView: View {
                 .fontWeight(.semibold)
 
             Text(L10n.createYourFirstDeckToGetStarted)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
             Button(L10n.createNewDeck) {}
@@ -275,7 +275,7 @@ struct DeckRowView: View {
             ProgressView()
                 .scaleEffect(1.2)
             Text(L10n.loadingDecks)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .padding(.top)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

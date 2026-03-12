@@ -43,7 +43,7 @@ struct DeckGraphView: View {
             ProgressView()
                 .scaleEffect(1.2)
             Text(L10n.generatingCharts)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .padding(.top)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,14 +53,14 @@ struct DeckGraphView: View {
         VStack(spacing: 20) {
             Image(systemName: "chart.bar")
                 .font(.largeTitle)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.noDataAvailable)
                 .font(.title2)
                 .fontWeight(.semibold)
 
             Text(L10n.addCardsToYourDeckToSeeStatistics)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
         .padding()

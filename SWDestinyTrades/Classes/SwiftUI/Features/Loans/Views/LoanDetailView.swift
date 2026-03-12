@@ -156,7 +156,7 @@ struct LoanCardRowView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25, height: 25)
-                    .foregroundColor(card.factionColor())
+                    .foregroundStyle(card.factionColor())
 
                 Text("\(quantity)")
                     .font(.body)
@@ -169,7 +169,7 @@ struct LoanCardRowView: View {
 
                     Text(card.setName)
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
 
@@ -183,7 +183,7 @@ struct LoanCardRowView: View {
 
                 Image(systemName: "chevron.right")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
         }
         .buttonStyle(.plain)
@@ -202,7 +202,7 @@ struct EmptyLoanRowView: View {
         VStack(spacing: 12) {
             Text(message)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Button(actionText) {
                 action()

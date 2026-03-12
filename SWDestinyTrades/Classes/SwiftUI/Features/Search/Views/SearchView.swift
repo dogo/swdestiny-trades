@@ -76,7 +76,7 @@ struct SearchView: View {
         VStack(spacing: 24) {
             Image(systemName: "magnifyingglass")
                 .font(.largeTitle)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             VStack(spacing: 8) {
                 Text(L10n.searchCards)
@@ -85,7 +85,7 @@ struct SearchView: View {
 
                 Text(L10n.enterACardNameTypeOrAnyKeywordToSearch)
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
             }
@@ -93,7 +93,7 @@ struct SearchView: View {
             VStack(spacing: 12) {
                 Text(L10n.popularSearches)
                     .font(.headline)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
 
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 100), spacing: 8)
@@ -133,10 +133,10 @@ struct SearchView: View {
                 } label: {
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
 
                         Text(suggestion)
-                            .foregroundColor(.primary)
+                            .foregroundStyle(.primary)
 
                         Spacer()
                     }
@@ -152,15 +152,15 @@ struct SearchView: View {
         VStack(spacing: 16) {
             Image(systemName: "magnifyingglass")
                 .font(.largeTitle)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.noResultsFound)
                 .font(.headline)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
 
             Text(L10n.noCardsMatchViewmodelcurrentqueryTryA(viewModel.currentQuery))
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
@@ -169,7 +169,7 @@ struct SearchView: View {
             } label: {
                 Text(L10n.clearSearch)
                     .font(.subheadline)
-                    .foregroundColor(.blue)
+                    .foregroundStyle(.blue)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -181,7 +181,7 @@ struct SearchView: View {
             HStack {
                 Text(L10n.viewmodelsearchresultscountResultsFor(viewModel.searchResults.count, viewModel.currentQuery))
                     .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
 
                 Spacer()
 
@@ -190,7 +190,7 @@ struct SearchView: View {
                 } label: {
                     Text(L10n.clear)
                         .font(.subheadline)
-                        .foregroundColor(.blue)
+                        .foregroundStyle(.blue)
                 }
             }
             .padding(.horizontal)

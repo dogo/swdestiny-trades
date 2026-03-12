@@ -111,12 +111,12 @@ struct CardDetailView: View {
                 Text(viewModel.currentCard.name)
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
 
                 if !viewModel.currentCard.subtitle.isEmpty {
                     Text(viewModel.currentCard.subtitle)
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
             }
 
@@ -126,11 +126,11 @@ struct CardDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(L10n.cardText)
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
 
                     Text(viewModel.currentCard.text)
                         .font(.body)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -139,12 +139,12 @@ struct CardDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(L10n.flavorText)
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
 
                     Text(viewModel.currentCard.flavor)
                         .font(.body)
                         .italic()
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -179,7 +179,7 @@ struct CardDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.cardInformation)
                 .font(.headline)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
 
             InfoRow(title: L10n.set, value: viewModel.currentCard.setName)
             InfoRow(title: L10n.type, value: viewModel.currentCard.typeName)

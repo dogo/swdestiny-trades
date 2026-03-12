@@ -36,13 +36,13 @@ struct SearchResultRowView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(card.name)
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
                         .multilineTextAlignment(.leading)
 
                     if !card.subtitle.isEmpty {
                         Text(card.subtitle)
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }
 
@@ -56,7 +56,7 @@ struct SearchResultRowView: View {
 
                         Text(card.typeCode.capitalized)
                             .font(.caption2)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -64,7 +64,7 @@ struct SearchResultRowView: View {
 
                 Image(systemName: "chevron.right")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
             .padding(.vertical, 8)
         }

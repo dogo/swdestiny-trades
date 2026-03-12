@@ -54,7 +54,7 @@ struct DeckBuilderView: View {
             ProgressView()
                 .scaleEffect(1.2)
             Text(L10n.loadingDeck)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .padding(.top)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -64,14 +64,14 @@ struct DeckBuilderView: View {
         VStack(spacing: 20) {
             Image(systemName: "rectangle.stack.badge.plus")
                 .font(.largeTitle)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
 
             Text(L10n.emptyDeck)
                 .font(.title2)
                 .fontWeight(.semibold)
 
             Text(L10n.addCardsToStartBuildingYourDeck)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
             Button(L10n.addCards) {
@@ -95,10 +95,10 @@ struct DeckBuilderView: View {
             VStack(alignment: .leading) {
                 Text(L10n.totalCardsViewmodeltotalcardcount(viewModel.totalCardCount))
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                 Text(L10n.uniqueCardsViewmodeluniquecardcount(viewModel.uniqueCardCount))
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
 
             Spacer()

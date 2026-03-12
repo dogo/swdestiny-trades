@@ -31,30 +31,30 @@ struct PeopleListView: View {
                 VStack(spacing: 16) {
                     Image(systemName: "person.2.slash")
                         .font(.largeTitle)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Text(L10n.noPeopleFound)
                         .font(.headline)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Text(L10n.tryAdjustingYourSearchTerms)
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewModel.filteredItems.isEmpty {
                 VStack(spacing: 16) {
                     Image(systemName: "person.2")
                         .font(.largeTitle)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Text(L10n.noPeopleYet)
                         .font(.headline)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Text(L10n.addPeopleToTrackLoans)
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Button(L10n.addPerson) {
                         navigationCoordinator.navigate(to: .newPerson)
@@ -135,7 +135,7 @@ struct PersonRowView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("\(person.name) \(person.lastName)")
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
 
                     loanStatusView
                 }
@@ -144,7 +144,7 @@ struct PersonRowView: View {
 
                 Image(systemName: "chevron.right")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
             .padding(.vertical, 4)
         }
@@ -158,18 +158,18 @@ struct PersonRowView: View {
         if lentCount == 0, borrowedCount == 0 {
             Label(L10n.noLoans, systemImage: "checkmark.circle")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
         } else {
             VStack(alignment: .leading, spacing: 2) {
                 if lentCount > 0 {
                     Label(L10n.lentMeCard(lentCount), systemImage: "arrow.up.right")
                         .font(.subheadline)
-                        .foregroundColor(.blue)
+                        .foregroundStyle(.blue)
                 }
                 if borrowedCount > 0 {
                     Label(L10n.borrowedCard(borrowedCount), systemImage: "arrow.down.left")
                         .font(.subheadline)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
                 }
             }
         }

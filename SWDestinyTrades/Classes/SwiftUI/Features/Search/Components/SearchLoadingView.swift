@@ -18,7 +18,7 @@ struct SearchLoadingView: View {
 
             Text(L10n.searchingForQuery(query))
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

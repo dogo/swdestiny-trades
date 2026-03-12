@@ -48,16 +48,16 @@ struct DeckSectionView: View {
                 HStack {
                     Text(section.name)
                         .font(.headline)
-                        .foregroundColor(.primary)
+                        .foregroundStyle(.primary)
 
                     Text("(\(section.cardCount))")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
 
                     Spacer()
 
                     Image(systemName: "chevron.right")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .font(.caption)
                         .rotationEffect(.degrees(section.isCollapsed ? 0 : 90))
                         .animation(.easeInOut(duration: 0.2), value: section.isCollapsed)

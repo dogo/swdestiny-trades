@@ -49,13 +49,13 @@ struct CollectionCardRowView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(card.name)
                 .font(.headline)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
                 .multilineTextAlignment(.leading)
 
             if !card.subtitle.isEmpty {
                 Text(card.subtitle)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
 
             HStack {
@@ -71,7 +71,7 @@ struct CollectionCardRowView: View {
                     .padding(.horizontal, 8)
                     .padding(.vertical, 2)
                     .background(Color.blue.opacity(0.2))
-                    .foregroundColor(.blue)
+                    .foregroundStyle(.blue)
                     .clipShape(Capsule())
             }
         }

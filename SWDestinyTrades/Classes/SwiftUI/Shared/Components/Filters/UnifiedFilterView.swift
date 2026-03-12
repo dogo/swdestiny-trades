@@ -124,7 +124,7 @@ struct UnifiedFilterView: View {
             Button(L10n.clearAllFilters) {
                 tempFilter.clearAll()
             }
-            .foregroundColor(.red)
+            .foregroundStyle(.red)
         }
     }
 }

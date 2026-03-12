@@ -16,7 +16,7 @@ struct LoadingView: View {
 
             Text(L10n.loading)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
