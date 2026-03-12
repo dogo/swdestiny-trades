@@ -46,7 +46,7 @@ struct CardDetailView: View {
                     )
                     .frame(height: 400)
 
-                    cardInfoSection
+                    CardInfoSection(card: viewModel.currentCard)
                 }
             }
 
@@ -105,106 +105,6 @@ struct CardDetailView: View {
         }
     }
 
-    @ViewBuilder private var cardInfoSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(viewModel.currentCard.name)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.primary)
-
-                if !viewModel.currentCard.subtitle.isEmpty {
-                    Text(viewModel.currentCard.subtitle)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-            }
-
-            cardStatsSection
-
-            if !viewModel.currentCard.text.isEmpty {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(L10n.cardText)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-
-                    Text(viewModel.currentCard.text)
-                        .font(.body)
-                        .foregroundStyle(.primary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            if !viewModel.currentCard.flavor.isEmpty {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(L10n.flavorText)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-
-                    Text(viewModel.currentCard.flavor)
-                        .font(.body)
-                        .italic()
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            additionalInfoSection
-        }
-        .padding()
-        .background(Color(.systemBackground))
-    }
-
-    @ViewBuilder private var cardStatsSection: some View {
-        LazyVGrid(columns: [
-            GridItem(.flexible()),
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ], spacing: 12) {
-            if viewModel.currentCard.cost > 0 {
-                StatView(title: L10n.cost, value: "\(viewModel.currentCard.cost)", color: .orange)
-            }
-
-            if viewModel.currentCard.health > 0 {
-                StatView(title: L10n.health, value: "\(viewModel.currentCard.health)", color: .red)
-            }
-
-            if !viewModel.currentCard.points.isEmpty {
-                StatView(title: L10n.points, value: viewModel.currentCard.points, color: .blue)
-            }
-        }
-    }
-
-    @ViewBuilder private var additionalInfoSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.cardInformation)
-                .font(.headline)
-                .foregroundStyle(.primary)
-
-            InfoRow(title: L10n.set, value: viewModel.currentCard.setName)
-            InfoRow(title: L10n.type, value: viewModel.currentCard.typeName)
-            InfoRow(title: L10n.faction, value: viewModel.currentCard.factionName)
-            InfoRow(title: L10n.rarity, value: viewModel.currentCard.rarityName)
-
-            if !viewModel.currentCard.affiliationName.isEmpty {
-                InfoRow(title: L10n.affiliation, value: viewModel.currentCard.affiliationName)
-            }
-
-            if !viewModel.currentCard.illustrator.isEmpty {
-                InfoRow(title: L10n.illustrator, value: viewModel.currentCard.illustrator)
-            }
-
-            InfoRow(title: L10n.deckLimit, value: "\(viewModel.currentCard.deckLimit)")
-
-            if viewModel.currentCard.isUnique {
-                InfoRow(title: L10n.unique, value: L10n.yes)
-            }
-
-            if viewModel.currentCard.hasDie {
-                InfoRow(title: L10n.hasDie, value: L10n.yes)
-            }
-        }
-    }
 }
 
 #Preview {
