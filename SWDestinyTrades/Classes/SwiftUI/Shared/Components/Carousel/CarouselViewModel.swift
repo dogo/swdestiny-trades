@@ -121,7 +121,7 @@ final class CarouselViewModel {
         autoScrollTask?.cancel()
         autoScrollTask = Task { [weak self] in
             while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: UInt64(interval * 1_000_000_000))
+                try? await Task.sleep(for: .seconds(interval))
                 guard !Task.isCancelled else { break }
                 self?.advanceToNextPage()
             }

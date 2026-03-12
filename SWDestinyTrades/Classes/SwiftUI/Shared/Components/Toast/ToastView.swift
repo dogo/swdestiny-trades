@@ -50,12 +50,12 @@ struct ToastView: View {
         .padding(.horizontal, 16)
         .task {
             do {
-                try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+                try await Task.sleep(for: .seconds(duration))
                 withAnimation {
                     isPresented = false
                 }
                 if let onDismiss {
-                    try await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+                    try await Task.sleep(for: .milliseconds(300))
                     onDismiss()
                 }
             } catch {
