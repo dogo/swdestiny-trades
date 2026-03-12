@@ -63,7 +63,7 @@ struct DeckBuilderView: View {
     private var emptyDeckView: some View {
         VStack(spacing: 20) {
             Image(systemName: "rectangle.stack.badge.plus")
-                .font(.system(size: 60))
+                .font(.largeTitle)
                 .foregroundColor(.secondary)
 
             Text(L10n.emptyDeck)

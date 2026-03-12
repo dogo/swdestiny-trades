@@ -50,7 +50,7 @@ struct ErrorView: View {
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 50))
+                .font(.largeTitle)
                 .foregroundColor(.orange)
 
             Text(L10n.error)

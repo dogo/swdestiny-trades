@@ -159,7 +159,7 @@ struct LoanCardRowView: View {
                     .foregroundColor(card.factionColor())
 
                 Text("\(quantity)")
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.body)
                     .frame(minWidth: 30)
 
                 VStack(alignment: .leading, spacing: 2) {

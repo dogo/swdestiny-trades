@@ -24,7 +24,7 @@ struct AboutView: View {
                 HStack {
                     Spacer()
                     Text(L10n.version(Bundle.main.releaseVersionNumber, Bundle.main.buildVersionNumber))
-                        .font(.system(size: 13))
+                        .font(.footnote)
                         .foregroundColor(.secondary)
                         .padding(.trailing, 15)
                 }

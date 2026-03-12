@@ -30,7 +30,7 @@ struct PeopleListView: View {
             } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
                 VStack(spacing: 16) {
                     Image(systemName: "person.2.slash")
-                        .font(.system(size: 48))
+                        .font(.largeTitle)
                         .foregroundColor(.secondary)
 
                     Text(L10n.noPeopleFound)
@@ -45,7 +45,7 @@ struct PeopleListView: View {
             } else if viewModel.filteredItems.isEmpty {
                 VStack(spacing: 16) {
                     Image(systemName: "person.2")
-                        .font(.system(size: 48))
+                        .font(.largeTitle)
                         .foregroundColor(.secondary)
 
                     Text(L10n.noPeopleYet)

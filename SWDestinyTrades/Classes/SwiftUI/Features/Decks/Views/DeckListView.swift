@@ -69,7 +69,7 @@ struct DeckListView: View {
     private var emptyStateView: some View {
         VStack(spacing: 20) {
             Image(systemName: "rectangle.stack")
-                .font(.system(size: 60))
+                .font(.largeTitle)
                 .foregroundColor(.secondary)
 
             Text(L10n.noDecksYet)
@@ -92,7 +92,7 @@ struct DeckListView: View {
     private var emptySearchView: some View {
         VStack(spacing: 20) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 60))
+                .font(.largeTitle)
                 .foregroundColor(.secondary)
 
             Text(L10n.noResults)

@@ -52,7 +52,7 @@ struct DeckGraphView: View {
     private var emptyStateView: some View {
         VStack(spacing: 20) {
             Image(systemName: "chart.bar")
-                .font(.system(size: 60))
+                .font(.largeTitle)
                 .foregroundColor(.secondary)
 
             Text(L10n.noDataAvailable)

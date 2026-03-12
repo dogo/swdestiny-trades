@@ -37,7 +37,7 @@ struct DeckCardRowView: View {
                 .frame(width: 25, height: 25)
 
             Text("\(quantity)")
-                .font(.system(size: 18, weight: .medium))
+                .font(.body)
                 .frame(minWidth: 30)
 
             VStack(alignment: .leading, spacing: 2) {

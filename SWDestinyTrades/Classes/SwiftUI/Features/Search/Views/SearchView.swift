@@ -75,7 +75,7 @@ struct SearchView: View {
     @ViewBuilder private var initialStateView: some View {
         VStack(spacing: 24) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 64))
+                .font(.largeTitle)
                 .foregroundColor(.secondary)
 
             VStack(spacing: 8) {
@@ -151,7 +151,7 @@ struct SearchView: View {
     @ViewBuilder private var emptySearchResultsView: some View {
         VStack(spacing: 16) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 48))
+                .font(.largeTitle)
                 .foregroundColor(.secondary)
 
             Text(L10n.noResultsFound)

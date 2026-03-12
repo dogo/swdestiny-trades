@@ -26,7 +26,7 @@ struct ToastView: View {
 
                 Image(systemName: type.icon)
                     .foregroundColor(type.backgroundColor)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.title3)
             }
 
             VStack(alignment: .leading, spacing: 2) {
