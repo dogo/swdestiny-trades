@@ -88,16 +88,7 @@ struct UnifiedFilterView: View {
     @ViewBuilder private var typeSection: some View {
         Section(L10n.cardTypes) {
             ForEach(cardTypes, id: \.self) { type in
-                Toggle(type.capitalized, isOn: Binding(
-                    get: { tempFilter.selectedTypes.contains(type) },
-                    set: { isSelected in
-                        if isSelected {
-                            tempFilter.selectedTypes.insert(type)
-                        } else {
-                            tempFilter.selectedTypes.remove(type)
-                        }
-                    }
-                ))
+                Toggle(type.capitalized, isOn: setBinding(for: type, in: \.selectedTypes))
             }
         }
     }
@@ -105,18 +96,19 @@ struct UnifiedFilterView: View {
     @ViewBuilder private var colorSection: some View {
         Section(L10n.color) {
             ForEach(cardColors, id: \.code) { color in
-                Toggle(color.name, isOn: Binding(
-                    get: { tempFilter.selectedColors.contains(color.code) },
-                    set: { isSelected in
-                        if isSelected {
-                            tempFilter.selectedColors.insert(color.code)
-                        } else {
-                            tempFilter.selectedColors.remove(color.code)
-                        }
-                    }
-                ))
+                Toggle(color.name, isOn: setBinding(for: color.code, in: \.selectedColors))
             }
         }
+    }
+
+    private func setBinding(for value: String, in keyPath: WritableKeyPath<UnifiedCardFilter, Set<String>>) -> Binding<Bool> {
+        Binding(
+            get: { tempFilter[keyPath: keyPath].contains(value) },
+            set: { isSelected in
+                if isSelected { tempFilter[keyPath: keyPath].insert(value) }
+                else { tempFilter[keyPath: keyPath].remove(value) }
+            }
+        )
     }
 
     @ViewBuilder private var clearSection: some View {
