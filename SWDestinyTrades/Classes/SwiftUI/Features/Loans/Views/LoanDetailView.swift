@@ -149,45 +149,44 @@ struct LoanCardRowView: View {
     }
 
     var body: some View {
-        HStack {
-            Image("ic_\(card.typeCode)")
-                .resizable()
-                .renderingMode(.template)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 25, height: 25)
-                .foregroundColor(card.factionColor())
+        Button(action: onTap) {
+            HStack {
+                Image("ic_\(card.typeCode)")
+                    .resizable()
+                    .renderingMode(.template)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(card.factionColor())
 
-            Text("\(quantity)")
-                .font(.system(size: 18, weight: .medium))
-                .frame(minWidth: 30)
+                Text("\(quantity)")
+                    .font(.system(size: 18, weight: .medium))
+                    .frame(minWidth: 30)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(card.name)
-                    .font(.headline)
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(card.name)
+                        .font(.headline)
+                        .lineLimit(1)
 
-                Text(card.setName)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-            }
-
-            Spacer()
-
-            Stepper("", value: $quantity, in: 1 ... 99)
-                .labelsHidden()
-                .onChange(of: quantity) { _, newValue in
-                    onQuantityChanged(newValue)
+                    Text(card.setName)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
                 }
 
-            Image(systemName: "chevron.right")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                Spacer()
+
+                Stepper("", value: $quantity, in: 1 ... 99)
+                    .labelsHidden()
+                    .onChange(of: quantity) { _, newValue in
+                        onQuantityChanged(newValue)
+                    }
+
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            onTap()
-        }
+        .buttonStyle(.plain)
         .onAppear {
             quantity = card.quantity
         }
