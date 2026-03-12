@@ -143,17 +143,15 @@ struct NewPersonView: View {
 
 // MARK: - Previews
 
-struct NewPersonView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            NewPersonView()
-        }
-        .previewDisplayName("New Person - Light")
-
-        NavigationStack {
-            NewPersonView()
-        }
-        .preferredColorScheme(.dark)
-        .previewDisplayName("New Person - Dark")
+#Preview("New Person - Light") {
+    NavigationStack {
+        NewPersonView()
     }
+}
+
+#Preview("New Person - Dark") {
+    NavigationStack {
+        NewPersonView()
+    }
+    .preferredColorScheme(.dark)
 }

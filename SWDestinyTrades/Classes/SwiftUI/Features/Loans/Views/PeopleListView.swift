@@ -178,17 +178,15 @@ struct PersonRowView: View {
 
 // MARK: - Previews
 
-struct PeopleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        PeopleListView()
-            .environment(NavigationCoordinator())
-            .environment(\.dependencyContainer, DependencyContainer.shared)
-            .previewDisplayName("People List - Light")
+#Preview("People List - Light") {
+    PeopleListView()
+        .environment(NavigationCoordinator())
+        .environment(\.dependencyContainer, DependencyContainer.shared)
+}
 
-        PeopleListView()
-            .environment(NavigationCoordinator())
-            .environment(\.dependencyContainer, DependencyContainer.shared)
-            .preferredColorScheme(.dark)
-            .previewDisplayName("People List - Dark")
-    }
+#Preview("People List - Dark") {
+    PeopleListView()
+        .environment(NavigationCoordinator())
+        .environment(\.dependencyContainer, DependencyContainer.shared)
+        .preferredColorScheme(.dark)
 }
