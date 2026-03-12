@@ -16,6 +16,7 @@
 "ADD_MY_CARD" = "Adicionar minha carta…";
 "ADD_PEOPLE_TO_TRACK_LOANS" = "Adicionar pessoas para controlar empréstimos";
 "ADD_PERSON" = "Adicionar pessoa";
+"ADD_TO_COLLECTION" = "Adicionar à coleção";
 "ALL_CARDS" = "Todas as cartas";
 "ALL_SETS" = "Todas as expansões";
 "ALREADY_ADDED" = "Esta carta já foi adicionada. Use o controle de quantidade na tela anterior.";
@@ -51,6 +52,7 @@
 "DELETE_DECK" = "Excluir baralho";
 "DICE_SYMBOLS" = "Símbolos dos dados";
 "DONE" = "Concluído";
+"EDIT" = "Editar";
 "DOWNGRADE" = "Desvantagem";
 "UPGRADE" = "Melhoria";
 "ELITE" = "Elite";
@@ -102,6 +104,7 @@
 "SEARCH" = "Buscar";
 "SEARCHING_FOR_QUERY" = "Buscando «%@»…";
 "SEARCH_FOR_CARDS" = "Buscar cartas";
+"SHARE" = "Compartilhar";
 "SHARE_TEXT" = "Compartilhado com SWD Trades para iOS";
 "SUGGESTIONS" = "Sugestões";
 "SUPPORT" = "Suporte";

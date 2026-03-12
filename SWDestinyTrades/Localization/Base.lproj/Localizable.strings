@@ -16,6 +16,7 @@
 "ADD_MY_CARD" = "Add my card…";
 "ADD_PEOPLE_TO_TRACK_LOANS" = "Add people to track loans";
 "ADD_PERSON" = "Add person";
+"ADD_TO_COLLECTION" = "Add to collection";
 "ALL_CARDS" = "All cards";
 "ALL_SETS" = "All sets";
 "ALREADY_ADDED" = "This card has already been added. Please use the quantity control on the previous screen.";
@@ -51,6 +52,7 @@
 "DELETE_DECK" = "Delete deck";
 "DICE_SYMBOLS" = "Dice symbols";
 "DONE" = "Done";
+"EDIT" = "Edit";
 "DOWNGRADE" = "Downgrade";
 "UPGRADE" = "Upgrade";
 "ELITE" = "Elite";
@@ -101,6 +103,7 @@
 "SAVE_PERSON" = "Save person";
 "SEARCH" = "Search";
 "SEARCHING_FOR_QUERY" = "Searching for “%@”…";
+"SHARE" = "Share";
 "SHARE_TEXT" = "Shared with SWD Trades for iOS";
 "SUGGESTIONS" = "Suggestions";
 "SUPPORT" = "Support";

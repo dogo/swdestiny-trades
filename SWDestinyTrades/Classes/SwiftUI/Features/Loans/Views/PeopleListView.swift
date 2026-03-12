@@ -94,11 +94,9 @@ struct PeopleListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
+                Button(L10n.addPerson, systemImage: "plus") {
                     navigationCoordinator.navigate(to: .newPerson)
-                }, label: {
-                    Image(systemName: "plus")
-                })
+                }
             }
         }
         .onAppear {

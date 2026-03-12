@@ -135,26 +135,16 @@ struct DeckBuilderView: View {
     }
 
     private var addCardButton: some View {
-        Button {
-            navigateToAddToDeck()
-        } label: {
-            Image(systemName: "plus")
-        }
+        Button(L10n.addCards, systemImage: "plus", action: navigateToAddToDeck)
     }
 
     private var deckGraphButton: some View {
-        Button {
-            navigateToDeckGraph()
-        } label: {
-            Image(systemName: "chart.bar")
-        }
+        Button(L10n.graph, systemImage: "chart.bar", action: navigateToDeckGraph)
     }
 
     private var shareButton: some View {
-        Button {
+        Button(L10n.share, systemImage: "square.and.arrow.up") {
             viewModel.prepareShareText()
-        } label: {
-            Image(systemName: "square.and.arrow.up")
         }
     }
 

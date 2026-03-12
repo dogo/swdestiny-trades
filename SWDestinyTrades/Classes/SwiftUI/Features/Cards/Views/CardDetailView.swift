@@ -52,10 +52,8 @@ struct CardDetailView: View {
 
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button {
+                    Button(L10n.share, systemImage: "square.and.arrow.up") {
                         showingShareSheet = true
-                    } label: {
-                        Image(systemName: "square.and.arrow.up")
                     }
                     .disabled(shareImage == nil)
 
@@ -67,6 +65,7 @@ struct CardDetailView: View {
                         } label: {
                             Image(asset: Asset.NavigationBar.icAddCollection)
                         }
+                        .accessibilityLabel(L10n.addToCollection)
                     }
                 }
             }

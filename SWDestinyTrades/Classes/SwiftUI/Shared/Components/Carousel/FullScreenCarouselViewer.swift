@@ -37,10 +37,8 @@ struct FullScreenCarouselViewer: View {
                     Button(L10n.done) { isPresented = false }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    Button(L10n.share, systemImage: "square.and.arrow.up") {
                         if loadedImage != nil { showingShareSheet = true }
-                    } label: {
-                        Image(systemName: "square.and.arrow.up")
                     }
                     .disabled(loadedImage == nil)
                 }

@@ -136,11 +136,13 @@ struct FilterToolbarButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
-            Image(systemName: hasActiveFilters
+        Button(
+            L10n.filterCards,
+            systemImage: hasActiveFilters
                 ? "line.3.horizontal.decrease.circle.fill"
-                : "line.3.horizontal.decrease.circle")
-                .foregroundColor(hasActiveFilters ? .blue : .primary)
-        }
+                : "line.3.horizontal.decrease.circle",
+            action: action
+        )
+        .foregroundStyle(hasActiveFilters ? .blue : .primary)
     }
 }

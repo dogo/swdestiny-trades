@@ -44,6 +44,8 @@ internal enum L10n {
   internal static let addPeopleToTrackLoans = L10n.tr("Localizable", "ADD_PEOPLE_TO_TRACK_LOANS", fallback: "Add people to track loans")
   /// Add person
   internal static let addPerson = L10n.tr("Localizable", "ADD_PERSON", fallback: "Add person")
+  /// Add to collection
+  internal static let addToCollection = L10n.tr("Localizable", "ADD_TO_COLLECTION", fallback: "Add to collection")
   /// Added
   internal static let added = L10n.tr("Localizable", "ADDED", fallback: "Added")
   /// Affiliation
@@ -138,6 +140,8 @@ internal enum L10n {
   internal static let done = L10n.tr("Localizable", "DONE", fallback: "Done")
   /// Downgrade
   internal static let downgrade = L10n.tr("Localizable", "DOWNGRADE", fallback: "Downgrade")
+  /// Edit
+  internal static let edit = L10n.tr("Localizable", "EDIT", fallback: "Edit")
   /// Elite
   internal static let elite = L10n.tr("Localizable", "ELITE", fallback: "Elite")
   /// Empty deck
@@ -314,6 +318,8 @@ internal enum L10n {
   internal static let `set` = L10n.tr("Localizable", "SET", fallback: "Set")
   /// Set Filter
   internal static let setFilter = L10n.tr("Localizable", "SET_FILTER", fallback: "Set Filter")
+  /// Share
+  internal static let share = L10n.tr("Localizable", "SHARE", fallback: "Share")
   /// Shared with SWD Trades for iOS
   internal static let shareText = L10n.tr("Localizable", "SHARE_TEXT", fallback: "Shared with SWD Trades for iOS")
   /// Plural format key: "%#@side@"

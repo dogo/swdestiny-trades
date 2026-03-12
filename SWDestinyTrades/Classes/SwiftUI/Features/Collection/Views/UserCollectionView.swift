@@ -140,18 +140,14 @@ struct UserCollectionView: View {
     }
 
     @ViewBuilder private var shareButton: some View {
-        Button {
+        Button(L10n.share, systemImage: "square.and.arrow.up") {
             showingShareSheet = true
-        } label: {
-            Image(systemName: "square.and.arrow.up")
         }
     }
 
     @ViewBuilder private var addButton: some View {
-        Button {
+        Button(L10n.addCard, systemImage: "plus") {
             navigationCoordinator.navigate(to: .addCard)
-        } label: {
-            Image(systemName: "plus")
         }
     }
 

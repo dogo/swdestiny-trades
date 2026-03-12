@@ -35,18 +35,14 @@ struct SetsListView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
-                Button {
+                Button(L10n.about, systemImage: "info.circle") {
                     navigationCoordinator.navigate(to: .about)
-                } label: {
-                    Image(systemName: "info.circle")
                 }
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
+                Button(L10n.search, systemImage: "magnifyingglass") {
                     navigationCoordinator.navigate(to: .search)
-                } label: {
-                    Image(systemName: "magnifyingglass")
                 }
             }
         }

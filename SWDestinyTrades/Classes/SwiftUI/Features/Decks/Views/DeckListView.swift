@@ -127,11 +127,7 @@ struct DeckListView: View {
     }
 
     private var addButton: some View {
-        Button {
-            createNewDeck()
-        } label: {
-            Image(systemName: "plus")
-        }
+        Button(L10n.createNewDeck, systemImage: "plus", action: createNewDeck)
     }
 
     private var deleteConfirmationAlert: some View {
@@ -211,13 +207,9 @@ struct DeckRowView: View {
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
             } else {
-                Button {
-                    startEditing()
-                } label: {
-                    Image(systemName: "pencil")
-                        .foregroundColor(.blue)
-                }
-                .buttonStyle(.plain)
+                Button(L10n.edit, systemImage: "pencil", action: startEditing)
+                    .foregroundStyle(.blue)
+                    .buttonStyle(.plain)
             }
         }
         .padding(.vertical, 4)
