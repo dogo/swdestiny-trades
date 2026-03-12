@@ -32,7 +32,7 @@ struct DeckListView: View {
         .navigationTitle(L10n.decks)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 addButton
             }
         }

@@ -93,7 +93,7 @@ struct PeopleListView: View {
             viewModel.performFiltering(searchText: newValue)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {
                     navigationCoordinator.navigate(to: .newPerson)
                 }, label: {

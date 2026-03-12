@@ -33,10 +33,10 @@ struct FullScreenCarouselViewer: View {
             .background(Color.black)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button(L10n.done) { isPresented = false }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         if loadedImage != nil { showingShareSheet = true }
                     } label: {

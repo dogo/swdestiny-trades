@@ -31,7 +31,7 @@ struct DeckBuilderView: View {
         .navigationTitle(viewModel.deck.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
+            ToolbarItemGroup(placement: .topBarTrailing) {
                 addCardButton
                 deckGraphButton
                 shareButton

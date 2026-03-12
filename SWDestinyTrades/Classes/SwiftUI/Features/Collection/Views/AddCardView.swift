@@ -36,7 +36,7 @@ struct AddCardView: View {
             .navigationTitle(viewModel.addCardContext.title)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     filterButton
                 }
             }

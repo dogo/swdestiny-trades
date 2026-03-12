@@ -34,7 +34,7 @@ struct SetsListView: View {
         .navigationTitle(L10n.expansions)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button {
                     navigationCoordinator.navigate(to: .about)
                 } label: {
@@ -42,7 +42,7 @@ struct SetsListView: View {
                 }
             }
 
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     navigationCoordinator.navigate(to: .search)
                 } label: {

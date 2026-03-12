@@ -57,13 +57,13 @@ struct UnifiedFilterView: View {
     // MARK: - Toolbar
 
     @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .topBarLeading) {
             Button(L10n.cancel) {
                 dismiss()
             }
         }
 
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
             Button(L10n.apply) {
                 filter = tempFilter
                 onApply()

@@ -86,7 +86,7 @@ struct NewPersonView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.done) {
                     Task {
                         await viewModel.savePerson()

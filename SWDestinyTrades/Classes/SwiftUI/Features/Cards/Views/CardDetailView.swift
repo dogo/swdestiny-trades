@@ -51,7 +51,7 @@ struct CardDetailView: View {
             }
 
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
                     Button {
                         showingShareSheet = true
                     } label: {
