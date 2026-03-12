@@ -118,7 +118,8 @@ final class LoanDetailViewModel: BaseViewModel {
     }
 
     var personFullName: String {
-        return "\(person.name) \(person.lastName)"
+        PersonNameComponents(givenName: person.name, familyName: person.lastName)
+            .formatted(.name(style: .long))
     }
 
     var hasLoans: Bool {

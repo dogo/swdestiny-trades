@@ -133,7 +133,7 @@ struct PersonRowView: View {
         Button(action: onTap) {
             HStack {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("\(person.name) \(person.lastName)")
+                    Text(PersonNameComponents(givenName: person.name, familyName: person.lastName).formatted(.name(style: .long)))
                         .font(.headline)
                         .foregroundStyle(.primary)
 

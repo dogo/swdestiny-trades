@@ -71,7 +71,8 @@ final class NewPersonViewModel: BaseViewModel {
 
             try Task.checkCancellation()
 
-            addedPersonName = "\(person.name) \(person.lastName)".trimmingCharacters(in: .whitespaces)
+            addedPersonName = PersonNameComponents(givenName: person.name, familyName: person.lastName)
+                .formatted(.name(style: .long))
             showSuccessToast = true
             resetForm()
         } catch is CancellationError {
