@@ -20,11 +20,11 @@ struct DeckListView: View {
     var body: some View {
         VStack {
             if viewModel.loadingState.isLoading {
-                loadingView
+                DeckListLoadingView()
             } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
-                emptySearchView
+                DeckEmptySearchView(searchText: viewModel.searchText)
             } else if viewModel.filteredItems.isEmpty {
-                emptyStateView
+                DeckEmptyStateView(onCreateDeck: createNewDeck)
             } else {
                 deckListView
             }
@@ -54,58 +54,6 @@ struct DeckListView: View {
     }
 
     // MARK: - View Components
-
-    private var loadingView: some View {
-        VStack {
-            ProgressView()
-                .scaleEffect(1.2)
-            Text(L10n.loadingDecks)
-                .foregroundStyle(.secondary)
-                .padding(.top)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var emptyStateView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "rectangle.stack")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noDecksYet)
-                .font(.title2)
-                .fontWeight(.semibold)
-
-            Text(L10n.createYourFirstDeckToGetStarted)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            Button(L10n.createNewDeck) {
-                createNewDeck()
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var emptySearchView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "magnifyingglass")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noResults)
-                .font(.title2)
-                .fontWeight(.semibold)
-
-            Text(L10n.noDecksMatchViewmodelsearchtext(viewModel.searchText))
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
 
     private var deckListView: some View {
         List {
