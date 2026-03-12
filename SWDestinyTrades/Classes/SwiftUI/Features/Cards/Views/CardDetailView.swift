@@ -104,7 +104,6 @@ struct CardDetailView: View {
             showToast = newValue
         }
     }
-
 }
 
 #Preview {
