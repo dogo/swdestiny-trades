@@ -13,7 +13,6 @@ struct CardListView: View {
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
     @State private var showingFilterOptions = false
-    @State private var showToast = false
 
     let set: SetDTO
 
@@ -56,21 +55,17 @@ struct CardListView: View {
             }
         }
         .overlay(alignment: .top) {
-            if showToast {
+            if viewModel.showToast {
                 ToastView(
                     title: viewModel.toastTitle,
                     message: viewModel.toastMessage,
                     type: viewModel.toastType,
-                    isPresented: $showToast,
+                    isPresented: $viewModel.showToast,
                     duration: 2.5
                 )
                 .padding(.top, 8)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
         }
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)

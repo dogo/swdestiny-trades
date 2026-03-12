@@ -13,8 +13,6 @@ struct AddToDeckView: View {
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
 
-    @State private var showToast = false
-
     init(deck: DeckDTO, viewModel: AddToDeckViewModel? = nil) {
         if let viewModel {
             _viewModel = State(wrappedValue: viewModel)
@@ -41,21 +39,17 @@ struct AddToDeckView: View {
         }
         .onSubmit(of: .search) {}
         .overlay(alignment: .top) {
-            if showToast {
+            if viewModel.showToast {
                 ToastView(
                     title: viewModel.toastTitle,
                     message: viewModel.toastMessage,
                     type: viewModel.toastType,
-                    isPresented: $showToast,
+                    isPresented: $viewModel.showToast,
                     duration: viewModel.toastType == .success ? 2.0 : (viewModel.toastType == .error ? 2.5 : 1.5)
                 )
                 .padding(.top, 8)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
         }
         .task {
             viewModel.loadRemoteCards()

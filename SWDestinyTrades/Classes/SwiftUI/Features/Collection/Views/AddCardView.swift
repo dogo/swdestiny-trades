@@ -14,7 +14,6 @@ struct AddCardView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var showingFilterSheet = false
-    @State private var showToast = false
 
     init(context: AddCardContext) {
         _viewModel = State(wrappedValue: AddCardViewModel(context: context))
@@ -53,22 +52,19 @@ struct AddCardView: View {
                 }
             }
 
-            if showToast {
+            if viewModel.showToast {
                 ToastView(
                     title: viewModel.toastTitle,
                     message: viewModel.toastMessage,
                     type: viewModel.toastType,
-                    isPresented: $showToast,
+                    isPresented: $viewModel.showToast,
                     duration: viewModel.toastType == .success ? 2.0 : 2.5
                 )
                 .padding(.top, 8)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
-        }
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: viewModel.showToast)
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)
         }

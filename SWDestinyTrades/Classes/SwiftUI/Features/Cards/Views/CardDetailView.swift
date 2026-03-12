@@ -14,7 +14,6 @@ struct CardDetailView: View {
     @State private var showingFullScreenImage = false
     @State private var showingShareSheet = false
     @State private var shareImage: UIImage?
-    @State private var showToast = false
 
     let cards: [CardDTO]
     let selectedCard: CardDTO
@@ -85,12 +84,12 @@ struct CardDetailView: View {
             }
 
             VStack {
-                if showToast {
+                if viewModel.showToast {
                     ToastView(
                         title: viewModel.toastTitle,
                         message: viewModel.toastMessage,
                         type: viewModel.toastType,
-                        isPresented: $showToast,
+                        isPresented: $viewModel.showToast,
                         duration: 2.5
                     )
                     .padding(.top, 8)
@@ -98,10 +97,6 @@ struct CardDetailView: View {
                 }
                 Spacer()
             }
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
         }
     }
 }

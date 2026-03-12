@@ -13,8 +13,6 @@ struct SetsListView: View {
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
     @Environment(\.dependencyContainer) private var container
 
-    @State private var showToast = false
-
     init(viewModel: SetsListViewModel? = nil) {
         if let viewModel {
             _viewModel = State(wrappedValue: viewModel)
@@ -50,21 +48,17 @@ struct SetsListView: View {
             await refreshSets()
         }
         .overlay(alignment: .top) {
-            if showToast {
+            if viewModel.showToast {
                 ToastView(
                     title: viewModel.toastTitle,
                     message: viewModel.toastMessage,
                     type: viewModel.toastType,
-                    isPresented: $showToast,
+                    isPresented: $viewModel.showToast,
                     duration: 2.5
                 )
                 .padding(.top, 8)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
         }
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.performFiltering(searchText: newValue)

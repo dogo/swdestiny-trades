@@ -12,7 +12,6 @@ struct LoanDetailView: View {
 
     @State private var viewModel: LoanDetailViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @State private var showToast = false
 
     init(personId: String) {
         _viewModel = State(wrappedValue: LoanDetailViewModel(personId: personId))
@@ -112,21 +111,17 @@ struct LoanDetailView: View {
             }
         }
         .overlay(alignment: .top) {
-            if showToast {
+            if viewModel.showToast {
                 ToastView(
                     title: viewModel.toastTitle,
                     message: viewModel.toastMessage,
                     type: viewModel.toastType,
-                    isPresented: $showToast,
+                    isPresented: $viewModel.showToast,
                     duration: 2.5
                 )
                 .padding(.top, 8)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: showToast)
-        .onChange(of: viewModel.showToast) { _, newValue in
-            showToast = newValue
         }
         .onAppear {
             viewModel.loadLoanData()
