@@ -22,13 +22,6 @@ final class ViewModelFactory {
     }
 }
 
-struct ViewModelFactoryKey: EnvironmentKey {
-    static let defaultValue = ViewModelFactory()
-}
-
 extension EnvironmentValues {
-    var viewModelFactory: ViewModelFactory {
-        get { self[ViewModelFactoryKey.self] }
-        set { self[ViewModelFactoryKey.self] = newValue }
-    }
+    @Entry var viewModelFactory: ViewModelFactory = .init()
 }
