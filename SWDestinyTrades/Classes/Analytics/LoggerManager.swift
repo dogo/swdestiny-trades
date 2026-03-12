@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 final class LoggerManager: LoggerProtocol {
     static let shared: LoggerManager = {
@@ -19,6 +20,7 @@ final class LoggerManager: LoggerProtocol {
     }()
 
     private var loggers: [LoggerProtocol] = []
+    private let osLogger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.swdestiny.trades", category: "App")
 
     private init() {}
 
@@ -28,5 +30,17 @@ final class LoggerManager: LoggerProtocol {
 
     func log(event: Events, parameters: [String: Any]? = nil) {
         loggers.forEach { $0.log(event: event, parameters: parameters) }
+    }
+
+    func logError(_ message: String) {
+        osLogger.error("\(message)")
+    }
+
+    func logInfo(_ message: String) {
+        osLogger.info("\(message)")
+    }
+
+    func logDebug(_ message: String) {
+        osLogger.debug("\(message)")
     }
 }
