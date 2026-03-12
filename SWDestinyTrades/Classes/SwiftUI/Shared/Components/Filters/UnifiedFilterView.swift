@@ -120,21 +120,3 @@ struct UnifiedFilterView: View {
         }
     }
 }
-
-// MARK: - Filter Button Helper
-
-struct FilterToolbarButton: View {
-    let hasActiveFilters: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(
-            L10n.filterCards,
-            systemImage: hasActiveFilters
-                ? "line.3.horizontal.decrease.circle.fill"
-                : "line.3.horizontal.decrease.circle",
-            action: action
-        )
-        .foregroundStyle(hasActiveFilters ? .blue : .primary)
-    }
-}

@@ -32,62 +32,6 @@ struct ContentView: View {
     }
 }
 
-struct SharedLoadingView: View {
-    var body: some View {
-        VStack {
-            ProgressView()
-                .scaleEffect(1.5)
-            Text(L10n.loading)
-                .padding(.top)
-        }
-    }
-}
-
-struct ErrorView: View {
-    let message: String
-    let retry: () -> Void
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "exclamationmark.triangle")
-                .font(.largeTitle)
-                .foregroundStyle(.orange)
-
-            Text(L10n.error)
-                .font(.title)
-                .fontWeight(.bold)
-
-            Text(message)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-
-            Button(L10n.retry) {
-                retry()
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .padding()
-    }
-}
-
-struct PlaceholderMainView: View {
-    var body: some View {
-        VStack {
-            Text(L10n.swdestinyTrades)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-
-            Text(L10n.swiftuiMigrationInProgress)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.appInitializedSuccessfully)
-                .padding(.top)
-                .foregroundStyle(.green)
-        }
-    }
-}
-
 #Preview {
     ContentView()
         .environment(AppState())

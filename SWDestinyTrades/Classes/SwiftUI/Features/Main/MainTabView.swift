@@ -112,38 +112,6 @@ struct MainTabView: View {
     }
 }
 
-// MARK: - Root Views for Each Tab
-
-struct SetsRootView: View {
-    @State private var viewModel = SetsListViewModel()
-
-    var body: some View {
-        SetsListView(viewModel: viewModel)
-    }
-}
-
-struct DecksRootView: View {
-    var body: some View {
-        DeckListView()
-    }
-}
-
-struct LoansRootView: View {
-    @State private var viewModel = PeopleListViewModel()
-
-    var body: some View {
-        PeopleListView(viewModel: viewModel)
-    }
-}
-
-struct CollectionRootView: View {
-    @State private var viewModel = UserCollectionViewModel()
-
-    var body: some View {
-        UserCollectionView(viewModel: viewModel)
-    }
-}
-
 #Preview {
     MainTabView()
         .environment(AppState())
