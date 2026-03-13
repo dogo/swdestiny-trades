@@ -66,10 +66,6 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
         return filteredPeople
     }
 
-    func createNewPerson() {}
-
-    func viewPersonDetails(_ person: PersonDTO) {}
-
     func deletePerson(_ person: PersonDTO) async {
         do {
             let personId = person.id
@@ -98,8 +94,8 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
     func getLoanSummary(for person: PersonDTO) -> LoanSummary {
         return LoanSummary(
-            borrowedCount: person.borrowedCount,
-            lentCount: person.lentCount,
+            borrowedCount: person.borrowed.reduce(0) { $0 + $1.quantity },
+            lentCount: person.lentMe.reduce(0) { $0 + $1.quantity },
             totalValue: 0.0
         )
     }

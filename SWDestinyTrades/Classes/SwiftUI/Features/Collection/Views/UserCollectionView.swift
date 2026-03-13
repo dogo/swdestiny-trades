@@ -125,9 +125,10 @@ struct UserCollectionView: View {
     @ViewBuilder private var filterSheet: some View {
         UnifiedFilterView(
             filter: $viewModel.filter,
-            availableSets: viewModel.availableSets,
-            onApply: { viewModel.applyFilters() }
-        )
+            availableSets: viewModel.availableSets
+        ) {
+            viewModel.applyFilters()
+        }
     }
 
     // MARK: - Toolbar Items

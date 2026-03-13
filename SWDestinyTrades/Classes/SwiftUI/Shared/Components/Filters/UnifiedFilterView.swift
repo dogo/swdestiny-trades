@@ -103,10 +103,15 @@ struct UnifiedFilterView: View {
 
     private func setBinding(for value: String, in keyPath: WritableKeyPath<UnifiedCardFilter, Set<String>>) -> Binding<Bool> {
         Binding(
-            get: { tempFilter[keyPath: keyPath].contains(value) },
+            get: {
+                tempFilter[keyPath: keyPath].contains(value)
+            },
             set: { isSelected in
-                if isSelected { tempFilter[keyPath: keyPath].insert(value) }
-                else { tempFilter[keyPath: keyPath].remove(value) }
+                if isSelected {
+                    tempFilter[keyPath: keyPath].insert(value)
+                } else {
+                    tempFilter[keyPath: keyPath].remove(value)
+                }
             }
         )
     }

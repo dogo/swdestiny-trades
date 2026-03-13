@@ -39,9 +39,10 @@ struct CardDetailView: View {
                         currentPage: $viewModel.currentIndex,
                         currentImage: $shareImage,
                         placeholder: Asset.icCardback.image,
-                        showsPageIndicator: false,
-                        onItemTapped: { _ in showingFullScreenImage = true }
-                    )
+                        showsPageIndicator: false
+                    ) { _ in
+                        showingFullScreenImage = true
+                    }
                     .frame(height: 400)
 
                     CardInfoSection(card: viewModel.currentCard)

@@ -91,13 +91,12 @@ final class CarouselViewModel {
             do {
                 let image = try await imageLoader.loadImage(
                     from: source,
-                    placeholder: placeholder,
-                    onProgress: { [weak self] progress in
-                        Task { @MainActor [weak self] in
-                            self?.imageStates[source] = .loading(progress: progress)
-                        }
+                    placeholder: placeholder
+                ) { [weak self] progress in
+                    Task { @MainActor [weak self] in
+                        self?.imageStates[source] = .loading(progress: progress)
                     }
-                )
+                }
                 imageStates[source] = .loaded(image)
             } catch {
                 imageStates[source] = .failed(error)
