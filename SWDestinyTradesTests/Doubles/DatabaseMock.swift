@@ -104,10 +104,6 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
         notifyObservers(for: key)
     }
 
-    func update(_ block: @escaping () throws -> Void) async throws {
-        try block()
-    }
-
     func delete(object: Storable) async throws {
         lock.lock()
         defer { lock.unlock() }

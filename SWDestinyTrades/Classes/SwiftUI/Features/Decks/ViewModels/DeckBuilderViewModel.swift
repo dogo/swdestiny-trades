@@ -60,7 +60,7 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 
     private func organizeDeckIntoSections() {
-        let cardList = Array(deck.list)
+        let cardList = deck.list
 
         if cardList.isEmpty {
             deckSections = []
@@ -85,7 +85,7 @@ final class DeckBuilderViewModel: BaseViewModel {
                 try await database.save(object: deck, update: .modified)
                 isNewDeck = false
             } else {
-                try await database.update {}
+                try await database.save(object: deck, update: .modified)
             }
         } catch is CancellationError {
             // Silently cancel
@@ -99,10 +99,8 @@ final class DeckBuilderViewModel: BaseViewModel {
             do {
                 try Task.checkCancellation()
 
-                try await database.update {
-                    card.quantity = quantity
-                }
-
+                card.quantity = quantity
+                try await database.save(object: card, update: .modified)
                 self.organizeDeckIntoSections()
             } catch is CancellationError {
                 return
@@ -117,10 +115,8 @@ final class DeckBuilderViewModel: BaseViewModel {
             do {
                 try Task.checkCancellation()
 
-                try await database.update {
-                    card.isElite = isElite
-                }
-
+                card.isElite = isElite
+                try await database.save(object: card, update: .modified)
                 self.organizeDeckIntoSections()
             } catch is CancellationError {
                 return
@@ -135,13 +131,9 @@ final class DeckBuilderViewModel: BaseViewModel {
             do {
                 try Task.checkCancellation()
 
-                if let index = self.deck.list.index(of: card) {
-                    try await database.update {
-                        self.deck.list.remove(at: index)
-                    }
-
-                    self.organizeDeckIntoSections()
-                }
+                self.deck.list.removeAll { $0.id == card.id }
+                try await database.save(object: self.deck, update: .modified)
+                self.organizeDeckIntoSections()
             } catch is CancellationError {
                 return
             } catch {
@@ -177,7 +169,7 @@ final class DeckBuilderViewModel: BaseViewModel {
     }
 
     var totalCardCount: Int {
-        return deck.list.sum(ofProperty: "quantity") as Int
+        return deck.list.reduce(0) { $0 + $1.quantity }
     }
 
     var uniqueCardCount: Int {

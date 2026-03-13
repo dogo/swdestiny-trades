@@ -7,9 +7,22 @@
 //
 
 import Foundation
-import RealmSwift
 
-final class UserCollectionDTO: Object, Storable, Identifiable {
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
-    @Persisted var myCollection = List<CardDTO>()
+final class UserCollectionDTO: Storable, Identifiable {
+    var id: String = UUID().uuidString
+    var myCollection: [CardDTO] = []
+
+    init() {}
+}
+
+extension UserCollectionDTO: Equatable {
+    static func == (lhs: UserCollectionDTO, rhs: UserCollectionDTO) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension UserCollectionDTO: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

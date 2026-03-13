@@ -7,12 +7,13 @@
 //
 
 import Foundation
-import RealmSwift
 
-class SetDTO: Object, Codable, Storable, Identifiable {
-    @Persisted var id: String = UUID().uuidString
-    @Persisted var name: String = ""
-    @Persisted(primaryKey: true) var code: String = ""
+class SetDTO: Codable, Storable, Identifiable {
+    var id: String = UUID().uuidString
+    var name: String = ""
+    var code: String = ""
+
+    init() {}
 
     // MARK: - Codable
 
@@ -20,8 +21,7 @@ class SetDTO: Object, Codable, Storable, Identifiable {
         case name, code
     }
 
-    required convenience init(from decoder: Decoder) throws {
-        self.init()
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         code = try container.decode(String.self, forKey: .code)
@@ -31,5 +31,17 @@ class SetDTO: Object, Codable, Storable, Identifiable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(code, forKey: .code)
+    }
+}
+
+extension SetDTO: Equatable {
+    static func == (lhs: SetDTO, rhs: SetDTO) -> Bool {
+        lhs.code == rhs.code
+    }
+}
+
+extension SetDTO: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(code)
     }
 }

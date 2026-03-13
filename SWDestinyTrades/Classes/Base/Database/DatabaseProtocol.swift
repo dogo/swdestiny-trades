@@ -60,11 +60,6 @@ protocol DatabaseProtocol: AnyObject {
     /// - Throws: Database errors if save fails
     func save(object: Storable, update: UpdatePolicy) async throws
 
-    /// Update objects within a transaction (async)
-    /// - Parameter block: The block containing update operations
-    /// - Throws: Database errors if update fails
-    func update(_ block: @escaping () throws -> Void) async throws
-
     /// Delete an object (async)
     /// - Parameter object: The object to delete
     /// - Throws: Database errors if deletion fails

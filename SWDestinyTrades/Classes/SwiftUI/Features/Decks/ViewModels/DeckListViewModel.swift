@@ -49,7 +49,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
 
         var counts: [String: Int] = [:]
         for deck in fetchedDecks {
-            counts[deck.id] = deck.list.sum(ofProperty: "quantity") as Int
+            counts[deck.id] = deck.list.reduce(0) { $0 + $1.quantity }
         }
         cardCounts = counts
 
@@ -110,10 +110,8 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         guard !trimmedName.isEmpty else { return }
 
         do {
-            try await database.update {
-                deck.name = trimmedName
-            }
-
+            deck.name = trimmedName
+            try await database.save(object: deck, update: .modified)
             await loadDecksFromDatabase()
         } catch {
             handleError(error)

@@ -14,7 +14,7 @@ extension UserCollectionDTO {
 
     static func stub(collection: [CardDTO] = []) -> UserCollectionDTO {
         let userCollection = UserCollectionDTO()
-        userCollection.myCollection.append(objectsIn: collection)
+        userCollection.myCollection = collection
         return userCollection
     }
 }

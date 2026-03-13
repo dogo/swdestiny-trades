@@ -17,8 +17,8 @@ extension PersonDTO {
         let person = PersonDTO()
         person.name = name
         person.lastName = lastName
-        person.lentMe.append(objectsIn: lentMe)
-        person.borrowed.append(objectsIn: borrowed)
+        person.lentMe = lentMe
+        person.borrowed = borrowed
         return person
     }
 }

@@ -31,9 +31,7 @@ public extension Project {
                     .external(name: "DGCharts"),
                     .external(name: "FirebaseAnalytics"),
                     .external(name: "FirebaseCrashlytics"),
-                    .external(name: "Kingfisher"),
-                    .external(name: "Realm"),
-                    .external(name: "RealmSwift")
+                    .external(name: "Kingfisher")
                 ]
             ),
             .target(

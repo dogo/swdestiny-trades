@@ -55,8 +55,14 @@ final class LoanDetailViewModel: BaseViewModel {
     }
 
     func loadLoanData() {
-        lentCards = Array(person.lentMe)
-        borrowedCards = Array(person.borrowed)
+        Task { @MainActor in
+            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+            if let freshPerson = people.first(where: { $0.id == person.id }) {
+                self.person = freshPerson
+            }
+            self.lentCards = self.person.lentMe
+            self.borrowedCards = self.person.borrowed
+        }
     }
 
     func updateCardQuantity(_ card: CardDTO, newQuantity: Int) {
@@ -64,9 +70,8 @@ final class LoanDetailViewModel: BaseViewModel {
             do {
                 try Task.checkCancellation()
 
-                try await database.update {
-                    card.quantity = newQuantity
-                }
+                card.quantity = newQuantity
+                try await database.save(object: card, update: .modified)
                 self.loadLoanData()
             } catch is CancellationError {
                 // Silently cancel
@@ -88,21 +93,16 @@ final class LoanDetailViewModel: BaseViewModel {
 
         Task { @MainActor in
             do {
-                try await database.update { [weak self] in
-                    switch cardToDelete.type {
-                    case .lent:
-                        if let index = self?.person.lentMe.firstIndex(of: cardToDelete.card) {
-                            self?.person.lentMe.remove(at: index)
-                        }
-                    case .borrow:
-                        if let index = self?.person.borrowed.firstIndex(of: cardToDelete.card) {
-                            self?.person.borrowed.remove(at: index)
-                        }
-                    default:
-                        break
-                    }
+                switch cardToDelete.type {
+                case .lent:
+                    self.person.lentMe.removeAll { $0.id == cardToDelete.card.id }
+                case .borrow:
+                    self.person.borrowed.removeAll { $0.id == cardToDelete.card.id }
+                default:
+                    break
                 }
 
+                try await database.save(object: self.person, update: .modified)
                 self.loadLoanData()
                 self.cardToDelete = nil
                 self.showingDeleteConfirmation = false

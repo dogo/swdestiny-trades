@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 @testable import SWDestinyTrades
 
@@ -18,12 +17,10 @@ extension DeckDTO {
         deck.name = "Mock Deck"
 
         if !emptyList, cards.isEmpty {
-            let list: List<CardDTO> = JSONHelper.loadJSON(withFile: "card-list")!
-            deck.list.append(objectsIn: list)
+            let list: [CardDTO] = JSONHelper.loadJSON(withFile: "card-list") ?? []
+            deck.list = list
         } else if !cards.isEmpty {
-            deck.list.append(objectsIn: cards)
-        } else {
-            deck.list.append(objectsIn: [])
+            deck.list = cards
         }
         return deck
     }

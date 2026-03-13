@@ -38,7 +38,7 @@ final class AppState {
     private func initializeDatabase() {
         Task { @MainActor in
             do {
-                let database = try await RealmManager.create(configuration: .basic(url: nil))
+                let database = try await CoreDataManager.create()
                 self.database = database
                 isInitialized = true
                 errorMessage = nil

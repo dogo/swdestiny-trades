@@ -1,5 +1,5 @@
 //
-//  RealmDTOExtensions.swift
+//  DTOExtensions.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 11/01/26.
@@ -10,7 +10,6 @@ import Foundation
 
 // MARK: - PersonDTO Extensions
 
-@MainActor
 extension PersonDTO {
     var borrowedCount: Int {
         borrowed.reduce(0) { $0 + $1.quantity }
@@ -31,7 +30,6 @@ extension PersonDTO {
 
 // MARK: - DeckDTO Extensions
 
-@MainActor
 extension DeckDTO {
     var cardCount: Int {
         list.reduce(0) { $0 + $1.quantity }
@@ -40,7 +38,6 @@ extension DeckDTO {
 
 // MARK: - UserCollectionDTO Extensions
 
-@MainActor
 extension UserCollectionDTO {
     var cardCount: Int {
         myCollection.count

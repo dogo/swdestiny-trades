@@ -7,42 +7,77 @@
 //
 
 import Foundation
-import RealmSwift
 
-class CardDTO: Object, Decodable, Storable, Identifiable {
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
-    @Persisted var dieFaces = List<String>()
-    @Persisted var setCode: String = ""
-    @Persisted var setName: String = ""
-    @Persisted var typeCode: String = ""
-    @Persisted var typeName: String = ""
-    @Persisted var factionCode: String = ""
-    @Persisted var factionName: String = ""
-    @Persisted var affiliationCode: String = ""
-    @Persisted var affiliationName: String = ""
-    @Persisted var rarityCode: String = ""
-    @Persisted var rarityName: String = ""
-    @Persisted var position: Int = 0
-    @Persisted var code: String = ""
-    @Persisted var ttscardid: String = ""
-    @Persisted var name: String = ""
-    @Persisted var subtitle: String = ""
-    @Persisted var cost: Int = 0
-    @Persisted var health: Int = 0
-    @Persisted var points: String = ""
-    @Persisted var text: String = ""
-    @Persisted var deckLimit: Int = 0
-    @Persisted var flavor: String = ""
-    @Persisted var illustrator: String = ""
-    @Persisted var isUnique: Bool = false
-    @Persisted var hasDie: Bool = false
-    @Persisted var externalUrl: String = ""
-    @Persisted var imageUrl: String = ""
-    @Persisted var label: String = ""
-    @Persisted var cp: Int = 0
+class CardDTO: Decodable, Storable, Identifiable {
+    var id: String = UUID().uuidString
+    var dieFaces: [String] = []
+    var setCode: String = ""
+    var setName: String = ""
+    var typeCode: String = ""
+    var typeName: String = ""
+    var factionCode: String = ""
+    var factionName: String = ""
+    var affiliationCode: String = ""
+    var affiliationName: String = ""
+    var rarityCode: String = ""
+    var rarityName: String = ""
+    var position: Int = 0
+    var code: String = ""
+    var ttscardid: String = ""
+    var name: String = ""
+    var subtitle: String = ""
+    var cost: Int = 0
+    var health: Int = 0
+    var points: String = ""
+    var text: String = ""
+    var deckLimit: Int = 0
+    var flavor: String = ""
+    var illustrator: String = ""
+    var isUnique: Bool = false
+    var hasDie: Bool = false
+    var externalUrl: String = ""
+    var imageUrl: String = ""
+    var label: String = ""
+    var cp: Int = 0
     // Non API properties
-    @Persisted var quantity: Int = 1
-    @Persisted var isElite: Bool = false
+    var quantity: Int = 1
+    var isElite: Bool = false
+
+    init() {}
+
+    init(copying other: CardDTO) {
+        dieFaces = other.dieFaces
+        setCode = other.setCode
+        setName = other.setName
+        typeCode = other.typeCode
+        typeName = other.typeName
+        factionCode = other.factionCode
+        factionName = other.factionName
+        affiliationCode = other.affiliationCode
+        affiliationName = other.affiliationName
+        rarityCode = other.rarityCode
+        rarityName = other.rarityName
+        position = other.position
+        code = other.code
+        ttscardid = other.ttscardid
+        name = other.name
+        subtitle = other.subtitle
+        cost = other.cost
+        health = other.health
+        points = other.points
+        text = other.text
+        deckLimit = other.deckLimit
+        flavor = other.flavor
+        illustrator = other.illustrator
+        isUnique = other.isUnique
+        hasDie = other.hasDie
+        externalUrl = other.externalUrl
+        imageUrl = other.imageUrl
+        label = other.label
+        cp = other.cp
+        quantity = other.quantity
+        isElite = other.isElite
+    }
 
     enum CodingKeys: String, CodingKey {
         case dieFaces = "sides"
@@ -76,8 +111,7 @@ class CardDTO: Object, Decodable, Storable, Identifiable {
         case cp
     }
 
-    required convenience init(from decoder: Decoder) throws {
-        self.init()
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         setCode = try container.decode(String.self, forKey: .setCode)
         setName = try container.decode(String.self, forKey: .setName)
@@ -107,8 +141,18 @@ class CardDTO: Object, Decodable, Storable, Identifiable {
         imageUrl = try container.decodeSafely(key: .imageUrl, defaultValue: "")
         label = try container.decode(String.self, forKey: .label)
         cp = try container.decode(Int.self, forKey: .cp)
+        dieFaces = try container.decodeSafely(key: .dieFaces, defaultValue: [])
+    }
+}
 
-        let faces: [String] = try container.decodeSafely(key: .dieFaces, defaultValue: [])
-        dieFaces.append(objectsIn: faces)
+extension CardDTO: Equatable {
+    static func == (lhs: CardDTO, rhs: CardDTO) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension CardDTO: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

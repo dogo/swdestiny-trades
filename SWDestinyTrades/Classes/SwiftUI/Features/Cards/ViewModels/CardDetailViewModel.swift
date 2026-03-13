@@ -93,24 +93,21 @@ final class CardDetailViewModel: BaseViewModel {
             } else {
                 try await database.create(
                     UserCollectionDTO.self,
-                    value: [:],
+                    value: UserCollectionDTO(),
                     update: .error
                 )
             }
 
             try Task.checkCancellation()
 
-            try await database.update {
-                let predicate = NSPredicate(format: "code == %@", card.code)
-                if let index = userCollection.myCollection.index(matching: predicate) {
-                    let existingCard = userCollection.myCollection[index]
-                    existingCard.quantity += 1
-                } else {
-                    let cardCopy = CardDTO(value: card)
-                    cardCopy.id = NSUUID().uuidString
-                    userCollection.myCollection.append(cardCopy)
-                }
+            if let existingCard = userCollection.myCollection.first(where: { $0.code == card.code }) {
+                existingCard.quantity += 1
+            } else {
+                let cardCopy = CardDTO(copying: card)
+                cardCopy.id = UUID().uuidString
+                userCollection.myCollection.append(cardCopy)
             }
+            try await database.save(object: userCollection, update: .modified)
 
             toastTitle = L10n.added
             toastMessage = card.name

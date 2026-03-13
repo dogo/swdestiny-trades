@@ -1,5 +1,4 @@
 import Foundation
-import RealmSwift
 
 enum SampleData {
     static let sets: [SetDTO] = {
@@ -29,15 +28,15 @@ enum SampleData {
     static let decks: [DeckDTO] = {
         let heroicDeck = DeckDTO()
         heroicDeck.name = "Heroic Rebels"
-        heroicDeck.list.append(objectsIn: [cards[0], cards[2], cards[3]])
+        heroicDeck.list = [cards[0], cards[2], cards[3]]
 
         let villainDeck = DeckDTO()
         villainDeck.name = "Dark Side Power"
-        villainDeck.list.append(objectsIn: [cards[1], cards[2]])
+        villainDeck.list = [cards[1], cards[2]]
 
         let reyDeck = DeckDTO()
         reyDeck.name = "Rey's Journey"
-        reyDeck.list.append(objectsIn: [cards[4], cards[2], cards[3]])
+        reyDeck.list = [cards[4], cards[2], cards[3]]
 
         return [heroicDeck, villainDeck, reyDeck]
     }()
@@ -46,18 +45,18 @@ enum SampleData {
         let john = PersonDTO()
         john.name = "John"
         john.lastName = "Smith"
-        john.lentMe.append(objectsIn: [cards[0], cards[2]])
+        john.lentMe = [cards[0], cards[2]]
 
         let sarah = PersonDTO()
         sarah.name = "Sarah"
         sarah.lastName = "Connor"
-        sarah.borrowed.append(objectsIn: [cards[1]])
+        sarah.borrowed = [cards[1]]
 
         let mike = PersonDTO()
         mike.name = "Mike"
         mike.lastName = "Johnson"
-        mike.lentMe.append(objectsIn: [cards[3]])
-        mike.borrowed.append(objectsIn: [cards[4]])
+        mike.lentMe = [cards[3]]
+        mike.borrowed = [cards[4]]
 
         return [john, sarah, mike]
     }()

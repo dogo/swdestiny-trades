@@ -25,10 +25,8 @@ enum PreviewHelper {
         return container
     }
 
-    static func createMockDatabase() async throws -> RealmManager {
-        let database = try await RealmManager.create(
-            configuration: .inMemory(identifier: "preview-\(UUID().uuidString)")
-        )
+    static func createMockDatabase() async throws -> CoreDataManager {
+        let database = try await CoreDataManager.create(inMemory: true)
 
         for card in SampleData.cards {
             try await database.save(object: card, update: .all)

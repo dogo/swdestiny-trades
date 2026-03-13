@@ -7,12 +7,25 @@
 //
 
 import Foundation
-import RealmSwift
 
-class PersonDTO: Object, Storable, Identifiable {
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
-    @Persisted var name: String = ""
-    @Persisted var lastName: String = ""
-    @Persisted var lentMe = List<CardDTO>()
-    @Persisted var borrowed = List<CardDTO>()
+class PersonDTO: Storable, Identifiable {
+    var id: String = UUID().uuidString
+    var name: String = ""
+    var lastName: String = ""
+    var lentMe: [CardDTO] = []
+    var borrowed: [CardDTO] = []
+
+    init() {}
+}
+
+extension PersonDTO: Equatable {
+    static func == (lhs: PersonDTO, rhs: PersonDTO) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension PersonDTO: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

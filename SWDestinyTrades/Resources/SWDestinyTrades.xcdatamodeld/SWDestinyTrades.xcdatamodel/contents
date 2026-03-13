@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CardMO" representedClassName="CardMO" syncable="YES">
+        <attribute name="affiliationCode" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="affiliationName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="code" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="cost" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="cp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="deckLimit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dieFaces" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="NSArray"/>
+        <attribute name="externalUrl" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="factionCode" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="factionName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="flavor" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="hasDie" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="health" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="illustrator" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="isElite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isUnique" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="points" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="rarityCode" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="rarityName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="setCode" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="setName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="subtitle" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="text" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="ttscardid" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="typeCode" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="typeName" optional="YES" attributeType="String" defaultValueString=""/>
+        <relationship name="borrowedByPerson" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonMO" inverseName="borrowed" inverseEntity="PersonMO"/>
+        <relationship name="inDeck" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DeckMO" inverseName="list" inverseEntity="DeckMO"/>
+        <relationship name="inUserCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCollectionMO" inverseName="myCollection" inverseEntity="UserCollectionMO"/>
+        <relationship name="lentToMe" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PersonMO" inverseName="lentMe" inverseEntity="PersonMO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DeckMO" representedClassName="DeckMO" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
+        <relationship name="list" optional="YES" toMany="YES" ordered="YES" deletionRule="Nullify" destinationEntity="CardMO" inverseName="inDeck" inverseEntity="CardMO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PersonMO" representedClassName="PersonMO" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <attribute name="lastName" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
+        <relationship name="borrowed" optional="YES" toMany="YES" ordered="YES" deletionRule="Nullify" destinationEntity="CardMO" inverseName="borrowedByPerson" inverseEntity="CardMO"/>
+        <relationship name="lentMe" optional="YES" toMany="YES" ordered="YES" deletionRule="Nullify" destinationEntity="CardMO" inverseName="lentToMe" inverseEntity="CardMO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="SetMO" representedClassName="SetMO" syncable="YES">
+        <attribute name="code" attributeType="String" defaultValueString=""/>
+        <attribute name="id" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="code"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="UserCollectionMO" representedClassName="UserCollectionMO" syncable="YES">
+        <attribute name="id" attributeType="String" defaultValueString=""/>
+        <relationship name="myCollection" optional="YES" toMany="YES" ordered="YES" deletionRule="Nullify" destinationEntity="CardMO" inverseName="inUserCollection" inverseEntity="CardMO"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>

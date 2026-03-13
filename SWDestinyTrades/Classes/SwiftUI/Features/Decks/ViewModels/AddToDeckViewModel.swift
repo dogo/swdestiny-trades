@@ -96,7 +96,7 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
                     return
                 }
 
-                let cards = Array(collection.myCollection)
+                let cards = collection.myCollection
                 self.updateItems(cards)
                 self.setLoaded()
             } catch is CancellationError {
@@ -116,15 +116,14 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
             return
         }
 
-        let cardCopy = CardDTO(value: card)
-        cardCopy.id = NSUUID().uuidString
+        let cardCopy = CardDTO(copying: card)
+        cardCopy.id = UUID().uuidString
         cardCopy.quantity = 1
 
         Task { @MainActor in
             do {
-                try await database.update { [weak self] in
-                    self?.deck.list.append(cardCopy)
-                }
+                self.deck.list.append(cardCopy)
+                try await database.save(object: self.deck, update: .modified)
 
                 self.toastTitle = L10n.added
                 self.toastMessage = card.name

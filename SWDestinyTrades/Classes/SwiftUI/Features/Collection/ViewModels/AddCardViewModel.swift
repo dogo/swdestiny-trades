@@ -135,7 +135,7 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
     private func loadAvailableSets() async {
         let sets = await database.fetch(SetDTO.self, predicate: nil, sorted: nil)
-        availableSets = Array(sets).sorted { $0.name < $1.name }
+        availableSets = sets.sorted { $0.name < $1.name }
     }
 
     override func filterItems(searchText: String) -> [CardDTO] {
@@ -222,12 +222,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             throw AddCardError.alreadyAdded
         }
 
-        let cardCopy = CardDTO(value: card)
-        cardCopy.id = NSUUID().uuidString
+        let cardCopy = CardDTO(copying: card)
+        cardCopy.id = UUID().uuidString
 
-        try await database.update {
-            userCollection.myCollection.append(cardCopy)
-        }
+        userCollection.myCollection.append(cardCopy)
+        try await database.save(object: userCollection, update: .modified)
     }
 
     private func addCardToLentMe(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) async throws {
@@ -235,12 +234,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             throw AddCardError.alreadyAdded
         }
 
-        let cardCopy = CardDTO(value: card)
-        cardCopy.id = NSUUID().uuidString
+        let cardCopy = CardDTO(copying: card)
+        cardCopy.id = UUID().uuidString
 
-        try await database.update {
-            person.lentMe.append(cardCopy)
-        }
+        person.lentMe.append(cardCopy)
+        try await database.save(object: person, update: .modified)
     }
 
     private func addCardToBorrowed(_ card: CardDTO, person: PersonDTO, database: DatabaseProtocol) async throws {
@@ -248,12 +246,11 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             throw AddCardError.alreadyAdded
         }
 
-        let cardCopy = CardDTO(value: card)
-        cardCopy.id = NSUUID().uuidString
+        let cardCopy = CardDTO(copying: card)
+        cardCopy.id = UUID().uuidString
 
-        try await database.update {
-            person.borrowed.append(cardCopy)
-        }
+        person.borrowed.append(cardCopy)
+        try await database.save(object: person, update: .modified)
     }
 
     override func handleError(_ error: Error) {

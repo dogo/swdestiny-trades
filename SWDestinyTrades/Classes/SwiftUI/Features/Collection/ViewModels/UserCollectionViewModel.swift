@@ -69,7 +69,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
                 guard !Task.isCancelled else { break }
 
                 if let userCollection = userCollections.first {
-                    let allCards = Array(userCollection.myCollection)
+                    let allCards = userCollection.myCollection
                     updateItems(allCards)
                 } else {
                     updateItems([])
@@ -139,11 +139,8 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
                 return
             }
 
-            let newQuantity = max(0, quantity)
-
-            try await database.update {
-                managedCard.quantity = newQuantity
-            }
+            managedCard.quantity = max(0, quantity)
+            try await database.save(object: managedCard, update: .modified)
         } catch {
             handleError(error)
         }
@@ -165,14 +162,8 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
                     return
                 }
 
-                guard let cardIndex = userCollection.myCollection.firstIndex(where: { $0.id == card.id }) else {
-                    handleError(ViewModelError.objectNotFound)
-                    return
-                }
-
-                try await database.update {
-                    userCollection.myCollection.remove(at: cardIndex)
-                }
+                userCollection.myCollection.removeAll { $0.id == card.id }
+                try await database.save(object: userCollection, update: .modified)
             } catch is CancellationError {
                 return
             } catch {
