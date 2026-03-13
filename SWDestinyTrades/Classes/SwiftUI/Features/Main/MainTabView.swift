@@ -11,7 +11,6 @@ import SwiftUI
 struct MainTabView: View {
     @State private var navigationCoordinator = NavigationCoordinator()
     @Environment(AppState.self) var appState
-    @Environment(\.dependencyContainer) var dependencyContainer
     @Environment(\.viewModelFactory) var viewModelFactory
 
     var body: some View {

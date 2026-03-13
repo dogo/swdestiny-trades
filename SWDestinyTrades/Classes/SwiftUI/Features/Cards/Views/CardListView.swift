@@ -11,7 +11,6 @@ import SwiftUI
 struct CardListView: View {
     @State private var viewModel: CardListViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dependencyContainer) private var container
     @State private var showingFilterOptions = false
 
     let set: SetDTO

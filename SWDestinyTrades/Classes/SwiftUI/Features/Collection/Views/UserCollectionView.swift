@@ -11,7 +11,6 @@ import SwiftUI
 struct UserCollectionView: View {
     @State private var viewModel: UserCollectionViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dependencyContainer) private var container
 
     @State private var showingFilterSheet = false
     @State private var showingShareSheet = false

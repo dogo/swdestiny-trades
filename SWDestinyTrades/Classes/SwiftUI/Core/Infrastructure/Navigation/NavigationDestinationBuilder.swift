@@ -138,7 +138,6 @@ struct DeckGraphViewWrapper: View {
 
 struct AddToDeckViewWrapper: View {
     let deckDTO: DeckDTO
-    @Environment(\.dependencyContainer) private var container
 
     var body: some View {
         AddToDeckView(deck: deckDTO)

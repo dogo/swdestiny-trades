@@ -26,6 +26,10 @@ final class CardDetailViewModel: BaseViewModel {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
+    var imageLoader: ImageLoadingService {
+        dependencyContainer.resolve(type: ImageLoadingService.self)
+    }
+
     var imageSources: [ImageSource] {
         return cards.map { card in
             if let url = URL(string: card.imageUrl),

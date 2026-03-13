@@ -11,7 +11,6 @@ import SwiftUI
 struct SearchView: View {
     @State private var viewModel: SearchViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dependencyContainer) private var container
 
     @FocusState private var isSearchFocused: Bool
 

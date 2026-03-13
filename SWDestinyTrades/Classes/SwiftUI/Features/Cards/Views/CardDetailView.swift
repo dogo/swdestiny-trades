@@ -10,7 +10,6 @@ import SwiftUI
 
 struct CardDetailView: View {
     @State private var viewModel: CardDetailViewModel
-    @Environment(\.dependencyContainer) private var container
     @State private var showingFullScreenImage = false
     @State private var showingShareSheet = false
     @State private var shareImage: UIImage?
@@ -36,7 +35,7 @@ struct CardDetailView: View {
                 VStack(spacing: 0) {
                     CarouselView(
                         items: viewModel.imageSources,
-                        imageLoader: container.resolve(type: ImageLoadingService.self),
+                        imageLoader: viewModel.imageLoader,
                         currentPage: $viewModel.currentIndex,
                         currentImage: $shareImage,
                         placeholder: Asset.icCardback.image,
@@ -72,7 +71,7 @@ struct CardDetailView: View {
                 if viewModel.currentIndex < viewModel.imageSources.count {
                     FullScreenCarouselViewer(
                         source: viewModel.imageSources[viewModel.currentIndex],
-                        imageLoader: container.resolve(type: ImageLoadingService.self),
+                        imageLoader: viewModel.imageLoader,
                         isPresented: $showingFullScreenImage
                     )
                 }
@@ -122,5 +121,4 @@ struct CardDetailView: View {
     return NavigationStack {
         CardDetailView(cards: [sampleCard], selectedCard: sampleCard)
     }
-    .environment(\.dependencyContainer, DependencyContainer.shared)
 }

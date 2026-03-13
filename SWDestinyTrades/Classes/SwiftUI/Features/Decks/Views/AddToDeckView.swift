@@ -11,7 +11,6 @@ import SwiftUI
 struct AddToDeckView: View {
     @State private var viewModel: AddToDeckViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dependencyContainer) private var container
 
     init(deck: DeckDTO, viewModel: AddToDeckViewModel? = nil) {
         if let viewModel {

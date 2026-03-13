@@ -11,7 +11,6 @@ import SwiftUI
 struct SetsListView: View {
     @State private var viewModel: SetsListViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dependencyContainer) private var container
 
     init(viewModel: SetsListViewModel? = nil) {
         if let viewModel {

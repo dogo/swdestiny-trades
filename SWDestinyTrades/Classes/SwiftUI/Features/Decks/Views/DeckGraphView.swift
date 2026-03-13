@@ -10,7 +10,6 @@ import SwiftUI
 
 struct DeckGraphView: View {
     @State private var viewModel: DeckGraphViewModel
-    @Environment(\.dependencyContainer) private var dependencyContainer
 
     init(deck: DeckDTO, dependencyContainer: DependencyContainer = .shared) {
         _viewModel = State(wrappedValue: DeckGraphViewModel(deck: deck, dependencyContainer: dependencyContainer))

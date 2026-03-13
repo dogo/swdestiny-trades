@@ -11,7 +11,6 @@ import SwiftUI
 struct DeckBuilderView: View {
     @State private var viewModel: DeckBuilderViewModel
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dependencyContainer) private var dependencyContainer
     @Environment(\.dismiss) private var dismiss
 
     init(deck: DeckDTO?, dependencyContainer: DependencyContainer = .shared) {
