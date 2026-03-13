@@ -53,15 +53,13 @@ class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
     }
 
     func updateItems(_ newItems: [T], append: Bool = false) {
-        let updatedItems = append ? items + newItems : newItems
-
-        guard updatedItems != items else { return }
-
-        items = updatedItems
-        filteredItems = filterItems(searchText: searchText)
         if append {
+            items.append(contentsOf: newItems)
             currentPage += 1
             hasMoreItems = newItems.count >= itemsPerPage
+        } else {
+            items = newItems
         }
+        filteredItems = filterItems(searchText: searchText)
     }
 }
