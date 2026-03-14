@@ -112,15 +112,15 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
     func delete(object: Storable) async throws {
         switch object {
         case let card as CardDTO:
-            if let sd = findCard(id: card.id) { context.delete(sd) }
+            if let stored = findCard(id: card.id) { context.delete(stored) }
         case let set as SetDTO:
-            if let sd = findSet(code: set.code) { context.delete(sd) }
+            if let stored = findSet(code: set.code) { context.delete(stored) }
         case let deck as DeckDTO:
-            if let sd = findDeck(id: deck.id) { context.delete(sd) }
+            if let stored = findDeck(id: deck.id) { context.delete(stored) }
         case let person as PersonDTO:
-            if let sd = findPerson(id: person.id) { context.delete(sd) }
+            if let stored = findPerson(id: person.id) { context.delete(stored) }
         case let collection as UserCollectionDTO:
-            if let sd = findUserCollection(id: collection.id) { context.delete(sd) }
+            if let stored = findUserCollection(id: collection.id) { context.delete(stored) }
         default:
             break
         }
@@ -337,20 +337,20 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
     private func upsert(_ object: Storable) throws {
         switch object {
         case let card as CardDTO:
-            let sd = findOrCreateCard(id: card.id)
-            populate(card: sd, from: card)
+            let stored = findOrCreateCard(id: card.id)
+            populate(card: stored, from: card)
         case let set as SetDTO:
-            let sd = findOrCreateSet(code: set.code)
-            populate(set: sd, from: set)
+            let stored = findOrCreateSet(code: set.code)
+            populate(set: stored, from: set)
         case let deck as DeckDTO:
-            let sd = findOrCreateDeck(id: deck.id)
-            populate(deck: sd, from: deck)
+            let stored = findOrCreateDeck(id: deck.id)
+            populate(deck: stored, from: deck)
         case let person as PersonDTO:
-            let sd = findOrCreatePerson(id: person.id)
-            populate(person: sd, from: person)
+            let stored = findOrCreatePerson(id: person.id)
+            populate(person: stored, from: person)
         case let collection as UserCollectionDTO:
-            let sd = findOrCreateUserCollection(id: collection.id)
-            populate(collection: sd, from: collection)
+            let stored = findOrCreateUserCollection(id: collection.id)
+            populate(collection: stored, from: collection)
         default:
             throw SwiftDataManagerError.unsupportedType(String(describing: type(of: object)))
         }
@@ -400,9 +400,9 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
     private func populate(deck: DeckSD, from dto: DeckDTO) {
         deck.name = dto.name
         deck.list = dto.list.map { cardDTO in
-            let sd = findOrCreateCard(id: cardDTO.id)
-            populate(card: sd, from: cardDTO)
-            return sd
+            let stored = findOrCreateCard(id: cardDTO.id)
+            populate(card: stored, from: cardDTO)
+            return stored
         }
     }
 
@@ -410,94 +410,94 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
         person.name = dto.name
         person.lastName = dto.lastName
         person.lentMe = dto.lentMe.map { cardDTO in
-            let sd = findOrCreateCard(id: cardDTO.id)
-            populate(card: sd, from: cardDTO)
-            return sd
+            let stored = findOrCreateCard(id: cardDTO.id)
+            populate(card: stored, from: cardDTO)
+            return stored
         }
         person.borrowed = dto.borrowed.map { cardDTO in
-            let sd = findOrCreateCard(id: cardDTO.id)
-            populate(card: sd, from: cardDTO)
-            return sd
+            let stored = findOrCreateCard(id: cardDTO.id)
+            populate(card: stored, from: cardDTO)
+            return stored
         }
     }
 
     private func populate(collection: UserCollectionSD, from dto: UserCollectionDTO) {
         collection.myCollection = dto.myCollection.map { cardDTO in
-            let sd = findOrCreateCard(id: cardDTO.id)
-            populate(card: sd, from: cardDTO)
-            return sd
+            let stored = findOrCreateCard(id: cardDTO.id)
+            populate(card: stored, from: cardDTO)
+            return stored
         }
     }
 
     // MARK: - Private: Map SD → DTO
 
-    private func cardDTO(from sd: CardSD) -> CardDTO {
+    private func cardDTO(from stored: CardSD) -> CardDTO {
         let dto = CardDTO()
-        dto.id = sd.id
-        dto.code = sd.code
-        dto.name = sd.name
-        dto.subtitle = sd.subtitle
-        dto.setCode = sd.setCode
-        dto.setName = sd.setName
-        dto.typeCode = sd.typeCode
-        dto.typeName = sd.typeName
-        dto.factionCode = sd.factionCode
-        dto.factionName = sd.factionName
-        dto.affiliationCode = sd.affiliationCode
-        dto.affiliationName = sd.affiliationName
-        dto.rarityCode = sd.rarityCode
-        dto.rarityName = sd.rarityName
-        dto.position = sd.position
-        dto.ttscardid = sd.ttscardid
-        dto.cost = sd.cost
-        dto.health = sd.health
-        dto.points = sd.points
-        dto.text = sd.text
-        dto.deckLimit = sd.deckLimit
-        dto.flavor = sd.flavor
-        dto.illustrator = sd.illustrator
-        dto.isUnique = sd.isUnique
-        dto.hasDie = sd.hasDie
-        dto.externalUrl = sd.externalUrl
-        dto.imageUrl = sd.imageUrl
-        dto.label = sd.label
-        dto.cp = sd.cp
-        dto.quantity = sd.quantity
-        dto.isElite = sd.isElite
-        dto.dieFaces = sd.dieFaces
+        dto.id = stored.id
+        dto.code = stored.code
+        dto.name = stored.name
+        dto.subtitle = stored.subtitle
+        dto.setCode = stored.setCode
+        dto.setName = stored.setName
+        dto.typeCode = stored.typeCode
+        dto.typeName = stored.typeName
+        dto.factionCode = stored.factionCode
+        dto.factionName = stored.factionName
+        dto.affiliationCode = stored.affiliationCode
+        dto.affiliationName = stored.affiliationName
+        dto.rarityCode = stored.rarityCode
+        dto.rarityName = stored.rarityName
+        dto.position = stored.position
+        dto.ttscardid = stored.ttscardid
+        dto.cost = stored.cost
+        dto.health = stored.health
+        dto.points = stored.points
+        dto.text = stored.text
+        dto.deckLimit = stored.deckLimit
+        dto.flavor = stored.flavor
+        dto.illustrator = stored.illustrator
+        dto.isUnique = stored.isUnique
+        dto.hasDie = stored.hasDie
+        dto.externalUrl = stored.externalUrl
+        dto.imageUrl = stored.imageUrl
+        dto.label = stored.label
+        dto.cp = stored.cp
+        dto.quantity = stored.quantity
+        dto.isElite = stored.isElite
+        dto.dieFaces = stored.dieFaces
         return dto
     }
 
-    private func setDTO(from sd: SetSD) -> SetDTO {
+    private func setDTO(from stored: SetSD) -> SetDTO {
         let dto = SetDTO()
-        dto.id = sd.id
-        dto.name = sd.name
-        dto.code = sd.code
+        dto.id = stored.id
+        dto.name = stored.name
+        dto.code = stored.code
         return dto
     }
 
-    private func deckDTO(from sd: DeckSD) -> DeckDTO {
+    private func deckDTO(from stored: DeckSD) -> DeckDTO {
         let dto = DeckDTO()
-        dto.id = sd.id
-        dto.name = sd.name
-        dto.list = sd.list.map { cardDTO(from: $0) }
+        dto.id = stored.id
+        dto.name = stored.name
+        dto.list = stored.list.map { cardDTO(from: $0) }
         return dto
     }
 
-    private func personDTO(from sd: PersonSD) -> PersonDTO {
+    private func personDTO(from stored: PersonSD) -> PersonDTO {
         let dto = PersonDTO()
-        dto.id = sd.id
-        dto.name = sd.name
-        dto.lastName = sd.lastName
-        dto.lentMe = sd.lentMe.map { cardDTO(from: $0) }
-        dto.borrowed = sd.borrowed.map { cardDTO(from: $0) }
+        dto.id = stored.id
+        dto.name = stored.name
+        dto.lastName = stored.lastName
+        dto.lentMe = stored.lentMe.map { cardDTO(from: $0) }
+        dto.borrowed = stored.borrowed.map { cardDTO(from: $0) }
         return dto
     }
 
-    private func userCollectionDTO(from sd: UserCollectionSD) -> UserCollectionDTO {
+    private func userCollectionDTO(from stored: UserCollectionSD) -> UserCollectionDTO {
         let dto = UserCollectionDTO()
-        dto.id = sd.id
-        dto.myCollection = sd.myCollection.map { cardDTO(from: $0) }
+        dto.id = stored.id
+        dto.myCollection = stored.myCollection.map { cardDTO(from: $0) }
         return dto
     }
 
