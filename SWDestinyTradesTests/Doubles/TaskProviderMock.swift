@@ -69,8 +69,7 @@ public final class TaskProviderMock: TaskProviderProtocol, Sendable {
         tasksCount.increment()
         return Task(priority: nil) { [weak self] in
             defer { self?.completedTasksCount.increment() }
-            let result = await operation()
-            return result
+            return await operation()
         }
     }
 
@@ -80,8 +79,7 @@ public final class TaskProviderMock: TaskProviderProtocol, Sendable {
         return Task(priority: nil) { [weak self] in
             defer { self?.completedTasksCount.increment() }
             do {
-                let result = try await operation()
-                return result
+                return try await operation()
             } catch {
                 throw error
             }
@@ -93,8 +91,7 @@ public final class TaskProviderMock: TaskProviderProtocol, Sendable {
         tasksCount.increment()
         return Task.detached(priority: nil) { [weak self] in
             defer { self?.completedTasksCount.increment() }
-            let result = await operation()
-            return result
+            return await operation()
         }
     }
 
@@ -104,8 +101,7 @@ public final class TaskProviderMock: TaskProviderProtocol, Sendable {
         return Task.detached(priority: nil) { [weak self] in
             defer { self?.completedTasksCount.increment() }
             do {
-                let result = try await operation()
-                return result
+                return try await operation()
             } catch {
                 throw error
             }

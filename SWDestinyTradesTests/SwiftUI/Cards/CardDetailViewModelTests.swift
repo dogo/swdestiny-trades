@@ -24,7 +24,7 @@ final class CardDetailViewModelTests: BaseTestCase {
 
     // MARK: - imageSources Tests
 
-    func testImageSourcesWithValidURLs() {
+    func testImageSourcesWithValidURLs() throws {
         let card1 = CardDTO.stub(
             code: "01001",
             name: "Captain Phasma",
@@ -41,8 +41,8 @@ final class CardDetailViewModelTests: BaseTestCase {
         let sources = sut.imageSources
 
         XCTAssertEqual(sources.count, 2)
-        XCTAssertEqual(sources[0], .remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!))
-        XCTAssertEqual(sources[1], .remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01002.jpg")!))
+        XCTAssertEqual(sources[0], try .remote(XCTUnwrap(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))))
+        XCTAssertEqual(sources[1], try .remote(XCTUnwrap(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01002.jpg"))))
     }
 
     func testImageSourcesWithEmptyURLFallsBackToLocal() {
@@ -75,7 +75,7 @@ final class CardDetailViewModelTests: BaseTestCase {
         XCTAssertEqual(sources[0], .local(Asset.icCardback.image))
     }
 
-    func testImageSourcesMixedValidAndInvalidURLs() {
+    func testImageSourcesMixedValidAndInvalidURLs() throws {
         let validCard = CardDTO.stub(
             code: "01001",
             name: "Captain Phasma",
@@ -92,7 +92,7 @@ final class CardDetailViewModelTests: BaseTestCase {
         let sources = sut.imageSources
 
         XCTAssertEqual(sources.count, 2)
-        XCTAssertEqual(sources[0], .remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!))
+        XCTAssertEqual(sources[0], try .remote(XCTUnwrap(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))))
         XCTAssertEqual(sources[1], .local(Asset.icCardback.image))
     }
 

@@ -54,7 +54,7 @@ final class CardListViewTests: BaseTestCase {
         XCTAssertNotNil(view)
     }
 
-    func testViewUsesTestContainer() async throws {
+    func testViewUsesTestContainer() async {
         let card = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -91,7 +91,7 @@ final class CardListViewTests: BaseTestCase {
         XCTAssertNotNil(helperWithMock.navigationCoordinatorMock)
     }
 
-    func testViewEnvironmentInjection() async throws {
+    func testViewEnvironmentInjection() {
         let view = helper.createView {
             CardListView(set: testSet)
         }
@@ -102,13 +102,13 @@ final class CardListViewTests: BaseTestCase {
         XCTAssertNotNil(helper.appState)
     }
 
-    func testViewModelCreatedThroughTestContainer() async throws {
+    func testViewModelCreatedThroughTestContainer() {
         let viewModel = helper.createViewModel(CardListViewModel.self)
 
         XCTAssertNotNil(viewModel.dependencyContainer)
     }
 
-    func testViewWithEmptyDatabase() async throws {
+    func testViewWithEmptyDatabase() {
         let view = helper.createView {
             CardListView(set: testSet)
         }
@@ -116,7 +116,7 @@ final class CardListViewTests: BaseTestCase {
         XCTAssertNotNil(view)
     }
 
-    func testViewWithMultipleCards() async throws {
+    func testViewWithMultipleCards() async {
         let cards = (1 ... 5).map { index in
             CardDTO.stub(
                 setCode: "AW",
@@ -155,7 +155,7 @@ final class CardListViewTests: BaseTestCase {
         XCTAssertEqual(fetchedCards.first?.name, "Test Card")
     }
 
-    func testViewWithDifferentSets() async throws {
+    func testViewWithDifferentSets() async {
         let awCard = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -204,7 +204,7 @@ final class CardListViewTests: BaseTestCase {
         XCTAssertEqual(fetchedCards.count, 3)
     }
 
-    func testViewWithAppState() async throws {
+    func testViewWithAppState() {
         let view = helper.createView {
             CardListView(set: testSet)
         }

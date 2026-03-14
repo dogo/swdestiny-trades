@@ -82,9 +82,7 @@ class XCSnapshotableTestCase: FBSnapshotTestCase {
         }
 
         let folderPathComponents = Array(fileName.components(separatedBy: "/")[0 ... currentIndex])
-        let folderPath = folderPathComponents.joined(separator: "/")
-
-        return folderPath
+        return folderPathComponents.joined(separator: "/")
     }
 
     private func sanitizedTestName(_ snapshotName: String?) -> String {

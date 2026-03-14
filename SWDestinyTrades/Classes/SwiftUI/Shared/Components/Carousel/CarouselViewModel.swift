@@ -36,7 +36,9 @@ final class CarouselViewModel {
     private var autoScrollTask: Task<Void, Never>?
     var loadTasks: [ImageSource: Task<Void, Never>] = [:]
 
-    var pageCount: Int { items.count }
+    var pageCount: Int {
+        items.count
+    }
 
     // MARK: - Init
 

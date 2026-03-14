@@ -114,8 +114,6 @@ public extension FBSnapshotTestCase {
         let nsName = NSString(string: String(describing: filename))
 
         let type = ".\(nsName.pathExtension)"
-        let sanitizedName = nsName.lastPathComponent.replacingOccurrences(of: type, with: "")
-
-        return sanitizedName
+        return nsName.lastPathComponent.replacingOccurrences(of: type, with: "")
     }
 }

@@ -123,11 +123,9 @@ final class DeckGraphViewModel: BaseViewModel {
     private nonisolated func buildRadarChartData(deckListData: [DeckCardData]) -> [Int] {
         let filters = ["Sp", "-", "*MD*", "*RD*", "*F", "*Dr*", "*Sh", "*Dc*", "*R", "*ID*"]
 
-        let faces = filters.map { filter in
+        return filters.map { filter in
             countFaces(filter: "value LIKE '\(filter)'", deckListData: deckListData)
         }
-
-        return faces
     }
 
     private nonisolated func countFaces(filter: String, deckListData: [DeckCardData]) -> Int {
@@ -202,7 +200,7 @@ enum ChartType: CaseIterable {
     }
 }
 
-struct DeckCardData: Sendable {
+struct DeckCardData {
     let typeCode: String
     let cost: Int
     let quantity: Int

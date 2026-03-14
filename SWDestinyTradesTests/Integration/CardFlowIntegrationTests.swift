@@ -134,7 +134,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
         XCTAssertEqual(listViewModel.items.count, 2)
         XCTAssertFalse(listViewModel.isLoading)
 
-        let selectedCard = listViewModel.items.first!
+        let selectedCard = try XCTUnwrap(listViewModel.items.first)
         navMock.navigate(to: .cardDetail(listViewModel.items, selectedCard))
 
         XCTAssertTrue(navMock.didNavigate(to: .cardDetail(listViewModel.items, selectedCard)))

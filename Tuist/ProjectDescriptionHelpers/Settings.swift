@@ -12,11 +12,10 @@ extension Project {
     }
 
     private static func baseSettings() -> SettingsDictionary {
-        let baseSettings = SettingsDictionary()
+        return SettingsDictionary()
             .automaticCodeSigning(devTeam: "75C4E36ZA7")
             .currentProjectVersion("44")
             .marketingVersion("1.5.0")
             .debugInformationFormat(.dwarfWithDsym)
-        return baseSettings
     }
 }

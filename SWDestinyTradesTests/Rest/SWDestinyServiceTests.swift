@@ -47,8 +47,8 @@ final class SWDestinyServiceTests: BaseTestCase {
         XCTAssertNotNil(result)
     }
 
-    func testCancelRequest() {
-        let request = URLRequest(with: URL(string: "https://base.url.com")!)
+    func testCancelRequest() throws {
+        let request = try URLRequest(with: XCTUnwrap(URL(string: "https://base.url.com")))
         sut.cancelRequest(request)
 
         XCTAssertTrue(mockHttpClient.isCancelled)

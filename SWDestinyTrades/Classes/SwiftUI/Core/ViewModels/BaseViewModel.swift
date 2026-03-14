@@ -11,7 +11,10 @@ import SwiftUI
 @MainActor
 @Observable
 class BaseViewModel {
-    var isLoading: Bool { loadingState.isLoading }
+    var isLoading: Bool {
+        loadingState.isLoading
+    }
+
     private(set) var errorMessage: String?
     private(set) var loadingState: LoadingState<Void> = .idle
 

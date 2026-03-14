@@ -121,7 +121,9 @@ final class APIErrorTests: XCTestCase {
 
 struct TestCodingKey: CodingKey, CustomStringConvertible {
     var stringValue: String
-    var intValue: Int? { return nil }
+    var intValue: Int? {
+        return nil
+    }
 
     init(stringValue: String) {
         self.stringValue = stringValue

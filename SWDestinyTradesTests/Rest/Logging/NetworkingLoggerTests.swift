@@ -40,8 +40,8 @@ final class NetworkingLoggerTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_log_request() {
-        var request = URLRequest(url: URL(string: "https://example.com")!)
+    func test_log_request() throws {
+        var request = try URLRequest(url: XCTUnwrap(URL(string: "https://example.com")))
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer token", forHTTPHeaderField: "Authorization")
         request.httpBody = Data("{\"key\": \"value\"}".utf8)
@@ -56,11 +56,11 @@ final class NetworkingLoggerTests: XCTestCase {
         XCTAssertTrue(output.contains("LOGGER | 📦 Body: {\"key\": \"value\"}"))
     }
 
-    func test_log_response() {
-        let response = HTTPURLResponse(url: URL(string: "https://example.com")!,
-                                       statusCode: 200,
-                                       httpVersion: nil,
-                                       headerFields: nil)
+    func test_log_response() throws {
+        let response = try HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")),
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: nil)
         let data = Data("{\"key\": \"value\"}".utf8)
         logger.log(response: response, data: data, time: 1.234)
 
@@ -73,11 +73,11 @@ final class NetworkingLoggerTests: XCTestCase {
         XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
     }
 
-    func test_log_response_with_invalid_json() {
-        let response = HTTPURLResponse(url: URL(string: "https://example.com")!,
-                                       statusCode: 200,
-                                       httpVersion: nil,
-                                       headerFields: nil)
+    func test_log_response_with_invalid_json() throws {
+        let response = try HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")),
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: nil)
         let data = Data("\"key\": \"value\"".utf8)
         logger.log(response: response, data: data, time: 1.234)
 
@@ -86,8 +86,8 @@ final class NetworkingLoggerTests: XCTestCase {
         XCTAssertTrue(output.contains("LOGGER | 📄 Response: \"key\": \"value\""))
     }
 
-    func test_log_error() {
-        let request = URLRequest(url: URL(string: "https://example.com")!)
+    func test_log_error() throws {
+        let request = try URLRequest(url: XCTUnwrap(URL(string: "https://example.com")))
         let error = NSError(domain: "TestDomain", code: 123, userInfo: [NSLocalizedDescriptionKey: "Test error"])
         logger.logError(request: request, statusCode: 500, error: error)
 

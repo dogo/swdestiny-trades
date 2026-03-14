@@ -12,8 +12,8 @@ import XCTest
 
 final class URLRequestTests: XCTestCase {
 
-    func test_init_with_URL_valid_URL_should_create_URLRequest() {
-        let validURL = URL(string: "https://example.com")!
+    func test_init_with_URL_valid_URL_should_create_URLRequest() throws {
+        let validURL = try XCTUnwrap(URL(string: "https://example.com"))
 
         let urlRequest = URLRequest(with: validURL)
 

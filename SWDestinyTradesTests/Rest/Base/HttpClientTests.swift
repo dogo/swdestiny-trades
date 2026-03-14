@@ -39,7 +39,7 @@ final class HttpClientTests: XCTestCase {
         XCTAssertTrue(result.bar)
     }
 
-    func test_request_with_failure_invalidData() async throws {
+    func test_request_with_failure_invalidData() async {
         setupURLProtocolMock(with: nil, statusCode: 200, isHTTP: false)
 
         await assertThrowsError(of: .invalidData) {
@@ -47,7 +47,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_request_with_failure_responseUnsuccessful() async throws {
+    func test_request_with_failure_responseUnsuccessful() async {
         setupURLProtocolMock(with: nil, statusCode: 404)
 
         await assertThrowsError(of: .responseUnsuccessful) {
@@ -55,7 +55,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_request_with_failure_requestCancelled() async throws {
+    func test_request_with_failure_requestCancelled() async {
         setupURLProtocolMock(with: nil, statusCode: 200, error: URLError(.cancelled))
 
         await assertThrowsError(of: .requestCancelled) {
@@ -63,7 +63,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_request_with_failure_keyNotFound() async throws {
+    func test_request_with_failure_keyNotFound() async {
         let missingKeyJson = Data("{ \"id\": 123 }".utf8)
         setupURLProtocolMock(with: missingKeyJson, statusCode: 200)
 
@@ -72,7 +72,7 @@ final class HttpClientTests: XCTestCase {
         }, missingKey: "name")
     }
 
-    func test_request_with_failure_valueNotFound() async throws {
+    func test_request_with_failure_valueNotFound() async {
         let missingValueJson = Data("{ \"id\": 123, \"name\": null }".utf8)
         setupURLProtocolMock(with: missingValueJson, statusCode: 200)
 
@@ -81,7 +81,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_request_with_failure_typeMismatch() async throws {
+    func test_request_with_failure_typeMismatch() async {
         setupURLProtocolMock(with: Data("{ \"bar\": \"invalid_value\" }".utf8), statusCode: 200)
 
         await assertThrowsError(of: .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead.")) {
@@ -89,7 +89,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_request_with_failure_dataCorrupted() async throws {
+    func test_request_with_failure_dataCorrupted() async {
         setupURLProtocolMock(with: nil, statusCode: 200)
 
         await assertThrowsError(of: .dataCorrupted(context: "The given data was not valid JSON.")) {

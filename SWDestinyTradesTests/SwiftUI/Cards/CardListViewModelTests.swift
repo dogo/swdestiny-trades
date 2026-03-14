@@ -30,7 +30,7 @@ final class CardListViewModelTests: BaseTestCase {
         try await super.tearDown()
     }
 
-    func testLoadCardsFromDatabase() async throws {
+    func testLoadCardsFromDatabase() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -54,14 +54,14 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertFalse(sut.isLoading)
     }
 
-    func testLoadCardsWithEmptyDatabase() async throws {
+    func testLoadCardsWithEmptyDatabase() async {
         await sut.loadCards()
 
         XCTAssertEqual(sut.items.count, 0)
         XCTAssertFalse(sut.isLoading)
     }
 
-    func testLoadCardsFiltersCorrectSet() async throws {
+    func testLoadCardsFiltersCorrectSet() async {
         let awCard = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -77,7 +77,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.items[0].setCode, "AW")
     }
 
-    func testLoadCardsWithMockHttpClient() async throws {
+    func testLoadCardsWithMockHttpClient() async {
         mockHttpClient.fileName = "card-list"
         mockHttpClient.error = false
 
@@ -87,7 +87,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertGreaterThan(sut.items.count, 0, "Should have loaded cards from mock data")
     }
 
-    func testLoadCardsHandlesHttpError() async throws {
+    func testLoadCardsHandlesHttpError() async {
         mockSWDestinyService.retrieveSetCardListError = APIError.invalidData
 
         await sut.loadCards()
@@ -97,7 +97,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.toastType, .error)
     }
 
-    func testAsyncOperationCompletesLoading() async throws {
+    func testAsyncOperationCompletesLoading() async {
         let card = CardDTO.stub(setCode: "AW", code: "01001")
 
         mockSWDestinyService.retrieveSetCardListResult = [card]
@@ -107,7 +107,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertFalse(sut.isLoading)
     }
 
-    func testSearchFilteringByName() async throws {
+    func testSearchFilteringByName() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -131,7 +131,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.filteredItems[0].name, "Captain Phasma")
     }
 
-    func testSearchFilteringBySubtitle() async throws {
+    func testSearchFilteringBySubtitle() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -155,7 +155,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.filteredItems[0].name, "Kylo Ren")
     }
 
-    func testColorFiltering() async throws {
+    func testColorFiltering() async {
         let redCard = CardDTO.stub(
             setCode: "AW",
             factionCode: "red",
@@ -180,7 +180,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.filteredItems[0].factionCode, "red")
     }
 
-    func testTypeFiltering() async throws {
+    func testTypeFiltering() async {
         let character = CardDTO.stub(
             setCode: "AW",
             typeCode: "character",
@@ -205,7 +205,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.filteredItems[0].typeCode, "character")
     }
 
-    func testCostFiltering() async throws {
+    func testCostFiltering() async {
         let lowCostCard = CardDTO.stub(
             setCode: "AW",
             factionCode: "red",
@@ -239,7 +239,7 @@ final class CardListViewModelTests: BaseTestCase {
         XCTAssertEqual(sut.filteredItems[0].cost, 3)
     }
 
-    func testPropertyLoadingAlwaysCompletes() async throws {
+    func testPropertyLoadingAlwaysCompletes() async {
         for iteration in 0 ..< 100 {
             let randomCardCount = Int.random(in: 0 ... 10)
             var randomCards: [CardDTO] = []
