@@ -18,7 +18,7 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
     private var observerContinuations: [String: [AnyContinuation]] = [:]
     private let lock = NSLock()
 
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) async -> [T] {
+    func fetch<T: Storable>(_ model: T.Type, predicate _: NSPredicate?, sorted: Sorted?) async -> [T] {
         lock.lock()
         defer { lock.unlock() }
 
@@ -28,18 +28,11 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
 
         print("🔍 DatabaseMock[\(ObjectIdentifier(self))].fetch: Fetching \(key), found \(result.count) objects")
 
-        if let predicate {
-            result = result.filter { object in
-                predicate.evaluate(with: object)
-            }
-        }
-
         if let sorted {
             result = result.sorted { obj1, obj2 in
-                let value1 = (obj1 as AnyObject).value(forKey: sorted.key)
-                let value2 = (obj2 as AnyObject).value(forKey: sorted.key)
-
-                if let str1 = value1 as? String, let str2 = value2 as? String {
+                let str1 = stringValue(of: obj1, forKey: sorted.key)
+                let str2 = stringValue(of: obj2, forKey: sorted.key)
+                if let str1, let str2 {
                     return sorted.ascending ? str1 < str2 : str1 > str2
                 }
                 return sorted.ascending
@@ -50,15 +43,9 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
     }
 
     func fetchByKey<T: Storable>(_ model: T.Type, key: Any) async -> T? {
+        guard let keyString = key as? String else { return nil }
         let objects = await fetch(model, predicate: nil, sorted: nil)
-        return objects.first { object in
-            if let codable = object as? AnyObject,
-               let primaryKey = codable.value(forKey: "id") as? String,
-               let keyString = key as? String {
-                return primaryKey == keyString
-            }
-            return false
-        }
+        return objects.first { primaryKey(of: $0) == keyString }
     }
 
     func create<T: Storable>(_ model: T.Type, value: Any, update: UpdatePolicy) async throws -> T {
@@ -79,15 +66,8 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
 
         print("💾 DatabaseMock[\(ObjectIdentifier(self))].save: Saving \(key)")
 
-        if let codable = object as? AnyObject,
-           let id = codable.value(forKey: "id") as? String {
-            if let index = objects.firstIndex(where: { existing in
-                if let existingCodable = existing as? AnyObject,
-                   let existingId = existingCodable.value(forKey: "id") as? String {
-                    return existingId == id
-                }
-                return false
-            }) {
+        if let id = primaryKey(of: object) {
+            if let index = objects.firstIndex(where: { ($0 as? Storable).flatMap { primaryKey(of: $0) } == id }) {
                 objects[index] = object
                 print("  ✏️  Updated \(key) with id \(id)")
             } else {
@@ -111,15 +91,8 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
         let key = String(describing: type(of: object))
         var objects = storage[key] ?? []
 
-        if let codable = object as? AnyObject,
-           let id = codable.value(forKey: "id") as? String {
-            objects.removeAll { existing in
-                if let existingCodable = existing as? AnyObject,
-                   let existingId = existingCodable.value(forKey: "id") as? String {
-                    return existingId == id
-                }
-                return false
-            }
+        if let id = primaryKey(of: object) {
+            objects.removeAll { ($0 as? Storable).flatMap { primaryKey(of: $0) } == id }
         }
 
         storage[key] = objects
@@ -184,6 +157,45 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
             for continuation in continuations {
                 continuation.yield(objects)
             }
+        }
+    }
+
+    // MARK: - Private: Pattern matching helpers
+
+    private func primaryKey(of object: Storable) -> String? {
+        switch object {
+        case let card as CardDTO:
+            return card.id
+        case let set as SetDTO:
+            return set.id
+        case let deck as DeckDTO:
+            return deck.id
+        case let person as PersonDTO:
+            return person.id
+        case let collection as UserCollectionDTO:
+            return collection.id
+        default:
+            return nil
+        }
+    }
+
+    private func stringValue(of object: Storable, forKey key: String) -> String? {
+        switch key {
+        case "name":
+            switch object {
+            case let card as CardDTO:
+                return card.name
+            case let set as SetDTO:
+                return set.name
+            case let deck as DeckDTO:
+                return deck.name
+            case let person as PersonDTO:
+                return person.name
+            default:
+                return nil
+            }
+        default:
+            return nil
         }
     }
 }

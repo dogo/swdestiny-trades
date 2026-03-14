@@ -38,7 +38,7 @@ final class AppState {
     private func initializeDatabase() {
         Task { @MainActor in
             do {
-                let database = try await CoreDataManager.create()
+                let database = try await SwiftDataManager.create()
                 self.database = database
                 isInitialized = true
                 errorMessage = nil

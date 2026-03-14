@@ -25,8 +25,8 @@ enum PreviewHelper {
         return container
     }
 
-    static func createMockDatabase() async throws -> CoreDataManager {
-        let database = try await CoreDataManager.create(inMemory: true)
+    static func createMockDatabase() async throws -> SwiftDataManager {
+        let database = try await SwiftDataManager.create(inMemory: true)
 
         for card in SampleData.cards {
             try await database.save(object: card, update: .all)
