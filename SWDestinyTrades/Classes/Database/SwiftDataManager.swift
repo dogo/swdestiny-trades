@@ -31,11 +31,13 @@ enum SwiftDataManagerError: Error, LocalizedError {
 // MARK: - SwiftDataManager
 
 @MainActor
-final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable:this type_body_length
+final class SwiftDataManager: @MainActor DatabaseProtocol {
 
     private let container: ModelContainer
 
-    private var context: ModelContext { container.mainContext }
+    private var context: ModelContext {
+        container.mainContext
+    }
 
     private static let didChangeNotification = Notification.Name("SwiftDataManagerDidChange")
 
@@ -61,15 +63,15 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
     func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) async -> [T] {
         switch model {
         case is CardDTO.Type:
-            return fetchCards(sorted: sorted) as! [T] // swiftlint:disable:this force_cast
+            return fetchCards(sorted: sorted) as? [T] ?? []
         case is SetDTO.Type:
-            return fetchSets(sorted: sorted) as! [T] // swiftlint:disable:this force_cast
+            return fetchSets(sorted: sorted) as? [T] ?? []
         case is DeckDTO.Type:
-            return fetchDecks(sorted: sorted) as! [T] // swiftlint:disable:this force_cast
+            return fetchDecks(sorted: sorted) as? [T] ?? []
         case is PersonDTO.Type:
-            return fetchPersons(sorted: sorted) as! [T] // swiftlint:disable:this force_cast
+            return fetchPersons(sorted: sorted) as? [T] ?? []
         case is UserCollectionDTO.Type:
-            return fetchUserCollections() as! [T] // swiftlint:disable:this force_cast
+            return fetchUserCollections() as? [T] ?? []
         default:
             return []
         }
@@ -110,20 +112,7 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
     }
 
     func delete(object: Storable) async throws {
-        switch object {
-        case let card as CardDTO:
-            if let stored = findCard(id: card.id) { context.delete(stored) }
-        case let set as SetDTO:
-            if let stored = findSet(code: set.code) { context.delete(stored) }
-        case let deck as DeckDTO:
-            if let stored = findDeck(id: deck.id) { context.delete(stored) }
-        case let person as PersonDTO:
-            if let stored = findPerson(id: person.id) { context.delete(stored) }
-        case let collection as UserCollectionDTO:
-            if let stored = findUserCollection(id: collection.id) { context.delete(stored) }
-        default:
-            break
-        }
+        deleteStoredModel(for: object)
         try saveContext()
     }
 
@@ -297,7 +286,7 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
 
     // MARK: - Private: Find or Create
 
-    private func findOrCreateCard(id: String) -> CardSD {
+    func findOrCreateCard(id: String) -> CardSD {
         if let existing = findCard(id: id) { return existing }
         let card = CardSD(id: id)
         context.insert(card)
@@ -325,7 +314,7 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
         return person
     }
 
-    private func findOrCreateUserCollection(id: String) -> UserCollectionSD {
+    func findOrCreateUserCollection(id: String) -> UserCollectionSD {
         if let existing = findUserCollection(id: id) { return existing }
         let collection = UserCollectionSD(id: id)
         context.insert(collection)
@@ -356,149 +345,23 @@ final class SwiftDataManager: @MainActor DatabaseProtocol { // swiftlint:disable
         }
     }
 
-    // MARK: - Private: Populate SD from DTO
+    // MARK: - Private: Delete helper
 
-    private func populate(card: CardSD, from dto: CardDTO) {
-        card.code = dto.code
-        card.name = dto.name
-        card.subtitle = dto.subtitle
-        card.setCode = dto.setCode
-        card.setName = dto.setName
-        card.typeCode = dto.typeCode
-        card.typeName = dto.typeName
-        card.factionCode = dto.factionCode
-        card.factionName = dto.factionName
-        card.affiliationCode = dto.affiliationCode
-        card.affiliationName = dto.affiliationName
-        card.rarityCode = dto.rarityCode
-        card.rarityName = dto.rarityName
-        card.position = dto.position
-        card.ttscardid = dto.ttscardid
-        card.cost = dto.cost
-        card.health = dto.health
-        card.points = dto.points
-        card.text = dto.text
-        card.deckLimit = dto.deckLimit
-        card.flavor = dto.flavor
-        card.illustrator = dto.illustrator
-        card.isUnique = dto.isUnique
-        card.hasDie = dto.hasDie
-        card.externalUrl = dto.externalUrl
-        card.imageUrl = dto.imageUrl
-        card.label = dto.label
-        card.cp = dto.cp
-        card.quantity = dto.quantity
-        card.isElite = dto.isElite
-        card.dieFaces = dto.dieFaces
-    }
-
-    private func populate(set: SetSD, from dto: SetDTO) {
-        set.id = dto.id
-        set.name = dto.name
-    }
-
-    private func populate(deck: DeckSD, from dto: DeckDTO) {
-        deck.name = dto.name
-        deck.list = dto.list.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
+    private func deleteStoredModel(for object: Storable) {
+        switch object {
+        case let card as CardDTO:
+            if let stored = findCard(id: card.id) { context.delete(stored) }
+        case let set as SetDTO:
+            if let stored = findSet(code: set.code) { context.delete(stored) }
+        case let deck as DeckDTO:
+            if let stored = findDeck(id: deck.id) { context.delete(stored) }
+        case let person as PersonDTO:
+            if let stored = findPerson(id: person.id) { context.delete(stored) }
+        case let collection as UserCollectionDTO:
+            if let stored = findUserCollection(id: collection.id) { context.delete(stored) }
+        default:
+            break
         }
-    }
-
-    private func populate(person: PersonSD, from dto: PersonDTO) {
-        person.name = dto.name
-        person.lastName = dto.lastName
-        person.lentMe = dto.lentMe.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
-        }
-        person.borrowed = dto.borrowed.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
-        }
-    }
-
-    private func populate(collection: UserCollectionSD, from dto: UserCollectionDTO) {
-        collection.myCollection = dto.myCollection.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
-        }
-    }
-
-    // MARK: - Private: Map SD → DTO
-
-    private func cardDTO(from stored: CardSD) -> CardDTO {
-        let dto = CardDTO()
-        dto.id = stored.id
-        dto.code = stored.code
-        dto.name = stored.name
-        dto.subtitle = stored.subtitle
-        dto.setCode = stored.setCode
-        dto.setName = stored.setName
-        dto.typeCode = stored.typeCode
-        dto.typeName = stored.typeName
-        dto.factionCode = stored.factionCode
-        dto.factionName = stored.factionName
-        dto.affiliationCode = stored.affiliationCode
-        dto.affiliationName = stored.affiliationName
-        dto.rarityCode = stored.rarityCode
-        dto.rarityName = stored.rarityName
-        dto.position = stored.position
-        dto.ttscardid = stored.ttscardid
-        dto.cost = stored.cost
-        dto.health = stored.health
-        dto.points = stored.points
-        dto.text = stored.text
-        dto.deckLimit = stored.deckLimit
-        dto.flavor = stored.flavor
-        dto.illustrator = stored.illustrator
-        dto.isUnique = stored.isUnique
-        dto.hasDie = stored.hasDie
-        dto.externalUrl = stored.externalUrl
-        dto.imageUrl = stored.imageUrl
-        dto.label = stored.label
-        dto.cp = stored.cp
-        dto.quantity = stored.quantity
-        dto.isElite = stored.isElite
-        dto.dieFaces = stored.dieFaces
-        return dto
-    }
-
-    private func setDTO(from stored: SetSD) -> SetDTO {
-        let dto = SetDTO()
-        dto.id = stored.id
-        dto.name = stored.name
-        dto.code = stored.code
-        return dto
-    }
-
-    private func deckDTO(from stored: DeckSD) -> DeckDTO {
-        let dto = DeckDTO()
-        dto.id = stored.id
-        dto.name = stored.name
-        dto.list = stored.list.map { cardDTO(from: $0) }
-        return dto
-    }
-
-    private func personDTO(from stored: PersonSD) -> PersonDTO {
-        let dto = PersonDTO()
-        dto.id = stored.id
-        dto.name = stored.name
-        dto.lastName = stored.lastName
-        dto.lentMe = stored.lentMe.map { cardDTO(from: $0) }
-        dto.borrowed = stored.borrowed.map { cardDTO(from: $0) }
-        return dto
-    }
-
-    private func userCollectionDTO(from stored: UserCollectionSD) -> UserCollectionDTO {
-        let dto = UserCollectionDTO()
-        dto.id = stored.id
-        dto.myCollection = stored.myCollection.map { cardDTO(from: $0) }
-        return dto
     }
 
     // MARK: - Private: Save
