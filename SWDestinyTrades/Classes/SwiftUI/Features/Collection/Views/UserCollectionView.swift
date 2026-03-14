@@ -49,7 +49,7 @@ struct UserCollectionView: View {
             }
     }
 
-    @ViewBuilder private var content: some View {
+    private var content: some View {
         VStack {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 LoadingView()
@@ -106,7 +106,7 @@ struct UserCollectionView: View {
         }
     }
 
-    @ViewBuilder private var collectionList: some View {
+    private var collectionList: some View {
         List(viewModel.filteredItems, id: \.code) { card in
             CollectionCardRowView(card: card) { updatedCard, quantity in
                 Task {
@@ -122,7 +122,7 @@ struct UserCollectionView: View {
         .listStyle(.plain)
     }
 
-    @ViewBuilder private var filterSheet: some View {
+    private var filterSheet: some View {
         UnifiedFilterView(
             filter: $viewModel.filter,
             availableSets: viewModel.availableSets
@@ -133,19 +133,19 @@ struct UserCollectionView: View {
 
     // MARK: - Toolbar Items
 
-    @ViewBuilder private var filterButton: some View {
+    private var filterButton: some View {
         FilterToolbarButton(hasActiveFilters: viewModel.hasActiveFilters) {
             showingFilterSheet = true
         }
     }
 
-    @ViewBuilder private var shareButton: some View {
+    private var shareButton: some View {
         Button(L10n.share, systemImage: "square.and.arrow.up") {
             showingShareSheet = true
         }
     }
 
-    @ViewBuilder private var addButton: some View {
+    private var addButton: some View {
         Button(L10n.addCard, systemImage: "plus") {
             navigationCoordinator.navigate(to: .addCard)
         }

@@ -5,7 +5,9 @@
 
 # Rules
 --disable blankLinesAtStartOfScope
+--disable blankLinesBetweenImports
+--disable redundantReturn
+--disable sortImports
 --disable trailingCommas
 --disable unusedArguments
 --disable wrapMultilineStatementBraces
---disable redundantReturn

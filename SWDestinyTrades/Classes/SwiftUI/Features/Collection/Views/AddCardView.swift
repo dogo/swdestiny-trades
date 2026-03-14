@@ -93,7 +93,7 @@ struct AddCardView: View {
         }
     }
 
-    @ViewBuilder private var filterButton: some View {
+    private var filterButton: some View {
         FilterToolbarButton(hasActiveFilters: viewModel.filter.hasActiveFilters) {
             showingFilterSheet = true
         }

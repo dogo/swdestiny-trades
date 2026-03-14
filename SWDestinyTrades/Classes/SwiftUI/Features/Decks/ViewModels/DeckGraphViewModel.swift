@@ -130,9 +130,9 @@ final class DeckGraphViewModel: BaseViewModel {
 
     private nonisolated func countFaces(filter: String, deckListData: [DeckCardData]) -> Int {
         return deckListData.reduce(0) { total, cardData in
-            let matchingFaces = cardData.dieFaces.filter { face in
+            let matchingFaces = cardData.dieFaces.count(where: { face in
                 evaluateFilter(filter, on: face)
-            }.count
+            })
             return total + (matchingFaces * cardData.quantity)
         }
     }

@@ -74,7 +74,7 @@ struct UnifiedFilterView: View {
 
     // MARK: - Sections
 
-    @ViewBuilder private var expansionSection: some View {
+    private var expansionSection: some View {
         Section(L10n.expansions) {
             Picker(L10n.set, selection: $tempFilter.selectedSet) {
                 Text(L10n.allSets).tag(SetDTO?.none)
@@ -85,7 +85,7 @@ struct UnifiedFilterView: View {
         }
     }
 
-    @ViewBuilder private var typeSection: some View {
+    private var typeSection: some View {
         Section(L10n.cardTypes) {
             ForEach(cardTypes, id: \.self) { type in
                 Toggle(type.capitalized, isOn: setBinding(for: type, in: \.selectedTypes))
@@ -93,7 +93,7 @@ struct UnifiedFilterView: View {
         }
     }
 
-    @ViewBuilder private var colorSection: some View {
+    private var colorSection: some View {
         Section(L10n.color) {
             ForEach(cardColors, id: \.code) { color in
                 Toggle(color.name, isOn: setBinding(for: color.code, in: \.selectedColors))
@@ -116,7 +116,7 @@ struct UnifiedFilterView: View {
         )
     }
 
-    @ViewBuilder private var clearSection: some View {
+    private var clearSection: some View {
         Section {
             Button(L10n.clearAllFilters) {
                 tempFilter.clearAll()

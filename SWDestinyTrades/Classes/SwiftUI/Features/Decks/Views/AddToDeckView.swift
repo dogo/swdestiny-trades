@@ -55,7 +55,7 @@ struct AddToDeckView: View {
         }
     }
 
-    @ViewBuilder private var dataSourceSelector: some View {
+    private var dataSourceSelector: some View {
         HStack(spacing: 0) {
             Button {
                 viewModel.loadRemoteCards()

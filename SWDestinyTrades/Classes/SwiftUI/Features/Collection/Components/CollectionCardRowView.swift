@@ -45,7 +45,7 @@ struct CollectionCardRowView: View {
         }
     }
 
-    @ViewBuilder private var cardInfoView: some View {
+    private var cardInfoView: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(card.name)
                 .font(.headline)
@@ -77,7 +77,7 @@ struct CollectionCardRowView: View {
         }
     }
 
-    @ViewBuilder private var iconView: some View {
+    private var iconView: some View {
         AsyncImage(url: URL(string: card.imageUrl)) { image in
             image
                 .resizable()
@@ -97,7 +97,7 @@ struct CollectionCardRowView: View {
         .clipShape(RoundedRectangle(cornerRadius: 4))
     }
 
-    @ViewBuilder private var quantityView: some View {
+    private var quantityView: some View {
         HStack {
             Button {
                 let newQuantity = max(0, quantity - 1)

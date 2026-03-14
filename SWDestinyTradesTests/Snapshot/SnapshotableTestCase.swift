@@ -9,7 +9,7 @@
 import Foundation
 import iOSSnapshotTestCase
 
-// Enum to represent different test modes
+/// Enum to represent different test modes
 enum SnapshotTestMode {
     case record
     case validate
@@ -62,8 +62,8 @@ class XCSnapshotableTestCase: FBSnapshotTestCase {
         return getTestsRootFolder(sourceFileName) + "/FailureDiffs"
     }
 
-    // Search the test file's path to find the first folder with a test suffix,
-    // then append "/ReferenceImages" or "FailureDiffs" and use that.
+    /// Search the test file's path to find the first folder with a test suffix,
+    /// then append "/ReferenceImages" or "FailureDiffs" and use that.
     private func getTestsRootFolder(_ sourceFileName: StaticString) -> String {
         let fileName = String(describing: sourceFileName)
 
