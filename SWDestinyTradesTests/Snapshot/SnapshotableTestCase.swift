@@ -31,20 +31,27 @@ class XCSnapshotableTestCase: FBSnapshotTestCase {
                   testMode: SnapshotTestMode = .validate,
                   perPixelTolerance: CGFloat = 0.02,
                   overallTolerance: CGFloat = 0,
-                  file: StaticString = #file) -> Bool {
+                  file: StaticString = #file,
+                  line: UInt = #line) -> Bool {
         guard let snapshotObject = instance.snapshotObject else {
             fatalError("Failed unwrapping Snapshot Object")
         }
 
         let sanitizedName = sanitizedTestName(named)
-        return FBSnapshotTestCase.validateSnapshot(snapshotObject,
-                                                   snapshot: sanitizedName,
-                                                   record: testMode == .record,
-                                                   referenceDirectory: getDefaultReferenceDirectory(file),
-                                                   imageDiffDirectory: getDefaultDiffDirectory(file),
-                                                   perPixelTolerance: perPixelTolerance,
-                                                   overallTolerance: overallTolerance,
-                                                   filename: file)
+        let result = FBSnapshotTestCase.validateSnapshot(snapshotObject,
+                                                         snapshot: sanitizedName,
+                                                         record: testMode == .record,
+                                                         referenceDirectory: getDefaultReferenceDirectory(file),
+                                                         imageDiffDirectory: getDefaultDiffDirectory(file),
+                                                         perPixelTolerance: perPixelTolerance,
+                                                         overallTolerance: overallTolerance,
+                                                         filename: file)
+
+        if testMode == .record {
+            XCTFail("Snapshot recorded — change testMode to .validate before committing.", file: file, line: line)
+        }
+
+        return result
     }
 
     private func getDefaultReferenceDirectory(_ sourceFileName: StaticString) -> String {
