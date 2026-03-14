@@ -67,11 +67,6 @@ final class CardListViewModelTests: BaseTestCase {
             code: "01001",
             name: "Captain Phasma"
         )
-        let sokCard = CardDTO.stub(
-            setCode: "SOR",
-            code: "02001",
-            name: "Luke Skywalker"
-        )
 
         mockSWDestinyService.retrieveSetCardListResult = [awCard]
 

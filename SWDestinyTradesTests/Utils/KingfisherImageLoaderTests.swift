@@ -86,7 +86,8 @@ final class KingfisherImageLoaderTests: XCTestCase {
     // MARK: - Protocol Conformance
 
     func test_conformsToImageLoadingService() {
-        XCTAssertTrue(sut is ImageLoadingService, "KingfisherImageLoader should conform to ImageLoadingService")
+        let service: any ImageLoadingService = sut
+        XCTAssertNotNil(service)
     }
 
     // MARK: - clearMemoryCache Tests

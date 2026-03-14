@@ -10,18 +10,13 @@ import Foundation
 
 @testable import SWDestinyTrades
 
-final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
-
-    typealias AnyContinuation = AsyncStream<[Any]>.Continuation
+@MainActor
+final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
 
     private var storage: [String: [Any]] = [:]
-    private var observerContinuations: [String: [AnyContinuation]] = [:]
-    private let lock = NSLock()
+    private var observerCallbacks: [String: [UUID: ([Any]) -> Void]] = [:]
 
     func fetch<T: Storable>(_ model: T.Type, predicate _: NSPredicate?, sorted: Sorted?) async -> [T] {
-        lock.lock()
-        defer { lock.unlock() }
-
         let key = String(describing: model)
         let objects = storage[key] ?? []
         var result = objects.compactMap { $0 as? T }
@@ -52,15 +47,11 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
         guard let object = value as? T else {
             throw DatabaseError.invalidObject
         }
-
         try await save(object: object, update: update)
         return object
     }
 
     func save(object: Storable, update: UpdatePolicy) async throws {
-        lock.lock()
-        defer { lock.unlock() }
-
         let key = String(describing: type(of: object))
         var objects = storage[key] ?? []
 
@@ -85,9 +76,6 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
     }
 
     func delete(object: Storable) async throws {
-        lock.lock()
-        defer { lock.unlock() }
-
         let key = String(describing: type(of: object))
         var objects = storage[key] ?? []
 
@@ -100,67 +88,45 @@ final class DatabaseMock: DatabaseProtocol, @unchecked Sendable {
     }
 
     func deleteAll(_ model: (some Storable).Type) async throws {
-        lock.lock()
-        defer { lock.unlock() }
-
         let key = String(describing: model)
         storage[key] = []
         notifyObservers(for: key)
     }
 
     func reset() async throws {
-        lock.lock()
-        defer { lock.unlock() }
-
         storage.removeAll()
-        for (_, continuations) in observerContinuations {
-            for continuation in continuations {
-                continuation.finish()
-            }
-        }
-        observerContinuations.removeAll()
+        observerCallbacks.removeAll()
     }
 
-    func observe<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) -> AsyncStream<[T]> {
+    func observe<T: Storable>(_ model: T.Type, predicate _: NSPredicate?, sorted _: Sorted?) -> AsyncStream<[T]> {
         let key = String(describing: model)
+        let id = UUID()
 
         return AsyncStream { continuation in
-            lock.lock()
-            var continuations = observerContinuations[key] ?? []
-            continuations.append(continuation as! AnyContinuation)
-            observerContinuations[key] = continuations
-            lock.unlock()
-
-            Task {
-                let objects = await self.fetch(model, predicate: predicate, sorted: sorted)
-                continuation.yield(objects)
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                let callback: ([Any]) -> Void = { items in
+                    continuation.yield(items.compactMap { $0 as? T })
+                }
+                observerCallbacks[key, default: [:]][id] = callback
+                let initial = (storage[key] ?? []).compactMap { $0 as? T }
+                continuation.yield(initial)
             }
 
             continuation.onTermination = { @Sendable _ in
-                Task {
-                    self.lock.lock()
-                    self.observerContinuations[key]?.removeAll { $0 as AnyObject === continuation as AnyObject }
-                    self.lock.unlock()
+                Task { @MainActor [weak self] in
+                    self?.observerCallbacks[key]?.removeValue(forKey: id)
                 }
             }
         }
     }
 
+    // MARK: - Private
+
     private func notifyObservers(for key: String) {
-        guard let continuations = observerContinuations[key] else { return }
-
-        Task {
-            self.lock.lock()
-            let objects = self.storage[key] ?? []
-            self.lock.unlock()
-
-            for continuation in continuations {
-                continuation.yield(objects)
-            }
-        }
+        let items = storage[key] ?? []
+        observerCallbacks[key]?.values.forEach { $0(items) }
     }
-
-    // MARK: - Private: Pattern matching helpers
 
     private func primaryKey(of object: Storable) -> String? {
         switch object {
