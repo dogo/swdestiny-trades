@@ -14,11 +14,7 @@ struct PeopleListView: View {
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
 
     init(viewModel: PeopleListViewModel? = nil) {
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: PeopleListViewModel())
-        }
+        _viewModel = State(wrappedValue: viewModel ?? PeopleListViewModel())
     }
 
     var body: some View {

@@ -17,11 +17,7 @@ struct UserCollectionView: View {
     @State private var showToast = false
 
     init(viewModel: UserCollectionViewModel? = nil) {
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: UserCollectionViewModel())
-        }
+        _viewModel = State(wrappedValue: viewModel ?? UserCollectionViewModel())
     }
 
     var body: some View {

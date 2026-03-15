@@ -13,11 +13,7 @@ struct AddToDeckView: View {
     @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
 
     init(deck: DeckDTO, viewModel: AddToDeckViewModel? = nil) {
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: AddToDeckViewModel(deck: deck))
-        }
+        _viewModel = State(wrappedValue: viewModel ?? AddToDeckViewModel(deck: deck))
     }
 
     var body: some View {

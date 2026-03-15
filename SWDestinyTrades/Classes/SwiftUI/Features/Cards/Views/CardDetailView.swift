@@ -22,11 +22,7 @@ struct CardDetailView: View {
         self.cards = cards
         self.selectedCard = selectedCard
         self.showAddToCollection = showAddToCollection
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: CardDetailViewModel(cards: cards, selectedCard: selectedCard))
-        }
+        _viewModel = State(wrappedValue: viewModel ?? CardDetailViewModel(cards: cards, selectedCard: selectedCard))
     }
 
     var body: some View {

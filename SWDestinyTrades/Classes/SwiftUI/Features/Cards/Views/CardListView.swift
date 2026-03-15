@@ -17,11 +17,7 @@ struct CardListView: View {
 
     init(set: SetDTO, viewModel: CardListViewModel? = nil) {
         self.set = set
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: CardListViewModel(set: set))
-        }
+        _viewModel = State(wrappedValue: viewModel ?? CardListViewModel(set: set))
     }
 
     var body: some View {

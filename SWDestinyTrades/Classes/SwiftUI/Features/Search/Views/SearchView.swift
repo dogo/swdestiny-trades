@@ -15,11 +15,7 @@ struct SearchView: View {
     @FocusState private var isSearchFocused: Bool
 
     init(viewModel: SearchViewModel? = nil) {
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: SearchViewModel())
-        }
+        _viewModel = State(wrappedValue: viewModel ?? SearchViewModel())
     }
 
     var body: some View {

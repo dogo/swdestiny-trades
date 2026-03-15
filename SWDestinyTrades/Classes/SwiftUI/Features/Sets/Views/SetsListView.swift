@@ -10,14 +10,10 @@ import SwiftUI
 
 struct SetsListView: View {
     @State private var viewModel: SetsListViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     init(viewModel: SetsListViewModel? = nil) {
-        if let viewModel {
-            _viewModel = State(wrappedValue: viewModel)
-        } else {
-            _viewModel = State(wrappedValue: SetsListViewModel())
-        }
+        _viewModel = State(wrappedValue: viewModel ?? SetsListViewModel())
     }
 
     var body: some View {
