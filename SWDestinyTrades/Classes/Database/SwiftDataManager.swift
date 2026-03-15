@@ -119,20 +119,15 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
     func deleteAll(_ model: (some Storable).Type) async throws {
         switch model {
         case is CardDTO.Type:
-            let items = (try? context.fetch(FetchDescriptor<CardSD>())) ?? []
-            items.forEach { context.delete($0) }
+            try context.delete(model: CardSD.self)
         case is SetDTO.Type:
-            let items = (try? context.fetch(FetchDescriptor<SetSD>())) ?? []
-            items.forEach { context.delete($0) }
+            try context.delete(model: SetSD.self)
         case is DeckDTO.Type:
-            let items = (try? context.fetch(FetchDescriptor<DeckSD>())) ?? []
-            items.forEach { context.delete($0) }
+            try context.delete(model: DeckSD.self)
         case is PersonDTO.Type:
-            let items = (try? context.fetch(FetchDescriptor<PersonSD>())) ?? []
-            items.forEach { context.delete($0) }
+            try context.delete(model: PersonSD.self)
         case is UserCollectionDTO.Type:
-            let items = (try? context.fetch(FetchDescriptor<UserCollectionSD>())) ?? []
-            items.forEach { context.delete($0) }
+            try context.delete(model: UserCollectionSD.self)
         default:
             return
         }
@@ -140,16 +135,11 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
     }
 
     func reset() async throws {
-        let cards = (try? context.fetch(FetchDescriptor<CardSD>())) ?? []
-        cards.forEach { context.delete($0) }
-        let sets = (try? context.fetch(FetchDescriptor<SetSD>())) ?? []
-        sets.forEach { context.delete($0) }
-        let decks = (try? context.fetch(FetchDescriptor<DeckSD>())) ?? []
-        decks.forEach { context.delete($0) }
-        let persons = (try? context.fetch(FetchDescriptor<PersonSD>())) ?? []
-        persons.forEach { context.delete($0) }
-        let collections = (try? context.fetch(FetchDescriptor<UserCollectionSD>())) ?? []
-        collections.forEach { context.delete($0) }
+        try context.delete(model: CardSD.self)
+        try context.delete(model: SetSD.self)
+        try context.delete(model: DeckSD.self)
+        try context.delete(model: PersonSD.self)
+        try context.delete(model: UserCollectionSD.self)
         try saveContext()
     }
 
@@ -184,141 +174,6 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
                 NotificationCenter.default.removeObserver(observer)
             }
         }
-    }
-
-    // MARK: - Private: Fetch Helpers
-
-    private func fetchCards(sorted: Sorted?) -> [CardDTO] {
-        var descriptor = FetchDescriptor<CardSD>()
-        if let sorted {
-            descriptor.sortBy = sortDescriptors(for: CardSD.self, sorted: sorted)
-        }
-        return ((try? context.fetch(descriptor)) ?? []).map { cardDTO(from: $0) }
-    }
-
-    private func fetchSets(sorted: Sorted?) -> [SetDTO] {
-        var descriptor = FetchDescriptor<SetSD>()
-        if let sorted {
-            descriptor.sortBy = sortDescriptors(for: SetSD.self, sorted: sorted)
-        }
-        return ((try? context.fetch(descriptor)) ?? []).map { setDTO(from: $0) }
-    }
-
-    private func fetchDecks(sorted: Sorted?) -> [DeckDTO] {
-        var descriptor = FetchDescriptor<DeckSD>()
-        if let sorted {
-            descriptor.sortBy = sortDescriptors(for: DeckSD.self, sorted: sorted)
-        }
-        return ((try? context.fetch(descriptor)) ?? []).map { deckDTO(from: $0) }
-    }
-
-    private func fetchPersons(sorted: Sorted?) -> [PersonDTO] {
-        var descriptor = FetchDescriptor<PersonSD>()
-        if let sorted {
-            descriptor.sortBy = sortDescriptors(for: PersonSD.self, sorted: sorted)
-        }
-        return ((try? context.fetch(descriptor)) ?? []).map { personDTO(from: $0) }
-    }
-
-    private func fetchUserCollections() -> [UserCollectionDTO] {
-        let descriptor = FetchDescriptor<UserCollectionSD>()
-        return ((try? context.fetch(descriptor)) ?? []).map { userCollectionDTO(from: $0) }
-    }
-
-    // MARK: - Private: Sort Descriptors
-
-    private func sortDescriptors(for _: CardSD.Type, sorted: Sorted) -> [SortDescriptor<CardSD>] {
-        guard sorted.key == "name" else { return [] }
-        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
-    }
-
-    private func sortDescriptors(for _: SetSD.Type, sorted: Sorted) -> [SortDescriptor<SetSD>] {
-        guard sorted.key == "name" else { return [] }
-        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
-    }
-
-    private func sortDescriptors(for _: DeckSD.Type, sorted: Sorted) -> [SortDescriptor<DeckSD>] {
-        guard sorted.key == "name" else { return [] }
-        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
-    }
-
-    private func sortDescriptors(for _: PersonSD.Type, sorted: Sorted) -> [SortDescriptor<PersonSD>] {
-        guard sorted.key == "name" else { return [] }
-        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
-    }
-
-    // MARK: - Private: Find Helpers
-
-    private func findCard(id: String) -> CardSD? {
-        let predicate = #Predicate<CardSD> { $0.id == id }
-        var descriptor = FetchDescriptor<CardSD>(predicate: predicate)
-        descriptor.fetchLimit = 1
-        return try? context.fetch(descriptor).first
-    }
-
-    private func findSet(code: String) -> SetSD? {
-        let predicate = #Predicate<SetSD> { $0.code == code }
-        var descriptor = FetchDescriptor<SetSD>(predicate: predicate)
-        descriptor.fetchLimit = 1
-        return try? context.fetch(descriptor).first
-    }
-
-    private func findDeck(id: String) -> DeckSD? {
-        let predicate = #Predicate<DeckSD> { $0.id == id }
-        var descriptor = FetchDescriptor<DeckSD>(predicate: predicate)
-        descriptor.fetchLimit = 1
-        return try? context.fetch(descriptor).first
-    }
-
-    private func findPerson(id: String) -> PersonSD? {
-        let predicate = #Predicate<PersonSD> { $0.id == id }
-        var descriptor = FetchDescriptor<PersonSD>(predicate: predicate)
-        descriptor.fetchLimit = 1
-        return try? context.fetch(descriptor).first
-    }
-
-    private func findUserCollection(id: String) -> UserCollectionSD? {
-        let predicate = #Predicate<UserCollectionSD> { $0.id == id }
-        var descriptor = FetchDescriptor<UserCollectionSD>(predicate: predicate)
-        descriptor.fetchLimit = 1
-        return try? context.fetch(descriptor).first
-    }
-
-    // MARK: - Private: Find or Create
-
-    func findOrCreateCard(id: String) -> CardSD {
-        if let existing = findCard(id: id) { return existing }
-        let card = CardSD(id: id)
-        context.insert(card)
-        return card
-    }
-
-    private func findOrCreateSet(code: String) -> SetSD {
-        if let existing = findSet(code: code) { return existing }
-        let set = SetSD(code: code)
-        context.insert(set)
-        return set
-    }
-
-    private func findOrCreateDeck(id: String) -> DeckSD {
-        if let existing = findDeck(id: id) { return existing }
-        let deck = DeckSD(id: id)
-        context.insert(deck)
-        return deck
-    }
-
-    private func findOrCreatePerson(id: String) -> PersonSD {
-        if let existing = findPerson(id: id) { return existing }
-        let person = PersonSD(id: id)
-        context.insert(person)
-        return person
-    }
-
-    func findOrCreateUserCollection(id: String) -> UserCollectionSD {
-        if let existing = findUserCollection(id: id) { return existing }
-        let collection = UserCollectionSD(id: id)
-        context.insert(collection)
-        return collection
     }
 
     // MARK: - Private: Upsert
@@ -378,5 +233,128 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
 
     private func notifyChange() {
         NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
+    }
+}
+
+// MARK: - Fetch Helpers
+
+private extension SwiftDataManager {
+
+    func fetchCards(sorted: Sorted?) -> [CardDTO] {
+        var descriptor = FetchDescriptor<CardSD>()
+        if let sorted { descriptor.sortBy = sortDescriptors(for: CardSD.self, sorted: sorted) }
+        return ((try? context.fetch(descriptor)) ?? []).map { cardDTO(from: $0) }
+    }
+
+    func fetchSets(sorted: Sorted?) -> [SetDTO] {
+        var descriptor = FetchDescriptor<SetSD>()
+        if let sorted { descriptor.sortBy = sortDescriptors(for: SetSD.self, sorted: sorted) }
+        return ((try? context.fetch(descriptor)) ?? []).map { setDTO(from: $0) }
+    }
+
+    func fetchDecks(sorted: Sorted?) -> [DeckDTO] {
+        var descriptor = FetchDescriptor<DeckSD>()
+        if let sorted { descriptor.sortBy = sortDescriptors(for: DeckSD.self, sorted: sorted) }
+        return ((try? context.fetch(descriptor)) ?? []).map { deckDTO(from: $0) }
+    }
+
+    func fetchPersons(sorted: Sorted?) -> [PersonDTO] {
+        var descriptor = FetchDescriptor<PersonSD>()
+        if let sorted { descriptor.sortBy = sortDescriptors(for: PersonSD.self, sorted: sorted) }
+        return ((try? context.fetch(descriptor)) ?? []).map { personDTO(from: $0) }
+    }
+
+    func fetchUserCollections() -> [UserCollectionDTO] {
+        return ((try? context.fetch(FetchDescriptor<UserCollectionSD>())) ?? []).map { userCollectionDTO(from: $0) }
+    }
+
+    func sortDescriptors(for _: CardSD.Type, sorted: Sorted) -> [SortDescriptor<CardSD>] {
+        guard sorted.key == "name" else { return [] }
+        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
+    }
+
+    func sortDescriptors(for _: SetSD.Type, sorted: Sorted) -> [SortDescriptor<SetSD>] {
+        guard sorted.key == "name" else { return [] }
+        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
+    }
+
+    func sortDescriptors(for _: DeckSD.Type, sorted: Sorted) -> [SortDescriptor<DeckSD>] {
+        guard sorted.key == "name" else { return [] }
+        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
+    }
+
+    func sortDescriptors(for _: PersonSD.Type, sorted: Sorted) -> [SortDescriptor<PersonSD>] {
+        guard sorted.key == "name" else { return [] }
+        return [SortDescriptor(\.name, order: sorted.ascending ? .forward : .reverse)]
+    }
+}
+
+// MARK: - Find & FindOrCreate Helpers
+
+extension SwiftDataManager {
+
+    func findCard(id: String) -> CardSD? {
+        var descriptor = FetchDescriptor<CardSD>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try? context.fetch(descriptor).first
+    }
+
+    func findSet(code: String) -> SetSD? {
+        var descriptor = FetchDescriptor<SetSD>(predicate: #Predicate { $0.code == code })
+        descriptor.fetchLimit = 1
+        return try? context.fetch(descriptor).first
+    }
+
+    func findDeck(id: String) -> DeckSD? {
+        var descriptor = FetchDescriptor<DeckSD>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try? context.fetch(descriptor).first
+    }
+
+    func findPerson(id: String) -> PersonSD? {
+        var descriptor = FetchDescriptor<PersonSD>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try? context.fetch(descriptor).first
+    }
+
+    func findUserCollection(id: String) -> UserCollectionSD? {
+        var descriptor = FetchDescriptor<UserCollectionSD>(predicate: #Predicate { $0.id == id })
+        descriptor.fetchLimit = 1
+        return try? context.fetch(descriptor).first
+    }
+
+    func findOrCreateCard(id: String) -> CardSD {
+        if let existing = findCard(id: id) { return existing }
+        let card = CardSD(id: id)
+        context.insert(card)
+        return card
+    }
+
+    func findOrCreateSet(code: String) -> SetSD {
+        if let existing = findSet(code: code) { return existing }
+        let set = SetSD(code: code)
+        context.insert(set)
+        return set
+    }
+
+    func findOrCreateDeck(id: String) -> DeckSD {
+        if let existing = findDeck(id: id) { return existing }
+        let deck = DeckSD(id: id)
+        context.insert(deck)
+        return deck
+    }
+
+    func findOrCreatePerson(id: String) -> PersonSD {
+        if let existing = findPerson(id: id) { return existing }
+        let person = PersonSD(id: id)
+        context.insert(person)
+        return person
+    }
+
+    func findOrCreateUserCollection(id: String) -> UserCollectionSD {
+        if let existing = findUserCollection(id: id) { return existing }
+        let collection = UserCollectionSD(id: id)
+        context.insert(collection)
+        return collection
     }
 }
