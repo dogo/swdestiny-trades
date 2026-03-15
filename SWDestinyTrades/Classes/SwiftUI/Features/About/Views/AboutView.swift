@@ -9,7 +9,12 @@
 import SwiftUI
 
 struct AboutView: View {
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
+    @State private var viewModel: AboutViewModel
+
+    init(viewModel: AboutViewModel? = nil) {
+        _viewModel = State(wrappedValue: viewModel ?? AboutViewModel())
+    }
 
     var body: some View {
         ScrollView {
@@ -51,7 +56,9 @@ struct AboutView: View {
                 Text(components[0])
                     .font(.body)
 
-                Button(action: openWebsite) {
+                Button {
+                    viewModel.openWebsite(using: navigationCoordinator)
+                } label: {
                     Text(L10n.swdestinydbWebsite)
                         .font(.body)
                         .foregroundStyle(.blue)
@@ -66,12 +73,6 @@ struct AboutView: View {
                 Text(aboutText)
                     .font(.body)
             }
-        }
-    }
-
-    private func openWebsite() {
-        if let url = URL(string: L10n.swdestinydbWebsite) {
-            navigationCoordinator.navigate(to: .webview(url: url))
         }
     }
 }
