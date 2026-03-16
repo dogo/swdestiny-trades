@@ -1,5 +1,5 @@
 //
-//  LoggerManager.swift
+//  AnalyticsManager.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 23/10/18.
@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import OSLog
 
-final class LoggerManager: LoggerProtocol {
-    static let shared: LoggerManager = {
-        var manager = LoggerManager()
+final class AnalyticsManager: AnalyticsProtocol {
+    static let shared: AnalyticsManager = {
+        var manager = AnalyticsManager()
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
             manager.loggers.append(FirebaseLogger())
         }
@@ -19,8 +18,7 @@ final class LoggerManager: LoggerProtocol {
         return manager
     }()
 
-    private var loggers: [LoggerProtocol] = []
-    private let osLogger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.swdestiny.trades", category: "App")
+    private var loggers: [AnalyticsProtocol] = []
 
     private init() {}
 
@@ -30,17 +28,5 @@ final class LoggerManager: LoggerProtocol {
 
     func log(event: Events, parameters: [String: Any]? = nil) {
         loggers.forEach { $0.log(event: event, parameters: parameters) }
-    }
-
-    func logError(_ message: String) {
-        osLogger.error("\(message)")
-    }
-
-    func logInfo(_ message: String) {
-        osLogger.info("\(message)")
-    }
-
-    func logDebug(_ message: String) {
-        osLogger.debug("\(message)")
     }
 }

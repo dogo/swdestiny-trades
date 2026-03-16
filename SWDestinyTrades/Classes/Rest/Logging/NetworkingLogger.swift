@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 final class NetworkingLogger {
     enum LogLevel {
@@ -18,7 +19,7 @@ final class NetworkingLogger {
     private let loglevel: LogLevel
     private let outputStream: TextOutputStream
 
-    init(level: LogLevel, outputStream: TextOutputStream = StandardOutputStream()) {
+    init(level: LogLevel, outputStream: TextOutputStream = OSLogOutputStream()) {
         loglevel = level
         self.outputStream = outputStream
     }
@@ -139,6 +140,23 @@ final class NetworkingLogger {
 
 protocol TextOutputStream {
     func write(_ string: String)
+}
+
+struct OSLogOutputStream: TextOutputStream {
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "com.swdestiny.trades",
+        category: "Networking"
+    )
+
+    func write(_ string: String) {
+        let trimmed = string.trimmingCharacters(in: .newlines)
+        guard !trimmed.isEmpty else { return }
+        if trimmed.contains("💥") {
+            logger.error("\(trimmed, privacy: .public)")
+        } else {
+            logger.debug("\(trimmed, privacy: .public)")
+        }
+    }
 }
 
 struct StandardOutputStream: TextOutputStream {

@@ -1,5 +1,5 @@
 //
-//  LoggerProtocol.swift
+//  AnalyticsProtocol.swift
 //  SWDestiny Trades
 //
 //  Created by Diogo Autilio on 23/10/18.
@@ -14,7 +14,7 @@ enum Events: String {
     case allCards
 }
 
-protocol LoggerProtocol {
+protocol AnalyticsProtocol {
     func setup()
     func log(event: Events, parameters: [String: Any]?)
 }

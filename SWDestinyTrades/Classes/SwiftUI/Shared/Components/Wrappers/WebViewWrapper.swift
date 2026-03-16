@@ -33,7 +33,7 @@ struct WebViewWrapper: UIViewRepresentable {
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {}
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation, withError error: Error) {
-            LoggerManager.shared.logError("WebView navigation failed: \(error.localizedDescription)")
+            OSLogDiagnosticsLogger.shared.logError("WebView navigation failed: \(error.localizedDescription)")
         }
     }
 }
