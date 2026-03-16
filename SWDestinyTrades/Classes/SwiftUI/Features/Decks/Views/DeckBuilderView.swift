@@ -59,9 +59,9 @@ struct DeckBuilderView: View {
         .onChange(of: viewModel.shareText) { _, newValue in
             shareItem = newValue.map { ShareText(value: $0) }
         }
-        .sheet(item: $shareItem, onDismiss: { viewModel.shareText = nil }) { item in
+        .sheet(item: $shareItem, onDismiss: { viewModel.shareText = nil }, content: { item in
             ShareSheet(items: [item.value])
-        }
+        })
         .onAppear {
             Task {
                 await viewModel.handleViewAppear()

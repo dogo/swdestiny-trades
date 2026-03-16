@@ -38,6 +38,17 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         loadCollectionFromDatabase()
     }
 
+    func refreshCollection() async {
+        setLoading(true)
+        let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
+        if let userCollection = collections.first {
+            updateItems(userCollection.myCollection)
+        } else {
+            updateItems([])
+        }
+        setLoaded()
+    }
+
     func applyFilters() {
         performFiltering(searchText: searchText)
     }

@@ -37,7 +37,7 @@ struct UserCollectionView: View {
                     }
                 }
             }
-            .refreshable { viewModel.loadCollection() }
+            .refreshable { await viewModel.refreshCollection() }
             .searchable(text: $viewModel.searchText, prompt: L10n.searchCollection)
             .onChange(of: viewModel.searchText) { _, newValue in
                 viewModel.performFiltering(searchText: newValue)
