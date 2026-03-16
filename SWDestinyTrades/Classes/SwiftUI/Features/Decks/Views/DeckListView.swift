@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DeckListView: View {
     @State private var viewModel: DeckListViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     init(dependencyContainer: DependencyContainer = .shared) {
         _viewModel = State(wrappedValue: DeckListViewModel(dependencyContainer: dependencyContainer))

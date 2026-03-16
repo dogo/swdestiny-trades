@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddToDeckView: View {
     @State private var viewModel: AddToDeckViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     init(deck: DeckDTO, viewModel: AddToDeckViewModel? = nil) {
         _viewModel = State(wrappedValue: viewModel ?? AddToDeckViewModel(deck: deck))

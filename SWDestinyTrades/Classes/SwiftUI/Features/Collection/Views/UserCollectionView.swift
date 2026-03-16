@@ -10,7 +10,7 @@ import SwiftUI
 
 struct UserCollectionView: View {
     @State private var viewModel: UserCollectionViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     @State private var showingFilterSheet = false
     @State private var showingShareSheet = false

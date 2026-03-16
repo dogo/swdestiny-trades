@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CardListView: View {
     @State private var viewModel: CardListViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
     @State private var showingFilterOptions = false
 
     let set: SetDTO

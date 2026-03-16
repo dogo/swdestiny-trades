@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AddCardView: View {
     @State private var viewModel: AddCardViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
     @Environment(\.dismiss) private var dismiss
 
     @State private var showingFilterSheet = false

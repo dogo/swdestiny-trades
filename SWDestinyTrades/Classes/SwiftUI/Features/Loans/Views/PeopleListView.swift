@@ -11,7 +11,7 @@ import SwiftUI
 struct PeopleListView: View {
 
     @State private var viewModel: PeopleListViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     init(viewModel: PeopleListViewModel? = nil) {
         _viewModel = State(wrappedValue: viewModel ?? PeopleListViewModel())

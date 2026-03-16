@@ -11,7 +11,7 @@ import SwiftUI
 struct LoanDetailView: View {
 
     @State private var viewModel: LoanDetailViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     init(personId: String) {
         _viewModel = State(wrappedValue: LoanDetailViewModel(personId: personId))

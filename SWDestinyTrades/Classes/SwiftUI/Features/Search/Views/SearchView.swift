@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var viewModel: SearchViewModel
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     @FocusState private var isSearchFocused: Bool
 

@@ -11,7 +11,7 @@ import SwiftUI
 struct NewPersonView: View {
 
     @State private var viewModel = NewPersonViewModel()
-    @Environment(NavigationCoordinator.self) var navigationCoordinator: NavigationCoordinator
+    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focusedField: FormField?
 
