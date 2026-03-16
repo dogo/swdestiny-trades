@@ -40,7 +40,7 @@ struct LoanDetailView: View {
         .navigationTitle(viewModel.personFullName)
         .navigationBarTitleDisplayMode(.large)
         .refreshable {
-            viewModel.loadLoanData()
+            await viewModel.loadLoanData()
         }
         .confirmationDialog("Delete Card", isPresented: $viewModel.showingDeleteConfirmation) {
             Button(L10n.delete, role: .destructive) {
@@ -56,7 +56,9 @@ struct LoanDetailView: View {
         }
         .toastQueue(viewModel.toastQueue)
         .onAppear {
-            viewModel.loadLoanData()
+            Task {
+                await viewModel.loadLoanData()
+            }
         }
     }
 }

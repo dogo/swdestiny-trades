@@ -70,6 +70,7 @@ struct AddToDeckView: View {
                 } else {
                     viewModel.loadLocalCards()
                 }
+                await viewModel.awaitCurrentLoad()
             }
         }
     }

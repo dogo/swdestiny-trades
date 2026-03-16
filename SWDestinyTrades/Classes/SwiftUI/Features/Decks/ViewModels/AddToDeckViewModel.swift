@@ -16,7 +16,7 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     private(set) var isLoadingFromRemote = false
     private(set) var dataSource: DataSource = .remote
 
-    private var loadTask: Task<Void, Never>?
+    private(set) var loadTask: Task<Void, Never>?
 
     enum DataSource {
         case remote
@@ -100,6 +100,10 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
                 self.handleError(ConcurrencyError.realmAccessError(error))
             }
         }
+    }
+
+    func awaitCurrentLoad() async {
+        await loadTask?.value
     }
 
     func addCardToDeck(_ card: CardDTO) {

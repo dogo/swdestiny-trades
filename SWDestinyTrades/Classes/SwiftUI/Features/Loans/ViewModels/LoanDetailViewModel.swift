@@ -31,7 +31,7 @@ final class LoanDetailViewModel: BaseViewModel {
     init(person: PersonDTO, dependencyContainer: DependencyContainer = .shared) {
         self.person = person
         super.init(dependencyContainer: dependencyContainer)
-        loadLoanData()
+        Task { await self.loadLoanData() }
     }
 
     required init(dependencyContainer: DependencyContainer = .shared) {
@@ -44,20 +44,18 @@ final class LoanDetailViewModel: BaseViewModel {
             let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
             if let foundPerson = people.first(where: { $0.id == personId }) {
                 self.person = foundPerson
-                self.loadLoanData()
+                await self.loadLoanData()
             }
         }
     }
 
-    func loadLoanData() {
-        Task { @MainActor in
-            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-            if let freshPerson = people.first(where: { $0.id == person.id }) {
-                self.person = freshPerson
-            }
-            self.lentCards = self.person.lentMe
-            self.borrowedCards = self.person.borrowed
+    func loadLoanData() async {
+        let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+        if let freshPerson = people.first(where: { $0.id == person.id }) {
+            person = freshPerson
         }
+        lentCards = person.lentMe
+        borrowedCards = person.borrowed
     }
 
     func updateCardQuantity(_ card: CardDTO, newQuantity: Int) {
@@ -67,7 +65,7 @@ final class LoanDetailViewModel: BaseViewModel {
 
                 card.quantity = newQuantity
                 try await database.save(object: card, update: .modified)
-                self.loadLoanData()
+                await self.loadLoanData()
             } catch is CancellationError {
                 // Silently cancel
             } catch {
@@ -98,7 +96,7 @@ final class LoanDetailViewModel: BaseViewModel {
                 }
 
                 try await database.save(object: self.person, update: .modified)
-                self.loadLoanData()
+                await self.loadLoanData()
                 self.cardToDelete = nil
                 self.showingDeleteConfirmation = false
             } catch {
