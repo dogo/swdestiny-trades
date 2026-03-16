@@ -8,14 +8,6 @@
 
 import SwiftUI
 
-private struct ShareText: Identifiable {
-    var id: String {
-        value
-    }
-
-    let value: String
-}
-
 struct UserCollectionView: View {
     @State private var viewModel: UserCollectionViewModel
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator

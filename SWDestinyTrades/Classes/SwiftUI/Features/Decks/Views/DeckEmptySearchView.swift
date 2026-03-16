@@ -9,9 +9,7 @@
 import SwiftUI
 
 struct DeckEmptySearchView: View {
-    let searchText: String
-
     var body: some View {
-        ContentUnavailableView.search(text: searchText)
+        ContentUnavailableView.search
     }
 }

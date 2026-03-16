@@ -26,9 +26,7 @@ struct ErrorView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
-            Button(L10n.retry) {
-                retry()
-            }
+            Button(L10n.retry, action: retry)
             .buttonStyle(.borderedProminent)
         }
         .padding()

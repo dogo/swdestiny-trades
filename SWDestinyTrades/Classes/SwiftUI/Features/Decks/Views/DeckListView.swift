@@ -21,7 +21,7 @@ struct DeckListView: View {
             if viewModel.loadingState.isLoading {
                 DeckListLoadingView()
             } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
-                DeckEmptySearchView(searchText: viewModel.searchText)
+                DeckEmptySearchView()
             } else if viewModel.filteredItems.isEmpty {
                 DeckEmptyStateView(onCreateDeck: createNewDeck)
             } else {

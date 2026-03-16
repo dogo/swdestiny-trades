@@ -8,14 +8,6 @@
 
 import SwiftUI
 
-private struct ShareText: Identifiable {
-    var id: String {
-        value
-    }
-
-    let value: String
-}
-
 struct DeckBuilderView: View {
     @State private var viewModel: DeckBuilderViewModel
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
