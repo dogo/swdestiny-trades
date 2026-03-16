@@ -38,6 +38,14 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         loadCollectionFromDatabase()
     }
 
+    var shareText: String {
+        var text = "\(L10n.myCollection)\n\n"
+        for card in filteredItems.filter({ $0.quantity > 0 }) {
+            text += "\(card.quantity)x \(card.name)\n"
+        }
+        return text
+    }
+
     func refreshCollection() async {
         setLoading(true)
         let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)

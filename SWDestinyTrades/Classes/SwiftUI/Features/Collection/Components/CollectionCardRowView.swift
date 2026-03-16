@@ -64,7 +64,7 @@ struct CollectionCardRowView: View {
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .background(Color(.systemGray5))
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .clipShape(.rect(cornerRadius: 4))
 
                 Text(card.typeName.capitalized)
                     .font(.caption)

@@ -30,7 +30,7 @@ struct UserCollectionView: View {
                 }
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button(L10n.share, systemImage: "square.and.arrow.up") {
-                        shareItem = ShareText(value: generateShareText())
+                        shareItem = ShareText(value: viewModel.shareText)
                     }
                     Button(L10n.addCard, systemImage: "plus") {
                         navigationCoordinator.navigate(to: .addCard)
@@ -57,13 +57,6 @@ struct UserCollectionView: View {
             }
     }
 
-    private func generateShareText() -> String {
-        var text = "\(L10n.myCollection)\n\n"
-        for card in viewModel.filteredItems.filter({ $0.quantity > 0 }) {
-            text += "\(card.quantity)x \(card.name)\n"
-        }
-        return text
-    }
 }
 
 #Preview {

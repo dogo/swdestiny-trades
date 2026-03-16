@@ -35,6 +35,7 @@ struct DeckCardRowView: View {
                 .renderingMode(.template)
                 .foregroundStyle(card.factionColor())
                 .frame(width: 25, height: 25)
+                .accessibilityHidden(true)
 
             Text("\(quantity)")
                 .font(.body)
