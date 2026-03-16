@@ -56,7 +56,6 @@ struct UserCollectionView: View {
                 ShareSheet(items: [item.value])
             }
     }
-
 }
 
 #Preview {

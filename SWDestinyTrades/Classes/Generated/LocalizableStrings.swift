@@ -356,6 +356,8 @@ internal enum L10n {
   internal static func uniqueCardsViewmodeluniquecardcount(_ p1: Any) -> String {
     return L10n.tr("Localizable", "UNIQUE_CARDS_VIEWMODELUNIQUECARDCOUNT", String(describing: p1), fallback: "Unique cards: %@")
   }
+  /// Unnamed Deck
+  internal static let unnamedDeck = L10n.tr("Localizable", "UNNAMED_DECK", fallback: "Unnamed Deck")
   /// Upgrade
   internal static let upgrade = L10n.tr("Localizable", "UPGRADE", fallback: "Upgrade")
   /// Version %@ (%@)

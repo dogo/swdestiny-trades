@@ -46,6 +46,7 @@
 "CREATE_YOUR_FIRST_DECK_TO_GET_STARTED" = "Create your first deck to get started";
 "DECKS" = "Decks";
 "DECK_NAME" = "Deck name";
+"UNNAMED_DECK" = "Unnamed Deck";
 "DECK_GRAPH" = "Deck graph";
 "DECK_STATISTICS" = "Deck statistics";
 "DECREASE_QUANTITY" = "Decrease quantity";

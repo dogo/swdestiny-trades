@@ -46,6 +46,7 @@
 "CREATE_YOUR_FIRST_DECK_TO_GET_STARTED" = "Crie seu primeiro baralho para começar";
 "DECKS" = "Baralhos";
 "DECK_NAME" = "Nome do baralho";
+"UNNAMED_DECK" = "Baralho sem nome";
 "DECK_GRAPH" = "Gráfico do baralho";
 "DECK_STATISTICS" = "Estatísticas do baralho";
 "DECREASE_QUANTITY" = "Diminuir quantidade";

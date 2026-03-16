@@ -40,14 +40,14 @@ struct DeckRowView: View {
     private var deckNameSection: some View {
         VStack(alignment: .leading, spacing: 4) {
             if isEditing {
-                TextField("Deck Name", text: $editedName)
+                TextField(L10n.deckName, text: $editedName)
                     .textFieldStyle(.roundedBorder)
                     .onSubmit {
                         saveName()
                     }
             } else {
                 Button(action: onEdit) {
-                    Text(deck.name.isEmpty ? "Unnamed Deck" : deck.name)
+                    Text(deck.name.isEmpty ? L10n.unnamedDeck : deck.name)
                         .font(.headline)
                         .foregroundStyle(.primary)
                 }
