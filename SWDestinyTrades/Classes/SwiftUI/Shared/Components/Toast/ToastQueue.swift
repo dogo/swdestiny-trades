@@ -64,14 +64,23 @@ private struct ToastQueueModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .overlay(alignment: .top) {
+            .overlay {
                 if let item = queue.current {
-                    ToastView(item: item, onDismiss: queue.advance)
-                        .padding(.top, 8)
-                        .transition(.move(edge: .top).combined(with: .opacity))
-                        .id(item.id)
+                    VStack(spacing: 0) {
+                        ToastView(item: item, onDismiss: queue.advance)
+                            .padding(.top, topSafeAreaInset + 8)
+                        Spacer()
+                    }
+                    .ignoresSafeArea()
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .id(item.id)
                 }
             }
             .animation(.spring(response: 0.3, dampingFraction: 0.8), value: queue.current?.id)
+    }
+
+    private var topSafeAreaInset: CGFloat {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+            .keyWindow?.safeAreaInsets.top ?? 0
     }
 }
