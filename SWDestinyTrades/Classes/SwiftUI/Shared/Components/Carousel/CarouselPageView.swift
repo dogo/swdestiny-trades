@@ -54,7 +54,7 @@ struct CarouselPageView: View {
                         .font(.largeTitle)
                         .foregroundStyle(.secondary)
                 }
-                Button("Retry") { onRetry() }
+                Button(L10n.retry) { onRetry() }
                     .buttonStyle(.bordered)
             }
         }
