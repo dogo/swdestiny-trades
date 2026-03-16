@@ -19,7 +19,7 @@ struct DeckEmptySearchView: View {
 
             Text(L10n.noResults)
                 .font(.title2)
-                .fontWeight(.semibold)
+                .bold()
 
             Text(L10n.noDecksMatchViewmodelsearchtext(searchText))
                 .foregroundStyle(.secondary)

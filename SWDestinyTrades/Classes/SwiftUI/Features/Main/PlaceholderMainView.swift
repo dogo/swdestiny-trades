@@ -13,7 +13,7 @@ struct PlaceholderMainView: View {
         VStack {
             Text(L10n.swdestinyTrades)
                 .font(.largeTitle)
-                .fontWeight(.bold)
+                .bold()
 
             Text(L10n.swiftuiMigrationInProgress)
                 .font(.subheadline)
