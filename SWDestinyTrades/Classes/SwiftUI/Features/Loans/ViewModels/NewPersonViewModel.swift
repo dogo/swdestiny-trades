@@ -83,9 +83,8 @@ final class NewPersonViewModel: BaseViewModel {
     }
 
     func resetForm() {
-        firstName = ""
-        lastName = ""
         validationErrors.removeAll()
+        isFormValid = false
     }
 
     func hasValidationError(_ error: ValidationError) -> Bool {
