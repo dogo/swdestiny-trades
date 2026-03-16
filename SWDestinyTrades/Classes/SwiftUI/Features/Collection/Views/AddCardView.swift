@@ -66,7 +66,8 @@ struct AddCardView: View {
     @ViewBuilder private var cardListContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
             if viewModel.searchText.isEmpty {
-                ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                ContentUnavailableView(L10n.noCardsFound,
+                                       systemImage: "rectangle.stack",
                                        description: Text(L10n.pullToRefreshToLoadCards))
             } else {
                 ContentUnavailableView.search

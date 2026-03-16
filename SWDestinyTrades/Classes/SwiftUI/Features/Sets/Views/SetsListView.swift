@@ -22,7 +22,8 @@ struct SetsListView: View {
                 SetsLoadingView()
             } else if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
                 if viewModel.searchText.isEmpty {
-                    ContentUnavailableView(L10n.noSetsFound, systemImage: "rectangle.stack",
+                    ContentUnavailableView(L10n.noSetsFound,
+                                           systemImage: "rectangle.stack",
                                            description: Text(L10n.pullToRefreshToLoadSets))
                 } else {
                     ContentUnavailableView.search

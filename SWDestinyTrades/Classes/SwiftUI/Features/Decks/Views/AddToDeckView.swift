@@ -48,10 +48,12 @@ struct AddToDeckView: View {
             if !viewModel.searchText.isEmpty {
                 ContentUnavailableView.search
             } else if viewModel.dataSource == .remote {
-                ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                ContentUnavailableView(L10n.noCardsFound,
+                                       systemImage: "rectangle.stack",
                                        description: Text(L10n.pullToRefreshToLoadCards))
             } else {
-                ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                ContentUnavailableView(L10n.noCardsFound,
+                                       systemImage: "rectangle.stack",
                                        description: Text(L10n.noCardsInCollection))
             }
         } else {

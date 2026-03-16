@@ -27,7 +27,7 @@ struct ErrorView: View {
                 .padding(.horizontal)
 
             Button(L10n.retry, action: retry)
-            .buttonStyle(.borderedProminent)
+                .buttonStyle(.borderedProminent)
         }
         .padding()
     }

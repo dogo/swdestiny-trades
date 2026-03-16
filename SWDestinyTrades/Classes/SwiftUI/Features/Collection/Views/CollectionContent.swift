@@ -19,7 +19,8 @@ struct CollectionContent: View {
                 LoadingView()
             } else if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
                 if viewModel.searchText.isEmpty {
-                    ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                    ContentUnavailableView(L10n.noCardsFound,
+                                           systemImage: "rectangle.stack",
                                            description: Text(L10n.collectionEmpty))
                 } else {
                     ContentUnavailableView.search

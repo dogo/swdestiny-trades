@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DeckBuilderView: View {
     @State private var viewModel: DeckBuilderViewModel
+    @State private var shareItem: ShareText?
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
     init(deck: DeckDTO?, dependencyContainer: DependencyContainer = .shared) {
@@ -55,10 +56,10 @@ struct DeckBuilderView: View {
                 }
             }
         }
-        .sheet(item: Binding<ShareText?>(
-            get: { viewModel.shareText.map { ShareText(value: $0) } },
-            set: { viewModel.shareText = $0?.value }
-        )) { item in
+        .onChange(of: viewModel.shareText) { _, newValue in
+            shareItem = newValue.map { ShareText(value: $0) }
+        }
+        .sheet(item: $shareItem, onDismiss: { viewModel.shareText = nil }) { item in
             ShareSheet(items: [item.value])
         }
         .onAppear {
