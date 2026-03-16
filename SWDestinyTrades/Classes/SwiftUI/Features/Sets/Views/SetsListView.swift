@@ -21,11 +21,12 @@ struct SetsListView: View {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 SetsLoadingView()
             } else if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-                EmptyStateView(
-                    title: L10n.noSetsFound,
-                    message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadSets : L10n.noSetsMatchSearch,
-                    systemImage: "rectangle.stack"
-                )
+                if viewModel.searchText.isEmpty {
+                    ContentUnavailableView(L10n.noSetsFound, systemImage: "rectangle.stack",
+                                           description: Text(L10n.pullToRefreshToLoadSets))
+                } else {
+                    ContentUnavailableView.search
+                }
             } else {
                 List(viewModel.filteredItems, id: \.code) { set in
                     SetRowView(set: set) {

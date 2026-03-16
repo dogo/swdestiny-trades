@@ -60,11 +60,12 @@ struct CardListView: View {
 
     @ViewBuilder private var cardListContent: some View {
         if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-            EmptyStateView(
-                title: L10n.noCardsFound,
-                message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadCards : L10n.noCardsMatchSearch,
-                systemImage: "rectangle.stack"
-            )
+            if viewModel.searchText.isEmpty {
+                ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                                       description: Text(L10n.pullToRefreshToLoadCards))
+            } else {
+                ContentUnavailableView.search
+            }
         } else {
             List(viewModel.filteredItems, id: \.code) { card in
                 CardRowView(card: card) {

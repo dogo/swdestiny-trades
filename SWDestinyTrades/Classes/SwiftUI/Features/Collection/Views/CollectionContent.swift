@@ -18,11 +18,12 @@ struct CollectionContent: View {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 LoadingView()
             } else if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-                EmptyStateView(
-                    title: L10n.noCardsFound,
-                    message: viewModel.searchText.isEmpty ? L10n.collectionEmpty : L10n.noCardsMatchSearch,
-                    systemImage: "rectangle.stack"
-                )
+                if viewModel.searchText.isEmpty {
+                    ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                                           description: Text(L10n.collectionEmpty))
+                } else {
+                    ContentUnavailableView.search
+                }
             } else {
                 List(viewModel.filteredItems, id: \.code) { card in
                     CollectionCardRowView(card: card) { updatedCard, quantity in

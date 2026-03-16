@@ -73,13 +73,15 @@ struct AddToDeckView: View {
 
     @ViewBuilder private var cardsList: some View {
         if viewModel.filteredItems.isEmpty {
-            EmptyStateView(
-                title: L10n.noCardsFound,
-                message: viewModel.searchText.isEmpty ?
-                    (viewModel.dataSource == .remote ? L10n.pullToRefreshToLoadCards : L10n.noCardsInCollection) :
-                    L10n.noCardsMatchSearch,
-                systemImage: "rectangle.stack"
-            )
+            if !viewModel.searchText.isEmpty {
+                ContentUnavailableView.search
+            } else if viewModel.dataSource == .remote {
+                ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                                       description: Text(L10n.pullToRefreshToLoadCards))
+            } else {
+                ContentUnavailableView(L10n.noCardsFound, systemImage: "rectangle.stack",
+                                       description: Text(L10n.noCardsInCollection))
+            }
         } else {
             List(viewModel.filteredItems, id: \.code) { card in
                 AddCardDetailRowView(card: card) {
