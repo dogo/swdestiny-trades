@@ -106,6 +106,7 @@ struct CollectionCardRowView: View {
             } label: {
                 Image(systemName: "minus.circle")
             }
+            .accessibilityLabel(L10n.decreaseQuantity)
             .disabled(quantity <= 0)
             .buttonStyle(.plain)
 
@@ -121,6 +122,7 @@ struct CollectionCardRowView: View {
             } label: {
                 Image(systemName: "plus.circle")
             }
+            .accessibilityLabel(L10n.increaseQuantity)
             .buttonStyle(.plain)
         }
         .font(.subheadline)

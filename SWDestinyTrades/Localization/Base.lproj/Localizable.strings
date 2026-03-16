@@ -48,7 +48,9 @@
 "DECK_NAME" = "Deck name";
 "DECK_GRAPH" = "Deck graph";
 "DECK_STATISTICS" = "Deck statistics";
+"DECREASE_QUANTITY" = "Decrease quantity";
 "DELETE_CARD" = "Delete card";
+"INCREASE_QUANTITY" = "Increase quantity";
 "DELETE_DECK" = "Delete deck";
 "DICE_SYMBOLS" = "Dice symbols";
 "DONE" = "Done";

@@ -48,7 +48,9 @@
 "DECK_NAME" = "Nome do baralho";
 "DECK_GRAPH" = "Gráfico do baralho";
 "DECK_STATISTICS" = "Estatísticas do baralho";
+"DECREASE_QUANTITY" = "Diminuir quantidade";
 "DELETE_CARD" = "Excluir carta";
+"INCREASE_QUANTITY" = "Aumentar quantidade";
 "DELETE_DECK" = "Excluir baralho";
 "DICE_SYMBOLS" = "Símbolos dos dados";
 "DONE" = "Concluído";

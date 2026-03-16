@@ -71,6 +71,7 @@ struct DeckCardRowView: View {
         .onTapGesture {
             onTap()
         }
+        .accessibilityAddTraits(.isButton)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(L10n.delete, role: .destructive) {
                 onRemove()

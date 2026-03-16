@@ -126,6 +126,8 @@ internal enum L10n {
   internal static let deckStatistics = L10n.tr("Localizable", "DECK_STATISTICS", fallback: "Deck statistics")
   /// Decks
   internal static let decks = L10n.tr("Localizable", "DECKS", fallback: "Decks")
+  /// Decrease quantity
+  internal static let decreaseQuantity = L10n.tr("Localizable", "DECREASE_QUANTITY", fallback: "Decrease quantity")
   /// Delete
   internal static let delete = L10n.tr("Localizable", "DELETE", fallback: "Delete")
   /// Delete card
@@ -188,6 +190,8 @@ internal enum L10n {
   internal static let health = L10n.tr("Localizable", "HEALTH", fallback: "Health")
   /// Illustrator
   internal static let illustrator = L10n.tr("Localizable", "ILLUSTRATOR", fallback: "Illustrator")
+  /// Increase quantity
+  internal static let increaseQuantity = L10n.tr("Localizable", "INCREASE_QUANTITY", fallback: "Increase quantity")
   /// Last name
   internal static let lastName = L10n.tr("Localizable", "LAST_NAME", fallback: "Last name")
   /// Last name must be at least 2 characters
