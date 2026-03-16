@@ -19,7 +19,7 @@ struct DeckBuilderEmptyView: View {
 
             Text(L10n.emptyDeck)
                 .font(.title2)
-                .fontWeight(.semibold)
+                .bold()
 
             Text(L10n.addCardsToStartBuildingYourDeck)
                 .foregroundStyle(.secondary)

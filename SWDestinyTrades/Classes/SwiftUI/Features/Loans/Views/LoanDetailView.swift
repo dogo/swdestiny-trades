@@ -24,7 +24,6 @@ struct LoanDetailView: View {
         List {
             LentCardsSectionView(
                 cards: viewModel.lentCards,
-                personId: viewModel.person.id,
                 onQuantityChanged: { card, quantity in viewModel.updateCardQuantity(card, newQuantity: quantity) },
                 onCardTap: { card in navigationCoordinator.navigate(to: .cardDetail([card], card, false)) },
                 onDelete: { card in viewModel.prepareToDelete(card, type: .lent) },
@@ -32,7 +31,6 @@ struct LoanDetailView: View {
             )
             BorrowedCardsSectionView(
                 cards: viewModel.borrowedCards,
-                personId: viewModel.person.id,
                 onQuantityChanged: { card, quantity in viewModel.updateCardQuantity(card, newQuantity: quantity) },
                 onCardTap: { card in navigationCoordinator.navigate(to: .cardDetail([card], card, false)) },
                 onDelete: { card in viewModel.prepareToDelete(card, type: .borrow) },

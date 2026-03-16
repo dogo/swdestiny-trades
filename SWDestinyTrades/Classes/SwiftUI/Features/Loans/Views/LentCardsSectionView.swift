@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LentCardsSectionView: View {
     let cards: [CardDTO]
-    let personId: String
     let onQuantityChanged: (CardDTO, Int) -> Void
     let onCardTap: (CardDTO) -> Void
     let onDelete: (CardDTO) -> Void
