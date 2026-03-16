@@ -87,6 +87,7 @@ struct AddCardDetailRowView: View {
                 .font(.title2)
                 .foregroundStyle(.green)
         }
+        .accessibilityLabel(L10n.addCard)
         .buttonStyle(.plain)
     }
 }
