@@ -23,7 +23,7 @@ struct StatView: View {
         VStack(spacing: 4) {
             Text(value)
                 .font(.title2)
-                .fontWeight(.bold)
+                .bold()
                 .foregroundStyle(color)
 
             Text(title)
@@ -33,6 +33,6 @@ struct StatView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
         .background(color.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .clipShape(.rect(cornerRadius: 8))
     }
 }

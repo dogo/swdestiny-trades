@@ -21,7 +21,7 @@ struct SearchInitialStateView: View {
             VStack(spacing: 8) {
                 Text(L10n.searchCards)
                     .font(.title2)
-                    .fontWeight(.semibold)
+                    .bold()
 
                 Text(L10n.enterACardNameTypeOrAnyKeywordToSearch)
                     .font(.subheadline)
@@ -54,7 +54,7 @@ struct SearchInitialStateView: View {
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
                             .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .clipShape(.rect(cornerRadius: 16))
                     }
                     .buttonStyle(.plain)
                 }

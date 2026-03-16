@@ -44,7 +44,7 @@ struct SearchResultRowView: View {
             }
         }
         .frame(width: 40, height: 56)
-        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .clipShape(.rect(cornerRadius: 4))
     }
 
     private var cardInfo: some View {
@@ -63,14 +63,14 @@ struct SearchResultRowView: View {
 
             HStack {
                 Text(card.setCode.uppercased())
-                    .font(.caption2)
+                    .font(.caption)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .background(Color(.systemGray5))
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .clipShape(.rect(cornerRadius: 4))
 
                 Text(card.typeCode.capitalized)
-                    .font(.caption2)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
         }

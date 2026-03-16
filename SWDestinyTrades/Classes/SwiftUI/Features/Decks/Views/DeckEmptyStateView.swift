@@ -19,7 +19,7 @@ struct DeckEmptyStateView: View {
 
             Text(L10n.noDecksYet)
                 .font(.title2)
-                .fontWeight(.semibold)
+                .bold()
 
             Text(L10n.createYourFirstDeckToGetStarted)
                 .foregroundStyle(.secondary)

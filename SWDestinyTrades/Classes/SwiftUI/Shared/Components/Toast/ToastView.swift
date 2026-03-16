@@ -29,7 +29,7 @@ struct ToastView: View {
                 Text(item.title)
                     .foregroundStyle(.white)
                     .font(.headline)
-                    .fontWeight(.semibold)
+                    .bold()
 
                 Text(item.message)
                     .foregroundStyle(.white.opacity(0.95))

@@ -20,7 +20,7 @@ struct ErrorView: View {
 
             Text(L10n.error)
                 .font(.title)
-                .fontWeight(.bold)
+                .bold()
 
             Text(message)
                 .multilineTextAlignment(.center)

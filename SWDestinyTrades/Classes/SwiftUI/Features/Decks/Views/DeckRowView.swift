@@ -41,7 +41,7 @@ struct DeckRowView: View {
         VStack(alignment: .leading, spacing: 4) {
             if isEditing {
                 TextField("Deck Name", text: $editedName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(.roundedBorder)
                     .onSubmit {
                         saveName()
                     }
