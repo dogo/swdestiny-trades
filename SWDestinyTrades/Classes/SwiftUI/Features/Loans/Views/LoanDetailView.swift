@@ -23,75 +23,8 @@ struct LoanDetailView: View {
 
     var body: some View {
         List {
-            Section {
-                if viewModel.lentCards.isEmpty {
-                    EmptyLoanRowView(
-                        message: L10n.noLentCards,
-                        actionText: L10n.addCard
-                    ) {
-                        navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .lent))
-                    }
-                } else {
-                    ForEach(viewModel.lentCards, id: \.id) { card in
-                        LoanCardRowView(
-                            card: card,
-                            onQuantityChanged: { newQuantity in
-                                viewModel.updateCardQuantity(card, newQuantity: newQuantity)
-                            },
-                            onTap: {
-                                navigationCoordinator.navigate(to: .cardDetail([card], card, false))
-                            }
-                        )
-                    }
-                    .onDelete { indexSet in
-                        for index in indexSet {
-                            let card = viewModel.lentCards[index]
-                            viewModel.prepareToDelete(card, type: .lent)
-                        }
-                    }
-
-                    AddCardRowView(text: L10n.addCard.appending("...")) {
-                        navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .lent))
-                    }
-                }
-            } header: {
-                Text(L10n.hasLentMe)
-            }
-
-            Section {
-                if viewModel.borrowedCards.isEmpty {
-                    EmptyLoanRowView(
-                        message: L10n.noBorrowedCards,
-                        actionText: L10n.addMyCard
-                    ) {
-                        navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .borrow))
-                    }
-                } else {
-                    ForEach(viewModel.borrowedCards, id: \.id) { card in
-                        LoanCardRowView(
-                            card: card,
-                            onQuantityChanged: { newQuantity in
-                                viewModel.updateCardQuantity(card, newQuantity: newQuantity)
-                            },
-                            onTap: {
-                                navigationCoordinator.navigate(to: .cardDetail([card], card, false))
-                            }
-                        )
-                    }
-                    .onDelete { indexSet in
-                        for index in indexSet {
-                            let card = viewModel.borrowedCards[index]
-                            viewModel.prepareToDelete(card, type: .borrow)
-                        }
-                    }
-
-                    AddCardRowView(text: L10n.addMyCard) {
-                        navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .borrow))
-                    }
-                }
-            } header: {
-                Text(L10n.hasBorrowedMy)
-            }
+            lentSection
+            borrowedSection
         }
         .navigationTitle(viewModel.personFullName)
         .navigationBarTitleDisplayMode(.large)
@@ -111,20 +44,98 @@ struct LoanDetailView: View {
             }
         }
         .overlay(alignment: .top) {
-            if viewModel.showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $viewModel.showToast,
-                    duration: 2.5
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
+            toastOverlay
         }
         .onAppear {
             viewModel.loadLoanData()
+        }
+    }
+
+    private var lentSection: some View {
+        Section {
+            if viewModel.lentCards.isEmpty {
+                EmptyLoanRowView(
+                    message: L10n.noLentCards,
+                    actionText: L10n.addCard
+                ) {
+                    navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .lent))
+                }
+            } else {
+                ForEach(viewModel.lentCards, id: \.id) { card in
+                    LoanCardRowView(
+                        card: card,
+                        onQuantityChanged: { newQuantity in
+                            viewModel.updateCardQuantity(card, newQuantity: newQuantity)
+                        },
+                        onTap: {
+                            navigationCoordinator.navigate(to: .cardDetail([card], card, false))
+                        }
+                    )
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        let card = viewModel.lentCards[index]
+                        viewModel.prepareToDelete(card, type: .lent)
+                    }
+                }
+
+                AddCardRowView(text: L10n.addCard.appending("...")) {
+                    navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .lent))
+                }
+            }
+        } header: {
+            Text(L10n.hasLentMe)
+        }
+    }
+
+    private var borrowedSection: some View {
+        Section {
+            if viewModel.borrowedCards.isEmpty {
+                EmptyLoanRowView(
+                    message: L10n.noBorrowedCards,
+                    actionText: L10n.addMyCard
+                ) {
+                    navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .borrow))
+                }
+            } else {
+                ForEach(viewModel.borrowedCards, id: \.id) { card in
+                    LoanCardRowView(
+                        card: card,
+                        onQuantityChanged: { newQuantity in
+                            viewModel.updateCardQuantity(card, newQuantity: newQuantity)
+                        },
+                        onTap: {
+                            navigationCoordinator.navigate(to: .cardDetail([card], card, false))
+                        }
+                    )
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        let card = viewModel.borrowedCards[index]
+                        viewModel.prepareToDelete(card, type: .borrow)
+                    }
+                }
+
+                AddCardRowView(text: L10n.addMyCard) {
+                    navigationCoordinator.navigate(to: .addCardToPerson(viewModel.person.id, .borrow))
+                }
+            }
+        } header: {
+            Text(L10n.hasBorrowedMy)
+        }
+    }
+
+    @ViewBuilder private var toastOverlay: some View {
+        if viewModel.showToast {
+            ToastView(
+                title: viewModel.toastTitle,
+                message: viewModel.toastMessage,
+                type: viewModel.toastType,
+                isPresented: $viewModel.showToast,
+                duration: 2.5
+            )
+            .padding(.top, 8)
+            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 }

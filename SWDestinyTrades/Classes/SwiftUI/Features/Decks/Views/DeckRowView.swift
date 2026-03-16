@@ -21,40 +21,9 @@ struct DeckRowView: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                if isEditing {
-                    TextField("Deck Name", text: $editedName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onSubmit {
-                            saveName()
-                        }
-                } else {
-                    Button(action: onEdit) {
-                        Text(deck.name.isEmpty ? "Unnamed Deck" : deck.name)
-                            .font(.headline)
-                            .foregroundStyle(.primary)
-                    }
-                    .buttonStyle(.plain)
-                }
-
-                Text(L10n.cardsCount(cardCount))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
+            deckNameSection
             Spacer()
-
-            if isEditing {
-                Button(L10n.done) {
-                    saveName()
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.small)
-            } else {
-                Button(L10n.edit, systemImage: "pencil", action: startEditing)
-                    .foregroundStyle(.blue)
-                    .buttonStyle(.plain)
-            }
+            deckActionButton
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -65,6 +34,43 @@ struct DeckRowView: View {
                 onGraph()
             }
             .tint(.blue)
+        }
+    }
+
+    private var deckNameSection: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            if isEditing {
+                TextField("Deck Name", text: $editedName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .onSubmit {
+                        saveName()
+                    }
+            } else {
+                Button(action: onEdit) {
+                    Text(deck.name.isEmpty ? "Unnamed Deck" : deck.name)
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                }
+                .buttonStyle(.plain)
+            }
+
+            Text(L10n.cardsCount(cardCount))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder private var deckActionButton: some View {
+        if isEditing {
+            Button(L10n.done) {
+                saveName()
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.small)
+        } else {
+            Button(L10n.edit, systemImage: "pencil", action: startEditing)
+                .foregroundStyle(.blue)
+                .buttonStyle(.plain)
         }
     }
 

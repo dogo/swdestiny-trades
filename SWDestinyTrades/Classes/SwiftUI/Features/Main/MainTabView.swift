@@ -15,73 +15,66 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $navigationCoordinator.selectedTab) {
-            // Sets Tab
             Tab(value: AppTab.sets) {
-                NavigationStack(path: $navigationCoordinator.setsPath) {
-                    SetsRootView()
-                        .navigationDestination(for: AppDestination.self) { destination in
-                            NavigationDestinationBuilder.build(destination: destination)
-                        }
-                }
+                setsStack
             } label: {
-                Label {
-                    Text(L10n.cards)
-                } icon: {
-                    Asset.Tabbar.icCards.swiftUIImage
-                }
+                Label { Text(L10n.cards) } icon: { Asset.Tabbar.icCards.swiftUIImage }
             }
-
-            // Decks Tab
             Tab(value: AppTab.decks) {
-                NavigationStack(path: $navigationCoordinator.deckPath) {
-                    DecksRootView()
-                        .navigationDestination(for: AppDestination.self) { destination in
-                            NavigationDestinationBuilder.build(destination: destination)
-                        }
-                }
+                decksStack
             } label: {
-                Label {
-                    Text(L10n.decks)
-                } icon: {
-                    Asset.Tabbar.icDecks.swiftUIImage
-                }
+                Label { Text(L10n.decks) } icon: { Asset.Tabbar.icDecks.swiftUIImage }
             }
-
-            // Loans Tab
             Tab(value: AppTab.loans) {
-                NavigationStack(path: $navigationCoordinator.loanPath) {
-                    LoansRootView()
-                        .navigationDestination(for: AppDestination.self) { destination in
-                            NavigationDestinationBuilder.build(destination: destination)
-                        }
-                }
+                loansStack
             } label: {
-                Label {
-                    Text(L10n.loans)
-                } icon: {
-                    Asset.Tabbar.icLoans.swiftUIImage
-                }
+                Label { Text(L10n.loans) } icon: { Asset.Tabbar.icLoans.swiftUIImage }
             }
-
-            // Collection Tab
             Tab(value: AppTab.collection) {
-                NavigationStack(path: $navigationCoordinator.collectionPath) {
-                    CollectionRootView()
-                        .navigationDestination(for: AppDestination.self) { destination in
-                            NavigationDestinationBuilder.build(destination: destination)
-                        }
-                }
+                collectionStack
             } label: {
-                Label {
-                    Text(L10n.collection)
-                } icon: {
-                    Asset.Tabbar.icCollection.swiftUIImage
-                }
+                Label { Text(L10n.collection) } icon: { Asset.Tabbar.icCollection.swiftUIImage }
             }
         }
         .environment(navigationCoordinator)
         .onAppear {
             setupTabBarAppearance()
+        }
+    }
+
+    private var setsStack: some View {
+        NavigationStack(path: $navigationCoordinator.setsPath) {
+            SetsRootView()
+                .navigationDestination(for: AppDestination.self) { destination in
+                    NavigationDestinationBuilder.build(destination: destination)
+                }
+        }
+    }
+
+    private var decksStack: some View {
+        NavigationStack(path: $navigationCoordinator.deckPath) {
+            DecksRootView()
+                .navigationDestination(for: AppDestination.self) { destination in
+                    NavigationDestinationBuilder.build(destination: destination)
+                }
+        }
+    }
+
+    private var loansStack: some View {
+        NavigationStack(path: $navigationCoordinator.loanPath) {
+            LoansRootView()
+                .navigationDestination(for: AppDestination.self) { destination in
+                    NavigationDestinationBuilder.build(destination: destination)
+                }
+        }
+    }
+
+    private var collectionStack: some View {
+        NavigationStack(path: $navigationCoordinator.collectionPath) {
+            CollectionRootView()
+                .navigationDestination(for: AppDestination.self) { destination in
+                    NavigationDestinationBuilder.build(destination: destination)
+                }
         }
     }
 

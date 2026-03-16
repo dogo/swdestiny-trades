@@ -30,31 +30,35 @@ struct SearchInitialStateView: View {
                     .padding(.horizontal)
             }
 
-            VStack(spacing: 12) {
-                Text(L10n.popularSearches)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-
-                LazyVGrid(columns: [
-                    GridItem(.adaptive(minimum: 100), spacing: 8)
-                ], spacing: 8) {
-                    ForEach(popularSearches, id: \.self) { search in
-                        Button {
-                            onSearch(search)
-                        } label: {
-                            Text(search)
-                                .font(.caption)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(Color(.systemGray5))
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-            }
+            popularSearchesSection
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
+    }
+
+    private var popularSearchesSection: some View {
+        VStack(spacing: 12) {
+            Text(L10n.popularSearches)
+                .font(.headline)
+                .foregroundStyle(.primary)
+
+            LazyVGrid(columns: [
+                GridItem(.adaptive(minimum: 100), spacing: 8)
+            ], spacing: 8) {
+                ForEach(popularSearches, id: \.self) { search in
+                    Button {
+                        onSearch(search)
+                    } label: {
+                        Text(search)
+                            .font(.caption)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Color(.systemGray5))
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
     }
 }

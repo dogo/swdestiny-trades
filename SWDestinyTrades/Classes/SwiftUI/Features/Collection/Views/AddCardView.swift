@@ -25,44 +25,8 @@ struct AddCardView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            VStack {
-                if viewModel.isLoading, viewModel.items.isEmpty {
-                    LoadingView()
-                } else {
-                    cardListContent
-                }
-            }
-            .navigationTitle(viewModel.addCardContext.title)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    filterButton
-                }
-            }
-            .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
-            .refreshable {
-                await refreshCards()
-            }
-            .sheet(isPresented: $showingFilterSheet) {
-                UnifiedFilterView(
-                    filter: $viewModel.filter,
-                    availableSets: viewModel.availableSets
-                ) {
-                    viewModel.applyFilters()
-                }
-            }
-
-            if viewModel.showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $viewModel.showToast,
-                    duration: viewModel.toastType == .success ? 2.0 : 2.5
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
+            cardListView
+            toastOverlay
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.8), value: viewModel.showToast)
         .onChange(of: viewModel.searchText) { _, newValue in
@@ -70,6 +34,49 @@ struct AddCardView: View {
         }
         .task {
             await viewModel.loadData()
+        }
+    }
+
+    private var cardListView: some View {
+        VStack {
+            if viewModel.isLoading, viewModel.items.isEmpty {
+                LoadingView()
+            } else {
+                cardListContent
+            }
+        }
+        .navigationTitle(viewModel.addCardContext.title)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                filterButton
+            }
+        }
+        .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
+        .refreshable {
+            await refreshCards()
+        }
+        .sheet(isPresented: $showingFilterSheet) {
+            UnifiedFilterView(
+                filter: $viewModel.filter,
+                availableSets: viewModel.availableSets
+            ) {
+                viewModel.applyFilters()
+            }
+        }
+    }
+
+    @ViewBuilder private var toastOverlay: some View {
+        if viewModel.showToast {
+            ToastView(
+                title: viewModel.toastTitle,
+                message: viewModel.toastMessage,
+                type: viewModel.toastType,
+                isPresented: $viewModel.showToast,
+                duration: viewModel.toastType == .success ? 2.0 : 2.5
+            )
+            .padding(.top, 8)
+            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 

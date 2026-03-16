@@ -21,10 +21,12 @@ final class URLProtocolMock: URLProtocol {
 
     static var response: ((URLRequest) throws -> HTTPResponse?)?
 
+    // swiftlint:disable:next static_over_final_class
     override class func canInit(with request: URLRequest) -> Bool {
         return true
     }
 
+    // swiftlint:disable:next static_over_final_class
     override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         return request
     }

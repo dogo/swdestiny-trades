@@ -107,8 +107,7 @@ struct NewPersonView: View {
         }
     }
 
-    @ToolbarContentBuilder
-    private var toolbarContent: some ToolbarContent {
+    @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
             Button(L10n.done) {
                 Task {
@@ -119,8 +118,7 @@ struct NewPersonView: View {
         }
     }
 
-    @ViewBuilder
-    private var successToastOverlay: some View {
+    @ViewBuilder private var successToastOverlay: some View {
         if viewModel.showSuccessToast {
             ToastView(
                 title: L10n.added,
@@ -135,8 +133,7 @@ struct NewPersonView: View {
         }
     }
 
-    @ViewBuilder
-    private var errorToastOverlay: some View {
+    @ViewBuilder private var errorToastOverlay: some View {
         if viewModel.showToast {
             ToastView(
                 title: viewModel.toastTitle,

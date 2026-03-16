@@ -69,39 +69,49 @@ struct DeckGraphView: View {
     private var chartsScrollView: some View {
         ScrollView {
             LazyVStack(spacing: 20) {
-                if viewModel.hasChartData(for: .cardTypes) {
-                    ChartCardView(title: viewModel.getChartTitle(for: .cardTypes)) {
-                        SwiftUIBarChartView(
-                            data: viewModel.cardTypeData,
-                            labels: viewModel.cardTypeLabels,
-                            title: viewModel.getChartTitle(for: .cardTypes)
-                        )
-                        .frame(height: 300)
-                    }
-                }
-
-                if viewModel.hasChartData(for: .cardCosts) {
-                    ChartCardView(title: viewModel.getChartTitle(for: .cardCosts)) {
-                        SwiftUILineChartView(
-                            data: viewModel.cardCostData,
-                            title: viewModel.getChartTitle(for: .cardCosts)
-                        )
-                        .frame(height: 300)
-                    }
-                }
-
-                if viewModel.hasChartData(for: .diceSymbols) {
-                    ChartCardView(title: viewModel.getChartTitle(for: .diceSymbols)) {
-                        SwiftUIRadarChartView(
-                            data: viewModel.diceFaceData,
-                            labels: viewModel.diceFaceLabels,
-                            title: viewModel.getChartTitle(for: .diceSymbols)
-                        )
-                        .frame(height: 300)
-                    }
-                }
+                cardTypesChart
+                cardCostsChart
+                diceSymbolsChart
             }
             .padding()
+        }
+    }
+
+    @ViewBuilder private var cardTypesChart: some View {
+        if viewModel.hasChartData(for: .cardTypes) {
+            ChartCardView(title: viewModel.getChartTitle(for: .cardTypes)) {
+                SwiftUIBarChartView(
+                    data: viewModel.cardTypeData,
+                    labels: viewModel.cardTypeLabels,
+                    title: viewModel.getChartTitle(for: .cardTypes)
+                )
+                .frame(height: 300)
+            }
+        }
+    }
+
+    @ViewBuilder private var cardCostsChart: some View {
+        if viewModel.hasChartData(for: .cardCosts) {
+            ChartCardView(title: viewModel.getChartTitle(for: .cardCosts)) {
+                SwiftUILineChartView(
+                    data: viewModel.cardCostData,
+                    title: viewModel.getChartTitle(for: .cardCosts)
+                )
+                .frame(height: 300)
+            }
+        }
+    }
+
+    @ViewBuilder private var diceSymbolsChart: some View {
+        if viewModel.hasChartData(for: .diceSymbols) {
+            ChartCardView(title: viewModel.getChartTitle(for: .diceSymbols)) {
+                SwiftUIRadarChartView(
+                    data: viewModel.diceFaceData,
+                    labels: viewModel.diceFaceLabels,
+                    title: viewModel.getChartTitle(for: .diceSymbols)
+                )
+                .frame(height: 300)
+            }
         }
     }
 

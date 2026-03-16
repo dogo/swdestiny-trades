@@ -19,67 +19,7 @@ struct PeopleListView: View {
 
     var body: some View {
         VStack {
-            if viewModel.isLoading {
-                ProgressView(L10n.loadingPeople)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
-                VStack(spacing: 16) {
-                    Image(systemName: "person.2.slash")
-                        .font(.largeTitle)
-                        .foregroundStyle(.secondary)
-
-                    Text(L10n.noPeopleFound)
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-
-                    Text(L10n.tryAdjustingYourSearchTerms)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if viewModel.filteredItems.isEmpty {
-                VStack(spacing: 16) {
-                    Image(systemName: "person.2")
-                        .font(.largeTitle)
-                        .foregroundStyle(.secondary)
-
-                    Text(L10n.noPeopleYet)
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-
-                    Text(L10n.addPeopleToTrackLoans)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-
-                    Button(L10n.addPerson) {
-                        navigationCoordinator.navigate(to: .newPerson)
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                List {
-                    ForEach(viewModel.filteredItems, id: \.id) { person in
-                        PersonRowView(
-                            person: person,
-                            loanSummary: viewModel.getLoanSummary(for: person)
-                        ) {
-                            navigationCoordinator.navigate(to: .loanDetail(person.id))
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(L10n.delete, role: .destructive) {
-                                Task {
-                                    await viewModel.deletePerson(person)
-                                }
-                            }
-                        }
-                    }
-                }
-                .listStyle(PlainListStyle())
-                .refreshable {
-                    await viewModel.refresh()
-                }
-            }
+            contentView
         }
         .navigationTitle(L10n.loans)
         .navigationBarTitleDisplayMode(.large)
@@ -100,17 +40,97 @@ struct PeopleListView: View {
             }
         }
         .overlay(alignment: .top) {
-            if viewModel.showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $viewModel.showToast,
-                    duration: 2.5
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
+            toastOverlay
+        }
+    }
+
+    @ViewBuilder private var contentView: some View {
+        if viewModel.isLoading {
+            ProgressView(L10n.loadingPeople)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
+            noResultsView
+        } else if viewModel.filteredItems.isEmpty {
+            emptyPeopleView
+        } else {
+            peopleListView
+        }
+    }
+
+    private var noResultsView: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "person.2.slash")
+                .font(.largeTitle)
+                .foregroundStyle(.secondary)
+
+            Text(L10n.noPeopleFound)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+
+            Text(L10n.tryAdjustingYourSearchTerms)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var emptyPeopleView: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "person.2")
+                .font(.largeTitle)
+                .foregroundStyle(.secondary)
+
+            Text(L10n.noPeopleYet)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+
+            Text(L10n.addPeopleToTrackLoans)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            Button(L10n.addPerson) {
+                navigationCoordinator.navigate(to: .newPerson)
             }
+            .buttonStyle(.borderedProminent)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var peopleListView: some View {
+        List {
+            ForEach(viewModel.filteredItems, id: \.id) { person in
+                PersonRowView(
+                    person: person,
+                    loanSummary: viewModel.getLoanSummary(for: person)
+                ) {
+                    navigationCoordinator.navigate(to: .loanDetail(person.id))
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(L10n.delete, role: .destructive) {
+                        Task {
+                            await viewModel.deletePerson(person)
+                        }
+                    }
+                }
+            }
+        }
+        .listStyle(PlainListStyle())
+        .refreshable {
+            await viewModel.refresh()
+        }
+    }
+
+    @ViewBuilder private var toastOverlay: some View {
+        if viewModel.showToast {
+            ToastView(
+                title: viewModel.toastTitle,
+                message: viewModel.toastMessage,
+                type: viewModel.toastType,
+                isPresented: $viewModel.showToast,
+                duration: 2.5
+            )
+            .padding(.top, 8)
+            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 }

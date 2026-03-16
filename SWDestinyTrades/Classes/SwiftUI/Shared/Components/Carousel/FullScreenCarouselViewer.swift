@@ -19,38 +19,40 @@ struct FullScreenCarouselViewer: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if let loadedImage {
-                    Image(uiImage: loadedImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            }
-            .background(Color.black)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(L10n.done) { isPresented = false }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(L10n.share, systemImage: "square.and.arrow.up") {
-                        if loadedImage != nil { showingShareSheet = true }
+            imageContent
+                .background(Color.black)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(L10n.done) { isPresented = false }
                     }
-                    .disabled(loadedImage == nil)
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(L10n.share, systemImage: "square.and.arrow.up") {
+                            if loadedImage != nil { showingShareSheet = true }
+                        }
+                        .disabled(loadedImage == nil)
+                    }
                 }
-            }
-            .sheet(isPresented: $showingShareSheet) {
-                if let loadedImage {
-                    ShareSheet(items: [loadedImage])
+                .sheet(isPresented: $showingShareSheet) {
+                    if let loadedImage {
+                        ShareSheet(items: [loadedImage])
+                    }
                 }
-            }
-            .task {
-                await loadImage()
-            }
+                .task {
+                    await loadImage()
+                }
+        }
+    }
+
+    @ViewBuilder private var imageContent: some View {
+        if let loadedImage {
+            Image(uiImage: loadedImage)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 

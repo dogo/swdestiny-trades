@@ -27,72 +27,78 @@ struct CardDetailView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            ScrollView {
-                VStack(spacing: 0) {
-                    CarouselView(
-                        items: viewModel.imageSources,
-                        imageLoader: viewModel.imageLoader,
-                        currentPage: $viewModel.currentIndex,
-                        currentImage: $shareImage,
-                        placeholder: Asset.icCardback.image,
-                        showsPageIndicator: false
-                    ) { _ in
-                        showingFullScreenImage = true
-                    }
-                    .frame(height: 400)
+            scrollContent
+            toastOverlay
+        }
+    }
 
-                    CardInfoSection(card: viewModel.currentCard)
+    private var scrollContent: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                CarouselView(
+                    items: viewModel.imageSources,
+                    imageLoader: viewModel.imageLoader,
+                    currentPage: $viewModel.currentIndex,
+                    currentImage: $shareImage,
+                    placeholder: Asset.icCardback.image,
+                    showsPageIndicator: false
+                ) { _ in
+                    showingFullScreenImage = true
                 }
+                .frame(height: 400)
+
+                CardInfoSection(card: viewModel.currentCard)
             }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Button(L10n.share, systemImage: "square.and.arrow.up") {
+                    showingShareSheet = true
+                }
+                .disabled(shareImage == nil)
 
-            .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button(L10n.share, systemImage: "square.and.arrow.up") {
-                        showingShareSheet = true
-                    }
-                    .disabled(shareImage == nil)
-
-                    if showAddToCollection {
-                        Button {
-                            Task {
-                                await viewModel.addToCollection()
-                            }
-                        } label: {
-                            Image(asset: Asset.NavigationBar.icAddCollection)
+                if showAddToCollection {
+                    Button {
+                        Task {
+                            await viewModel.addToCollection()
                         }
-                        .accessibilityLabel(L10n.addToCollection)
+                    } label: {
+                        Image(asset: Asset.NavigationBar.icAddCollection)
                     }
+                    .accessibilityLabel(L10n.addToCollection)
                 }
             }
-            .sheet(isPresented: $showingFullScreenImage) {
-                if viewModel.currentIndex < viewModel.imageSources.count {
-                    FullScreenCarouselViewer(
-                        source: viewModel.imageSources[viewModel.currentIndex],
-                        imageLoader: viewModel.imageLoader,
-                        isPresented: $showingFullScreenImage
-                    )
-                }
+        }
+        .sheet(isPresented: $showingFullScreenImage) {
+            if viewModel.currentIndex < viewModel.imageSources.count {
+                FullScreenCarouselViewer(
+                    source: viewModel.imageSources[viewModel.currentIndex],
+                    imageLoader: viewModel.imageLoader,
+                    isPresented: $showingFullScreenImage
+                )
             }
-            .sheet(isPresented: $showingShareSheet) {
-                if let shareImage {
-                    ShareSheet(items: [shareImage])
-                }
+        }
+        .sheet(isPresented: $showingShareSheet) {
+            if let shareImage {
+                ShareSheet(items: [shareImage])
             }
+        }
+    }
 
-            VStack {
-                if viewModel.showToast {
-                    ToastView(
-                        title: viewModel.toastTitle,
-                        message: viewModel.toastMessage,
-                        type: viewModel.toastType,
-                        isPresented: $viewModel.showToast,
-                        duration: 2.5
-                    )
-                    .padding(.top, 8)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                }
-                Spacer()
+    private var toastOverlay: some View {
+        VStack {
+            if viewModel.showToast {
+                ToastView(
+                    title: viewModel.toastTitle,
+                    message: viewModel.toastMessage,
+                    type: viewModel.toastType,
+                    isPresented: $viewModel.showToast,
+                    duration: 2.5
+                )
+                .padding(.top, 8)
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
+            Spacer()
         }
     }
 }
