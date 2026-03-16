@@ -8,11 +8,16 @@
 
 import SwiftUI
 
+private struct ShareText: Identifiable {
+    var id: String { value }
+    let value: String
+}
+
 struct UserCollectionView: View {
     @State private var viewModel: UserCollectionViewModel
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
     @State private var showingFilterSheet = false
-    @State private var showingShareSheet = false
+    @State private var shareItem: ShareText?
 
     init(viewModel: UserCollectionViewModel? = nil) {
         _viewModel = State(wrappedValue: viewModel ?? UserCollectionViewModel())
@@ -30,7 +35,7 @@ struct UserCollectionView: View {
                 }
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button(L10n.share, systemImage: "square.and.arrow.up") {
-                        showingShareSheet = true
+                        shareItem = ShareText(value: generateShareText())
                     }
                     Button(L10n.addCard, systemImage: "plus") {
                         navigationCoordinator.navigate(to: .addCard)
@@ -52,8 +57,8 @@ struct UserCollectionView: View {
                     viewModel.applyFilters()
                 }
             }
-            .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(items: [generateShareText()])
+            .sheet(item: $shareItem) { item in
+                ShareSheet(items: [item.value])
             }
     }
 
