@@ -67,7 +67,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
 
         if !searchText.isEmpty {
             filtered = filtered.filter { deck in
-                deck.name.localizedCaseInsensitiveContains(searchText)
+                deck.name.localizedStandardContains(searchText)
             }
         }
 

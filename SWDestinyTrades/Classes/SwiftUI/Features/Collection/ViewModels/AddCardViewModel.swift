@@ -138,8 +138,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
         if !searchText.isEmpty {
             filtered = filtered.filter { card in
-                card.name.localizedCaseInsensitiveContains(searchText) ||
-                    card.subtitle.localizedCaseInsensitiveContains(searchText)
+                card.name.localizedStandardContains(searchText) ||
+                    card.subtitle.localizedStandardContains(searchText)
             }
         }
 

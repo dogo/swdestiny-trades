@@ -110,7 +110,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
             "Event",
             "Support"
         ].filter { suggestion in
-            searchText.isEmpty || suggestion.localizedCaseInsensitiveContains(searchText)
+            searchText.isEmpty || suggestion.localizedStandardContains(searchText)
         }
     }
 

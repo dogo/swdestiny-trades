@@ -46,8 +46,8 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
         if !searchText.isEmpty {
             filteredPeople = filteredPeople.filter { person in
-                person.name.localizedCaseInsensitiveContains(searchText) ||
-                    person.lastName.localizedCaseInsensitiveContains(searchText)
+                person.name.localizedStandardContains(searchText) ||
+                    person.lastName.localizedStandardContains(searchText)
             }
         }
 

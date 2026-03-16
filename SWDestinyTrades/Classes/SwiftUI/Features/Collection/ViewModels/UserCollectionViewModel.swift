@@ -128,7 +128,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         // Apply search
         if !searchText.isEmpty {
             filtered = filtered.filter { card in
-                card.name.localizedCaseInsensitiveContains(searchText)
+                card.name.localizedStandardContains(searchText)
             }
         }
 

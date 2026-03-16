@@ -46,10 +46,10 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
             return items
         } else {
             return items.filter { card in
-                card.name.localizedCaseInsensitiveContains(searchText) ||
-                    card.subtitle.localizedCaseInsensitiveContains(searchText) ||
-                    card.typeCode.localizedCaseInsensitiveContains(searchText) ||
-                    card.setCode.localizedCaseInsensitiveContains(searchText)
+                card.name.localizedStandardContains(searchText) ||
+                    card.subtitle.localizedStandardContains(searchText) ||
+                    card.typeCode.localizedStandardContains(searchText) ||
+                    card.setCode.localizedStandardContains(searchText)
             }
         }
     }

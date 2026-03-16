@@ -73,8 +73,8 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
             return items
         } else {
             return items.filter { set in
-                set.name.localizedCaseInsensitiveContains(searchText) ||
-                    set.code.localizedCaseInsensitiveContains(searchText)
+                set.name.localizedStandardContains(searchText) ||
+                    set.code.localizedStandardContains(searchText)
             }
         }
     }

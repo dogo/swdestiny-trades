@@ -96,8 +96,8 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     override func filterItems(searchText: String) -> [CardDTO] {
         items.filter { card in
             let matchesSearch = searchText.isEmpty ||
-                card.name.localizedCaseInsensitiveContains(searchText) ||
-                card.subtitle.localizedCaseInsensitiveContains(searchText)
+                card.name.localizedStandardContains(searchText) ||
+                card.subtitle.localizedStandardContains(searchText)
 
             let matchesColor = filter.selectedColors.isEmpty ||
                 filter.selectedColors.contains(card.factionCode)
