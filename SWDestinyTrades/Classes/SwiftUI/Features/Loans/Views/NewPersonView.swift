@@ -18,8 +18,26 @@ struct NewPersonView: View {
     var body: some View {
         Form {
             Section {
-                firstNameField
-                lastNameField
+                PersonFormField(
+                    label: L10n.firstName,
+                    text: $viewModel.firstName,
+                    focus: $focusedField,
+                    field: .firstName,
+                    errorMessage: viewModel.getValidationMessage(for: .firstName)
+                ) {
+                    focusedField = .lastName
+                }
+                PersonFormField(
+                    label: L10n.lastName,
+                    text: $viewModel.lastName,
+                    focus: $focusedField,
+                    field: .lastName,
+                    errorMessage: viewModel.getValidationMessage(for: .lastName)
+                ) {
+                    if viewModel.isFormValid {
+                        Task { await viewModel.savePerson() }
+                    }
+                }
             } header: {
                 Text(L10n.personInformation)
             } footer: {
@@ -27,7 +45,12 @@ struct NewPersonView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-            saveButtonSection
+            SavePersonSection(
+                isLoading: viewModel.isLoading,
+                isDisabled: !viewModel.isFormValid || viewModel.isLoading
+            ) {
+                Task { await viewModel.savePerson() }
+            }
         }
         .toolbar { toolbarContent }
         .toastQueue(viewModel.toastQueue)
@@ -41,71 +64,6 @@ struct NewPersonView: View {
                 try? await Task.sleep(for: .milliseconds(500))
                 focusedField = .firstName
             }
-        }
-    }
-
-    private var firstNameField: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            TextField(L10n.firstName, text: $viewModel.firstName)
-                .textFieldStyle(.roundedBorder)
-                .textInputAutocapitalization(.words)
-                .disableAutocorrection(false)
-                .focused($focusedField, equals: .firstName)
-                .onSubmit {
-                    focusedField = .lastName
-                }
-
-            if let errorMessage = viewModel.getValidationMessage(for: .firstName) {
-                Text(errorMessage)
-                    .font(.caption)
-                    .foregroundStyle(.red)
-            }
-        }
-    }
-
-    private var lastNameField: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            TextField(L10n.lastName, text: $viewModel.lastName)
-                .textFieldStyle(.roundedBorder)
-                .textInputAutocapitalization(.words)
-                .disableAutocorrection(false)
-                .focused($focusedField, equals: .lastName)
-                .onSubmit {
-                    if viewModel.isFormValid {
-                        Task {
-                            await viewModel.savePerson()
-                        }
-                    }
-                }
-
-            if let errorMessage = viewModel.getValidationMessage(for: .lastName) {
-                Text(errorMessage)
-                    .font(.caption)
-                    .foregroundStyle(.red)
-            }
-        }
-    }
-
-    private var saveButtonSection: some View {
-        Section {
-            Button(action: {
-                Task {
-                    await viewModel.savePerson()
-                }
-            }, label: {
-                HStack {
-                    if viewModel.isLoading {
-                        ProgressView()
-                            .scaleEffect(0.8)
-                    }
-
-                    Text(L10n.savePerson)
-                        .fontWeight(.medium)
-                }
-                .frame(maxWidth: .infinity)
-            })
-            .disabled(!viewModel.isFormValid || viewModel.isLoading)
-            .buttonStyle(.borderedProminent)
         }
     }
 

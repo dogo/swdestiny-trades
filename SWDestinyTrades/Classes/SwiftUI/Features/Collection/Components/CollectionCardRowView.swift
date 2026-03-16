@@ -27,10 +27,10 @@ struct CollectionCardRowView: View {
     var body: some View {
         Button(action: onTap) {
             HStack(spacing: 12) {
-                iconView
-                cardInfoView
+                CollectionCardIconView(card: card)
+                CollectionCardInfoView(card: card)
                 Spacer()
-                quantityView
+                CollectionQuantityView(card: card, quantity: $quantity, onChange: onQuantityChange)
             }
             .padding(.vertical, 8)
         }
@@ -43,88 +43,5 @@ struct CollectionCardRowView: View {
                 onRemove(card)
             }
         }
-    }
-
-    private var cardInfoView: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(card.name)
-                .font(.headline)
-                .foregroundStyle(.primary)
-                .multilineTextAlignment(.leading)
-
-            if !card.subtitle.isEmpty {
-                Text(card.subtitle)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            HStack {
-                Text(card.setCode.uppercased())
-                    .font(.caption)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Color(.systemGray5))
-                    .clipShape(.rect(cornerRadius: 4))
-
-                Text(card.typeName.capitalized)
-                    .font(.caption)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 2)
-                    .background(Color.blue.opacity(0.2))
-                    .foregroundStyle(.blue)
-                    .clipShape(Capsule())
-            }
-        }
-    }
-
-    private var iconView: some View {
-        AsyncImage(url: URL(string: card.imageUrl)) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-        } placeholder: {
-            ZStack {
-                Image(asset: Asset.icCardback)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(0.3)
-
-                ProgressView()
-                    .scaleEffect(0.8)
-            }
-        }
-        .frame(width: 40, height: 56)
-        .clipShape(RoundedRectangle(cornerRadius: 4))
-    }
-
-    private var quantityView: some View {
-        HStack {
-            Button {
-                let newQuantity = max(0, quantity - 1)
-                quantity = newQuantity
-                onQuantityChange(card, newQuantity)
-            } label: {
-                Image(systemName: "minus.circle")
-            }
-            .accessibilityLabel(L10n.decreaseQuantity)
-            .disabled(quantity <= 0)
-            .buttonStyle(.plain)
-
-            Text("\(quantity)")
-                .font(.subheadline)
-                .bold()
-                .frame(minWidth: 30)
-
-            Button {
-                let newQuantity = quantity + 1
-                quantity = newQuantity
-                onQuantityChange(card, newQuantity)
-            } label: {
-                Image(systemName: "plus.circle")
-            }
-            .accessibilityLabel(L10n.increaseQuantity)
-            .buttonStyle(.plain)
-        }
-        .font(.subheadline)
     }
 }

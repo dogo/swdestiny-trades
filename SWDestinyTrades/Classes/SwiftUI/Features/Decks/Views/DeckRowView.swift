@@ -21,9 +21,20 @@ struct DeckRowView: View {
 
     var body: some View {
         HStack {
-            deckNameSection
+            DeckNameSection(
+                deck: deck,
+                cardCount: cardCount,
+                isEditing: $isEditing,
+                editedName: $editedName,
+                onEdit: onEdit,
+                onSave: saveName
+            )
             Spacer()
-            deckActionButton
+            DeckActionButton(
+                isEditing: isEditing,
+                onSave: saveName,
+                onStartEditing: startEditing
+            )
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -34,43 +45,6 @@ struct DeckRowView: View {
                 onGraph()
             }
             .tint(.blue)
-        }
-    }
-
-    private var deckNameSection: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            if isEditing {
-                TextField(L10n.deckName, text: $editedName)
-                    .textFieldStyle(.roundedBorder)
-                    .onSubmit {
-                        saveName()
-                    }
-            } else {
-                Button(action: onEdit) {
-                    Text(deck.name.isEmpty ? L10n.unnamedDeck : deck.name)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-                }
-                .buttonStyle(.plain)
-            }
-
-            Text(L10n.cardsCount(cardCount))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-    }
-
-    @ViewBuilder private var deckActionButton: some View {
-        if isEditing {
-            Button(L10n.done) {
-                saveName()
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.small)
-        } else {
-            Button(L10n.edit, systemImage: "pencil", action: startEditing)
-                .foregroundStyle(.blue)
-                .buttonStyle(.plain)
         }
     }
 

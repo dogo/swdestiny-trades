@@ -25,14 +25,22 @@ struct DeckListView: View {
             } else if viewModel.filteredItems.isEmpty {
                 DeckEmptyStateView(onCreateDeck: createNewDeck)
             } else {
-                deckListView
+                DeckListContent(
+                    decks: viewModel.filteredItems,
+                    cardCounts: viewModel.cardCounts,
+                    onEdit: editDeck,
+                    onGraph: showDeckGraph,
+                    onDelete: viewModel.prepareToDelete
+                ) { deck, newName in
+                    Task { await viewModel.renameDeck(deck, newName: newName) }
+                }
             }
         }
         .navigationTitle(L10n.decks)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                addButton
+                Button(L10n.createNewDeck, systemImage: "plus", action: createNewDeck)
             }
         }
         .searchable(text: $viewModel.searchText, prompt: L10n.searchDecks)
@@ -43,49 +51,16 @@ struct DeckListView: View {
             await refreshDecks()
         }
         .alert(L10n.deleteDeck, isPresented: $viewModel.showingDeleteConfirmation) {
-            deleteConfirmationAlert
+            Button(L10n.delete, role: .destructive) {
+                Task { await viewModel.confirmDelete() }
+            }
+            Button(L10n.cancel, role: .cancel) {
+                viewModel.cancelDelete()
+            }
         }
         .onAppear {
             Task {
                 await viewModel.loadDecks()
-            }
-        }
-    }
-
-    // MARK: - View Components
-
-    private var deckListView: some View {
-        List {
-            ForEach(viewModel.filteredItems, id: \.id) { deck in
-                DeckRowView(deck: deck, cardCount: viewModel.cardCounts[deck.id] ?? 0) {
-                    editDeck(deck)
-                } onGraph: {
-                    showDeckGraph(deck)
-                } onDelete: {
-                    viewModel.prepareToDelete(deck)
-                } onRename: { newName in
-                    Task {
-                        await viewModel.renameDeck(deck, newName: newName)
-                    }
-                }
-            }
-        }
-        .listStyle(.plain)
-    }
-
-    private var addButton: some View {
-        Button(L10n.createNewDeck, systemImage: "plus", action: createNewDeck)
-    }
-
-    private var deleteConfirmationAlert: some View {
-        Group {
-            Button(L10n.delete, role: .destructive) {
-                Task {
-                    await viewModel.confirmDelete()
-                }
-            }
-            Button(L10n.cancel, role: .cancel) {
-                viewModel.cancelDelete()
             }
         }
     }
