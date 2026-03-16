@@ -12,23 +12,13 @@ struct DeckBuilderEmptyView: View {
     let onAddCards: () -> Void
 
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "rectangle.stack.badge.plus")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.emptyDeck)
-                .font(.title2)
-                .bold()
-
+        ContentUnavailableView {
+            Label(L10n.emptyDeck, systemImage: "rectangle.stack.badge.plus")
+        } description: {
             Text(L10n.addCardsToStartBuildingYourDeck)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
+        } actions: {
             Button(L10n.addCards, action: onAddCards)
                 .buttonStyle(.borderedProminent)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

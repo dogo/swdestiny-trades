@@ -18,9 +18,9 @@ struct DeckGraphView: View {
     var body: some View {
         VStack {
             if viewModel.isLoading {
-                loadingView
+                DeckGraphLoadingView()
             } else if !viewModel.hasData {
-                emptyStateView
+                DeckGraphEmptyView()
             } else {
                 chartsScrollView
             }
@@ -36,35 +36,6 @@ struct DeckGraphView: View {
     }
 
     // MARK: - View Components
-
-    private var loadingView: some View {
-        VStack {
-            ProgressView()
-                .scaleEffect(1.2)
-            Text(L10n.generatingCharts)
-                .foregroundStyle(.secondary)
-                .padding(.top)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var emptyStateView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "chart.bar")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noDataAvailable)
-                .font(.title2)
-                .bold()
-
-            Text(L10n.addCardsToYourDeckToSeeStatistics)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
 
     private var chartsScrollView: some View {
         ScrollView {

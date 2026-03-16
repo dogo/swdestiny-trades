@@ -9,7 +9,10 @@
 import SwiftUI
 
 private struct ShareText: Identifiable {
-    var id: String { value }
+    var id: String {
+        value
+    }
+
     let value: String
 }
 

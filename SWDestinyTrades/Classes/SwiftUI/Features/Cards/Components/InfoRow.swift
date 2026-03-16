@@ -17,7 +17,7 @@ struct InfoRow: View {
             Text(title)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-                .frame(width: 100, alignment: .leading)
+                .frame(minWidth: 80, alignment: .leading)
 
             Text(value)
                 .font(.subheadline)
