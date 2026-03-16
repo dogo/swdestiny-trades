@@ -18,7 +18,7 @@ struct CardFlavorSection: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
 
-                Text(flavor)
+                flavor.toCardText()
                     .font(.body)
                     .italic()
                     .foregroundStyle(.secondary)

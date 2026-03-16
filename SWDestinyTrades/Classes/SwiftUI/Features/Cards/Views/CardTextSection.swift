@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CardTextSection: View {
     let text: String
+    @ScaledMetric private var iconSize: CGFloat = 17
 
     var body: some View {
         if !text.isEmpty {
@@ -18,7 +19,7 @@ struct CardTextSection: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
 
-                Text(text)
+                text.toCardText(iconSize: iconSize)
                     .font(.body)
                     .foregroundStyle(.primary)
                     .fixedSize(horizontal: false, vertical: true)
