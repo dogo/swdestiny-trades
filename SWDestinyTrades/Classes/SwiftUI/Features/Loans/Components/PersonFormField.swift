@@ -21,7 +21,7 @@ struct PersonFormField: View {
             TextField(label, text: $text)
                 .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.words)
-                .disableAutocorrection(false)
+                .autocorrectionDisabled(false)
                 .focused(focus, equals: field)
                 .onSubmit(onSubmit)
 

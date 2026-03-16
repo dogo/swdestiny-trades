@@ -23,7 +23,7 @@ struct UserCollectionView: View {
             .navigationTitle(L10n.myCollection)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
-                ToolbarItemGroup(placement: .topBarLeading) {
+                ToolbarItem(placement: .topBarLeading) {
                     FilterToolbarButton(hasActiveFilters: viewModel.hasActiveFilters) {
                         showingFilterSheet = true
                     }
