@@ -42,19 +42,17 @@ struct UnifiedFilterView: View {
         NavigationStack {
             Form {
                 if showExpansionFilter {
-                    expansionSection
+                    FilterExpansionSection(selectedSet: $tempFilter.selectedSet, availableSets: availableSets)
                 }
-                typeSection
-                colorSection
-                clearSection
+                FilterTypeSection(selectedTypes: $tempFilter.selectedTypes, cardTypes: cardTypes)
+                FilterColorSection(selectedColors: $tempFilter.selectedColors, cardColors: cardColors)
+                FilterClearSection { tempFilter.clearAll() }
             }
             .navigationTitle(L10n.filterCards)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarContent }
         }
     }
-
-    // MARK: - Toolbar
 
     @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
@@ -69,59 +67,6 @@ struct UnifiedFilterView: View {
                 onApply()
                 dismiss()
             }
-        }
-    }
-
-    // MARK: - Sections
-
-    private var expansionSection: some View {
-        Section(L10n.expansions) {
-            Picker(L10n.set, selection: $tempFilter.selectedSet) {
-                Text(L10n.allSets).tag(SetDTO?.none)
-                ForEach(availableSets, id: \.code) { set in
-                    Text(set.name).tag(SetDTO?.some(set))
-                }
-            }
-        }
-    }
-
-    private var typeSection: some View {
-        Section(L10n.cardTypes) {
-            ForEach(cardTypes, id: \.self) { type in
-                Toggle(type.capitalized, isOn: setBinding(for: type, in: \.selectedTypes))
-            }
-        }
-    }
-
-    private var colorSection: some View {
-        Section(L10n.color) {
-            ForEach(cardColors, id: \.code) { color in
-                Toggle(color.name, isOn: setBinding(for: color.code, in: \.selectedColors))
-            }
-        }
-    }
-
-    private func setBinding(for value: String, in keyPath: WritableKeyPath<UnifiedCardFilter, Set<String>>) -> Binding<Bool> {
-        Binding(
-            get: {
-                tempFilter[keyPath: keyPath].contains(value)
-            },
-            set: { isSelected in
-                if isSelected {
-                    tempFilter[keyPath: keyPath].insert(value)
-                } else {
-                    tempFilter[keyPath: keyPath].remove(value)
-                }
-            }
-        )
-    }
-
-    private var clearSection: some View {
-        Section {
-            Button(L10n.clearAllFilters) {
-                tempFilter.clearAll()
-            }
-            .foregroundStyle(.red)
         }
     }
 }

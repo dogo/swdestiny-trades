@@ -18,7 +18,11 @@ struct AddToDeckView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            dataSourceSelector
+            AddToDeckDataSourceSelector(
+                dataSource: viewModel.dataSource,
+                onSelectRemote: viewModel.loadRemoteCards,
+                onSelectLocal: viewModel.loadLocalCards
+            )
 
             if viewModel.isLoading {
                 LoadingView()
@@ -37,38 +41,6 @@ struct AddToDeckView: View {
         .task {
             viewModel.loadRemoteCards()
         }
-    }
-
-    private var dataSourceSelector: some View {
-        HStack(spacing: 0) {
-            Button {
-                viewModel.loadRemoteCards()
-            } label: {
-                Text(L10n.remote)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundStyle(viewModel.dataSource == .remote ? .white : .primary)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(viewModel.dataSource == .remote ? Color.blue : Color.clear)
-            }
-
-            Button {
-                viewModel.loadLocalCards()
-            } label: {
-                Text(L10n.local)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundStyle(viewModel.dataSource == .local ? .white : .primary)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(viewModel.dataSource == .local ? Color.blue : Color.clear)
-            }
-        }
-        .background(Color(.systemGray6))
-        .clipShape(.rect(cornerRadius: 8))
-        .padding(.horizontal)
-        .padding(.vertical, 8)
     }
 
     @ViewBuilder private var cardsList: some View {

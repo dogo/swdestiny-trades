@@ -21,7 +21,7 @@ struct PersonRowView: View {
                         .font(.headline)
                         .foregroundStyle(.primary)
 
-                    loanStatusView
+                    LoanStatusView(loanSummary: loanSummary)
                 }
 
                 Spacer()
@@ -33,29 +33,5 @@ struct PersonRowView: View {
             .padding(.vertical, 4)
         }
         .buttonStyle(.plain)
-    }
-
-    @ViewBuilder private var loanStatusView: some View {
-        let lentCount = loanSummary.lentCount
-        let borrowedCount = loanSummary.borrowedCount
-
-        if lentCount == 0, borrowedCount == 0 {
-            Label(L10n.noLoans, systemImage: "checkmark.circle")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-        } else {
-            VStack(alignment: .leading, spacing: 2) {
-                if lentCount > 0 {
-                    Label(L10n.lentMeCard(lentCount), systemImage: "arrow.up.right")
-                        .font(.subheadline)
-                        .foregroundStyle(.blue)
-                }
-                if borrowedCount > 0 {
-                    Label(L10n.borrowedCard(borrowedCount), systemImage: "arrow.down.left")
-                        .font(.subheadline)
-                        .foregroundStyle(.orange)
-                }
-            }
-        }
     }
 }
