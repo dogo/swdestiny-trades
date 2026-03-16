@@ -12,10 +12,14 @@ import UIKit
 // MARK: - ImageSource
 
 /// Represents the source of an image to be loaded by the carousel.
-enum ImageSource: Hashable {
+enum ImageSource: Hashable, Identifiable {
     case remote(URL)
     case local(UIImage)
     case asset(String)
+
+    var id: Self {
+        self
+    }
 }
 
 // MARK: - ImageLoadState

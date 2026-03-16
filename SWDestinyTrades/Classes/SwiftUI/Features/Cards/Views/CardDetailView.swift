@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CardDetailView: View {
     @State private var viewModel: CardDetailViewModel
-    @State private var showingFullScreenImage = false
+    @State private var fullScreenSource: ImageSource?
     @State private var showingShareSheet = false
     @State private var shareImage: UIImage?
 
@@ -40,8 +40,9 @@ struct CardDetailView: View {
                     currentImage: $shareImage,
                     placeholder: Asset.icCardback.image,
                     showsPageIndicator: false
-                ) { _ in
-                    showingFullScreenImage = true
+                ) { index in
+                    guard index < viewModel.imageSources.count else { return }
+                    fullScreenSource = viewModel.imageSources[index]
                 }
                 .frame(height: 400)
 
@@ -67,14 +68,11 @@ struct CardDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingFullScreenImage) {
-            if viewModel.currentIndex < viewModel.imageSources.count {
-                FullScreenCarouselViewer(
-                    source: viewModel.imageSources[viewModel.currentIndex],
-                    imageLoader: viewModel.imageLoader,
-                    isPresented: $showingFullScreenImage
-                )
-            }
+        .sheet(item: $fullScreenSource) { source in
+            FullScreenCarouselViewer(
+                source: source,
+                imageLoader: viewModel.imageLoader
+            )
         }
         .sheet(isPresented: $showingShareSheet) {
             if let shareImage {

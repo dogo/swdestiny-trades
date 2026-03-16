@@ -44,11 +44,11 @@ struct CardRowView: View {
             }
         }
         .frame(width: 60, height: 84)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay(
+        .clipShape(.rect(cornerRadius: 8))
+        .overlay {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-        )
+        }
     }
 
     private var cardInfo: some View {

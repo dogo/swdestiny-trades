@@ -12,7 +12,7 @@ import SwiftUI
 struct FullScreenCarouselViewer: View {
     let source: ImageSource
     let imageLoader: ImageLoadingService
-    @Binding var isPresented: Bool
+    @Environment(\.dismiss) private var dismiss
 
     @State private var showingShareSheet = false
     @State private var loadedImage: UIImage?
@@ -24,7 +24,7 @@ struct FullScreenCarouselViewer: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button(L10n.done) { isPresented = false }
+                        Button(L10n.done) { dismiss() }
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(L10n.share, systemImage: "square.and.arrow.up") {
