@@ -47,8 +47,8 @@ struct NewPersonView: View {
     private var firstNameField: some View {
         VStack(alignment: .leading, spacing: 8) {
             TextField(L10n.firstName, text: $viewModel.firstName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.words)
+                .textFieldStyle(.roundedBorder)
+                .textInputAutocapitalization(.words)
                 .disableAutocorrection(false)
                 .focused($focusedField, equals: .firstName)
                 .onSubmit {
@@ -66,8 +66,8 @@ struct NewPersonView: View {
     private var lastNameField: some View {
         VStack(alignment: .leading, spacing: 8) {
             TextField(L10n.lastName, text: $viewModel.lastName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.words)
+                .textFieldStyle(.roundedBorder)
+                .textInputAutocapitalization(.words)
                 .disableAutocorrection(false)
                 .focused($focusedField, equals: .lastName)
                 .onSubmit {

@@ -60,7 +60,7 @@ struct CollectionCardRowView: View {
 
             HStack {
                 Text(card.setCode.uppercased())
-                    .font(.caption2)
+                    .font(.caption)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .background(Color(.systemGray5))
@@ -111,7 +111,7 @@ struct CollectionCardRowView: View {
 
             Text("\(quantity)")
                 .font(.subheadline)
-                .fontWeight(.semibold)
+                .bold()
                 .frame(minWidth: 30)
 
             Button {

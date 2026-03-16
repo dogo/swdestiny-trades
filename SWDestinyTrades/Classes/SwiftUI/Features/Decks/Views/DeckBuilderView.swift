@@ -8,10 +8,17 @@
 
 import SwiftUI
 
+private struct ShareText: Identifiable {
+    var id: String {
+        value
+    }
+
+    let value: String
+}
+
 struct DeckBuilderView: View {
     @State private var viewModel: DeckBuilderViewModel
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
-    @Environment(\.dismiss) private var dismiss
 
     init(deck: DeckDTO?, dependencyContainer: DependencyContainer = .shared) {
         _viewModel = State(wrappedValue: DeckBuilderViewModel(deck: deck, dependencyContainer: dependencyContainer))
@@ -56,8 +63,11 @@ struct DeckBuilderView: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.showingShareSheet) {
-            ShareSheet(items: [viewModel.shareText])
+        .sheet(item: Binding<ShareText?>(
+            get: { viewModel.shareText.map { ShareText(value: $0) } },
+            set: { viewModel.shareText = $0?.value }
+        )) { item in
+            ShareSheet(items: [item.value])
         }
         .onAppear {
             Task {

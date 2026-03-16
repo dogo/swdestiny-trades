@@ -56,7 +56,7 @@ struct DeckGraphView: View {
 
             Text(L10n.noDataAvailable)
                 .font(.title2)
-                .fontWeight(.semibold)
+                .bold()
 
             Text(L10n.addCardsToYourDeckToSeeStatistics)
                 .foregroundStyle(.secondary)
@@ -132,7 +132,7 @@ struct ChartCardView<Content: View>: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .font(.headline)
-                .fontWeight(.semibold)
+                .bold()
                 .padding(.horizontal)
 
             content
@@ -143,10 +143,10 @@ struct ChartCardView<Content: View>: View {
                 .fill(Color(.systemBackground))
                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         )
-        .overlay(
+        .overlay {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color(.systemGray5), lineWidth: 1)
-        )
+        }
     }
 }
 

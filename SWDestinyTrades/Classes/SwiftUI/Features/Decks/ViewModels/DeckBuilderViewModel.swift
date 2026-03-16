@@ -15,8 +15,7 @@ final class DeckBuilderViewModel: BaseViewModel {
     var deck: DeckDTO
     var deckSections: [DeckSection] = []
     var isNewDeck: Bool
-    var showingShareSheet = false
-    var shareText = ""
+    var shareText: String?
 
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -165,7 +164,6 @@ final class DeckBuilderViewModel: BaseViewModel {
         }
 
         shareText = deckText
-        showingShareSheet = true
     }
 
     var totalCardCount: Int {

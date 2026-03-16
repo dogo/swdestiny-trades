@@ -70,7 +70,7 @@ struct DeckListView: View {
                 }
             }
         }
-        .listStyle(PlainListStyle())
+        .listStyle(.plain)
     }
 
     private var addButton: some View {

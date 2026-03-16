@@ -16,7 +16,7 @@ struct CardNameSection: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(name)
                 .font(.title2)
-                .fontWeight(.bold)
+                .bold()
                 .foregroundStyle(.primary)
 
             if !subtitle.isEmpty {

@@ -66,7 +66,7 @@ struct AddToDeckView: View {
             }
         }
         .background(Color(.systemGray6))
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .clipShape(.rect(cornerRadius: 8))
         .padding(.horizontal)
         .padding(.vertical, 8)
     }

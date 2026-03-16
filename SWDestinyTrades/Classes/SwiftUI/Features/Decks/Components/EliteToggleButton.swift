@@ -26,10 +26,10 @@ struct EliteToggleButton: View {
                         .fill(isElite ? Color.primary : Color.clear)
                 )
                 .foregroundStyle(isElite ? Color(.systemBackground) : Color.primary)
-                .overlay(
+                .overlay {
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.primary, lineWidth: 1)
-                )
+                }
         }
         .buttonStyle(.plain)
     }
