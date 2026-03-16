@@ -10,11 +10,11 @@ import SwiftUI
 
 struct TabNavigationStack<Root: View>: View {
     @Binding var path: NavigationPath
-    @ViewBuilder let root: () -> Root
+    @ViewBuilder let root: Root
 
     var body: some View {
         NavigationStack(path: $path) {
-            root()
+            root
                 .navigationDestination(for: AppDestination.self) { destination in
                     NavigationDestinationBuilder.build(destination: destination)
                 }
