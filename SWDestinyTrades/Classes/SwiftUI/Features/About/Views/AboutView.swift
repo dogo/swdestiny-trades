@@ -35,7 +35,9 @@ struct AboutView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 16) {
-                    aboutTextWithLink
+                    AboutTextSection {
+                        viewModel.openWebsite(using: navigationCoordinator)
+                    }
                 }
                 .padding(.horizontal, 12)
 
@@ -45,35 +47,6 @@ struct AboutView: View {
         .navigationTitle(L10n.about)
         .navigationBarTitleDisplayMode(.large)
         .background(Color(.systemBackground))
-    }
-
-    private var aboutTextWithLink: some View {
-        let aboutText = L10n.aboutText(L10n.swdestinydbWebsite)
-        let components = aboutText.components(separatedBy: L10n.swdestinydbWebsite)
-
-        return VStack(alignment: .leading, spacing: 8) {
-            if components.count >= 2 {
-                Text(components[0])
-                    .font(.body)
-
-                Button {
-                    viewModel.openWebsite(using: navigationCoordinator)
-                } label: {
-                    Text(L10n.swdestinydbWebsite)
-                        .font(.body)
-                        .foregroundStyle(.blue)
-                        .underline()
-                }
-                .buttonStyle(.plain)
-
-                Text(components[1])
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-            } else {
-                Text(aboutText)
-                    .font(.body)
-            }
-        }
     }
 }
 

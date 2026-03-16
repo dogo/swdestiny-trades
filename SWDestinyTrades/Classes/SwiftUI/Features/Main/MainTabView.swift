@@ -16,22 +16,22 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $navigationCoordinator.selectedTab) {
             Tab(value: AppTab.sets) {
-                setsStack
+                TabNavigationStack(path: $navigationCoordinator.setsPath) { SetsRootView() }
             } label: {
                 Label { Text(L10n.cards) } icon: { Asset.Tabbar.icCards.swiftUIImage }
             }
             Tab(value: AppTab.decks) {
-                decksStack
+                TabNavigationStack(path: $navigationCoordinator.deckPath) { DecksRootView() }
             } label: {
                 Label { Text(L10n.decks) } icon: { Asset.Tabbar.icDecks.swiftUIImage }
             }
             Tab(value: AppTab.loans) {
-                loansStack
+                TabNavigationStack(path: $navigationCoordinator.loanPath) { LoansRootView() }
             } label: {
                 Label { Text(L10n.loans) } icon: { Asset.Tabbar.icLoans.swiftUIImage }
             }
             Tab(value: AppTab.collection) {
-                collectionStack
+                TabNavigationStack(path: $navigationCoordinator.collectionPath) { CollectionRootView() }
             } label: {
                 Label { Text(L10n.collection) } icon: { Asset.Tabbar.icCollection.swiftUIImage }
             }
@@ -42,46 +42,9 @@ struct MainTabView: View {
         }
     }
 
-    private var setsStack: some View {
-        NavigationStack(path: $navigationCoordinator.setsPath) {
-            SetsRootView()
-                .navigationDestination(for: AppDestination.self) { destination in
-                    NavigationDestinationBuilder.build(destination: destination)
-                }
-        }
-    }
-
-    private var decksStack: some View {
-        NavigationStack(path: $navigationCoordinator.deckPath) {
-            DecksRootView()
-                .navigationDestination(for: AppDestination.self) { destination in
-                    NavigationDestinationBuilder.build(destination: destination)
-                }
-        }
-    }
-
-    private var loansStack: some View {
-        NavigationStack(path: $navigationCoordinator.loanPath) {
-            LoansRootView()
-                .navigationDestination(for: AppDestination.self) { destination in
-                    NavigationDestinationBuilder.build(destination: destination)
-                }
-        }
-    }
-
-    private var collectionStack: some View {
-        NavigationStack(path: $navigationCoordinator.collectionPath) {
-            CollectionRootView()
-                .navigationDestination(for: AppDestination.self) { destination in
-                    NavigationDestinationBuilder.build(destination: destination)
-                }
-        }
-    }
-
     private func setupTabBarAppearance() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-
         appearance.backgroundColor = UIColor.systemBackground
         appearance.selectionIndicatorTintColor = UIColor.systemBlue
 

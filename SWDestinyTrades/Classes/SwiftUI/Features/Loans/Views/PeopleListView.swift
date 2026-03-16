@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct PeopleListView: View {
-
     @State private var viewModel: PeopleListViewModel
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
 
@@ -18,160 +17,28 @@ struct PeopleListView: View {
     }
 
     var body: some View {
-        VStack {
-            contentView
-        }
-        .navigationTitle(L10n.loans)
-        .navigationBarTitleDisplayMode(.large)
-        .searchable(text: $viewModel.searchText, prompt: L10n.searchPeople)
-        .onChange(of: viewModel.searchText) { _, newValue in
-            viewModel.performFiltering(searchText: newValue)
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(L10n.addPerson, systemImage: "plus") {
-                    navigationCoordinator.navigate(to: .newPerson)
-                }
+        PeopleListContent(viewModel: viewModel)
+            .navigationTitle(L10n.loans)
+            .navigationBarTitleDisplayMode(.large)
+            .searchable(text: $viewModel.searchText, prompt: L10n.searchPeople)
+            .onChange(of: viewModel.searchText) { _, newValue in
+                viewModel.performFiltering(searchText: newValue)
             }
-        }
-        .onAppear {
-            Task {
-                await viewModel.loadPeople()
-            }
-        }
-        .toastQueue(viewModel.toastQueue)
-    }
-
-    @ViewBuilder private var contentView: some View {
-        if viewModel.isLoading {
-            ProgressView(L10n.loadingPeople)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } else if viewModel.filteredItems.isEmpty, !viewModel.searchText.isEmpty {
-            noResultsView
-        } else if viewModel.filteredItems.isEmpty {
-            emptyPeopleView
-        } else {
-            peopleListView
-        }
-    }
-
-    private var noResultsView: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "person.2.slash")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noPeopleFound)
-                .font(.headline)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.tryAdjustingYourSearchTerms)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var emptyPeopleView: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "person.2")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noPeopleYet)
-                .font(.headline)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.addPeopleToTrackLoans)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-
-            Button(L10n.addPerson) {
-                navigationCoordinator.navigate(to: .newPerson)
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var peopleListView: some View {
-        List {
-            ForEach(viewModel.filteredItems, id: \.id) { person in
-                PersonRowView(
-                    person: person,
-                    loanSummary: viewModel.getLoanSummary(for: person)
-                ) {
-                    navigationCoordinator.navigate(to: .loanDetail(person.id))
-                }
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button(L10n.delete, role: .destructive) {
-                        Task {
-                            await viewModel.deletePerson(person)
-                        }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(L10n.addPerson, systemImage: "plus") {
+                        navigationCoordinator.navigate(to: .newPerson)
                     }
                 }
             }
-        }
-        .listStyle(PlainListStyle())
-        .refreshable {
-            await viewModel.refresh()
-        }
-    }
-}
-
-struct PersonRowView: View {
-    let person: PersonDTO
-    let loanSummary: LoanSummary
-    let onTap: () -> Void
-
-    var body: some View {
-        Button(action: onTap) {
-            HStack {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(PersonNameComponents(givenName: person.name, familyName: person.lastName).formatted(.name(style: .long)))
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-
-                    loanStatusView
-                }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.vertical, 4)
-        }
-        .buttonStyle(.plain)
-    }
-
-    @ViewBuilder private var loanStatusView: some View {
-        let lentCount = loanSummary.lentCount
-        let borrowedCount = loanSummary.borrowedCount
-
-        if lentCount == 0, borrowedCount == 0 {
-            Label(L10n.noLoans, systemImage: "checkmark.circle")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-        } else {
-            VStack(alignment: .leading, spacing: 2) {
-                if lentCount > 0 {
-                    Label(L10n.lentMeCard(lentCount), systemImage: "arrow.up.right")
-                        .font(.subheadline)
-                        .foregroundStyle(.blue)
-                }
-                if borrowedCount > 0 {
-                    Label(L10n.borrowedCard(borrowedCount), systemImage: "arrow.down.left")
-                        .font(.subheadline)
-                        .foregroundStyle(.orange)
+            .onAppear {
+                Task {
+                    await viewModel.loadPeople()
                 }
             }
-        }
+            .toastQueue(viewModel.toastQueue)
     }
 }
-
-// MARK: - Previews
 
 #Preview("People List - Light") {
     PeopleListView()

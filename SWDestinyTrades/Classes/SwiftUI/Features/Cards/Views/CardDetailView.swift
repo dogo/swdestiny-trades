@@ -10,9 +10,6 @@ import SwiftUI
 
 struct CardDetailView: View {
     @State private var viewModel: CardDetailViewModel
-    @State private var fullScreenSource: ImageSource?
-    @State private var showingShareSheet = false
-    @State private var shareImage: UIImage?
 
     let cards: [CardDTO]
     let selectedCard: CardDTO
@@ -26,59 +23,8 @@ struct CardDetailView: View {
     }
 
     var body: some View {
-        scrollContent
+        CardDetailScrollContent(viewModel: viewModel, showAddToCollection: showAddToCollection)
             .toastQueue(viewModel.toastQueue)
-    }
-
-    private var scrollContent: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                CarouselView(
-                    items: viewModel.imageSources,
-                    imageLoader: viewModel.imageLoader,
-                    currentPage: $viewModel.currentIndex,
-                    currentImage: $shareImage,
-                    placeholder: Asset.icCardback.image,
-                    showsPageIndicator: false
-                ) { index in
-                    guard index < viewModel.imageSources.count else { return }
-                    fullScreenSource = viewModel.imageSources[index]
-                }
-                .frame(height: 400)
-
-                CardInfoSection(card: viewModel.currentCard)
-            }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Button(L10n.share, systemImage: "square.and.arrow.up") {
-                    showingShareSheet = true
-                }
-                .disabled(shareImage == nil)
-
-                if showAddToCollection {
-                    Button {
-                        Task {
-                            await viewModel.addToCollection()
-                        }
-                    } label: {
-                        Image(asset: Asset.NavigationBar.icAddCollection)
-                    }
-                    .accessibilityLabel(L10n.addToCollection)
-                }
-            }
-        }
-        .sheet(item: $fullScreenSource) { source in
-            FullScreenCarouselViewer(
-                source: source,
-                imageLoader: viewModel.imageLoader
-            )
-        }
-        .sheet(isPresented: $showingShareSheet) {
-            if let shareImage {
-                ShareSheet(items: [shareImage])
-            }
-        }
     }
 }
 

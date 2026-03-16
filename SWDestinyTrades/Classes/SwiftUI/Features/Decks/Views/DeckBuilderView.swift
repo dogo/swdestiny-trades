@@ -20,20 +20,40 @@ struct DeckBuilderView: View {
     var body: some View {
         VStack {
             if viewModel.isLoading {
-                loadingView
+                DeckBuilderLoadingView()
             } else if viewModel.isDeckEmpty {
-                emptyDeckView
+                DeckBuilderEmptyView(onAddCards: navigateToAddToDeck)
             } else {
-                deckBuilderContent
+                VStack {
+                    DeckStatsView(
+                        totalCardCount: viewModel.totalCardCount,
+                        uniqueCardCount: viewModel.uniqueCardCount
+                    )
+                    List {
+                        ForEach(viewModel.deckSections, id: \.id) { section in
+                            DeckSectionView(
+                                section: section,
+                                onCardTap: { navigateToCardDetail($0) },
+                                onQuantityChange: { viewModel.updateCardQuantity($0, quantity: $1) },
+                                onEliteToggle: { viewModel.updateCharacterElite($0, isElite: $1) },
+                                onRemoveCard: { viewModel.removeCard($0) },
+                                onToggleCollapse: { viewModel.toggleSection(section) }
+                            )
+                        }
+                    }
+                    .listStyle(.plain)
+                }
             }
         }
         .navigationTitle(viewModel.deck.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
-                addCardButton
-                deckGraphButton
-                shareButton
+                Button(L10n.addCards, systemImage: "plus", action: navigateToAddToDeck)
+                Button(L10n.graph, systemImage: "chart.bar", action: navigateToDeckGraph)
+                Button(L10n.share, systemImage: "square.and.arrow.up") {
+                    viewModel.prepareShareText()
+                }
             }
         }
         .sheet(isPresented: $viewModel.showingShareSheet) {
@@ -43,107 +63,6 @@ struct DeckBuilderView: View {
             Task {
                 await viewModel.handleViewAppear()
             }
-        }
-    }
-
-    // MARK: - View Components
-
-    private var loadingView: some View {
-        VStack {
-            ProgressView()
-                .scaleEffect(1.2)
-            Text(L10n.loadingDeck)
-                .foregroundStyle(.secondary)
-                .padding(.top)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var emptyDeckView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "rectangle.stack.badge.plus")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.emptyDeck)
-                .font(.title2)
-                .fontWeight(.semibold)
-
-            Text(L10n.addCardsToStartBuildingYourDeck)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            Button(L10n.addCards) {
-                navigateToAddToDeck()
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var deckBuilderContent: some View {
-        VStack {
-            deckStatsView
-            deckSectionsList
-        }
-    }
-
-    private var deckStatsView: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(L10n.totalCardsViewmodeltotalcardcount(viewModel.totalCardCount))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Text(L10n.uniqueCardsViewmodeluniquecardcount(viewModel.uniqueCardCount))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 8)
-        .background(Color(.systemGray6))
-    }
-
-    private var deckSectionsList: some View {
-        List {
-            ForEach(viewModel.deckSections, id: \.id) { section in
-                DeckSectionView(
-                    section: section,
-                    onCardTap: { card in
-                        navigateToCardDetail(card)
-                    },
-                    onQuantityChange: { card, quantity in
-                        viewModel.updateCardQuantity(card, quantity: quantity)
-                    },
-                    onEliteToggle: { card, isElite in
-                        viewModel.updateCharacterElite(card, isElite: isElite)
-                    },
-                    onRemoveCard: { card in
-                        viewModel.removeCard(card)
-                    },
-                    onToggleCollapse: {
-                        viewModel.toggleSection(section)
-                    }
-                )
-            }
-        }
-        .listStyle(PlainListStyle())
-    }
-
-    private var addCardButton: some View {
-        Button(L10n.addCards, systemImage: "plus", action: navigateToAddToDeck)
-    }
-
-    private var deckGraphButton: some View {
-        Button(L10n.graph, systemImage: "chart.bar", action: navigateToDeckGraph)
-    }
-
-    private var shareButton: some View {
-        Button(L10n.share, systemImage: "square.and.arrow.up") {
-            viewModel.prepareShareText()
         }
     }
 

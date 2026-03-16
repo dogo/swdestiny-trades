@@ -20,8 +20,20 @@ struct SetsListView: View {
         VStack {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 SetsLoadingView()
+            } else if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
+                EmptyStateView(
+                    title: L10n.noSetsFound,
+                    message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadSets : L10n.noSetsMatchSearch,
+                    systemImage: "rectangle.stack"
+                )
             } else {
-                setsListContent
+                List(viewModel.filteredItems, id: \.code) { set in
+                    SetRowView(set: set) {
+                        navigationCoordinator.navigate(to: .cardList(set))
+                    }
+                    .listRowSeparator(.visible)
+                }
+                .listStyle(.plain)
             }
         }
         .navigationTitle(L10n.expansions)
@@ -32,7 +44,6 @@ struct SetsListView: View {
                     navigationCoordinator.navigate(to: .about)
                 }
             }
-
             ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.search, systemImage: "magnifyingglass") {
                     navigationCoordinator.navigate(to: .search)
@@ -40,7 +51,7 @@ struct SetsListView: View {
             }
         }
         .refreshable {
-            await refreshSets()
+            await viewModel.refreshSets()
         }
         .toastQueue(viewModel.toastQueue)
         .onChange(of: viewModel.searchText) { _, newValue in
@@ -52,39 +63,6 @@ struct SetsListView: View {
                 await viewModel.loadItems()
             }
         }
-    }
-
-    @ViewBuilder private var setsListContent: some View {
-        if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-            EmptyStateView(
-                title: L10n.noSetsFound,
-                message: viewModel.searchText.isEmpty ? L10n.pullToRefreshToLoadSets : L10n.noSetsMatchSearch,
-                systemImage: "rectangle.stack"
-            )
-        } else {
-            List(viewModel.filteredItems, id: \.code) { set in
-                SetRowView(set: set) {
-                    navigationCoordinator.navigate(to: .cardList(set))
-                }
-                .listRowSeparator(.visible)
-            }
-            .listStyle(.plain)
-        }
-    }
-
-    @MainActor
-    private func refreshSets() async {
-        await viewModel.refreshSets()
-    }
-}
-
-struct SetsLoadingView: View {
-    var body: some View {
-        VStack {
-            ProgressView()
-                .scaleEffect(1.2)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

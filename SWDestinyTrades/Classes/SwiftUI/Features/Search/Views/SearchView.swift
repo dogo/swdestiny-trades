@@ -10,72 +10,26 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var viewModel: SearchViewModel
-    @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
-
-    @FocusState private var isSearchFocused: Bool
 
     init(viewModel: SearchViewModel? = nil) {
         _viewModel = State(wrappedValue: viewModel ?? SearchViewModel())
     }
 
     var body: some View {
-        VStack {
-            searchContent
-        }
-        .navigationTitle(L10n.search)
-        .navigationBarTitleDisplayMode(.large)
-        .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
-        .onSubmit(of: .search) {
-            if !viewModel.searchText.isEmpty {
-                viewModel.performSearch(query: viewModel.searchText)
-            }
-        }
-        .toastQueue(viewModel.toastQueue)
-        .onChange(of: viewModel.searchText) { _, newValue in
-            viewModel.onSearchTextChanged(newValue)
-        }
-    }
-
-    @ViewBuilder private var searchContent: some View {
-        if viewModel.shouldShowInitialState {
-            SearchInitialStateView(popularSearches: popularSearches) { search in
-                viewModel.searchText = search
-                viewModel.performSearch(query: search)
-            }
-        } else if viewModel.shouldShowSuggestions {
-            SearchSuggestionsView(suggestions: viewModel.getSearchSuggestions()) { suggestion in
-                viewModel.searchText = suggestion
-                viewModel.performSearch(query: suggestion)
-            }
-        } else if viewModel.isLoading {
-            LoadingView()
-        } else if viewModel.shouldShowEmptyState {
-            SearchEmptyResultsView(query: viewModel.currentQuery) {
-                viewModel.clearSearch()
-            }
-        } else {
-            SearchResultsListView(
-                results: viewModel.searchResults,
-                query: viewModel.currentQuery,
-                onClear: { viewModel.clearSearch() },
-                onCardSelected: { card in
-                    navigationCoordinator.navigate(to: .cardDetail(viewModel.searchResults, card))
+        SearchContent(viewModel: viewModel)
+            .navigationTitle(L10n.search)
+            .navigationBarTitleDisplayMode(.large)
+            .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
+            .onSubmit(of: .search) {
+                if !viewModel.searchText.isEmpty {
+                    viewModel.performSearch(query: viewModel.searchText)
                 }
-            )
-        }
+            }
+            .toastQueue(viewModel.toastQueue)
+            .onChange(of: viewModel.searchText) { _, newValue in
+                viewModel.onSearchTextChanged(newValue)
+            }
     }
-
-    private let popularSearches: [String] = [
-        "Luke",
-        "Vader",
-        "Lightsaber",
-        "Character",
-        "Upgrade",
-        "Event",
-        "Blue",
-        "Red",
-        "Yellow"
-    ]
 }
 
 #Preview {

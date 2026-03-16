@@ -11,7 +11,6 @@ import SwiftUI
 struct UserCollectionView: View {
     @State private var viewModel: UserCollectionViewModel
     @Environment(NavigationCoordinator.self) private var navigationCoordinator: NavigationCoordinator
-
     @State private var showingFilterSheet = false
     @State private var showingShareSheet = false
 
@@ -20,10 +19,24 @@ struct UserCollectionView: View {
     }
 
     var body: some View {
-        content
+        CollectionContent(viewModel: viewModel)
             .navigationTitle(L10n.myCollection)
             .navigationBarTitleDisplayMode(.large)
-            .toolbar { toolbarContent }
+            .toolbar {
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    FilterToolbarButton(hasActiveFilters: viewModel.hasActiveFilters) {
+                        showingFilterSheet = true
+                    }
+                }
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(L10n.share, systemImage: "square.and.arrow.up") {
+                        showingShareSheet = true
+                    }
+                    Button(L10n.addCard, systemImage: "plus") {
+                        navigationCoordinator.navigate(to: .addCard)
+                    }
+                }
+            }
             .refreshable { viewModel.loadCollection() }
             .searchable(text: $viewModel.searchText, prompt: L10n.searchCollection)
             .onChange(of: viewModel.searchText) { _, newValue in
@@ -32,115 +45,26 @@ struct UserCollectionView: View {
             .onChange(of: viewModel.filter) { _, _ in viewModel.applyFilters() }
             .toastQueue(viewModel.toastQueue)
             .sheet(isPresented: $showingFilterSheet) {
-                filterSheet
+                UnifiedFilterView(
+                    filter: $viewModel.filter,
+                    availableSets: viewModel.availableSets
+                ) {
+                    viewModel.applyFilters()
+                }
             }
             .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(items: [generateShareTextForSheet()])
+                ShareSheet(items: [generateShareText()])
             }
     }
 
-    private var content: some View {
-        VStack {
-            if viewModel.isLoading, viewModel.items.isEmpty {
-                LoadingView()
-            } else {
-                collectionContent
-            }
-        }
-        .onAppear {
-            if viewModel.items.isEmpty {
-                viewModel.loadCollection()
-            }
-            if viewModel.availableSets.isEmpty {
-                viewModel.loadAvailableSets()
-            }
-        }
-    }
-
-    @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
-        ToolbarItemGroup(placement: .topBarLeading) {
-            filterButton
-        }
-
-        ToolbarItemGroup(placement: .topBarTrailing) {
-            shareButton
-            addButton
-        }
-    }
-
-    // MARK: - View Components
-
-    @ViewBuilder private var collectionContent: some View {
-        if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-            EmptyStateView(
-                title: L10n.noCardsFound,
-                message: viewModel.searchText.isEmpty ? L10n.collectionEmpty : L10n.noCardsMatchSearch,
-                systemImage: "rectangle.stack"
-            )
-        } else {
-            collectionList
-        }
-    }
-
-    private var collectionList: some View {
-        List(viewModel.filteredItems, id: \.code) { card in
-            CollectionCardRowView(card: card) { updatedCard, quantity in
-                Task {
-                    await viewModel.updateCardQuantity(updatedCard, quantity: quantity)
-                }
-            } onTap: {
-                navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
-            } onRemove: { card in
-                viewModel.removeCard(card)
-            }
-            .listRowSeparator(.visible)
-        }
-        .listStyle(.plain)
-    }
-
-    private var filterSheet: some View {
-        UnifiedFilterView(
-            filter: $viewModel.filter,
-            availableSets: viewModel.availableSets
-        ) {
-            viewModel.applyFilters()
-        }
-    }
-
-    // MARK: - Toolbar Items
-
-    private var filterButton: some View {
-        FilterToolbarButton(hasActiveFilters: viewModel.hasActiveFilters) {
-            showingFilterSheet = true
-        }
-    }
-
-    private var shareButton: some View {
-        Button(L10n.share, systemImage: "square.and.arrow.up") {
-            showingShareSheet = true
-        }
-    }
-
-    private var addButton: some View {
-        Button(L10n.addCard, systemImage: "plus") {
-            navigationCoordinator.navigate(to: .addCard)
-        }
-    }
-
-    // MARK: - Helper Methods
-
-    private func generateShareTextForSheet() -> String {
-        var collectionText = "\(L10n.myCollection)\n\n"
-
+    private func generateShareText() -> String {
+        var text = "\(L10n.myCollection)\n\n"
         for card in viewModel.filteredItems.filter({ $0.quantity > 0 }) {
-            collectionText += "\(card.quantity)x \(card.name)\n"
+            text += "\(card.quantity)x \(card.name)\n"
         }
-
-        return collectionText
+        return text
     }
 }
-
-// MARK: - Supporting Views
 
 #Preview {
     NavigationStack {
