@@ -12,23 +12,13 @@ struct DeckEmptyStateView: View {
     let onCreateDeck: () -> Void
 
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "rectangle.stack")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noDecksYet)
-                .font(.title2)
-                .bold()
-
+        ContentUnavailableView {
+            Label(L10n.noDecksYet, systemImage: "rectangle.stack")
+        } description: {
             Text(L10n.createYourFirstDeckToGetStarted)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
+        } actions: {
             Button(L10n.createNewDeck, action: onCreateDeck)
                 .buttonStyle(.borderedProminent)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

@@ -13,30 +13,12 @@ struct SearchEmptyResultsView: View {
     let onClear: () -> Void
 
     var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "magnifyingglass")
-                .font(.largeTitle)
-                .foregroundStyle(.secondary)
-
-            Text(L10n.noResultsFound)
-                .font(.headline)
-                .foregroundStyle(.primary)
-
+        ContentUnavailableView {
+            Label(L10n.noResultsFound, systemImage: "magnifyingglass")
+        } description: {
             Text(L10n.noCardsMatchViewmodelcurrentqueryTryA(query))
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-
-            Button {
-                onClear()
-            } label: {
-                Text(L10n.clearSearch)
-                    .font(.subheadline)
-                    .foregroundStyle(.blue)
-            }
+        } actions: {
+            Button(L10n.clearSearch, action: onClear)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding()
     }
 }
