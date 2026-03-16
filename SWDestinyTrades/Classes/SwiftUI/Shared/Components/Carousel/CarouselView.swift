@@ -70,7 +70,8 @@ struct CarouselView: View {
     var body: some View {
         VStack(spacing: 0) {
             TabView(selection: $currentPage) {
-                ForEach(Array(viewModel.items.enumerated()), id: \.offset) { index, source in
+                ForEach(viewModel.items.indices, id: \.self) { index in
+                    let source = viewModel.items[index]
                     CarouselPageView(
                         source: source,
                         state: viewModel.imageStates[source] ?? .idle,
