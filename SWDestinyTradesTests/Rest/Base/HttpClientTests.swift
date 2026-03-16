@@ -97,7 +97,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func disabled_test_cancelRequest() async {
+    func test_cancelRequest() async {
         setupURLProtocolMock(with: nil, statusCode: 200)
 
         Task {
@@ -114,7 +114,7 @@ final class HttpClientTests: XCTestCase {
         sut.cancelRequest(request)
 
         // Add a short delay to ensure the cancellation has taken effect
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(for: .milliseconds(100))
 
         XCTAssertNoThrow(try {
             let areTasksEmpty = try XCTUnwrap(self.sut.activeTasks).isEmpty

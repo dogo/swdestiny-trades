@@ -10,6 +10,7 @@ import XCTest
 
 @testable import SWDestinyTrades
 
+// swiftlint:disable test_case_accessibility
 @MainActor
 class BaseTestCase: XCTestCase {
 
@@ -88,3 +89,5 @@ class BaseTestCase: XCTestCase {
         return true
     }
 }
+
+// swiftlint:enable test_case_accessibility

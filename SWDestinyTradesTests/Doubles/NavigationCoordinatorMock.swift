@@ -56,7 +56,7 @@ final class NavigationCoordinatorMock: NavigationCoordinatorProtocol {
     }
 
     func navigationCallCount(to destination: AppDestination) -> Int {
-        navigationCalls.count(where: { $0.destination == destination })
+        navigationCalls.count { $0.destination == destination }
     }
 
     func reset() {

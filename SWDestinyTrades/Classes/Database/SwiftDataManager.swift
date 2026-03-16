@@ -158,6 +158,9 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
                 continuation.yield(initial)
             }
 
+            nonisolated(unsafe) let capturedModel = model
+            nonisolated(unsafe) let capturedPredicate = predicate
+
             let observer = NotificationCenter.default.addObserver(
                 forName: Self.didChangeNotification,
                 object: self,
@@ -165,7 +168,7 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
             ) { [weak self] _ in
                 Task { @MainActor [weak self] in
                     guard let self else { return }
-                    let items = await fetch(model, predicate: predicate, sorted: sorted)
+                    let items = await fetch(capturedModel, predicate: capturedPredicate, sorted: sorted)
                     continuation.yield(items)
                 }
             }
@@ -205,18 +208,22 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
     private func deleteStoredModel(for object: Storable) {
         switch object {
         case let card as CardDTO:
-            if let stored = findCard(id: card.id) { context.delete(stored) }
+            deleteIfFound(findCard(id: card.id))
         case let set as SetDTO:
-            if let stored = findSet(code: set.code) { context.delete(stored) }
+            deleteIfFound(findSet(code: set.code))
         case let deck as DeckDTO:
-            if let stored = findDeck(id: deck.id) { context.delete(stored) }
+            deleteIfFound(findDeck(id: deck.id))
         case let person as PersonDTO:
-            if let stored = findPerson(id: person.id) { context.delete(stored) }
+            deleteIfFound(findPerson(id: person.id))
         case let collection as UserCollectionDTO:
-            if let stored = findUserCollection(id: collection.id) { context.delete(stored) }
+            deleteIfFound(findUserCollection(id: collection.id))
         default:
             break
         }
+    }
+
+    private func deleteIfFound(_ model: (some PersistentModel)?) {
+        if let model { context.delete(model) }
     }
 
     // MARK: - Private: Save
