@@ -64,23 +64,126 @@ private struct ToastQueueModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .overlay {
-                if let item = queue.current {
-                    VStack(spacing: 0) {
-                        ToastView(item: item, onDismiss: queue.advance)
-                            .padding(.top, topSafeAreaInset + 8)
-                        Spacer()
-                    }
-                    .ignoresSafeArea()
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    .id(item.id)
-                }
+            .background {
+                WindowToastAnchor(queue: queue)
+                    .frame(width: 0, height: 0)
+                    .allowsHitTesting(false)
             }
-            .animation(.spring(response: 0.3, dampingFraction: 0.8), value: queue.current?.id)
+    }
+}
+
+// MARK: - UIKit Window Presenter
+
+private struct WindowToastAnchor: UIViewRepresentable {
+    let queue: ToastQueue
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
     }
 
-    private var topSafeAreaInset: CGFloat {
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
-            .keyWindow?.safeAreaInsets.top ?? 0
+    func makeUIView(context: Context) -> UIView {
+        context.coordinator.anchor
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        context.coordinator.sync(with: queue)
+    }
+
+    static func dismantleUIView(_ uiView: UIView, coordinator: Coordinator) {
+        coordinator.removeToast(animated: false)
+    }
+
+    @MainActor
+    final class Coordinator {
+        let anchor = UIView()
+        private var hostVC: UIHostingController<AnyView>?
+        private var presentedItemID: UUID?
+        private var isObserving = false
+
+        func sync(with queue: ToastQueue) {
+            if let item = queue.current, item.id != presentedItemID {
+                schedulePresentation(item: item, onDismiss: queue.advance)
+            } else if queue.current == nil {
+                removeToast()
+            }
+            scheduleObservation(queue)
+        }
+
+        private func scheduleObservation(_ queue: ToastQueue) {
+            guard !isObserving else { return }
+            isObserving = true
+            withObservationTracking {
+                _ = queue.current
+            } onChange: { [weak self] in
+                Task { @MainActor [weak self] in
+                    self?.isObserving = false
+                    self?.sync(with: queue)
+                }
+            }
+        }
+
+        private func schedulePresentation(item: ToastItem, onDismiss: @escaping () -> Void) {
+            guard let window = anchor.window ?? keyWindow() else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.schedulePresentation(item: item, onDismiss: onDismiss)
+                }
+                return
+            }
+            present(item: item, onDismiss: onDismiss, in: window)
+        }
+
+        private func present(item: ToastItem, onDismiss: @escaping () -> Void, in window: UIWindow) {
+            removeToast(animated: false)
+            presentedItemID = item.id
+
+            let content = AnyView(
+                ToastView(item: item, onDismiss: onDismiss)
+                    .padding(.top, window.safeAreaInsets.top + 8)
+                    .frame(maxWidth: .infinity)
+            )
+
+            let hostController = UIHostingController(rootView: content)
+            hostController.view.backgroundColor = .clear
+
+            hostController.view.alpha = 0
+            hostController.view.frame = CGRect(x: 0, y: 0, width: window.bounds.width, height: 1000)
+            window.addSubview(hostController.view)
+            hostController.view.layoutIfNeeded()
+
+            let fittingSize = CGSize(width: window.bounds.width, height: UIView.layoutFittingCompressedSize.height)
+            let height = hostController.view.systemLayoutSizeFitting(
+                fittingSize,
+                withHorizontalFittingPriority: .required,
+                verticalFittingPriority: .fittingSizeLevel
+            ).height
+            hostController.view.frame.size.height = height
+            hostVC = hostController
+
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
+                hostController.view.alpha = 1
+            }
+        }
+
+        func removeToast(animated: Bool = true) {
+            presentedItemID = nil
+            guard let hostController = hostVC else { return }
+            hostVC = nil
+            if animated {
+                UIView.animate(withDuration: 0.2) {
+                    hostController.view.alpha = 0
+                } completion: { _ in
+                    hostController.view.removeFromSuperview()
+                }
+            } else {
+                hostController.view.removeFromSuperview()
+            }
+        }
+
+        private func keyWindow() -> UIWindow? {
+            UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap(\.windows)
+                .first(where: \.isKeyWindow)
+        }
     }
 }
