@@ -16,11 +16,6 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     private(set) var isLoadingFromRemote = false
     private(set) var dataSource: DataSource = .remote
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     private var loadTask: Task<Void, Never>?
 
     enum DataSource {
@@ -109,10 +104,7 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
 
     func addCardToDeck(_ card: CardDTO) {
         if deck.list.contains(where: { $0.code == card.code }) {
-            toastTitle = ""
-            toastMessage = L10n.alreadyAdded
-            toastType = .info
-            showToast = true
+            toastQueue.enqueue(title: "", message: L10n.alreadyAdded, type: .info, duration: 1.5)
             return
         }
 
@@ -125,10 +117,7 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
                 self.deck.list.append(cardCopy)
                 try await database.save(object: self.deck, update: .modified)
 
-                self.toastTitle = L10n.added
-                self.toastMessage = card.name
-                self.toastType = .success
-                self.showToast = true
+                toastQueue.enqueue(title: L10n.added, message: card.name, type: .success)
             } catch {
                 self.handleError(ConcurrencyError.realmAccessError(error))
             }
@@ -136,15 +125,7 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
     }
 
     override func handleError(_ error: Error) {
+        guard !ConcurrencyError.isCancellation(error) else { return }
         super.handleError(error)
-
-        if ConcurrencyError.isCancellation(error) {
-            return
-        }
-
-        toastTitle = L10n.error
-        toastMessage = L10n.errorMessage
-        toastType = .error
-        showToast = true
     }
 }

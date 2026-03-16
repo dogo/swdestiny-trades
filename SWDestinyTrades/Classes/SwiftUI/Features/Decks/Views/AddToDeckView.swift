@@ -33,19 +33,7 @@ struct AddToDeckView: View {
             viewModel.performFiltering(searchText: newValue)
         }
         .onSubmit(of: .search) {}
-        .overlay(alignment: .top) {
-            if viewModel.showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $viewModel.showToast,
-                    duration: viewModel.toastType == .success ? 2.0 : (viewModel.toastType == .error ? 2.5 : 1.5)
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
-        }
+        .toastQueue(viewModel.toastQueue)
         .task {
             viewModel.loadRemoteCards()
         }

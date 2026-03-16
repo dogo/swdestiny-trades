@@ -93,8 +93,8 @@ final class CardListViewModelTests: BaseTestCase {
         await sut.loadCards()
 
         XCTAssertFalse(sut.isLoading)
-        XCTAssertTrue(sut.showToast)
-        XCTAssertEqual(sut.toastType, .error)
+        XCTAssertNotNil(sut.toastQueue.current)
+        XCTAssertEqual(sut.toastQueue.current?.type, .error)
     }
 
     func testAsyncOperationCompletesLoading() async {

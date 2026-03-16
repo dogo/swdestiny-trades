@@ -43,9 +43,7 @@ struct LoanDetailView: View {
                 Text(L10n.areYouSureYouWantToRemove(cardToDelete.card.name))
             }
         }
-        .overlay(alignment: .top) {
-            toastOverlay
-        }
+        .toastQueue(viewModel.toastQueue)
         .onAppear {
             viewModel.loadLoanData()
         }
@@ -122,20 +120,6 @@ struct LoanDetailView: View {
             }
         } header: {
             Text(L10n.hasBorrowedMy)
-        }
-    }
-
-    @ViewBuilder private var toastOverlay: some View {
-        if viewModel.showToast {
-            ToastView(
-                title: viewModel.toastTitle,
-                message: viewModel.toastMessage,
-                type: viewModel.toastType,
-                isPresented: $viewModel.showToast,
-                duration: 2.5
-            )
-            .padding(.top, 8)
-            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 }

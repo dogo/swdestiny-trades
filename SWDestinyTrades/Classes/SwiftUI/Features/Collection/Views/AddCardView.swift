@@ -24,17 +24,14 @@ struct AddCardView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            cardListView
-            toastOverlay
-        }
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: viewModel.showToast)
-        .onChange(of: viewModel.searchText) { _, newValue in
-            viewModel.performFiltering(searchText: newValue)
-        }
-        .task {
-            await viewModel.loadData()
-        }
+        cardListView
+            .toastQueue(viewModel.toastQueue)
+            .onChange(of: viewModel.searchText) { _, newValue in
+                viewModel.performFiltering(searchText: newValue)
+            }
+            .task {
+                await viewModel.loadData()
+            }
     }
 
     private var cardListView: some View {
@@ -63,20 +60,6 @@ struct AddCardView: View {
             ) {
                 viewModel.applyFilters()
             }
-        }
-    }
-
-    @ViewBuilder private var toastOverlay: some View {
-        if viewModel.showToast {
-            ToastView(
-                title: viewModel.toastTitle,
-                message: viewModel.toastMessage,
-                type: viewModel.toastType,
-                isPresented: $viewModel.showToast,
-                duration: viewModel.toastType == .success ? 2.0 : 2.5
-            )
-            .padding(.top, 8)
-            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 

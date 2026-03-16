@@ -17,10 +17,6 @@ final class CardDetailViewModel: BaseViewModel {
     var currentIndex: Int = 0
     var showingSuccessMessage = false
     var successMessage = ""
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
 
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -63,13 +59,6 @@ final class CardDetailViewModel: BaseViewModel {
         super.init(dependencyContainer: dependencyContainer)
     }
 
-    override func handleError(_ error: Error) {
-        toastTitle = L10n.error
-        toastMessage = error.localizedDescription
-        toastType = .error
-        showToast = true
-    }
-
     func updateCurrentIndex(_ index: Int) {
         guard index < cards.count else { return }
         currentIndex = index
@@ -109,10 +98,7 @@ final class CardDetailViewModel: BaseViewModel {
             }
             try await database.save(object: userCollection, update: .modified)
 
-            toastTitle = L10n.added
-            toastMessage = card.name
-            toastType = .success
-            showToast = true
+            toastQueue.enqueue(title: L10n.added, message: card.name, type: .success)
 
             setLoaded()
         } catch is CancellationError {

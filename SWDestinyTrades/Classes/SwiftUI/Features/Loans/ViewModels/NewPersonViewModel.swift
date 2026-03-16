@@ -15,14 +15,8 @@ final class NewPersonViewModel: BaseViewModel {
     var firstName = ""
     var lastName = ""
     var isFormValid = false
-    var showSuccessToast = false
-    var addedPersonName = ""
+    var shouldDismiss = false
     var validationErrors: [ValidationError] = []
-
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
 
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -71,9 +65,13 @@ final class NewPersonViewModel: BaseViewModel {
 
             try Task.checkCancellation()
 
-            addedPersonName = PersonNameComponents(givenName: person.name, familyName: person.lastName)
+            let addedName = PersonNameComponents(givenName: person.name, familyName: person.lastName)
                 .formatted(.name(style: .long))
-            showSuccessToast = true
+
+            toastQueue.enqueue(title: L10n.added, message: addedName, type: .success) { [weak self] in
+                self?.shouldDismiss = true
+            }
+
             resetForm()
         } catch is CancellationError {
             // Silently cancel
@@ -109,11 +107,7 @@ final class NewPersonViewModel: BaseViewModel {
 
     override func handleError(_ error: Error) {
         setLoading(false)
-
-        toastTitle = L10n.error
-        toastMessage = error.localizedDescription
-        toastType = .error
-        showToast = true
+        super.handleError(error)
     }
 }
 

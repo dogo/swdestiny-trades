@@ -12,11 +12,6 @@ import SwiftUI
 @Observable
 final class SetsListViewModel: ListViewModel<SetDTO> {
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
@@ -85,15 +80,7 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
     }
 
     override func handleError(_ error: Error) {
+        guard !ConcurrencyError.isCancellation(error) else { return }
         super.handleError(error)
-
-        if ConcurrencyError.isCancellation(error) {
-            return
-        }
-
-        toastTitle = L10n.error
-        toastMessage = L10n.errorMessage
-        toastType = .error
-        showToast = true
     }
 }

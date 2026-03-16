@@ -18,11 +18,6 @@ final class LoanDetailViewModel: BaseViewModel {
     var showingDeleteConfirmation = false
     var cardToDelete: (card: CardDTO, type: AddCardType)?
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
@@ -76,7 +71,7 @@ final class LoanDetailViewModel: BaseViewModel {
             } catch is CancellationError {
                 // Silently cancel
             } catch {
-                self.showErrorToast(error.localizedDescription)
+                self.toastQueue.enqueue(title: L10n.error, message: error.localizedDescription, type: .error, duration: 2.5)
             }
         }
     }
@@ -107,7 +102,7 @@ final class LoanDetailViewModel: BaseViewModel {
                 self.cardToDelete = nil
                 self.showingDeleteConfirmation = false
             } catch {
-                self.showErrorToast(error.localizedDescription)
+                self.toastQueue.enqueue(title: L10n.error, message: error.localizedDescription, type: .error, duration: 2.5)
             }
         }
     }
@@ -132,12 +127,5 @@ final class LoanDetailViewModel: BaseViewModel {
             lentCount: lentCards.count,
             totalValue: 0.0
         )
-    }
-
-    private func showErrorToast(_ message: String) {
-        toastTitle = L10n.error
-        toastMessage = message
-        toastType = .error
-        showToast = true
     }
 }

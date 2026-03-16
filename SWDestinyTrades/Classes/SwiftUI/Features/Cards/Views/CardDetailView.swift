@@ -26,10 +26,8 @@ struct CardDetailView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            scrollContent
-            toastOverlay
-        }
+        scrollContent
+            .toastQueue(viewModel.toastQueue)
     }
 
     private var scrollContent: some View {
@@ -82,23 +80,6 @@ struct CardDetailView: View {
             if let shareImage {
                 ShareSheet(items: [shareImage])
             }
-        }
-    }
-
-    private var toastOverlay: some View {
-        VStack {
-            if viewModel.showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $viewModel.showToast,
-                    duration: 2.5
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
-            Spacer()
         }
     }
 }

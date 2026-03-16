@@ -15,11 +15,6 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     var filter: UnifiedCardFilter = .init()
     var availableSets: [SetDTO] = []
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     private var isInitialLoadComplete = false
 
     var addCardContext: AddCardContext
@@ -200,19 +195,17 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                     try await addCardToBorrowed(card, person: person, database: database)
                 }
 
-                self.toastTitle = L10n.cardAdded
-                self.toastMessage = L10n.cardAddedSuccessfully(card.name)
-                self.toastType = .success
-                self.showToast = true
-
+                toastQueue.enqueue(title: L10n.cardAdded, message: L10n.cardAddedSuccessfully(card.name), type: .success)
                 self.performFiltering(searchText: self.searchText)
             } catch is CancellationError {
                 return
             } catch {
-                self.toastTitle = L10n.error
-                self.toastMessage = (error as? AddCardError)?.localizedDescription ?? error.localizedDescription
-                self.toastType = .error
-                self.showToast = true
+                toastQueue.enqueue(
+                    title: L10n.error,
+                    message: (error as? AddCardError)?.localizedDescription ?? error.localizedDescription,
+                    type: .error,
+                    duration: 2.5
+                )
             }
         }
     }
@@ -254,16 +247,10 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     }
 
     override func handleError(_ error: Error) {
-        super.handleError(error)
-
         if ConcurrencyError.isCancellation(error) {
             return
         }
-
-        toastTitle = L10n.error
-        toastMessage = error.localizedDescription
-        toastType = .error
-        showToast = true
+        super.handleError(error)
     }
 }
 

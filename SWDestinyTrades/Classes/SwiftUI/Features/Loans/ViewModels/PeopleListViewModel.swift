@@ -12,11 +12,6 @@ import SwiftUI
 @Observable
 final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
@@ -26,11 +21,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     override func handleError(_ error: Error) {
-        toastTitle = L10n.error
-        toastMessage = error.localizedDescription
-        toastType = .error
-
-        showToast = true
+        super.handleError(error)
         setLoaded()
     }
 
@@ -83,10 +74,11 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
             updateItems(Array(freshPeople))
 
-            toastTitle = L10n.deletedPerson
-            toastMessage = L10n.personDeletedSuccessfully(person.name, person.lastName)
-            toastType = .success
-            showToast = true
+            toastQueue.enqueue(
+                title: L10n.deletedPerson,
+                message: L10n.personDeletedSuccessfully(person.name, person.lastName),
+                type: .success
+            )
         } catch {
             handleError(error)
         }

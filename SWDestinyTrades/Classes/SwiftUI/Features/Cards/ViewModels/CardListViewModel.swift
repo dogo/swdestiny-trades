@@ -17,11 +17,6 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     var selectedSet: SetDTO?
     var filter: UnifiedCardFilter = .init()
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     // MARK: - Computed Properties
 
     private var database: DatabaseProtocol {
@@ -46,17 +41,12 @@ final class CardListViewModel: ListViewModel<CardDTO> {
     // MARK: - Error handling
 
     override func handleError(_ error: Error) {
-        showToast = false
-        toastTitle = L10n.error
-
         if ConcurrencyError.isCancellation(error) {
             setLoaded()
             return
         }
 
-        toastMessage = error.localizedDescription
-        toastType = .error
-        showToast = true
+        super.handleError(error)
         setLoaded()
     }
 

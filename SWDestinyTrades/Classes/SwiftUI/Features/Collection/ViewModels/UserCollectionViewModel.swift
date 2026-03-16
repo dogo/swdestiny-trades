@@ -13,10 +13,6 @@ import SwiftUI
 final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
     var filter: UnifiedCardFilter = .init()
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
     var availableSets: [SetDTO] = []
 
     var hasActiveFilters: Bool {
@@ -31,15 +27,6 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
-    }
-
-    override func handleError(_ error: Error) {
-        super.handleError(error)
-
-        toastTitle = L10n.error
-        toastMessage = error.localizedDescription
-        toastType = .error
-        showToast = true
     }
 
     override func loadItems(page: Int = 0, reset: Bool = false) async {

@@ -30,8 +30,10 @@ struct NewPersonView: View {
             saveButtonSection
         }
         .toolbar { toolbarContent }
-        .overlay(alignment: .top) { successToastOverlay }
-        .overlay(alignment: .top) { errorToastOverlay }
+        .toastQueue(viewModel.toastQueue)
+        .onChange(of: viewModel.shouldDismiss) { _, shouldDismiss in
+            if shouldDismiss { dismiss() }
+        }
         .onChange(of: viewModel.firstName) { _, _ in viewModel.validate() }
         .onChange(of: viewModel.lastName) { _, _ in viewModel.validate() }
         .onAppear {
@@ -115,35 +117,6 @@ struct NewPersonView: View {
                 }
             }
             .disabled(!viewModel.isFormValid || viewModel.isLoading)
-        }
-    }
-
-    @ViewBuilder private var successToastOverlay: some View {
-        if viewModel.showSuccessToast {
-            ToastView(
-                title: L10n.added,
-                message: viewModel.addedPersonName,
-                type: .success,
-                isPresented: $viewModel.showSuccessToast
-            ) {
-                dismiss()
-            }
-            .padding(.top, 8)
-            .transition(.move(edge: .top).combined(with: .opacity))
-        }
-    }
-
-    @ViewBuilder private var errorToastOverlay: some View {
-        if viewModel.showToast {
-            ToastView(
-                title: viewModel.toastTitle,
-                message: viewModel.toastMessage,
-                type: viewModel.toastType,
-                isPresented: $viewModel.showToast,
-                duration: 2.5
-            )
-            .padding(.top, 8)
-            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 }

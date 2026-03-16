@@ -20,6 +20,8 @@ class BaseViewModel {
 
     let dependencyContainer: DependencyContainer
 
+    var toastQueue = ToastQueue()
+
     required init(dependencyContainer: DependencyContainer = .shared) {
         self.dependencyContainer = dependencyContainer
     }
@@ -29,6 +31,7 @@ class BaseViewModel {
 
         errorMessage = error.localizedDescription
         loadingState = .error(error)
+        toastQueue.enqueue(title: L10n.error, message: error.localizedDescription, type: .error, duration: 2.5)
     }
 
     func clearError() {

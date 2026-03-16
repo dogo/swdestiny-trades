@@ -30,19 +30,7 @@ struct SearchView: View {
                 viewModel.performSearch(query: viewModel.searchText)
             }
         }
-        .overlay(alignment: .top) {
-            if viewModel.showToast {
-                ToastView(
-                    title: viewModel.toastTitle,
-                    message: viewModel.toastMessage,
-                    type: viewModel.toastType,
-                    isPresented: $viewModel.showToast,
-                    duration: 2.5
-                )
-                .padding(.top, 8)
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
-        }
+        .toastQueue(viewModel.toastQueue)
         .onChange(of: viewModel.searchText) { _, newValue in
             viewModel.onSearchTextChanged(newValue)
         }

@@ -17,11 +17,6 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     var hasSearched = false
     var currentQuery = ""
 
-    var showToast = false
-    var toastTitle = ""
-    var toastMessage = ""
-    var toastType: ToastType = .info
-
     private var service: SWDestinyServiceProtocol {
         dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
     }
@@ -49,16 +44,8 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     }
 
     override func handleError(_ error: Error) {
+        guard !ConcurrencyError.isCancellation(error) else { return }
         super.handleError(error)
-
-        if ConcurrencyError.isCancellation(error) {
-            return
-        }
-
-        toastTitle = L10n.error
-        toastMessage = error.localizedDescription
-        toastType = .error
-        showToast = true
     }
 
     func performSearch(query: String) {

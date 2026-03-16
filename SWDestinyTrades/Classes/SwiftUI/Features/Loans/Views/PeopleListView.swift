@@ -39,9 +39,7 @@ struct PeopleListView: View {
                 await viewModel.loadPeople()
             }
         }
-        .overlay(alignment: .top) {
-            toastOverlay
-        }
+        .toastQueue(viewModel.toastQueue)
     }
 
     @ViewBuilder private var contentView: some View {
@@ -117,20 +115,6 @@ struct PeopleListView: View {
         .listStyle(PlainListStyle())
         .refreshable {
             await viewModel.refresh()
-        }
-    }
-
-    @ViewBuilder private var toastOverlay: some View {
-        if viewModel.showToast {
-            ToastView(
-                title: viewModel.toastTitle,
-                message: viewModel.toastMessage,
-                type: viewModel.toastType,
-                isPresented: $viewModel.showToast,
-                duration: 2.5
-            )
-            .padding(.top, 8)
-            .transition(.move(edge: .top).combined(with: .opacity))
         }
     }
 }
