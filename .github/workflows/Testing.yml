@@ -58,6 +58,8 @@ jobs:
         shell: bash
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
+        env:
+          SWIFT_DISABLE_CAS: 1
         run: |
           xcodebuild -workspace ${{ matrix.workspace }} \
             -scheme ${{ matrix.scheme }} \
