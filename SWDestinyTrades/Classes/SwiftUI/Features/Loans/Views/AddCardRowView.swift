@@ -24,6 +24,6 @@ struct AddCardRowView: View {
                 Spacer()
             }
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(.plain)
     }
 }

@@ -51,11 +51,11 @@ struct MainTabView: View {
         let normalItemAppearance = UITabBarItemAppearance()
         normalItemAppearance.normal.titleTextAttributes = [
             .foregroundColor: UIColor.label,
-            .font: UIFont.systemFont(ofSize: 10, weight: .medium)
+            .font: UIFont.preferredFont(forTextStyle: .caption2)
         ]
         normalItemAppearance.selected.titleTextAttributes = [
             .foregroundColor: UIColor.systemBlue,
-            .font: UIFont.systemFont(ofSize: 10, weight: .medium)
+            .font: UIFont.preferredFont(forTextStyle: .caption2)
         ]
 
         appearance.stackedLayoutAppearance = normalItemAppearance
