@@ -8,13 +8,18 @@
 
 import SwiftUI
 
+private struct IdentifiableImage: Identifiable {
+    let id = UUID()
+    let image: UIImage
+}
+
 struct CardDetailScrollContent: View {
     @Bindable var viewModel: CardDetailViewModel
     let showAddToCollection: Bool
 
     @State private var fullScreenSource: ImageSource?
-    @State private var showingShareSheet = false
     @State private var shareImage: UIImage?
+    @State private var shareItem: IdentifiableImage?
 
     var body: some View {
         ScrollView {
@@ -38,7 +43,7 @@ struct CardDetailScrollContent: View {
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button(L10n.share, systemImage: "square.and.arrow.up") {
-                    showingShareSheet = true
+                    shareItem = shareImage.map { IdentifiableImage(image: $0) }
                 }
                 .disabled(shareImage == nil)
 
@@ -60,10 +65,8 @@ struct CardDetailScrollContent: View {
                 imageLoader: viewModel.imageLoader
             )
         }
-        .sheet(isPresented: $showingShareSheet) {
-            if let shareImage {
-                ShareSheet(items: [shareImage])
-            }
+        .sheet(item: $shareItem) { item in
+            ShareSheet(items: [item.image])
         }
     }
 }
