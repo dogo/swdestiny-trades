@@ -8,13 +8,18 @@
 
 import SwiftUI
 
+private struct IdentifiableImage: Identifiable {
+    let id = UUID()
+    let image: UIImage
+}
+
 /// A full-screen image viewer with share and dismiss controls.
 struct FullScreenCarouselViewer: View {
     let source: ImageSource
     let imageLoader: ImageLoadingService
     @Environment(\.dismiss) private var dismiss
 
-    @State private var showingShareSheet = false
+    @State private var shareItem: IdentifiableImage?
     @State private var loadedImage: UIImage?
 
     var body: some View {
@@ -28,15 +33,13 @@ struct FullScreenCarouselViewer: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(L10n.share, systemImage: "square.and.arrow.up") {
-                            if loadedImage != nil { showingShareSheet = true }
+                            shareItem = loadedImage.map { IdentifiableImage(image: $0) }
                         }
                         .disabled(loadedImage == nil)
                     }
                 }
-                .sheet(isPresented: $showingShareSheet) {
-                    if let loadedImage {
-                        ShareSheet(items: [loadedImage])
-                    }
+                .sheet(item: $shareItem) { item in
+                    ShareSheet(items: [item.image])
                 }
                 .task {
                     await loadImage()
