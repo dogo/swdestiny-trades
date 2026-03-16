@@ -9,9 +9,6 @@
 import Foundation
 
 struct ShareText: Identifiable {
-    var id: String {
-        value
-    }
-
+    let id = UUID()
     let value: String
 }
