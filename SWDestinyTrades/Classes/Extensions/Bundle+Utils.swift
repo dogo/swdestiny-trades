@@ -30,4 +30,8 @@ extension Bundle {
             return version
         #endif
     }
+
+    var appBundleIdentifier: String {
+        return Bundle.main.bundleIdentifier ?? "com.swdestiny.trades"
+    }
 }

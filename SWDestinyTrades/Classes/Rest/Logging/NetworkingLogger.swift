@@ -144,7 +144,7 @@ protocol TextOutputStream {
 
 struct OSLogOutputStream: TextOutputStream {
     private let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "com.swdestiny.trades",
+        subsystem: Bundle.main.appBundleIdentifier,
         category: "Networking"
     )
 
