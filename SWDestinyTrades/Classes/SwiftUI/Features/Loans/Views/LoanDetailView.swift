@@ -42,7 +42,7 @@ struct LoanDetailView: View {
         .refreshable {
             await viewModel.loadLoanData()
         }
-        .confirmationDialog("Delete Card", isPresented: $viewModel.showingDeleteConfirmation) {
+        .confirmationDialog(L10n.deleteCard, isPresented: $viewModel.showingDeleteConfirmation) {
             Button(L10n.delete, role: .destructive) {
                 viewModel.confirmDelete()
             }
