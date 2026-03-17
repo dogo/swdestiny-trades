@@ -19,9 +19,12 @@ struct DeckActionButton: View {
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
         } else {
-            Button(L10n.edit, systemImage: "pencil", action: onStartEditing)
-                .foregroundStyle(.blue)
-                .buttonStyle(.plain)
+            Button(action: onStartEditing) {
+                Image(systemName: "pencil")
+            }
+            .foregroundStyle(.blue)
+            .buttonStyle(.plain)
+            .accessibilityLabel(L10n.edit)
         }
     }
 }
