@@ -72,6 +72,20 @@ private struct ToastQueueModifier: ViewModifier {
     }
 }
 
+// MARK: - Toast Presenter Content
+
+private struct ToastPresenterContent: View {
+    let item: ToastItem
+    let onDismiss: () -> Void
+    let topInset: CGFloat
+
+    var body: some View {
+        ToastView(item: item, onDismiss: onDismiss)
+            .padding(.top, topInset)
+            .frame(maxWidth: .infinity)
+    }
+}
+
 // MARK: - UIKit Window Presenter
 
 private struct WindowToastAnchor: UIViewRepresentable {
@@ -96,7 +110,7 @@ private struct WindowToastAnchor: UIViewRepresentable {
     @MainActor
     final class Coordinator {
         let anchor = UIView()
-        private var hostVC: UIHostingController<AnyView>?
+        private var hostVC: UIHostingController<ToastPresenterContent>?
         private var presentedItemID: UUID?
         private var isObserving = false
 
@@ -124,7 +138,7 @@ private struct WindowToastAnchor: UIViewRepresentable {
 
         private func schedulePresentation(item: ToastItem, onDismiss: @escaping () -> Void) {
             guard let window = anchor.window ?? keyWindow() else {
-                DispatchQueue.main.async { [weak self] in
+                Task { @MainActor [weak self] in
                     self?.schedulePresentation(item: item, onDismiss: onDismiss)
                 }
                 return
@@ -136,10 +150,10 @@ private struct WindowToastAnchor: UIViewRepresentable {
             removeToast(animated: false)
             presentedItemID = item.id
 
-            let content = AnyView(
-                ToastView(item: item, onDismiss: onDismiss)
-                    .padding(.top, window.safeAreaInsets.top + 8)
-                    .frame(maxWidth: .infinity)
+            let content = ToastPresenterContent(
+                item: item,
+                onDismiss: onDismiss,
+                topInset: window.safeAreaInsets.top + 8
             )
 
             let hostController = UIHostingController(rootView: content)
