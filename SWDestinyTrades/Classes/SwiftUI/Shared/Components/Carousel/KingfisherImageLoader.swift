@@ -80,7 +80,6 @@ final class KingfisherImageLoader: ImageLoadingService {
         url: URL,
         onProgress: (@Sendable (Double) -> Void)?
     ) async throws -> UIImage {
-        let resource = ImageResource(downloadURL: url)
         let options: KingfisherOptionsInfo = [
             .targetCache(cache),
             .retryStrategy(retryStrategy),
@@ -91,7 +90,7 @@ final class KingfisherImageLoader: ImageLoadingService {
 
         return try await withCheckedThrowingContinuation { continuation in
             KingfisherManager.shared.retrieveImage(
-                with: resource,
+                with: url,
                 options: options,
                 progressBlock: { received, total in
                     guard total > 0 else { return }
