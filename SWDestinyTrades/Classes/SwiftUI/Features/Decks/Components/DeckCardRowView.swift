@@ -30,62 +30,12 @@ struct DeckCardRowView: View {
 
     var body: some View {
         HStack {
-            cardInfoButton
-            quantityControl
+            CardInfoButton(card: card, quantity: quantity, onTap: onTap)
+            DeckQuantityControl(card: card, quantity: $quantity, isElite: $isElite, onQuantityChange: onQuantityChange, onEliteToggle: onEliteToggle)
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(L10n.delete, role: .destructive) {
-                onRemove()
-            }
-        }
-    }
-
-    private var cardInfoButton: some View {
-        Button(action: onTap) {
-            HStack {
-                Image("ic_\(card.typeCode)")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundStyle(card.factionColor())
-                    .frame(width: 25, height: 25)
-                    .accessibilityHidden(true)
-
-                Text("\(quantity)")
-                    .font(.body)
-                    .frame(minWidth: 30)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(card.name)
-                        .font(.headline)
-                        .lineLimit(1)
-
-                    if !card.subtitle.isEmpty {
-                        Text(card.subtitle)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                    }
-                }
-
-                Spacer()
-            }
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-    }
-
-    @ViewBuilder
-    private var quantityControl: some View {
-        if card.typeCode == "character", card.isUnique {
-            EliteToggleButton(isElite: $isElite) { newValue in
-                onEliteToggle(newValue)
-            }
-        } else if !(card.typeCode == "character" && card.isUnique), card.typeCode != "battlefield" {
-            Stepper("", value: $quantity, in: 1 ... card.deckLimit) { _ in
-                onQuantityChange(quantity)
-            }
-            .labelsHidden()
+            Button(L10n.delete, role: .destructive, action: onRemove)
         }
     }
 }
