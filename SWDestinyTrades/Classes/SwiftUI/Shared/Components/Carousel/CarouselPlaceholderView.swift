@@ -17,7 +17,7 @@ struct CarouselPlaceholderView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
         } else {
-            Color(.systemGray6)
+            Color(uiColor: .systemGray6)
         }
     }
 }

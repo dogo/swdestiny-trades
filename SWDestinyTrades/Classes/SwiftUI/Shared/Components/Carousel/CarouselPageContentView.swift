@@ -30,6 +30,7 @@ struct CarouselPageContentView: View {
             Image(uiImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .accessibilityHidden(true)
 
         case .failed:
             VStack(spacing: 12) {
@@ -38,12 +39,14 @@ struct CarouselPageContentView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 120)
+                        .accessibilityHidden(true)
                 } else {
                     Image(systemName: "exclamationmark.triangle")
                         .font(.largeTitle)
                         .foregroundStyle(.secondary)
+                        .accessibilityHidden(true)
                 }
-                Button(L10n.retry) { onRetry() }
+                Button(L10n.retry, action: onRetry)
                     .buttonStyle(.bordered)
             }
         }
