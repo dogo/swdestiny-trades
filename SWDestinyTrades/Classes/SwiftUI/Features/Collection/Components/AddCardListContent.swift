@@ -25,7 +25,7 @@ struct AddCardListContent: View {
                 ContentUnavailableView.search
             }
         } else {
-            List(filteredItems, id: \.code) { card in
+            List(filteredItems) { card in
                 AddCardDetailRowView(card: card) {
                     onAddCard(card)
                 } onDetailTap: {

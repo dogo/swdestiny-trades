@@ -24,7 +24,7 @@ struct CardListContent: View {
                 ContentUnavailableView.search
             }
         } else {
-            List(filteredItems, id: \.code) { card in
+            List(filteredItems) { card in
                 CardRowView(card: card) {
                     onCardSelected(card)
                 }
