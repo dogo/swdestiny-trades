@@ -82,6 +82,7 @@ struct CarouselView: View {
                     }
                     .tag(index)
                     .onTapGesture { onItemTapped?(index) }
+                    .accessibilityAddTraits(onItemTapped != nil ? .isButton : [])
                     .onAppear { viewModel.loadImage(for: source, placeholder: placeholder) }
                 }
             }

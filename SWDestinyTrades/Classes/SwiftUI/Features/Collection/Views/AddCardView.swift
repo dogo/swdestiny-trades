@@ -24,29 +24,28 @@ struct AddCardView: View {
     }
 
     var body: some View {
-        cardListView
-            .toastQueue(viewModel.toastQueue)
-            .onChange(of: viewModel.searchText) { _, newValue in
-                viewModel.performFiltering(searchText: newValue)
-            }
-            .task {
-                await viewModel.loadData()
-            }
-    }
-
-    private var cardListView: some View {
         VStack {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 LoadingView()
             } else {
-                cardListContent
+                AddCardListContent(
+                    filteredItems: viewModel.filteredItems,
+                    isLoading: viewModel.isLoading,
+                    searchText: viewModel.searchText,
+                    onAddCard: { viewModel.addCard($0) },
+                    onDetailTap: { card in
+                        navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
+                    }
+                )
             }
         }
         .navigationTitle(viewModel.addCardContext.title)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                filterButton
+                FilterToolbarButton(hasActiveFilters: viewModel.filter.hasActiveFilters) {
+                    showingFilterSheet = true
+                }
             }
         }
         .searchable(text: $viewModel.searchText, prompt: L10n.searchCards)
@@ -61,33 +60,12 @@ struct AddCardView: View {
                 viewModel.applyFilters()
             }
         }
-    }
-
-    @ViewBuilder private var cardListContent: some View {
-        if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-            if viewModel.searchText.isEmpty {
-                ContentUnavailableView(L10n.noCardsFound,
-                                       systemImage: "rectangle.stack",
-                                       description: Text(L10n.pullToRefreshToLoadCards))
-            } else {
-                ContentUnavailableView.search
-            }
-        } else {
-            List(viewModel.filteredItems, id: \.code) { card in
-                AddCardDetailRowView(card: card) {
-                    viewModel.addCard(card)
-                } onDetailTap: {
-                    navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
-                }
-                .listRowSeparator(.visible)
-            }
-            .listStyle(.plain)
+        .toastQueue(viewModel.toastQueue)
+        .onChange(of: viewModel.searchText) { _, newValue in
+            viewModel.performFiltering(searchText: newValue)
         }
-    }
-
-    private var filterButton: some View {
-        FilterToolbarButton(hasActiveFilters: viewModel.filter.hasActiveFilters) {
-            showingFilterSheet = true
+        .task {
+            await viewModel.loadData()
         }
     }
 

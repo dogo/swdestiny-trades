@@ -25,7 +25,13 @@ struct CardListView: View {
             if viewModel.isLoading, viewModel.items.isEmpty {
                 LoadingView()
             } else {
-                cardListContent
+                CardListContent(
+                    filteredItems: viewModel.filteredItems,
+                    isLoading: viewModel.isLoading,
+                    searchText: viewModel.searchText
+                ) { card in
+                    navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
+                }
             }
         }
         .navigationTitle(set.name)
@@ -55,26 +61,6 @@ struct CardListView: View {
         }
         .task {
             await viewModel.loadCards()
-        }
-    }
-
-    @ViewBuilder private var cardListContent: some View {
-        if viewModel.filteredItems.isEmpty, !viewModel.isLoading {
-            if viewModel.searchText.isEmpty {
-                ContentUnavailableView(L10n.noCardsFound,
-                                       systemImage: "rectangle.stack",
-                                       description: Text(L10n.pullToRefreshToLoadCards))
-            } else {
-                ContentUnavailableView.search
-            }
-        } else {
-            List(viewModel.filteredItems, id: \.code) { card in
-                CardRowView(card: card) {
-                    navigationCoordinator.navigate(to: .cardDetail(viewModel.filteredItems, card))
-                }
-                .listRowSeparator(.visible)
-            }
-            .listStyle(.plain)
         }
     }
 

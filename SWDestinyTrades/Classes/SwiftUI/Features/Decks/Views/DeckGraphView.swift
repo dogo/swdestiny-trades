@@ -22,74 +22,38 @@ struct DeckGraphView: View {
             } else if !viewModel.hasData {
                 DeckGraphEmptyView()
             } else {
-                chartsScrollView
+                ScrollView {
+                    LazyVStack(spacing: 20) {
+                        DeckCardTypesChart(
+                            hasData: viewModel.hasChartData(for: .cardTypes),
+                            title: viewModel.getChartTitle(for: .cardTypes),
+                            data: viewModel.cardTypeData,
+                            labels: viewModel.cardTypeLabels
+                        )
+                        DeckCardCostsChart(
+                            hasData: viewModel.hasChartData(for: .cardCosts),
+                            title: viewModel.getChartTitle(for: .cardCosts),
+                            data: viewModel.cardCostData
+                        )
+                        DeckDiceSymbolsChart(
+                            hasData: viewModel.hasChartData(for: .diceSymbols),
+                            title: viewModel.getChartTitle(for: .diceSymbols),
+                            data: viewModel.diceFaceData,
+                            labels: viewModel.diceFaceLabels
+                        )
+                    }
+                    .padding()
+                }
             }
         }
         .navigationTitle(L10n.deckStatistics)
         .navigationBarTitleDisplayMode(.large)
         .refreshable {
-            refreshData()
+            viewModel.refresh()
         }
         .onAppear {
             viewModel.generateGraphData()
         }
-    }
-
-    // MARK: - View Components
-
-    private var chartsScrollView: some View {
-        ScrollView {
-            LazyVStack(spacing: 20) {
-                cardTypesChart
-                cardCostsChart
-                diceSymbolsChart
-            }
-            .padding()
-        }
-    }
-
-    @ViewBuilder private var cardTypesChart: some View {
-        if viewModel.hasChartData(for: .cardTypes) {
-            ChartCardView(title: viewModel.getChartTitle(for: .cardTypes)) {
-                SwiftUIBarChartView(
-                    data: viewModel.cardTypeData,
-                    labels: viewModel.cardTypeLabels,
-                    title: viewModel.getChartTitle(for: .cardTypes)
-                )
-                .frame(height: 300)
-            }
-        }
-    }
-
-    @ViewBuilder private var cardCostsChart: some View {
-        if viewModel.hasChartData(for: .cardCosts) {
-            ChartCardView(title: viewModel.getChartTitle(for: .cardCosts)) {
-                SwiftUILineChartView(
-                    data: viewModel.cardCostData,
-                    title: viewModel.getChartTitle(for: .cardCosts)
-                )
-                .frame(height: 300)
-            }
-        }
-    }
-
-    @ViewBuilder private var diceSymbolsChart: some View {
-        if viewModel.hasChartData(for: .diceSymbols) {
-            ChartCardView(title: viewModel.getChartTitle(for: .diceSymbols)) {
-                SwiftUIRadarChartView(
-                    data: viewModel.diceFaceData,
-                    labels: viewModel.diceFaceLabels,
-                    title: viewModel.getChartTitle(for: .diceSymbols)
-                )
-                .frame(height: 300)
-            }
-        }
-    }
-
-    // MARK: - Actions
-
-    private func refreshData() {
-        viewModel.refresh()
     }
 }
 

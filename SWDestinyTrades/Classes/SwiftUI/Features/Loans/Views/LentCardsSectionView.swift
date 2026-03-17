@@ -37,7 +37,7 @@ struct LentCardsSectionView: View {
                     }
                 }
 
-                AddCardRowView(text: L10n.addCard.appending("..."), action: onAddCard)
+                AddCardRowView(text: L10n.addCard + "...", action: onAddCard)
             }
         } header: {
             Text(L10n.hasLentMe)
