@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-enum AddCardType: Hashable {
-    case lent
-    case borrow
-    case collection
-}
-
 enum NavigationDestinationBuilder {
 
     @ViewBuilder
