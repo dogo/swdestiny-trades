@@ -23,7 +23,7 @@ struct ContentView: View {
             } else if appState.isInitialized {
                 MainTabView()
             } else {
-                ErrorView(message: "App failed to initialize") {
+                ErrorView(message: L10n.appFailedToInitialize) {
                     appState.reset()
                     appState.initialize()
                 }

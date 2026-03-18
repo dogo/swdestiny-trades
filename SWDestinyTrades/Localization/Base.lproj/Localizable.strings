@@ -161,3 +161,4 @@
 "NO_BORROWED_CARDS" = "No cards borrowed";
 "DELETED_PERSON" = "Deleted Person";
 "LOADING_PEOPLE" = "Loading people...";
+"APP_FAILED_TO_INITIALIZE" = "App failed to initialize";

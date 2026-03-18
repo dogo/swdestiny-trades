@@ -162,4 +162,4 @@
 "NO_BORROWED_CARDS" = "No hay cartas prestadas por alguien";
 "DELETED_PERSON" = "Persona Eliminada";
 "LOADING_PEOPLE" = "Cargando personas...";
-
+"APP_FAILED_TO_INITIALIZE" = "App failed to initialize";

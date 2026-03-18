@@ -56,6 +56,8 @@ internal enum L10n {
   internal static let allSets = L10n.tr("Localizable", "ALL_SETS", fallback: "All sets")
   /// This card has already been added. Please use the quantity control on the previous screen.
   internal static let alreadyAdded = L10n.tr("Localizable", "ALREADY_ADDED", fallback: "This card has already been added. Please use the quantity control on the previous screen.")
+  /// App failed to initialize
+  internal static let appFailedToInitialize = L10n.tr("Localizable", "APP_FAILED_TO_INITIALIZE", fallback: "App failed to initialize")
   /// App initialized successfully!
   internal static let appInitializedSuccessfully = L10n.tr("Localizable", "APP_INITIALIZED_SUCCESSFULLY", fallback: "App initialized successfully!")
   /// Apply
