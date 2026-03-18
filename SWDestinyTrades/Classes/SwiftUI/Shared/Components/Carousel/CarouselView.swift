@@ -72,16 +72,18 @@ struct CarouselView: View {
             TabView(selection: $currentPage) {
                 ForEach(viewModel.items.indices, id: \.self) { index in
                     let source = viewModel.items[index]
-                    CarouselPageView(
-                        source: source,
-                        state: viewModel.imageStates[source] ?? .idle,
-                        placeholder: placeholder,
-                        errorImage: errorImage
-                    ) {
-                        viewModel.retryLoad(for: source, placeholder: placeholder)
+                    Button { onItemTapped?(index) } label: {
+                        CarouselPageView(
+                            source: source,
+                            state: viewModel.imageStates[source] ?? .idle,
+                            placeholder: placeholder,
+                            errorImage: errorImage
+                        ) {
+                            viewModel.retryLoad(for: source, placeholder: placeholder)
+                        }
                     }
+                    .buttonStyle(.plain)
                     .tag(index)
-                    .onTapGesture { onItemTapped?(index) }
                     .accessibilityAddTraits(onItemTapped != nil ? .isButton : [])
                     .onAppear { viewModel.loadImage(for: source, placeholder: placeholder) }
                 }
