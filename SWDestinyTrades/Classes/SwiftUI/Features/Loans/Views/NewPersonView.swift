@@ -17,40 +17,7 @@ struct NewPersonView: View {
 
     var body: some View {
         Form {
-            Section {
-                PersonFormField(
-                    label: L10n.firstName,
-                    text: $viewModel.firstName,
-                    focus: $focusedField,
-                    field: .firstName,
-                    errorMessage: viewModel.getValidationMessage(for: .firstName)
-                ) {
-                    focusedField = .lastName
-                }
-                PersonFormField(
-                    label: L10n.lastName,
-                    text: $viewModel.lastName,
-                    focus: $focusedField,
-                    field: .lastName,
-                    errorMessage: viewModel.getValidationMessage(for: .lastName)
-                ) {
-                    if viewModel.isFormValid {
-                        Task { await viewModel.savePerson() }
-                    }
-                }
-            } header: {
-                Text(L10n.personInformation)
-            } footer: {
-                Text(L10n.enterThePersonsNameToTrackLoansWithThem)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            SavePersonSection(
-                isLoading: viewModel.isLoading,
-                isDisabled: !viewModel.isFormValid || viewModel.isLoading
-            ) {
-                Task { await viewModel.savePerson() }
-            }
+            NewPersonFormContent(viewModel: viewModel, focusedField: $focusedField)
         }
         .toolbar { toolbarContent }
         .toastQueue(viewModel.toastQueue)
