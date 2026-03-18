@@ -10,6 +10,7 @@ import UIKit
 
 @testable import SWDestinyTrades
 
+@MainActor
 final class MockImageLoader: ImageLoadingService {
 
     var loadImageCallCount = 0
@@ -22,7 +23,7 @@ final class MockImageLoader: ImageLoadingService {
     func loadImage(
         from source: ImageSource,
         placeholder: UIImage?,
-        onProgress: (@Sendable (Double) -> Void)?
+        onProgress: (@MainActor @Sendable (Double) -> Void)?
     ) async throws -> UIImage {
         loadImageCallCount += 1
         lastLoadedSource = source

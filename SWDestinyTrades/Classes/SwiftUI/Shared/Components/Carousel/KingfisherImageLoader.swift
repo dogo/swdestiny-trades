@@ -32,7 +32,7 @@ final class KingfisherImageLoader: ImageLoadingService {
     func loadImage(
         from source: ImageSource,
         placeholder: UIImage?,
-        onProgress: (@Sendable (Double) -> Void)?
+        onProgress: (@MainActor @Sendable (Double) -> Void)?
     ) async throws -> UIImage {
         switch source {
         case let .remote(url):
@@ -78,7 +78,7 @@ final class KingfisherImageLoader: ImageLoadingService {
 
     private func loadRemoteImage(
         url: URL,
-        onProgress: (@Sendable (Double) -> Void)?
+        onProgress: (@MainActor @Sendable (Double) -> Void)?
     ) async throws -> UIImage {
         let options: KingfisherOptionsInfo = [
             .targetCache(cache),
@@ -95,7 +95,9 @@ final class KingfisherImageLoader: ImageLoadingService {
                 progressBlock: { received, total in
                     guard total > 0 else { return }
                     let progress = Double(received) / Double(total)
-                    onProgress?(progress)
+                    if let onProgress {
+                        Task { await MainActor.run { onProgress(progress) } }
+                    }
                 },
                 completionHandler: { result in
                     switch result {

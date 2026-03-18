@@ -26,7 +26,7 @@ protocol ImageLoadingService: Sendable {
     func loadImage(
         from source: ImageSource,
         placeholder: UIImage?,
-        onProgress: (@Sendable (Double) -> Void)?
+        onProgress: (@MainActor @Sendable (Double) -> Void)?
     ) async throws -> UIImage
 
     /// Cancels any in-flight loading for the given source.

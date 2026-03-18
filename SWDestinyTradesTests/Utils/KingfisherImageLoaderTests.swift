@@ -76,7 +76,7 @@ final class KingfisherImageLoaderTests: XCTestCase {
         var progressCallCount = 0
         let originalImage = UIImage()
 
-        _ = try await sut.loadImage(from: .local(originalImage), placeholder: nil) { _ in
+        _ = try await sut.loadImage(from: .local(originalImage), placeholder: nil) { @MainActor _ in
             progressCallCount += 1
         }
 
