@@ -13,6 +13,8 @@ import Foundation
 @MainActor
 final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
 
+    var stubbedSaveError: Error?
+
     private var storage: [String: [Any]] = [:]
     private var observerCallbacks: [String: [UUID: ([Any]) -> Void]] = [:]
 
@@ -52,6 +54,7 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
     }
 
     func save(object: Storable, update: UpdatePolicy) async throws {
+        if let error = stubbedSaveError { throw error }
         let key = String(describing: type(of: object))
         var objects = storage[key] ?? []
 

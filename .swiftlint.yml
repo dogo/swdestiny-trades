@@ -97,6 +97,7 @@ excluded:
   - Pods
   - Carthage
   - Tuist/.build
+  - SWDestinyTrades/Classes/Generated
 
 custom_rules:
   quickspec_class_name:
