@@ -16,10 +16,6 @@ struct LoanDetailView: View {
         _viewModel = State(wrappedValue: LoanDetailViewModel(personId: personId))
     }
 
-    init(person: PersonDTO) {
-        _viewModel = State(wrappedValue: LoanDetailViewModel(person: person))
-    }
-
     var body: some View {
         List {
             LentCardsSectionView(

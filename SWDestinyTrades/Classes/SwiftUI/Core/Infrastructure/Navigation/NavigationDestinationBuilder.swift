@@ -82,7 +82,7 @@ enum NavigationDestinationBuilder {
         case let .addCardToCollection(userCollection):
             AddCardView(context: .collection(userCollection))
         case let .addCardToPerson(personId, type):
-            AddCardView(personId: personId, type: type)
+            AddCardView(context: .person(id: personId, type: type))
         default:
             EmptyView()
         }

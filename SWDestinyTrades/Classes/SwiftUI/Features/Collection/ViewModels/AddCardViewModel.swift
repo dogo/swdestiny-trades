@@ -32,31 +32,14 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         super.init(dependencyContainer: dependencyContainer)
 
         Task { @MainActor in
-            await loadOrCreateUserCollection()
-            await loadAllCards()
-            await loadAvailableSets()
-            isInitialLoadComplete = true
-        }
-    }
-
-    init(personId: String, type: AddCardType, dependencyContainer: DependencyContainer = .shared) {
-        addCardContext = .collection(UserCollectionDTO())
-
-        super.init(dependencyContainer: dependencyContainer)
-
-        Task { @MainActor in
-            let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-            if let person = people.first(where: { $0.id == personId }) {
-                switch type {
-                case .lent:
-                    self.addCardContext = .lentToPerson(person)
-                case .borrow:
-                    self.addCardContext = .borrowedFromPerson(person)
-                case .collection:
-                    await self.loadOrCreateUserCollection()
-                }
+            switch context {
+            case let .person(id, type):
+                await loadPersonContext(id: id, type: type)
+            case .collection:
+                await loadOrCreateUserCollection()
+            case .lentToPerson, .borrowedFromPerson:
+                break
             }
-
             await loadAllCards()
             await loadAvailableSets()
             isInitialLoadComplete = true
@@ -80,6 +63,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         guard !isInitialLoadComplete else { return }
 
         switch addCardContext {
+        case let .person(id, type):
+            await loadPersonContext(id: id, type: type)
         case .collection:
             await loadOrCreateUserCollection()
         case .lentToPerson, .borrowedFromPerson:
@@ -87,6 +72,20 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
         }
         await loadAllCards()
         await loadAvailableSets()
+    }
+
+    private func loadPersonContext(id: String, type: AddCardType) async {
+        let people = await database.fetch(PersonDTO.self, predicate: nil, sorted: nil)
+        if let person = people.first(where: { $0.id == id }) {
+            switch type {
+            case .lent:
+                addCardContext = .lentToPerson(person)
+            case .borrow:
+                addCardContext = .borrowedFromPerson(person)
+            case .collection:
+                await loadOrCreateUserCollection()
+            }
+        }
     }
 
     private func loadOrCreateUserCollection() async {
@@ -180,6 +179,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
             return cards.filter { card in
                 !person.borrowed.contains { $0.code == card.code }
             }
+        case .person:
+            return cards
         }
     }
 
@@ -193,6 +194,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
                     try await addCardToLentMe(card, person: person, database: database)
                 case let .borrowedFromPerson(person):
                     try await addCardToBorrowed(card, person: person, database: database)
+                case .person:
+                    return
                 }
 
                 toastQueue.enqueue(title: L10n.cardAdded, message: L10n.cardAddedSuccessfully(card.name), type: .success)
@@ -258,6 +261,7 @@ enum AddCardContext {
     case collection(UserCollectionDTO)
     case lentToPerson(PersonDTO)
     case borrowedFromPerson(PersonDTO)
+    case person(id: String, type: AddCardType)
 
     var title: String {
         switch self {
@@ -267,6 +271,15 @@ enum AddCardContext {
             return L10n.addLentCard
         case .borrowedFromPerson:
             return L10n.addBorrowedCard
+        case let .person(_, type):
+            switch type {
+            case .lent:
+                return L10n.addLentCard
+            case .borrow:
+                return L10n.addBorrowedCard
+            case .collection:
+                return L10n.addCard
+            }
         }
     }
 }

@@ -19,10 +19,6 @@ struct AddCardView: View {
         _viewModel = State(wrappedValue: AddCardViewModel(context: context))
     }
 
-    init(personId: String, type: AddCardType) {
-        _viewModel = State(wrappedValue: AddCardViewModel(personId: personId, type: type))
-    }
-
     var body: some View {
         VStack {
             if viewModel.isLoading, viewModel.items.isEmpty {

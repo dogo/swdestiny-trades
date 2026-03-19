@@ -28,12 +28,6 @@ final class LoanDetailViewModel: BaseViewModel {
         loadPerson(byId: personId)
     }
 
-    init(person: PersonDTO, dependencyContainer: DependencyContainer = .shared) {
-        self.person = person
-        super.init(dependencyContainer: dependencyContainer)
-        Task { await self.loadLoanData() }
-    }
-
     required init(dependencyContainer: DependencyContainer = .shared) {
         person = PersonDTO()
         super.init(dependencyContainer: dependencyContainer)
