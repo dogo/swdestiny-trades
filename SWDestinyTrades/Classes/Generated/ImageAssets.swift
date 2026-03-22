@@ -22,13 +22,6 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
-  internal static let icBattlefield = ImageAsset(name: "ic_battlefield")
-  internal static let icCharacter = ImageAsset(name: "ic_character")
-  internal static let icDowngrade = ImageAsset(name: "ic_downgrade")
-  internal static let icEvent = ImageAsset(name: "ic_event")
-  internal static let icPlot = ImageAsset(name: "ic_plot")
-  internal static let icSupport = ImageAsset(name: "ic_support")
-  internal static let icUpgrade = ImageAsset(name: "ic_upgrade")
   internal enum Logo {
     internal static let largeIconBlack = ImageAsset(name: "Logo/LargeIconBlack")
     internal static let largeIconTransparent = ImageAsset(name: "Logo/LargeIconTransparent")
@@ -36,23 +29,18 @@ internal enum Asset {
   internal enum NavigationBar {
     internal static let icAccount = ImageAsset(name: "NavigationBar/ic_account")
     internal static let icAddCollection = ImageAsset(name: "NavigationBar/ic_add_collection")
-    internal static let icChart = ImageAsset(name: "NavigationBar/ic_chart")
-    internal static let icSort = ImageAsset(name: "NavigationBar/ic_sort")
   }
   internal enum Sets {
     internal static let icNotFound = ImageAsset(name: "Sets/ic_not_found")
   }
   internal enum Tabbar {
     internal static let icCards = ImageAsset(name: "Tabbar/ic_cards")
-    internal static let icCardsFilled = ImageAsset(name: "Tabbar/ic_cards_filled")
     internal static let icCollection = ImageAsset(name: "Tabbar/ic_collection")
     internal static let icDecks = ImageAsset(name: "Tabbar/ic_decks")
     internal static let icLoans = ImageAsset(name: "Tabbar/ic_loans")
   }
   internal static let ic404 = ImageAsset(name: "ic_404")
   internal static let icCardback = ImageAsset(name: "ic_cardback")
-  internal static let icDoneEdit = ImageAsset(name: "ic_done_edit")
-  internal static let icEdit = ImageAsset(name: "ic_edit")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
