@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-private extension Text {
-    static func += (lhs: inout Text, rhs: Text) {
-        lhs = lhs + rhs
-    }
-}
-
 private let dieSymbolIcons: [String: SWDIcon] = [
     "ranged": .icRanged,
     "resource": .icResource,
@@ -40,31 +34,31 @@ extension String {
     /// - `<i>…</i>` and `<em>…</em>` segments are rendered italic.
     /// - `<cite>…</cite>` segments are rendered italic (flavor text attribution).
     func toCardText(iconSize: CGFloat = 17) -> Text {
-        var result = Text("")
+        var components: [Text] = []
         var lastEnd = startIndex
         let pattern = /\[([a-zA-Z]+)\]|<b>(.*?)<\/b>|<i>(.*?)<\/i>|<em>(.*?)<\/em>|<cite>(.*?)<\/cite>/
 
         for match in matches(of: pattern) {
             let textBefore = String(self[lastEnd ..< match.range.lowerBound])
             if !textBefore.isEmpty {
-                result += Text(textBefore)
+                components.append(Text(textBefore))
             }
 
             if let markerSubstring = match.output.1 {
                 let marker = String(markerSubstring).lowercased()
                 if let icon = icon(forMarker: marker) {
-                    result += Text.swdIcon(icon, size: iconSize)
+                    components.append(Text.swdIcon(icon, size: iconSize))
                 } else {
-                    result += Text("[\(marker)]")
+                    components.append(Text("[\(marker)]"))
                 }
             } else if let boldContent = match.output.2 {
-                result += Text(String(boldContent)).bold()
+                components.append(Text(String(boldContent)).bold())
             } else if let italicContent = match.output.3 {
-                result += Text(String(italicContent)).italic()
+                components.append(Text(String(italicContent)).italic())
             } else if let emContent = match.output.4 {
-                result += Text(String(emContent)).italic()
+                components.append(Text(String(emContent)).italic())
             } else if let citeContent = match.output.5 {
-                result += Text(String(citeContent)).italic()
+                components.append(Text(String(citeContent)).italic())
             }
 
             lastEnd = match.range.upperBound
@@ -72,9 +66,11 @@ extension String {
 
         let remaining = String(self[lastEnd...])
         if !remaining.isEmpty {
-            result += Text(remaining)
+            components.append(Text(remaining))
         }
 
-        return result
+        return components.reduce(Text("")) { result, text in
+            Text("\(result)\(text)")
+        }
     }
 }
