@@ -28,6 +28,7 @@ struct MainTabView: View {
                 TabNavigationStack(path: $navigationCoordinator.collectionPath) { CollectionRootView() }
             }
         }
+        .tint(ColorPalette.appTheme)
         .environment(navigationCoordinator)
     }
 }

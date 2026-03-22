@@ -44,7 +44,7 @@ struct DeckRowView: View {
             Button(L10n.graph) {
                 onGraph()
             }
-            .tint(.blue)
+            .tint(ColorPalette.appTheme)
         }
     }
 

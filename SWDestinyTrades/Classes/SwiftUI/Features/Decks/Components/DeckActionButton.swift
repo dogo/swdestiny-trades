@@ -21,7 +21,7 @@ struct DeckActionButton: View {
         } else {
             Button(L10n.edit, systemImage: "pencil", action: onStartEditing)
                 .labelStyle(.iconOnly)
-                .foregroundStyle(.blue)
+                .foregroundStyle(ColorPalette.appTheme)
                 .buttonStyle(.plain)
         }
     }
