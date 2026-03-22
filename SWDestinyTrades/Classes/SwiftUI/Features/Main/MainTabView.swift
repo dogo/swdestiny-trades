@@ -15,55 +15,20 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $navigationCoordinator.selectedTab) {
-            Tab(value: AppTab.sets) {
+            Tab(L10n.cards, image: Asset.Tabbar.icCards.name, value: AppTab.sets) {
                 TabNavigationStack(path: $navigationCoordinator.setsPath) { SetsRootView() }
-            } label: {
-                Label { Text(L10n.cards) } icon: { Asset.Tabbar.icCards.swiftUIImage }
             }
-            Tab(value: AppTab.decks) {
+            Tab(L10n.decks, image: Asset.Tabbar.icDecks.name, value: AppTab.decks) {
                 TabNavigationStack(path: $navigationCoordinator.deckPath) { DecksRootView() }
-            } label: {
-                Label { Text(L10n.decks) } icon: { Asset.Tabbar.icDecks.swiftUIImage }
             }
-            Tab(value: AppTab.loans) {
+            Tab(L10n.loans, image: Asset.Tabbar.icLoans.name, value: AppTab.loans) {
                 TabNavigationStack(path: $navigationCoordinator.loanPath) { LoansRootView() }
-            } label: {
-                Label { Text(L10n.loans) } icon: { Asset.Tabbar.icLoans.swiftUIImage }
             }
-            Tab(value: AppTab.collection) {
+            Tab(L10n.collection, image: Asset.Tabbar.icCollection.name, value: AppTab.collection) {
                 TabNavigationStack(path: $navigationCoordinator.collectionPath) { CollectionRootView() }
-            } label: {
-                Label { Text(L10n.collection) } icon: { Asset.Tabbar.icCollection.swiftUIImage }
             }
         }
         .environment(navigationCoordinator)
-        .onAppear {
-            setupTabBarAppearance()
-        }
-    }
-
-    private func setupTabBarAppearance() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBackground
-        appearance.selectionIndicatorTintColor = UIColor.systemBlue
-
-        let normalItemAppearance = UITabBarItemAppearance()
-        normalItemAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor.label,
-            .font: UIFont.preferredFont(forTextStyle: .caption2)
-        ]
-        normalItemAppearance.selected.titleTextAttributes = [
-            .foregroundColor: UIColor.systemBlue,
-            .font: UIFont.preferredFont(forTextStyle: .caption2)
-        ]
-
-        appearance.stackedLayoutAppearance = normalItemAppearance
-        appearance.inlineLayoutAppearance = normalItemAppearance
-        appearance.compactInlineLayoutAppearance = normalItemAppearance
-
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
 }
 
