@@ -27,6 +27,9 @@ struct FullScreenCarouselViewer: View {
             imageContent
                 .background(Color.black)
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.black, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button(L10n.done) { dismiss() }
