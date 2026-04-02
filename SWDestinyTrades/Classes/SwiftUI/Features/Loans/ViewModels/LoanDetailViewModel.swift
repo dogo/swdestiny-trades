@@ -80,11 +80,13 @@ final class LoanDetailViewModel: BaseViewModel {
 
         Task { @MainActor in
             do {
+                let cardIDToDelete = cardToDelete.card.id
+
                 switch cardToDelete.type {
                 case .lent:
-                    self.person.lentMe.removeAll { $0.id == cardToDelete.card.id }
+                    self.person.lentMe.removeAll { $0.id == cardIDToDelete }
                 case .borrow:
-                    self.person.borrowed.removeAll { $0.id == cardToDelete.card.id }
+                    self.person.borrowed.removeAll { $0.id == cardIDToDelete }
                 default:
                     break
                 }

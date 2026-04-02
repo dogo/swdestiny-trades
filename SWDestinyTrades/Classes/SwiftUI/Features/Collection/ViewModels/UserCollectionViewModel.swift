@@ -168,7 +168,8 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
                     return
                 }
 
-                userCollection.myCollection.removeAll { $0.id == card.id }
+                let cardIDToRemove = card.id
+                userCollection.myCollection.removeAll { $0.id == cardIDToRemove }
                 try await database.save(object: userCollection, update: .modified)
             } catch is CancellationError {
                 return
