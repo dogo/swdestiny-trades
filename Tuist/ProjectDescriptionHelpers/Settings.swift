@@ -8,7 +8,21 @@ import ProjectDescription
 extension Project {
 
     public static func settings() -> Settings {
-        Settings.settings(base: baseSettings())
+        Settings.settings(
+            base: baseSettings(),
+            configurations: [
+                .debug(
+                    name: "Debug",
+                    settings: SettingsDictionary()
+                        .debugInformationFormat(.dwarf)
+                ),
+                .release(
+                    name: "Release",
+                    settings: SettingsDictionary()
+                        .debugInformationFormat(.dwarfWithDsym)
+                )
+            ]
+        )
     }
 
     private static func baseSettings() -> SettingsDictionary {
@@ -16,6 +30,5 @@ extension Project {
             .automaticCodeSigning(devTeam: "75C4E36ZA7")
             .currentProjectVersion("44")
             .marketingVersion("1.5.0")
-            .debugInformationFormat(.dwarfWithDsym)
     }
 }

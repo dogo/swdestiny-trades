@@ -17,32 +17,87 @@ public extension Project {
                 swiftgen
                 """,
                 name: "[SwiftGen] Run Script",
-                basedOnDependencyAnalysis: false
+                inputPaths: [
+                    "$SRCROOT/swiftgen.yml",
+                    "$SRCROOT/SWDestinyTrades/Localization/Base.lproj",
+                    "$SRCROOT/SWDestinyTrades/Assets.xcassets"
+                ],
+                outputPaths: [
+                    "$SRCROOT/SWDestinyTrades/Classes/Generated/LocalizableStrings.swift",
+                    "$SRCROOT/SWDestinyTrades/Classes/Generated/ImageAssets.swift"
+                ],
+                basedOnDependencyAnalysis: true
             ),
             TargetScript.pre(
                 script:
                 """
+                if [[ -z "${CI:-}" ]]; then
+                  echo "Skipping SwiftFormat outside CI."
+                  exit 0
+                fi
+
                 # Add Mise to the PATH
                 export PATH="$HOME/.local/share/mise/shims:$PATH"
                 swiftformat --swiftversion 5.10 --config .swiftformat .
+                touch "$DERIVED_FILE_DIR/swiftformat.stamp"
                 """,
                 name: "[SwiftFormat] Run Script",
-                basedOnDependencyAnalysis: false
+                inputPaths: [
+                    "$SRCROOT/.swiftformat"
+                ],
+                outputPaths: [
+                    "$(DERIVED_FILE_DIR)/swiftformat.stamp"
+                ],
+                basedOnDependencyAnalysis: true
             ),
             TargetScript.pre(
                 script:
                 """
+                if [[ -z "${CI:-}" ]]; then
+                  echo "Skipping SwiftLint outside CI."
+                  exit 0
+                fi
+
                 # Add Mise to the PATH
                 export PATH="$HOME/.local/share/mise/shims:$PATH"
                 swiftlint
+                touch "$DERIVED_FILE_DIR/swiftlint.stamp"
                 """,
                 name: "[SwiftLint] Run Script",
-                basedOnDependencyAnalysis: false
+                inputPaths: [
+                    "$SRCROOT/.swiftlint.yml"
+                ],
+                outputPaths: [
+                    "$(DERIVED_FILE_DIR)/swiftlint.stamp"
+                ],
+                basedOnDependencyAnalysis: true
             ),
             TargetScript.post(
-                script: "${PROJECT_DIR}/Tuist/.build/checkouts/firebase-ios-sdk/Crashlytics/run",
+                script:
+                """
+                if [[ "$CONFIGURATION" != "Release" ]]; then
+                  echo "Skipping Crashlytics for non-Release configuration."
+                  exit 0
+                fi
+
+                if [[ -z "${CI:-}" ]]; then
+                  echo "Skipping Crashlytics outside CI."
+                  exit 0
+                fi
+
+                "${PROJECT_DIR}/Tuist/.build/checkouts/firebase-ios-sdk/Crashlytics/run"
+                touch "$DERIVED_FILE_DIR/crashlytics.stamp"
+                """,
                 name: "[Crashlytics] Run Script",
-                basedOnDependencyAnalysis: false
+                inputPaths: [
+                    "$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+                    "$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
+                    "$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)"
+                ],
+                outputPaths: [
+                    "$(DERIVED_FILE_DIR)/crashlytics.stamp"
+                ],
+                basedOnDependencyAnalysis: true
             )
         ]
     }
