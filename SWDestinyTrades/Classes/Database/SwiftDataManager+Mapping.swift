@@ -14,9 +14,19 @@ import SwiftData
 extension SwiftDataManager {
 
     func populate(card: CardSD, from dto: CardDTO) {
+        populateCardIdentity(card: card, from: dto)
+        populateCardClassification(card: card, from: dto)
+        populateCardStats(card: card, from: dto)
+        populateCardPresentation(card: card, from: dto)
+    }
+
+    private func populateCardIdentity(card: CardSD, from dto: CardDTO) {
         card.code = dto.code
         card.name = dto.name
         card.subtitle = dto.subtitle
+    }
+
+    private func populateCardClassification(card: CardSD, from dto: CardDTO) {
         card.setCode = dto.setCode
         card.setName = dto.setName
         card.typeCode = dto.typeCode
@@ -27,24 +37,30 @@ extension SwiftDataManager {
         card.affiliationName = dto.affiliationName
         card.rarityCode = dto.rarityCode
         card.rarityName = dto.rarityName
+    }
+
+    private func populateCardStats(card: CardSD, from dto: CardDTO) {
         card.position = dto.position
         card.ttscardid = dto.ttscardid
         card.cost = dto.cost
         card.health = dto.health
         card.points = dto.points
-        card.text = dto.text
         card.deckLimit = dto.deckLimit
-        card.flavor = dto.flavor
-        card.illustrator = dto.illustrator
         card.isUnique = dto.isUnique
         card.hasDie = dto.hasDie
-        card.externalUrl = dto.externalUrl
-        card.imageUrl = dto.imageUrl
         card.label = dto.label
         card.cp = dto.cp
         card.quantity = dto.quantity
         card.isElite = dto.isElite
         card.dieFaces = dto.dieFaces
+    }
+
+    private func populateCardPresentation(card: CardSD, from dto: CardDTO) {
+        card.text = dto.text
+        card.flavor = dto.flavor
+        card.illustrator = dto.illustrator
+        card.externalUrl = dto.externalUrl
+        card.imageUrl = dto.imageUrl
     }
 
     func populate(set: SetSD, from dto: SetDTO) {

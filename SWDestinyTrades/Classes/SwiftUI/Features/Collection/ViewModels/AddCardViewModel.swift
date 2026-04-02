@@ -166,22 +166,20 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
     }
 
     private func filterExistingCards(_ cards: [CardDTO]) -> [CardDTO] {
+        let existingCodes: Set<String>
+
         switch addCardContext {
         case let .collection(userCollection):
-            return cards.filter { card in
-                !userCollection.myCollection.contains { $0.code == card.code }
-            }
+            existingCodes = Set(userCollection.myCollection.map(\.code))
         case let .lentToPerson(person):
-            return cards.filter { card in
-                !person.lentMe.contains { $0.code == card.code }
-            }
+            existingCodes = Set(person.lentMe.map(\.code))
         case let .borrowedFromPerson(person):
-            return cards.filter { card in
-                !person.borrowed.contains { $0.code == card.code }
-            }
+            existingCodes = Set(person.borrowed.map(\.code))
         case .person:
             return cards
         }
+
+        return cards.filter { !existingCodes.contains($0.code) }
     }
 
     func addCard(_ card: CardDTO) {

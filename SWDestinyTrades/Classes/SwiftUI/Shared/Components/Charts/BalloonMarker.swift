@@ -51,21 +51,56 @@ open class BalloonMarker: MarkerImage {
         let padding = CGFloat(8.0)
         let originX = point.x - width / 2
         let originY = point.y - height
-        let chartBounds = chartView?.bounds
+        let chartBounds = chartView?.bounds ?? .zero
 
-        if originX + drawingOffset.x < 0.0 {
-            drawingOffset.x = -originX + padding
-        } else if let chartWidth = chartBounds?.width, originX + width + drawingOffset.x > chartWidth {
-            drawingOffset.x = chartWidth - originX - width - padding
-        }
-
-        if originY + drawingOffset.y < 0 {
-            drawingOffset.y = height + padding
-        } else if let chartHeight = chartBounds?.height, originY + height + drawingOffset.y > chartHeight {
-            drawingOffset.y = chartHeight - originY - height - padding
-        }
+        drawingOffset.x = adjustedOffsetX(
+            currentOffsetX: drawingOffset.x,
+            originX: originX,
+            width: width,
+            chartWidth: chartBounds.width,
+            padding: padding
+        )
+        drawingOffset.y = adjustedOffsetY(
+            currentOffsetY: drawingOffset.y,
+            originY: originY,
+            height: height,
+            chartHeight: chartBounds.height,
+            padding: padding
+        )
 
         return drawingOffset
+    }
+
+    private func adjustedOffsetX(
+        currentOffsetX: CGFloat,
+        originX: CGFloat,
+        width: CGFloat,
+        chartWidth: CGFloat,
+        padding: CGFloat
+    ) -> CGFloat {
+        if originX + currentOffsetX < 0.0 {
+            return -originX + padding
+        }
+        if chartWidth > 0.0, originX + width + currentOffsetX > chartWidth {
+            return chartWidth - originX - width - padding
+        }
+        return currentOffsetX
+    }
+
+    private func adjustedOffsetY(
+        currentOffsetY: CGFloat,
+        originY: CGFloat,
+        height: CGFloat,
+        chartHeight: CGFloat,
+        padding: CGFloat
+    ) -> CGFloat {
+        if originY + currentOffsetY < 0 {
+            return height + padding
+        }
+        if chartHeight > 0.0, originY + height + currentOffsetY > chartHeight {
+            return chartHeight - originY - height - padding
+        }
+        return currentOffsetY
     }
 
     override open func draw(context: CGContext, point: CGPoint) {

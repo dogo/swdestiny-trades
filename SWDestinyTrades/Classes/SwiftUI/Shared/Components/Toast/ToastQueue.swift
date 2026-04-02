@@ -16,7 +16,17 @@ final class ToastQueue {
     private var queue: [ToastItem] = []
 
     func enqueue(title: String, message: String, type: ToastType, duration: TimeInterval = 2.0, onDismiss: (() -> Void)? = nil) {
-        let item = ToastItem(title: title, message: message, type: type, duration: duration, onDismiss: onDismiss)
+        let item = ToastItem(
+            title: title,
+            message: message,
+            type: type,
+            duration: duration,
+            onDismiss: onDismiss
+        )
+        enqueue(item)
+    }
+
+    private func enqueue(_ item: ToastItem) {
         if current == nil {
             current = item
         } else {
