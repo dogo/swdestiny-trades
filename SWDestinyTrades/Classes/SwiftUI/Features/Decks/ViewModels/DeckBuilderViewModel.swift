@@ -131,7 +131,9 @@ final class DeckBuilderViewModel: BaseViewModel {
                 try Task.checkCancellation()
 
                 let cardIDToRemove = card.id
-                self.deck.list.removeAll { $0.id == cardIDToRemove }
+                if let index = self.deck.list.firstIndex(where: { $0.id == cardIDToRemove }) {
+                    self.deck.list.remove(at: index)
+                }
                 try await database.save(object: self.deck, update: .modified)
                 self.organizeDeckIntoSections()
             } catch is CancellationError {

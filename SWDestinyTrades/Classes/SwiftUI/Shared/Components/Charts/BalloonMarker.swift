@@ -36,38 +36,36 @@ open class BalloonMarker: MarkerImage {
     }
 
     override open func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
-        var offset = offset
+        var drawingOffset = offset
+        var markerSize = size
 
-        let chart = chartView
-
-        var size = size
-
-        if size.width == 0.0, let image {
-            size.width = image.size.width
+        if markerSize.width == 0.0, let image {
+            markerSize.width = image.size.width
         }
-        if size.height == 0.0, let image {
-            size.height = image.size.height
+        if markerSize.height == 0.0, let image {
+            markerSize.height = image.size.height
         }
 
-        let width = size.width
-        let height = size.height
+        let width = markerSize.width
+        let height = markerSize.height
         let padding = CGFloat(8.0)
-        var origin = point
-        origin.x -= width / 2
-        origin.y -= height
-        if origin.x + offset.x < 0.0 {
-            offset.x = -origin.x + padding
-        } else if let chart, origin.x + width + offset.x > chart.bounds.size.width {
-            offset.x = chart.bounds.size.width - origin.x - width - padding
+        let originX = point.x - width / 2
+        let originY = point.y - height
+        let chartBounds = chartView?.bounds
+
+        if originX + drawingOffset.x < 0.0 {
+            drawingOffset.x = -originX + padding
+        } else if let chartWidth = chartBounds?.width, originX + width + drawingOffset.x > chartWidth {
+            drawingOffset.x = chartWidth - originX - width - padding
         }
 
-        if origin.y + offset.y < 0 {
-            offset.y = height + padding
-        } else if let chart, origin.y + height + offset.y > chart.bounds.size.height {
-            offset.y = chart.bounds.size.height - origin.y - height - padding
+        if originY + drawingOffset.y < 0 {
+            drawingOffset.y = height + padding
+        } else if let chartHeight = chartBounds?.height, originY + height + drawingOffset.y > chartHeight {
+            drawingOffset.y = chartHeight - originY - height - padding
         }
 
-        return offset
+        return drawingOffset
     }
 
     override open func draw(context: CGContext, point: CGPoint) {

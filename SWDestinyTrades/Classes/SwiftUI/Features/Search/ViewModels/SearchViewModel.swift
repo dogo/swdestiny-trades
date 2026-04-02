@@ -49,34 +49,32 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     }
 
     func performSearch(query: String) {
-        guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        let normalizedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalizedQuery.isEmpty else {
             clearSearch()
             return
         }
 
-        currentQuery = query
+        currentQuery = normalizedQuery
         setLoading(true)
         hasSearched = true
 
         Task { @MainActor in
+            let expectedQuery = normalizedQuery
             do {
-                let results = try await service.search(query: query)
-
-                if self.currentQuery == query {
-                    self.searchResults = results
-                    self.updateItems(results)
-                    self.setLoaded()
-                }
+                let results = try await service.search(query: expectedQuery)
+                guard self.currentQuery == expectedQuery else { return }
+                self.searchResults = results
+                self.updateItems(results)
+                self.setLoaded()
             } catch is CancellationError {
-                if self.currentQuery == query {
-                    self.setLoaded()
-                }
+                guard self.currentQuery == expectedQuery else { return }
+                self.setLoaded()
             } catch {
-                if self.currentQuery == query {
-                    self.handleError(error)
-                    self.searchResults = []
-                    self.updateItems([])
-                }
+                guard self.currentQuery == expectedQuery else { return }
+                self.handleError(error)
+                self.searchResults = []
+                self.updateItems([])
             }
         }
     }

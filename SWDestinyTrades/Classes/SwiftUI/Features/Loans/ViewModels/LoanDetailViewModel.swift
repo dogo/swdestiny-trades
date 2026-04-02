@@ -84,9 +84,9 @@ final class LoanDetailViewModel: BaseViewModel {
 
                 switch cardToDelete.type {
                 case .lent:
-                    self.person.lentMe.removeAll { $0.id == cardIDToDelete }
+                    removeCard(withID: cardIDToDelete, from: &self.person.lentMe)
                 case .borrow:
-                    self.person.borrowed.removeAll { $0.id == cardIDToDelete }
+                    removeCard(withID: cardIDToDelete, from: &self.person.borrowed)
                 default:
                     break
                 }
@@ -99,6 +99,13 @@ final class LoanDetailViewModel: BaseViewModel {
                 self.toastQueue.enqueue(title: L10n.error, message: error.localizedDescription, type: .error, duration: 2.5)
             }
         }
+    }
+
+    private func removeCard(withID cardID: String, from cards: inout [CardDTO]) {
+        guard let index = cards.firstIndex(where: { $0.id == cardID }) else {
+            return
+        }
+        cards.remove(at: index)
     }
 
     func cancelDelete() {

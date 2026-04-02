@@ -69,8 +69,6 @@ extension String {
             components.append(Text(remaining))
         }
 
-        return components.reduce(Text("")) { result, text in
-            Text("\(result)\(text)")
-        }
+        return components.reduce(Text(""), +)
     }
 }
