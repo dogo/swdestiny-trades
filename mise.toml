@@ -1,6 +1,6 @@
 [tools]
 ruby = "3.3.0"
 tuist = "4.192.3"
-swiftlint = "0.59.1"
-swiftformat = "0.60.1"
+swiftlint = "0.63.2"
+swiftformat = "0.61.1"
 swiftgen = "6.6.3"
