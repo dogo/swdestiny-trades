@@ -38,13 +38,15 @@ struct DeckRowView: View {
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button(L10n.delete, role: .destructive) {
+            Button(L10n.delete, systemImage: "trash", role: .destructive) {
                 onDelete()
             }
-            Button(L10n.graph) {
+            .tint(ColorPalette.red)
+
+            Button(L10n.graph, systemImage: "chart.bar") {
                 onGraph()
             }
-            .tint(ColorPalette.appTheme)
+            .tint(ColorPalette.blue)
         }
     }
 
