@@ -107,6 +107,8 @@ struct DeckListView: View {
 
             Button(L10n.createNewDeck) {}
                 .buttonStyle(.borderedProminent)
+                .tint(ColorPalette.appTheme)
+                .foregroundStyle(ColorPalette.appThemeForeground)
         }
         .padding()
         .navigationTitle(L10n.decks)

@@ -19,6 +19,8 @@ struct DeckEmptyStateView: View {
         } actions: {
             Button(L10n.createNewDeck, action: onCreateDeck)
                 .buttonStyle(.borderedProminent)
+                .tint(ColorPalette.appTheme)
+                .foregroundStyle(ColorPalette.appThemeForeground)
         }
     }
 }

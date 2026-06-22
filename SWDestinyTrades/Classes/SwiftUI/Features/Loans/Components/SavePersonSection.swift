@@ -29,6 +29,8 @@ struct SavePersonSection: View {
             }
             .disabled(isDisabled)
             .buttonStyle(.borderedProminent)
+            .tint(ColorPalette.appTheme)
+            .foregroundStyle(ColorPalette.appThemeForeground)
         }
     }
 }

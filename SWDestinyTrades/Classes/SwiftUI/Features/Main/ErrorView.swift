@@ -28,6 +28,8 @@ struct ErrorView: View {
 
             Button(L10n.retry, action: retry)
                 .buttonStyle(.borderedProminent)
+                .tint(ColorPalette.appTheme)
+                .foregroundStyle(ColorPalette.appThemeForeground)
         }
         .padding()
     }

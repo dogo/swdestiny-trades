@@ -21,6 +21,8 @@ struct EmptyLoanRowView: View {
 
             Button(actionText, action: action)
                 .buttonStyle(.borderedProminent)
+                .tint(ColorPalette.appTheme)
+                .foregroundStyle(ColorPalette.appThemeForeground)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 20)

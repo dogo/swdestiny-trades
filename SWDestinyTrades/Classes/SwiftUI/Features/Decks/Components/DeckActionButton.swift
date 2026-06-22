@@ -17,6 +17,8 @@ struct DeckActionButton: View {
         if isEditing {
             Button(L10n.done, action: onSave)
                 .buttonStyle(.borderedProminent)
+                .tint(ColorPalette.appTheme)
+                .foregroundStyle(ColorPalette.appThemeForeground)
                 .controlSize(.small)
         } else {
             Button(L10n.edit, systemImage: "pencil", action: onStartEditing)

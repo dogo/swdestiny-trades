@@ -19,6 +19,8 @@ struct DeckBuilderEmptyView: View {
         } actions: {
             Button(L10n.addCards, action: onAddCards)
                 .buttonStyle(.borderedProminent)
+                .tint(ColorPalette.appTheme)
+                .foregroundStyle(ColorPalette.appThemeForeground)
         }
     }
 }

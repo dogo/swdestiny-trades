@@ -16,6 +16,7 @@ struct SetRowView: View {
         Button(action: onTap) {
             HStack {
                 Text.swdIcon(set.icon, size: 28)
+                    .foregroundStyle(.primary)
                     .frame(width: 40, height: 40)
 
                 VStack(alignment: .leading, spacing: 4) {
