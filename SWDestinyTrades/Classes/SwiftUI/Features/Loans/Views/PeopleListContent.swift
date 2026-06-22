@@ -35,11 +35,12 @@ struct PeopleListContent: View {
                         navigationCoordinator.navigate(to: .loanDetail(person.id))
                     }
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(L10n.delete, role: .destructive) {
+                        Button(L10n.delete, systemImage: "trash", role: .destructive) {
                             Task {
                                 await viewModel.deletePerson(person)
                             }
                         }
+                        .tint(ColorPalette.red)
                     }
                 }
             }
