@@ -90,9 +90,13 @@ private struct ToastPresenterContent: View {
     let topInset: CGFloat
 
     var body: some View {
-        ToastView(item: item, onDismiss: onDismiss)
-            .padding(.top, topInset)
-            .frame(maxWidth: .infinity)
+        VStack {
+            ToastView(item: item, onDismiss: onDismiss)
+                .padding(.top, topInset)
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .allowsHitTesting(false)
     }
 }
 
@@ -147,7 +151,7 @@ private struct WindowToastAnchor: UIViewRepresentable {
         }
 
         private func schedulePresentation(item: ToastItem, onDismiss: @escaping () -> Void) {
-            guard let window = anchor.window ?? keyWindow() else {
+            guard let window = keyWindow() ?? anchor.window else {
                 Task { @MainActor [weak self] in
                     self?.schedulePresentation(item: item, onDismiss: onDismiss)
                 }
@@ -168,19 +172,12 @@ private struct WindowToastAnchor: UIViewRepresentable {
 
             let hostController = UIHostingController(rootView: content)
             hostController.view.backgroundColor = .clear
-
+            hostController.view.isUserInteractionEnabled = false
             hostController.view.alpha = 0
-            hostController.view.frame = CGRect(x: 0, y: 0, width: window.bounds.width, height: 1000)
+            hostController.view.frame = window.bounds
+            hostController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             window.addSubview(hostController.view)
             hostController.view.layoutIfNeeded()
-
-            let fittingSize = CGSize(width: window.bounds.width, height: UIView.layoutFittingCompressedSize.height)
-            let height = hostController.view.systemLayoutSizeFitting(
-                fittingSize,
-                withHorizontalFittingPriority: .required,
-                verticalFittingPriority: .fittingSizeLevel
-            ).height
-            hostController.view.frame.size.height = height
             hostVC = hostController
 
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
@@ -204,10 +201,24 @@ private struct WindowToastAnchor: UIViewRepresentable {
         }
 
         private func keyWindow() -> UIWindow? {
-            UIApplication.shared.connectedScenes
+            let foregroundScenes = UIApplication.shared.connectedScenes
                 .compactMap { $0 as? UIWindowScene }
+                .filter { $0.activationState == .foregroundActive }
+
+            return foregroundScenes
                 .flatMap(\.windows)
-                .first(where: \.isKeyWindow)
+                .first { window in
+                    window.isKeyWindow
+                        && !window.isHidden
+                        && window.windowLevel == .normal
+                        && !window.bounds.isEmpty
+                } ?? foregroundScenes
+                .flatMap(\.windows)
+                .first { window in
+                    !window.isHidden
+                        && window.windowLevel == .normal
+                        && !window.bounds.isEmpty
+                }
         }
     }
 }
