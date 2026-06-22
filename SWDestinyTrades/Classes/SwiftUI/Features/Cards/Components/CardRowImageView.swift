@@ -12,39 +12,12 @@ struct CardRowImageView: View {
     let card: CardDTO
 
     var body: some View {
-        AsyncImage(url: URL(string: card.imageUrl)) { phase in
-            switch phase {
-            case let .success(image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            case .failure:
-                Image(asset: Asset.icCardback)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(0.5)
-            case .empty:
-                ZStack {
-                    Image(asset: Asset.icCardback)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .opacity(0.3)
-
-                    ProgressView()
-                        .scaleEffect(0.8)
-                }
-            @unknown default:
-                Image(asset: Asset.icCardback)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(0.5)
-            }
-        }
-        .frame(width: 60, height: 84)
-        .clipShape(.rect(cornerRadius: 8))
-        .overlay {
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-        }
+        CardImageView(
+            imageUrl: card.imageUrl,
+            width: 60,
+            height: 84,
+            cornerRadius: 8,
+            showsBorder: true
+        )
     }
 }
