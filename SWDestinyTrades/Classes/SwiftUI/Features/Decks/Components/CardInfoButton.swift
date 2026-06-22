@@ -16,9 +16,7 @@ struct CardInfoButton: View {
     var body: some View {
         Button(action: onTap) {
             HStack {
-                Image("ic_\(card.typeCode)")
-                    .resizable()
-                    .renderingMode(.template)
+                Text.swdIcon(card.typeIcon, size: 25)
                     .foregroundStyle(card.factionColor())
                     .frame(width: 25, height: 25)
                     .accessibilityHidden(true)

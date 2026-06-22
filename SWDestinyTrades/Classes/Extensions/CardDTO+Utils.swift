@@ -9,6 +9,16 @@
 import SwiftUI
 
 extension CardDTO {
+    private static let typeIconsByCode: [String: SWDIcon] = [
+        "battlefield": .icBattlefield,
+        "character": .icCharacter,
+        "downgrade": .icDowngrade,
+        "event": .icEvent,
+        "plot": .icPlot,
+        "support": .icSupport,
+        "upgrade": .icUpgrade
+    ]
+
     func factionColor() -> Color {
         let colorMapping: [String: Color] = [
             "red": ColorPalette.red,
@@ -17,5 +27,9 @@ extension CardDTO {
             "gray": ColorPalette.gray
         ]
         return colorMapping[factionCode] ?? .clear
+    }
+
+    var typeIcon: SWDIcon {
+        CardDTO.typeIconsByCode[typeCode.lowercased()] ?? .icUnknown
     }
 }
