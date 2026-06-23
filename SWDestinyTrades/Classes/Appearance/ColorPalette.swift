@@ -17,4 +17,5 @@ enum ColorPalette {
     static let appTheme = Asset.appTheme.swiftUIColor
     static let appThemeForeground = Asset.appThemeForeground.swiftUIColor
     static let appThemeSecondary = Asset.appThemeSecondary.swiftUIColor
+    static let accent = Asset.appAccent.swiftUIColor
 }

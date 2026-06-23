@@ -19,10 +19,10 @@ struct PersonFormField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             TextField(label, text: $text)
-                .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.words)
                 .autocorrectionDisabled(false)
                 .focused(focus, equals: field)
+                .tint(ColorPalette.accent)
                 .onSubmit(onSubmit)
 
             if let errorMessage {
