@@ -22,7 +22,7 @@ struct AddToDeckDataSourceSelector: View {
                     .foregroundStyle(dataSource == .remote ? .white : .primary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(dataSource == .remote ? Color.blue : Color.clear)
+                    .background(dataSource == .remote ? ColorPalette.accent : Color.clear)
             }
 
             Button(action: onSelectLocal) {
@@ -32,7 +32,7 @@ struct AddToDeckDataSourceSelector: View {
                     .foregroundStyle(dataSource == .local ? .white : .primary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
-                    .background(dataSource == .local ? Color.blue : Color.clear)
+                    .background(dataSource == .local ? ColorPalette.accent : Color.clear)
             }
         }
         .background(Color(.systemGray6))

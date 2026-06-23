@@ -16,7 +16,7 @@ struct AddCardRowView: View {
         Button(action: action) {
             HStack {
                 Image(systemName: "plus.circle")
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(ColorPalette.accent)
 
                 Text(text)
                     .foregroundStyle(.secondary)

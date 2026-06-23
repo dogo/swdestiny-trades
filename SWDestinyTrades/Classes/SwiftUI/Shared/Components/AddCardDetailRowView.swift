@@ -61,8 +61,8 @@ struct AddCardDetailRowView: View {
                     .font(.caption)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 2)
-                    .background(Color.blue.opacity(0.2))
-                    .foregroundStyle(.blue)
+                    .background(ColorPalette.accent.opacity(0.2))
+                    .foregroundStyle(ColorPalette.accent)
                     .clipShape(Capsule())
             }
         }
@@ -74,7 +74,7 @@ struct AddCardDetailRowView: View {
         } label: {
             Image(systemName: "plus.circle.fill")
                 .font(.title2)
-                .foregroundStyle(.green)
+                .foregroundStyle(ColorPalette.accent)
         }
         .accessibilityLabel(L10n.addCard)
         .buttonStyle(.plain)
