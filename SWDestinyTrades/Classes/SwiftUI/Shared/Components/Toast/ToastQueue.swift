@@ -91,12 +91,16 @@ private struct ToastPresenterContent: View {
 
     var body: some View {
         VStack {
-            ToastView(item: item, onDismiss: onDismiss)
-                .padding(.top, topInset)
+            ToastView(
+                item: item,
+                onDismiss: onDismiss,
+                onTap: onDismiss,
+                onSwipeUp: onDismiss
+            )
+            .padding(.top, topInset)
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .allowsHitTesting(false)
     }
 }
 
@@ -172,7 +176,7 @@ private struct WindowToastAnchor: UIViewRepresentable {
 
             let hostController = UIHostingController(rootView: content)
             hostController.view.backgroundColor = .clear
-            hostController.view.isUserInteractionEnabled = false
+            hostController.view.isUserInteractionEnabled = true
             hostController.view.alpha = 0
             hostController.view.frame = window.bounds
             hostController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]

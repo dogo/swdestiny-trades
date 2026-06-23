@@ -12,6 +12,30 @@ import SwiftUI
 struct ToastView: View {
     let item: ToastItem
     var onDismiss: (() -> Void)?
+    var onTap: (() -> Void)?
+    var onSwipeUp: (() -> Void)?
+
+    @State private var dragOffset: CGFloat = 0
+
+    private var swipeUpGesture: some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onChanged { value in
+                dragOffset = min(value.translation.height, 0)
+            }
+            .onEnded { value in
+                if value.translation.height < -20 {
+                    withAnimation(.easeIn(duration: 0.25)) {
+                        dragOffset = -400
+                    } completion: {
+                        onSwipeUp?()
+                    }
+                } else {
+                    withAnimation(.spring) {
+                        dragOffset = 0
+                    }
+                }
+            }
+    }
 
     var body: some View {
         HStack(spacing: 12) {
@@ -42,8 +66,12 @@ struct ToastView: View {
         .padding(.vertical, 12)
         .background(item.type.backgroundColor)
         .clipShape(.rect(cornerRadius: 12))
+        .contentShape(.rect(cornerRadius: 12))
+        .onTapGesture { onTap?() }
+        .gesture(swipeUpGesture)
         .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
         .padding(.horizontal, 16)
+        .offset(y: dragOffset)
         .task {
             do {
                 try await Task.sleep(for: .seconds(item.duration))
