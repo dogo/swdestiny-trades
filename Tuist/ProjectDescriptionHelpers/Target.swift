@@ -43,7 +43,7 @@ public extension Project {
                 infoPlist: "SWDestinyTradesTests/Info.plist",
                 sources: ["SWDestinyTradesTests/**"],
                 resources: [
-                    "SWDestinyTradesTests/JSON/*.json"
+                    "SWDestinyTradesTests/Json/*.json"
                 ],
                 dependencies: [
                     .target(name: "SWDestinyTrades"),
