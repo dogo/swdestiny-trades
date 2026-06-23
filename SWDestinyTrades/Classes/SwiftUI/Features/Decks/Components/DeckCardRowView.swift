@@ -35,7 +35,8 @@ struct DeckCardRowView: View {
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(L10n.delete, role: .destructive, action: onRemove)
+            Button(L10n.delete, systemImage: "trash", role: .destructive, action: onRemove)
+                .tint(ColorPalette.red)
         }
     }
 }

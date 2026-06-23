@@ -39,9 +39,10 @@ struct CollectionCardRowView: View {
             quantity = newValue
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button(L10n.delete, role: .destructive) {
+            Button(L10n.delete, systemImage: "trash", role: .destructive) {
                 onRemove(card)
             }
+            .tint(ColorPalette.red)
         }
     }
 }
