@@ -62,6 +62,7 @@ struct DeckSectionView: View {
                         .rotationEffect(.degrees(section.isCollapsed ? 0 : 90))
                         .animation(.easeInOut(duration: 0.2), value: section.isCollapsed)
                 }
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
         }

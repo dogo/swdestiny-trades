@@ -17,23 +17,33 @@ struct DeckNameSection: View {
     let onSave: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            if isEditing {
+        if isEditing {
+            VStack(alignment: .leading, spacing: 4) {
                 TextField(L10n.deckName, text: $editedName)
                     .textFieldStyle(.roundedBorder)
                     .onSubmit(onSave)
-            } else {
-                Button(action: onEdit) {
+
+                cardCountLabel
+            }
+        } else {
+            Button(action: onEdit) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(deck.name.isEmpty ? L10n.unnamedDeck : deck.name)
                         .font(.headline)
                         .foregroundStyle(.primary)
-                }
-                .buttonStyle(.plain)
-            }
 
-            Text(L10n.cardsCount(cardCount))
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                    cardCountLabel
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
         }
+    }
+
+    private var cardCountLabel: some View {
+        Text(L10n.cardsCount(cardCount))
+            .font(.caption)
+            .foregroundStyle(.secondary)
     }
 }

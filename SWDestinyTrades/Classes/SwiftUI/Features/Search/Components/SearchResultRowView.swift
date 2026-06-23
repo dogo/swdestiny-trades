@@ -23,6 +23,7 @@ struct SearchResultRowView: View {
                     .foregroundStyle(.secondary)
             }
             .padding(.vertical, 8)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

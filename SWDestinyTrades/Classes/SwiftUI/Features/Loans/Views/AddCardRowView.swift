@@ -23,6 +23,7 @@ struct AddCardRowView: View {
 
                 Spacer()
             }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

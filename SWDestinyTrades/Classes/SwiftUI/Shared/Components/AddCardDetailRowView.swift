@@ -22,6 +22,7 @@ struct AddCardDetailRowView: View {
                 addButton
             }
             .padding(.vertical, 8)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

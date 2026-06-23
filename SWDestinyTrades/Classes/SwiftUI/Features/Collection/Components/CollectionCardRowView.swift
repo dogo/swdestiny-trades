@@ -33,6 +33,7 @@ struct CollectionCardRowView: View {
                 CollectionQuantityView(card: card, quantity: $quantity, onChange: onQuantityChange)
             }
             .padding(.vertical, 8)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .onChange(of: card.quantity) { _, newValue in

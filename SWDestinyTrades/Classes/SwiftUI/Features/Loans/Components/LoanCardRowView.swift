@@ -57,6 +57,7 @@ struct LoanCardRowView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

@@ -29,7 +29,6 @@ struct DeckRowView: View {
                 onEdit: onEdit,
                 onSave: saveName
             )
-            Spacer()
             DeckActionButton(
                 isEditing: isEditing,
                 onSave: saveName,
