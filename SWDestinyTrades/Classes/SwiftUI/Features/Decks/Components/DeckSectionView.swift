@@ -50,7 +50,7 @@ struct DeckSectionView: View {
                         .font(.headline)
                         .foregroundStyle(.primary)
 
-                    Text("(\(section.cardCount))")
+                    Text("(\(section.totalQuantity))")
                         .font(.caption)
                         .foregroundStyle(.secondary)
 

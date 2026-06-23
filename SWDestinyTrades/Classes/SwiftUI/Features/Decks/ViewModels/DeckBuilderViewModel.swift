@@ -195,10 +195,6 @@ final class DeckSection: Identifiable {
         self.isCollapsed = isCollapsed
     }
 
-    var cardCount: Int {
-        return cards.count
-    }
-
     var totalQuantity: Int {
         return cards.reduce(0) { $0 + $1.quantity }
     }
