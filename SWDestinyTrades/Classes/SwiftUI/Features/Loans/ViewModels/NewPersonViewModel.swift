@@ -15,6 +15,7 @@ final class NewPersonViewModel: BaseViewModel {
     var firstName = ""
     var lastName = ""
     var isFormValid = false
+    var isSaved = false
     var shouldDismiss = false
     var validationErrors: [ValidationError] = []
 
@@ -64,6 +65,8 @@ final class NewPersonViewModel: BaseViewModel {
             try await database.save(object: person, update: .modified)
 
             try Task.checkCancellation()
+
+            isSaved = true
 
             let addedName = PersonNameComponents(givenName: person.name, familyName: person.lastName)
                 .formatted(.name(style: .long))
