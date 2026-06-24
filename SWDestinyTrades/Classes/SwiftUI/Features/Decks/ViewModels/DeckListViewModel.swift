@@ -110,8 +110,11 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         guard !trimmedName.isEmpty else { return }
 
         do {
-            deck.name = trimmedName
-            try await database.save(object: deck, update: .modified)
+            let updatedDeck = DeckDTO()
+            updatedDeck.id = deck.id
+            updatedDeck.name = trimmedName
+            updatedDeck.list = deck.list
+            try await database.save(object: updatedDeck, update: .modified)
             await loadDecksFromDatabase()
         } catch {
             handleError(error)
