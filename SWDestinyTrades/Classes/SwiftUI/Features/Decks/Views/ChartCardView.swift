@@ -17,10 +17,10 @@ struct ChartCardView<Content: View>: View {
             Text(title)
                 .font(.headline)
                 .bold()
-                .padding(.horizontal)
+                .padding([.horizontal, .top])
 
             content
-                .padding(.horizontal)
+                .padding([.horizontal, .bottom])
         }
         .background(
             RoundedRectangle(cornerRadius: 12)

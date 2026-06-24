@@ -6,83 +6,88 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import DGCharts
+import Charts
 import SwiftUI
 
-struct SwiftUILineChartView: UIViewRepresentable {
+struct SwiftUILineChartView: View {
     let data: [Int]
     let title: String
 
-    func makeUIView(context: Context) -> LineChartView {
-        let chartView = LineChartView()
-        setupLineChart(chartView)
-        return chartView
-    }
+    @State private var selectedIndex: Int?
 
-    func updateUIView(_ uiView: LineChartView, context: Context) {
-        setLineChartData(uiView)
-    }
+    var body: some View {
+        Chart {
+            if let selectedIndex, data.indices.contains(selectedIndex) {
+                RuleMark(x: .value("Index", selectedIndex))
+                    .foregroundStyle(Color(.systemYellow).opacity(0.8))
+                    .lineStyle(StrokeStyle(lineWidth: 1.0))
+                RuleMark(y: .value("Count", data[selectedIndex]))
+                    .foregroundStyle(Color(.systemYellow).opacity(0.8))
+                    .lineStyle(StrokeStyle(lineWidth: 1.0))
+            }
 
-    private func setupLineChart(_ chartView: LineChartView) {
-        chartView.legend.textColor = UIColor.label
-        chartView.noDataTextColor = UIColor.label
-        chartView.chartDescription.enabled = false
-        chartView.legend.enabled = true
-        chartView.dragEnabled = false
-        chartView.setScaleEnabled(false)
-        chartView.pinchZoomEnabled = false
-        chartView.rightAxis.enabled = false
+            ForEach(Array(data.enumerated()), id: \.offset) { index, value in
+                LineMark(
+                    x: .value("Index", index),
+                    y: .value("Count", value)
+                )
+                .foregroundStyle(by: .value("Series", title))
+                .symbol {
+                    Circle()
+                        .fill(ColorPalette.accent)
+                        .opacity(index == selectedIndex ? 0.5 : 1.0)
+                        .frame(width: 7.0, height: 7.0)
+                }
+            }
 
-        // X-Axis configuration
-        let xAxis = chartView.xAxis
-        xAxis.labelPosition = .bottom
-        xAxis.labelTextColor = UIColor.label
-        xAxis.labelFont = UIFont.systemFont(ofSize: 10.0)
-        xAxis.drawGridLinesEnabled = false
-        xAxis.granularity = 1.0
-
-        // Y-Axis configuration
-        let leftAxis = chartView.leftAxis
-        leftAxis.labelFont = UIFont.systemFont(ofSize: 10.0)
-        leftAxis.labelTextColor = UIColor.label
-        leftAxis.labelPosition = .outsideChart
-        leftAxis.axisMinimum = 0.0
-        leftAxis.axisMaximum = 18
-        leftAxis.granularity = 2.0
-
-        // Marker configuration
-        let marker = BalloonMarkerView(
-            color: UIColor.systemGray,
-            font: UIFont.systemFont(ofSize: 10.0),
-            textColor: UIColor.white,
-            insets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 20.0, right: 8.0)
-        ) { count in
-            return L10n.cardsCount(count)
+            if let selectedIndex, data.indices.contains(selectedIndex) {
+                PointMark(
+                    x: .value("Index", selectedIndex),
+                    y: .value("Count", data[selectedIndex])
+                )
+                .symbolSize(0.0)
+                .foregroundStyle(.clear)
+                .annotation(
+                    position: .top,
+                    spacing: 0.0,
+                    overflowResolution: .init(x: .fit(to: .chart), y: .disabled)
+                ) {
+                    BalloonAnnotationView(text: L10n.cardsCount(data[selectedIndex]))
+                }
+            }
         }
-        marker.chartView = chartView
-        marker.minimumSize = CGSize(width: 80.0, height: 40.0)
-        chartView.marker = marker
+        .chartForegroundStyleScale([title: ColorPalette.accent])
+        .chartYScale(domain: 0.0...18.0)
+        .chartYAxis {
+            AxisMarks(position: .leading, values: .stride(by: 3.0))
+        }
+        .chartXAxis {
+            AxisMarks(values: .stride(by: 1)) {
+                AxisGridLine().foregroundStyle(.clear)
+                AxisValueLabel()
+            }
+        }
+        .chartOverlay { proxy in
+            GeometryReader { geometry in
+                Rectangle()
+                    .fill(.clear)
+                    .contentShape(Rectangle())
+                    .onTapGesture { location in
+                        handleTap(at: location, proxy: proxy, geometry: geometry)
+                    }
+            }
+        }
     }
 
-    private func setLineChartData(_ chartView: LineChartView) {
-        guard !data.isEmpty else {
-            chartView.data = nil
+    private func handleTap(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {
+        guard let plotFrame = proxy.plotFrame else { return }
+        let xPosition = location.x - geometry[plotFrame].origin.x
+        guard let index: Int = proxy.value(atX: xPosition), data.indices.contains(index) else {
+            selectedIndex = nil
             return
         }
-
-        var dataEntries: [ChartDataEntry] = []
-        for (index, value) in data.enumerated() {
-            let dataEntry = ChartDataEntry(x: Double(index), y: Double(value))
-            dataEntries.append(dataEntry)
+        withAnimation(.easeInOut(duration: 0.15)) {
+            selectedIndex = (selectedIndex == index) ? nil : index
         }
-
-        let chartDataSet = LineChartDataSet(entries: dataEntries, label: title)
-        chartDataSet.drawValuesEnabled = false
-        chartDataSet.setColor(UIColor.systemBlue)
-        chartDataSet.setCircleColor(UIColor.systemBlue)
-        chartDataSet.drawCircleHoleEnabled = false
-
-        let chartData = LineChartData(dataSet: chartDataSet)
-        chartView.data = chartData
     }
 }
