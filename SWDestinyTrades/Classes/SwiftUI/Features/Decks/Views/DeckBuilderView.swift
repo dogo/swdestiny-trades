@@ -46,7 +46,7 @@ struct DeckBuilderView: View {
             }
         }
         .navigationTitle(viewModel.deck.name)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button(L10n.addCards, systemImage: "plus", action: navigateToAddToDeck)

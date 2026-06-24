@@ -45,7 +45,7 @@ struct AboutView: View {
             }
         }
         .navigationTitle(L10n.about)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .background(Color(.systemBackground))
     }
 }

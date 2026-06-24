@@ -34,7 +34,7 @@ struct LoanDetailView: View {
             )
         }
         .navigationTitle(viewModel.personFullName)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .refreshable {
             await viewModel.loadLoanData()
         }

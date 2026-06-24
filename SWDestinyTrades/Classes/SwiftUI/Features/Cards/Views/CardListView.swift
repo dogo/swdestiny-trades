@@ -35,7 +35,7 @@ struct CardListView: View {
             }
         }
         .navigationTitle(set.name)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 FilterToolbarButton(hasActiveFilters: viewModel.filter.hasActiveFilters) {

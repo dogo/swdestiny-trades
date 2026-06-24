@@ -47,7 +47,7 @@ struct DeckGraphView: View {
             }
         }
         .navigationTitle(L10n.deckStatistics)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .refreshable {
             viewModel.refresh()
         }
