@@ -39,22 +39,6 @@ struct SwiftUILineChartView: View {
                         .frame(width: 7.0, height: 7.0)
                 }
             }
-
-            if let selectedIndex, data.indices.contains(selectedIndex) {
-                PointMark(
-                    x: .value("Index", selectedIndex),
-                    y: .value("Count", data[selectedIndex])
-                )
-                .symbolSize(0.0)
-                .foregroundStyle(.clear)
-                .annotation(
-                    position: .top,
-                    spacing: 0.0,
-                    overflowResolution: .init(x: .fit(to: .chart), y: .disabled)
-                ) {
-                    BalloonAnnotationView(text: L10n.cardsCount(data[selectedIndex]))
-                }
-            }
         }
         .chartForegroundStyleScale([title: ColorPalette.accent])
         .chartYScale(domain: 0.0...18.0)
@@ -69,6 +53,11 @@ struct SwiftUILineChartView: View {
         }
         .chartOverlay { proxy in
             GeometryReader { geometry in
+                Canvas { context, size in
+                    drawBalloon(in: &context, size: size, proxy: proxy, geometry: geometry)
+                }
+                .allowsHitTesting(false)
+
                 Rectangle()
                     .fill(.clear)
                     .contentShape(Rectangle())
@@ -77,6 +66,17 @@ struct SwiftUILineChartView: View {
                     }
             }
         }
+    }
+
+    private func drawBalloon(in context: inout GraphicsContext, size: CGSize, proxy: ChartProxy, geometry: GeometryProxy) {
+        guard let selectedIndex, data.indices.contains(selectedIndex),
+              let plotFrame = proxy.plotFrame,
+              let xPosition = proxy.position(forX: selectedIndex),
+              let yPosition = proxy.position(forY: data[selectedIndex]) else { return }
+
+        let origin = geometry[plotFrame].origin
+        let point = CGPoint(x: origin.x + xPosition, y: origin.y + yPosition)
+        ChartBalloon.draw(in: &context, at: point, size: size, text: L10n.cardsCount(data[selectedIndex]))
     }
 
     private func handleTap(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {

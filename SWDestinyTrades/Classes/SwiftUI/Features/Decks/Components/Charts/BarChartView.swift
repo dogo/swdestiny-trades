@@ -30,23 +30,6 @@ struct SwiftUIBarChartView: View {
                 .foregroundStyle(by: .value("Series", title))
                 .opacity(entry.label == selectedLabel ? 0.55 : 1.0)
             }
-
-            if let selectedLabel,
-               let entry = entries.first(where: { $0.label == selectedLabel }) {
-                PointMark(
-                    x: .value("Type", selectedLabel),
-                    y: .value("Count", entry.value)
-                )
-                .symbolSize(0.0)
-                .foregroundStyle(.clear)
-                .annotation(
-                    position: .top,
-                    spacing: 0.0,
-                    overflowResolution: .init(x: .fit(to: .chart), y: .disabled)
-                ) {
-                    BalloonAnnotationView(text: L10n.cardsCount(entry.value))
-                }
-            }
         }
         .chartForegroundStyleScale([title: ColorPalette.accent])
         .chartYScale(domain: 0.0...18.0)
@@ -61,6 +44,11 @@ struct SwiftUIBarChartView: View {
         }
         .chartOverlay { proxy in
             GeometryReader { geometry in
+                Canvas { context, size in
+                    drawBalloon(in: &context, size: size, proxy: proxy, geometry: geometry)
+                }
+                .allowsHitTesting(false)
+
                 Rectangle()
                     .fill(.clear)
                     .contentShape(Rectangle())
@@ -69,6 +57,18 @@ struct SwiftUIBarChartView: View {
                     }
             }
         }
+    }
+
+    private func drawBalloon(in context: inout GraphicsContext, size: CGSize, proxy: ChartProxy, geometry: GeometryProxy) {
+        guard let selectedLabel,
+              let entry = entries.first(where: { $0.label == selectedLabel }),
+              let plotFrame = proxy.plotFrame,
+              let xPosition = proxy.position(forX: selectedLabel),
+              let yPosition = proxy.position(forY: entry.value) else { return }
+
+        let origin = geometry[plotFrame].origin
+        let point = CGPoint(x: origin.x + xPosition, y: origin.y + yPosition)
+        ChartBalloon.draw(in: &context, at: point, size: size, text: L10n.cardsCount(entry.value))
     }
 
     private func handleTap(at location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) {

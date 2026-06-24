@@ -67,7 +67,7 @@ struct SwiftUIRadarChartView: View {
             let fraction = Double(data[selectedIndex]) / maxValue
             let vertex = point(center: center, radius: radius, index: selectedIndex, fraction: fraction, count: count)
             drawHighlight(in: &context, at: vertex)
-            drawBalloon(in: &context, at: vertex, size: size, text: L10n.sidesCount(data[selectedIndex]))
+            ChartBalloon.draw(in: &context, at: vertex, size: size, text: L10n.sidesCount(data[selectedIndex]))
         }
     }
 
@@ -126,37 +126,6 @@ struct SwiftUIRadarChartView: View {
         let dot = Path(ellipseIn: CGRect(x: vertex.x - 4.0, y: vertex.y - 4.0, width: 8.0, height: 8.0))
         context.fill(dot, with: .color(fillColor))
         context.stroke(dot, with: .color(.white), lineWidth: 1.0)
-    }
-
-    private func drawBalloon(in context: inout GraphicsContext, at point: CGPoint, size: CGSize, text: String) {
-        let resolved = context.resolve(
-            Text(text)
-                .font(.system(size: 10.0))
-                .foregroundStyle(.white)
-        )
-        let textSize = resolved.measure(in: size)
-        let arrowHeight: CGFloat = 8.0
-        let arrowWidth: CGFloat = 12.0
-        let boxWidth = textSize.width + 16.0
-        let boxHeight = textSize.height + 12.0
-
-        let placeAbove = point.y - arrowHeight - boxHeight >= 0.0
-        let boxY = placeAbove ? point.y - arrowHeight - boxHeight : point.y + arrowHeight
-        let boxX = min(max(point.x - boxWidth / 2.0, 0.0), size.width - boxWidth)
-        let boxRect = CGRect(x: boxX, y: boxY, width: boxWidth, height: boxHeight)
-
-        context.fill(Path(roundedRect: boxRect, cornerRadius: 6.0), with: .color(webColor))
-
-        let tipX = min(max(point.x, boxX + arrowWidth / 2.0), boxX + boxWidth - arrowWidth / 2.0)
-        let baseY = placeAbove ? boxRect.maxY : boxRect.minY
-        var arrow = Path()
-        arrow.move(to: CGPoint(x: tipX - arrowWidth / 2.0, y: baseY))
-        arrow.addLine(to: CGPoint(x: tipX + arrowWidth / 2.0, y: baseY))
-        arrow.addLine(to: point)
-        arrow.closeSubpath()
-        context.fill(arrow, with: .color(webColor))
-
-        context.draw(resolved, at: CGPoint(x: boxRect.midX, y: boxRect.midY), anchor: .center)
     }
 
     // MARK: - Interaction
