@@ -27,6 +27,7 @@ enum AppDestination: Hashable {
     case addCard
     case addCardToCollection(UserCollectionDTO)
     case addCardToPerson(String, AddCardType)
+    case scanCard
 
     case about
     case webview(url: URL)

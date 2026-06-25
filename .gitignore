@@ -59,6 +59,19 @@ FailureDiffs
 ## Tuist
 Tuist/.build/
 
+## Swift Package Manager (scanner tooling)
+.build/
+.swiftpm/
+
+## Python (ML tooling)
+.venv/
+__pycache__/
+*.pyc
+
+## ML datasets / checkpoints (regenerable, large)
+Tooling/ml/data/
+Tooling/ml/runs/
+
 ## Fastlane
 fastlane/report.xml
 fastlane/test_output/*

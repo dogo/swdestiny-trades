@@ -29,6 +29,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera, to scan cards and add them to your collection.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires access to the address book, to assign the cards images to the profile picture.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

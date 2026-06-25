@@ -1,0 +1,2 @@
+*.swdx filter=lfs diff=lfs merge=lfs -text
+SWDestinyTrades/Resources/MobileCLIPImage.mlpackage/** filter=lfs diff=lfs merge=lfs -text

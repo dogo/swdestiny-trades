@@ -19,7 +19,7 @@ enum NavigationDestinationBuilder {
             buildDeckDestination(destination)
         case .peopleList, .newPerson, .loanDetail:
             buildPeopleDestination(destination)
-        case .userCollection, .addCard, .addCardToCollection, .addCardToPerson:
+        case .userCollection, .addCard, .addCardToCollection, .addCardToPerson, .scanCard:
             buildCollectionDestination(destination)
         case .about, .webview:
             buildMiscDestination(destination)
@@ -83,6 +83,8 @@ enum NavigationDestinationBuilder {
             AddCardView(context: .collection(userCollection))
         case let .addCardToPerson(personId, type):
             AddCardView(context: .person(id: personId, type: type))
+        case .scanCard:
+            CardScannerView()
         default:
             EmptyView()
         }
