@@ -32,6 +32,9 @@ struct UserCollectionView: View {
                     Button(L10n.share, systemImage: "square.and.arrow.up") {
                         shareItem = ShareText(value: viewModel.shareText)
                     }
+                    Button(L10n.scanCard, systemImage: "viewfinder") {
+                        navigationCoordinator.navigate(to: .scanCard)
+                    }
                     Button(L10n.addCard, systemImage: "plus") {
                         navigationCoordinator.navigate(to: .addCard)
                     }

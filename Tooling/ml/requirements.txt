@@ -1,0 +1,6 @@
+torch==2.7.0
+torchvision==0.22.0
+open_clip_torch>=2.24
+coremltools>=8.0
+pillow>=10.0
+numpy>=1.26

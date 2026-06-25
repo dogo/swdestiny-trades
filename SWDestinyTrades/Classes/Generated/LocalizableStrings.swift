@@ -274,6 +274,8 @@ internal enum L10n {
   internal static let noSetsMatchSearch = L10n.tr("Localizable", "NO_SETS_MATCH_SEARCH", fallback: "No sets match your search")
   /// Non-elite
   internal static let nonElite = L10n.tr("Localizable", "NON_ELITE", fallback: "Non-elite")
+  /// Open Settings
+  internal static let openSettings = L10n.tr("Localizable", "OPEN_SETTINGS", fallback: "Open Settings")
   /// People
   internal static let people = L10n.tr("Localizable", "PEOPLE", fallback: "People")
   /// %@ %@ was successfully deleted.
@@ -304,6 +306,58 @@ internal enum L10n {
   internal static let retry = L10n.tr("Localizable", "RETRY", fallback: "Retry")
   /// Save person
   internal static let savePerson = L10n.tr("Localizable", "SAVE_PERSON", fallback: "Save person")
+  /// Add %d
+  internal static func scanAddSelected(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "SCAN_ADD_SELECTED", p1, fallback: "Add %d")
+  }
+  /// Added %d card(s) to your collection
+  internal static func scanAddedSummary(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "SCAN_ADDED_SUMMARY", p1, fallback: "Added %d card(s) to your collection")
+  }
+  /// Scan again
+  internal static let scanAgain = L10n.tr("Localizable", "SCAN_AGAIN", fallback: "Scan again")
+  /// Align the card within the frame
+  internal static let scanAlignHint = L10n.tr("Localizable", "SCAN_ALIGN_HINT", fallback: "Align the card within the frame")
+  /// Enable camera access in Settings to scan cards.
+  internal static let scanCameraDeniedMessage = L10n.tr("Localizable", "SCAN_CAMERA_DENIED_MESSAGE", fallback: "Enable camera access in Settings to scan cards.")
+  /// Camera access needed
+  internal static let scanCameraDeniedTitle = L10n.tr("Localizable", "SCAN_CAMERA_DENIED_TITLE", fallback: "Camera access needed")
+  /// Capture
+  internal static let scanCapture = L10n.tr("Localizable", "SCAN_CAPTURE", fallback: "Capture")
+  /// Scan card
+  internal static let scanCard = L10n.tr("Localizable", "SCAN_CARD", fallback: "Scan card")
+  /// Card detected
+  internal static let scanCardDetected = L10n.tr("Localizable", "SCAN_CARD_DETECTED", fallback: "Card detected")
+  /// Point your camera at a card
+  internal static let scanCardHint = L10n.tr("Localizable", "SCAN_CARD_HINT", fallback: "Point your camera at a card")
+  /// Scan a card
+  internal static let scanCardTitle = L10n.tr("Localizable", "SCAN_CARD_TITLE", fallback: "Scan a card")
+  /// %d cards detected
+  internal static func scanCardsDetected(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "SCAN_CARDS_DETECTED", p1, fallback: "%d cards detected")
+  }
+  /// Choose a different match
+  internal static let scanChooseMatch = L10n.tr("Localizable", "SCAN_CHOOSE_MATCH", fallback: "Choose a different match")
+  /// Match confidence: %d%%
+  internal static func scanConfidence(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "SCAN_CONFIDENCE", p1, fallback: "Match confidence: %d%%")
+  }
+  /// Couldn't load card data
+  internal static let scanIndexFailed = L10n.tr("Localizable", "SCAN_INDEX_FAILED", fallback: "Couldn't load card data")
+  /// No card detected
+  internal static let scanNoCardDetected = L10n.tr("Localizable", "SCAN_NO_CARD_DETECTED", fallback: "No card detected")
+  /// Not recognized
+  internal static let scanNotRecognized = L10n.tr("Localizable", "SCAN_NOT_RECOGNIZED", fallback: "Not recognized")
+  /// Point at one or more cards
+  internal static let scanPointAtCards = L10n.tr("Localizable", "SCAN_POINT_AT_CARDS", fallback: "Point at one or more cards")
+  /// Preparing… %d%%
+  internal static func scanPreparing(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "SCAN_PREPARING", p1, fallback: "Preparing… %d%%")
+  }
+  /// Review cards
+  internal static let scanReviewTitle = L10n.tr("Localizable", "SCAN_REVIEW_TITLE", fallback: "Review cards")
+  /// Search manually
+  internal static let scanSearchManually = L10n.tr("Localizable", "SCAN_SEARCH_MANUALLY", fallback: "Search manually")
   /// Search
   internal static let search = L10n.tr("Localizable", "SEARCH", fallback: "Search")
   /// Search cards...

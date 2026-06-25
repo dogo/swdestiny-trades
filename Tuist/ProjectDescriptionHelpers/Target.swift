@@ -24,7 +24,13 @@ public extension Project {
                     "SWDestinyTrades/Assets.xcassets",
                     "SWDestinyTrades/Base.lproj/**",
                     "SWDestinyTrades/Localization/**",
-                    "SWDestinyTrades/Resources/**"
+                    // Exclude the .mlpackage internals so the glob doesn't add the model's inner
+                    // files as compile sources; the package is added as a CoreML resource below.
+                    .glob(
+                        pattern: "SWDestinyTrades/Resources/**",
+                        excluding: ["SWDestinyTrades/Resources/MobileCLIPImage.mlpackage/**"]
+                    ),
+                    "SWDestinyTrades/Resources/MobileCLIPImage.mlpackage"
                 ],
                 scripts: Project.targetScripts(),
                 dependencies: [
