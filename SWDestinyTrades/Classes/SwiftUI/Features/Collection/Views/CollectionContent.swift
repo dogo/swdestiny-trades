@@ -42,9 +42,7 @@ struct CollectionContent: View {
             }
         }
         .onAppear {
-            if viewModel.items.isEmpty {
-                viewModel.loadCollection()
-            }
+            Task { await viewModel.refreshCollection() }
             if viewModel.availableSets.isEmpty {
                 viewModel.loadAvailableSets()
             }
