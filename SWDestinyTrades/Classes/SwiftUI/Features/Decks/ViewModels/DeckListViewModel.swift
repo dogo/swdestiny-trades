@@ -12,8 +12,6 @@ import SwiftUI
 @Observable
 final class DeckListViewModel: ListViewModel<DeckDTO> {
 
-    var showingDeleteConfirmation = false
-    var deckToDelete: DeckDTO?
     private(set) var cardCounts: [String: Int] = [:]
 
     private var database: DatabaseProtocol {
@@ -78,31 +76,13 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         return filterDecks()
     }
 
-    func prepareToDelete(_ deck: DeckDTO) {
-        deckToDelete = deck
-        showingDeleteConfirmation = true
-    }
-
-    func confirmDelete() async {
-        guard let deck = deckToDelete else {
-            return
-        }
-
+    func delete(_ deck: DeckDTO) async {
         do {
             try await database.delete(object: deck)
-
-            deckToDelete = nil
-            showingDeleteConfirmation = false
-
             await loadDecksFromDatabase()
         } catch {
             handleError(error)
         }
-    }
-
-    func cancelDelete() {
-        deckToDelete = nil
-        showingDeleteConfirmation = false
     }
 
     func renameDeck(_ deck: DeckDTO, newName: String) async {

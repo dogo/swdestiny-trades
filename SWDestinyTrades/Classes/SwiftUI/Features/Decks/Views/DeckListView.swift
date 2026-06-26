@@ -30,7 +30,9 @@ struct DeckListView: View {
                     cardCounts: viewModel.cardCounts,
                     onEdit: editDeck,
                     onGraph: showDeckGraph,
-                    onDelete: viewModel.prepareToDelete
+                    onDelete: { deck in
+                        Task { await viewModel.delete(deck) }
+                    }
                 ) { deck, newName in
                     Task { await viewModel.renameDeck(deck, newName: newName) }
                 }
@@ -49,14 +51,6 @@ struct DeckListView: View {
         }
         .refreshable {
             await refreshDecks()
-        }
-        .alert(L10n.deleteDeck, isPresented: $viewModel.showingDeleteConfirmation) {
-            Button(L10n.delete, role: .destructive) {
-                Task { await viewModel.confirmDelete() }
-            }
-            Button(L10n.cancel, role: .cancel) {
-                viewModel.cancelDelete()
-            }
         }
         .onAppear {
             Task {
