@@ -139,9 +139,14 @@ final class CardScannerViewModel: BaseViewModel {
             toastQueue.enqueue(title: L10n.scanNoCardDetected, message: L10n.scanPointAtCards, type: .info)
             return
         }
-        reviewCandidates = candidates.map {
-            let confident = ($0.matches.first?.confidence ?? 0) >= EmbeddingCardMatcher.defaultThreshold
-            return ScanCandidate(crop: $0.crop, matches: $0.matches, chosenIndex: 0, isSelected: confident)
+        reviewCandidates = candidates.map { candidate in
+            let best = candidate.matches.first?.confidence ?? 0
+            // Too weak to be a real card → unrecognized (drives the "Not recognized" + manual-search UX).
+            guard best >= EmbeddingCardMatcher.recognitionThreshold else {
+                return ScanCandidate(crop: candidate.crop, matches: [], chosenIndex: 0, isSelected: false)
+            }
+            let confident = best >= EmbeddingCardMatcher.defaultThreshold
+            return ScanCandidate(crop: candidate.crop, matches: candidate.matches, chosenIndex: 0, isSelected: confident)
         }
         isReviewPresented = true
     }
