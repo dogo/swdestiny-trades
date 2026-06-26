@@ -32,6 +32,12 @@ enum ConcurrencyError: Error, LocalizedError {
         if case .taskCancelled = error as? ConcurrencyError {
             return true
         }
+        if case .requestCancelled = error as? APIError {
+            return true
+        }
+        if let urlError = error as? URLError, urlError.code == .cancelled {
+            return true
+        }
         return false
     }
 
