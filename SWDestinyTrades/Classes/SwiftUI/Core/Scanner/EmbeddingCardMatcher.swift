@@ -18,6 +18,10 @@ final class EmbeddingCardMatcher: CardScanMatching {
     /// ~0.55–0.85 for the right card; tune from the values shown in the UI.
     static let defaultThreshold: Float = 0.45
 
+    /// Below this the top match is too weak to be a real card (blank table / off-card crop) — treat
+    /// the capture as unrecognized so the review shows the manual-search fallback.
+    static let recognitionThreshold: Float = 0.35
+
     private static let orientations: [CGImagePropertyOrientation] = [.up, .right, .down, .left]
 
     private let embedder: MobileCLIPEmbedder
