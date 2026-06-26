@@ -79,6 +79,12 @@ private struct ToastQueueModifier: ViewModifier {
                     .frame(width: 0, height: 0)
                     .allowsHitTesting(false)
             }
+            .onDisappear {
+                // The toast lives in the key window, so it doesn't take part in the
+                // navigation pop. Clear it as the screen leaves so it doesn't float
+                // on top during the transition (and doesn't re-appear on return).
+                queue.cancelAll()
+            }
     }
 }
 
@@ -87,20 +93,26 @@ private struct ToastQueueModifier: ViewModifier {
 private struct ToastPresenterContent: View {
     let item: ToastItem
     let onDismiss: () -> Void
-    let topInset: CGFloat
 
     var body: some View {
-        VStack {
-            ToastView(
-                item: item,
-                onDismiss: onDismiss,
-                onTap: onDismiss,
-                onSwipeUp: onDismiss
-            )
-            .padding(.top, topInset)
-            Spacer(minLength: 0)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        ToastView(
+            item: item,
+            onDismiss: onDismiss,
+            onTap: onDismiss,
+            onSwipeUp: onDismiss
+        )
+    }
+}
+
+// MARK: - Passthrough Container
+
+/// Full-screen container that only captures touches landing on its subviews
+/// (the toast). Touches in empty areas return `nil`, so they pass through to
+/// the app's UI underneath instead of being swallowed by the overlay.
+private final class PassthroughView: UIView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hit = super.hitTest(point, with: event)
+        return hit === self ? nil : hit
     }
 }
 
@@ -129,6 +141,7 @@ private struct WindowToastAnchor: UIViewRepresentable {
     final class Coordinator {
         let anchor = UIView()
         private var hostVC: UIHostingController<ToastPresenterContent>?
+        private var presenterView: PassthroughView?
         private var presentedItemID: UUID?
         private var isObserving = false
 
@@ -170,37 +183,79 @@ private struct WindowToastAnchor: UIViewRepresentable {
 
             let content = ToastPresenterContent(
                 item: item,
-                onDismiss: onDismiss,
-                topInset: window.safeAreaInsets.top + 8
+                onDismiss: onDismiss
             )
 
             let hostController = UIHostingController(rootView: content)
             hostController.view.backgroundColor = .clear
-            hostController.view.isUserInteractionEnabled = true
-            hostController.view.alpha = 0
-            hostController.view.frame = window.bounds
-            hostController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            window.addSubview(hostController.view)
-            hostController.view.layoutIfNeeded()
+
+            let container = PassthroughView()
+            container.backgroundColor = .clear
+            container.frame = window.bounds
+            container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            container.alpha = 0
+
+            hostController.view.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(hostController.view)
+            NSLayoutConstraint.activate([
+                hostController.view.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+                hostController.view.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+                hostController.view.topAnchor.constraint(
+                    equalTo: container.topAnchor,
+                    constant: toastTopOffset(in: window)
+                )
+            ])
+
+            window.addSubview(container)
+            container.layoutIfNeeded()
             hostVC = hostController
+            presenterView = container
 
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
-                hostController.view.alpha = 1
+                container.alpha = 1
             }
+        }
+
+        /// Top inset for the toast, measured from the window's top edge. Uses the
+        /// bottom of the visible navigation bar as reference so the toast sits just
+        /// below it, regardless of large titles, search bars, or notch height.
+        /// Falls back to the safe area when no navigation bar is present.
+        private func toastTopOffset(in window: UIWindow) -> CGFloat {
+            let referenceBottom = visibleNavigationBars(in: window)
+                .map { $0.convert($0.bounds, to: window).maxY }
+                .max()
+
+            return (referenceBottom ?? window.safeAreaInsets.top) + 8
+        }
+
+        private func visibleNavigationBars(in root: UIView) -> [UINavigationBar] {
+            var result: [UINavigationBar] = []
+            if let navBar = root as? UINavigationBar,
+               navBar.window != nil,
+               !navBar.isHidden,
+               navBar.alpha > 0.01,
+               !navBar.bounds.isEmpty {
+                result.append(navBar)
+            }
+            for subview in root.subviews {
+                result += visibleNavigationBars(in: subview)
+            }
+            return result
         }
 
         func removeToast(animated: Bool = true) {
             presentedItemID = nil
-            guard let hostController = hostVC else { return }
+            guard let container = presenterView else { return }
             hostVC = nil
+            presenterView = nil
             if animated {
                 UIView.animate(withDuration: 0.2) {
-                    hostController.view.alpha = 0
+                    container.alpha = 0
                 } completion: { _ in
-                    hostController.view.removeFromSuperview()
+                    container.removeFromSuperview()
                 }
             } else {
-                hostController.view.removeFromSuperview()
+                container.removeFromSuperview()
             }
         }
 

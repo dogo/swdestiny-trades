@@ -70,7 +70,6 @@ struct ToastView: View {
         .onTapGesture { onTap?() }
         .gesture(swipeUpGesture)
         .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
-        .padding(.horizontal, 16)
         .offset(y: dragOffset)
         .task {
             do {
@@ -93,5 +92,6 @@ struct ToastView: View {
             ToastView(item: ToastItem(title: "Error", message: "An error occurred", type: .error))
             ToastView(item: ToastItem(title: "Info", message: "Information message", type: .info))
         }
+        .padding(.horizontal, 16)
     }
 }
