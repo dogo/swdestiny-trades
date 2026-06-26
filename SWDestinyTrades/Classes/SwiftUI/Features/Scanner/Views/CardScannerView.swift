@@ -43,6 +43,8 @@ struct CardScannerView: View {
 
     private var cameraContent: some View {
         ZStack {
+            Color.black
+
             CameraPreviewView(session: viewModel.cameraSession.captureSession)
 
             RoundedRectangle(cornerRadius: 12)
