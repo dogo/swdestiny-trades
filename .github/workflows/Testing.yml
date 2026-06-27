@@ -2,6 +2,7 @@ name: Testing
 on: [push, pull_request]
 
 env:
+  TUIST_TOKEN: ${{ secrets.TUIST_CLOUD_TOKEN }}
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
@@ -41,6 +42,9 @@ jobs:
         with:
           experimental: true
 
+      # Auth is token-only via TUIST_TOKEN (env above). Do not add `tuist auth
+      # login`: mixing OIDC with the token breaks the remote Xcode cache (CAS).
+      #
       # Starts the gRPC socket proxy that Xcode's compilation cache (CAS) connects
       # to. Without this step the project is wired to a remote CAS socket that
       # never exists -> `CAS error: deadlineExceeded(... No such file or directory)`.
