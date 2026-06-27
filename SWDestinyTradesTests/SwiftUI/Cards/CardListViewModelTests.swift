@@ -58,7 +58,7 @@ final class CardListViewModelTests: BaseTestCase {
     func testLoadCardsWithEmptyDatabase() async {
         await sut.loadCards()
 
-        #expect(sut.items.count == 0)
+        #expect(sut.items.isEmpty)
         #expect(sut.isLoading == false)
     }
 
@@ -87,7 +87,7 @@ final class CardListViewModelTests: BaseTestCase {
         await sut.loadCards()
 
         #expect(sut.isLoading == false)
-        #expect(sut.items.count > 0, "Should have loaded cards from mock data")
+        #expect(!sut.items.isEmpty, "Should have loaded cards from mock data")
     }
 
     @Test

@@ -122,17 +122,17 @@ extension String {
         for segment in segments {
             switch segment {
             case let .plain(text):
-                result = result + Text(text)
+                result += Text(text)
             case let .marker(marker):
                 if let icon = icon(forMarker: marker) {
-                    result = result + Text.swdIcon(icon, size: iconSize)
+                    result += Text.swdIcon(icon, size: iconSize)
                 } else {
-                    result = result + Text("[\(marker)]")
+                    result += Text("[\(marker)]")
                 }
             case let .bold(text):
-                result = result + Text(text).bold()
+                result += Text(text).bold()
             case let .italic(text):
-                result = result + Text(text).italic()
+                result += Text(text).italic()
             }
         }
         return result
