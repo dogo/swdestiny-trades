@@ -70,10 +70,21 @@ jobs:
             -enableCodeCoverage YES \
             test | xcpretty && exit ${PIPESTATUS[0]}
 
+      # Convert the app-scoped .xcresult into Cobertura XML ourselves so Codecov
+      # reports app coverage. Codecov's own xcresult auto-discovery picked up the
+      # test bundle instead of the app target.
+      - name: Convert coverage to Cobertura
+        run: |
+          brew install xcresultparser
+          xcresultparser --output-format cobertura \
+            --project-root "$PWD" \
+            ./coverage/SwdUnitTests.xcresult > ./coverage/cobertura.xml
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          swift_project: SWDestinyTrades
+          files: ./coverage/cobertura.xml
+          disable_search: true
           verbose: true
 
       - name: Upload Snapshot Failures
