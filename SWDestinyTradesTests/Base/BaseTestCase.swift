@@ -10,7 +10,6 @@ import Foundation
 
 @testable import SWDestinyTrades
 
-// swiftlint:disable test_case_accessibility
 @MainActor
 class BaseTestCase {
 
@@ -96,5 +95,3 @@ class BaseTestCase {
         }
     }
 }
-
-// swiftlint:enable test_case_accessibility

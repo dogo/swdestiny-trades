@@ -96,6 +96,8 @@ final class CardEmbeddingIndex {
         entries.reserveCapacity(count)
         for _ in 0..<count {
             let codeLen = Int(try read(2).readLittleEndianUInt16())
+            // Card codes are ASCII; `String(decoding:as:)` is intentional (non-failable, lossless here).
+            // swiftlint:disable:next optional_data_string_conversion
             let code = String(decoding: try read(codeLen), as: UTF8.self)
             let floatBytes = try read(dim * 4)
             let vector: [Float] = floatBytes.withUnsafeBytes { buffer in

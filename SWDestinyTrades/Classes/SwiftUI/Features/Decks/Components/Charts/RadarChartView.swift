@@ -77,7 +77,11 @@ struct SwiftUIRadarChartView: View {
             var path = Path()
             for index in 0..<count {
                 let vertex = point(center: center, radius: radius, index: index, fraction: fraction, count: count)
-                index == 0 ? path.move(to: vertex) : path.addLine(to: vertex)
+                if index == 0 {
+                    path.move(to: vertex)
+                } else {
+                    path.addLine(to: vertex)
+                }
             }
             path.closeSubpath()
             context.stroke(path, with: .color(webColor.opacity(0.5)), lineWidth: 1.0)
@@ -99,7 +103,11 @@ struct SwiftUIRadarChartView: View {
         for index in 0..<count {
             let fraction = Double(data[index]) / maxValue
             let vertex = point(center: center, radius: radius, index: index, fraction: fraction, count: count)
-            index == 0 ? path.move(to: vertex) : path.addLine(to: vertex)
+            if index == 0 {
+                path.move(to: vertex)
+            } else {
+                path.addLine(to: vertex)
+            }
         }
         path.closeSubpath()
         context.fill(path, with: .color(fillColor.opacity(0.7)))

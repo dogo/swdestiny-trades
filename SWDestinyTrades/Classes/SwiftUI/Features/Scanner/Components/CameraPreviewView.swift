@@ -24,6 +24,8 @@ struct CameraPreviewView: UIViewRepresentable {
     func updateUIView(_ uiView: PreviewView, context: Context) {}
 
     final class PreviewView: UIView {
+        // `static` is not valid here — UIKit requires overriding the `class var`.
+        // swiftlint:disable:next static_over_final_class
         override class var layerClass: AnyClass { AVCaptureVideoPreviewLayer.self }
 
         var videoPreviewLayer: AVCaptureVideoPreviewLayer {

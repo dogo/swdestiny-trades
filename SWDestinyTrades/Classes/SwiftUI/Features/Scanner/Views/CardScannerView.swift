@@ -62,8 +62,7 @@ struct CardScannerView: View {
         }
     }
 
-    @ViewBuilder
-    private var statusBadge: some View {
+    @ViewBuilder private var statusBadge: some View {
         switch viewModel.indexState {
         case let .building(progress):
             badge(L10n.scanPreparing(Int(progress * 100)), systemImage: "hourglass")

@@ -58,17 +58,23 @@ final class APIErrorTests {
 
     @Test
     func test_invalid_data_error_equality() {
-        #expect(APIError.invalidData == APIError.invalidData)
+        let error1 = APIError.invalidData
+        let error2 = APIError.invalidData
+        #expect(error1 == error2)
     }
 
     @Test
     func test_response_unsuccessful_error_equality() {
-        #expect(APIError.responseUnsuccessful == APIError.responseUnsuccessful)
+        let error1 = APIError.responseUnsuccessful
+        let error2 = APIError.responseUnsuccessful
+        #expect(error1 == error2)
     }
 
     @Test
     func test_request_cancelled_error_equality() {
-        #expect(APIError.requestCancelled == APIError.requestCancelled)
+        let error1 = APIError.requestCancelled
+        let error2 = APIError.requestCancelled
+        #expect(error1 == error2)
     }
 
     @Test

@@ -7,6 +7,7 @@ import ProjectDescription
 
 public extension Project {
 
+    // swiftlint:disable:next function_body_length
     static func targetScripts() -> [TargetScript] {
         return [
             TargetScript.pre(

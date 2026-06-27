@@ -61,8 +61,7 @@ struct CardImageView: View {
             }
     }
 
-    @ViewBuilder
-    private var content: some View {
+    @ViewBuilder private var content: some View {
         switch state {
         case let .loaded(image):
             Image(uiImage: image)

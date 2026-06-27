@@ -108,9 +108,8 @@ final class CardScannerViewModel: BaseViewModel {
             var added = 0
             for card in cards {
                 // Skip duplicates / failures silently; the summary reports what landed.
-                if (try? await writer.addToCollection(card)) != nil {
-                    added += 1
-                }
+                guard (try? await writer.addToCollection(card)) != nil else { continue }
+                added += 1
             }
             toastQueue.enqueue(title: L10n.cardAdded, message: L10n.scanAddedSummary(added), type: .success)
             dismissReview()

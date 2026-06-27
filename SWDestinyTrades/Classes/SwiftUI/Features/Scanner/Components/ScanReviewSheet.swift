@@ -76,29 +76,7 @@ struct ScanReviewSheet: View {
 
                 Spacer()
 
-                if candidate.matches.count > 1 {
-                    Menu {
-                        ForEach(Array(candidate.matches.enumerated()), id: \.offset) { index, option in
-                            Button {
-                                viewModel.choose(candidate, index: index)
-                            } label: {
-                                Text("\(option.card.name) · \(option.card.setName) — \(option.confidencePercent)%")
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "chevron.down.circle")
-                            .foregroundStyle(.secondary)
-                    }
-                    .accessibilityLabel(L10n.scanChooseMatch)
-                }
-
-                Button {
-                    viewModel.toggle(candidate)
-                } label: {
-                    Image(systemName: candidate.isSelected ? "checkmark.circle.fill" : "circle")
-                        .foregroundStyle(candidate.isSelected ? Color.accentColor : Color.secondary)
-                }
-                .buttonStyle(.plain)
+                matchControls(for: candidate)
             } else {
                 Text(L10n.scanNotRecognized)
                     .font(.subheadline)
@@ -106,5 +84,32 @@ struct ScanReviewSheet: View {
                 Spacer()
             }
         }
+    }
+
+    @ViewBuilder
+    private func matchControls(for candidate: ScanCandidate) -> some View {
+        if candidate.matches.count > 1 {
+            Menu {
+                ForEach(Array(candidate.matches.enumerated()), id: \.offset) { index, option in
+                    Button {
+                        viewModel.choose(candidate, index: index)
+                    } label: {
+                        Text("\(option.card.name) · \(option.card.setName) — \(option.confidencePercent)%")
+                    }
+                }
+            } label: {
+                Image(systemName: "chevron.down.circle")
+                    .foregroundStyle(.secondary)
+            }
+            .accessibilityLabel(L10n.scanChooseMatch)
+        }
+
+        Button {
+            viewModel.toggle(candidate)
+        } label: {
+            Image(systemName: candidate.isSelected ? "checkmark.circle.fill" : "circle")
+                .foregroundStyle(candidate.isSelected ? Color.accentColor : Color.secondary)
+        }
+        .buttonStyle(.plain)
     }
 }

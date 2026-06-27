@@ -103,7 +103,6 @@ final class CardFlowIntegrationTests: BaseTestCase {
 
         #expect(navMock.didNavigate(to: .cardDetail(viewModel.items, card)))
         #expect(navMock.navigationCallCount(to: .cardDetail(viewModel.items, card)) == 1)
-
     }
 
     @Test

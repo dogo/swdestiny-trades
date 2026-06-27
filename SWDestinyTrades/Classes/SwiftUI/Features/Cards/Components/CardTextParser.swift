@@ -48,10 +48,10 @@ private func parseCardTextSegments(_ source: String) -> [CardTextSegment] {
             }
         }
 
-        if let (openTag, closeTag, style) = matchingTag(at: index, in: source),
-           let closeRange = source.range(of: closeTag, range: openTag.upperBound..<source.endIndex) {
-            let content = String(source[openTag.upperBound..<closeRange.lowerBound])
-            segments.append(style(content))
+        if let match = matchingTag(at: index, in: source),
+           let closeRange = source.range(of: match.tag.close, range: match.range.upperBound..<source.endIndex) {
+            let content = String(source[match.range.upperBound..<closeRange.lowerBound])
+            segments.append(match.tag.style(content))
             index = closeRange.upperBound
             continue
         }
@@ -72,20 +72,26 @@ private func parseCardTextSegments(_ source: String) -> [CardTextSegment] {
     return segments
 }
 
+private struct CardTextTag {
+    let open: String
+    let close: String
+    let style: (String) -> CardTextSegment
+}
+
 private func matchingTag(
     at index: String.Index,
     in source: String
-) -> (open: Range<String.Index>, close: String, style: (String) -> CardTextSegment)? {
-    let tags: [(String, String, (String) -> CardTextSegment)] = [
-        ("<b>", "</b>", CardTextSegment.bold),
-        ("<i>", "</i>", CardTextSegment.italic),
-        ("<em>", "</em>", CardTextSegment.italic),
-        ("<cite>", "</cite>", CardTextSegment.italic)
+) -> (range: Range<String.Index>, tag: CardTextTag)? {
+    let tags = [
+        CardTextTag(open: "<b>", close: "</b>", style: CardTextSegment.bold),
+        CardTextTag(open: "<i>", close: "</i>", style: CardTextSegment.italic),
+        CardTextTag(open: "<em>", close: "</em>", style: CardTextSegment.italic),
+        CardTextTag(open: "<cite>", close: "</cite>", style: CardTextSegment.italic)
     ]
 
-    for (open, close, style) in tags {
-        if let range = source.range(of: open, range: index..<source.endIndex), range.lowerBound == index {
-            return (range, close, style)
+    for tag in tags {
+        if let range = source.range(of: tag.open, range: index..<source.endIndex), range.lowerBound == index {
+            return (range, tag)
         }
     }
 

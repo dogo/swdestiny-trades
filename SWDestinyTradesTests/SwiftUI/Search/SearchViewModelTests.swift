@@ -70,7 +70,7 @@ final class SearchViewModelTests: BaseTestCase {
         sut.clearSearch()
 
         #expect(sut.searchResults.isEmpty)
-        #expect(sut.currentQuery == "")
+        #expect(sut.currentQuery.isEmpty)
         #expect(sut.hasSearched == false)
     }
 

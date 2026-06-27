@@ -31,7 +31,7 @@ final class EmbeddingCardMatcher: CardScanMatching {
     init(embedder: MobileCLIPEmbedder, index: CardEmbeddingIndex, cards: [CardDTO]) {
         self.embedder = embedder
         self.index = index
-        cardsByCode = Dictionary(cards.map { ($0.code, $0) }, uniquingKeysWith: { first, _ in first })
+        cardsByCode = Dictionary(cards.map { ($0.code, $0) }) { first, _ in first }
     }
 
     func matches(_ image: CGImage, limit: Int) -> [ScannedCardResult] {

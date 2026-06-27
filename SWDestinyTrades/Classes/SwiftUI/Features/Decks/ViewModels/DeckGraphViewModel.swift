@@ -50,7 +50,7 @@ final class DeckGraphViewModel: BaseViewModel {
         }
     }
 
-    private nonisolated func computeGraphData(deckListData: [DeckCardData]) async {
+    nonisolated private func computeGraphData(deckListData: [DeckCardData]) async {
         let cardTypeResult = buildBarChartData(deckListData: deckListData)
         let cardCostResult = buildLineChartData(deckListData: deckListData)
         let diceFaceResult = buildRadarChartData(deckListData: deckListData)
@@ -72,7 +72,7 @@ final class DeckGraphViewModel: BaseViewModel {
         setLoading(false)
     }
 
-    private nonisolated func buildBarChartData(deckListData: [DeckCardData]) -> [Int] {
+    nonisolated private func buildBarChartData(deckListData: [DeckCardData]) -> [Int] {
         var upgrades = 0
         var supports = 0
         var events = 0
@@ -103,7 +103,7 @@ final class DeckGraphViewModel: BaseViewModel {
         }
     }
 
-    private nonisolated func buildLineChartData(deckListData: [DeckCardData]) -> [Int] {
+    nonisolated private func buildLineChartData(deckListData: [DeckCardData]) -> [Int] {
         var costs: [Int] = []
 
         if let maxCost = deckListData.map(\.cost).max() {
@@ -120,7 +120,7 @@ final class DeckGraphViewModel: BaseViewModel {
         return costs
     }
 
-    private nonisolated func buildRadarChartData(deckListData: [DeckCardData]) -> [Int] {
+    nonisolated private func buildRadarChartData(deckListData: [DeckCardData]) -> [Int] {
         let filters = ["Sp", "-", "*MD*", "*RD*", "*F", "*Dr*", "*Sh", "*Dc*", "*R", "*ID*"]
 
         return filters.map { filter in
@@ -128,7 +128,7 @@ final class DeckGraphViewModel: BaseViewModel {
         }
     }
 
-    private nonisolated func countFaces(filter: String, deckListData: [DeckCardData]) -> Int {
+    nonisolated private func countFaces(filter: String, deckListData: [DeckCardData]) -> Int {
         return deckListData.reduce(0) { total, cardData in
             let matchingFaces = cardData.dieFaces.count { face in
                 evaluateFilter(filter, on: face)
@@ -137,7 +137,7 @@ final class DeckGraphViewModel: BaseViewModel {
         }
     }
 
-    private nonisolated func evaluateFilter(_ filter: String, on value: String) -> Bool {
+    nonisolated private func evaluateFilter(_ filter: String, on value: String) -> Bool {
         let pattern = filter
             .replacingOccurrences(of: "value LIKE '", with: "")
             .replacingOccurrences(of: "'", with: "")

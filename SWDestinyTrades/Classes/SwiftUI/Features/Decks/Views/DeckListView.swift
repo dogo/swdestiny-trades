@@ -32,10 +32,11 @@ struct DeckListView: View {
                     onGraph: showDeckGraph,
                     onDelete: { deck in
                         Task { await viewModel.delete(deck) }
+                    },
+                    onRename: { deck, newName in
+                        Task { await viewModel.renameDeck(deck, newName: newName) }
                     }
-                ) { deck, newName in
-                    Task { await viewModel.renameDeck(deck, newName: newName) }
-                }
+                )
             }
         }
         .navigationTitle(L10n.decks)
