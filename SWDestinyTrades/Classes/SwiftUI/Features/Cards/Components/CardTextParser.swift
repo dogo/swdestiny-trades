@@ -125,22 +125,25 @@ extension String {
     func toCardText(iconSize: CGFloat = 17) -> Text {
         var result = Text("")
         let segments = parseCardTextSegments(self)
+        // SwiftUI `Text` supports `+` concatenation but not `+=`, so shorthand can't apply here.
+        // swiftlint:disable shorthand_operator
         for segment in segments {
             switch segment {
             case let .plain(text):
-                result += Text(text)
+                result = result + Text(text)
             case let .marker(marker):
                 if let icon = icon(forMarker: marker) {
-                    result += Text.swdIcon(icon, size: iconSize)
+                    result = result + Text.swdIcon(icon, size: iconSize)
                 } else {
-                    result += Text("[\(marker)]")
+                    result = result + Text("[\(marker)]")
                 }
             case let .bold(text):
-                result += Text(text).bold()
+                result = result + Text(text).bold()
             case let .italic(text):
-                result += Text(text).italic()
+                result = result + Text(text).italic()
             }
         }
+        // swiftlint:enable shorthand_operator
         return result
     }
 }
