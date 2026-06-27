@@ -158,14 +158,4 @@ final class DeckBuilderViewModelTests: BaseTestCase {
 
         XCTAssertTrue(card.isElite)
     }
-
-    // MARK: - Helpers
-
-    private func waitUntil(timeout: TimeInterval = 2.0, _ condition: @MainActor () -> Bool) async {
-        let start = Date()
-        while !condition() {
-            if Date().timeIntervalSince(start) >= timeout { return }
-            try? await Task.sleep(nanoseconds: 10_000_000) // 10ms
-        }
-    }
 }

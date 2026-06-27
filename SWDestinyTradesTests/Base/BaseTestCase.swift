@@ -88,6 +88,17 @@ class BaseTestCase: XCTestCase {
         }
         return true
     }
+
+    /// Polls a condition until it becomes true or the timeout elapses. Useful for
+    /// fire-and-forget `Task`-based view model methods that have no awaitable handle.
+    @MainActor
+    func waitUntil(timeout: TimeInterval = 2.0, _ condition: @escaping @MainActor () -> Bool) async {
+        let start = Date()
+        while !condition() {
+            if Date().timeIntervalSince(start) >= timeout { return }
+            try? await Task.sleep(nanoseconds: 10_000_000) // 10ms
+        }
+    }
 }
 
 // swiftlint:enable test_case_accessibility

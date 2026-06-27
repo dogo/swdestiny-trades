@@ -138,15 +138,4 @@ final class LoanDetailViewModelTests: BaseTestCase {
 
         XCTAssertEqual(sut.lentCards.first?.quantity, 5)
     }
-
-    // MARK: - Helpers
-
-    /// Polls a condition for fire-and-forget `Task`-based view model methods.
-    private func waitUntil(timeout: TimeInterval = 2.0, _ condition: @MainActor () -> Bool) async {
-        let start = Date()
-        while !condition() {
-            if Date().timeIntervalSince(start) >= timeout { return }
-            try? await Task.sleep(nanoseconds: 10_000_000) // 10ms
-        }
-    }
 }

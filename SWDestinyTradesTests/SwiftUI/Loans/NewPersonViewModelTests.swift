@@ -171,14 +171,4 @@ final class NewPersonViewModelTests: BaseTestCase {
         XCTAssertFalse(sut.isLoading)
         XCTAssertEqual(sut.toastQueue.current?.type, .error)
     }
-
-    // MARK: - Helpers
-
-    private func waitUntil(timeout: TimeInterval = 2.0, _ condition: @MainActor () -> Bool) async {
-        let start = Date()
-        while !condition() {
-            if Date().timeIntervalSince(start) >= timeout { return }
-            try? await Task.sleep(nanoseconds: 10_000_000) // 10ms
-        }
-    }
 }
