@@ -42,19 +42,25 @@ jobs:
         with:
           experimental: true
 
-      # - name: Authenticate with Tuist
-      #   if: github.event.pull_request.head.repo.fork != true
-      #   run: tuist auth login
-
-      # - name: Tuist Cache
-      #   if: github.event.pull_request.head.repo.fork != true
-      #   run: tuist setup cache
+      # Auth is token-only via TUIST_TOKEN (env above). Do not add `tuist auth
+      # login`: mixing OIDC with the token breaks the remote Xcode cache (CAS).
+      #
+      # Starts the gRPC socket proxy that Xcode's compilation cache (CAS) connects
+      # to. Without this step the project is wired to a remote CAS socket that
+      # never exists -> `CAS error: deadlineExceeded(... No such file or directory)`.
+      - name: Tuist Cache
+        if: github.event.pull_request.head.repo.fork != true
+        run: tuist setup cache
 
       - name: Install Tuist dependencies
         if: steps.cache-restore.outputs.cache-matched-key == ''
         run: tuist install
 
       - name: Generate project with tuist
+        # Fork PRs skip `tuist setup cache` (no secrets), so don't wire the
+        # project to the remote CAS socket — it won't exist on those runners.
+        env:
+          TUIST_DISABLE_XCODE_CACHE: ${{ github.event.pull_request.head.repo.fork == true && '1' || '' }}
         run: |
           tuist generate --no-open
         shell: bash
@@ -68,7 +74,6 @@ jobs:
             -resultBundlePath ./coverage/SwdUnitTests.xcresult \
             -enableCodeCoverage YES \
             COMPILER_INDEX_STORE_ENABLE=NO \
-            SWIFT_USE_INTEGRATED_DRIVER=NO \
             test | xcpretty && exit ${PIPESTATUS[0]}
 
       # Convert the app-scoped .xcresult into Cobertura XML ourselves so Codecov
