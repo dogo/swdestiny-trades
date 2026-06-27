@@ -60,14 +60,15 @@ jobs:
         shell: bash
 
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
-        env:
-          SWIFT_DISABLE_CAS: 1
         run: |
-          xcodebuild -workspace ${{ matrix.workspace }} \
-            -scheme ${{ matrix.scheme }} \
-            -destination '${{ matrix.destination }}' \
+          xcodebuild \
+            -workspace "${{ matrix.workspace }}" \
+            -scheme "${{ matrix.scheme }}" \
+            -destination "${{ matrix.destination }}" \
             -resultBundlePath ./coverage/SwdUnitTests.xcresult \
             -enableCodeCoverage YES \
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            SWIFT_USE_INTEGRATED_DRIVER=NO \
             test | xcpretty && exit ${PIPESTATUS[0]}
 
       # Convert the app-scoped .xcresult into Cobertura XML ourselves so Codecov
