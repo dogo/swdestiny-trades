@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -17,20 +17,20 @@ final class CardListViewTests: BaseTestCase {
     var helper: ViewTestHelper!
     var testSet: SetDTO!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
 
         helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
         testSet = SetDTO.stub(name: "Awakenings", code: "AW")
     }
 
-    override func tearDown() async throws {
+    deinit {
         helper = nil
         testSet = nil
-        try await super.tearDown()
     }
 
+    @Test
     func testViewCreationWithTestData() async throws {
         let card1 = CardDTO.stub(
             setCode: "AW",
@@ -47,13 +47,12 @@ final class CardListViewTests: BaseTestCase {
 
         try await populateTestData(objects: [card1, card2])
 
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: testSet)
         }
-
-        XCTAssertNotNil(view)
     }
 
+    @Test
     func testViewUsesTestContainer() async {
         let card = CardDTO.stub(
             setCode: "AW",
@@ -67,10 +66,11 @@ final class CardListViewTests: BaseTestCase {
 
         await viewModel.loadCards()
 
-        XCTAssertEqual(viewModel.items.count, 1)
-        XCTAssertEqual(viewModel.items.first?.code, "01001")
+        #expect(viewModel.items.count == 1)
+        #expect(viewModel.items.first?.code == "01001")
     }
 
+    @Test
     func testViewWithNavigationCoordinatorMock() async throws {
         let navMock = NavigationCoordinatorMock()
         let helperWithMock = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: navMock)
@@ -83,39 +83,38 @@ final class CardListViewTests: BaseTestCase {
 
         try await populateTestData(objects: [card])
 
-        let view = helperWithMock.createView {
+        _ = helperWithMock.createView {
             CardListView(set: testSet)
         }
 
-        XCTAssertNotNil(view)
-        XCTAssertNotNil(helperWithMock.navigationCoordinatorMock)
+        let storedMock = try #require(helperWithMock.navigationCoordinatorMock)
+        #expect(storedMock === navMock)
     }
 
+    @Test
     func testViewEnvironmentInjection() {
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: testSet)
         }
 
-        XCTAssertNotNil(view)
-        XCTAssertNotNil(helper.container)
-        XCTAssertNotNil(helper.navigationCoordinator)
-        XCTAssertNotNil(helper.appState)
+        #expect(helper.navigationCoordinatorMock == nil)
     }
 
+    @Test
     func testViewModelCreatedThroughTestContainer() {
         let viewModel = helper.createViewModel(CardListViewModel.self)
 
-        XCTAssertNotNil(viewModel.dependencyContainer)
+        #expect(viewModel.isLoading == false)
     }
 
+    @Test
     func testViewWithEmptyDatabase() {
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: testSet)
         }
-
-        XCTAssertNotNil(view)
     }
 
+    @Test
     func testViewWithMultipleCards() async {
         let cards = (1 ... 5).map { index in
             CardDTO.stub(
@@ -132,9 +131,10 @@ final class CardListViewTests: BaseTestCase {
 
         await viewModel.loadCards()
 
-        XCTAssertEqual(viewModel.items.count, 5)
+        #expect(viewModel.items.count == 5)
     }
 
+    @Test
     func testViewModelUsesDatabase() async throws {
         let card = CardDTO.stub(
             setCode: "AW",
@@ -151,10 +151,11 @@ final class CardListViewTests: BaseTestCase {
             sorted: nil
         )
 
-        XCTAssertEqual(fetchedCards.count, 1)
-        XCTAssertEqual(fetchedCards.first?.name, "Test Card")
+        #expect(fetchedCards.count == 1)
+        #expect(fetchedCards.first?.name == "Test Card")
     }
 
+    @Test
     func testViewWithDifferentSets() async {
         let awCard = CardDTO.stub(
             setCode: "AW",
@@ -172,8 +173,8 @@ final class CardListViewTests: BaseTestCase {
         let awViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
         await awViewModel.loadCards()
 
-        XCTAssertEqual(awViewModel.items.count, 1)
-        XCTAssertEqual(awViewModel.items.first?.setCode, "AW")
+        #expect(awViewModel.items.count == 1)
+        #expect(awViewModel.items.first?.setCode == "AW")
 
         mockSWDestinyService.retrieveSetCardListResult = [sorCard]
 
@@ -181,10 +182,11 @@ final class CardListViewTests: BaseTestCase {
         let sorViewModel = CardListViewModel(set: sorSet, dependencyContainer: testContainer.container)
         await sorViewModel.loadCards()
 
-        XCTAssertEqual(sorViewModel.items.count, 1)
-        XCTAssertEqual(sorViewModel.items.first?.setCode, "SOR")
+        #expect(sorViewModel.items.count == 1)
+        #expect(sorViewModel.items.first?.setCode == "SOR")
     }
 
+    @Test
     func testPopulateTestDataHelper() async throws {
         let cards = [
             CardDTO.stub(setCode: "AW", code: "01001", name: "Card 1"),
@@ -201,18 +203,19 @@ final class CardListViewTests: BaseTestCase {
             sorted: nil
         )
 
-        XCTAssertEqual(fetchedCards.count, 3)
+        #expect(fetchedCards.count == 3)
     }
 
+    @Test
     func testViewWithAppState() {
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: testSet)
         }
 
-        XCTAssertNotNil(view)
-        XCTAssertNotNil(helper.appState)
+        #expect(helper.navigationCoordinatorMock == nil)
     }
 
+    @Test
     func testViewCreationWithCustomViewModel() async throws {
         let card = CardDTO.stub(
             setCode: "AW",
@@ -224,10 +227,8 @@ final class CardListViewTests: BaseTestCase {
 
         let customViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: testSet, viewModel: customViewModel)
         }
-
-        XCTAssertNotNil(view)
     }
 }

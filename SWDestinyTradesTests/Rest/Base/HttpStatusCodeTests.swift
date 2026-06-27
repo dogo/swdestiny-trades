@@ -6,52 +6,60 @@
 //  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class HttpStatusCodeTests: XCTestCase {
+final class HttpStatusCodeTests {
 
+    @Test
     func testInitFromStringValue_withValidString_shouldReturnCorrectStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "200")
-        XCTAssertEqual(statusCode, .ok)
+        #expect(statusCode == .ok)
     }
 
+    @Test
     func testInitFromStringValue_withInvalidString_shouldReturnUnknownStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "9999")
-        XCTAssertEqual(statusCode, .unknown)
+        #expect(statusCode == .unknown)
     }
 
+    @Test
     func testInitFromStringValue_withNonNumericString_shouldReturnUnknownStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "Invalid")
-        XCTAssertEqual(statusCode, .unknown)
+        #expect(statusCode == .unknown)
     }
 
+    @Test
     func testInitFromRawValue_withValidInt_shouldReturnCorrectStatusCode() {
         let statusCode = HttpStatusCode(fromRawValue: 404)
-        XCTAssertEqual(statusCode, .notFound)
+        #expect(statusCode == .notFound)
     }
 
+    @Test
     func testInitFromRawValue_withInvalidInt_shouldReturnUnknownStatusCode() {
         let statusCode = HttpStatusCode(fromRawValue: 9999)
-        XCTAssertEqual(statusCode, .unknown)
+        #expect(statusCode == .unknown)
     }
 
+    @Test
     func testComparable_lessThan_shouldReturnTrue() {
         let statusCode1 = HttpStatusCode.ok
         let statusCode2 = HttpStatusCode.notFound
-        XCTAssertTrue(statusCode1 < statusCode2)
+        #expect(statusCode1 < statusCode2)
     }
 
+    @Test
     func testComparable_lessThan_shouldReturnFalse() {
         let statusCode1 = HttpStatusCode.ok
         let statusCode2 = HttpStatusCode.ok
-        XCTAssertFalse(statusCode1 < statusCode2)
+        #expect((statusCode1 < statusCode2) == false)
     }
 
+    @Test
     func testComparable_greaterThan_shouldReturnTrue() {
         let statusCode1 = HttpStatusCode.notFound
         let statusCode2 = HttpStatusCode.ok
-        XCTAssertTrue(statusCode1 > statusCode2)
+        #expect(statusCode1 > statusCode2)
     }
 }

@@ -11,7 +11,8 @@
 //  These tests cover the unit-testable surface: the value-type scan logic and
 //  the view model's review-dismissal state.
 
-import XCTest
+import CoreGraphics
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -20,53 +21,56 @@ final class CardScannerViewModelTests: BaseTestCase {
 
     private var sut: CardScannerViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = CardScannerViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Default state
 
+    @Test
     func test_freshViewModel_isNotReadyAndHasNoSelection() {
-        XCTAssertFalse(sut.isReady)
-        XCTAssertEqual(sut.selectedCount, 0)
-        XCTAssertFalse(sut.isReviewPresented)
+        #expect(sut.isReady == false)
+        #expect(sut.selectedCount == 0)
+        #expect(sut.isReviewPresented == false)
     }
 
     // MARK: - Dismiss review
 
+    @Test
     func test_dismissReview_clearsPresentationState() {
         sut.isReviewPresented = true
 
         sut.dismissReview()
 
-        XCTAssertFalse(sut.isReviewPresented)
+        #expect(sut.isReviewPresented == false)
     }
 
+    @Test
     func test_addSelected_withNoCandidates_dismissesWithoutToast() {
         sut.isReviewPresented = true
 
         sut.addSelected()
 
-        XCTAssertFalse(sut.isReviewPresented)
-        XCTAssertNil(sut.toastQueue.current)
+        #expect(sut.isReviewPresented == false)
+        #expect(sut.toastQueue.current == nil)
     }
 }
 
 // MARK: - ScanCandidate
 
 @MainActor
-final class ScanCandidateTests: XCTestCase {
+final class ScanCandidateTests {
 
     private func result(code: String, confidence: Float) -> ScannedCardResult {
         ScannedCardResult(card: CardDTO.stub(code: code), confidence: confidence)
     }
 
+    @Test
     func test_isRecognized_trueWhenMatchesPresent() {
         let candidate = ScanCandidate(
             crop: TestImage.solid,
@@ -75,15 +79,17 @@ final class ScanCandidateTests: XCTestCase {
             isSelected: false
         )
 
-        XCTAssertTrue(candidate.isRecognized)
+        #expect(candidate.isRecognized)
     }
 
+    @Test
     func test_isRecognized_falseWhenNoMatches() {
         let candidate = ScanCandidate(crop: TestImage.solid, matches: [], chosenIndex: 0, isSelected: false)
 
-        XCTAssertFalse(candidate.isRecognized)
+        #expect(candidate.isRecognized == false)
     }
 
+    @Test
     func test_chosenMatch_returnsMatchAtChosenIndex() {
         let candidate = ScanCandidate(
             crop: TestImage.solid,
@@ -92,9 +98,10 @@ final class ScanCandidateTests: XCTestCase {
             isSelected: true
         )
 
-        XCTAssertEqual(candidate.chosenMatch?.card.code, "01002")
+        #expect(candidate.chosenMatch?.card.code == "01002")
     }
 
+    @Test
     func test_chosenMatch_outOfBounds_returnsNil() {
         let candidate = ScanCandidate(
             crop: TestImage.solid,
@@ -103,26 +110,29 @@ final class ScanCandidateTests: XCTestCase {
             isSelected: false
         )
 
-        XCTAssertNil(candidate.chosenMatch)
+        #expect(candidate.chosenMatch == nil)
     }
 }
 
 // MARK: - ScannedCardResult
 
-final class ScannedCardResultTests: XCTestCase {
+final class ScannedCardResultTests {
 
+    @Test
     func test_confidencePercent_roundsToInteger() {
         let result = ScannedCardResult(card: CardDTO.stub(), confidence: 0.846)
-        XCTAssertEqual(result.confidencePercent, 85)
+        #expect(result.confidencePercent == 85)
     }
 
+    @Test
     func test_confidencePercent_clampsOutOfRange() {
-        XCTAssertEqual(ScannedCardResult(card: CardDTO.stub(), confidence: 1.5).confidencePercent, 100)
-        XCTAssertEqual(ScannedCardResult(card: CardDTO.stub(), confidence: -0.5).confidencePercent, 0)
+        #expect(ScannedCardResult(card: CardDTO.stub(), confidence: 1.5).confidencePercent == 100)
+        #expect(ScannedCardResult(card: CardDTO.stub(), confidence: -0.5).confidencePercent == 0)
     }
 
+    @Test
     func test_confidencePercent_nanIsZero() {
-        XCTAssertEqual(ScannedCardResult(card: CardDTO.stub(), confidence: .nan).confidencePercent, 0)
+        #expect(ScannedCardResult(card: CardDTO.stub(), confidence: .nan).confidencePercent == 0)
     }
 }
 

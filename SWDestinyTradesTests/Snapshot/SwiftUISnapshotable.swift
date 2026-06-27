@@ -6,6 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 import UIKit
 
@@ -45,7 +46,8 @@ extension XCSnapshotableTestCase {
         perPixelTolerance: CGFloat = 0.02,
         overallTolerance: CGFloat = 0,
         file: StaticString = #file,
-        line: UInt = #line
+        line: UInt = #line,
+        function: String = #function
     ) -> Bool {
         let controller = UIHostingController(rootView: view)
         controller.view.backgroundColor = .systemBackground
@@ -76,6 +78,7 @@ extension XCSnapshotableTestCase {
                         perPixelTolerance: perPixelTolerance,
                         overallTolerance: overallTolerance,
                         file: file,
-                        line: line)
+                        line: line,
+                        function: function)
     }
 }

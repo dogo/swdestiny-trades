@@ -6,39 +6,40 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import SWDestinyTrades
 
 @MainActor
-final class AboutViewModelTests: XCTestCase {
+final class AboutViewModelTests {
 
     private var sut: AboutViewModel!
     private var coordinatorMock: NavigationCoordinatorMock!
 
-    override func setUp() {
-        super.setUp()
+    init() {
         coordinatorMock = NavigationCoordinatorMock()
         sut = AboutViewModel()
     }
 
-    override func tearDown() {
+    deinit {
         sut = nil
         coordinatorMock = nil
-        super.tearDown()
     }
 
+    @Test
     func testOpenWebsiteNavigatesToWebview() throws {
         sut.openWebsite(using: coordinatorMock)
 
-        let expectedURL = try XCTUnwrap(URL(string: L10n.swdestinydbWebsite))
-        XCTAssertTrue(coordinatorMock.didNavigate(to: .webview(url: expectedURL)))
+        let expectedURL = try #require(URL(string: L10n.swdestinydbWebsite))
+        #expect(coordinatorMock.didNavigate(to: .webview(url: expectedURL)))
     }
 
+    @Test
     func testOpenWebsiteNavigatesOnce() throws {
         sut.openWebsite(using: coordinatorMock)
 
-        let expectedURL = try XCTUnwrap(URL(string: L10n.swdestinydbWebsite))
-        XCTAssertEqual(coordinatorMock.navigationCallCount(to: .webview(url: expectedURL)), 1)
+        let expectedURL = try #require(URL(string: L10n.swdestinydbWebsite))
+        #expect(coordinatorMock.navigationCallCount(to: .webview(url: expectedURL)) == 1)
     }
 }

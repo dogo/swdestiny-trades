@@ -6,12 +6,14 @@
 //  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import SWDestinyTrades
 
-final class BodyParametersTests: XCTestCase {
+final class BodyParametersTests {
 
+    @Test
     func test_dataEncoded() {
         let bodyParameters: BodyParameters = [
             "key1": "value1",
@@ -21,14 +23,14 @@ final class BodyParametersTests: XCTestCase {
 
         let data = bodyParameters.dataEncoded
 
-        XCTAssertNotNil(data, "Encoded data should not be nil")
+        #expect(data != nil, "Encoded data should not be nil")
 
         if let data {
             do {
                 let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                XCTAssertTrue(jsonObject is [String: Any], "Encoded data should be a dictionary")
+                #expect(jsonObject is [String: Any], "Encoded data should be a dictionary")
             } catch {
-                XCTFail("Error decoding the encoded data: \(error)")
+                Issue.record("Error decoding the encoded data: \(error)")
             }
         }
     }

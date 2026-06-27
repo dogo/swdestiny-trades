@@ -7,11 +7,12 @@
 //
 
 @testable import SWDestinyTrades
-import XCTest
+import Testing
 
 @MainActor
 final class CardFlowIntegrationTests: BaseTestCase {
 
+    @Test
     func testMultipleViewsShareSameTestContainer() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
@@ -32,18 +33,16 @@ final class CardFlowIntegrationTests: BaseTestCase {
 
         try await populateTestData(objects: [card1, card2])
 
-        let cardListView = helper.createView {
+        _ = helper.createView {
             CardListView(set: set)
         }
 
-        let cardDetailView = helper.createView {
+        _ = helper.createView {
             CardDetailView(cards: [card1], selectedCard: card1)
         }
-
-        XCTAssertNotNil(cardListView)
-        XCTAssertNotNil(cardDetailView)
     }
 
+    @Test
     func testDataFlowBetweenViewModelsThroughSharedDatabase() async throws {
         let set = SetDTO()
         set.code = "AW"
@@ -61,8 +60,8 @@ final class CardFlowIntegrationTests: BaseTestCase {
 
         await viewModel1.loadCards()
 
-        XCTAssertEqual(viewModel1.items.count, 1)
-        XCTAssertEqual(viewModel1.items.first?.name, "Initial Name")
+        #expect(viewModel1.items.count == 1)
+        #expect(viewModel1.items.first?.name == "Initial Name")
 
         card.name = "Updated Name"
         mockSWDestinyService.retrieveSetCardListResult = [card]
@@ -70,10 +69,11 @@ final class CardFlowIntegrationTests: BaseTestCase {
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel2.loadCards()
 
-        XCTAssertEqual(viewModel2.items.count, 1)
-        XCTAssertEqual(viewModel2.items.first?.name, "Updated Name")
+        #expect(viewModel2.items.count == 1)
+        #expect(viewModel2.items.first?.name == "Updated Name")
     }
 
+    @Test
     func testNavigationFlowWithMockCoordinator() async throws {
         let navMock = NavigationCoordinatorMock()
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: navMock)
@@ -90,23 +90,23 @@ final class CardFlowIntegrationTests: BaseTestCase {
 
         mockSWDestinyService.retrieveSetCardListResult = [card]
 
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: set)
         }
 
         let viewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel.loadCards()
 
-        XCTAssertEqual(viewModel.items.count, 1)
+        #expect(viewModel.items.count == 1)
 
         navMock.navigate(to: .cardDetail(viewModel.items, card))
 
-        XCTAssertTrue(navMock.didNavigate(to: .cardDetail(viewModel.items, card)))
-        XCTAssertEqual(navMock.navigationCallCount(to: .cardDetail(viewModel.items, card)), 1)
+        #expect(navMock.didNavigate(to: .cardDetail(viewModel.items, card)))
+        #expect(navMock.navigationCallCount(to: .cardDetail(viewModel.items, card)) == 1)
 
-        XCTAssertNotNil(view)
     }
 
+    @Test
     func testFullFeatureFlowWithSharedContainer() async throws {
         let navMock = NavigationCoordinatorMock()
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: navMock)
@@ -131,26 +131,24 @@ final class CardFlowIntegrationTests: BaseTestCase {
         let listViewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await listViewModel.loadCards()
 
-        XCTAssertEqual(listViewModel.items.count, 2)
-        XCTAssertFalse(listViewModel.isLoading)
+        #expect(listViewModel.items.count == 2)
+        #expect(listViewModel.isLoading == false)
 
-        let selectedCard = try XCTUnwrap(listViewModel.items.first)
+        let selectedCard = try #require(listViewModel.items.first)
         navMock.navigate(to: .cardDetail(listViewModel.items, selectedCard))
 
-        XCTAssertTrue(navMock.didNavigate(to: .cardDetail(listViewModel.items, selectedCard)))
+        #expect(navMock.didNavigate(to: .cardDetail(listViewModel.items, selectedCard)))
 
-        let detailView = helper.createView {
+        _ = helper.createView {
             CardDetailView(cards: [selectedCard], selectedCard: selectedCard)
         }
-
-        XCTAssertNotNil(detailView)
 
         let deck = DeckDTO()
         deck.name = "Test Deck"
         try await populateTestData(objects: [deck])
 
         let decks: [DeckDTO] = await testDatabase.fetch(DeckDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(decks.count, 1)
-        XCTAssertEqual(decks.first?.name, "Test Deck")
+        #expect(decks.count == 1)
+        #expect(decks.first?.name == "Test Deck")
     }
 }

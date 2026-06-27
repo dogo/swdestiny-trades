@@ -7,38 +7,38 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class HttpClientTests: XCTestCase {
+final class HttpClientTests {
 
     private var sut: HttpClient!
     private var session: URLSession!
     private var request: URLRequest!
 
-    override func setUp() {
-        super.setUp()
+    init() {
         session = URLSessionMock().build()
         sut = HttpClient(session: session)
         request = URLRequest(url: URL(string: "https://base.url.com")!)
         request.httpMethod = HttpMethod.get.toString()
     }
 
-    override func tearDown() {
+    deinit {
         sut = nil
         session = nil
         request = nil
-        super.tearDown()
     }
 
+    @Test
     func test_request_with_success() async throws {
         setupURLProtocolMock(with: Data("{ \"bar\": true }".utf8), statusCode: 200)
 
         let result = try await sut.request(request, decode: Foo.self)
-        XCTAssertTrue(result.bar)
+        #expect(result.bar)
     }
 
+    @Test
     func test_request_with_failure_invalidData() async {
         setupURLProtocolMock(with: nil, statusCode: 200, isHTTP: false)
 
@@ -47,6 +47,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
+    @Test
     func test_request_with_failure_responseUnsuccessful() async {
         setupURLProtocolMock(with: nil, statusCode: 404)
 
@@ -55,6 +56,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
+    @Test
     func test_request_with_failure_requestCancelled() async {
         setupURLProtocolMock(with: nil, statusCode: 200, error: URLError(.cancelled))
 
@@ -63,6 +65,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
+    @Test
     func test_request_with_failure_keyNotFound() async {
         let missingKeyJson = Data("{ \"id\": 123 }".utf8)
         setupURLProtocolMock(with: missingKeyJson, statusCode: 200)
@@ -72,6 +75,7 @@ final class HttpClientTests: XCTestCase {
         }, missingKey: "name")
     }
 
+    @Test
     func test_request_with_failure_valueNotFound() async {
         let missingValueJson = Data("{ \"id\": 123, \"name\": null }".utf8)
         setupURLProtocolMock(with: missingValueJson, statusCode: 200)
@@ -81,6 +85,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
+    @Test
     func test_request_with_failure_typeMismatch() async {
         setupURLProtocolMock(with: Data("{ \"bar\": \"invalid_value\" }".utf8), statusCode: 200)
 
@@ -89,6 +94,7 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
+    @Test
     func test_request_with_failure_dataCorrupted() async {
         setupURLProtocolMock(with: nil, statusCode: 200)
 
@@ -97,35 +103,37 @@ final class HttpClientTests: XCTestCase {
         }
     }
 
-    func test_cancelRequest() async {
-        setupURLProtocolMock(with: nil, statusCode: 200)
+    @Test
+    func test_cancelRequest() async throws {
+        setupURLProtocolMock(with: nil, statusCode: 200, delay: 1.0)
 
-        Task {
+        let requestTask = Task {
             _ = try? await self.sut.request(self.request, decode: Foo.self)
         }
 
-        await Task.yield() // Allow the request to start
+        try? await Task.sleep(for: .milliseconds(100))
 
-        XCTAssertNoThrow(try {
-            let activeTasksCount = try XCTUnwrap(self.sut.activeTasks).count
-            XCTAssertEqual(activeTasksCount, 1, "Expected 1 active task before cancellation.")
-        }())
+        let activeTasksCount = try #require(self.sut.activeTasks).count
+        #expect(activeTasksCount == 1, "Expected 1 active task before cancellation.")
 
         sut.cancelRequest(request)
 
         // Add a short delay to ensure the cancellation has taken effect
         try? await Task.sleep(for: .milliseconds(100))
 
-        XCTAssertNoThrow(try {
-            let areTasksEmpty = try XCTUnwrap(self.sut.activeTasks).isEmpty
-            XCTAssertTrue(areTasksEmpty, "Expected no active tasks after cancelling the request.")
-        }())
+        let areTasksEmpty = try #require(self.sut.activeTasks).isEmpty
+        #expect(areTasksEmpty, "Expected no active tasks after cancelling the request.")
+
+        requestTask.cancel()
     }
 
     // MARK: - Helper Methods
 
-    private func setupURLProtocolMock(with data: Data?, statusCode: Int, isHTTP: Bool = true, error: Error? = nil) {
+    private func setupURLProtocolMock(with data: Data?, statusCode: Int, isHTTP: Bool = true, error: Error? = nil, delay: TimeInterval = 0) {
         URLProtocolMock.response = { _ in
+            if delay > 0 {
+                Thread.sleep(forTimeInterval: delay)
+            }
             if let error {
                 throw error
             }
@@ -136,22 +144,22 @@ final class HttpClientTests: XCTestCase {
     private func assertThrowsError(of expectedError: APIError, in block: @escaping () async throws -> Void) async {
         do {
             try await block()
-            XCTFail("Expected to throw \(expectedError), but succeeded.")
+            Issue.record("Expected to throw \(expectedError), but succeeded.")
         } catch {
-            XCTAssertEqual(error as? APIError, expectedError, "Expected \(expectedError) but got \(error) instead.")
+            #expect(error as? APIError == expectedError, "Expected \(expectedError) but got \(error) instead.")
         }
     }
 
     private func assertKeyNotFound(in block: @escaping () async throws -> Void, missingKey: String) async {
         do {
             try await block()
-            XCTFail("Expected to throw APIError.keyNotFound, but succeeded.")
+            Issue.record("Expected to throw APIError.keyNotFound, but succeeded.")
         } catch {
             if let apiError = error as? APIError, case let .keyNotFound(key, context) = apiError {
-                XCTAssertEqual(key.stringValue, missingKey, "Expected '\(missingKey)' key to be missing.")
-                XCTAssertTrue(context.contains("No value associated with key CodingKeys(stringValue: \"\(missingKey)\", intValue: nil) (\"\(missingKey)\")."), "Unexpected context message.")
+                #expect(key.stringValue == missingKey, "Expected '\(missingKey)' key to be missing.")
+                #expect(context.contains("No value associated with key CodingKeys(stringValue: \"\(missingKey)\", intValue: nil) (\"\(missingKey)\")."), "Unexpected context message.")
             } else {
-                XCTFail("Expected APIError.keyNotFound, but got \(error) instead.")
+                Issue.record("Expected APIError.keyNotFound, but got \(error) instead.")
             }
         }
     }
@@ -159,13 +167,13 @@ final class HttpClientTests: XCTestCase {
     private func assertValueNotFound(of expectedType: (some Any).Type, in block: @escaping () async throws -> Void) async {
         do {
             try await block()
-            XCTFail("Expected to throw APIError.valueNotFound, but succeeded.")
+            Issue.record("Expected to throw APIError.valueNotFound, but succeeded.")
         } catch {
             if let apiError = error as? APIError, case let .valueNotFound(type, context) = apiError {
-                XCTAssertEqual(String(describing: type), String(describing: expectedType), "Expected type \(expectedType) for the value.")
-                XCTAssertTrue(context.contains("Cannot get value of type String -- found null value instead"), "Unexpected context message: \(context)")
+                #expect(String(describing: type) == String(describing: expectedType), "Expected type \(expectedType) for the value.")
+                #expect(context.contains("Cannot get value of type String -- found null value instead"), "Unexpected context message: \(context)")
             } else {
-                XCTFail("Expected APIError.valueNotFound, but got \(error) instead.")
+                Issue.record("Expected APIError.valueNotFound, but got \(error) instead.")
             }
         }
     }

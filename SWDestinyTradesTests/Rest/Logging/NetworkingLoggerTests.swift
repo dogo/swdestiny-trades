@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class NetworkingLoggerTests: XCTestCase {
+final class NetworkingLoggerTests {
 
     private class TestOutputStream: TextOutputStream {
         private(set) var output: [String] = []
@@ -28,72 +28,74 @@ final class NetworkingLoggerTests: XCTestCase {
     private var logger: NetworkingLogger!
     private var testOutputStream: TestOutputStream!
 
-    override func setUp() {
-        super.setUp()
+    init() {
         testOutputStream = TestOutputStream()
         logger = NetworkingLogger(level: .debug, outputStream: testOutputStream)
     }
 
-    override func tearDown() {
+    deinit {
         logger = nil
         testOutputStream = nil
-        super.tearDown()
     }
 
-    func test_log_request() throws {
-        var request = try URLRequest(url: XCTUnwrap(URL(string: "https://example.com")))
+    @Test
+    func test_log_request() {
+        var request = URLRequest(url: URL(string: "https://example.com")!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer token", forHTTPHeaderField: "Authorization")
         request.httpBody = Data("{\"key\": \"value\"}".utf8)
         logger.log(request: request)
 
         let output = testOutputStream.output.joined()
-        XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
-        XCTAssertTrue(output.contains("LOGGER | 🚀 GET https://example.com"))
-        XCTAssertTrue(output.contains("LOGGER | 📋 Headers:"))
-        XCTAssertTrue(output.contains("LOGGER |    Authorization: Bearer token"))
-        XCTAssertTrue(output.contains("LOGGER |    Content-Type: application/json"))
-        XCTAssertTrue(output.contains("LOGGER | 📦 Body: {\"key\": \"value\"}"))
+        #expect(output.contains("LOGGER | ───────────────────────────────────────────────────"))
+        #expect(output.contains("LOGGER | 🚀 GET https://example.com"))
+        #expect(output.contains("LOGGER | 📋 Headers:"))
+        #expect(output.contains("LOGGER |    Authorization: Bearer token"))
+        #expect(output.contains("LOGGER |    Content-Type: application/json"))
+        #expect(output.contains("LOGGER | 📦 Body: {\"key\": \"value\"}"))
     }
 
+    @Test
     func test_log_response() throws {
-        let response = try HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")),
-                                           statusCode: 200,
-                                           httpVersion: nil,
-                                           headerFields: nil)
+        let response = try #require(HTTPURLResponse(url: URL(string: "https://example.com")!,
+                                                    statusCode: 200,
+                                                    httpVersion: nil,
+                                                    headerFields: nil))
         let data = Data("{\"key\": \"value\"}".utf8)
         logger.log(response: response, data: data, time: 1.234)
 
         let output = testOutputStream.output.joined()
-        XCTAssertTrue(output.contains("LOGGER | ✅ 200 • 1.23s"))
-        XCTAssertTrue(output.contains("LOGGER | 📄 Response:"))
-        XCTAssertTrue(output.contains("LOGGER |    {"))
-        XCTAssertTrue(output.contains("LOGGER |      \"key\" : \"value\""))
-        XCTAssertTrue(output.contains("LOGGER |    }"))
-        XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
+        #expect(output.contains("LOGGER | ✅ 200 • 1.23s"))
+        #expect(output.contains("LOGGER | 📄 Response:"))
+        #expect(output.contains("LOGGER |    {"))
+        #expect(output.contains("LOGGER |      \"key\" : \"value\""))
+        #expect(output.contains("LOGGER |    }"))
+        #expect(output.contains("LOGGER | ───────────────────────────────────────────────────"))
     }
 
+    @Test
     func test_log_response_with_invalid_json() throws {
-        let response = try HTTPURLResponse(url: XCTUnwrap(URL(string: "https://example.com")),
-                                           statusCode: 200,
-                                           httpVersion: nil,
-                                           headerFields: nil)
+        let response = try #require(HTTPURLResponse(url: URL(string: "https://example.com")!,
+                                                    statusCode: 200,
+                                                    httpVersion: nil,
+                                                    headerFields: nil))
         let data = Data("\"key\": \"value\"".utf8)
         logger.log(response: response, data: data, time: 1.234)
 
         let output = testOutputStream.output.joined()
-        XCTAssertTrue(output.contains("LOGGER | ✅ 200 • 1.23s"))
-        XCTAssertTrue(output.contains("LOGGER | 📄 Response: \"key\": \"value\""))
+        #expect(output.contains("LOGGER | ✅ 200 • 1.23s"))
+        #expect(output.contains("LOGGER | 📄 Response: \"key\": \"value\""))
     }
 
-    func test_log_error() throws {
-        let request = try URLRequest(url: XCTUnwrap(URL(string: "https://example.com")))
+    @Test
+    func test_log_error() {
+        let request = URLRequest(url: URL(string: "https://example.com")!)
         let error = NSError(domain: "TestDomain", code: 123, userInfo: [NSLocalizedDescriptionKey: "Test error"])
         logger.logError(request: request, statusCode: 500, error: error)
 
         let output = testOutputStream.output.joined()
-        XCTAssertTrue(output.contains("LOGGER | ───────────────────────────────────────────────────"))
-        XCTAssertTrue(output.contains("LOGGER | 💥 500 GET https://example.com"))
-        XCTAssertTrue(output.contains("LOGGER |    Test error"))
+        #expect(output.contains("LOGGER | ───────────────────────────────────────────────────"))
+        #expect(output.contains("LOGGER | 💥 500 GET https://example.com"))
+        #expect(output.contains("LOGGER |    Test error"))
     }
 }

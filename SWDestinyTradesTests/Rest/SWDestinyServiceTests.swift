@@ -6,7 +6,8 @@
 //  Copyright © 2018 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -14,43 +15,48 @@ final class SWDestinyServiceTests: BaseTestCase {
 
     private var sut: SWDestinyService!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = SWDestinyService(client: mockHttpClient)
     }
 
+    @Test
     func testRetrieveSetListWithSuccess() async throws {
         mockHttpClient.fileName = "sets"
         let result = try await sut.retrieveSetList()
 
-        XCTAssertNotNil(result)
+        #expect(result.isEmpty == false)
     }
 
+    @Test
     func testRetrieveSetCardListWithSuccess() async throws {
         mockHttpClient.fileName = "card-list"
         let result = try await sut.retrieveSetCardList(setCode: "anyString")
 
-        XCTAssertNotNil(result)
+        #expect(result.isEmpty == false)
     }
 
+    @Test
     func testRetrieveSpecificCardWithSuccess() async throws {
         mockHttpClient.fileName = "card"
         let result = try await sut.retrieveCard(cardId: "anyString")
 
-        XCTAssertNotNil(result)
+        #expect(result.code == "01001")
     }
 
+    @Test
     func testRetrieveAllCardsWithSuccess() async throws {
         mockHttpClient.fileName = "card-list"
         let result = try await sut.retrieveAllCards()
 
-        XCTAssertNotNil(result)
+        #expect(result.isEmpty == false)
     }
 
-    func testCancelRequest() throws {
-        let request = try URLRequest(with: XCTUnwrap(URL(string: "https://base.url.com")))
+    @Test
+    func testCancelRequest() {
+        let request = URLRequest(with: URL(string: "https://base.url.com")!)
         sut.cancelRequest(request)
 
-        XCTAssertTrue(mockHttpClient.isCancelled)
+        #expect(mockHttpClient.isCancelled)
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -16,40 +16,42 @@ final class AddToDeckViewModelTests: BaseTestCase {
     private var deck: DeckDTO!
     private var sut: AddToDeckViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         deck = DeckDTO()
         deck.name = "Test Deck"
         sut = AddToDeckViewModel(deck: deck, dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
         deck = nil
-        try await super.tearDown()
     }
 
     // MARK: - Filtering
 
+    @Test
     func test_filterItems_emptySearch_returnsAll() {
         sut.updateItems([CardDTO.stub(code: "01001"), CardDTO.stub(code: "01002")])
 
-        XCTAssertEqual(sut.filterItems(searchText: "").count, 2)
+        #expect(sut.filterItems(searchText: "").count == 2)
     }
 
+    @Test
     func test_filterItems_matchesNameSubtitleTypeAndSet() {
         let phasma = CardDTO.stub(setCode: "AW", typeCode: "character", code: "01001", name: "Captain Phasma", subtitle: "Elite Trooper")
         let saber = CardDTO.stub(setCode: "SOR", typeCode: "upgrade", code: "02002", name: "Lightsaber", subtitle: "Weapon")
         sut.updateItems([phasma, saber])
 
-        XCTAssertEqual(sut.filterItems(searchText: "Phasma").map(\.code), ["01001"])
-        XCTAssertEqual(sut.filterItems(searchText: "Weapon").map(\.code), ["02002"])
-        XCTAssertEqual(sut.filterItems(searchText: "upgrade").map(\.code), ["02002"])
-        XCTAssertEqual(sut.filterItems(searchText: "AW").map(\.code), ["01001"])
+        #expect(sut.filterItems(searchText: "Phasma").map(\.code) == ["01001"])
+        #expect(sut.filterItems(searchText: "Weapon").map(\.code) == ["02002"])
+        #expect(sut.filterItems(searchText: "upgrade").map(\.code) == ["02002"])
+        #expect(sut.filterItems(searchText: "AW").map(\.code) == ["01001"])
     }
 
     // MARK: - Loading
 
+    @Test
     func test_loadRemoteCards_populatesItemsFromService() async {
         mockSWDestinyService.retrieveAllCardsResult = [
             CardDTO.stub(code: "01001"),
@@ -59,20 +61,22 @@ final class AddToDeckViewModelTests: BaseTestCase {
         sut.loadRemoteCards()
         await sut.awaitCurrentLoad()
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertEqual(sut.dataSource, .remote)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 2)
+        #expect(sut.dataSource == .remote)
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func test_loadRemoteCards_onError_enqueuesErrorToast() async {
         mockSWDestinyService.retrieveAllCardsError = APIError.invalidData
 
         sut.loadRemoteCards()
         await sut.awaitCurrentLoad()
 
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
+    @Test
     func test_loadLocalCards_populatesFromUserCollection() async {
         let collection = UserCollectionDTO.stub(collection: [
             CardDTO.stub(code: "01001"),
@@ -83,38 +87,41 @@ final class AddToDeckViewModelTests: BaseTestCase {
         sut.loadLocalCards()
         await sut.awaitCurrentLoad()
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertEqual(sut.dataSource, .local)
+        #expect(sut.items.count == 2)
+        #expect(sut.dataSource == .local)
     }
 
+    @Test
     func test_loadLocalCards_noCollection_loadsEmpty() async {
         sut.loadLocalCards()
         await sut.awaitCurrentLoad()
 
-        XCTAssertTrue(sut.items.isEmpty)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.isEmpty)
+        #expect(sut.isLoading == false)
     }
 
     // MARK: - Add card
 
+    @Test
     func test_addCardToDeck_appendsCopyAndShowsSuccess() async {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
 
         sut.addCardToDeck(card)
         await waitUntil { self.sut.toastQueue.current != nil }
 
-        XCTAssertEqual(deck.list.map(\.code), ["01001"])
-        XCTAssertEqual(deck.list.first?.quantity, 1)
-        XCTAssertNotEqual(deck.list.first?.id, card.id) // a fresh copy
-        XCTAssertEqual(sut.toastQueue.current?.type, .success)
+        #expect(deck.list.map(\.code) == ["01001"])
+        #expect(deck.list.first?.quantity == 1)
+        #expect(deck.list.first?.id != card.id) // a fresh copy
+        #expect(sut.toastQueue.current?.type == .success)
     }
 
+    @Test
     func test_addCardToDeck_duplicateCode_showsInfoAndDoesNotAppend() {
         deck.list = [CardDTO.stub(code: "01001")]
 
         sut.addCardToDeck(CardDTO.stub(code: "01001"))
 
-        XCTAssertEqual(deck.list.count, 1)
-        XCTAssertEqual(sut.toastQueue.current?.type, .info)
+        #expect(deck.list.count == 1)
+        #expect(sut.toastQueue.current?.type == .info)
     }
 }

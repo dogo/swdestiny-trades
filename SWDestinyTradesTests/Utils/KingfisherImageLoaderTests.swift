@@ -6,12 +6,13 @@
 //  Copyright © 2025 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
+import UIKit
 
 @testable import SWDestinyTrades
 
 @MainActor
-final class KingfisherImageLoaderTests: XCTestCase {
+final class KingfisherImageLoaderTests {
 
     // MARK: - Properties
 
@@ -19,59 +20,62 @@ final class KingfisherImageLoaderTests: XCTestCase {
 
     // MARK: - Lifecycle
 
-    override func setUp() async throws {
-        try await super.setUp()
+    init() async throws {
         sut = KingfisherImageLoader()
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - loadImage Tests
 
+    @Test
     func test_loadLocalImage_returnsSameInstance() async throws {
         let originalImage = UIImage()
 
         let result = try await sut.loadImage(from: .local(originalImage), placeholder: nil, onProgress: nil)
 
-        XCTAssertTrue(result === originalImage, "Loading a local image should return the exact same instance")
+        #expect(result === originalImage, "Loading a local image should return the exact same instance")
     }
 
+    @Test
     func test_loadLocalImage_ignoresPlaceholder() async throws {
         let originalImage = UIImage()
         let placeholder = UIImage()
 
         let result = try await sut.loadImage(from: .local(originalImage), placeholder: placeholder, onProgress: nil)
 
-        XCTAssertTrue(result === originalImage, "Should return the original image, not the placeholder")
-        XCTAssertFalse(result === placeholder, "Should not return the placeholder image")
+        #expect(result === originalImage, "Should return the original image, not the placeholder")
+        #expect(result !== placeholder, "Should not return the placeholder image")
     }
 
+    @Test
     func test_loadAsset_throwsAssetNotFound_forInvalidName() async {
         do {
             _ = try await sut.loadImage(from: .asset("nonexistent_xyz"), placeholder: nil, onProgress: nil)
-            XCTFail("Expected ImageLoadError.assetNotFound to be thrown")
+            Issue.record("Expected ImageLoadError.assetNotFound to be thrown")
         } catch let error as ImageLoadError {
-            XCTAssertEqual(error, ImageLoadError.assetNotFound("nonexistent_xyz"))
+            #expect(error == ImageLoadError.assetNotFound("nonexistent_xyz"))
         } catch {
-            XCTFail("Unexpected error type: \(error)")
+            Issue.record("Unexpected error type: \(error)")
         }
     }
 
+    @Test
     func test_loadAsset_errorDescription_containsAssetName() async {
         do {
             _ = try await sut.loadImage(from: .asset("missing_icon"), placeholder: nil, onProgress: nil)
-            XCTFail("Expected ImageLoadError.assetNotFound to be thrown")
+            Issue.record("Expected ImageLoadError.assetNotFound to be thrown")
         } catch let error as ImageLoadError {
-            XCTAssertNotNil(error.errorDescription)
-            XCTAssertTrue(error.errorDescription?.contains("missing_icon") == true, "Error description should contain the asset name")
+            #expect(error.errorDescription != nil)
+            #expect(error.errorDescription?.contains("missing_icon") == true, "Error description should contain the asset name")
         } catch {
-            XCTFail("Unexpected error type: \(error)")
+            Issue.record("Unexpected error type: \(error)")
         }
     }
 
+    @Test
     func test_loadLocalImage_doesNotInvokeProgressCallback() async throws {
         var progressCallCount = 0
         let originalImage = UIImage()
@@ -80,24 +84,26 @@ final class KingfisherImageLoaderTests: XCTestCase {
             progressCallCount += 1
         }
 
-        XCTAssertEqual(progressCallCount, 0, "Progress callback should never be invoked for local images")
+        #expect(progressCallCount == 0, "Progress callback should never be invoked for local images")
     }
 
     // MARK: - Protocol Conformance
 
+    @Test
     func test_conformsToImageLoadingService() {
         let service: any ImageLoadingService = sut
-        XCTAssertNotNil(service)
+        #expect((service as? KingfisherImageLoader) === sut)
     }
 
     // MARK: - clearMemoryCache Tests
 
+    @Test
     func test_clearMemoryCache_completesWithoutError() async throws {
         sut.clearMemoryCache()
 
         let image = UIImage()
         let result = try await sut.loadImage(from: .local(image), placeholder: nil, onProgress: nil)
 
-        XCTAssertTrue(result === image, "Should still be able to load images after clearing the cache")
+        #expect(result === image, "Should still be able to load images after clearing the cache")
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import iOSSnapshotTestCaseCore
+import Testing
 import UIKit
 import XCTest
 
@@ -85,6 +86,7 @@ public extension FBSnapshotTestCase {
             let image = try snapshotController.referenceImage(for: Selector(snapshot), identifier: identifier)
             FBSnapshotTestCase.attach(image: image, named: "Reference_\(snapshot)")
         } catch {
+            Issue.record("Snapshot comparison failed: \(error)")
             let info = (error as NSError).userInfo
             if let ref = info[FBReferenceImageKey] as? UIImage {
                 FBSnapshotTestCase.attach(image: ref, named: "Reference_\(snapshot)")

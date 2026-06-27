@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Testing
 import iOSSnapshotTestCase
 
 /// Enum to represent different test modes
@@ -15,7 +16,7 @@ enum SnapshotTestMode {
     case validate
 }
 
-class XCSnapshotableTestCase: FBSnapshotTestCase {
+class XCSnapshotableTestCase {
 
     /// Captures and validates a snapshot of the specified view or layer.
     /// - Parameters:
@@ -32,12 +33,13 @@ class XCSnapshotableTestCase: FBSnapshotTestCase {
                   perPixelTolerance: CGFloat = 0.02,
                   overallTolerance: CGFloat = 0,
                   file: StaticString = #file,
-                  line: UInt = #line) -> Bool {
+                  line: UInt = #line,
+                  function: String = #function) -> Bool {
         guard let snapshotObject = instance.snapshotObject else {
             fatalError("Failed unwrapping Snapshot Object")
         }
 
-        let sanitizedName = sanitizedTestName(named)
+        let sanitizedName = sanitizedTestName(named, file: file, function: function)
         let result = FBSnapshotTestCase.validateSnapshot(snapshotObject,
                                                          snapshot: sanitizedName,
                                                          record: testMode == .record,
@@ -47,8 +49,10 @@ class XCSnapshotableTestCase: FBSnapshotTestCase {
                                                          overallTolerance: overallTolerance,
                                                          filename: file)
 
+        #expect(result, "Snapshot should match the reference image.")
+
         if testMode == .record {
-            XCTFail("Snapshot recorded — change testMode to .validate before committing.", file: file, line: line)
+            Issue.record("Snapshot recorded at \(file):\(line) — change testMode to .validate before committing.")
         }
 
         return result
@@ -92,8 +96,16 @@ class XCSnapshotableTestCase: FBSnapshotTestCase {
         return folderPathComponents.joined(separator: "/")
     }
 
-    private func sanitizedTestName(_ snapshotName: String?) -> String {
-        var filename = snapshotName ?? name
+    private func sanitizedTestName(_ snapshotName: String?, file: StaticString, function: String) -> String {
+        var filename: String
+        if let snapshotName {
+            filename = snapshotName
+        } else {
+            let fileName = NSString(string: String(describing: file))
+            let testCaseName = fileName.lastPathComponent.replacingOccurrences(of: ".\(fileName.pathExtension)", with: "")
+            let testMethodName = function.components(separatedBy: "(").first ?? function
+            filename = "__\(testCaseName)_\(testMethodName)_"
+        }
         filename = filename.replacingOccurrences(of: "root example group, ", with: "")
         let characterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_")
         let components = filename.components(separatedBy: characterSet.inverted)

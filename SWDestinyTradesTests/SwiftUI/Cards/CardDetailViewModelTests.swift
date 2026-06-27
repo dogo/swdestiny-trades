@@ -6,7 +6,8 @@
 //  Copyright © 2025 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -18,22 +19,22 @@ final class CardDetailViewModelTests: BaseTestCase {
     var sut: CardDetailViewModel!
     var mockImageLoader: MockImageLoader!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         mockImageLoader = MockImageLoader()
         testContainer.registerMock(ImageLoadingService.self) { [weak self] in
             self?.mockImageLoader ?? MockImageLoader()
         }
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
         mockImageLoader = nil
-        try await super.tearDown()
     }
 
     // MARK: - imageSources Tests
 
+    @Test
     func testImageSourcesWithValidURLs() throws {
         let card1 = CardDTO.stub(
             code: "01001",
@@ -50,11 +51,15 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         let sources = sut.imageSources
 
-        XCTAssertEqual(sources.count, 2)
-        XCTAssertEqual(sources[0], try .remote(XCTUnwrap(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))))
-        XCTAssertEqual(sources[1], try .remote(XCTUnwrap(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01002.jpg"))))
+        let firstExpectedSource = ImageSource.remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!)
+        let secondExpectedSource = ImageSource.remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01002.jpg")!)
+
+        #expect(sources.count == 2)
+        #expect(sources[0] == firstExpectedSource)
+        #expect(sources[1] == secondExpectedSource)
     }
 
+    @Test
     func testImageSourcesWithEmptyURLFallsBackToLocal() {
         let card = CardDTO.stub(
             code: "01001",
@@ -66,10 +71,11 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         let sources = sut.imageSources
 
-        XCTAssertEqual(sources.count, 1)
-        XCTAssertEqual(sources[0], .local(Asset.icCardback.image))
+        #expect(sources.count == 1)
+        #expect(sources[0] == .local(Asset.icCardback.image))
     }
 
+    @Test
     func testImageSourcesWithMalformedURLFallsBackToLocal() {
         let card = CardDTO.stub(
             code: "01001",
@@ -81,10 +87,11 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         let sources = sut.imageSources
 
-        XCTAssertEqual(sources.count, 1)
-        XCTAssertEqual(sources[0], .local(Asset.icCardback.image))
+        #expect(sources.count == 1)
+        #expect(sources[0] == .local(Asset.icCardback.image))
     }
 
+    @Test
     func testImageSourcesMixedValidAndInvalidURLs() throws {
         let validCard = CardDTO.stub(
             code: "01001",
@@ -101,42 +108,48 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         let sources = sut.imageSources
 
-        XCTAssertEqual(sources.count, 2)
-        XCTAssertEqual(sources[0], try .remote(XCTUnwrap(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg"))))
-        XCTAssertEqual(sources[1], .local(Asset.icCardback.image))
+        let expectedSource = ImageSource.remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!)
+
+        #expect(sources.count == 2)
+        #expect(sources[0] == expectedSource)
+        #expect(sources[1] == .local(Asset.icCardback.image))
     }
 
+    @Test
     func testImageSourcesWithEmptyCards() {
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [], selectedCard: card, dependencyContainer: testContainer.container)
 
         let sources = sut.imageSources
 
-        XCTAssertTrue(sources.isEmpty)
+        #expect(sources.isEmpty)
     }
 
     // MARK: - Initialization Tests
 
+    @Test
     func testInitSetsSelectedCard() {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
 
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
-        XCTAssertEqual(sut.selectedCard.code, "01001")
-        XCTAssertEqual(sut.selectedCard.name, "Captain Phasma")
+        #expect(sut.selectedCard.code == "01001")
+        #expect(sut.selectedCard.name == "Captain Phasma")
     }
 
+    @Test
     func testInitSetsCurrentIndexToSelectedCard() {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
 
         sut = CardDetailViewModel(cards: [card1, card2], selectedCard: card2, dependencyContainer: testContainer.container)
 
-        XCTAssertEqual(sut.currentIndex, 1)
+        #expect(sut.currentIndex == 1)
     }
 
     // MARK: - updateCurrentIndex Tests
 
+    @Test
     func testUpdateCurrentIndexWithValidIndex() {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
@@ -145,9 +158,10 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         sut.updateCurrentIndex(1)
 
-        XCTAssertEqual(sut.currentIndex, 1)
+        #expect(sut.currentIndex == 1)
     }
 
+    @Test
     func testUpdateCurrentIndexWithOutOfBoundsIndex() {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
 
@@ -155,11 +169,12 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         sut.updateCurrentIndex(5)
 
-        XCTAssertEqual(sut.currentIndex, 0)
+        #expect(sut.currentIndex == 0)
     }
 
     // MARK: - currentCard Tests
 
+    @Test
     func testCurrentCardReturnsCorrectCard() {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
@@ -168,21 +183,23 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         sut.updateCurrentIndex(1)
 
-        XCTAssertEqual(sut.currentCard.code, "01002")
-        XCTAssertEqual(sut.currentCard.name, "Kylo Ren")
+        #expect(sut.currentCard.code == "01002")
+        #expect(sut.currentCard.name == "Kylo Ren")
     }
 
     // MARK: - imageLoader Tests
 
+    @Test
     func test_imageLoader_resolvedFromDI() {
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
-        XCTAssertTrue(sut.imageLoader is MockImageLoader)
+        #expect(sut.imageLoader is MockImageLoader)
     }
 
     // MARK: - addToCollection Tests
 
+    @Test
     func test_addToCollection_createsNewCollectionWhenNoneExists() async {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
@@ -190,11 +207,12 @@ final class CardDetailViewModelTests: BaseTestCase {
         await sut.addToCollection()
 
         let stored = await testDatabase.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(stored.count, 1)
-        XCTAssertEqual(stored.first?.myCollection.count, 1)
-        XCTAssertEqual(stored.first?.myCollection.first?.code, "01001")
+        #expect(stored.count == 1)
+        #expect(stored.first?.myCollection.count == 1)
+        #expect(stored.first?.myCollection.first?.code == "01001")
     }
 
+    @Test
     func test_addToCollection_addsCardToExistingEmptyCollection() async throws {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let existingCollection = UserCollectionDTO.stub()
@@ -205,10 +223,11 @@ final class CardDetailViewModelTests: BaseTestCase {
         await sut.addToCollection()
 
         let stored = await testDatabase.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(stored.first?.myCollection.count, 1)
-        XCTAssertEqual(stored.first?.myCollection.first?.code, "01001")
+        #expect(stored.first?.myCollection.count == 1)
+        #expect(stored.first?.myCollection.first?.code == "01001")
     }
 
+    @Test
     func test_addToCollection_incrementsQuantityWhenCardAlreadyInCollection() async throws {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let existingCard = CardDTO.stub(code: "01001", name: "Captain Phasma", quantity: 1)
@@ -220,10 +239,11 @@ final class CardDetailViewModelTests: BaseTestCase {
         await sut.addToCollection()
 
         let stored = await testDatabase.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(stored.first?.myCollection.count, 1)
-        XCTAssertEqual(stored.first?.myCollection.first?.quantity, 2)
+        #expect(stored.first?.myCollection.count == 1)
+        #expect(stored.first?.myCollection.first?.quantity == 2)
     }
 
+    @Test
     func test_addToCollection_doesNotDuplicateCardInCollection() async throws {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let existingCard = CardDTO.stub(code: "01001", name: "Captain Phasma", quantity: 3)
@@ -235,29 +255,32 @@ final class CardDetailViewModelTests: BaseTestCase {
         await sut.addToCollection()
 
         let stored = await testDatabase.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(stored.first?.myCollection.count, 1, "Should not duplicate — only quantity should increase")
+        #expect(stored.first?.myCollection.count == 1, "Should not duplicate — only quantity should increase")
     }
 
+    @Test
     func test_addToCollection_enqueuesToastOnSuccess() async {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
         await sut.addToCollection()
 
-        XCTAssertEqual(sut.toastQueue.current?.title, L10n.added)
-        XCTAssertEqual(sut.toastQueue.current?.message, "Captain Phasma")
-        XCTAssertEqual(sut.toastQueue.current?.type, .success)
+        #expect(sut.toastQueue.current?.title == L10n.added)
+        #expect(sut.toastQueue.current?.message == "Captain Phasma")
+        #expect(sut.toastQueue.current?.type == .success)
     }
 
+    @Test
     func test_addToCollection_isNotLoadingAfterCompletion() async {
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
         await sut.addToCollection()
 
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func test_addToCollection_handlesError() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         let card = CardDTO.stub()
@@ -265,11 +288,12 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         await sut.addToCollection()
 
-        XCTAssertNotNil(sut.errorMessage)
-        XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.errorMessage != nil)
+        #expect(sut.isLoading == false)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
+    @Test
     func test_addToCollection_usesCurrentCardNotSelectedCard() async {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
@@ -279,6 +303,6 @@ final class CardDetailViewModelTests: BaseTestCase {
         await sut.addToCollection()
 
         let stored = await testDatabase.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(stored.first?.myCollection.first?.code, "01002", "Should add the card at currentIndex, not selectedCard")
+        #expect(stored.first?.myCollection.first?.code == "01002", "Should add the card at currentIndex, not selectedCard")
     }
 }

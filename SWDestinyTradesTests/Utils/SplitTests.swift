@@ -6,12 +6,13 @@
 //  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class SplitTests: XCTestCase {
+final class SplitTests {
 
+    @Test
     func test_cardsAlphabetically() {
         let cardList: [CardDTO] = [
             .stub(name: "Cherry"),
@@ -24,16 +25,17 @@ final class SplitTests: XCTestCase {
 
         let result = Split.cardsAlphabetically(cardList: cardList, sections: sections)
 
-        XCTAssertEqual(result["A"]?.count, 1)
-        XCTAssertEqual(result["B"]?.count, 2)
-        XCTAssertEqual(result["C"]?.count, 1)
+        #expect(result["A"]?.count == 1)
+        #expect(result["B"]?.count == 2)
+        #expect(result["C"]?.count == 1)
 
-        XCTAssertEqual(result["A"]?.first?.name, "Apple")
-        XCTAssertEqual(result["B"]?.first?.name, "Banana")
-        XCTAssertEqual(result["B"]?[1].name, "Brocolis")
-        XCTAssertEqual(result["C"]?.first?.name, "Cherry")
+        #expect(result["A"]?.first?.name == "Apple")
+        #expect(result["B"]?.first?.name == "Banana")
+        #expect(result["B"]?[1].name == "Brocolis")
+        #expect(result["C"]?.first?.name == "Cherry")
     }
 
+    @Test
     func test_cardsByColor() {
         let cardList: [CardDTO] = [
             .stub(factionCode: "Red", name: "Card1"),
@@ -46,16 +48,17 @@ final class SplitTests: XCTestCase {
 
         let result = Split.cardsByColor(cardList: cardList, sections: sections)
 
-        XCTAssertEqual(result["Red"]?.count, 2)
-        XCTAssertEqual(result["Blue"]?.count, 1)
-        XCTAssertEqual(result["Green"]?.count, 1)
+        #expect(result["Red"]?.count == 2)
+        #expect(result["Blue"]?.count == 1)
+        #expect(result["Green"]?.count == 1)
 
-        XCTAssertEqual(result["Red"]?.first?.name, "Card1")
-        XCTAssertEqual(result["Red"]?[1].name, "Card3")
-        XCTAssertEqual(result["Blue"]?.first?.name, "Card2")
-        XCTAssertEqual(result["Green"]?.first?.name, "Card4")
+        #expect(result["Red"]?.first?.name == "Card1")
+        #expect(result["Red"]?[1].name == "Card3")
+        #expect(result["Blue"]?.first?.name == "Card2")
+        #expect(result["Green"]?.first?.name == "Card4")
     }
 
+    @Test
     func test_cardsByType() {
         let cardList: [CardDTO] = [
             .stub(typeName: "Creature", name: "Card1"),
@@ -68,16 +71,17 @@ final class SplitTests: XCTestCase {
 
         let result = Split.cardsByType(cardList: cardList, sections: sections)
 
-        XCTAssertEqual(result["Creature"]?.count, 2)
-        XCTAssertEqual(result["Spell"]?.count, 1)
-        XCTAssertEqual(result["Artifact"]?.count, 1)
+        #expect(result["Creature"]?.count == 2)
+        #expect(result["Spell"]?.count == 1)
+        #expect(result["Artifact"]?.count == 1)
 
-        XCTAssertEqual(result["Creature"]?.first?.name, "Card1")
-        XCTAssertEqual(result["Creature"]?[1].name, "Card3")
-        XCTAssertEqual(result["Spell"]?.first?.name, "Card2")
-        XCTAssertEqual(result["Artifact"]?.first?.name, "Card4")
+        #expect(result["Creature"]?.first?.name == "Card1")
+        #expect(result["Creature"]?[1].name == "Card3")
+        #expect(result["Spell"]?.first?.name == "Card2")
+        #expect(result["Artifact"]?.first?.name == "Card4")
     }
 
+    @Test
     func test_setsByAlphabetically() {
         let sections = ["S", "A", "E"]
 
@@ -90,13 +94,13 @@ final class SplitTests: XCTestCase {
 
         let result = Split.setsByAlphabetically(setList: sets, sections: sections)
 
-        XCTAssertEqual(result["A"]?.count, 1)
-        XCTAssertEqual(result["E"]?.count, 1)
-        XCTAssertEqual(result["S"]?.count, 2)
+        #expect(result["A"]?.count == 1)
+        #expect(result["E"]?.count == 1)
+        #expect(result["S"]?.count == 2)
 
-        XCTAssertEqual(result["A"]?.first?.name, "Awakenings")
-        XCTAssertEqual(result["S"]?[0].name, "Spark of Hope")
-        XCTAssertEqual(result["S"]?[1].name, "Spirit of Rebellion")
-        XCTAssertEqual(result["E"]?.first?.name, "Empire at War")
+        #expect(result["A"]?.first?.name == "Awakenings")
+        #expect(result["S"]?[0].name == "Spark of Hope")
+        #expect(result["S"]?[1].name == "Spirit of Rebellion")
+        #expect(result["E"]?.first?.name == "Empire at War")
     }
 }

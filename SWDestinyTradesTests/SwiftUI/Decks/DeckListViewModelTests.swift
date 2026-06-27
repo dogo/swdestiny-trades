@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -15,14 +15,13 @@ final class DeckListViewModelTests: BaseTestCase {
 
     private var sut: DeckListViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = DeckListViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     private func makeDeck(name: String, cards: [CardDTO] = []) -> DeckDTO {
@@ -34,6 +33,7 @@ final class DeckListViewModelTests: BaseTestCase {
 
     // MARK: - Load
 
+    @Test
     func test_loadDecks_populatesItemsSortedByName() async {
         try? await populateTestData(objects: [
             makeDeck(name: "Zeta"),
@@ -42,10 +42,11 @@ final class DeckListViewModelTests: BaseTestCase {
 
         await sut.loadDecks()
 
-        XCTAssertEqual(sut.items.map(\.name), ["Alpha", "Zeta"])
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.map(\.name) == ["Alpha", "Zeta"])
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func test_loadDecks_computesCardCounts() async {
         let deck = makeDeck(name: "Counted", cards: [
             CardDTO.stub(code: "01001", quantity: 2),
@@ -55,11 +56,12 @@ final class DeckListViewModelTests: BaseTestCase {
 
         await sut.loadDecks()
 
-        XCTAssertEqual(sut.cardCounts[deck.id], 5)
+        #expect(sut.cardCounts[deck.id] == 5)
     }
 
     // MARK: - Filtering
 
+    @Test
     func test_filterItems_byName() {
         let alpha = makeDeck(name: "Alpha Strike")
         let beta = makeDeck(name: "Beta Build")
@@ -67,11 +69,12 @@ final class DeckListViewModelTests: BaseTestCase {
 
         sut.performFiltering(searchText: "Alpha")
 
-        XCTAssertEqual(sut.filteredItems.map(\.name), ["Alpha Strike"])
+        #expect(sut.filteredItems.map(\.name) == ["Alpha Strike"])
     }
 
     // MARK: - Delete
 
+    @Test
     func test_delete_removesDeck() async {
         let keep = makeDeck(name: "Keep")
         let remove = makeDeck(name: "Remove")
@@ -80,11 +83,12 @@ final class DeckListViewModelTests: BaseTestCase {
 
         await sut.delete(remove)
 
-        XCTAssertEqual(sut.items.map(\.name), ["Keep"])
+        #expect(sut.items.map(\.name) == ["Keep"])
     }
 
     // MARK: - Rename
 
+    @Test
     func test_renameDeck_updatesName() async {
         let deck = makeDeck(name: "Old Name")
         try? await populateTestData(objects: [deck])
@@ -92,9 +96,10 @@ final class DeckListViewModelTests: BaseTestCase {
 
         await sut.renameDeck(deck, newName: "New Name")
 
-        XCTAssertEqual(sut.items.map(\.name), ["New Name"])
+        #expect(sut.items.map(\.name) == ["New Name"])
     }
 
+    @Test
     func test_renameDeck_blankName_isNoOp() async {
         let deck = makeDeck(name: "Original")
         try? await populateTestData(objects: [deck])
@@ -102,6 +107,6 @@ final class DeckListViewModelTests: BaseTestCase {
 
         await sut.renameDeck(deck, newName: "   ")
 
-        XCTAssertEqual(sut.items.map(\.name), ["Original"])
+        #expect(sut.items.map(\.name) == ["Original"])
     }
 }

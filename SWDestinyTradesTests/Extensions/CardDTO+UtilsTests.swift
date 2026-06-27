@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class CardDTOTests: XCTestCase {
+final class CardDTOTests {
 
+    @Test
     func test_factionColor() {
         let testCases: [(factionCode: String, expectedColor: Color)] = [
             ("red", ColorPalette.red),
@@ -24,7 +25,7 @@ final class CardDTOTests: XCTestCase {
 
         for testCase in testCases {
             let cardDTO = CardDTO.stub(factionCode: testCase.factionCode)
-            XCTAssertEqual(cardDTO.factionColor(), testCase.expectedColor, "Faction color for code \(testCase.factionCode) did not match expected color.")
+            #expect(cardDTO.factionColor() == testCase.expectedColor, "Faction color for code \(testCase.factionCode) did not match expected color.")
         }
     }
 }

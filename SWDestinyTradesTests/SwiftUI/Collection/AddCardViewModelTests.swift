@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -28,27 +28,30 @@ final class AddCardViewModelTests: BaseTestCase {
 
     // MARK: - Loading
 
+    @Test
     func test_loadAllCards_populatesItemsFromService() async {
         let sut = await makeCollectionSUT(
             collection: UserCollectionDTO(),
             serviceCards: [CardDTO.stub(code: "01001"), CardDTO.stub(code: "01002")]
         )
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 2)
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func test_loadAllCards_onError_enqueuesErrorToast() async {
         mockSWDestinyService.retrieveAllCardsError = APIError.invalidData
         let sut = AddCardViewModel(context: .collection(UserCollectionDTO()), dependencyContainer: testContainer.container)
 
         await waitUntil { sut.toastQueue.current != nil }
 
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
     // MARK: - Filtering
 
+    @Test
     func test_filterItems_bySearch() async {
         let sut = await makeCollectionSUT(
             collection: UserCollectionDTO(),
@@ -61,9 +64,10 @@ final class AddCardViewModelTests: BaseTestCase {
         sut.searchText = "Phasma"
         sut.applyFilters()
 
-        XCTAssertEqual(sut.filteredItems.map(\.code), ["01001"])
+        #expect(sut.filteredItems.map(\.code) == ["01001"])
     }
 
+    @Test
     func test_filterItems_excludesCardsAlreadyInCollection() async {
         let owned = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let collection = UserCollectionDTO.stub(collection: [owned])
@@ -78,11 +82,12 @@ final class AddCardViewModelTests: BaseTestCase {
         sut.applyFilters()
 
         // The already-owned code 01001 is filtered out.
-        XCTAssertEqual(sut.filteredItems.map(\.code), ["01002"])
+        #expect(sut.filteredItems.map(\.code) == ["01002"])
     }
 
     // MARK: - Add card (async Task)
 
+    @Test
     func test_addCard_collection_appendsCopyAndShowsSuccess() async {
         let collection = UserCollectionDTO()
         let sut = await makeCollectionSUT(
@@ -94,11 +99,12 @@ final class AddCardViewModelTests: BaseTestCase {
         sut.addCard(card)
         await waitUntil { sut.toastQueue.current?.type == .success }
 
-        XCTAssertEqual(collection.myCollection.map(\.code), ["01001"])
-        XCTAssertNotEqual(collection.myCollection.first?.id, card.id) // fresh copy
-        XCTAssertEqual(sut.toastQueue.current?.type, .success)
+        #expect(collection.myCollection.map(\.code) == ["01001"])
+        #expect(collection.myCollection.first?.id != card.id) // fresh copy
+        #expect(sut.toastQueue.current?.type == .success)
     }
 
+    @Test
     func test_addCard_duplicate_showsErrorToast() async {
         let owned = CardDTO.stub(code: "01001")
         let collection = UserCollectionDTO.stub(collection: [owned])
@@ -110,17 +116,18 @@ final class AddCardViewModelTests: BaseTestCase {
         sut.addCard(CardDTO.stub(code: "01001"))
         await waitUntil { sut.toastQueue.current != nil }
 
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
-        XCTAssertEqual(collection.myCollection.count, 1)
+        #expect(sut.toastQueue.current?.type == .error)
+        #expect(collection.myCollection.count == 1)
     }
 
     // MARK: - Context title
 
+    @Test
     func test_addCardContext_titlesAreLocalized() {
-        XCTAssertEqual(AddCardContext.collection(UserCollectionDTO()).title, L10n.addCard)
-        XCTAssertEqual(AddCardContext.lentToPerson(PersonDTO()).title, L10n.addLentCard)
-        XCTAssertEqual(AddCardContext.borrowedFromPerson(PersonDTO()).title, L10n.addBorrowedCard)
-        XCTAssertEqual(AddCardContext.person(id: "1", type: .lent).title, L10n.addLentCard)
-        XCTAssertEqual(AddCardContext.person(id: "1", type: .collection).title, L10n.addCard)
+        #expect(AddCardContext.collection(UserCollectionDTO()).title == L10n.addCard)
+        #expect(AddCardContext.lentToPerson(PersonDTO()).title == L10n.addLentCard)
+        #expect(AddCardContext.borrowedFromPerson(PersonDTO()).title == L10n.addBorrowedCard)
+        #expect(AddCardContext.person(id: "1", type: .lent).title == L10n.addLentCard)
+        #expect(AddCardContext.person(id: "1", type: .collection).title == L10n.addCard)
     }
 }

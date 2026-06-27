@@ -6,22 +6,20 @@
 //  Copyright © 2025 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Foundation
 
 @testable import SWDestinyTrades
 
 // swiftlint:disable test_case_accessibility
 @MainActor
-class BaseTestCase: XCTestCase {
+class BaseTestCase {
 
     var testContainer: TestContainer!
     var testDatabase: DatabaseMock!
     var mockHttpClient: HttpClientMock!
     var mockSWDestinyService: SWDestinyServiceMock!
 
-    override func setUp() async throws {
-        try await super.setUp()
-
+    init() async throws {
         testContainer = TestContainer()
         mockHttpClient = HttpClientMock()
 
@@ -51,13 +49,11 @@ class BaseTestCase: XCTestCase {
         }
     }
 
-    override func tearDown() async throws {
+    deinit {
         testDatabase = nil
         testContainer = nil
         mockHttpClient = nil
         mockSWDestinyService = nil
-
-        try await super.tearDown()
     }
 
     func registerMock<T>(_ type: T.Type, mock: @escaping () -> T) {

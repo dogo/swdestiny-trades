@@ -6,69 +6,71 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
 @MainActor
-final class SwiftDataManagerTests: XCTestCase {
+final class SwiftDataManagerTests {
 
     private var sut: SwiftDataManager!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    init() async throws {
         sut = try await SwiftDataManager.create(inMemory: true)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Card round-trip & field mapping
 
+    @Test
     func test_saveAndFetchByKey_card_mapsAllFields() async throws {
         let card = CardDTO.stub()
 
         try await sut.save(object: card, update: .all)
         let result = await sut.fetchByKey(CardDTO.self, key: card.id)
-        let fetched = try XCTUnwrap(result)
+        let fetched = try #require(result)
 
-        XCTAssertEqual(fetched.id, card.id)
-        XCTAssertEqual(fetched.code, "01001")
-        XCTAssertEqual(fetched.name, "Captain Phasma")
-        XCTAssertEqual(fetched.subtitle, "Elite Trooper")
-        XCTAssertEqual(fetched.setCode, "AW")
-        XCTAssertEqual(fetched.typeCode, "character")
-        XCTAssertEqual(fetched.factionCode, "red")
-        XCTAssertEqual(fetched.affiliationCode, "villain")
-        XCTAssertEqual(fetched.rarityCode, "L")
-        XCTAssertEqual(fetched.cost, 0)
-        XCTAssertEqual(fetched.health, 11)
-        XCTAssertEqual(fetched.points, "12/15")
-        XCTAssertEqual(fetched.deckLimit, 1)
-        XCTAssertEqual(fetched.isUnique, true)
-        XCTAssertEqual(fetched.hasDie, true)
-        XCTAssertEqual(fetched.cp, 1215)
-        XCTAssertEqual(fetched.quantity, 1)
-        XCTAssertEqual(fetched.imageUrl, "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")
+        #expect(fetched.id == card.id)
+        #expect(fetched.code == "01001")
+        #expect(fetched.name == "Captain Phasma")
+        #expect(fetched.subtitle == "Elite Trooper")
+        #expect(fetched.setCode == "AW")
+        #expect(fetched.typeCode == "character")
+        #expect(fetched.factionCode == "red")
+        #expect(fetched.affiliationCode == "villain")
+        #expect(fetched.rarityCode == "L")
+        #expect(fetched.cost == 0)
+        #expect(fetched.health == 11)
+        #expect(fetched.points == "12/15")
+        #expect(fetched.deckLimit == 1)
+        #expect(fetched.isUnique == true)
+        #expect(fetched.hasDie == true)
+        #expect(fetched.cp == 1215)
+        #expect(fetched.quantity == 1)
+        #expect(fetched.imageUrl == "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")
     }
 
+    @Test
     func test_fetchByKey_missingCard_returnsNil() async throws {
         let fetched = await sut.fetchByKey(CardDTO.self, key: "does-not-exist")
-        XCTAssertNil(fetched)
+        #expect(fetched == nil)
     }
 
+    @Test
     func test_fetch_returnsAllSavedCards() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
         try await sut.save(object: CardDTO.stub(code: "01002"), update: .all)
 
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(cards.count, 2)
+        #expect(cards.count == 2)
     }
 
     // MARK: - Upsert semantics (no duplicate on same key)
 
+    @Test
     func test_save_sameId_updatesInsteadOfDuplicating() async throws {
         let card = CardDTO.stub(name: "Captain Phasma")
         try await sut.save(object: card, update: .all)
@@ -77,31 +79,34 @@ final class SwiftDataManagerTests: XCTestCase {
         try await sut.save(object: card, update: .all)
 
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(cards.count, 1)
-        XCTAssertEqual(cards.first?.name, "Updated Name")
+        #expect(cards.count == 1)
+        #expect(cards.first?.name == "Updated Name")
     }
 
+    @Test
     func test_create_persistsAndReturnsObject() async throws {
         let card = CardDTO.stub(code: "01005")
 
         let created = try await sut.create(CardDTO.self, value: card, update: .all)
 
-        XCTAssertEqual(created.id, card.id)
+        #expect(created.id == card.id)
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(cards.count, 1)
+        #expect(cards.count == 1)
     }
 
+    @Test
     func test_create_withMismatchedValue_throwsUnsupportedType() async throws {
         do {
             _ = try await sut.create(CardDTO.self, value: SetDTO.stub(), update: .all)
-            XCTFail("Expected unsupportedType error")
+            Issue.record("Expected unsupportedType error")
         } catch let SwiftDataManagerError.unsupportedType(type) {
-            XCTAssertTrue(type.contains("CardDTO"))
+            #expect(type.contains("CardDTO"))
         }
     }
 
     // MARK: - Delete
 
+    @Test
     func test_delete_removesObject() async throws {
         let card = CardDTO.stub()
         try await sut.save(object: card, update: .all)
@@ -109,9 +114,10 @@ final class SwiftDataManagerTests: XCTestCase {
         try await sut.delete(object: card)
 
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        XCTAssertTrue(cards.isEmpty)
+        #expect(cards.isEmpty)
     }
 
+    @Test
     func test_deleteAll_removesOnlyGivenType() async throws {
         try await sut.save(object: CardDTO.stub(), update: .all)
         try await sut.save(object: SetDTO.stub(), update: .all)
@@ -120,10 +126,11 @@ final class SwiftDataManagerTests: XCTestCase {
 
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
         let sets = await sut.fetch(SetDTO.self, predicate: nil, sorted: nil)
-        XCTAssertTrue(cards.isEmpty)
-        XCTAssertEqual(sets.count, 1)
+        #expect(cards.isEmpty)
+        #expect(sets.count == 1)
     }
 
+    @Test
     func test_reset_removesEverything() async throws {
         try await sut.save(object: CardDTO.stub(), update: .all)
         try await sut.save(object: SetDTO.stub(), update: .all)
@@ -134,40 +141,43 @@ final class SwiftDataManagerTests: XCTestCase {
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
         let sets = await sut.fetch(SetDTO.self, predicate: nil, sorted: nil)
         let people = await sut.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-        XCTAssertTrue(cards.isEmpty)
-        XCTAssertTrue(sets.isEmpty)
-        XCTAssertTrue(people.isEmpty)
+        #expect(cards.isEmpty)
+        #expect(sets.isEmpty)
+        #expect(people.isEmpty)
     }
 
     // MARK: - Sorting
 
+    @Test
     func test_fetch_sortedByName_ascendingAndDescending() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001", name: "Chewbacca"), update: .all)
         try await sut.save(object: CardDTO.stub(code: "01002", name: "Ackbar"), update: .all)
         try await sut.save(object: CardDTO.stub(code: "01003", name: "Boba Fett"), update: .all)
 
         let ascending = await sut.fetch(CardDTO.self, predicate: nil, sorted: Sorted(key: "name", ascending: true))
-        XCTAssertEqual(ascending.map(\.name), ["Ackbar", "Boba Fett", "Chewbacca"])
+        #expect(ascending.map(\.name) == ["Ackbar", "Boba Fett", "Chewbacca"])
 
         let descending = await sut.fetch(CardDTO.self, predicate: nil, sorted: Sorted(key: "name", ascending: false))
-        XCTAssertEqual(descending.map(\.name), ["Chewbacca", "Boba Fett", "Ackbar"])
+        #expect(descending.map(\.name) == ["Chewbacca", "Boba Fett", "Ackbar"])
     }
 
     // MARK: - Set round-trip (code-keyed)
 
+    @Test
     func test_saveAndFetchByKey_set_usesCodeAsKey() async throws {
         let set = SetDTO.stub(name: "Awakenings", code: "AW")
 
         try await sut.save(object: set, update: .all)
         let result = await sut.fetchByKey(SetDTO.self, key: "AW")
-        let fetched = try XCTUnwrap(result)
+        let fetched = try #require(result)
 
-        XCTAssertEqual(fetched.code, "AW")
-        XCTAssertEqual(fetched.name, "Awakenings")
+        #expect(fetched.code == "AW")
+        #expect(fetched.name == "Awakenings")
     }
 
     // MARK: - Nested relationships
 
+    @Test
     func test_savePerson_persistsLentAndBorrowedCards() async throws {
         let person = PersonDTO.stub(
             name: "Luke",
@@ -178,43 +188,46 @@ final class SwiftDataManagerTests: XCTestCase {
 
         try await sut.save(object: person, update: .all)
         let result = await sut.fetchByKey(PersonDTO.self, key: person.id)
-        let fetched = try XCTUnwrap(result)
+        let fetched = try #require(result)
 
-        XCTAssertEqual(fetched.name, "Luke")
-        XCTAssertEqual(fetched.lastName, "Skywalker")
-        XCTAssertEqual(fetched.lentMe.map(\.code), ["01001"])
-        XCTAssertEqual(fetched.borrowed.map(\.code), ["01002"])
+        #expect(fetched.name == "Luke")
+        #expect(fetched.lastName == "Skywalker")
+        #expect(fetched.lentMe.map(\.code) == ["01001"])
+        #expect(fetched.borrowed.map(\.code) == ["01002"])
     }
 
+    @Test
     func test_saveDeck_persistsCardList() async throws {
         let deck = DeckDTO.stub(cards: [CardDTO.stub(code: "01001"), CardDTO.stub(code: "01002")])
 
         try await sut.save(object: deck, update: .all)
         let result = await sut.fetchByKey(DeckDTO.self, key: deck.id)
-        let fetched = try XCTUnwrap(result)
+        let fetched = try #require(result)
 
-        XCTAssertEqual(fetched.name, "Mock Deck")
-        XCTAssertEqual(fetched.list.map(\.code).sorted(), ["01001", "01002"])
+        #expect(fetched.name == "Mock Deck")
+        #expect(fetched.list.map(\.code).sorted() == ["01001", "01002"])
     }
 
+    @Test
     func test_saveUserCollection_persistsCards() async throws {
         let collection = UserCollectionDTO.stub(collection: [CardDTO.stub(code: "01001")])
 
         try await sut.save(object: collection, update: .all)
         let result = await sut.fetchByKey(UserCollectionDTO.self, key: collection.id)
-        let fetched = try XCTUnwrap(result)
+        let fetched = try #require(result)
 
-        XCTAssertEqual(fetched.myCollection.map(\.code), ["01001"])
+        #expect(fetched.myCollection.map(\.code) == ["01001"])
     }
 
     // MARK: - Observe
 
+    @Test
     func test_observe_emitsInitialState() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
 
         var iterator = sut.observe(CardDTO.self, predicate: nil, sorted: nil).makeAsyncIterator()
         let firstEmission = await iterator.next()
 
-        XCTAssertEqual(firstEmission?.map(\.code), ["01001"])
+        #expect(firstEmission?.map(\.code) == ["01001"])
     }
 }

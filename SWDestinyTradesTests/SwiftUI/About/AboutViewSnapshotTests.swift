@@ -7,26 +7,16 @@
 //
 
 import SwiftUI
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
 @MainActor
 final class AboutViewSnapshotTests: XCSnapshotableTestCase {
 
-    private var coordinator: NavigationCoordinator!
-
-    override func setUp() {
-        super.setUp()
-        coordinator = NavigationCoordinator()
-    }
-
-    override func tearDown() {
-        coordinator = nil
-        super.tearDown()
-    }
-
+    @Test
     func testShouldHaveValidLayout() {
+        let coordinator = NavigationCoordinator()
         let view = AboutView()
             .environment(coordinator)
 

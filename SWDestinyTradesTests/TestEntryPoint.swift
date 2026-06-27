@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import XCTest
 
 final class TestEntryPoint: NSObject {
 

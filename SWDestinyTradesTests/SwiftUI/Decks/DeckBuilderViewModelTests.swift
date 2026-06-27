@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -26,37 +26,41 @@ final class DeckBuilderViewModelTests: BaseTestCase {
 
     // MARK: - Initialization
 
+    @Test
     func test_init_withoutDeck_createsNewEmptyDeck() {
         let sut = DeckBuilderViewModel(dependencyContainer: testContainer.container)
 
-        XCTAssertTrue(sut.isNewDeck)
-        XCTAssertEqual(sut.deck.name, "New Deck")
-        XCTAssertTrue(sut.isDeckEmpty)
-        XCTAssertTrue(sut.deckSections.isEmpty)
+        #expect(sut.isNewDeck)
+        #expect(sut.deck.name == "New Deck")
+        #expect(sut.isDeckEmpty)
+        #expect(sut.deckSections.isEmpty)
     }
 
+    @Test
     func test_init_withExistingDeck_isNotNew() {
         let sut = makeSUT(deck: makeDeck(cards: [CardDTO.stub(code: "01001")]))
 
-        XCTAssertFalse(sut.isNewDeck)
-        XCTAssertFalse(sut.isDeckEmpty)
+        #expect(sut.isNewDeck == false)
+        #expect(sut.isDeckEmpty == false)
     }
 
     // MARK: - Counts
 
+    @Test
     func test_counts_reflectDeckList() {
         let sut = makeSUT(deck: makeDeck(cards: [
             CardDTO.stub(code: "01001", quantity: 2),
             CardDTO.stub(code: "01002", quantity: 3)
         ]))
 
-        XCTAssertEqual(sut.totalCardCount, 5)
-        XCTAssertEqual(sut.uniqueCardCount, 2)
-        XCTAssertFalse(sut.isDeckEmpty)
+        #expect(sut.totalCardCount == 5)
+        #expect(sut.uniqueCardCount == 2)
+        #expect(sut.isDeckEmpty == false)
     }
 
     // MARK: - Sections
 
+    @Test
     func test_loadDeckData_buildsSectionsCoveringAllCards() {
         let sut = makeSUT(deck: makeDeck(cards: [
             CardDTO.stub(code: "01001", name: "Captain Phasma"),
@@ -64,22 +68,24 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         ]))
 
         let sectionedCodes = sut.deckSections.flatMap { $0.cards.map(\.code) }.sorted()
-        XCTAssertFalse(sut.deckSections.isEmpty)
-        XCTAssertEqual(sectionedCodes, ["01001", "01002"])
+        #expect(sut.deckSections.isEmpty == false)
+        #expect(sectionedCodes == ["01001", "01002"])
     }
 
-    func test_toggleSection_flipsCollapsedState() {
+    @Test
+    func test_toggleSection_flipsCollapsedState() throws {
         let sut = makeSUT(deck: makeDeck(cards: [CardDTO.stub(code: "01001")]))
-        let section = try? XCTUnwrap(sut.deckSections.first)
-        let original = section!.isCollapsed
+        let section = try #require(sut.deckSections.first)
+        let original = section.isCollapsed
 
-        sut.toggleSection(section!)
+        sut.toggleSection(section)
 
-        XCTAssertEqual(sut.deckSections.first?.isCollapsed, !original)
+        #expect(sut.deckSections.first?.isCollapsed == !original)
     }
 
     // MARK: - Share text
 
+    @Test
     func test_prepareShareText_includesDeckAndCardNames() {
         let sut = makeSUT(deck: makeDeck(name: "My Deck", cards: [
             CardDTO.stub(code: "01001", name: "Captain Phasma")
@@ -88,12 +94,13 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         sut.prepareShareText()
 
         let text = sut.shareText ?? ""
-        XCTAssertTrue(text.contains("My Deck"))
-        XCTAssertTrue(text.contains("Captain Phasma"))
+        #expect(text.contains("My Deck"))
+        #expect(text.contains("Captain Phasma"))
     }
 
     // MARK: - Save
 
+    @Test
     func test_saveDeck_persistsAndClearsNewFlag() async {
         let sut = makeSUT(deck: nil)
         sut.deck.list = [CardDTO.stub(code: "01001")]
@@ -101,19 +108,21 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         await sut.saveDeck()
 
         let decks = await testDatabase.fetch(DeckDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(decks.count, 1)
-        XCTAssertFalse(sut.isNewDeck)
+        #expect(decks.count == 1)
+        #expect(sut.isNewDeck == false)
     }
 
+    @Test
     func test_saveDeck_whenSaveFails_enqueuesErrorToast() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         let sut = makeSUT(deck: makeDeck(cards: [CardDTO.stub(code: "01001")]))
 
         await sut.saveDeck()
 
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
+    @Test
     func test_handleViewAppear_newDeckWithCards_persistsAndClearsNewFlag() async {
         let sut = makeSUT(deck: nil)
         sut.deck.list = [CardDTO.stub(code: "01001")]
@@ -121,12 +130,13 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         await sut.handleViewAppear()
 
         let decks = await testDatabase.fetch(DeckDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(decks.count, 1)
-        XCTAssertFalse(sut.isNewDeck)
+        #expect(decks.count == 1)
+        #expect(sut.isNewDeck == false)
     }
 
     // MARK: - Mutations (async Task)
 
+    @Test
     func test_removeCard_removesFromDeckAndReorganizes() async {
         let card1 = CardDTO.stub(code: "01001")
         let card2 = CardDTO.stub(code: "01002")
@@ -135,10 +145,11 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         sut.removeCard(card1)
         await waitUntil { sut.deck.list.count == 1 }
 
-        XCTAssertEqual(sut.deck.list.map(\.code), ["01002"])
-        XCTAssertEqual(sut.uniqueCardCount, 1)
+        #expect(sut.deck.list.map(\.code) == ["01002"])
+        #expect(sut.uniqueCardCount == 1)
     }
 
+    @Test
     func test_updateCardQuantity_updatesCountAndReorganizes() async {
         let card = CardDTO.stub(code: "01001", quantity: 1)
         let sut = makeSUT(deck: makeDeck(cards: [card]))
@@ -146,9 +157,10 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         sut.updateCardQuantity(card, quantity: 4)
         await waitUntil { sut.totalCardCount == 4 }
 
-        XCTAssertEqual(sut.totalCardCount, 4)
+        #expect(sut.totalCardCount == 4)
     }
 
+    @Test
     func test_updateCharacterElite_persistsEliteFlag() async {
         let card = CardDTO.stub(code: "01001", isElite: false)
         let sut = makeSUT(deck: makeDeck(cards: [card]))
@@ -156,6 +168,6 @@ final class DeckBuilderViewModelTests: BaseTestCase {
         sut.updateCharacterElite(card, isElite: true)
         await waitUntil { card.isElite }
 
-        XCTAssertTrue(card.isElite)
+        #expect(card.isElite)
     }
 }

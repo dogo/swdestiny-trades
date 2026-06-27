@@ -6,125 +6,132 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Foundation
+import Testing
 
 @testable import SWDestinyTrades
 
 @MainActor
-final class ToastQueueTests: XCTestCase {
+final class ToastQueueTests {
 
     private var sut: ToastQueue!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    init() async throws {
         sut = ToastQueue()
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Enqueue
 
+    @Test
     func test_enqueue_whenEmpty_becomesCurrent() {
         sut.enqueue(title: "Saved", message: "Card added", type: .success)
 
-        XCTAssertEqual(sut.current?.title, "Saved")
-        XCTAssertEqual(sut.current?.message, "Card added")
-        XCTAssertEqual(sut.current?.type, .success)
+        #expect(sut.current?.title == "Saved")
+        #expect(sut.current?.message == "Card added")
+        #expect(sut.current?.type == .success)
     }
 
+    @Test
     func test_enqueue_whenBusy_doesNotReplaceCurrent() {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
 
-        XCTAssertEqual(sut.current?.title, "First")
+        #expect(sut.current?.title == "First")
     }
 
     // MARK: - Advance (FIFO)
 
+    @Test
     func test_advance_promotesQueuedItemsInOrder() {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
         sut.enqueue(title: "Third", message: "3", type: .info)
 
         sut.advance()
-        XCTAssertEqual(sut.current?.title, "Second")
+        #expect(sut.current?.title == "Second")
 
         sut.advance()
-        XCTAssertEqual(sut.current?.title, "Third")
+        #expect(sut.current?.title == "Third")
     }
 
+    @Test
     func test_advance_whenQueueEmpty_clearsCurrent() {
         sut.enqueue(title: "Only", message: "1", type: .info)
 
         sut.advance()
 
-        XCTAssertNil(sut.current)
+        #expect(sut.current == nil)
     }
 
     // MARK: - Cancel
 
+    @Test
     func test_cancel_currentItem_advancesToNext() throws {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
-        let currentId = try XCTUnwrap(sut.current?.id)
+        let currentId = try #require(sut.current?.id)
 
         sut.cancel(id: currentId)
 
-        XCTAssertEqual(sut.current?.title, "Second")
+        #expect(sut.current?.title == "Second")
     }
 
+    @Test
     func test_cancel_unknownId_keepsCurrentAndQueue() throws {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
-        let currentId = try XCTUnwrap(sut.current?.id)
+        let currentId = try #require(sut.current?.id)
 
         sut.cancel(id: UUID())
 
         // Current untouched and the queued item is still there to be promoted.
-        XCTAssertEqual(sut.current?.id, currentId)
+        #expect(sut.current?.id == currentId)
         sut.advance()
-        XCTAssertEqual(sut.current?.title, "Second")
+        #expect(sut.current?.title == "Second")
     }
 
     // MARK: - Cancel All
 
+    @Test
     func test_cancelAll_clearsEverything() {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
 
         sut.cancelAll()
-        XCTAssertNil(sut.current)
+        #expect(sut.current == nil)
 
         // Nothing is left to promote.
         sut.advance()
-        XCTAssertNil(sut.current)
+        #expect(sut.current == nil)
     }
 
     // MARK: - onDismiss callback
 
+    @Test
     func test_advance_firesOnDismissOfDismissedItem() async {
-        let expectation = expectation(description: "onDismiss called")
-        sut.enqueue(title: "First", message: "1", type: .success) {
-            expectation.fulfill()
+        await confirmation("onDismiss called") { confirm in
+            sut.enqueue(title: "First", message: "1", type: .success) {
+                confirm()
+            }
+
+            sut.advance()
+            try? await Task.sleep(for: .milliseconds(400))
         }
-
-        sut.advance()
-
-        await fulfillment(of: [expectation], timeout: 2.0)
     }
 
+    @Test
     func test_cancelAll_doesNotFireOnDismiss() async {
-        let expectation = expectation(description: "onDismiss must not be called")
-        expectation.isInverted = true
-        sut.enqueue(title: "First", message: "1", type: .success) {
-            expectation.fulfill()
+        await confirmation("onDismiss must not be called", expectedCount: 0) { confirm in
+            sut.enqueue(title: "First", message: "1", type: .success) {
+                confirm()
+            }
+
+            sut.cancelAll()
+            try? await Task.sleep(for: .milliseconds(600))
         }
-
-        sut.cancelAll()
-
-        await fulfillment(of: [expectation], timeout: 0.6)
     }
 }

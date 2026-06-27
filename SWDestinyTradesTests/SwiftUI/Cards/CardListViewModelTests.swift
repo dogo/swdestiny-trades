@@ -6,7 +6,7 @@
 //  Copyright © 2025 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -18,18 +18,18 @@ final class CardListViewModelTests: BaseTestCase {
     var sut: CardListViewModel!
     var testSet: SetDTO!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         testSet = SetDTO.stub(name: "Awakenings", code: "AW")
         sut = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
         testSet = nil
-        try await super.tearDown()
     }
 
+    @Test
     func testLoadCardsFromDatabase() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
@@ -48,19 +48,21 @@ final class CardListViewModelTests: BaseTestCase {
 
         await sut.loadCards()
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertEqual(sut.items[0].code, "01001")
-        XCTAssertEqual(sut.items[1].code, "01002")
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 2)
+        #expect(sut.items[0].code == "01001")
+        #expect(sut.items[1].code == "01002")
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func testLoadCardsWithEmptyDatabase() async {
         await sut.loadCards()
 
-        XCTAssertEqual(sut.items.count, 0)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 0)
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func testLoadCardsFiltersCorrectSet() async {
         let awCard = CardDTO.stub(
             setCode: "AW",
@@ -72,31 +74,34 @@ final class CardListViewModelTests: BaseTestCase {
 
         await sut.loadCards()
 
-        XCTAssertEqual(sut.items.count, 1)
-        XCTAssertEqual(sut.items[0].code, "01001")
-        XCTAssertEqual(sut.items[0].setCode, "AW")
+        #expect(sut.items.count == 1)
+        #expect(sut.items[0].code == "01001")
+        #expect(sut.items[0].setCode == "AW")
     }
 
+    @Test
     func testLoadCardsWithMockHttpClient() async {
         mockHttpClient.fileName = "card-list"
         mockHttpClient.error = false
 
         await sut.loadCards()
 
-        XCTAssertFalse(sut.isLoading)
-        XCTAssertGreaterThan(sut.items.count, 0, "Should have loaded cards from mock data")
+        #expect(sut.isLoading == false)
+        #expect(sut.items.count > 0, "Should have loaded cards from mock data")
     }
 
+    @Test
     func testLoadCardsHandlesHttpError() async {
         mockSWDestinyService.retrieveSetCardListError = APIError.invalidData
 
         await sut.loadCards()
 
-        XCTAssertFalse(sut.isLoading)
-        XCTAssertNotNil(sut.toastQueue.current)
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.isLoading == false)
+        #expect(sut.toastQueue.current != nil)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
+    @Test
     func testAsyncOperationCompletesLoading() async {
         let card = CardDTO.stub(setCode: "AW", code: "01001")
 
@@ -104,9 +109,10 @@ final class CardListViewModelTests: BaseTestCase {
 
         await sut.loadCards()
 
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func testSearchFilteringByName() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
@@ -127,10 +133,11 @@ final class CardListViewModelTests: BaseTestCase {
 
         sut.performFiltering(searchText: "Phasma")
 
-        XCTAssertEqual(sut.filteredItems.count, 1)
-        XCTAssertEqual(sut.filteredItems[0].name, "Captain Phasma")
+        #expect(sut.filteredItems.count == 1)
+        #expect(sut.filteredItems[0].name == "Captain Phasma")
     }
 
+    @Test
     func testSearchFilteringBySubtitle() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
@@ -151,10 +158,11 @@ final class CardListViewModelTests: BaseTestCase {
 
         sut.performFiltering(searchText: "Vader")
 
-        XCTAssertEqual(sut.filteredItems.count, 1)
-        XCTAssertEqual(sut.filteredItems[0].name, "Kylo Ren")
+        #expect(sut.filteredItems.count == 1)
+        #expect(sut.filteredItems[0].name == "Kylo Ren")
     }
 
+    @Test
     func testColorFiltering() async {
         let redCard = CardDTO.stub(
             setCode: "AW",
@@ -176,10 +184,11 @@ final class CardListViewModelTests: BaseTestCase {
         sut.filter.selectedColors.insert("red")
         sut.performFiltering(searchText: "")
 
-        XCTAssertEqual(sut.filteredItems.count, 1)
-        XCTAssertEqual(sut.filteredItems[0].factionCode, "red")
+        #expect(sut.filteredItems.count == 1)
+        #expect(sut.filteredItems[0].factionCode == "red")
     }
 
+    @Test
     func testTypeFiltering() async {
         let character = CardDTO.stub(
             setCode: "AW",
@@ -201,10 +210,11 @@ final class CardListViewModelTests: BaseTestCase {
         sut.filter.selectedTypes.insert("character")
         sut.performFiltering(searchText: "")
 
-        XCTAssertEqual(sut.filteredItems.count, 1)
-        XCTAssertEqual(sut.filteredItems[0].typeCode, "character")
+        #expect(sut.filteredItems.count == 1)
+        #expect(sut.filteredItems[0].typeCode == "character")
     }
 
+    @Test
     func testCostFiltering() async {
         let lowCostCard = CardDTO.stub(
             setCode: "AW",
@@ -235,10 +245,11 @@ final class CardListViewModelTests: BaseTestCase {
         sut.filter.selectedColors.insert("blue")
         sut.performFiltering(searchText: "")
 
-        XCTAssertEqual(sut.filteredItems.count, 1)
-        XCTAssertEqual(sut.filteredItems[0].cost, 3)
+        #expect(sut.filteredItems.count == 1)
+        #expect(sut.filteredItems[0].cost == 3)
     }
 
+    @Test
     func testPropertyLoadingAlwaysCompletes() async {
         for iteration in 0 ..< 100 {
             let randomCardCount = Int.random(in: 0 ... 10)
@@ -258,8 +269,8 @@ final class CardListViewModelTests: BaseTestCase {
             let testViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
             await testViewModel.loadCards()
 
-            XCTAssertFalse(testViewModel.isLoading, "Loading should complete on iteration \(iteration)")
-            XCTAssertEqual(testViewModel.items.count, randomCardCount, "Should load correct number of cards on iteration \(iteration)")
+            #expect(testViewModel.isLoading == false, "Loading should complete on iteration \(iteration)")
+            #expect(testViewModel.items.count == randomCardCount, "Should load correct number of cards on iteration \(iteration)")
         }
     }
 }

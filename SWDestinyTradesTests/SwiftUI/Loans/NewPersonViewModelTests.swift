@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -15,109 +15,119 @@ final class NewPersonViewModelTests: BaseTestCase {
 
     private var sut: NewPersonViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = NewPersonViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Validation
 
+    @Test
     func test_validate_emptyFirstName_isInvalid() {
         sut.firstName = ""
 
         sut.validate()
 
-        XCTAssertFalse(sut.isFormValid)
-        XCTAssertTrue(sut.hasValidationError(.emptyFirstName))
+        #expect(sut.isFormValid == false)
+        #expect(sut.hasValidationError(.emptyFirstName))
     }
 
+    @Test
     func test_validate_whitespaceFirstName_isInvalid() {
         sut.firstName = "   "
 
         sut.validate()
 
-        XCTAssertFalse(sut.isFormValid)
-        XCTAssertTrue(sut.hasValidationError(.emptyFirstName))
+        #expect(sut.isFormValid == false)
+        #expect(sut.hasValidationError(.emptyFirstName))
     }
 
+    @Test
     func test_validate_shortFirstName_isInvalid() {
         sut.firstName = "A"
 
         sut.validate()
 
-        XCTAssertFalse(sut.isFormValid)
-        XCTAssertTrue(sut.hasValidationError(.firstNameTooShort))
+        #expect(sut.isFormValid == false)
+        #expect(sut.hasValidationError(.firstNameTooShort))
     }
 
+    @Test
     func test_validate_shortLastName_isInvalid() {
         sut.firstName = "Luke"
         sut.lastName = "S"
 
         sut.validate()
 
-        XCTAssertFalse(sut.isFormValid)
-        XCTAssertTrue(sut.hasValidationError(.lastNameTooShort))
+        #expect(sut.isFormValid == false)
+        #expect(sut.hasValidationError(.lastNameTooShort))
     }
 
+    @Test
     func test_validate_validFirstNameEmptyLastName_isValid() {
         sut.firstName = "Luke"
         sut.lastName = ""
 
         sut.validate()
 
-        XCTAssertTrue(sut.isFormValid)
-        XCTAssertTrue(sut.validationErrors.isEmpty)
+        #expect(sut.isFormValid)
+        #expect(sut.validationErrors.isEmpty)
     }
 
+    @Test
     func test_validate_validFirstAndLastName_isValid() {
         sut.firstName = "Luke"
         sut.lastName = "Skywalker"
 
         sut.validate()
 
-        XCTAssertTrue(sut.isFormValid)
+        #expect(sut.isFormValid)
     }
 
     // MARK: - Validation messages
 
+    @Test
     func test_getValidationMessage_emptyFirstName() {
         sut.firstName = ""
         sut.validate()
 
-        XCTAssertEqual(sut.getValidationMessage(for: .firstName), L10n.firstNameRequired)
+        #expect(sut.getValidationMessage(for: .firstName) == L10n.firstNameRequired)
     }
 
+    @Test
     func test_getValidationMessage_shortFirstName() {
         sut.firstName = "A"
         sut.validate()
 
-        XCTAssertEqual(sut.getValidationMessage(for: .firstName), L10n.firstNameMinLength)
+        #expect(sut.getValidationMessage(for: .firstName) == L10n.firstNameMinLength)
     }
 
+    @Test
     func test_getValidationMessage_shortLastName() {
         sut.firstName = "Luke"
         sut.lastName = "S"
         sut.validate()
 
-        XCTAssertEqual(sut.getValidationMessage(for: .lastName), L10n.lastNameMinLength)
+        #expect(sut.getValidationMessage(for: .lastName) == L10n.lastNameMinLength)
     }
 
+    @Test
     func test_getValidationMessage_noError_returnsNil() {
         sut.firstName = "Luke"
         sut.lastName = "Skywalker"
         sut.validate()
 
-        XCTAssertNil(sut.getValidationMessage(for: .firstName))
-        XCTAssertNil(sut.getValidationMessage(for: .lastName))
+        #expect(sut.getValidationMessage(for: .firstName) == nil)
+        #expect(sut.getValidationMessage(for: .lastName) == nil)
     }
 
     // MARK: - Save
 
+    @Test
     func test_savePerson_whenInvalid_doesNotPersist() async {
         sut.firstName = ""
         sut.validate()
@@ -125,10 +135,11 @@ final class NewPersonViewModelTests: BaseTestCase {
         await sut.savePerson()
 
         let people = await testDatabase.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-        XCTAssertTrue(people.isEmpty)
-        XCTAssertFalse(sut.isSaved)
+        #expect(people.isEmpty)
+        #expect(sut.isSaved == false)
     }
 
+    @Test
     func test_savePerson_valid_persistsTrimmedNamesAndShowsSuccess() async {
         sut.firstName = "  Han  "
         sut.lastName = "  Solo  "
@@ -137,15 +148,16 @@ final class NewPersonViewModelTests: BaseTestCase {
         await sut.savePerson()
 
         let people = await testDatabase.fetch(PersonDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(people.count, 1)
-        XCTAssertEqual(people.first?.name, "Han")
-        XCTAssertEqual(people.first?.lastName, "Solo")
-        XCTAssertTrue(sut.isSaved)
-        XCTAssertFalse(sut.isFormValid)
-        XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.toastQueue.current?.type, .success)
+        #expect(people.count == 1)
+        #expect(people.first?.name == "Han")
+        #expect(people.first?.lastName == "Solo")
+        #expect(sut.isSaved)
+        #expect(sut.isFormValid == false)
+        #expect(sut.isLoading == false)
+        #expect(sut.toastQueue.current?.type == .success)
     }
 
+    @Test
     func test_savePerson_successToastDismiss_setsShouldDismiss() async {
         sut.firstName = "Han"
         sut.lastName = "Solo"
@@ -156,9 +168,10 @@ final class NewPersonViewModelTests: BaseTestCase {
         sut.toastQueue.advance()
         await waitUntil { self.sut.shouldDismiss }
 
-        XCTAssertTrue(sut.shouldDismiss)
+        #expect(sut.shouldDismiss)
     }
 
+    @Test
     func test_savePerson_whenSaveFails_enqueuesErrorToast() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         sut.firstName = "Han"
@@ -167,8 +180,8 @@ final class NewPersonViewModelTests: BaseTestCase {
 
         await sut.savePerson()
 
-        XCTAssertFalse(sut.isSaved)
-        XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.isSaved == false)
+        #expect(sut.isLoading == false)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 }

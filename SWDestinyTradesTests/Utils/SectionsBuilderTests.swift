@@ -6,28 +6,31 @@
 //  Copyright © 2024 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class SectionsBuilderTests: XCTestCase {
+final class SectionsBuilderTests {
 
     // MARK: - alphabetically
 
+    @Test
     func test_alphabetically_withEmptyCardList_shouldReturnEmptyArray() {
         let cardList: [CardDTO] = []
         let result = SectionsBuilder.alphabetically(cardList: cardList)
 
-        XCTAssertTrue(result.isEmpty)
+        #expect(result.isEmpty)
     }
 
+    @Test
     func test_alphabetically_withSingleCard_shouldReturnArrayWithSingleElement() {
         let cardList: [CardDTO] = [.stub()]
         let result = SectionsBuilder.alphabetically(cardList: cardList)
 
-        XCTAssertEqual(result, ["C"])
+        #expect(result == ["C"])
     }
 
+    @Test
     func test_alphabetically_withMultipleCards_shouldReturnSortedArray() {
         let cardList: [CardDTO] = [
             .stub(factionCode: "ColorC", name: "CardC"),
@@ -37,23 +40,26 @@ final class SectionsBuilderTests: XCTestCase {
 
         let result = SectionsBuilder.alphabetically(cardList: cardList)
 
-        XCTAssertEqual(result, ["A", "B", "C"])
+        #expect(result == ["A", "B", "C"])
     }
 
+    @Test
     func test_alphabetically_withEmptySetList_shouldReturnEmptyArray() {
         let setList: [SetDTO] = []
         let result = SectionsBuilder.alphabetically(setList: setList)
 
-        XCTAssertTrue(result.isEmpty)
+        #expect(result.isEmpty)
     }
 
+    @Test
     func test_alphabetically_withSingleSet_shouldReturnArrayWithSingleElement() {
         let setList: [SetDTO] = [.stub()]
         let result = SectionsBuilder.alphabetically(setList: setList)
 
-        XCTAssertEqual(result, ["A"])
+        #expect(result == ["A"])
     }
 
+    @Test
     func test_alphabetically_withMultipleSets_shouldReturnSortedArray() {
         let setList: [SetDTO] = [
             .stub(),
@@ -64,25 +70,28 @@ final class SectionsBuilderTests: XCTestCase {
 
         let result = SectionsBuilder.alphabetically(setList: setList)
 
-        XCTAssertEqual(result, ["A", "E", "S"])
+        #expect(result == ["A", "E", "S"])
     }
 
     // MARK: - byColor
 
+    @Test
     func test_byColor_withEmptyList_shouldReturnEmptyArray() {
         let cardList: [CardDTO] = []
         let result = SectionsBuilder.byColor(cardList: cardList)
 
-        XCTAssertTrue(result.isEmpty)
+        #expect(result.isEmpty)
     }
 
+    @Test
     func test_byColor_withSingleCard_shouldReturnArrayWithSingleElement() {
         let cardList: [CardDTO] = [.stub()]
         let result = SectionsBuilder.byColor(cardList: cardList)
 
-        XCTAssertEqual(result, ["red"])
+        #expect(result == ["red"])
     }
 
+    @Test
     func test_byColor_withMultipleCards_shouldReturnArrayWithDistinctColors() {
         let cardList: [CardDTO] = [
             .stub(factionCode: "red", name: "CardC"),
@@ -93,25 +102,28 @@ final class SectionsBuilderTests: XCTestCase {
 
         let result = SectionsBuilder.byColor(cardList: cardList)
 
-        XCTAssertEqual(result, ["blue", "red", "yellow"])
+        #expect(result == ["blue", "red", "yellow"])
     }
 
     // MARK: - byType
 
+    @Test
     func test_byType_withEmptyList_shouldReturnEmptyArray() {
         let cardList: [CardDTO] = []
         let result = SectionsBuilder.byType(cardList: cardList)
 
-        XCTAssertTrue(result.isEmpty)
+        #expect(result.isEmpty)
     }
 
+    @Test
     func test_byType_withSingleCard_shouldReturnArrayWithSingleElement() {
         let cardList: [CardDTO] = [.stub()]
         let result = SectionsBuilder.byType(cardList: cardList)
 
-        XCTAssertEqual(result, ["Character"])
+        #expect(result == ["Character"])
     }
 
+    @Test
     func test_byType_withMultipleCards_shouldReturnArrayWithDistinctTypes() {
         let cardList: [CardDTO] = [
             .stub(typeName: "Character", name: "CardC"),
@@ -122,6 +134,6 @@ final class SectionsBuilderTests: XCTestCase {
 
         let result = SectionsBuilder.byType(cardList: cardList)
 
-        XCTAssertEqual(result, ["Character", "Event", "Plot", "Upgrade"])
+        #expect(result == ["Character", "Event", "Plot", "Upgrade"])
     }
 }

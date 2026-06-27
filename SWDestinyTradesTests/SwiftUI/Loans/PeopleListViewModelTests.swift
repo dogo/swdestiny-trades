@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -15,18 +15,18 @@ final class PeopleListViewModelTests: BaseTestCase {
 
     private var sut: PeopleListViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = PeopleListViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Load
 
+    @Test
     func test_loadPeople_populatesItemsFromDatabase() async {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
@@ -35,12 +35,13 @@ final class PeopleListViewModelTests: BaseTestCase {
         await sut.loadPeople()
         _ = await waitForLoadingToComplete(viewModel: sut)
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 2)
+        #expect(sut.isLoading == false)
     }
 
     // MARK: - Filtering
 
+    @Test
     func test_filterItems_byFirstName() {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
@@ -48,9 +49,10 @@ final class PeopleListViewModelTests: BaseTestCase {
 
         sut.performFiltering(searchText: "Luke")
 
-        XCTAssertEqual(sut.filteredItems.map(\.name), ["Luke"])
+        #expect(sut.filteredItems.map(\.name) == ["Luke"])
     }
 
+    @Test
     func test_filterItems_byLastName() {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
@@ -58,9 +60,10 @@ final class PeopleListViewModelTests: BaseTestCase {
 
         sut.performFiltering(searchText: "Organa")
 
-        XCTAssertEqual(sut.filteredItems.map(\.name), ["Leia"])
+        #expect(sut.filteredItems.map(\.name) == ["Leia"])
     }
 
+    @Test
     func test_filterItems_emptySearch_returnsAllSortedByName() {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let anakin = PersonDTO.stub(name: "Anakin", lastName: "Skywalker")
@@ -68,11 +71,12 @@ final class PeopleListViewModelTests: BaseTestCase {
 
         sut.performFiltering(searchText: "")
 
-        XCTAssertEqual(sut.filteredItems.map(\.name), ["Anakin", "Luke"])
+        #expect(sut.filteredItems.map(\.name) == ["Anakin", "Luke"])
     }
 
     // MARK: - Delete
 
+    @Test
     func test_deletePerson_removesPersonAndEnqueuesSuccessToast() async {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
@@ -81,12 +85,13 @@ final class PeopleListViewModelTests: BaseTestCase {
 
         await sut.deletePerson(luke)
 
-        XCTAssertEqual(sut.items.map(\.id), [leia.id])
-        XCTAssertEqual(sut.toastQueue.current?.type, .success)
+        #expect(sut.items.map(\.id) == [leia.id])
+        #expect(sut.toastQueue.current?.type == .success)
     }
 
     // MARK: - Loan summary
 
+    @Test
     func test_getLoanSummary_sumsCardQuantities() {
         let person = PersonDTO.stub(
             name: "Han",
@@ -97,18 +102,19 @@ final class PeopleListViewModelTests: BaseTestCase {
 
         let summary = sut.getLoanSummary(for: person)
 
-        XCTAssertEqual(summary.lentCount, 3)
-        XCTAssertEqual(summary.borrowedCount, 2)
-        XCTAssertTrue(summary.hasLoans)
+        #expect(summary.lentCount == 3)
+        #expect(summary.borrowedCount == 2)
+        #expect(summary.hasLoans)
     }
 
+    @Test
     func test_getLoanSummary_noLoans_hasLoansIsFalse() {
         let person = PersonDTO.stub(name: "Empty", lastName: "Person")
 
         let summary = sut.getLoanSummary(for: person)
 
-        XCTAssertEqual(summary.lentCount, 0)
-        XCTAssertEqual(summary.borrowedCount, 0)
-        XCTAssertFalse(summary.hasLoans)
+        #expect(summary.lentCount == 0)
+        #expect(summary.borrowedCount == 0)
+        #expect(summary.hasLoans == false)
     }
 }

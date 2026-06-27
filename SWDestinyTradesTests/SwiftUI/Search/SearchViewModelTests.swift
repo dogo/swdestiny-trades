@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -15,18 +15,18 @@ final class SearchViewModelTests: BaseTestCase {
 
     private var sut: SearchViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = SearchViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Search
 
+    @Test
     func test_performSearch_populatesResults() async {
         mockSWDestinyService.searchResult = [
             CardDTO.stub(code: "01001", name: "Luke Skywalker"),
@@ -36,29 +36,32 @@ final class SearchViewModelTests: BaseTestCase {
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.isLoading && self.sut.hasSearched && !self.sut.searchResults.isEmpty }
 
-        XCTAssertEqual(sut.searchResults.count, 2)
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertEqual(sut.currentQuery, "Luke")
-        XCTAssertTrue(sut.hasSearched)
+        #expect(sut.searchResults.count == 2)
+        #expect(sut.items.count == 2)
+        #expect(sut.currentQuery == "Luke")
+        #expect(sut.hasSearched)
     }
 
+    @Test
     func test_performSearch_blankQuery_clearsSearch() {
         sut.performSearch(query: "   ")
 
-        XCTAssertFalse(sut.hasSearched)
-        XCTAssertTrue(sut.searchResults.isEmpty)
+        #expect(sut.hasSearched == false)
+        #expect(sut.searchResults.isEmpty)
     }
 
+    @Test
     func test_performSearch_onError_clearsResultsAndShowsErrorToast() async {
         mockSWDestinyService.searchError = APIError.invalidData
 
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.isLoading && self.sut.toastQueue.current != nil }
 
-        XCTAssertTrue(sut.searchResults.isEmpty)
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.searchResults.isEmpty)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
+    @Test
     func test_clearSearch_resetsState() async {
         mockSWDestinyService.searchResult = [CardDTO.stub(code: "01001")]
         sut.performSearch(query: "Luke")
@@ -66,52 +69,58 @@ final class SearchViewModelTests: BaseTestCase {
 
         sut.clearSearch()
 
-        XCTAssertTrue(sut.searchResults.isEmpty)
-        XCTAssertEqual(sut.currentQuery, "")
-        XCTAssertFalse(sut.hasSearched)
+        #expect(sut.searchResults.isEmpty)
+        #expect(sut.currentQuery == "")
+        #expect(sut.hasSearched == false)
     }
 
+    @Test
     func test_filterItems_returnsSearchResults() async {
         mockSWDestinyService.searchResult = [CardDTO.stub(code: "01001")]
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.searchResults.isEmpty }
 
-        XCTAssertEqual(sut.filterItems(searchText: "anything").map(\.code), ["01001"])
+        #expect(sut.filterItems(searchText: "anything").map(\.code) == ["01001"])
     }
 
     // MARK: - Suggestions
 
+    @Test
     func test_getSearchSuggestions_emptyText_returnsAll() {
         sut.searchText = ""
 
-        XCTAssertFalse(sut.getSearchSuggestions().isEmpty)
+        #expect(sut.getSearchSuggestions().isEmpty == false)
     }
 
+    @Test
     func test_getSearchSuggestions_filtersByText() {
         sut.searchText = "Luke"
 
-        XCTAssertEqual(sut.getSearchSuggestions(), ["Luke Skywalker"])
+        #expect(sut.getSearchSuggestions() == ["Luke Skywalker"])
     }
 
     // MARK: - View state flags
 
+    @Test
     func test_shouldShowInitialState_onFreshViewModel() {
-        XCTAssertTrue(sut.shouldShowInitialState)
-        XCTAssertFalse(sut.shouldShowSuggestions)
+        #expect(sut.shouldShowInitialState)
+        #expect(sut.shouldShowSuggestions == false)
     }
 
+    @Test
     func test_shouldShowSuggestions_whenShortQueryNotYetSearched() {
         sut.searchText = "Lu"
 
-        XCTAssertTrue(sut.shouldShowSuggestions)
+        #expect(sut.shouldShowSuggestions)
     }
 
+    @Test
     func test_shouldShowEmptyState_afterSearchWithNoResults() async {
         mockSWDestinyService.searchResult = []
 
         sut.performSearch(query: "Nonexistent")
         await waitUntil { !self.sut.isLoading && self.sut.hasSearched }
 
-        XCTAssertTrue(sut.shouldShowEmptyState)
+        #expect(sut.shouldShowEmptyState)
     }
 }

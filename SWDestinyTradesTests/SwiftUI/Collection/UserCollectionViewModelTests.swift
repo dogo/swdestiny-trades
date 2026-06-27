@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -15,18 +15,18 @@ final class UserCollectionViewModelTests: BaseTestCase {
 
     private var sut: UserCollectionViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = UserCollectionViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Refresh
 
+    @Test
     func test_refreshCollection_populatesItemsFromCollection() async {
         let collection = UserCollectionDTO.stub(collection: [
             CardDTO.stub(code: "01001"),
@@ -36,18 +36,20 @@ final class UserCollectionViewModelTests: BaseTestCase {
 
         await sut.refreshCollection()
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 2)
+        #expect(sut.isLoading == false)
     }
 
+    @Test
     func test_refreshCollection_noCollection_isEmpty() async {
         await sut.refreshCollection()
 
-        XCTAssertTrue(sut.items.isEmpty)
+        #expect(sut.items.isEmpty)
     }
 
     // MARK: - Filtering
 
+    @Test
     func test_filterItems_byColorTypeAndSearch_sortedByName() {
         let redCharacter = CardDTO.stub(typeCode: "character", factionCode: "red", code: "01001", name: "Zeb")
         let blueUpgrade = CardDTO.stub(typeCode: "upgrade", factionCode: "blue", code: "01002", name: "Anakin")
@@ -56,9 +58,10 @@ final class UserCollectionViewModelTests: BaseTestCase {
         sut.filter.selectedColors = ["red"]
         sut.applyFilters()
 
-        XCTAssertEqual(sut.filteredItems.map(\.code), ["01001"])
+        #expect(sut.filteredItems.map(\.code) == ["01001"])
     }
 
+    @Test
     func test_filterItems_emptyFilters_returnsAllSortedByName() {
         let zeb = CardDTO.stub(code: "01001", name: "Zeb")
         let anakin = CardDTO.stub(code: "01002", name: "Anakin")
@@ -66,19 +69,21 @@ final class UserCollectionViewModelTests: BaseTestCase {
 
         sut.applyFilters()
 
-        XCTAssertEqual(sut.filteredItems.map(\.name), ["Anakin", "Zeb"])
+        #expect(sut.filteredItems.map(\.name) == ["Anakin", "Zeb"])
     }
 
+    @Test
     func test_hasActiveFilters_reflectsFilterState() {
-        XCTAssertFalse(sut.hasActiveFilters)
+        #expect(sut.hasActiveFilters == false)
 
         sut.filter.selectedTypes = ["character"]
 
-        XCTAssertTrue(sut.hasActiveFilters)
+        #expect(sut.hasActiveFilters)
     }
 
     // MARK: - Share text
 
+    @Test
     func test_shareText_listsCardsWithPositiveQuantity() {
         sut.updateItems([
             CardDTO.stub(code: "01001", name: "Captain Phasma", quantity: 2),
@@ -87,12 +92,13 @@ final class UserCollectionViewModelTests: BaseTestCase {
         sut.applyFilters()
 
         let text = sut.shareText
-        XCTAssertTrue(text.contains("2x Captain Phasma"))
-        XCTAssertFalse(text.contains("Zero"))
+        #expect(text.contains("2x Captain Phasma"))
+        #expect(text.contains("Zero") == false)
     }
 
     // MARK: - Update quantity
 
+    @Test
     func test_updateCardQuantity_persistsClampedQuantity() async {
         let card = CardDTO.stub(code: "01001", quantity: 1)
         try? await populateTestData(objects: [card])
@@ -100,19 +106,21 @@ final class UserCollectionViewModelTests: BaseTestCase {
         await sut.updateCardQuantity(card, quantity: -3)
 
         let stored = await testDatabase.fetchByKey(CardDTO.self, key: card.id)
-        XCTAssertEqual(stored?.quantity, 0)
+        #expect(stored?.quantity == 0)
     }
 
+    @Test
     func test_updateCardQuantity_missingCard_enqueuesErrorToast() async {
         let card = CardDTO.stub(code: "09999")
 
         await sut.updateCardQuantity(card, quantity: 2)
 
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
     // MARK: - Remove card (async Task)
 
+    @Test
     func test_removeCard_removesFromStoredCollection() async {
         let card = CardDTO.stub(code: "01001")
         let collection = UserCollectionDTO.stub(collection: [card])
@@ -121,11 +129,12 @@ final class UserCollectionViewModelTests: BaseTestCase {
         sut.removeCard(card)
         await waitUntil { collection.myCollection.isEmpty }
 
-        XCTAssertTrue(collection.myCollection.isEmpty)
+        #expect(collection.myCollection.isEmpty)
     }
 
     // MARK: - Available sets (async Task)
 
+    @Test
     func test_loadAvailableSets_populatesSortedByName() async {
         try? await populateTestData(objects: [
             SetDTO.stub(name: "Spark of Hope", code: "SOH"),
@@ -135,6 +144,6 @@ final class UserCollectionViewModelTests: BaseTestCase {
         sut.loadAvailableSets()
         await waitUntil { self.sut.availableSets.count == 2 }
 
-        XCTAssertEqual(sut.availableSets.map(\.name), ["Awakenings", "Spark of Hope"])
+        #expect(sut.availableSets.map(\.name) == ["Awakenings", "Spark of Hope"])
     }
 }

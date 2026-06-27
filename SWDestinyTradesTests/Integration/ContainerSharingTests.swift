@@ -6,13 +6,14 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
 @MainActor
 final class ContainerSharingTests: BaseTestCase {
 
+    @Test
     func testTestContainerCanBeSharedAcrossMultipleViewCreations() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
@@ -27,23 +28,20 @@ final class ContainerSharingTests: BaseTestCase {
         card.setCode = "AW"
         try await populateTestData(objects: [card])
 
-        let view1 = helper.createView {
+        _ = helper.createView {
             CardListView(set: set)
         }
 
-        let view2 = helper.createView {
+        _ = helper.createView {
             CardDetailView(cards: [card], selectedCard: card)
         }
 
-        let view3 = helper.createView {
+        _ = helper.createView {
             CardListView(set: set)
         }
-
-        XCTAssertNotNil(view1)
-        XCTAssertNotNil(view2)
-        XCTAssertNotNil(view3)
     }
 
+    @Test
     func testDatabaseChangesAreVisibleAcrossViews() async throws {
         let set = SetDTO()
         set.code = "AW"
@@ -60,8 +58,8 @@ final class ContainerSharingTests: BaseTestCase {
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
 
-        XCTAssertEqual(viewModel1.items.count, 1)
-        XCTAssertEqual(viewModel1.items.first?.name, "Original Name")
+        #expect(viewModel1.items.count == 1)
+        #expect(viewModel1.items.first?.name == "Original Name")
 
         card.name = "Modified Name"
         mockSWDestinyService.retrieveSetCardListResult = [card]
@@ -70,14 +68,15 @@ final class ContainerSharingTests: BaseTestCase {
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel2.loadCards()
 
-        XCTAssertEqual(viewModel2.items.count, 1)
-        XCTAssertEqual(viewModel2.items.first?.name, "Modified Name")
+        #expect(viewModel2.items.count == 1)
+        #expect(viewModel2.items.first?.name == "Modified Name")
 
         let fetchedCards: [CardDTO] = await testDatabase.fetch(CardDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(fetchedCards.count, 1)
-        XCTAssertEqual(fetchedCards.first?.name, "Modified Name")
+        #expect(fetchedCards.count == 1)
+        #expect(fetchedCards.first?.name == "Modified Name")
     }
 
+    @Test
     func testNoAdditionalCodeNeededForIntegrationTests() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
@@ -101,15 +100,14 @@ final class ContainerSharingTests: BaseTestCase {
         let viewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel.loadCards()
 
-        XCTAssertEqual(viewModel.items.count, 2)
+        #expect(viewModel.items.count == 2)
 
-        let view = helper.createView {
+        _ = helper.createView {
             CardListView(set: set)
         }
-
-        XCTAssertNotNil(view)
     }
 
+    @Test
     func testMultipleViewModelsShareSameDatabaseData() async throws {
         let set = SetDTO()
         set.code = "AW"
@@ -134,13 +132,14 @@ final class ContainerSharingTests: BaseTestCase {
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel2.loadCards()
 
-        XCTAssertEqual(viewModel1.items.count, 2)
-        XCTAssertEqual(viewModel2.items.count, 2)
+        #expect(viewModel1.items.count == 2)
+        #expect(viewModel2.items.count == 2)
 
-        XCTAssertEqual(viewModel1.items.first?.name, viewModel2.items.first?.name)
-        XCTAssertEqual(viewModel1.items.last?.name, viewModel2.items.last?.name)
+        #expect(viewModel1.items.first?.name == viewModel2.items.first?.name)
+        #expect(viewModel1.items.last?.name == viewModel2.items.last?.name)
     }
 
+    @Test
     func testDatabaseDataPersistsAcrossMultipleOperations() async throws {
         let set = SetDTO()
         set.code = "AW"
@@ -156,8 +155,8 @@ final class ContainerSharingTests: BaseTestCase {
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
-        XCTAssertEqual(viewModel1.items.count, 1)
-        XCTAssertEqual(viewModel1.items.first?.name, "Initial")
+        #expect(viewModel1.items.count == 1)
+        #expect(viewModel1.items.first?.name == "Initial")
 
         card.name = "Updated Once"
         mockSWDestinyService.retrieveSetCardListResult = [card]
@@ -165,7 +164,7 @@ final class ContainerSharingTests: BaseTestCase {
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel2.loadCards()
-        XCTAssertEqual(viewModel2.items.first?.name, "Updated Once")
+        #expect(viewModel2.items.first?.name == "Updated Once")
 
         card.name = "Updated Twice"
         mockSWDestinyService.retrieveSetCardListResult = [card]
@@ -173,9 +172,10 @@ final class ContainerSharingTests: BaseTestCase {
 
         let viewModel3 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel3.loadCards()
-        XCTAssertEqual(viewModel3.items.first?.name, "Updated Twice")
+        #expect(viewModel3.items.first?.name == "Updated Twice")
     }
 
+    @Test
     func testContainerSharingWithDifferentViewTypes() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
@@ -194,21 +194,18 @@ final class ContainerSharingTests: BaseTestCase {
         deck.name = "Test Deck"
         try await populateTestData(objects: [deck])
 
-        let cardListView = helper.createView {
+        _ = helper.createView {
             CardListView(set: set)
         }
 
-        let cardDetailView = helper.createView {
+        _ = helper.createView {
             CardDetailView(cards: [card], selectedCard: card)
         }
-
-        XCTAssertNotNil(cardListView)
-        XCTAssertNotNil(cardDetailView)
 
         let fetchedCards: [CardDTO] = await testDatabase.fetch(CardDTO.self, predicate: nil, sorted: nil)
         let fetchedDecks: [DeckDTO] = await testDatabase.fetch(DeckDTO.self, predicate: nil, sorted: nil)
 
-        XCTAssertEqual(fetchedCards.count, 1)
-        XCTAssertEqual(fetchedDecks.count, 1)
+        #expect(fetchedCards.count == 1)
+        #expect(fetchedDecks.count == 1)
     }
 }

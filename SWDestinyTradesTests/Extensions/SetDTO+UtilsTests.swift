@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
-final class SetDTOTests: XCTestCase {
+final class SetDTOTests {
 
+    @Test
     func test_icon() {
         let testCases: [(code: String, expectedIcon: SWDIcon)] = [
             ("aw", .icAwakenings),
@@ -38,7 +39,7 @@ final class SetDTOTests: XCTestCase {
 
         for testCase in testCases {
             let setDTO = SetDTO.stub(name: "Test", code: testCase.code)
-            XCTAssertEqual(setDTO.icon, testCase.expectedIcon, "Icon for code \(testCase.code) did not match expected icon.")
+            #expect(setDTO.icon == testCase.expectedIcon, "Icon for code \(testCase.code) did not match expected icon.")
         }
     }
 }

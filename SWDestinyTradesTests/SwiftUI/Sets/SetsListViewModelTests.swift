@@ -6,7 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
-import XCTest
+import Testing
 
 @testable import SWDestinyTrades
 
@@ -15,18 +15,18 @@ final class SetsListViewModelTests: BaseTestCase {
 
     private var sut: SetsListViewModel!
 
-    override func setUp() async throws {
-        try await super.setUp()
+    override init() async throws {
+        try await super.init()
         sut = SetsListViewModel(dependencyContainer: testContainer.container)
     }
 
-    override func tearDown() async throws {
+    deinit {
         sut = nil
-        try await super.tearDown()
     }
 
     // MARK: - Load
 
+    @Test
     func test_loadItems_fetchesSetsAndPersistsThem() async {
         mockSWDestinyService.retrieveSetListResult = [
             SetDTO.stub(name: "Awakenings", code: "AW"),
@@ -35,48 +35,52 @@ final class SetsListViewModelTests: BaseTestCase {
 
         await sut.loadItems()
 
-        XCTAssertEqual(sut.items.count, 2)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.items.count == 2)
+        #expect(sut.isLoading == false)
         let persisted = await testDatabase.fetch(SetDTO.self, predicate: nil, sorted: nil)
-        XCTAssertEqual(persisted.count, 2)
+        #expect(persisted.count == 2)
     }
 
+    @Test
     func test_loadItems_onError_enqueuesErrorToast() async {
         mockSWDestinyService.retrieveSetListError = APIError.invalidData
 
         await sut.loadItems()
 
-        XCTAssertFalse(sut.isLoading)
-        XCTAssertEqual(sut.toastQueue.current?.type, .error)
+        #expect(sut.isLoading == false)
+        #expect(sut.toastQueue.current?.type == .error)
     }
 
+    @Test
     func test_refreshSets_updatesItems() async {
         mockSWDestinyService.retrieveSetListResult = [SetDTO.stub(name: "Awakenings", code: "AW")]
 
         await sut.refreshSets()
 
-        XCTAssertEqual(sut.items.map(\.code), ["AW"])
+        #expect(sut.items.map(\.code) == ["AW"])
     }
 
     // MARK: - Filtering
 
+    @Test
     func test_filterItems_byNameOrCode() {
         let aw = SetDTO.stub(name: "Awakenings", code: "AW")
         let soh = SetDTO.stub(name: "Spark of Hope", code: "SOH")
         sut.updateItems([aw, soh])
 
         sut.performFiltering(searchText: "Awak")
-        XCTAssertEqual(sut.filteredItems.map(\.code), ["AW"])
+        #expect(sut.filteredItems.map(\.code) == ["AW"])
 
         sut.performFiltering(searchText: "SOH")
-        XCTAssertEqual(sut.filteredItems.map(\.code), ["SOH"])
+        #expect(sut.filteredItems.map(\.code) == ["SOH"])
     }
 
+    @Test
     func test_filterItems_emptySearch_returnsAll() {
         sut.updateItems([SetDTO.stub(name: "Awakenings", code: "AW"), SetDTO.stub(name: "Spark of Hope", code: "SOH")])
 
         sut.performFiltering(searchText: "")
 
-        XCTAssertEqual(sut.filteredItems.count, 2)
+        #expect(sut.filteredItems.count == 2)
     }
 }
