@@ -81,10 +81,14 @@ jobs:
             ./coverage/SwdUnitTests.xcresult > ./coverage/cobertura.xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           files: ./coverage/cobertura.xml
           disable_search: true
+          # Disable the built-in xcode plugin: its `llvm-cov` pass fails on the
+          # app binary and only produces the xctest bundle's coverage, which
+          # would otherwise be uploaded alongside (and contaminate) our report.
+          plugins: noop
           verbose: true
 
       - name: Upload Snapshot Failures
