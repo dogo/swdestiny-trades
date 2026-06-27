@@ -37,11 +37,11 @@ enum PreviewHelper {
         }
 
         for deck in SampleData.decks {
-            try await database.save(object: deck, update: .all)
+            try await database.save(object: copyDeck(deck), update: .all)
         }
 
         for person in SampleData.people {
-            try await database.save(object: person, update: .all)
+            try await database.save(object: copyPerson(person), update: .all)
         }
 
         return database
@@ -52,6 +52,24 @@ enum PreviewHelper {
         appState.database = try await createMockDatabase()
         appState.isInitialized = true
         return appState
+    }
+
+    private static func copyDeck(_ deck: DeckDTO) -> DeckDTO {
+        let copy = DeckDTO()
+        copy.id = deck.id
+        copy.name = deck.name
+        copy.list = deck.list.map(CardDTO.init(copying:))
+        return copy
+    }
+
+    private static func copyPerson(_ person: PersonDTO) -> PersonDTO {
+        let copy = PersonDTO()
+        copy.id = person.id
+        copy.name = person.name
+        copy.lastName = person.lastName
+        copy.lentMe = person.lentMe.map(CardDTO.init(copying:))
+        copy.borrowed = person.borrowed.map(CardDTO.init(copying:))
+        return copy
     }
 }
 
