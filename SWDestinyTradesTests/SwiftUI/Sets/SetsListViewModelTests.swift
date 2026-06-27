@@ -64,9 +64,9 @@ final class SetsListViewModelTests: BaseTestCase {
 
     @Test
     func test_filterItems_byNameOrCode() {
-        let aw = SetDTO.stub(name: "Awakenings", code: "AW")
+        let awakenings = SetDTO.stub(name: "Awakenings", code: "AW")
         let soh = SetDTO.stub(name: "Spark of Hope", code: "SOH")
-        sut.updateItems([aw, soh])
+        sut.updateItems([awakenings, soh])
 
         sut.performFiltering(searchText: "Awak")
         #expect(sut.filteredItems.map(\.code) == ["AW"])
