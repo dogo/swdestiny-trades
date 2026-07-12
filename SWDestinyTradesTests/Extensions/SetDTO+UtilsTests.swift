@@ -32,8 +32,17 @@ final class SetDTOTests {
             ("fa", .icFalteringAllegiances),
             ("ec", .icEternalConflict),
             ("rm", .icRedemption),
-            ("ap", .icAlteredPaths),
             ("pw", .icPartingWords),
+            ("hs", .icHighStakes),
+            ("eod", .icEchoesOfDestiny),
+            ("eod1", .icEchoesOfDestiny),
+            ("uh", .icUnlikelyHeroes),
+            ("gs", .icGalacticStruggle),
+            ("sa", .icSeekingAnswers),
+            ("dop", .icDisplayOfPower),
+            ("res", .icResurgence),
+            ("af", .icAwaitingFate),
+            ("ua", .icUnchartedAlliances),
             ("unknown", .icUnknown)
         ]
 

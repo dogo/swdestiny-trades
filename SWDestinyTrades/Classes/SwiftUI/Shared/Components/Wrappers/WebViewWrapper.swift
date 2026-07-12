@@ -39,6 +39,6 @@ struct WebViewWrapper: UIViewRepresentable {
 }
 
 #Preview {
-    let previewURL = URL(string: "https://www.coruscant-initiative.org") ?? URL(fileURLWithPath: "/")
+    let previewURL = URL(string: "https://db.swdrenewedhope.com") ?? URL(fileURLWithPath: "/")
     return WebViewWrapper(url: previewURL)
 }

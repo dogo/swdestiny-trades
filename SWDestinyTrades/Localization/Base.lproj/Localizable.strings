@@ -7,7 +7,7 @@
 */
 
 "ABOUT" = "About";
-"ABOUT_TEXT" = "By Diogo Autilio\n\nAPI Data by Lanoix %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.";
+"ABOUT_TEXT" = "By Diogo Autilio\n\nAPI Data by ARH Team %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.";
 "ADDED" = "Added";
 "ADD_CARD" = "Add card";
 "ADD_CARDS" = "Add cards";
@@ -64,7 +64,7 @@
 "ENTER_A_CARD_NAME_TYPE_OR_ANY_KEYWORD_TO_SEARCH" = "Enter a card name, type, or any keyword to search through all available cards";
 "ENTER_THE_PERSONS_NAME_TO_TRACK_LOANS_WITH_THEM" = "Enter the person's name to track loans with them.";
 "ERROR" = "Error";
-"ERROR_MESSAGE" = "Something went wrong! Tap here to check if swdb.coruscant-initiative.org is online.";
+"ERROR_MESSAGE" = "Something went wrong! Tap here to check if db.swdrenewedhope.com is online.";
 "EVENT" = "Event";
 "EXPANSIONS" = "Expansions";
 "FILTER_CARDS" = "Filter cards";
@@ -110,7 +110,7 @@
 "SHARE_TEXT" = "Shared with SWD Trades for iOS";
 "SUGGESTIONS" = "Suggestions";
 "SUPPORT" = "Support";
-"SWDESTINYDB_WEBSITE" = "https://swdb.coruscant-initiative.org";
+"SWDESTINYDB_WEBSITE" = "https://db.swdrenewedhope.com";
 "SWDESTINY_TRADES" = "SWDestiny Trades";
 "SWIFTUI_MIGRATION_IN_PROGRESS" = "SwiftUI migration in progress";
 "TOTAL_CARDS_VIEWMODELTOTALCARDCOUNT" = "Total cards: %@";

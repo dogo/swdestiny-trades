@@ -27,8 +27,17 @@ extension SetDTO {
         "fa": .icFalteringAllegiances,
         "ec": .icEternalConflict,
         "rm": .icRedemption,
-        "ap": .icAlteredPaths,
-        "pw": .icPartingWords
+        "pw": .icPartingWords,
+        "hs": .icHighStakes,
+        "eod": .icEchoesOfDestiny,
+        "eod1": .icEchoesOfDestiny,
+        "uh": .icUnlikelyHeroes,
+        "gs": .icGalacticStruggle,
+        "sa": .icSeekingAnswers,
+        "dop": .icDisplayOfPower,
+        "res": .icResurgence,
+        "af": .icAwaitingFate,
+        "ua": .icUnchartedAlliances
     ]
 
     var icon: SWDIcon {
