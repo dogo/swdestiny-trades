@@ -1,5 +1,15 @@
-• Fix glitch that make "My Collection" tab mess-up with "All cards"
-• Ready for iOS 12.
-• Under the hood improvements.
+This is our biggest update ever — the app has been rebuilt from the ground up.
 
-This app will never interrupt you with 'Rate this App' messages. However, it would be great if you could take a minute to rate this new version of the app on the App Store. This makes a big difference to the app's success. Thanks!
+What's new:
+• NEW: Scan cards with your camera to add them to your collection instantly, fully on-device.
+• Completely redesigned for iOS 26 with Liquid Glass.
+• Refreshed loan tracking with a clearer lend/borrow status layout.
+• Improved deck builder with statistics and total card counts.
+• Smarter, unified filters and sorting across your collection.
+• Brand-new card viewer with full-screen, swipeable card art.
+• New in-app notifications you can dismiss with a tap or swipe.
+• Better dark mode contrast and readability throughout.
+• Swipe to quickly delete decks.
+• Faster, more reliable, and more stable, with countless bug fixes under the hood.
+
+Thanks for playing! If you enjoy the app, please leave a review.

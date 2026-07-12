@@ -1,13 +1,14 @@
-SWD Trades gives you the tools you need for Star Wars Destiny, right at your fingertips. It includes card search by expansion or card name, allows you to track cards you have loaned or borrowed and manage your collection.
+SWD Trades puts everything you need for Star Wars Destiny right at your fingertips. Search the complete card database by set or name, build and tune decks, manage your entire collection, and keep track of every card you've lent out or borrowed.
 
 Features:
-• The most complete cards database.
-• Track cards you have lent out or borrowed from other people.
-• Sort the card list alphabetically, by color or by collection number.
-• Deck-builder with statistics.
-• Share cards, your collection or decks with your friends.
+• The most complete Star Wars Destiny card database.
+• Scan cards with your camera to add them instantly.
+• Track cards you've lent out or borrowed from friends.
+• Build decks with built-in statistics.
+• Sort your cards alphabetically, by color, or by set number.
+• Manage your full collection in one place.
+• Share cards, your collection, or your decks with friends.
 • Universal app for iPhone and iPad.
-• Collection manager.
-• Ready for iOS 12.
+• Built for iOS 26 with Liquid Glass.
 
 This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.

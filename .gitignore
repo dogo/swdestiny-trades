@@ -90,3 +90,6 @@ default.realm
 default.realm.lock
 default.realm.management/
 default.realm.note
+
+# App Store review contact info (personal data, written by deliver download_metadata)
+fastlane/metadata/review_information/
