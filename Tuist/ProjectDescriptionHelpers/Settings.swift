@@ -28,7 +28,7 @@ extension Project {
     private static func baseSettings() -> SettingsDictionary {
         return SettingsDictionary()
             .automaticCodeSigning(devTeam: "75C4E36ZA7")
-            .currentProjectVersion("45")
+            .currentProjectVersion("46")
             .marketingVersion("1.9.0")
     }
 }
