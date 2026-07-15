@@ -14,7 +14,7 @@ import Testing
 final class ContainerSharingTests: BaseTestCase {
 
     @Test
-    func testTestContainerCanBeSharedAcrossMultipleViewCreations() async throws {
+    func containerCanBeSharedAcrossMultipleViewCreations() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
         let set = SetDTO()
@@ -42,7 +42,7 @@ final class ContainerSharingTests: BaseTestCase {
     }
 
     @Test
-    func testDatabaseChangesAreVisibleAcrossViews() async throws {
+    func databaseChangesAreVisibleAcrossViews() async throws {
         let set = SetDTO()
         set.code = "AW"
         set.name = "Awakenings"
@@ -77,7 +77,7 @@ final class ContainerSharingTests: BaseTestCase {
     }
 
     @Test
-    func testNoAdditionalCodeNeededForIntegrationTests() async throws {
+    func noAdditionalCodeNeededForIntegrationTests() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
         let set = SetDTO()
@@ -108,7 +108,7 @@ final class ContainerSharingTests: BaseTestCase {
     }
 
     @Test
-    func testMultipleViewModelsShareSameDatabaseData() async throws {
+    func multipleViewModelsShareSameDatabaseData() async throws {
         let set = SetDTO()
         set.code = "AW"
         set.name = "Awakenings"
@@ -140,7 +140,7 @@ final class ContainerSharingTests: BaseTestCase {
     }
 
     @Test
-    func testDatabaseDataPersistsAcrossMultipleOperations() async throws {
+    func databaseDataPersistsAcrossMultipleOperations() async throws {
         let set = SetDTO()
         set.code = "AW"
         set.name = "Awakenings"
@@ -176,7 +176,7 @@ final class ContainerSharingTests: BaseTestCase {
     }
 
     @Test
-    func testContainerSharingWithDifferentViewTypes() async throws {
+    func containerSharingWithDifferentViewTypes() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
         let set = SetDTO()

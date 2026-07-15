@@ -14,8 +14,8 @@ import Testing
 final class URLRequestTests {
 
     @Test
-    func test_init_with_URL_valid_URL_should_create_URLRequest() {
-        let validURL = URL(string: "https://example.com")!
+    func init_with_URL_valid_URL_should_create_URLRequest() throws {
+        let validURL = try #require(URL(string: "https://example.com"))
 
         let urlRequest = URLRequest(with: validURL)
 

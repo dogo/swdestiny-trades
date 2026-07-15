@@ -33,7 +33,7 @@ final class CardScannerViewModelTests: BaseTestCase {
     // MARK: - Default state
 
     @Test
-    func test_freshViewModel_isNotReadyAndHasNoSelection() {
+    func freshViewModel_isNotReadyAndHasNoSelection() {
         #expect(sut.isReady == false)
         #expect(sut.selectedCount == 0)
         #expect(sut.isReviewPresented == false)
@@ -42,7 +42,7 @@ final class CardScannerViewModelTests: BaseTestCase {
     // MARK: - Dismiss review
 
     @Test
-    func test_dismissReview_clearsPresentationState() {
+    func dismissReview_clearsPresentationState() {
         sut.isReviewPresented = true
 
         sut.dismissReview()
@@ -51,7 +51,7 @@ final class CardScannerViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addSelected_withNoCandidates_dismissesWithoutToast() {
+    func addSelected_withNoCandidates_dismissesWithoutToast() {
         sut.isReviewPresented = true
 
         sut.addSelected()
@@ -71,7 +71,7 @@ final class ScanCandidateTests {
     }
 
     @Test
-    func test_isRecognized_trueWhenMatchesPresent() {
+    func isRecognized_trueWhenMatchesPresent() {
         let candidate = ScanCandidate(
             crop: TestImage.solid,
             matches: [result(code: "01001", confidence: 0.9)],
@@ -83,14 +83,14 @@ final class ScanCandidateTests {
     }
 
     @Test
-    func test_isRecognized_falseWhenNoMatches() {
+    func isRecognized_falseWhenNoMatches() {
         let candidate = ScanCandidate(crop: TestImage.solid, matches: [], chosenIndex: 0, isSelected: false)
 
         #expect(candidate.isRecognized == false)
     }
 
     @Test
-    func test_chosenMatch_returnsMatchAtChosenIndex() {
+    func chosenMatch_returnsMatchAtChosenIndex() {
         let candidate = ScanCandidate(
             crop: TestImage.solid,
             matches: [result(code: "01001", confidence: 0.9), result(code: "01002", confidence: 0.7)],
@@ -102,7 +102,7 @@ final class ScanCandidateTests {
     }
 
     @Test
-    func test_chosenMatch_outOfBounds_returnsNil() {
+    func chosenMatch_outOfBounds_returnsNil() {
         let candidate = ScanCandidate(
             crop: TestImage.solid,
             matches: [result(code: "01001", confidence: 0.9)],
@@ -119,19 +119,19 @@ final class ScanCandidateTests {
 final class ScannedCardResultTests {
 
     @Test
-    func test_confidencePercent_roundsToInteger() {
+    func confidencePercent_roundsToInteger() {
         let result = ScannedCardResult(card: CardDTO.stub(), confidence: 0.846)
         #expect(result.confidencePercent == 85)
     }
 
     @Test
-    func test_confidencePercent_clampsOutOfRange() {
+    func confidencePercent_clampsOutOfRange() {
         #expect(ScannedCardResult(card: CardDTO.stub(), confidence: 1.5).confidencePercent == 100)
         #expect(ScannedCardResult(card: CardDTO.stub(), confidence: -0.5).confidencePercent == 0)
     }
 
     @Test
-    func test_confidencePercent_nanIsZero() {
+    func confidencePercent_nanIsZero() {
         #expect(ScannedCardResult(card: CardDTO.stub(), confidence: .nan).confidencePercent == 0)
     }
 }

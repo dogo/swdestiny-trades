@@ -15,7 +15,7 @@ import Testing
 final class AboutViewSnapshotTests: XCSnapshotableTestCase {
 
     @Test
-    func testShouldHaveValidLayout() {
+    func shouldHaveValidLayout() {
         let coordinator = NavigationCoordinator()
         let view = AboutView()
             .environment(coordinator)

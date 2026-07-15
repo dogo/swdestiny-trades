@@ -31,14 +31,14 @@ final class AddToDeckViewModelTests: BaseTestCase {
     // MARK: - Filtering
 
     @Test
-    func test_filterItems_emptySearch_returnsAll() {
+    func filterItems_emptySearch_returnsAll() {
         sut.updateItems([CardDTO.stub(code: "01001"), CardDTO.stub(code: "01002")])
 
         #expect(sut.filterItems(searchText: "").count == 2)
     }
 
     @Test
-    func test_filterItems_matchesNameSubtitleTypeAndSet() {
+    func filterItems_matchesNameSubtitleTypeAndSet() {
         let phasma = CardDTO.stub(setCode: "AW", typeCode: "character", code: "01001", name: "Captain Phasma", subtitle: "Elite Trooper")
         let saber = CardDTO.stub(setCode: "SOR", typeCode: "upgrade", code: "02002", name: "Lightsaber", subtitle: "Weapon")
         sut.updateItems([phasma, saber])
@@ -52,7 +52,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
     // MARK: - Loading
 
     @Test
-    func test_loadRemoteCards_populatesItemsFromService() async {
+    func loadRemoteCards_populatesItemsFromService() async {
         mockSWDestinyService.retrieveAllCardsResult = [
             CardDTO.stub(code: "01001"),
             CardDTO.stub(code: "01002")
@@ -67,7 +67,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loadRemoteCards_onError_enqueuesErrorToast() async {
+    func loadRemoteCards_onError_enqueuesErrorToast() async {
         mockSWDestinyService.retrieveAllCardsError = APIError.invalidData
 
         sut.loadRemoteCards()
@@ -77,7 +77,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loadLocalCards_populatesFromUserCollection() async {
+    func loadLocalCards_populatesFromUserCollection() async {
         let collection = UserCollectionDTO.stub(collection: [
             CardDTO.stub(code: "01001"),
             CardDTO.stub(code: "01002")
@@ -92,7 +92,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loadLocalCards_noCollection_loadsEmpty() async {
+    func loadLocalCards_noCollection_loadsEmpty() async {
         sut.loadLocalCards()
         await sut.awaitCurrentLoad()
 
@@ -103,7 +103,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
     // MARK: - Add card
 
     @Test
-    func test_addCardToDeck_appendsCopyAndShowsSuccess() async {
+    func addCardToDeck_appendsCopyAndShowsSuccess() async {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
 
         sut.addCardToDeck(card)
@@ -116,7 +116,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addCardToDeck_duplicateCode_showsInfoAndDoesNotAppend() {
+    func addCardToDeck_duplicateCode_showsInfoAndDoesNotAppend() {
         deck.list = [CardDTO.stub(code: "01001")]
 
         sut.addCardToDeck(CardDTO.stub(code: "01001"))

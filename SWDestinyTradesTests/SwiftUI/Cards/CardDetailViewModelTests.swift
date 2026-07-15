@@ -35,7 +35,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     // MARK: - imageSources Tests
 
     @Test
-    func testImageSourcesWithValidURLs() throws {
+    func imageSourcesWithValidURLs() throws {
         let card1 = CardDTO.stub(
             code: "01001",
             name: "Captain Phasma",
@@ -51,8 +51,8 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         let sources = sut.imageSources
 
-        let firstExpectedSource = ImageSource.remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!)
-        let secondExpectedSource = ImageSource.remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01002.jpg")!)
+        let firstExpectedSource = try ImageSource.remote(#require(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")))
+        let secondExpectedSource = try ImageSource.remote(#require(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01002.jpg")))
 
         #expect(sources.count == 2)
         #expect(sources[0] == firstExpectedSource)
@@ -60,7 +60,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testImageSourcesWithEmptyURLFallsBackToLocal() {
+    func imageSourcesWithEmptyURLFallsBackToLocal() {
         let card = CardDTO.stub(
             code: "01001",
             name: "Captain Phasma",
@@ -76,7 +76,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testImageSourcesWithMalformedURLFallsBackToLocal() {
+    func imageSourcesWithMalformedURLFallsBackToLocal() {
         let card = CardDTO.stub(
             code: "01001",
             name: "Captain Phasma",
@@ -92,7 +92,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testImageSourcesMixedValidAndInvalidURLs() throws {
+    func imageSourcesMixedValidAndInvalidURLs() throws {
         let validCard = CardDTO.stub(
             code: "01001",
             name: "Captain Phasma",
@@ -108,7 +108,7 @@ final class CardDetailViewModelTests: BaseTestCase {
 
         let sources = sut.imageSources
 
-        let expectedSource = ImageSource.remote(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")!)
+        let expectedSource = try ImageSource.remote(#require(URL(string: "https://swdestinydb.com/bundles/cards/en/01/01001.jpg")))
 
         #expect(sources.count == 2)
         #expect(sources[0] == expectedSource)
@@ -116,7 +116,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testImageSourcesWithEmptyCards() {
+    func imageSourcesWithEmptyCards() {
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [], selectedCard: card, dependencyContainer: testContainer.container)
 
@@ -128,7 +128,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     // MARK: - Initialization Tests
 
     @Test
-    func testInitSetsSelectedCard() {
+    func initSetsSelectedCard() {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
 
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
@@ -138,7 +138,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testInitSetsCurrentIndexToSelectedCard() {
+    func initSetsCurrentIndexToSelectedCard() {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
 
@@ -150,7 +150,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     // MARK: - updateCurrentIndex Tests
 
     @Test
-    func testUpdateCurrentIndexWithValidIndex() {
+    func updateCurrentIndexWithValidIndex() {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
 
@@ -162,7 +162,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testUpdateCurrentIndexWithOutOfBoundsIndex() {
+    func updateCurrentIndexWithOutOfBoundsIndex() {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
 
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
@@ -175,7 +175,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     // MARK: - currentCard Tests
 
     @Test
-    func testCurrentCardReturnsCorrectCard() {
+    func currentCardReturnsCorrectCard() {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
 
@@ -190,7 +190,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     // MARK: - imageLoader Tests
 
     @Test
-    func test_imageLoader_resolvedFromDI() {
+    func imageLoader_resolvedFromDI() {
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
@@ -200,7 +200,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     // MARK: - addToCollection Tests
 
     @Test
-    func test_addToCollection_createsNewCollectionWhenNoneExists() async {
+    func addToCollection_createsNewCollectionWhenNoneExists() async {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
@@ -213,7 +213,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_addsCardToExistingEmptyCollection() async throws {
+    func addToCollection_addsCardToExistingEmptyCollection() async throws {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let existingCollection = UserCollectionDTO.stub()
         try await testDatabase.save(object: existingCollection, update: .all)
@@ -228,7 +228,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_incrementsQuantityWhenCardAlreadyInCollection() async throws {
+    func addToCollection_incrementsQuantityWhenCardAlreadyInCollection() async throws {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let existingCard = CardDTO.stub(code: "01001", name: "Captain Phasma", quantity: 1)
         let existingCollection = UserCollectionDTO.stub(collection: [existingCard])
@@ -244,7 +244,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_doesNotDuplicateCardInCollection() async throws {
+    func addToCollection_doesNotDuplicateCardInCollection() async throws {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let existingCard = CardDTO.stub(code: "01001", name: "Captain Phasma", quantity: 3)
         let existingCollection = UserCollectionDTO.stub(collection: [existingCard])
@@ -259,7 +259,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_enqueuesToastOnSuccess() async {
+    func addToCollection_enqueuesToastOnSuccess() async {
         let card = CardDTO.stub(code: "01001", name: "Captain Phasma")
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
@@ -271,7 +271,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_isNotLoadingAfterCompletion() async {
+    func addToCollection_isNotLoadingAfterCompletion() async {
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
 
@@ -281,7 +281,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_handlesError() async {
+    func addToCollection_handlesError() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         let card = CardDTO.stub()
         sut = CardDetailViewModel(cards: [card], selectedCard: card, dependencyContainer: testContainer.container)
@@ -294,7 +294,7 @@ final class CardDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addToCollection_usesCurrentCardNotSelectedCard() async {
+    func addToCollection_usesCurrentCardNotSelectedCard() async {
         let card1 = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let card2 = CardDTO.stub(code: "01002", name: "Kylo Ren")
         sut = CardDetailViewModel(cards: [card1, card2], selectedCard: card1, dependencyContainer: testContainer.container)

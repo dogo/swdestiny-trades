@@ -40,7 +40,7 @@ private func parseCardTextSegments(_ source: String) -> [CardTextSegment] {
         if source[index] == "[",
            let close = source[index...].firstIndex(of: "]") {
             let markerStart = source.index(after: index)
-            let markerText = String(source[markerStart..<close]).lowercased()
+            let markerText = String(source[markerStart ..< close]).lowercased()
             if !markerText.isEmpty, markerText.allSatisfy(\.isLetter) {
                 segments.append(.marker(markerText))
                 index = source.index(after: close)
@@ -49,8 +49,8 @@ private func parseCardTextSegments(_ source: String) -> [CardTextSegment] {
         }
 
         if let match = matchingTag(at: index, in: source),
-           let closeRange = source.range(of: match.tag.close, range: match.range.upperBound..<source.endIndex) {
-            let content = String(source[match.range.upperBound..<closeRange.lowerBound])
+           let closeRange = source.range(of: match.tag.close, range: match.range.upperBound ..< source.endIndex) {
+            let content = String(source[match.range.upperBound ..< closeRange.lowerBound])
             segments.append(match.tag.style(content))
             index = closeRange.upperBound
             continue
@@ -61,7 +61,7 @@ private func parseCardTextSegments(_ source: String) -> [CardTextSegment] {
             segments.append(.plain(String(source[index])))
             index = source.index(after: index)
         } else {
-            let plain = String(source[index..<nextSpecial])
+            let plain = String(source[index ..< nextSpecial])
             if !plain.isEmpty {
                 segments.append(.plain(plain))
             }
@@ -90,7 +90,7 @@ private func matchingTag(
     ]
 
     for tag in tags {
-        if let range = source.range(of: tag.open, range: index..<source.endIndex), range.lowerBound == index {
+        if let range = source.range(of: tag.open, range: index ..< source.endIndex), range.lowerBound == index {
             return (range, tag)
         }
     }

@@ -27,7 +27,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     // MARK: - Initialization
 
     @Test
-    func test_init_withoutDeck_createsNewEmptyDeck() {
+    func init_withoutDeck_createsNewEmptyDeck() {
         let sut = DeckBuilderViewModel(dependencyContainer: testContainer.container)
 
         #expect(sut.isNewDeck)
@@ -37,7 +37,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_init_withExistingDeck_isNotNew() {
+    func init_withExistingDeck_isNotNew() {
         let sut = makeSUT(deck: makeDeck(cards: [CardDTO.stub(code: "01001")]))
 
         #expect(sut.isNewDeck == false)
@@ -47,7 +47,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     // MARK: - Counts
 
     @Test
-    func test_counts_reflectDeckList() {
+    func counts_reflectDeckList() {
         let sut = makeSUT(deck: makeDeck(cards: [
             CardDTO.stub(code: "01001", quantity: 2),
             CardDTO.stub(code: "01002", quantity: 3)
@@ -61,7 +61,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     // MARK: - Sections
 
     @Test
-    func test_loadDeckData_buildsSectionsCoveringAllCards() {
+    func loadDeckData_buildsSectionsCoveringAllCards() {
         let sut = makeSUT(deck: makeDeck(cards: [
             CardDTO.stub(code: "01001", name: "Captain Phasma"),
             CardDTO.stub(code: "01002", name: "Kylo Ren")
@@ -73,7 +73,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_toggleSection_flipsCollapsedState() throws {
+    func toggleSection_flipsCollapsedState() throws {
         let sut = makeSUT(deck: makeDeck(cards: [CardDTO.stub(code: "01001")]))
         let section = try #require(sut.deckSections.first)
         let original = section.isCollapsed
@@ -86,7 +86,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     // MARK: - Share text
 
     @Test
-    func test_prepareShareText_includesDeckAndCardNames() {
+    func prepareShareText_includesDeckAndCardNames() {
         let sut = makeSUT(deck: makeDeck(name: "My Deck", cards: [
             CardDTO.stub(code: "01001", name: "Captain Phasma")
         ]))
@@ -101,7 +101,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     // MARK: - Save
 
     @Test
-    func test_saveDeck_persistsAndClearsNewFlag() async {
+    func saveDeck_persistsAndClearsNewFlag() async {
         let sut = makeSUT(deck: nil)
         sut.deck.list = [CardDTO.stub(code: "01001")]
 
@@ -113,7 +113,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_saveDeck_whenSaveFails_enqueuesErrorToast() async {
+    func saveDeck_whenSaveFails_enqueuesErrorToast() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         let sut = makeSUT(deck: makeDeck(cards: [CardDTO.stub(code: "01001")]))
 
@@ -123,7 +123,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_handleViewAppear_newDeckWithCards_persistsAndClearsNewFlag() async {
+    func handleViewAppear_newDeckWithCards_persistsAndClearsNewFlag() async {
         let sut = makeSUT(deck: nil)
         sut.deck.list = [CardDTO.stub(code: "01001")]
 
@@ -137,7 +137,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     // MARK: - Mutations (async Task)
 
     @Test
-    func test_removeCard_removesFromDeckAndReorganizes() async {
+    func removeCard_removesFromDeckAndReorganizes() async {
         let card1 = CardDTO.stub(code: "01001")
         let card2 = CardDTO.stub(code: "01002")
         let sut = makeSUT(deck: makeDeck(cards: [card1, card2]))
@@ -150,7 +150,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_updateCardQuantity_updatesCountAndReorganizes() async {
+    func updateCardQuantity_updatesCountAndReorganizes() async {
         let card = CardDTO.stub(code: "01001", quantity: 1)
         let sut = makeSUT(deck: makeDeck(cards: [card]))
 
@@ -161,7 +161,7 @@ final class DeckBuilderViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_updateCharacterElite_persistsEliteFlag() async {
+    func updateCharacterElite_persistsEliteFlag() async {
         let card = CardDTO.stub(code: "01001", isElite: false)
         let sut = makeSUT(deck: makeDeck(cards: [card]))
 

@@ -24,7 +24,7 @@ final class NavigationCoordinatorTests {
     }
 
     @Test
-    func test_initialState_selectsSetsTabWithEmptyPaths() {
+    func initialState_selectsSetsTabWithEmptyPaths() {
         #expect(sut.selectedTab == .sets)
         #expect(sut.setsPath.isEmpty)
         #expect(sut.deckPath.isEmpty)
@@ -33,7 +33,7 @@ final class NavigationCoordinatorTests {
     }
 
     @Test
-    func test_navigate_withoutTab_usesSelectedTab() {
+    func navigate_withoutTab_usesSelectedTab() {
         sut.selectedTab = .decks
 
         sut.navigate(to: .search)
@@ -45,7 +45,7 @@ final class NavigationCoordinatorTests {
     }
 
     @Test
-    func test_navigate_onSpecificTab_doesNotChangeSelectedTab() {
+    func navigate_onSpecificTab_doesNotChangeSelectedTab() {
         sut.selectedTab = .sets
 
         sut.navigate(to: .peopleList, on: .loans)
@@ -58,7 +58,7 @@ final class NavigationCoordinatorTests {
     }
 
     @Test
-    func test_navigate_routesEachTabToItsOwnPath() {
+    func navigate_routesEachTabToItsOwnPath() {
         sut.navigate(to: .setsList, on: .sets)
         sut.navigate(to: .deckList, on: .decks)
         sut.navigate(to: .peopleList, on: .loans)

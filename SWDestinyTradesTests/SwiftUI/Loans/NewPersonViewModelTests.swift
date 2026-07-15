@@ -27,7 +27,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     // MARK: - Validation
 
     @Test
-    func test_validate_emptyFirstName_isInvalid() {
+    func validate_emptyFirstName_isInvalid() {
         sut.firstName = ""
 
         sut.validate()
@@ -37,7 +37,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_validate_whitespaceFirstName_isInvalid() {
+    func validate_whitespaceFirstName_isInvalid() {
         sut.firstName = "   "
 
         sut.validate()
@@ -47,7 +47,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_validate_shortFirstName_isInvalid() {
+    func validate_shortFirstName_isInvalid() {
         sut.firstName = "A"
 
         sut.validate()
@@ -57,7 +57,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_validate_shortLastName_isInvalid() {
+    func validate_shortLastName_isInvalid() {
         sut.firstName = "Luke"
         sut.lastName = "S"
 
@@ -68,7 +68,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_validate_validFirstNameEmptyLastName_isValid() {
+    func validate_validFirstNameEmptyLastName_isValid() {
         sut.firstName = "Luke"
         sut.lastName = ""
 
@@ -79,7 +79,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_validate_validFirstAndLastName_isValid() {
+    func validate_validFirstAndLastName_isValid() {
         sut.firstName = "Luke"
         sut.lastName = "Skywalker"
 
@@ -91,7 +91,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     // MARK: - Validation messages
 
     @Test
-    func test_getValidationMessage_emptyFirstName() {
+    func getValidationMessage_emptyFirstName() {
         sut.firstName = ""
         sut.validate()
 
@@ -99,7 +99,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_getValidationMessage_shortFirstName() {
+    func getValidationMessage_shortFirstName() {
         sut.firstName = "A"
         sut.validate()
 
@@ -107,7 +107,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_getValidationMessage_shortLastName() {
+    func getValidationMessage_shortLastName() {
         sut.firstName = "Luke"
         sut.lastName = "S"
         sut.validate()
@@ -116,7 +116,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_getValidationMessage_noError_returnsNil() {
+    func getValidationMessage_noError_returnsNil() {
         sut.firstName = "Luke"
         sut.lastName = "Skywalker"
         sut.validate()
@@ -128,7 +128,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     // MARK: - Save
 
     @Test
-    func test_savePerson_whenInvalid_doesNotPersist() async {
+    func savePerson_whenInvalid_doesNotPersist() async {
         sut.firstName = ""
         sut.validate()
 
@@ -140,7 +140,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_savePerson_valid_persistsTrimmedNamesAndShowsSuccess() async {
+    func savePerson_valid_persistsTrimmedNamesAndShowsSuccess() async {
         sut.firstName = "  Han  "
         sut.lastName = "  Solo  "
         sut.validate()
@@ -158,7 +158,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_savePerson_successToastDismiss_setsShouldDismiss() async {
+    func savePerson_successToastDismiss_setsShouldDismiss() async {
         sut.firstName = "Han"
         sut.lastName = "Solo"
         sut.validate()
@@ -172,7 +172,7 @@ final class NewPersonViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_savePerson_whenSaveFails_enqueuesErrorToast() async {
+    func savePerson_whenSaveFails_enqueuesErrorToast() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         sut.firstName = "Han"
         sut.lastName = "Solo"

@@ -28,7 +28,7 @@ final class AboutViewModelTests {
     }
 
     @Test
-    func testOpenWebsiteNavigatesToWebview() throws {
+    func openWebsiteNavigatesToWebview() throws {
         sut.openWebsite(using: coordinatorMock)
 
         let expectedURL = try #require(URL(string: L10n.swdestinydbWebsite))
@@ -36,7 +36,7 @@ final class AboutViewModelTests {
     }
 
     @Test
-    func testOpenWebsiteNavigatesOnce() throws {
+    func openWebsiteNavigatesOnce() throws {
         sut.openWebsite(using: coordinatorMock)
 
         let expectedURL = try #require(URL(string: L10n.swdestinydbWebsite))

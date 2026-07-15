@@ -30,7 +30,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testLoadCardsFromDatabase() async {
+    func loadCardsFromDatabase() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -55,7 +55,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testLoadCardsWithEmptyDatabase() async {
+    func loadCardsWithEmptyDatabase() async {
         await sut.loadCards()
 
         #expect(sut.items.isEmpty)
@@ -63,7 +63,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testLoadCardsFiltersCorrectSet() async {
+    func loadCardsFiltersCorrectSet() async {
         let awCard = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -80,7 +80,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testLoadCardsWithMockHttpClient() async {
+    func loadCardsWithMockHttpClient() async {
         mockHttpClient.fileName = "card-list"
         mockHttpClient.error = false
 
@@ -91,7 +91,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testLoadCardsHandlesHttpError() async {
+    func loadCardsHandlesHttpError() async {
         mockSWDestinyService.retrieveSetCardListError = APIError.invalidData
 
         await sut.loadCards()
@@ -102,7 +102,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testAsyncOperationCompletesLoading() async {
+    func asyncOperationCompletesLoading() async {
         let card = CardDTO.stub(setCode: "AW", code: "01001")
 
         mockSWDestinyService.retrieveSetCardListResult = [card]
@@ -113,7 +113,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testSearchFilteringByName() async {
+    func searchFilteringByName() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -138,7 +138,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testSearchFilteringBySubtitle() async {
+    func searchFilteringBySubtitle() async {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -163,7 +163,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testColorFiltering() async {
+    func colorFiltering() async {
         let redCard = CardDTO.stub(
             setCode: "AW",
             factionCode: "red",
@@ -189,7 +189,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testTypeFiltering() async {
+    func typeFiltering() async {
         let character = CardDTO.stub(
             setCode: "AW",
             typeCode: "character",
@@ -215,7 +215,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testCostFiltering() async {
+    func costFiltering() async {
         let lowCostCard = CardDTO.stub(
             setCode: "AW",
             factionCode: "red",
@@ -250,7 +250,7 @@ final class CardListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func testPropertyLoadingAlwaysCompletes() async {
+    func propertyLoadingAlwaysCompletes() async {
         for iteration in 0 ..< 100 {
             let randomCardCount = Int.random(in: 0 ... 10)
             var randomCards: [CardDTO] = []

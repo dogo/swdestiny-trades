@@ -19,25 +19,25 @@ final class CardEmbeddingIndexTests {
     ]
 
     @Test
-    func test_nearestToAny_picksBestAcrossQueryOrientations() {
+    func nearestToAny_picksBestAcrossQueryOrientations() {
         let index = CardEmbeddingIndex(entries: entries)
 
         // One orientation is noise, the other points at C.
         let matches = index.nearest(toAny: [[0.6, 0.4, 0], [0, 0, 1]], limit: 1)
 
         #expect(matches.first?.code == "C")
-        #expect(abs((matches.first?.score ?? 0) - (1.0)) <= 0.0001)
+        #expect(abs((matches.first?.score ?? 0) - 1.0) <= 0.0001)
     }
 
     @Test
-    func test_nearestToAny_ignoresVectorMagnitude() {
+    func nearestToAny_ignoresVectorMagnitude() {
         let index = CardEmbeddingIndex(entries: entries)
 
         #expect(index.nearest(toAny: [[0, 50, 0]], limit: 1).first?.code == "B")
     }
 
     @Test
-    func test_nearestToAny_respectsLimitAndOrdering() {
+    func nearestToAny_respectsLimitAndOrdering() {
         let index = CardEmbeddingIndex(entries: entries)
 
         let matches = index.nearest(toAny: [[0.6, 0.8, 0]], limit: 2)
@@ -46,14 +46,14 @@ final class CardEmbeddingIndexTests {
     }
 
     @Test
-    func test_nearestToAny_producesFiniteScoresForDegenerateQuery() {
+    func nearestToAny_producesFiniteScoresForDegenerateQuery() {
         let index = CardEmbeddingIndex(entries: entries)
 
         #expect(index.nearest(toAny: [[.nan, .nan, .nan]]).allSatisfy { $0.score.isFinite })
     }
 
     @Test
-    func test_nearestToAny_emptyOnDimensionMismatch() {
+    func nearestToAny_emptyOnDimensionMismatch() {
         let index = CardEmbeddingIndex(entries: entries)
 
         #expect(index.nearest(toAny: [[1, 0]]).isEmpty)

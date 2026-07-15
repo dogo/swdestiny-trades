@@ -27,7 +27,7 @@ final class SetsListViewModelTests: BaseTestCase {
     // MARK: - Load
 
     @Test
-    func test_loadItems_fetchesSetsAndPersistsThem() async {
+    func loadItems_fetchesSetsAndPersistsThem() async {
         mockSWDestinyService.retrieveSetListResult = [
             SetDTO.stub(name: "Awakenings", code: "AW"),
             SetDTO.stub(name: "Spark of Hope", code: "SOH")
@@ -42,7 +42,7 @@ final class SetsListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loadItems_onError_enqueuesErrorToast() async {
+    func loadItems_onError_enqueuesErrorToast() async {
         mockSWDestinyService.retrieveSetListError = APIError.invalidData
 
         await sut.loadItems()
@@ -52,7 +52,7 @@ final class SetsListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_refreshSets_updatesItems() async {
+    func refreshSets_updatesItems() async {
         mockSWDestinyService.retrieveSetListResult = [SetDTO.stub(name: "Awakenings", code: "AW")]
 
         await sut.refreshSets()
@@ -63,7 +63,7 @@ final class SetsListViewModelTests: BaseTestCase {
     // MARK: - Filtering
 
     @Test
-    func test_filterItems_byNameOrCode() {
+    func filterItems_byNameOrCode() {
         let awakenings = SetDTO.stub(name: "Awakenings", code: "AW")
         let soh = SetDTO.stub(name: "Spark of Hope", code: "SOH")
         sut.updateItems([awakenings, soh])
@@ -76,7 +76,7 @@ final class SetsListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_filterItems_emptySearch_returnsAll() {
+    func filterItems_emptySearch_returnsAll() {
         sut.updateItems([SetDTO.stub(name: "Awakenings", code: "AW"), SetDTO.stub(name: "Spark of Hope", code: "SOH")])
 
         sut.performFiltering(searchText: "")

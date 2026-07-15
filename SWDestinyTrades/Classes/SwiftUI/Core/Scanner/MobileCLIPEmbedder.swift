@@ -50,6 +50,6 @@ final class MobileCLIPEmbedder {
               let multiArray = observation.featureValue.multiArrayValue else {
             throw ScannerError.embeddingFailed
         }
-        return (0..<multiArray.count).map { multiArray[$0].floatValue }
+        return (0 ..< multiArray.count).map { multiArray[$0].floatValue }
     }
 }

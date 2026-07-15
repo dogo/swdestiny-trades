@@ -31,7 +31,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewCreationWithTestData() async throws {
+    func viewCreationWithTestData() async throws {
         let card1 = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -53,7 +53,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewUsesTestContainer() async {
+    func viewUsesTestContainer() async {
         let card = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -71,7 +71,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewWithNavigationCoordinatorMock() async throws {
+    func viewWithNavigationCoordinatorMock() async throws {
         let navMock = NavigationCoordinatorMock()
         let helperWithMock = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: navMock)
 
@@ -92,7 +92,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewEnvironmentInjection() {
+    func viewEnvironmentInjection() {
         _ = helper.createView {
             CardListView(set: testSet)
         }
@@ -101,21 +101,21 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewModelCreatedThroughTestContainer() {
+    func viewModelCreatedThroughTestContainer() {
         let viewModel = helper.createViewModel(CardListViewModel.self)
 
         #expect(viewModel.isLoading == false)
     }
 
     @Test
-    func testViewWithEmptyDatabase() {
+    func viewWithEmptyDatabase() {
         _ = helper.createView {
             CardListView(set: testSet)
         }
     }
 
     @Test
-    func testViewWithMultipleCards() async {
+    func viewWithMultipleCards() async {
         let cards = (1 ... 5).map { index in
             CardDTO.stub(
                 setCode: "AW",
@@ -135,7 +135,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewModelUsesDatabase() async throws {
+    func viewModelUsesDatabase() async throws {
         let card = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -156,7 +156,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewWithDifferentSets() async {
+    func viewWithDifferentSets() async {
         let awCard = CardDTO.stub(
             setCode: "AW",
             code: "01001",
@@ -187,7 +187,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testPopulateTestDataHelper() async throws {
+    func populateTestDataHelper() async throws {
         let cards = [
             CardDTO.stub(setCode: "AW", code: "01001", name: "Card 1"),
             CardDTO.stub(setCode: "AW", code: "01002", name: "Card 2"),
@@ -207,7 +207,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewWithAppState() {
+    func viewWithAppState() {
         _ = helper.createView {
             CardListView(set: testSet)
         }
@@ -216,7 +216,7 @@ final class CardListViewTests: BaseTestCase {
     }
 
     @Test
-    func testViewCreationWithCustomViewModel() async throws {
+    func viewCreationWithCustomViewModel() async throws {
         let card = CardDTO.stub(
             setCode: "AW",
             code: "01001",

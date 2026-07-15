@@ -27,7 +27,7 @@ final class CollectionCardWriterTests {
     }
 
     @Test
-    func test_addToCollection_createsCollectionAndAddsCard() async throws {
+    func addToCollection_createsCollectionAndAddsCard() async throws {
         try await sut.addToCollection(CardDTO.stub(code: "01001", name: "Captain Phasma"))
 
         let collections = await database.fetch(UserCollectionDTO.self, predicate: nil, sorted: nil)
@@ -36,7 +36,7 @@ final class CollectionCardWriterTests {
     }
 
     @Test
-    func test_addToCollection_reusesExistingCollection() async throws {
+    func addToCollection_reusesExistingCollection() async throws {
         try await sut.addToCollection(CardDTO.stub(code: "01001"))
         try await sut.addToCollection(CardDTO.stub(code: "01002"))
 
@@ -46,7 +46,7 @@ final class CollectionCardWriterTests {
     }
 
     @Test
-    func test_addToCollection_incrementsQuantityOnDuplicateCode() async throws {
+    func addToCollection_incrementsQuantityOnDuplicateCode() async throws {
         try await sut.addToCollection(CardDTO.stub(code: "01001"))
         try await sut.addToCollection(CardDTO.stub(code: "01001"))
 
@@ -56,7 +56,7 @@ final class CollectionCardWriterTests {
     }
 
     @Test
-    func test_addToCollection_assignsFreshIdentityToCopy() async throws {
+    func addToCollection_assignsFreshIdentityToCopy() async throws {
         let card = CardDTO.stub(code: "01001")
         let originalId = card.id
 

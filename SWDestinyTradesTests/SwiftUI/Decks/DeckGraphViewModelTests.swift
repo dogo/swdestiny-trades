@@ -30,7 +30,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     // MARK: - Bar chart (card types)
 
     @Test
-    func test_generateGraphData_buildsCardTypeCountsByQuantity() async {
+    func generateGraphData_buildsCardTypeCountsByQuantity() async {
         let sut = await makeSUT(cards: [
             card(type: "upgrade", cost: 1, quantity: 2),
             card(type: "support", cost: 3, quantity: 1),
@@ -43,7 +43,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_generateGraphData_emptyDeck_hasNoData() async {
+    func generateGraphData_emptyDeck_hasNoData() async {
         let sut = await makeSUT(cards: [])
 
         #expect(sut.hasData == false)
@@ -51,7 +51,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_generateGraphData_noChartableTypes_returnsEmptyBarData() async {
+    func generateGraphData_noChartableTypes_returnsEmptyBarData() async {
         let sut = await makeSUT(cards: [
             card(type: "character", cost: 2, quantity: 1)
         ])
@@ -63,7 +63,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     // MARK: - Line chart (card costs)
 
     @Test
-    func test_generateGraphData_buildsCostHistogramExcludingCharacters() async {
+    func generateGraphData_buildsCostHistogramExcludingCharacters() async {
         let sut = await makeSUT(cards: [
             card(type: "upgrade", cost: 1, quantity: 2),
             card(type: "event", cost: 2, quantity: 1),
@@ -78,7 +78,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     // MARK: - Radar chart (dice faces)
 
     @Test
-    func test_generateGraphData_countsDiceFaces() async {
+    func generateGraphData_countsDiceFaces() async {
         let sut = await makeSUT(cards: [
             card(type: "upgrade", cost: 1, quantity: 2, dieFaces: ["2MD"])
         ])
@@ -91,7 +91,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     // MARK: - Chart helpers
 
     @Test
-    func test_getChartTitle_returnsLocalizedTitles() async {
+    func getChartTitle_returnsLocalizedTitles() async {
         let sut = await makeSUT(cards: [])
 
         #expect(sut.getChartTitle(for: .cardTypes) == L10n.cardTypes)
@@ -100,7 +100,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_hasChartData_reflectsComputedData() async {
+    func hasChartData_reflectsComputedData() async {
         let sut = await makeSUT(cards: [
             card(type: "upgrade", cost: 1, quantity: 1)
         ])
@@ -110,7 +110,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_refresh_recomputesData() async {
+    func refresh_recomputesData() async {
         let sut = await makeSUT(cards: [card(type: "upgrade", cost: 1, quantity: 1)])
 
         sut.deck.list = []

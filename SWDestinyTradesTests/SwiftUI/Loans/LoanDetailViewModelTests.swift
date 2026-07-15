@@ -39,7 +39,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     // MARK: - Load
 
     @Test
-    func test_loadLoanData_populatesLentAndBorrowed() {
+    func loadLoanData_populatesLentAndBorrowed() {
         #expect(sut.lentCards.map(\.code) == ["01001"])
         #expect(sut.borrowedCards.map(\.code) == ["01002"])
     }
@@ -47,18 +47,18 @@ final class LoanDetailViewModelTests: BaseTestCase {
     // MARK: - Derived state
 
     @Test
-    func test_personFullName_formatsGivenAndFamilyName() {
+    func personFullName_formatsGivenAndFamilyName() {
         #expect(sut.personFullName.contains("Luke"))
         #expect(sut.personFullName.contains("Skywalker"))
     }
 
     @Test
-    func test_hasLoans_trueWhenLoansPresent() {
+    func hasLoans_trueWhenLoansPresent() {
         #expect(sut.hasLoans)
     }
 
     @Test
-    func test_hasLoans_falseWhenNoLoans() async {
+    func hasLoans_falseWhenNoLoans() async {
         let emptyPerson = PersonDTO.stub(name: "Empty", lastName: "Person")
         try? await populateTestData(objects: [emptyPerson])
         sut.person = emptyPerson
@@ -68,7 +68,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loanSummary_countsLentAndBorrowed() {
+    func loanSummary_countsLentAndBorrowed() {
         #expect(sut.loanSummary.lentCount == 1)
         #expect(sut.loanSummary.borrowedCount == 1)
     }
@@ -76,7 +76,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     // MARK: - Delete confirmation flow (synchronous state)
 
     @Test
-    func test_prepareToDelete_setsCardAndShowsConfirmation() {
+    func prepareToDelete_setsCardAndShowsConfirmation() {
         let card = sut.lentCards[0]
 
         sut.prepareToDelete(card, type: .lent)
@@ -87,7 +87,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_cancelDelete_clearsState() {
+    func cancelDelete_clearsState() {
         sut.prepareToDelete(sut.lentCards[0], type: .lent)
 
         sut.cancelDelete()
@@ -99,7 +99,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     // MARK: - Confirm delete (async Task)
 
     @Test
-    func test_confirmDelete_lent_removesCardAndDismisses() async {
+    func confirmDelete_lent_removesCardAndDismisses() async {
         sut.prepareToDelete(sut.lentCards[0], type: .lent)
 
         sut.confirmDelete()
@@ -110,7 +110,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_confirmDelete_borrow_removesCard() async {
+    func confirmDelete_borrow_removesCard() async {
         sut.prepareToDelete(sut.borrowedCards[0], type: .borrow)
 
         sut.confirmDelete()
@@ -120,7 +120,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_confirmDelete_withoutSelection_isNoOp() {
+    func confirmDelete_withoutSelection_isNoOp() {
         sut.confirmDelete()
 
         #expect(sut.lentCards.isEmpty == false)
@@ -128,7 +128,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_confirmDelete_whenSaveFails_enqueuesErrorToast() async {
+    func confirmDelete_whenSaveFails_enqueuesErrorToast() async {
         testDatabase.stubbedSaveError = DatabaseError.invalidObject
         sut.prepareToDelete(sut.lentCards[0], type: .lent)
 
@@ -141,7 +141,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
     // MARK: - Update quantity (async Task)
 
     @Test
-    func test_updateCardQuantity_persistsNewQuantity() async {
+    func updateCardQuantity_persistsNewQuantity() async {
         let card = sut.lentCards[0]
 
         sut.updateCardQuantity(card, newQuantity: 5)

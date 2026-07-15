@@ -31,8 +31,13 @@ final class CardScannerViewModel: BaseViewModel {
     private(set) var reviewCandidates: [ScanCandidate] = []
     var isReviewPresented = false
 
-    var isReady: Bool { indexState == .ready }
-    var selectedCount: Int { reviewCandidates.filter(\.isSelected).count }
+    var isReady: Bool {
+        indexState == .ready
+    }
+
+    var selectedCount: Int {
+        reviewCandidates.filter(\.isSelected).count
+    }
 
     let cameraSession = CameraSession()
     private let pipeline = ScanFramePipeline()
@@ -108,7 +113,7 @@ final class CardScannerViewModel: BaseViewModel {
             var added = 0
             for card in cards {
                 // Skip duplicates / failures silently; the summary reports what landed.
-                guard (try? await writer.addToCollection(card)) != nil else { continue }
+                guard await (try? writer.addToCollection(card)) != nil else { continue }
                 added += 1
             }
             toastQueue.enqueue(title: L10n.cardAdded, message: L10n.scanAddedSummary(added), type: .success)
@@ -164,7 +169,7 @@ final class CardScannerViewModel: BaseViewModel {
         // Feedback while the catalog loads, otherwise the screen looks idle (button disabled).
         indexState = .building(0)
 
-        let cards = (try? await service.retrieveAllCards()) ?? []
+        let cards = await (try? service.retrieveAllCards()) ?? []
         guard !cards.isEmpty,
               let embedder = MobileCLIPEmbedder.bundled(),
               let url = Bundle.main.url(forResource: "card-embeddings", withExtension: "swdx"),
@@ -188,7 +193,10 @@ struct ScanCandidate: Identifiable {
     var chosenIndex: Int
     var isSelected: Bool
 
-    var isRecognized: Bool { !matches.isEmpty }
+    var isRecognized: Bool {
+        !matches.isEmpty
+    }
+
     var chosenMatch: ScannedCardResult? {
         matches.indices.contains(chosenIndex) ? matches[chosenIndex] : nil
     }

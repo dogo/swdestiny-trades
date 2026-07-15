@@ -34,7 +34,7 @@ final class DeckListViewModelTests: BaseTestCase {
     // MARK: - Load
 
     @Test
-    func test_loadDecks_populatesItemsSortedByName() async {
+    func loadDecks_populatesItemsSortedByName() async {
         try? await populateTestData(objects: [
             makeDeck(name: "Zeta"),
             makeDeck(name: "Alpha")
@@ -47,7 +47,7 @@ final class DeckListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loadDecks_computesCardCounts() async {
+    func loadDecks_computesCardCounts() async {
         let deck = makeDeck(name: "Counted", cards: [
             CardDTO.stub(code: "01001", quantity: 2),
             CardDTO.stub(code: "01002", quantity: 3)
@@ -62,7 +62,7 @@ final class DeckListViewModelTests: BaseTestCase {
     // MARK: - Filtering
 
     @Test
-    func test_filterItems_byName() {
+    func filterItems_byName() {
         let alpha = makeDeck(name: "Alpha Strike")
         let beta = makeDeck(name: "Beta Build")
         sut.updateItems([alpha, beta])
@@ -75,7 +75,7 @@ final class DeckListViewModelTests: BaseTestCase {
     // MARK: - Delete
 
     @Test
-    func test_delete_removesDeck() async {
+    func delete_removesDeck() async {
         let keep = makeDeck(name: "Keep")
         let remove = makeDeck(name: "Remove")
         try? await populateTestData(objects: [keep, remove])
@@ -89,7 +89,7 @@ final class DeckListViewModelTests: BaseTestCase {
     // MARK: - Rename
 
     @Test
-    func test_renameDeck_updatesName() async {
+    func renameDeck_updatesName() async {
         let deck = makeDeck(name: "Old Name")
         try? await populateTestData(objects: [deck])
         await sut.loadDecks()
@@ -100,7 +100,7 @@ final class DeckListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_renameDeck_blankName_isNoOp() async {
+    func renameDeck_blankName_isNoOp() async {
         let deck = makeDeck(name: "Original")
         try? await populateTestData(objects: [deck])
         await sut.loadDecks()

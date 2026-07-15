@@ -27,7 +27,7 @@ final class SearchViewModelTests: BaseTestCase {
     // MARK: - Search
 
     @Test
-    func test_performSearch_populatesResults() async {
+    func performSearch_populatesResults() async {
         mockSWDestinyService.searchResult = [
             CardDTO.stub(code: "01001", name: "Luke Skywalker"),
             CardDTO.stub(code: "01002", name: "Luke's Lightsaber")
@@ -43,7 +43,7 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_performSearch_blankQuery_clearsSearch() {
+    func performSearch_blankQuery_clearsSearch() {
         sut.performSearch(query: "   ")
 
         #expect(sut.hasSearched == false)
@@ -51,7 +51,7 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_performSearch_onError_clearsResultsAndShowsErrorToast() async {
+    func performSearch_onError_clearsResultsAndShowsErrorToast() async {
         mockSWDestinyService.searchError = APIError.invalidData
 
         sut.performSearch(query: "Luke")
@@ -62,7 +62,7 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_clearSearch_resetsState() async {
+    func clearSearch_resetsState() async {
         mockSWDestinyService.searchResult = [CardDTO.stub(code: "01001")]
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.searchResults.isEmpty }
@@ -75,7 +75,7 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_filterItems_returnsSearchResults() async {
+    func filterItems_returnsSearchResults() async {
         mockSWDestinyService.searchResult = [CardDTO.stub(code: "01001")]
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.searchResults.isEmpty }
@@ -86,14 +86,14 @@ final class SearchViewModelTests: BaseTestCase {
     // MARK: - Suggestions
 
     @Test
-    func test_getSearchSuggestions_emptyText_returnsAll() {
+    func getSearchSuggestions_emptyText_returnsAll() {
         sut.searchText = ""
 
         #expect(sut.getSearchSuggestions().isEmpty == false)
     }
 
     @Test
-    func test_getSearchSuggestions_filtersByText() {
+    func getSearchSuggestions_filtersByText() {
         sut.searchText = "Luke"
 
         #expect(sut.getSearchSuggestions() == ["Luke Skywalker"])
@@ -102,20 +102,20 @@ final class SearchViewModelTests: BaseTestCase {
     // MARK: - View state flags
 
     @Test
-    func test_shouldShowInitialState_onFreshViewModel() {
+    func shouldShowInitialState_onFreshViewModel() {
         #expect(sut.shouldShowInitialState)
         #expect(sut.shouldShowSuggestions == false)
     }
 
     @Test
-    func test_shouldShowSuggestions_whenShortQueryNotYetSearched() {
+    func shouldShowSuggestions_whenShortQueryNotYetSearched() {
         sut.searchText = "Lu"
 
         #expect(sut.shouldShowSuggestions)
     }
 
     @Test
-    func test_shouldShowEmptyState_afterSearchWithNoResults() async {
+    func shouldShowEmptyState_afterSearchWithNoResults() async {
         mockSWDestinyService.searchResult = []
 
         sut.performSearch(query: "Nonexistent")

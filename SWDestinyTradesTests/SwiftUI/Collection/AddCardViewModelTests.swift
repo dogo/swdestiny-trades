@@ -29,7 +29,7 @@ final class AddCardViewModelTests: BaseTestCase {
     // MARK: - Loading
 
     @Test
-    func test_loadAllCards_populatesItemsFromService() async {
+    func loadAllCards_populatesItemsFromService() async {
         let sut = await makeCollectionSUT(
             collection: UserCollectionDTO(),
             serviceCards: [CardDTO.stub(code: "01001"), CardDTO.stub(code: "01002")]
@@ -40,7 +40,7 @@ final class AddCardViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_loadAllCards_onError_enqueuesErrorToast() async {
+    func loadAllCards_onError_enqueuesErrorToast() async {
         mockSWDestinyService.retrieveAllCardsError = APIError.invalidData
         let sut = AddCardViewModel(context: .collection(UserCollectionDTO()), dependencyContainer: testContainer.container)
 
@@ -52,7 +52,7 @@ final class AddCardViewModelTests: BaseTestCase {
     // MARK: - Filtering
 
     @Test
-    func test_filterItems_bySearch() async {
+    func filterItems_bySearch() async {
         let sut = await makeCollectionSUT(
             collection: UserCollectionDTO(),
             serviceCards: [
@@ -68,7 +68,7 @@ final class AddCardViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_filterItems_excludesCardsAlreadyInCollection() async {
+    func filterItems_excludesCardsAlreadyInCollection() async {
         let owned = CardDTO.stub(code: "01001", name: "Captain Phasma")
         let collection = UserCollectionDTO.stub(collection: [owned])
         let sut = await makeCollectionSUT(
@@ -88,7 +88,7 @@ final class AddCardViewModelTests: BaseTestCase {
     // MARK: - Add card (async Task)
 
     @Test
-    func test_addCard_collection_appendsCopyAndShowsSuccess() async {
+    func addCard_collection_appendsCopyAndShowsSuccess() async {
         let collection = UserCollectionDTO()
         let sut = await makeCollectionSUT(
             collection: collection,
@@ -105,7 +105,7 @@ final class AddCardViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_addCard_duplicate_showsErrorToast() async {
+    func addCard_duplicate_showsErrorToast() async {
         let owned = CardDTO.stub(code: "01001")
         let collection = UserCollectionDTO.stub(collection: [owned])
         let sut = await makeCollectionSUT(
@@ -123,7 +123,7 @@ final class AddCardViewModelTests: BaseTestCase {
     // MARK: - Context title
 
     @Test
-    func test_addCardContext_titlesAreLocalized() {
+    func addCardContext_titlesAreLocalized() {
         #expect(AddCardContext.collection(UserCollectionDTO()).title == L10n.addCard)
         #expect(AddCardContext.lentToPerson(PersonDTO()).title == L10n.addLentCard)
         #expect(AddCardContext.borrowedFromPerson(PersonDTO()).title == L10n.addBorrowedCard)

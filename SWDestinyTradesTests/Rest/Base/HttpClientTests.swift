@@ -31,7 +31,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_success() async throws {
+    func request_with_success() async throws {
         setupURLProtocolMock(with: Data("{ \"bar\": true }".utf8), statusCode: 200)
 
         let result = try await sut.request(request, decode: Foo.self)
@@ -39,7 +39,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_invalidData() async {
+    func request_with_failure_invalidData() async {
         setupURLProtocolMock(with: nil, statusCode: 200, isHTTP: false)
 
         await assertThrowsError(of: .invalidData) {
@@ -48,7 +48,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_responseUnsuccessful() async {
+    func request_with_failure_responseUnsuccessful() async {
         setupURLProtocolMock(with: nil, statusCode: 404)
 
         await assertThrowsError(of: .responseUnsuccessful) {
@@ -57,7 +57,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_requestCancelled() async {
+    func request_with_failure_requestCancelled() async {
         setupURLProtocolMock(with: nil, statusCode: 200, error: URLError(.cancelled))
 
         await assertThrowsError(of: .requestCancelled) {
@@ -66,7 +66,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_keyNotFound() async {
+    func request_with_failure_keyNotFound() async {
         let missingKeyJson = Data("{ \"id\": 123 }".utf8)
         setupURLProtocolMock(with: missingKeyJson, statusCode: 200)
 
@@ -76,7 +76,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_valueNotFound() async {
+    func request_with_failure_valueNotFound() async {
         let missingValueJson = Data("{ \"id\": 123, \"name\": null }".utf8)
         setupURLProtocolMock(with: missingValueJson, statusCode: 200)
 
@@ -86,7 +86,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_typeMismatch() async {
+    func request_with_failure_typeMismatch() async {
         setupURLProtocolMock(with: Data("{ \"bar\": \"invalid_value\" }".utf8), statusCode: 200)
 
         await assertThrowsError(of: .typeMismatch(type: Bool.self, context: "Expected to decode Bool but found a string instead.")) {
@@ -95,7 +95,7 @@ final class HttpClientTests {
     }
 
     @Test
-    func test_request_with_failure_dataCorrupted() async {
+    func request_with_failure_dataCorrupted() async {
         setupURLProtocolMock(with: nil, statusCode: 200)
 
         await assertThrowsError(of: .dataCorrupted(context: "The given data was not valid JSON.")) {
@@ -113,7 +113,7 @@ final class HttpClientTests {
 
         try? await Task.sleep(for: .milliseconds(100))
 
-        let activeTasksCount = try #require(self.sut.activeTasks).count
+        let activeTasksCount = try #require(sut.activeTasks).count
         #expect(activeTasksCount == 1, "Expected 1 active task before cancellation.")
 
         sut.cancelRequest(request)
@@ -121,7 +121,7 @@ final class HttpClientTests {
         // Add a short delay to ensure the cancellation has taken effect
         try? await Task.sleep(for: .milliseconds(100))
 
-        let areTasksEmpty = try #require(self.sut.activeTasks).isEmpty
+        let areTasksEmpty = try #require(sut.activeTasks).isEmpty
         #expect(areTasksEmpty, "Expected no active tasks after cancelling the request.")
 
         requestTask.cancel()

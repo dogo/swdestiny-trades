@@ -27,7 +27,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     // MARK: - Load
 
     @Test
-    func test_loadPeople_populatesItemsFromDatabase() async {
+    func loadPeople_populatesItemsFromDatabase() async {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
         try? await populateTestData(objects: [luke, leia])
@@ -42,7 +42,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     // MARK: - Filtering
 
     @Test
-    func test_filterItems_byFirstName() {
+    func filterItems_byFirstName() {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
         sut.updateItems([luke, leia])
@@ -53,7 +53,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_filterItems_byLastName() {
+    func filterItems_byLastName() {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
         sut.updateItems([luke, leia])
@@ -64,7 +64,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_filterItems_emptySearch_returnsAllSortedByName() {
+    func filterItems_emptySearch_returnsAllSortedByName() {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let anakin = PersonDTO.stub(name: "Anakin", lastName: "Skywalker")
         sut.updateItems([luke, anakin])
@@ -77,7 +77,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     // MARK: - Delete
 
     @Test
-    func test_deletePerson_removesPersonAndEnqueuesSuccessToast() async {
+    func deletePerson_removesPersonAndEnqueuesSuccessToast() async {
         let luke = PersonDTO.stub(name: "Luke", lastName: "Skywalker")
         let leia = PersonDTO.stub(name: "Leia", lastName: "Organa")
         try? await populateTestData(objects: [luke, leia])
@@ -92,7 +92,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     // MARK: - Loan summary
 
     @Test
-    func test_getLoanSummary_sumsCardQuantities() {
+    func getLoanSummary_sumsCardQuantities() {
         let person = PersonDTO.stub(
             name: "Han",
             lastName: "Solo",
@@ -108,7 +108,7 @@ final class PeopleListViewModelTests: BaseTestCase {
     }
 
     @Test
-    func test_getLoanSummary_noLoans_hasLoansIsFalse() {
+    func getLoanSummary_noLoans_hasLoansIsFalse() {
         let person = PersonDTO.stub(name: "Empty", lastName: "Person")
 
         let summary = sut.getLoanSummary(for: person)

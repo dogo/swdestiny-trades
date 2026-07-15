@@ -39,7 +39,10 @@ public extension Project {
 
                 # Add Mise to the PATH
                 export PATH="$HOME/.local/share/mise/shims:$PATH"
-                swiftformat --swiftversion 5.10 --config .swiftformat .
+                # Lint only: formatting in place here made CI compile code that
+                # differs from the repo (and SwiftFormat's Swift Testing
+                # rewrites can produce code that doesn't compile).
+                swiftformat --lint --swiftversion 5.10 --config .swiftformat .
                 touch "$DERIVED_FILE_DIR/swiftformat.stamp"
                 """,
                 name: "[SwiftFormat] Run Script",

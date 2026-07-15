@@ -72,10 +72,10 @@ struct SwiftUIRadarChartView: View {
     }
 
     private func drawWeb(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, count: Int, ringCount: Int) {
-        for ring in 1...ringCount {
+        for ring in 1 ... ringCount {
             let fraction = Double(ring) / Double(ringCount)
             var path = Path()
-            for index in 0..<count {
+            for index in 0 ..< count {
                 let vertex = point(center: center, radius: radius, index: index, fraction: fraction, count: count)
                 if index == 0 {
                     path.move(to: vertex)
@@ -89,7 +89,7 @@ struct SwiftUIRadarChartView: View {
     }
 
     private func drawSpokes(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, count: Int) {
-        for index in 0..<count {
+        for index in 0 ..< count {
             let vertex = point(center: center, radius: radius, index: index, fraction: 1.0, count: count)
             var path = Path()
             path.move(to: center)
@@ -100,7 +100,7 @@ struct SwiftUIRadarChartView: View {
 
     private func drawDataPolygon(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, count: Int, maxValue: Double) {
         var path = Path()
-        for index in 0..<count {
+        for index in 0 ..< count {
             let fraction = Double(data[index]) / maxValue
             let vertex = point(center: center, radius: radius, index: index, fraction: fraction, count: count)
             if index == 0 {
@@ -115,7 +115,7 @@ struct SwiftUIRadarChartView: View {
     }
 
     private func drawLabels(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, count: Int) {
-        for index in 0..<count {
+        for index in 0 ..< count {
             let radians = angle(index: index, count: count)
             let direction = CGPoint(x: cos(radians), y: sin(radians))
             let labelPoint = CGPoint(
@@ -148,7 +148,7 @@ struct SwiftUIRadarChartView: View {
 
         var nearestIndex: Int?
         var nearestDistance = CGFloat.greatestFiniteMagnitude
-        for index in 0..<count {
+        for index in 0 ..< count {
             let fraction = Double(data[index]) / maxValue
             let vertex = point(center: center, radius: radius, index: index, fraction: fraction, count: count)
             let distance = hypot(vertex.x - location.x, vertex.y - location.y)

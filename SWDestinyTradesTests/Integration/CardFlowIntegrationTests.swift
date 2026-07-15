@@ -13,7 +13,7 @@ import Testing
 final class CardFlowIntegrationTests: BaseTestCase {
 
     @Test
-    func testMultipleViewsShareSameTestContainer() async throws {
+    func multipleViewsShareSameTestContainer() async throws {
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: nil)
 
         let set = SetDTO()
@@ -43,7 +43,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
     }
 
     @Test
-    func testDataFlowBetweenViewModelsThroughSharedDatabase() async throws {
+    func dataFlowBetweenViewModelsThroughSharedDatabase() async throws {
         let set = SetDTO()
         set.code = "AW"
         set.name = "Awakenings"
@@ -74,7 +74,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
     }
 
     @Test
-    func testNavigationFlowWithMockCoordinator() async throws {
+    func navigationFlowWithMockCoordinator() async throws {
         let navMock = NavigationCoordinatorMock()
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: navMock)
 
@@ -106,7 +106,7 @@ final class CardFlowIntegrationTests: BaseTestCase {
     }
 
     @Test
-    func testFullFeatureFlowWithSharedContainer() async throws {
+    func fullFeatureFlowWithSharedContainer() async throws {
         let navMock = NavigationCoordinatorMock()
         let helper = ViewTestHelper(testContainer: testContainer, navigationCoordinatorMock: navMock)
 

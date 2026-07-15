@@ -31,7 +31,7 @@ final class KingfisherImageLoaderTests {
     // MARK: - loadImage Tests
 
     @Test
-    func test_loadLocalImage_returnsSameInstance() async throws {
+    func loadLocalImage_returnsSameInstance() async throws {
         let originalImage = UIImage()
 
         let result = try await sut.loadImage(from: .local(originalImage), placeholder: nil, onProgress: nil)
@@ -40,7 +40,7 @@ final class KingfisherImageLoaderTests {
     }
 
     @Test
-    func test_loadLocalImage_ignoresPlaceholder() async throws {
+    func loadLocalImage_ignoresPlaceholder() async throws {
         let originalImage = UIImage()
         let placeholder = UIImage()
 
@@ -51,7 +51,7 @@ final class KingfisherImageLoaderTests {
     }
 
     @Test
-    func test_loadAsset_throwsAssetNotFound_forInvalidName() async {
+    func loadAsset_throwsAssetNotFound_forInvalidName() async {
         do {
             _ = try await sut.loadImage(from: .asset("nonexistent_xyz"), placeholder: nil, onProgress: nil)
             Issue.record("Expected ImageLoadError.assetNotFound to be thrown")
@@ -63,7 +63,7 @@ final class KingfisherImageLoaderTests {
     }
 
     @Test
-    func test_loadAsset_errorDescription_containsAssetName() async {
+    func loadAsset_errorDescription_containsAssetName() async {
         do {
             _ = try await sut.loadImage(from: .asset("missing_icon"), placeholder: nil, onProgress: nil)
             Issue.record("Expected ImageLoadError.assetNotFound to be thrown")
@@ -76,7 +76,7 @@ final class KingfisherImageLoaderTests {
     }
 
     @Test
-    func test_loadLocalImage_doesNotInvokeProgressCallback() async throws {
+    func loadLocalImage_doesNotInvokeProgressCallback() async throws {
         var progressCallCount = 0
         let originalImage = UIImage()
 
@@ -90,7 +90,7 @@ final class KingfisherImageLoaderTests {
     // MARK: - Protocol Conformance
 
     @Test
-    func test_conformsToImageLoadingService() {
+    func conformsToImageLoadingService() {
         let service: any ImageLoadingService = sut
         #expect((service as? KingfisherImageLoader) === sut)
     }
@@ -98,7 +98,7 @@ final class KingfisherImageLoaderTests {
     // MARK: - clearMemoryCache Tests
 
     @Test
-    func test_clearMemoryCache_completesWithoutError() async throws {
+    func clearMemoryCache_completesWithoutError() async throws {
         sut.clearMemoryCache()
 
         let image = UIImage()

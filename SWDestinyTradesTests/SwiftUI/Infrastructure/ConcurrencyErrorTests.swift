@@ -14,7 +14,7 @@ import Testing
 final class ConcurrencyErrorTests {
 
     @Test
-    func test_errorDescription_returnsExpectedMessages() {
+    func errorDescription_returnsExpectedMessages() {
         #expect(ConcurrencyError.taskCancelled.localizedDescription == "Operation was cancelled")
         #expect(ConcurrencyError.mainActorTimeout.localizedDescription == "Main actor operation timed out")
 
@@ -23,7 +23,7 @@ final class ConcurrencyErrorTests {
     }
 
     @Test
-    func test_isCancellation_recognizesCancellationErrors() {
+    func isCancellation_recognizesCancellationErrors() {
         #expect(ConcurrencyError.isCancellation(CancellationError()))
         #expect(ConcurrencyError.isCancellation(ConcurrencyError.taskCancelled))
         #expect(ConcurrencyError.isCancellation(APIError.requestCancelled))
@@ -31,14 +31,14 @@ final class ConcurrencyErrorTests {
     }
 
     @Test
-    func test_isCancellation_rejectsNonCancellationErrors() {
+    func isCancellation_rejectsNonCancellationErrors() {
         #expect(!ConcurrencyError.isCancellation(APIError.invalidData))
         #expect(!ConcurrencyError.isCancellation(URLError(.badURL)))
         #expect(!ConcurrencyError.isCancellation(SampleLocalizedError()))
     }
 
     @Test
-    func test_from_mapsCancellationErrorToTaskCancelled() {
+    func from_mapsCancellationErrorToTaskCancelled() {
         let result = ConcurrencyError.from(CancellationError())
 
         guard case .taskCancelled = result else {
@@ -48,7 +48,7 @@ final class ConcurrencyErrorTests {
     }
 
     @Test
-    func test_from_preservesConcurrencyError() {
+    func from_preservesConcurrencyError() {
         let result = ConcurrencyError.from(ConcurrencyError.mainActorTimeout)
 
         guard case .mainActorTimeout = result else {
@@ -58,7 +58,7 @@ final class ConcurrencyErrorTests {
     }
 
     @Test
-    func test_from_wrapsGenericErrorAsRealmAccessError() {
+    func from_wrapsGenericErrorAsRealmAccessError() {
         let result = ConcurrencyError.from(SampleLocalizedError())
 
         guard case let .realmAccessError(error) = result else {

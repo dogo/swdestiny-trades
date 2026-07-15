@@ -32,7 +32,9 @@ final class CardEmbeddingIndex {
     private let codes: [String]
     private let normalized: [[Float]]
 
-    var count: Int { codes.count }
+    var count: Int {
+        codes.count
+    }
 
     init(entries: [CardEmbeddingEntry]) {
         dimension = entries.first?.vector.count ?? 0
@@ -62,7 +64,9 @@ final class CardEmbeddingIndex {
 
     private static func normalize(_ vector: [Float]) -> [Float] {
         var sum: Float = 0
-        for value in vector { sum += value * value }
+        for value in vector {
+            sum += value * value
+        }
         let norm = sum.squareRoot()
         guard norm.isFinite, norm > 0 else { return [Float](repeating: 0, count: vector.count) }
         return vector.map { $0 / norm }
@@ -70,7 +74,9 @@ final class CardEmbeddingIndex {
 
     private static func dot(_ lhs: [Float], _ rhs: [Float]) -> Float {
         var result: Float = 0
-        for index in lhs.indices { result += lhs[index] * rhs[index] }
+        for index in lhs.indices {
+            result += lhs[index] * rhs[index]
+        }
         return result
     }
 
@@ -83,22 +89,22 @@ final class CardEmbeddingIndex {
         func read(_ count: Int) throws -> Data {
             guard cursor + count <= data.count else { throw ScannerError.invalidIndexData }
             defer { cursor += count }
-            return data.subdata(in: cursor..<(cursor + count))
+            return data.subdata(in: cursor ..< (cursor + count))
         }
 
         guard try Array(read(4)) == magic else { throw ScannerError.invalidIndexData }
         _ = try read(4) // version
-        let dim = Int(try read(4).readLittleEndianUInt32())
-        let count = Int(try read(4).readLittleEndianUInt32())
+        let dim = try Int(read(4).readLittleEndianUInt32())
+        let count = try Int(read(4).readLittleEndianUInt32())
         guard dim > 0 else { throw ScannerError.invalidIndexData }
 
         var entries: [CardEmbeddingEntry] = []
         entries.reserveCapacity(count)
-        for _ in 0..<count {
-            let codeLen = Int(try read(2).readLittleEndianUInt16())
+        for _ in 0 ..< count {
+            let codeLen = try Int(read(2).readLittleEndianUInt16())
             // Card codes are ASCII; `String(decoding:as:)` is intentional (non-failable, lossless here).
             // swiftlint:disable:next optional_data_string_conversion
-            let code = String(decoding: try read(codeLen), as: UTF8.self)
+            let code = try String(decoding: read(codeLen), as: UTF8.self)
             let floatBytes = try read(dim * 4)
             let vector: [Float] = floatBytes.withUnsafeBytes { buffer in
                 buffer.bindMemory(to: UInt32.self).map { Float(bitPattern: UInt32(littleEndian: $0)) }

@@ -13,51 +13,51 @@ import Testing
 final class HttpStatusCodeTests {
 
     @Test
-    func testInitFromStringValue_withValidString_shouldReturnCorrectStatusCode() {
+    func initFromStringValue_withValidString_shouldReturnCorrectStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "200")
         #expect(statusCode == .ok)
     }
 
     @Test
-    func testInitFromStringValue_withInvalidString_shouldReturnUnknownStatusCode() {
+    func initFromStringValue_withInvalidString_shouldReturnUnknownStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "9999")
         #expect(statusCode == .unknown)
     }
 
     @Test
-    func testInitFromStringValue_withNonNumericString_shouldReturnUnknownStatusCode() {
+    func initFromStringValue_withNonNumericString_shouldReturnUnknownStatusCode() {
         let statusCode = HttpStatusCode(fromStringValue: "Invalid")
         #expect(statusCode == .unknown)
     }
 
     @Test
-    func testInitFromRawValue_withValidInt_shouldReturnCorrectStatusCode() {
+    func initFromRawValue_withValidInt_shouldReturnCorrectStatusCode() {
         let statusCode = HttpStatusCode(fromRawValue: 404)
         #expect(statusCode == .notFound)
     }
 
     @Test
-    func testInitFromRawValue_withInvalidInt_shouldReturnUnknownStatusCode() {
+    func initFromRawValue_withInvalidInt_shouldReturnUnknownStatusCode() {
         let statusCode = HttpStatusCode(fromRawValue: 9999)
         #expect(statusCode == .unknown)
     }
 
     @Test
-    func testComparable_lessThan_shouldReturnTrue() {
+    func comparable_lessThan_shouldReturnTrue() {
         let statusCode1 = HttpStatusCode.ok
         let statusCode2 = HttpStatusCode.notFound
         #expect(statusCode1 < statusCode2)
     }
 
     @Test
-    func testComparable_lessThan_shouldReturnFalse() {
+    func comparable_lessThan_shouldReturnFalse() {
         let statusCode1 = HttpStatusCode.ok
         let statusCode2 = HttpStatusCode.ok
         #expect((statusCode1 < statusCode2) == false)
     }
 
     @Test
-    func testComparable_greaterThan_shouldReturnTrue() {
+    func comparable_greaterThan_shouldReturnTrue() {
         let statusCode1 = HttpStatusCode.notFound
         let statusCode2 = HttpStatusCode.ok
         #expect(statusCode1 > statusCode2)

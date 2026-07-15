@@ -15,7 +15,7 @@ import Testing
 final class PreviewHelperTests {
 
     @Test
-    func test_createMockDatabase_populatesSampleData() async throws {
+    func createMockDatabase_populatesSampleData() async throws {
         let database = try await PreviewHelper.createMockDatabase()
 
         let cards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
@@ -32,7 +32,7 @@ final class PreviewHelperTests {
     }
 
     @Test
-    func test_createAppState_marksInitializedAndAttachesDatabase() async throws {
+    func createAppState_marksInitializedAndAttachesDatabase() async throws {
         let appState = try await PreviewHelper.createAppState()
         let database = try #require(appState.database)
         let cards = await database.fetch(CardDTO.self, predicate: nil, sorted: nil)
@@ -43,7 +43,7 @@ final class PreviewHelperTests {
     }
 
     @Test
-    func test_previewHttpClientMock_requestThrowsInvalidData() async throws {
+    func previewHttpClientMock_requestThrowsInvalidData() async throws {
         let sut = PreviewHttpClientMock()
         let url = try #require(URL(string: "https://example.com/cards"))
         let request = URLRequest(url: url)

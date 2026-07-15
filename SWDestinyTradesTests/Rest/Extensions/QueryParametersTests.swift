@@ -13,7 +13,7 @@ import Testing
 final class QueryParametersTests {
 
     @Test
-    func test_items_Empty_Parameters() {
+    func items_Empty_Parameters() {
         let queryParameters: QueryParameters = [:]
 
         let items = queryParameters.items
@@ -22,7 +22,7 @@ final class QueryParametersTests {
     }
 
     @Test
-    func test_items_single_parameter() {
+    func items_single_parameter() {
         let queryParameters: QueryParameters = ["key": "value"]
 
         let items = queryParameters.items
@@ -33,7 +33,7 @@ final class QueryParametersTests {
     }
 
     @Test
-    func test_items_multiple_parameters() {
+    func items_multiple_parameters() {
         let queryParameters: QueryParameters = [
             "key1": "value1",
             "key2": "value2",

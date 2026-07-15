@@ -53,7 +53,6 @@ struct ScanReviewSheet: View {
         .presentationDetents([.medium, .large])
     }
 
-    @ViewBuilder
     private func row(_ candidate: ScanCandidate) -> some View {
         HStack(spacing: 12) {
             Image(decorative: candidate.crop, scale: 1.0)

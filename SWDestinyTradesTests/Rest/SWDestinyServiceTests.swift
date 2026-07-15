@@ -21,7 +21,7 @@ final class SWDestinyServiceTests: BaseTestCase {
     }
 
     @Test
-    func testRetrieveSetListWithSuccess() async throws {
+    func retrieveSetListWithSuccess() async throws {
         mockHttpClient.fileName = "sets"
         let result = try await sut.retrieveSetList()
 
@@ -29,7 +29,7 @@ final class SWDestinyServiceTests: BaseTestCase {
     }
 
     @Test
-    func testRetrieveSetCardListWithSuccess() async throws {
+    func retrieveSetCardListWithSuccess() async throws {
         mockHttpClient.fileName = "card-list"
         let result = try await sut.retrieveSetCardList(setCode: "anyString")
 
@@ -37,7 +37,7 @@ final class SWDestinyServiceTests: BaseTestCase {
     }
 
     @Test
-    func testRetrieveSpecificCardWithSuccess() async throws {
+    func retrieveSpecificCardWithSuccess() async throws {
         mockHttpClient.fileName = "card"
         let result = try await sut.retrieveCard(cardId: "anyString")
 
@@ -45,7 +45,7 @@ final class SWDestinyServiceTests: BaseTestCase {
     }
 
     @Test
-    func testRetrieveAllCardsWithSuccess() async throws {
+    func retrieveAllCardsWithSuccess() async throws {
         mockHttpClient.fileName = "card-list"
         let result = try await sut.retrieveAllCards()
 
@@ -53,8 +53,8 @@ final class SWDestinyServiceTests: BaseTestCase {
     }
 
     @Test
-    func testCancelRequest() {
-        let request = URLRequest(with: URL(string: "https://base.url.com")!)
+    func testCancelRequest() throws {
+        let request = try URLRequest(with: #require(URL(string: "https://base.url.com")))
         sut.cancelRequest(request)
 
         #expect(mockHttpClient.isCancelled)

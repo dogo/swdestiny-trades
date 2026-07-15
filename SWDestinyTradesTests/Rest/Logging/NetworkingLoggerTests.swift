@@ -39,8 +39,8 @@ final class NetworkingLoggerTests {
     }
 
     @Test
-    func test_log_request() {
-        var request = URLRequest(url: URL(string: "https://example.com")!)
+    func log_request() throws {
+        var request = try URLRequest(url: #require(URL(string: "https://example.com")))
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer token", forHTTPHeaderField: "Authorization")
         request.httpBody = Data("{\"key\": \"value\"}".utf8)
@@ -56,8 +56,9 @@ final class NetworkingLoggerTests {
     }
 
     @Test
-    func test_log_response() throws {
-        let response = try #require(HTTPURLResponse(url: URL(string: "https://example.com")!,
+    func log_response() throws {
+        let url = try #require(URL(string: "https://example.com"))
+        let response = try #require(HTTPURLResponse(url: url,
                                                     statusCode: 200,
                                                     httpVersion: nil,
                                                     headerFields: nil))
@@ -74,8 +75,9 @@ final class NetworkingLoggerTests {
     }
 
     @Test
-    func test_log_response_with_invalid_json() throws {
-        let response = try #require(HTTPURLResponse(url: URL(string: "https://example.com")!,
+    func log_response_with_invalid_json() throws {
+        let url = try #require(URL(string: "https://example.com"))
+        let response = try #require(HTTPURLResponse(url: url,
                                                     statusCode: 200,
                                                     httpVersion: nil,
                                                     headerFields: nil))
@@ -88,8 +90,8 @@ final class NetworkingLoggerTests {
     }
 
     @Test
-    func test_log_error() {
-        let request = URLRequest(url: URL(string: "https://example.com")!)
+    func log_error() throws {
+        let request = try URLRequest(url: #require(URL(string: "https://example.com")))
         let error = NSError(domain: "TestDomain", code: 123, userInfo: [NSLocalizedDescriptionKey: "Test error"])
         logger.logError(request: request, statusCode: 500, error: error)
 

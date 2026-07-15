@@ -26,7 +26,7 @@ final class SwiftDataManagerTests {
     // MARK: - Card round-trip & field mapping
 
     @Test
-    func test_saveAndFetchByKey_card_mapsAllFields() async throws {
+    func saveAndFetchByKey_card_mapsAllFields() async throws {
         let card = CardDTO.stub()
 
         try await sut.save(object: card, update: .all)
@@ -54,13 +54,13 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_fetchByKey_missingCard_returnsNil() async throws {
+    func fetchByKey_missingCard_returnsNil() async {
         let fetched = await sut.fetchByKey(CardDTO.self, key: "does-not-exist")
         #expect(fetched == nil)
     }
 
     @Test
-    func test_fetch_returnsAllSavedCards() async throws {
+    func fetch_returnsAllSavedCards() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
         try await sut.save(object: CardDTO.stub(code: "01002"), update: .all)
 
@@ -71,7 +71,7 @@ final class SwiftDataManagerTests {
     // MARK: - Upsert semantics (no duplicate on same key)
 
     @Test
-    func test_save_sameId_updatesInsteadOfDuplicating() async throws {
+    func save_sameId_updatesInsteadOfDuplicating() async throws {
         let card = CardDTO.stub(name: "Captain Phasma")
         try await sut.save(object: card, update: .all)
 
@@ -84,7 +84,7 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_create_persistsAndReturnsObject() async throws {
+    func create_persistsAndReturnsObject() async throws {
         let card = CardDTO.stub(code: "01005")
 
         let created = try await sut.create(CardDTO.self, value: card, update: .all)
@@ -95,7 +95,7 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_create_withMismatchedValue_throwsUnsupportedType() async throws {
+    func create_withMismatchedValue_throwsUnsupportedType() async throws {
         do {
             _ = try await sut.create(CardDTO.self, value: SetDTO.stub(), update: .all)
             Issue.record("Expected unsupportedType error")
@@ -107,7 +107,7 @@ final class SwiftDataManagerTests {
     // MARK: - Delete
 
     @Test
-    func test_delete_removesObject() async throws {
+    func delete_removesObject() async throws {
         let card = CardDTO.stub()
         try await sut.save(object: card, update: .all)
 
@@ -118,7 +118,7 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_deleteAll_removesOnlyGivenType() async throws {
+    func deleteAll_removesOnlyGivenType() async throws {
         try await sut.save(object: CardDTO.stub(), update: .all)
         try await sut.save(object: SetDTO.stub(), update: .all)
 
@@ -131,7 +131,7 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_reset_removesEverything() async throws {
+    func reset_removesEverything() async throws {
         try await sut.save(object: CardDTO.stub(), update: .all)
         try await sut.save(object: SetDTO.stub(), update: .all)
         try await sut.save(object: PersonDTO.stub(), update: .all)
@@ -149,7 +149,7 @@ final class SwiftDataManagerTests {
     // MARK: - Sorting
 
     @Test
-    func test_fetch_sortedByName_ascendingAndDescending() async throws {
+    func fetch_sortedByName_ascendingAndDescending() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001", name: "Chewbacca"), update: .all)
         try await sut.save(object: CardDTO.stub(code: "01002", name: "Ackbar"), update: .all)
         try await sut.save(object: CardDTO.stub(code: "01003", name: "Boba Fett"), update: .all)
@@ -164,7 +164,7 @@ final class SwiftDataManagerTests {
     // MARK: - Set round-trip (code-keyed)
 
     @Test
-    func test_saveAndFetchByKey_set_usesCodeAsKey() async throws {
+    func saveAndFetchByKey_set_usesCodeAsKey() async throws {
         let set = SetDTO.stub(name: "Awakenings", code: "AW")
 
         try await sut.save(object: set, update: .all)
@@ -178,7 +178,7 @@ final class SwiftDataManagerTests {
     // MARK: - Nested relationships
 
     @Test
-    func test_savePerson_persistsLentAndBorrowedCards() async throws {
+    func savePerson_persistsLentAndBorrowedCards() async throws {
         let person = PersonDTO.stub(
             name: "Luke",
             lastName: "Skywalker",
@@ -197,7 +197,7 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_saveDeck_persistsCardList() async throws {
+    func saveDeck_persistsCardList() async throws {
         let deck = DeckDTO.stub(cards: [CardDTO.stub(code: "01001"), CardDTO.stub(code: "01002")])
 
         try await sut.save(object: deck, update: .all)
@@ -209,7 +209,7 @@ final class SwiftDataManagerTests {
     }
 
     @Test
-    func test_saveUserCollection_persistsCards() async throws {
+    func saveUserCollection_persistsCards() async throws {
         let collection = UserCollectionDTO.stub(collection: [CardDTO.stub(code: "01001")])
 
         try await sut.save(object: collection, update: .all)
@@ -222,7 +222,7 @@ final class SwiftDataManagerTests {
     // MARK: - Observe
 
     @Test
-    func test_observe_emitsInitialState() async throws {
+    func observe_emitsInitialState() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
 
         var iterator = sut.observe(CardDTO.self, predicate: nil, sorted: nil).makeAsyncIterator()

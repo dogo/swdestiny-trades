@@ -32,7 +32,7 @@ struct SwiftUIBarChartView: View {
             }
         }
         .chartForegroundStyleScale([title: ColorPalette.accent])
-        .chartYScale(domain: 0.0...18.0)
+        .chartYScale(domain: 0.0 ... 18.0)
         .chartYAxis {
             AxisMarks(position: .leading, values: .stride(by: 3.0))
         }

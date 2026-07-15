@@ -27,7 +27,7 @@ final class ToastQueueTests {
     // MARK: - Enqueue
 
     @Test
-    func test_enqueue_whenEmpty_becomesCurrent() {
+    func enqueue_whenEmpty_becomesCurrent() {
         sut.enqueue(title: "Saved", message: "Card added", type: .success)
 
         #expect(sut.current?.title == "Saved")
@@ -36,7 +36,7 @@ final class ToastQueueTests {
     }
 
     @Test
-    func test_enqueue_whenBusy_doesNotReplaceCurrent() {
+    func enqueue_whenBusy_doesNotReplaceCurrent() {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
 
@@ -46,7 +46,7 @@ final class ToastQueueTests {
     // MARK: - Advance (FIFO)
 
     @Test
-    func test_advance_promotesQueuedItemsInOrder() {
+    func advance_promotesQueuedItemsInOrder() {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
         sut.enqueue(title: "Third", message: "3", type: .info)
@@ -59,7 +59,7 @@ final class ToastQueueTests {
     }
 
     @Test
-    func test_advance_whenQueueEmpty_clearsCurrent() {
+    func advance_whenQueueEmpty_clearsCurrent() {
         sut.enqueue(title: "Only", message: "1", type: .info)
 
         sut.advance()
@@ -70,7 +70,7 @@ final class ToastQueueTests {
     // MARK: - Cancel
 
     @Test
-    func test_cancel_currentItem_advancesToNext() throws {
+    func cancel_currentItem_advancesToNext() throws {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
         let currentId = try #require(sut.current?.id)
@@ -81,7 +81,7 @@ final class ToastQueueTests {
     }
 
     @Test
-    func test_cancel_unknownId_keepsCurrentAndQueue() throws {
+    func cancel_unknownId_keepsCurrentAndQueue() throws {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
         let currentId = try #require(sut.current?.id)
@@ -97,7 +97,7 @@ final class ToastQueueTests {
     // MARK: - Cancel All
 
     @Test
-    func test_cancelAll_clearsEverything() {
+    func cancelAll_clearsEverything() {
         sut.enqueue(title: "First", message: "1", type: .info)
         sut.enqueue(title: "Second", message: "2", type: .info)
 
@@ -112,7 +112,7 @@ final class ToastQueueTests {
     // MARK: - onDismiss callback
 
     @Test
-    func test_advance_firesOnDismissOfDismissedItem() async {
+    func advance_firesOnDismissOfDismissedItem() async {
         await confirmation("onDismiss called") { confirm in
             sut.enqueue(title: "First", message: "1", type: .success) {
                 confirm()
@@ -124,7 +124,7 @@ final class ToastQueueTests {
     }
 
     @Test
-    func test_cancelAll_doesNotFireOnDismiss() async {
+    func cancelAll_doesNotFireOnDismiss() async {
         await confirmation("onDismiss must not be called", expectedCount: 0) { confirm in
             sut.enqueue(title: "First", message: "1", type: .success) {
                 confirm()
