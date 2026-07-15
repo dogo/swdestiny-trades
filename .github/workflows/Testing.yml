@@ -62,6 +62,12 @@ jobs:
           tuist generate --no-open
         shell: bash
 
+      - name: Toolchain versions
+        run: |
+          xcode-select -p
+          xcodebuild -version
+          swift --version
+
       - name: Test ${{ matrix.scheme }} on ${{ matrix.destination }}
         run: |
           xcodebuild \
@@ -71,7 +77,16 @@ jobs:
             -resultBundlePath ./coverage/SwdUnitTests.xcresult \
             -enableCodeCoverage YES \
             COMPILER_INDEX_STORE_ENABLE=NO \
-            test | xcpretty && exit ${PIPESTATUS[0]}
+            test 2>&1 | tee xcodebuild-raw.log | xcpretty && exit ${PIPESTATUS[0]}
+
+      # xcpretty swallows compiler diagnostics' file/line details; keep the raw
+      # xcodebuild output around for debugging build failures.
+      - name: Upload raw xcodebuild log
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: xcodebuild-raw-log
+          path: xcodebuild-raw.log
 
       # Convert the app-scoped .xcresult into Cobertura XML ourselves so Codecov
       # reports app coverage. Codecov's own xcresult auto-discovery picked up the
