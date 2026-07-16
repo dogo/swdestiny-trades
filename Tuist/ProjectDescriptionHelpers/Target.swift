@@ -37,7 +37,10 @@ public extension Project {
                     .external(name: "FirebaseAnalytics"),
                     .external(name: "FirebaseCrashlytics"),
                     .external(name: "Kingfisher")
-                ]
+                ],
+                settings: .settings(base: [
+                    "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor"
+                ])
             ),
             .target(
                 name: "SWDestinyTradesTests",

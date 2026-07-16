@@ -21,7 +21,7 @@ final class CollectionCardWriterTests {
         sut = CollectionCardWriter(database: database)
     }
 
-    deinit {
+    isolated deinit {
         database = nil
         sut = nil
     }

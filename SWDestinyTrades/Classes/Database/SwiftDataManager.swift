@@ -30,6 +30,13 @@ enum SwiftDataManagerError: Error, LocalizedError {
 
 // MARK: - SwiftDataManager
 
+// NotificationCenter observer tokens are opaque NSObjectProtocol values. This
+// wrapper only carries the immutable token into AsyncStream.onTermination so it
+// can be unregistered.
+nonisolated private struct NotificationObserverToken: @unchecked Sendable {
+    let value: NSObjectProtocol
+}
+
 @MainActor
 final class SwiftDataManager: @MainActor DatabaseProtocol {
 
@@ -155,26 +162,32 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
             Task { @MainActor [weak self] in
                 guard let self else { return }
                 let initial = await fetch(model, predicate: predicate, sorted: sorted)
-                continuation.yield(initial)
+                // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
+                nonisolated(unsafe) let emittedInitial = initial
+                continuation.yield(emittedInitial)
             }
 
             nonisolated(unsafe) let capturedModel = model
             nonisolated(unsafe) let capturedPredicate = predicate
 
-            let observer = NotificationCenter.default.addObserver(
-                forName: Self.didChangeNotification,
-                object: self,
-                queue: .main
-            ) { [weak self] _ in
-                Task { @MainActor [weak self] in
-                    guard let self else { return }
-                    let items = await fetch(capturedModel, predicate: capturedPredicate, sorted: sorted)
-                    continuation.yield(items)
+            let observer = NotificationObserverToken(
+                value: NotificationCenter.default.addObserver(
+                    forName: Self.didChangeNotification,
+                    object: self,
+                    queue: .main
+                ) { [weak self] _ in
+                    Task { @MainActor [weak self] in
+                        guard let self else { return }
+                        let items = await fetch(capturedModel, predicate: capturedPredicate, sorted: sorted)
+                        // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
+                        nonisolated(unsafe) let emittedItems = items
+                        continuation.yield(emittedItems)
+                    }
                 }
-            }
+            )
 
             continuation.onTermination = { _ in
-                NotificationCenter.default.removeObserver(observer)
+                NotificationCenter.default.removeObserver(observer.value)
             }
         }
     }

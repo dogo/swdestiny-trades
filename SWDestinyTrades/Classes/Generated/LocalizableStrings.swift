@@ -9,7 +9,7 @@ import Foundation
 
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
-internal enum L10n {
+nonisolated internal enum L10n {
   /// A–Z
   internal static let aToZ = L10n.tr("Localizable", "A_TO_Z", fallback: "A–Z")
   /// Localizable.strings
@@ -435,20 +435,20 @@ internal enum L10n {
 // MARK: - Implementation Details
 
 extension L10n {
-  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
+  nonisolated private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
     let format = BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
     return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 
 // swiftlint:disable convenience_type
-private final class BundleToken {
-  static let bundle: Bundle = {
+nonisolated private final class BundleToken {
+  static var bundle: Bundle {
     #if SWIFT_PACKAGE
     return Bundle.module
     #else
     return Bundle(for: BundleToken.self)
     #endif
-  }()
+  }
 }
 // swiftlint:enable convenience_type

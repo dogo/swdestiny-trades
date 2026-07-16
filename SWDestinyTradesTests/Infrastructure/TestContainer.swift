@@ -10,6 +10,7 @@ import Foundation
 
 @testable import SWDestinyTrades
 
+@MainActor
 final class TestContainer {
     private let dependencyManager: DependencyManagerProtocol
     let container: DependencyContainer

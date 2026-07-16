@@ -23,7 +23,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
         sut = AddToDeckViewModel(deck: deck, dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
         deck = nil
     }

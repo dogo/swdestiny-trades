@@ -20,7 +20,7 @@ final class SearchViewModelTests: BaseTestCase {
         sut = SearchViewModel(dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

@@ -13,10 +13,12 @@ import Foundation
 @MainActor
 final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
 
+    private typealias ObserverCallback = @MainActor @Sendable ([Any]) -> Void
+
     var stubbedSaveError: Error?
 
     private var storage: [String: [Any]] = [:]
-    private var observerCallbacks: [String: [UUID: ([Any]) -> Void]] = [:]
+    private var observerCallbacks: [String: [UUID: ObserverCallback]] = [:]
 
     func fetch<T: Storable>(_ model: T.Type, predicate _: NSPredicate?, sorted: Sorted?) async -> [T] {
         let key = String(describing: model)
@@ -108,12 +110,17 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
         return AsyncStream { continuation in
             Task { @MainActor [weak self] in
                 guard let self else { return }
-                let callback: ([Any]) -> Void = { items in
-                    continuation.yield(items.compactMap { $0 as? T })
+                let callback: ObserverCallback = { items in
+                    let typedItems = items.compactMap { $0 as? T }
+                    // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
+                    nonisolated(unsafe) let emittedItems = typedItems
+                    continuation.yield(emittedItems)
                 }
                 observerCallbacks[key, default: [:]][id] = callback
                 let initial = (storage[key] ?? []).compactMap { $0 as? T }
-                continuation.yield(initial)
+                // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
+                nonisolated(unsafe) let emittedInitial = initial
+                continuation.yield(emittedInitial)
             }
 
             continuation.onTermination = { @Sendable _ in

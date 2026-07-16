@@ -20,7 +20,7 @@ final class PeopleListViewModelTests: BaseTestCase {
         sut = PeopleListViewModel(dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

@@ -16,7 +16,7 @@ protocol Snapshotable {
     var snapshotObject: UIView? { get }
 }
 
-extension UIViewController: Snapshotable {
+extension UIViewController: @MainActor Snapshotable {
     var snapshotObject: UIView? {
         beginAppearanceTransition(true, animated: false)
         endAppearanceTransition()
@@ -24,7 +24,7 @@ extension UIViewController: Snapshotable {
     }
 }
 
-extension UIView: Snapshotable {
+extension UIView: @MainActor Snapshotable {
     var snapshotObject: UIView? {
         return self
     }
@@ -48,6 +48,7 @@ public extension FBSnapshotTestCase {
     ///   - identifier: An optional identifier to distinguish between multiple snapshots of the same view or layer. The default is `nil`.
     ///   - shouldIgnoreScale: A Boolean value indicating whether to ignore screen scale differences when comparing snapshots. The default is `false`.
     /// - Returns: `true` if the snapshot validation succeeds; otherwise, `false`.
+    @MainActor
     static func validateSnapshot(_ instance: AnyObject,
                                  isDeviceAgnostic: Bool = false,
                                  usesDrawRect: Bool = false,
@@ -104,6 +105,7 @@ public extension FBSnapshotTestCase {
 
     // swiftlint:enable function_parameter_count
 
+    @MainActor
     private static func attach(image: UIImage, named name: String) {
         XCTContext.runActivity(named: name) { activity in
             let attachment = XCTAttachment(image: image)

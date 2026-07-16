@@ -39,7 +39,7 @@ public extension Project {
 
                 # Add Mise to the PATH
                 export PATH="$HOME/.local/share/mise/shims:$PATH"
-                swiftformat --swiftversion 5.10 --config .swiftformat .
+                swiftformat --swiftversion 6.0 --config .swiftformat .
                 touch "$DERIVED_FILE_DIR/swiftformat.stamp"
                 """,
                 name: "[SwiftFormat] Run Script",

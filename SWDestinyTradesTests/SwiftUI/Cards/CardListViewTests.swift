@@ -25,7 +25,7 @@ final class CardListViewTests: BaseTestCase {
         testSet = SetDTO.stub(name: "Awakenings", code: "AW")
     }
 
-    deinit {
+    isolated deinit {
         helper = nil
         testSet = nil
     }

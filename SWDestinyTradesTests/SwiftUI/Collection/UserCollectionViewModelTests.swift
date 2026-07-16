@@ -20,7 +20,7 @@ final class UserCollectionViewModelTests: BaseTestCase {
         sut = UserCollectionViewModel(dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

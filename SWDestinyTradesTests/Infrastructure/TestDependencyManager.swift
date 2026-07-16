@@ -10,6 +10,7 @@ import Foundation
 
 @testable import SWDestinyTrades
 
+@MainActor
 final class TestDependencyManager: DependencyManagerProtocol {
     private var dependencyInitializer: [String: () -> Any] = [:]
     private var dependencyShared: [String: Any] = [:]

@@ -10,6 +10,7 @@ import Testing
 
 @testable import SWDestinyTrades
 
+@MainActor
 final class SectionsBuilderTests {
 
     // MARK: - alphabetically

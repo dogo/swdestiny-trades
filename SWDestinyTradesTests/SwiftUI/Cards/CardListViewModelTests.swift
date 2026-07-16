@@ -24,7 +24,7 @@ final class CardListViewModelTests: BaseTestCase {
         sut = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
         testSet = nil
     }

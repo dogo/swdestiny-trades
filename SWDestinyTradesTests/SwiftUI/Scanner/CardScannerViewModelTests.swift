@@ -26,7 +26,7 @@ final class CardScannerViewModelTests: BaseTestCase {
         sut = CardScannerViewModel(dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 
@@ -116,6 +116,7 @@ final class ScanCandidateTests {
 
 // MARK: - ScannedCardResult
 
+@MainActor
 final class ScannedCardResultTests {
 
     @Test

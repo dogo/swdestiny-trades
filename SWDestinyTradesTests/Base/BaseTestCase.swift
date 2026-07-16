@@ -48,7 +48,7 @@ class BaseTestCase {
         }
     }
 
-    deinit {
+    isolated deinit {
         testDatabase = nil
         testContainer = nil
         mockHttpClient = nil

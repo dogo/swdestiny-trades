@@ -30,5 +30,6 @@ extension Project {
             .automaticCodeSigning(devTeam: "75C4E36ZA7")
             .currentProjectVersion("46")
             .marketingVersion("1.9.0")
+            .swiftVersion("6.0")
     }
 }

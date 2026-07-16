@@ -97,7 +97,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         }
     }
 
-    deinit {
+    isolated deinit {
         observationTask?.cancel()
     }
 

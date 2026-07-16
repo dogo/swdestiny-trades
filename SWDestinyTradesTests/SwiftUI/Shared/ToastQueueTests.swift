@@ -20,7 +20,7 @@ final class ToastQueueTests {
         sut = ToastQueue()
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

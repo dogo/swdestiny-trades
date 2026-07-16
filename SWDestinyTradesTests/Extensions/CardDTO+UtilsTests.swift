@@ -11,6 +11,7 @@ import Testing
 
 @testable import SWDestinyTrades
 
+@MainActor
 final class CardDTOTests {
 
     @Test

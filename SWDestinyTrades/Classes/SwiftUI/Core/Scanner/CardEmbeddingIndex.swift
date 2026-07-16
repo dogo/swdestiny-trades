@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct CardEmbeddingEntry {
+nonisolated struct CardEmbeddingEntry: Sendable {
     let code: String
     let vector: [Float]
 }
 
-struct CardMatch: Equatable {
+nonisolated struct CardMatch: Equatable, Sendable {
     let code: String
     let score: Float
 }
@@ -24,7 +24,7 @@ struct CardMatch: Equatable {
 /// Binary format (`.swdx`, little-endian), shared with the Python index builder:
 /// `magic("SWDX") | version:UInt32 | dim:UInt32 | count:UInt32` then per entry
 /// `codeLen:UInt16 | codeUTF8 | dim×Float32`.
-final class CardEmbeddingIndex {
+nonisolated final class CardEmbeddingIndex: Sendable {
 
     private static let magic: [UInt8] = Array("SWDX".utf8)
 
@@ -115,17 +115,17 @@ final class CardEmbeddingIndex {
     }
 }
 
-enum ScannerError: Error {
+nonisolated enum ScannerError: Error {
     case embeddingFailed
     case invalidIndexData
 }
 
 private extension Data {
-    func readLittleEndianUInt16() -> UInt16 {
+    nonisolated func readLittleEndianUInt16() -> UInt16 {
         withUnsafeBytes { UInt16(littleEndian: $0.loadUnaligned(as: UInt16.self)) }
     }
 
-    func readLittleEndianUInt32() -> UInt32 {
+    nonisolated func readLittleEndianUInt32() -> UInt32 {
         withUnsafeBytes { UInt32(littleEndian: $0.loadUnaligned(as: UInt32.self)) }
     }
 }

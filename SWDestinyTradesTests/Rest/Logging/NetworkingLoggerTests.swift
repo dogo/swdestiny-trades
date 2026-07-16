@@ -11,6 +11,7 @@ import Testing
 
 @testable import SWDestinyTrades
 
+@MainActor
 final class NetworkingLoggerTests {
 
     private class TestOutputStream: TextOutputStream {
@@ -33,7 +34,7 @@ final class NetworkingLoggerTests {
         logger = NetworkingLogger(level: .debug, outputStream: testOutputStream)
     }
 
-    deinit {
+    isolated deinit {
         logger = nil
         testOutputStream = nil
     }

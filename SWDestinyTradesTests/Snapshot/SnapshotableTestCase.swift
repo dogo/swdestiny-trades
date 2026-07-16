@@ -16,6 +16,7 @@ enum SnapshotTestMode {
     case validate
 }
 
+@MainActor
 class XCSnapshotableTestCase {
 
     /// Captures and validates a snapshot of the specified view or layer.

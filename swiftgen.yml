@@ -3,10 +3,10 @@ output_dir: 'SWDestinyTrades/Classes/Generated/'
 strings:
   inputs: Localization/Base.lproj
   outputs:
-    - templateName: structured-swift5
+    - templatePath: Tooling/SwiftGen/strings-structured-swift6.stencil
       output: LocalizableStrings.swift
 xcassets:
   inputs: Assets.xcassets
   outputs:
-    - templateName: swift5
+    - templatePath: Tooling/SwiftGen/xcassets-swift6.stencil
       output: ImageAssets.swift

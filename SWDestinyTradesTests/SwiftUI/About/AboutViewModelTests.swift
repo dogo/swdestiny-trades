@@ -22,7 +22,7 @@ final class AboutViewModelTests {
         sut = AboutViewModel()
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
         coordinatorMock = nil
     }

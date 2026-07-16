@@ -27,7 +27,7 @@ final class CardDetailViewModelTests: BaseTestCase {
         }
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
         mockImageLoader = nil
     }

@@ -24,7 +24,7 @@ final class KingfisherImageLoaderTests {
         sut = KingfisherImageLoader()
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

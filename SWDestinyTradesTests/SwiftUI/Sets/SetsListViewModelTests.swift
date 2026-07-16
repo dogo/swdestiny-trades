@@ -20,7 +20,7 @@ final class SetsListViewModelTests: BaseTestCase {
         sut = SetsListViewModel(dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

@@ -20,7 +20,7 @@ final class DeckListViewModelTests: BaseTestCase {
         sut = DeckListViewModel(dependencyContainer: testContainer.container)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

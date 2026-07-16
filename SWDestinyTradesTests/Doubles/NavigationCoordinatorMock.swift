@@ -15,7 +15,7 @@ import SwiftUI
 @Observable
 final class NavigationCoordinatorMock: NavigationCoordinatorProtocol {
 
-    struct NavigationCall: Equatable {
+    struct NavigationCall {
         let destination: AppDestination
         let timestamp: Date
         let tab: AppTab?

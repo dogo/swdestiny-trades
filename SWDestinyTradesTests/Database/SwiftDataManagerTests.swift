@@ -19,7 +19,7 @@ final class SwiftDataManagerTests {
         sut = try await SwiftDataManager.create(inMemory: true)
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

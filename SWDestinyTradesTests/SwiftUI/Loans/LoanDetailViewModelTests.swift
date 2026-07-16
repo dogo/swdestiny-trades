@@ -31,7 +31,7 @@ final class LoanDetailViewModelTests: BaseTestCase {
         await sut.loadLoanData()
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
         person = nil
     }

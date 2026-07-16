@@ -19,7 +19,7 @@ final class NavigationCoordinatorTests {
         sut = NavigationCoordinator()
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
     }
 

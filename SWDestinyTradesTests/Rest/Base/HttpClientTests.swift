@@ -11,6 +11,8 @@ import Testing
 
 @testable import SWDestinyTrades
 
+@MainActor
+@Suite(.serialized)
 final class HttpClientTests {
 
     private var sut: HttpClient!
@@ -24,7 +26,7 @@ final class HttpClientTests {
         request.httpMethod = HttpMethod.get.toString()
     }
 
-    deinit {
+    isolated deinit {
         sut = nil
         session = nil
         request = nil

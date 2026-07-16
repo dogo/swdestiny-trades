@@ -1,7 +1,7 @@
 import Foundation
 
 enum SampleData {
-    static let sets: [SetDTO] = {
+    static var sets: [SetDTO] {
         let awakenings = SetDTO()
         awakenings.code = "AW"
         awakenings.name = "Awakenings"
@@ -15,17 +15,20 @@ enum SampleData {
         empireAtWar.name = "Empire at War"
 
         return [awakenings, spiritOfRebellion, empireAtWar]
-    }()
+    }
 
-    static let cards: [CardDTO] = [
-        createLukeSkywalker(),
-        createDarthVader(),
-        createLightsaber(),
-        createForcePush(),
-        createRey()
-    ]
+    static var cards: [CardDTO] {
+        [
+            createLukeSkywalker(),
+            createDarthVader(),
+            createLightsaber(),
+            createForcePush(),
+            createRey()
+        ]
+    }
 
-    static let decks: [DeckDTO] = {
+    static var decks: [DeckDTO] {
+        let cards = cards
         let heroicDeck = DeckDTO()
         heroicDeck.name = "Heroic Rebels"
         heroicDeck.list = [cards[0], cards[2], cards[3]]
@@ -39,9 +42,10 @@ enum SampleData {
         reyDeck.list = [cards[4], cards[2], cards[3]]
 
         return [heroicDeck, villainDeck, reyDeck]
-    }()
+    }
 
-    static let people: [PersonDTO] = {
+    static var people: [PersonDTO] {
+        let cards = cards
         let john = PersonDTO()
         john.name = "John"
         john.lastName = "Smith"
@@ -59,7 +63,7 @@ enum SampleData {
         mike.borrowed = [cards[4]]
 
         return [john, sarah, mike]
-    }()
+    }
 
     private static func createLukeSkywalker() -> CardDTO {
         let card = CardDTO()
