@@ -23,7 +23,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    @ObservationIgnored private var observationTask: Task<Void, Never>?
+    @ObservationIgnored private var observation: DatabaseObservation?
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
@@ -62,27 +62,19 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     }
 
     private func loadCollectionFromDatabase() {
-        observationTask?.cancel()
+        observation?.cancel()
 
-        observationTask = Task { @MainActor in
-            let collectionStream = database.observe(
-                UserCollectionDTO.self,
-                predicate: nil,
-                sorted: nil
-            )
-
-            for await userCollections in collectionStream {
-                guard !Task.isCancelled else { break }
-
-                if let userCollection = userCollections.first {
-                    let allCards = userCollection.myCollection
-                    updateItems(allCards)
-                } else {
-                    updateItems([])
-                }
-
-                setLoaded()
+        observation = database.observe(
+            UserCollectionDTO.self,
+            predicate: nil,
+            sorted: nil
+        ) { [weak self] userCollections in
+            if let userCollection = userCollections.first {
+                self?.updateItems(userCollection.myCollection)
+            } else {
+                self?.updateItems([])
             }
+            self?.setLoaded()
         }
     }
 
@@ -98,7 +90,7 @@ final class UserCollectionViewModel: ListViewModel<CardDTO> {
     }
 
     isolated deinit {
-        observationTask?.cancel()
+        observation?.cancel()
     }
 
     override func filterItems(searchText: String) -> [CardDTO] {

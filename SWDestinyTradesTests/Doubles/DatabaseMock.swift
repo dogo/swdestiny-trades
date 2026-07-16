@@ -13,7 +13,7 @@ import Foundation
 @MainActor
 final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
 
-    private typealias ObserverCallback = @MainActor @Sendable ([Any]) -> Void
+    private typealias ObserverCallback = @MainActor ([Any]) -> Void
 
     var stubbedSaveError: Error?
 
@@ -103,31 +103,24 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
         observerCallbacks.removeAll()
     }
 
-    func observe<T: Storable>(_ model: T.Type, predicate _: NSPredicate?, sorted _: Sorted?) -> AsyncStream<[T]> {
+    @discardableResult
+    func observe<T: Storable>(
+        _ model: T.Type,
+        predicate _: NSPredicate?,
+        sorted _: Sorted?,
+        onChange: @escaping @MainActor ([T]) -> Void
+    ) -> DatabaseObservation {
         let key = String(describing: model)
         let id = UUID()
 
-        return AsyncStream { continuation in
-            Task { @MainActor [weak self] in
-                guard let self else { return }
-                let callback: ObserverCallback = { items in
-                    let typedItems = items.compactMap { $0 as? T }
-                    // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
-                    nonisolated(unsafe) let emittedItems = typedItems
-                    continuation.yield(emittedItems)
-                }
-                observerCallbacks[key, default: [:]][id] = callback
-                let initial = (storage[key] ?? []).compactMap { $0 as? T }
-                // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
-                nonisolated(unsafe) let emittedInitial = initial
-                continuation.yield(emittedInitial)
-            }
+        let callback: ObserverCallback = { items in
+            onChange(items.compactMap { $0 as? T })
+        }
+        observerCallbacks[key, default: [:]][id] = callback
+        onChange((storage[key] ?? []).compactMap { $0 as? T })
 
-            continuation.onTermination = { @Sendable _ in
-                Task { @MainActor [weak self] in
-                    self?.observerCallbacks[key]?.removeValue(forKey: id)
-                }
-            }
+        return DatabaseObservationToken { [weak self] in
+            self?.observerCallbacks[key]?.removeValue(forKey: id)
         }
     }
 

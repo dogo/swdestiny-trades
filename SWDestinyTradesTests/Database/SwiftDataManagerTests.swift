@@ -11,6 +11,11 @@ import Testing
 @testable import SWDestinyTrades
 
 @MainActor
+private final class DatabaseObservationHolder {
+    var observation: DatabaseObservation?
+}
+
+@MainActor
 final class SwiftDataManagerTests {
 
     private var sut: SwiftDataManager!
@@ -225,9 +230,15 @@ final class SwiftDataManagerTests {
     func observe_emitsInitialState() async throws {
         try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
 
-        var iterator = sut.observe(CardDTO.self, predicate: nil, sorted: nil).makeAsyncIterator()
-        let firstEmission = await iterator.next()
+        let holder = DatabaseObservationHolder()
+        let firstEmission = await withCheckedContinuation { continuation in
+            holder.observation = sut.observe(CardDTO.self, predicate: nil, sorted: nil) { [weak holder] cards in
+                holder?.observation?.cancel()
+                holder?.observation = nil
+                continuation.resume(returning: cards)
+            }
+        }
 
-        #expect(firstEmission?.map(\.code) == ["01001"])
+        #expect(firstEmission.map(\.code) == ["01001"])
     }
 }

@@ -16,7 +16,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    @ObservationIgnored private var observationTask: Task<Void, Never>?
+    @ObservationIgnored private var observation: DatabaseObservation?
 
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
@@ -37,18 +37,16 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
     }
 
     private func loadPeopleFromDatabase() {
-        observationTask?.cancel()
+        observation?.cancel()
 
-        observationTask = Task { @MainActor in
-            let peopleStream = database.observe(PersonDTO.self, predicate: nil, sorted: nil)
-
-            for await people in peopleStream {
-                guard !Task.isCancelled else { break }
-
-                updateItems(Array(people))
-                setLoaded()
-            }
+        observation = database.observe(PersonDTO.self, predicate: nil, sorted: nil) { [weak self] people in
+            self?.updateItems(people)
+            self?.setLoaded()
         }
+    }
+
+    isolated deinit {
+        observation?.cancel()
     }
 
     override func filterItems(searchText: String) -> [PersonDTO] {

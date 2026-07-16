@@ -30,13 +30,6 @@ enum SwiftDataManagerError: Error, LocalizedError {
 
 // MARK: - SwiftDataManager
 
-// NotificationCenter observer tokens are opaque NSObjectProtocol values. This
-// wrapper only carries the immutable token into AsyncStream.onTermination so it
-// can be unregistered.
-nonisolated private struct NotificationObserverToken: @unchecked Sendable {
-    let value: NSObjectProtocol
-}
-
 @MainActor
 final class SwiftDataManager: @MainActor DatabaseProtocol {
 
@@ -152,44 +145,23 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
 
     // MARK: - DatabaseProtocol: Observe
 
-    func observe<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) -> AsyncStream<[T]> {
-        AsyncStream { [weak self] continuation in
-            guard let self else {
-                continuation.finish()
-                return
-            }
-
-            Task { @MainActor [weak self] in
-                guard let self else { return }
-                let initial = await fetch(model, predicate: predicate, sorted: sorted)
-                // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
-                nonisolated(unsafe) let emittedInitial = initial
-                continuation.yield(emittedInitial)
-            }
-
-            nonisolated(unsafe) let capturedModel = model
-            nonisolated(unsafe) let capturedPredicate = predicate
-
-            let observer = NotificationObserverToken(
-                value: NotificationCenter.default.addObserver(
-                    forName: Self.didChangeNotification,
-                    object: self,
-                    queue: .main
-                ) { [weak self] _ in
-                    Task { @MainActor [weak self] in
-                        guard let self else { return }
-                        let items = await fetch(capturedModel, predicate: capturedPredicate, sorted: sorted)
-                        // DTOs are mutable legacy reference types; observe streams are consumed by main-actor view models.
-                        nonisolated(unsafe) let emittedItems = items
-                        continuation.yield(emittedItems)
-                    }
-                }
-            )
-
-            continuation.onTermination = { _ in
-                NotificationCenter.default.removeObserver(observer.value)
-            }
-        }
+    @discardableResult
+    func observe<T: Storable>(
+        _ model: T.Type,
+        predicate: NSPredicate?,
+        sorted: Sorted?,
+        onChange: @escaping @MainActor ([T]) -> Void
+    ) -> DatabaseObservation {
+        let observation = SwiftDataObservation(
+            database: self,
+            model: model,
+            predicate: predicate,
+            sorted: sorted,
+            notification: Self.didChangeNotification,
+            onChange: onChange
+        )
+        observation.start()
+        return observation
     }
 
     // MARK: - Private: Upsert
@@ -253,6 +225,73 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
 
     private func notifyChange() {
         NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
+    }
+}
+
+@MainActor
+private final class SwiftDataObservation<T: Storable>: DatabaseObservation {
+
+    private weak var database: SwiftDataManager?
+    private let model: T.Type
+    private let predicate: NSPredicate?
+    private let sorted: Sorted?
+    private let notification: Notification.Name
+    private let onChange: @MainActor ([T]) -> Void
+
+    private var observer: NSObjectProtocol?
+    private var fetchTask: Task<Void, Never>?
+
+    init(
+        database: SwiftDataManager,
+        model: T.Type,
+        predicate: NSPredicate?,
+        sorted: Sorted?,
+        notification: Notification.Name,
+        onChange: @escaping @MainActor ([T]) -> Void
+    ) {
+        self.database = database
+        self.model = model
+        self.predicate = predicate
+        self.sorted = sorted
+        self.notification = notification
+        self.onChange = onChange
+    }
+
+    func start() {
+        observer = NotificationCenter.default.addObserver(
+            forName: notification,
+            object: database,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.fetchCurrentValue()
+            }
+        }
+        fetchCurrentValue()
+    }
+
+    func cancel() {
+        fetchTask?.cancel()
+        fetchTask = nil
+
+        if let observer {
+            NotificationCenter.default.removeObserver(observer)
+            self.observer = nil
+        }
+    }
+
+    isolated deinit {
+        cancel()
+    }
+
+    private func fetchCurrentValue() {
+        fetchTask?.cancel()
+        fetchTask = Task { @MainActor [weak self] in
+            guard let self, let database else { return }
+            let items = await database.fetch(model, predicate: predicate, sorted: sorted)
+            guard !Task.isCancelled else { return }
+            onChange(items)
+        }
     }
 }
 

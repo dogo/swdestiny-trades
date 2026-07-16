@@ -95,6 +95,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
             updatedDeck.name = trimmedName
             updatedDeck.list = deck.list
             try await database.save(object: updatedDeck, update: .modified)
+            deck.name = trimmedName
             await loadDecksFromDatabase()
         } catch {
             handleError(error)

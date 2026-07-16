@@ -26,6 +26,30 @@ enum UpdatePolicy {
     case all
 }
 
+@MainActor
+protocol DatabaseObservation: AnyObject {
+    func cancel()
+}
+
+@MainActor
+final class DatabaseObservationToken: DatabaseObservation {
+
+    private var cancellation: (() -> Void)?
+
+    init(cancellation: @escaping () -> Void) {
+        self.cancellation = cancellation
+    }
+
+    func cancel() {
+        cancellation?()
+        cancellation = nil
+    }
+
+    isolated deinit {
+        cancel()
+    }
+}
+
 /// Protocol defining the database abstraction layer
 protocol DatabaseProtocol: AnyObject {
 
@@ -74,11 +98,18 @@ protocol DatabaseProtocol: AnyObject {
     /// - Throws: Database errors if reset fails
     func reset() async throws
 
-    /// Observe changes to a query (returns AsyncStream)
+    /// Observe changes to a query on the main actor
     /// - Parameters:
     ///   - model: The type of object to observe
     ///   - predicate: Optional predicate to filter results
     ///   - sorted: Optional sorting configuration
-    /// - Returns: AsyncStream that emits arrays of objects when changes occur
-    func observe<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) -> AsyncStream<[T]>
+    ///   - onChange: Called with the current objects when the query changes
+    /// - Returns: A token that cancels the observation
+    @discardableResult
+    func observe<T: Storable>(
+        _ model: T.Type,
+        predicate: NSPredicate?,
+        sorted: Sorted?,
+        onChange: @escaping @MainActor ([T]) -> Void
+    ) -> DatabaseObservation
 }

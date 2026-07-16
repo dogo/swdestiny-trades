@@ -6,6 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Observation
 import Testing
 
 @testable import SWDestinyTrades
@@ -94,7 +95,15 @@ final class DeckListViewModelTests: BaseTestCase {
         try? await populateTestData(objects: [deck])
         await sut.loadDecks()
 
-        await sut.renameDeck(deck, newName: "New Name")
+        await confirmation("Deck list invalidated after rename") { confirm in
+            withObservationTracking {
+                _ = sut.filteredItems.map(\.name)
+            } onChange: {
+                confirm()
+            }
+
+            await sut.renameDeck(deck, newName: "New Name")
+        }
 
         #expect(sut.items.map(\.name) == ["New Name"])
     }

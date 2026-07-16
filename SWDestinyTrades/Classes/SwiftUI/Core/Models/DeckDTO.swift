@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import Observation
 
+@Observable
 class DeckDTO: Storable, Identifiable {
     var id: String = UUID().uuidString
     var name: String = ""
