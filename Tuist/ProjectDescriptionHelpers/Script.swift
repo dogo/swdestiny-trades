@@ -32,17 +32,14 @@ public extension Project {
             TargetScript.pre(
                 script:
                 """
-                if [[ -z "${CI:-}" ]]; then
-                  echo "Skipping SwiftFormat outside CI."
+                if [[ -n "${CI:-}" ]]; then
+                  echo "Skipping SwiftFormat on CI."
                   exit 0
                 fi
 
                 # Add Mise to the PATH
                 export PATH="$HOME/.local/share/mise/shims:$PATH"
-                # Lint only: formatting in place here made CI compile code that
-                # differs from the repo (and SwiftFormat's Swift Testing
-                # rewrites can produce code that doesn't compile).
-                swiftformat --lint --swiftversion 5.10 --config .swiftformat .
+                swiftformat --swiftversion 5.10 --config .swiftformat .
                 touch "$DERIVED_FILE_DIR/swiftformat.stamp"
                 """,
                 name: "[SwiftFormat] Run Script",

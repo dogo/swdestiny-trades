@@ -4,9 +4,6 @@
 --exclude SWDestinyTrades/Classes/Generated
 
 # Rules
-# preferKeyPath rewrites closures like `.allSatisfy { $0.x }` into key paths;
-# inside Swift Testing's #expect/#require macros the key-path form fails to
-# compile ("call can throw" via the rethrows rewrite), so keep closures.
 --disable preferKeyPath
 --disable blankLinesAtStartOfScope
 --disable blankLinesBetweenImports
