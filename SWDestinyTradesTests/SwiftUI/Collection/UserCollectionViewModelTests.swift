@@ -6,6 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Observation
 import Testing
 
 @testable import SWDestinyTrades
@@ -45,6 +46,31 @@ final class UserCollectionViewModelTests: BaseTestCase {
         await sut.refreshCollection()
 
         #expect(sut.items.isEmpty)
+    }
+
+    @Test
+    func observedCollectionUpdate_invalidatesCardContent() async throws {
+        let originalCard = CardDTO.stub(code: "01001", quantity: 1)
+        let collection = UserCollectionDTO.stub(collection: [originalCard])
+        try await populateTestData(objects: [collection])
+        sut.loadCollection()
+
+        let updatedCard = CardDTO.stub(code: originalCard.code, quantity: 3)
+        updatedCard.id = originalCard.id
+        let updatedCollection = UserCollectionDTO.stub(collection: [updatedCard])
+        updatedCollection.id = collection.id
+
+        try await confirmation("Collection content invalidated") { confirm in
+            withObservationTracking {
+                _ = sut.filteredItems.map(\.quantity)
+            } onChange: {
+                confirm()
+            }
+
+            try await testDatabase.save(object: updatedCollection, update: .modified)
+        }
+
+        #expect(sut.filteredItems.map(\.quantity) == [3])
     }
 
     // MARK: - Filtering

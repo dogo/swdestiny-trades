@@ -9,24 +9,23 @@
 import SwiftUI
 
 struct DeckListContent: View {
-    let decks: [DeckDTO]
-    let cardCounts: [String: Int]
-    let onEdit: (DeckDTO) -> Void
-    let onGraph: (DeckDTO) -> Void
-    let onDelete: (DeckDTO) -> Void
-    let onRename: (DeckDTO, String) -> Void
+    let items: [DeckListItem]
+    let onEdit: (DeckListItem) -> Void
+    let onGraph: (DeckListItem) -> Void
+    let onDelete: (DeckListItem) -> Void
+    let onRename: (DeckListItem, String) -> Void
 
     var body: some View {
         List {
-            ForEach(decks, id: \.id) { deck in
-                DeckRowView(deck: deck, cardCount: cardCounts[deck.id] ?? 0) {
-                    onEdit(deck)
+            ForEach(items) { item in
+                DeckRowView(item: item) {
+                    onEdit(item)
                 } onGraph: {
-                    onGraph(deck)
+                    onGraph(item)
                 } onDelete: {
-                    onDelete(deck)
+                    onDelete(item)
                 } onRename: { newName in
-                    onRename(deck, newName)
+                    onRename(item, newName)
                 }
             }
         }

@@ -26,15 +26,14 @@ struct DeckListView: View {
                 DeckEmptyStateView(onCreateDeck: createNewDeck)
             } else {
                 DeckListContent(
-                    decks: viewModel.filteredItems,
-                    cardCounts: viewModel.cardCounts,
+                    items: viewModel.filteredItems,
                     onEdit: editDeck,
                     onGraph: showDeckGraph,
-                    onDelete: { deck in
-                        Task { await viewModel.delete(deck) }
+                    onDelete: { item in
+                        Task { await viewModel.delete(item) }
                     },
-                    onRename: { deck, newName in
-                        Task { await viewModel.renameDeck(deck, newName: newName) }
+                    onRename: { item, newName in
+                        Task { await viewModel.renameDeck(item, newName: newName) }
                     }
                 )
             }
@@ -66,11 +65,13 @@ struct DeckListView: View {
         navigationCoordinator.navigate(to: .deckBuilder(nil))
     }
 
-    private func editDeck(_ deck: DeckDTO) {
+    private func editDeck(_ item: DeckListItem) {
+        guard let deck = viewModel.deck(for: item) else { return }
         navigationCoordinator.navigate(to: .deckBuilder(deck))
     }
 
-    private func showDeckGraph(_ deck: DeckDTO) {
+    private func showDeckGraph(_ item: DeckListItem) {
+        guard let deck = viewModel.deck(for: item) else { return }
         navigationCoordinator.navigate(to: .deckGraph(deck))
     }
 

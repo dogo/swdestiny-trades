@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct DeckRowView: View {
-    let deck: DeckDTO
-    let cardCount: Int
+    let item: DeckListItem
     let onEdit: () -> Void
     let onGraph: () -> Void
     let onDelete: () -> Void
@@ -22,8 +21,8 @@ struct DeckRowView: View {
     var body: some View {
         HStack {
             DeckNameSection(
-                deck: deck,
-                cardCount: cardCount,
+                name: item.name,
+                cardCount: item.cardCount,
                 isEditing: $isEditing,
                 editedName: $editedName,
                 onEdit: onEdit,
@@ -52,13 +51,13 @@ struct DeckRowView: View {
     // MARK: - Private Methods
 
     private func startEditing() {
-        editedName = deck.name
+        editedName = item.name
         isEditing = true
     }
 
     private func saveName() {
         let trimmedName = editedName.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmedName.isEmpty, trimmedName != deck.name {
+        if !trimmedName.isEmpty, trimmedName != item.name {
             onRename(trimmedName)
         }
         isEditing = false

@@ -57,7 +57,7 @@ final class DeckListViewModelTests: BaseTestCase {
 
         await sut.loadDecks()
 
-        #expect(sut.cardCounts[deck.id] == 5)
+        #expect(sut.items.first(where: { $0.id == deck.id })?.cardCount == 5)
     }
 
     // MARK: - Filtering
@@ -66,7 +66,7 @@ final class DeckListViewModelTests: BaseTestCase {
     func filterItems_byName() {
         let alpha = makeDeck(name: "Alpha Strike")
         let beta = makeDeck(name: "Beta Build")
-        sut.updateItems([alpha, beta])
+        sut.updateItems([DeckListItem(deck: alpha), DeckListItem(deck: beta)])
 
         sut.performFiltering(searchText: "Alpha")
 
@@ -76,13 +76,14 @@ final class DeckListViewModelTests: BaseTestCase {
     // MARK: - Delete
 
     @Test
-    func delete_removesDeck() async {
+    func delete_removesDeck() async throws {
         let keep = makeDeck(name: "Keep")
         let remove = makeDeck(name: "Remove")
         try? await populateTestData(objects: [keep, remove])
         await sut.loadDecks()
+        let item = try #require(sut.items.first(where: { $0.id == remove.id }))
 
-        await sut.delete(remove)
+        await sut.delete(item)
 
         #expect(sut.items.map(\.name) == ["Keep"])
     }
@@ -90,10 +91,11 @@ final class DeckListViewModelTests: BaseTestCase {
     // MARK: - Rename
 
     @Test
-    func renameDeck_updatesName() async {
+    func renameDeck_replacesListItemSnapshotWithUpdatedName() async throws {
         let deck = makeDeck(name: "Old Name")
         try? await populateTestData(objects: [deck])
         await sut.loadDecks()
+        let originalItem = try #require(sut.items.first)
 
         await confirmation("Deck list invalidated after rename") { confirm in
             withObservationTracking {
@@ -102,19 +104,21 @@ final class DeckListViewModelTests: BaseTestCase {
                 confirm()
             }
 
-            await sut.renameDeck(deck, newName: "New Name")
+            await sut.renameDeck(originalItem, newName: "New Name")
         }
 
+        #expect(originalItem.name == "Old Name")
         #expect(sut.items.map(\.name) == ["New Name"])
     }
 
     @Test
-    func renameDeck_blankName_isNoOp() async {
+    func renameDeck_blankName_isNoOp() async throws {
         let deck = makeDeck(name: "Original")
         try? await populateTestData(objects: [deck])
         await sut.loadDecks()
+        let item = try #require(sut.items.first)
 
-        await sut.renameDeck(deck, newName: "   ")
+        await sut.renameDeck(item, newName: "   ")
 
         #expect(sut.items.map(\.name) == ["Original"])
     }

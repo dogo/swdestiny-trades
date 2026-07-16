@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 @Observable
-class ListViewModel<T: Identifiable & Equatable>: BaseViewModel {
+class ListViewModel<T: Identifiable>: BaseViewModel {
     private(set) var items: [T] = []
     private(set) var filteredItems: [T] = []
 

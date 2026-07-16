@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DeckNameSection: View {
-    let deck: DeckDTO
+    let name: String
     let cardCount: Int
     @Binding var isEditing: Bool
     @Binding var editedName: String
@@ -28,7 +28,7 @@ struct DeckNameSection: View {
         } else {
             Button(action: onEdit) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(deck.name.isEmpty ? L10n.unnamedDeck : deck.name)
+                    Text(name.isEmpty ? L10n.unnamedDeck : name)
                         .font(.headline)
                         .foregroundStyle(.primary)
 

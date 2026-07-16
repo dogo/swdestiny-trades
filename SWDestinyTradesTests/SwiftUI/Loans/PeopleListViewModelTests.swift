@@ -6,6 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Observation
 import Testing
 
 @testable import SWDestinyTrades
@@ -37,6 +38,32 @@ final class PeopleListViewModelTests: BaseTestCase {
 
         #expect(sut.items.count == 2)
         #expect(sut.isLoading == false)
+    }
+
+    @Test
+    func observedPersonUpdate_invalidatesLoanSummary() async throws {
+        let person = PersonDTO.stub(name: "Han", lastName: "Solo")
+        try await populateTestData(objects: [person])
+        await sut.loadPeople()
+
+        let updatedPerson = PersonDTO.stub(
+            name: person.name,
+            lastName: person.lastName,
+            lentMe: [CardDTO.stub(code: "01001", quantity: 2)]
+        )
+        updatedPerson.id = person.id
+
+        try await confirmation("Person loan summary invalidated") { confirm in
+            withObservationTracking {
+                _ = sut.filteredItems.map { sut.getLoanSummary(for: $0).lentCount }
+            } onChange: {
+                confirm()
+            }
+
+            try await testDatabase.save(object: updatedPerson, update: .modified)
+        }
+
+        #expect(sut.filteredItems.map { sut.getLoanSummary(for: $0).lentCount } == [2])
     }
 
     // MARK: - Filtering

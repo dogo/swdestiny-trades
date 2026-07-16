@@ -10,9 +10,8 @@ import SwiftUI
 
 @MainActor
 @Observable
-final class DeckListViewModel: ListViewModel<DeckDTO> {
-
-    private(set) var cardCounts: [String: Int] = [:]
+final class DeckListViewModel: ListViewModel<DeckListItem> {
+    @ObservationIgnored private var decksByID: [String: DeckDTO] = [:]
 
     private var database: DatabaseProtocol {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
@@ -45,13 +44,11 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
             sorted: Sorted(key: "name", ascending: true)
         )
 
-        var counts: [String: Int] = [:]
-        for deck in fetchedDecks {
-            counts[deck.id] = deck.list.reduce(0) { $0 + $1.quantity }
+        decksByID = fetchedDecks.reduce(into: [:]) { decks, deck in
+            decks[deck.id] = deck
         }
-        cardCounts = counts
 
-        updateItems(fetchedDecks)
+        updateItems(fetchedDecks.map(DeckListItem.init))
         applySorting()
         setLoaded()
     }
@@ -60,7 +57,7 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         performFiltering(searchText: searchText)
     }
 
-    private func filterDecks() -> [DeckDTO] {
+    private func filterDecks() -> [DeckListItem] {
         var filtered = items
 
         if !searchText.isEmpty {
@@ -72,11 +69,17 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         return filtered
     }
 
-    override func filterItems(searchText: String) -> [DeckDTO] {
+    override func filterItems(searchText: String) -> [DeckListItem] {
         return filterDecks()
     }
 
-    func delete(_ deck: DeckDTO) async {
+    func deck(for item: DeckListItem) -> DeckDTO? {
+        decksByID[item.id]
+    }
+
+    func delete(_ item: DeckListItem) async {
+        guard let deck = deck(for: item) else { return }
+
         do {
             try await database.delete(object: deck)
             await loadDecksFromDatabase()
@@ -85,9 +88,9 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
         }
     }
 
-    func renameDeck(_ deck: DeckDTO, newName: String) async {
+    func renameDeck(_ item: DeckListItem, newName: String) async {
         let trimmedName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmedName.isEmpty else { return }
+        guard !trimmedName.isEmpty, let deck = deck(for: item) else { return }
 
         do {
             let updatedDeck = DeckDTO()
@@ -95,7 +98,6 @@ final class DeckListViewModel: ListViewModel<DeckDTO> {
             updatedDeck.name = trimmedName
             updatedDeck.list = deck.list
             try await database.save(object: updatedDeck, update: .modified)
-            deck.name = trimmedName
             await loadDecksFromDatabase()
         } catch {
             handleError(error)
