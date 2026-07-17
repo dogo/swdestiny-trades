@@ -53,8 +53,8 @@ final class SWDestinyServiceTests: BaseTestCase {
     }
 
     @Test
-    func testCancelRequest() throws {
-        let request = try URLRequest(with: #require(URL(string: "https://base.url.com")))
+    func testCancelRequest() {
+        let request = URLRequest(with: URL(string: "https://base.url.com"))
         sut.cancelRequest(request)
 
         #expect(mockHttpClient.isCancelled)
