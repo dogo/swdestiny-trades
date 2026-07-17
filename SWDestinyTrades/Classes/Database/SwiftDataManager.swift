@@ -263,7 +263,7 @@ private final class SwiftDataObservation<T: Storable>: DatabaseObservation {
             object: database,
             queue: .main
         ) { [weak self] _ in
-            Task { @MainActor [weak self] in
+            MainActor.assumeIsolated {
                 self?.fetchCurrentValue()
             }
         }
