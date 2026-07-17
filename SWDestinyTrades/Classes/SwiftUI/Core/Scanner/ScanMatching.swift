@@ -8,6 +8,12 @@
 
 import CoreGraphics
 
+/// Background-safe output from the image matcher. Catalog models are resolved on `MainActor`.
+nonisolated struct CardScanMatch: Equatable, Sendable {
+    let code: String
+    let confidence: Float
+}
+
 /// A resolved scan: the catalog card plus a 0...1 match score.
 struct ScannedCardResult: Equatable {
     let card: CardDTO
@@ -24,8 +30,8 @@ struct ScannedCardResult: Equatable {
     }
 }
 
-protocol CardScanMatching: AnyObject {
+nonisolated protocol CardScanMatching: AnyObject, Sendable {
     /// Returns the best catalog matches, best first. CPU-bound — call off the main thread.
     /// Implementations must be safe to call from a background queue (read-only after init).
-    func matches(_ image: CGImage, limit: Int) -> [ScannedCardResult]
+    func matches(_ image: CGImage, limit: Int) -> [CardScanMatch]
 }
