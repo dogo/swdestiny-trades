@@ -8,7 +8,7 @@
 
 import CoreImage
 import CoreVideo
-import Foundation
+import Synchronization
 
 /// Crops the framed card and matches it on capture.
 ///
@@ -19,36 +19,41 @@ import Foundation
 ///
 /// Lives off the main actor: the camera delivers frames on its sample queue and calls `process`
 /// there, so cropping and Vision embedding never touch the main thread.
-final class ScanFramePipeline: @unchecked Sendable {
+/// Matcher replacement and capture requests cross executors, so that state lives in a compiler-
+/// checked `Mutex`; image processing remains synchronous on the serial sample queue.
+nonisolated final class ScanFramePipeline: Sendable {
 
-    struct Candidate {
+    private struct State {
+        var matcher: CardScanMatching?
+        var captureRequested = false
+    }
+
+    struct Candidate: Sendable {
         let crop: CGImage
-        let matches: [ScannedCardResult]
+        let matches: [CardScanMatch]
     }
 
     /// Standard trading-card aspect ratio (63mm × 88mm), width / height.
     static let cardAspect: CGFloat = 0.716
 
     private let ciContext = CIContext(options: nil)
-    private let lock = NSLock()
-    private var _matcher: CardScanMatching?
-    private var _captureRequested = false
+    private let state = Mutex(State())
 
     var matcher: CardScanMatching? {
-        get { lock.withLock { _matcher } }
-        set { lock.withLock { _matcher = newValue } }
+        get { state.withLock { $0.matcher } }
+        set { state.withLock { $0.matcher = newValue } }
     }
 
     func requestCapture() {
-        lock.withLock { _captureRequested = true }
+        state.withLock { $0.captureRequested = true }
     }
 
     /// Returns matched candidates only on the frame that fulfilled a capture request, else nil.
     func process(_ pixelBuffer: CVPixelBuffer) -> [Candidate]? {
-        let (currentMatcher, isCapture) = lock.withLock { () -> (CardScanMatching?, Bool) in
-            let capture = _captureRequested
-            _captureRequested = false
-            return (_matcher, capture)
+        let (currentMatcher, isCapture) = state.withLock { state -> (CardScanMatching?, Bool) in
+            let capture = state.captureRequested
+            state.captureRequested = false
+            return (state.matcher, capture)
         }
 
         guard isCapture, let crop = centerCardCrop(pixelBuffer) else {

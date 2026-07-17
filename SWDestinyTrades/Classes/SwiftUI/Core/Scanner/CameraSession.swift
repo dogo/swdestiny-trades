@@ -8,51 +8,56 @@
 
 import AVFoundation
 
-/// Thin wrapper around `AVCaptureSession` that emits raw camera frames.
+/// Owns an `AVCaptureSession` and emits raw camera frames.
 ///
-/// Capture is configured and started on a private queue; frames are delivered on a separate
+/// Capture is configured and started on a private serial executor; frames are delivered on a separate
 /// sample queue so heavy work (Vision) never blocks the main thread. The session drops late
 /// frames, so processing one frame at a time is enough — no manual throttling required.
-final class CameraSession: NSObject {
+actor CameraSession {
 
-    let captureSession = AVCaptureSession()
+    private nonisolated let executor = DispatchSerialQueue(label: "com.swdestiny.camera.session")
 
-    private let sessionQueue = DispatchQueue(label: "com.swdestiny.camera.session")
+    nonisolated var unownedExecutor: UnownedSerialExecutor {
+        executor.asUnownedSerialExecutor()
+    }
+
+    /// AVFoundation requires the same session instance on its serial capture executor and in the
+    /// main-thread preview layer, but the SDK does not declare `AVCaptureSession` as `Sendable`.
+    /// No Swift mutable state is exposed through this reference; all session mutations stay here.
+    nonisolated(unsafe) let captureSession = AVCaptureSession()
+
     private let sampleQueue = DispatchQueue(label: "com.swdestiny.camera.samples")
     private let videoOutput = AVCaptureVideoDataOutput()
-
+    private let frameDelegate: CameraFrameDelegate
     private var isConfigured = false
-    private var frameHandler: ((CVPixelBuffer) -> Void)?
+
+    init(frameHandler: @escaping @Sendable (CVPixelBuffer) -> Void) {
+        frameDelegate = CameraFrameDelegate(frameHandler: frameHandler)
+    }
 
     // MARK: - Authorization
 
-    var authorizationStatus: AVAuthorizationStatus {
+    nonisolated var authorizationStatus: AVAuthorizationStatus {
         AVCaptureDevice.authorizationStatus(for: .video)
     }
 
-    func requestAccess() async -> Bool {
+    nonisolated func requestAccess() async -> Bool {
         await AVCaptureDevice.requestAccess(for: .video)
     }
 
     // MARK: - Lifecycle
 
-    /// Configures (once) and starts the session. `frameHandler` is called on a background queue.
-    func start(frameHandler: @escaping (CVPixelBuffer) -> Void) {
-        self.frameHandler = frameHandler
-        sessionQueue.async { [weak self] in
-            guard let self else { return }
-            configureIfNeeded()
-            if !captureSession.isRunning {
-                captureSession.startRunning()
-            }
+    /// Configures (once) and starts the session. Frames arrive on the background sample queue.
+    func start() {
+        configureIfNeeded()
+        if !captureSession.isRunning {
+            captureSession.startRunning()
         }
     }
 
     func stop() {
-        sessionQueue.async { [weak self] in
-            guard let self, captureSession.isRunning else { return }
-            captureSession.stopRunning()
-        }
+        guard captureSession.isRunning else { return }
+        captureSession.stopRunning()
     }
 
     // MARK: - Configuration
@@ -73,7 +78,7 @@ final class CameraSession: NSObject {
 
         videoOutput.alwaysDiscardsLateVideoFrames = true
         videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
-        videoOutput.setSampleBufferDelegate(self, queue: sampleQueue)
+        videoOutput.setSampleBufferDelegate(frameDelegate, queue: sampleQueue)
 
         guard captureSession.canAddOutput(videoOutput) else {
             captureSession.commitConfiguration()
@@ -92,12 +97,19 @@ final class CameraSession: NSObject {
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
-extension CameraSession: AVCaptureVideoDataOutputSampleBufferDelegate {
+nonisolated private final class CameraFrameDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+    private let frameHandler: @Sendable (CVPixelBuffer) -> Void
+
+    init(frameHandler: @escaping @Sendable (CVPixelBuffer) -> Void) {
+        self.frameHandler = frameHandler
+        super.init()
+    }
 
     func captureOutput(_ output: AVCaptureOutput,
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        frameHandler?(pixelBuffer)
+        frameHandler(pixelBuffer)
     }
 }

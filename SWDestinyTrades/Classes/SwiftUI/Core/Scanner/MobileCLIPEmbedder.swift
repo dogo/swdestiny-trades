@@ -8,23 +8,24 @@
 
 import CoreGraphics
 import CoreML
+import Synchronization
 import Vision
 
 /// Embeds a card crop with the bundled, fine-tuned MobileCLIP image encoder (Core ML, FP32).
 ///
 /// The encoder was fine-tuned so phone photos match the catalog scans (see Tooling/ml). The model
 /// bakes CLIP normalization; cosine normalization happens in `CardEmbeddingIndex`.
-final class MobileCLIPEmbedder {
+nonisolated final class MobileCLIPEmbedder: Sendable {
 
     static let bundledModelName = "MobileCLIPImage"
 
-    private let model: VNCoreMLModel
+    private let model: Mutex<VNCoreMLModel>
 
     init(modelURL: URL) throws {
         let configuration = MLModelConfiguration()
         configuration.computeUnits = .all
         let mlModel = try MLModel(contentsOf: modelURL, configuration: configuration)
-        model = try VNCoreMLModel(for: mlModel)
+        model = Mutex(try VNCoreMLModel(for: mlModel))
     }
 
     static func bundled(name: String = bundledModelName, in bundle: Bundle = .main) -> MobileCLIPEmbedder? {
@@ -40,16 +41,18 @@ final class MobileCLIPEmbedder {
 
     /// Embeds the image at the given orientation (used to try the 4 card rotations). CPU-bound.
     func embed(_ image: CGImage, orientation: CGImagePropertyOrientation) throws -> [Float] {
-        let request = VNCoreMLRequest(model: model)
-        request.imageCropAndScaleOption = .scaleFill
+        try model.withLock { model in
+            let request = VNCoreMLRequest(model: model)
+            request.imageCropAndScaleOption = .scaleFill
 
-        let handler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
-        try handler.perform([request])
+            let handler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
+            try handler.perform([request])
 
-        guard let observation = request.results?.first as? VNCoreMLFeatureValueObservation,
-              let multiArray = observation.featureValue.multiArrayValue else {
-            throw ScannerError.embeddingFailed
+            guard let observation = request.results?.first as? VNCoreMLFeatureValueObservation,
+                  let multiArray = observation.featureValue.multiArrayValue else {
+                throw ScannerError.embeddingFailed
+            }
+            return (0 ..< multiArray.count).map { multiArray[$0].floatValue }
         }
-        return (0 ..< multiArray.count).map { multiArray[$0].floatValue }
     }
 }

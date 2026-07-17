@@ -45,7 +45,7 @@ struct CardScannerView: View {
         ZStack {
             Color.black
 
-            CameraPreviewView(session: viewModel.cameraSession.captureSession)
+            CameraPreviewView(session: viewModel.previewSession)
 
             RoundedRectangle(cornerRadius: 12)
                 .stroke(.white.opacity(0.9), lineWidth: 3)
