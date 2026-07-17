@@ -1,3 +1,7 @@
+# torch 2.10 is past coremltools 9.0's tested matrix (<= 2.7), but the convert_trained.py
+# export was exercised with this exact pairing: identical embeddings (cosine 1.0) vs the
+# shipped torch 2.7 export. Needs Python <= 3.11: coremltools 9.0 lacks the native
+# BlobWriter extension on 3.14 ("BlobWriter not loaded").
 torch==2.10.0
 torchvision==0.25.0
 open_clip_torch>=2.24
