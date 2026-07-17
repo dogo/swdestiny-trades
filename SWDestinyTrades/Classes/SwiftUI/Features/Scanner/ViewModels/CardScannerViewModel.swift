@@ -182,14 +182,19 @@ final class CardScannerViewModel: BaseViewModel {
         let cards = await (try? service.retrieveAllCards()) ?? []
         cardsByCode = Dictionary(cards.map { ($0.code, $0) }) { first, _ in first }
 
+        // Without the catalog no match can be resolved to a card, even with a working matcher.
+        guard !cards.isEmpty else {
+            indexState = .failed
+            return
+        }
+
         if let injectedMatcher {
             pipeline.matcher = injectedMatcher
             indexState = .ready
             return
         }
 
-        guard !cards.isEmpty,
-              let embedder = MobileCLIPEmbedder.bundled(),
+        guard let embedder = MobileCLIPEmbedder.bundled(),
               let url = Bundle.main.url(forResource: "card-embeddings", withExtension: "swdx"),
               let entries = try? CardEmbeddingIndex.load(from: url),
               !entries.isEmpty else {
