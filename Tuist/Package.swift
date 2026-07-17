@@ -17,8 +17,8 @@ import PackageDescription
 let package = Package(
     name: "PackageName",
     dependencies: [
-        .package(url: "https://github.com/onevcat/Kingfisher", from: "8.8.0"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "12.15.0"),
+        .package(url: "https://github.com/onevcat/Kingfisher", from: "8.10.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "12.16.0"),
         .package(url: "https://github.com/uber/ios-snapshot-test-case", from: "8.0.0")
     ]
 )

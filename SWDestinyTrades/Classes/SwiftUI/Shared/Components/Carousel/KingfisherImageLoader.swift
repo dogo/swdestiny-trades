@@ -58,7 +58,7 @@ final class KingfisherImageLoader: ImageLoadingService {
             return url
         }
         guard !urls.isEmpty else { return }
-        ImagePrefetcher(urls: urls).start()
+        ImagePrefetcher(urls: urls, options: makeOptions()).start()
     }
 
     func cancelPrefetch(sources: [ImageSource]) {
@@ -76,17 +76,26 @@ final class KingfisherImageLoader: ImageLoadingService {
 
     // MARK: - Private
 
-    private func loadRemoteImage(
-        url: URL,
-        onProgress: (@MainActor @Sendable (Double) -> Void)?
-    ) async throws -> UIImage {
-        let options: KingfisherOptionsInfo = [
+    private func makeOptions() -> KingfisherOptionsInfo {
+        var serializer = DefaultCacheSerializer()
+        serializer.preferCacheOriginalData = true
+
+        return [
             .targetCache(cache),
             .retryStrategy(retryStrategy),
             .transition(.fade(0.2)),
             .cacheOriginalImage,
-            .backgroundDecode
+            .backgroundDecode,
+            .asyncCacheTypeCheck,
+            .cacheSerializer(serializer)
         ]
+    }
+
+    private func loadRemoteImage(
+        url: URL,
+        onProgress: (@MainActor @Sendable (Double) -> Void)?
+    ) async throws -> UIImage {
+        let options = makeOptions()
 
         return try await withCheckedThrowingContinuation { continuation in
             KingfisherManager.shared.retrieveImage(
