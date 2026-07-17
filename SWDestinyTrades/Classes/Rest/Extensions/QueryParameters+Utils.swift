@@ -10,7 +10,7 @@ import Foundation
 
 extension QueryParameters {
 
-    var items: [URLQueryItem] {
+    nonisolated var items: [URLQueryItem] {
         return compactMap { URLQueryItem(name: $0, value: $1) }
     }
 }

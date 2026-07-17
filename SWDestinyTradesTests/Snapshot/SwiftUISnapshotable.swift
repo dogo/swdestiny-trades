@@ -45,7 +45,7 @@ extension XCSnapshotableTestCase {
         testMode: SnapshotTestMode = .validate,
         perPixelTolerance: CGFloat = 0.02,
         overallTolerance: CGFloat = 0,
-        file: StaticString = #file,
+        file: StaticString = #filePath,
         line: UInt = #line,
         function: String = #function
     ) -> Bool {
