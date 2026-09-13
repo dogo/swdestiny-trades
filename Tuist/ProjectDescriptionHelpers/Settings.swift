@@ -28,8 +28,8 @@ extension Project {
     private static func baseSettings() -> SettingsDictionary {
         return SettingsDictionary()
             .automaticCodeSigning(devTeam: "75C4E36ZA7")
-            .currentProjectVersion("46")
-            .marketingVersion("1.9.0")
+            .currentProjectVersion("47")
+            .marketingVersion("1.9.1")
             .swiftVersion("6.0")
     }
 }
