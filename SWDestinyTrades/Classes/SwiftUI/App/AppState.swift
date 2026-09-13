@@ -62,7 +62,7 @@ final class AppState {
         }
 
         dependencyContainer.register(type: SWDestinyServiceProtocol.self) {
-            let httpClient: HttpClientProtocol = self.dependencyContainer.resolve(type: HttpClientProtocol.self)
+            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
             return SWDestinyService(client: httpClient)
         }
 
