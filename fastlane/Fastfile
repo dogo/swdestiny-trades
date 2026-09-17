@@ -14,6 +14,14 @@ SCHEME     = "SWDestinyTrades"
 APP_ID     = "br.com.anykey.SWDestiny-Trades"
 
 platform :ios do
+  def asc_api_key
+    app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: ENV.fetch("ASC_KEY_PATH")
+    )
+  end
+
   before_all do
     # Fetch SPM dependencies and (re)generate the Xcode project/workspace.
     # `sh` runs inside the fastlane/ folder, so step up to the repo root first.
@@ -56,7 +64,7 @@ platform :ios do
       workspace: WORKSPACE,
       export_options: "./fastlane/exportOptions.plist"
     )
-    pilot(skip_waiting_for_build_processing: true)
+    pilot(api_key: asc_api_key, skip_waiting_for_build_processing: true)
   end
 
   desc "Deploy a new version to the App Store"
@@ -67,7 +75,7 @@ platform :ios do
       workspace: WORKSPACE,
       export_options: "./fastlane/exportOptions.plist"
     )
-    deliver(force: true)
+    deliver(api_key: asc_api_key, force: true)
   end
 
   error do |lane, exception|
