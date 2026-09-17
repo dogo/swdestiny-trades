@@ -29,13 +29,11 @@ struct ViewTestHelper {
             if let mock = navigationCoordinatorMock {
                 content()
                     .environment(\.dependencyContainer, container)
-                    .environment(\.viewModelFactory, ViewModelFactory(container: container))
                     .environment(mock)
                     .environment(appState)
             } else {
                 content()
                     .environment(\.dependencyContainer, container)
-                    .environment(\.viewModelFactory, ViewModelFactory(container: container))
                     .environment(navigationCoordinator)
                     .environment(appState)
             }

@@ -11,7 +11,6 @@ import SwiftUI
 struct MainTabView: View {
     @State private var navigationCoordinator = NavigationCoordinator()
     @Environment(AppState.self) var appState
-    @Environment(\.viewModelFactory) var viewModelFactory
 
     var body: some View {
         TabView(selection: $navigationCoordinator.selectedTab) {
@@ -37,5 +36,4 @@ struct MainTabView: View {
     MainTabView()
         .environment(AppState())
         .environment(\.dependencyContainer, DependencyContainer.shared)
-        .environment(\.viewModelFactory, ViewModelFactory(container: DependencyContainer.shared))
 }

@@ -17,7 +17,6 @@ struct SWDestinyTradesApp: App {
             ContentView()
                 .environment(appState)
                 .environment(\.dependencyContainer, appState.dependencyContainer)
-                .environment(\.viewModelFactory, ViewModelFactory(container: appState.dependencyContainer))
                 .onAppear {
                     if !appState.isInitialized, !appState.isLoading {
                         appState.initialize()
