@@ -11,7 +11,7 @@ import ProjectDescription
 let cacheDisabled = ProcessInfo.processInfo.environment["TUIST_DISABLE_XCODE_CACHE"] == "1"
 
 let tuist = Tuist(
-    fullHandle: "AnyKey Entertainment/swdestiny-trades",
+    fullHandle: "AnyKey-Entertainment/swdestiny-trades",
     project: .tuist(
         generationOptions: .options(
             enableCaching: !cacheDisabled
