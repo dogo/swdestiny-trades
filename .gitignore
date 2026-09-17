@@ -58,6 +58,7 @@ FailureDiffs
 
 ## Tuist
 Tuist/.build/
+Derived/
 
 ## Swift Package Manager (scanner tooling)
 .build/
