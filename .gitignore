@@ -49,10 +49,6 @@ playground.xcworkspace
 .nvim
 buildServer.json
 
-## Carthage
-Carthage/Checkouts
-Carthage/Build
-
 ## Snapshot Failures
 FailureDiffs
 
@@ -79,18 +75,13 @@ fastlane/test_output/*
 fastlane/Appfile
 fastlane/Matchfile
 fastlane/Deliverfile
+fastlane/Preview.html
 
 ## Slather Code Coverage
 CoverageReport
 
 ## Firebase Config file
 firebase-crashreporting.json
-
-# Realm database (simulator debug)
-default.realm
-default.realm.lock
-default.realm.management/
-default.realm.note
 
 # App Store review contact info (personal data, written by deliver download_metadata)
 fastlane/metadata/review_information/
