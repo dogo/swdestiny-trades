@@ -31,11 +31,11 @@ extension SWDestinyEndpoint: EndpointProtocol {
     var path: String {
         switch self {
         case .setList:
-            return "/api/public/sets/"
+            return "/api/public/sets"
         case let .cardList(setCode):
             return "/api/public/cards/\(setCode)"
         case .allCards:
-            return "/api/public/cards/"
+            return "/api/public/cards"
         case let .card(cardId):
             return "/api/public/card/\(cardId)"
         case .search:
