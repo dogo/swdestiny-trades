@@ -39,7 +39,8 @@ public extension Project {
                     .external(name: "Kingfisher")
                 ],
                 settings: .settings(base: [
-                    "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor"
+                    "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor",
+                    "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": ""
                 ])
             ),
             .target(
