@@ -1,8 +1,7 @@
 A small update focused on fixes and polish.
 
-• The card scanner is more reliable: the camera pipeline no longer stalls mid-scan, and scanning now fails gracefully instead of hanging when the card catalog hasn't finished loading.
-• Lists refresh immediately after you add, edit, or remove cards, so you no longer see stale content.
-• Card images load faster and use less data thanks to improved caching.
+• Fixed an issue that could prevent sets and cards from loading.
+• Card images load more smoothly and use less memory.
 • Various stability and performance improvements under the hood.
 
 Thanks for playing! If you enjoy the app, please leave a review.
