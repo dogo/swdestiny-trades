@@ -214,6 +214,30 @@ final class SwiftDataManagerTests {
     }
 
     @Test
+    func saveDeck_removedCard_isDeleted() async throws {
+        let kept = CardDTO.stub(code: "01001")
+        let deck = DeckDTO.stub(cards: [kept, CardDTO.stub(code: "01002")])
+        try await sut.save(object: deck, update: .all)
+
+        deck.list = [kept]
+        try await sut.save(object: deck, update: .modified)
+
+        let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
+        #expect(cards.map(\.code) == ["01001"])
+    }
+
+    @Test
+    func deleteDeck_deletesItsCards() async throws {
+        let deck = DeckDTO.stub(cards: [CardDTO.stub(code: "01001")])
+        try await sut.save(object: deck, update: .all)
+
+        try await sut.delete(object: deck)
+
+        let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
+        #expect(cards.isEmpty)
+    }
+
+    @Test
     func saveUserCollection_persistsCards() async throws {
         let collection = UserCollectionDTO.stub(collection: [CardDTO.stub(code: "01001")])
 

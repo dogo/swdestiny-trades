@@ -392,6 +392,13 @@ extension SwiftDataManager {
         return try? context.fetch(descriptor).first
     }
 
+    func deleteCards(_ cards: [CardSD], notIn kept: [CardSD]) {
+        let keptIDs = Set(kept.map(\.id))
+        for card in cards where !keptIDs.contains(card.id) {
+            context.delete(card)
+        }
+    }
+
     func findOrCreateCard(id: String) -> CardSD {
         if let existing = findCard(id: id) {
             return existing

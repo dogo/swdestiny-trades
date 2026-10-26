@@ -142,7 +142,7 @@ final class SetSD {
 final class DeckSD {
     @Attribute(.unique) var id: String
     var name: String
-    @Relationship(deleteRule: .nullify, inverse: \CardSD.deck) var list: [CardSD]
+    @Relationship(deleteRule: .cascade, inverse: \CardSD.deck) var list: [CardSD]
 
     init(id: String, name: String = "", list: [CardSD] = []) {
         self.id = id
@@ -158,8 +158,8 @@ final class PersonSD {
     @Attribute(.unique) var id: String
     var name: String
     var lastName: String
-    @Relationship(deleteRule: .nullify, inverse: \CardSD.lender) var lentMe: [CardSD]
-    @Relationship(deleteRule: .nullify, inverse: \CardSD.borrower) var borrowed: [CardSD]
+    @Relationship(deleteRule: .cascade, inverse: \CardSD.lender) var lentMe: [CardSD]
+    @Relationship(deleteRule: .cascade, inverse: \CardSD.borrower) var borrowed: [CardSD]
 
     init(id: String, name: String = "", lastName: String = "", lentMe: [CardSD] = [], borrowed: [CardSD] = []) {
         self.id = id
@@ -175,7 +175,7 @@ final class PersonSD {
 @Model
 final class UserCollectionSD {
     @Attribute(.unique) var id: String
-    @Relationship(deleteRule: .nullify, inverse: \CardSD.userCollection) var myCollection: [CardSD]
+    @Relationship(deleteRule: .cascade, inverse: \CardSD.userCollection) var myCollection: [CardSD]
 
     init(id: String, myCollection: [CardSD] = []) {
         self.id = id

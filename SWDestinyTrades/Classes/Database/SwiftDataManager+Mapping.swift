@@ -70,30 +70,28 @@ extension SwiftDataManager {
 
     func populate(deck: DeckSD, from dto: DeckDTO) {
         deck.name = dto.name
-        deck.list = dto.list.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
-        }
+        let previous = deck.list
+        deck.list = storedCards(from: dto.list)
+        deleteCards(previous, notIn: deck.list)
     }
 
     func populate(person: PersonSD, from dto: PersonDTO) {
         person.name = dto.name
         person.lastName = dto.lastName
-        person.lentMe = dto.lentMe.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
-        }
-        person.borrowed = dto.borrowed.map { cardDTO in
-            let stored = findOrCreateCard(id: cardDTO.id)
-            populate(card: stored, from: cardDTO)
-            return stored
-        }
+        let previous = person.lentMe + person.borrowed
+        person.lentMe = storedCards(from: dto.lentMe)
+        person.borrowed = storedCards(from: dto.borrowed)
+        deleteCards(previous, notIn: person.lentMe + person.borrowed)
     }
 
     func populate(collection: UserCollectionSD, from dto: UserCollectionDTO) {
-        collection.myCollection = dto.myCollection.map { cardDTO in
+        let previous = collection.myCollection
+        collection.myCollection = storedCards(from: dto.myCollection)
+        deleteCards(previous, notIn: collection.myCollection)
+    }
+
+    private func storedCards(from dtos: [CardDTO]) -> [CardSD] {
+        dtos.map { cardDTO in
             let stored = findOrCreateCard(id: cardDTO.id)
             populate(card: stored, from: cardDTO)
             return stored
