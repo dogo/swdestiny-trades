@@ -6,6 +6,7 @@
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
+import Foundation
 import Testing
 
 @testable import SWDestinyTrades
@@ -71,6 +72,15 @@ final class SwiftDataManagerTests {
 
         let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
         #expect(cards.count == 2)
+    }
+
+    @Test
+    func fetch_withPredicate_returnsOnlyMatches() async throws {
+        try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
+        try await sut.save(object: CardDTO.stub(code: "01002"), update: .all)
+
+        let cards = await sut.fetch(CardDTO.self, predicate: #Predicate { $0.code == "01002" }, sorted: nil)
+        #expect(cards.map(\.code) == ["01002"])
     }
 
     // MARK: - Upsert semantics (no duplicate on same key)
@@ -259,10 +269,10 @@ final class SwiftDataManagerTests {
             holder.observation = sut.observe(CardDTO.self, predicate: nil, sorted: nil) { [weak holder] cards in
                 holder?.observation?.cancel()
                 holder?.observation = nil
-                continuation.resume(returning: cards)
+                continuation.resume(returning: cards.map(\.code))
             }
         }
 
-        #expect(firstEmission.map(\.code) == ["01001"])
+        #expect(firstEmission == ["01001"])
     }
 }

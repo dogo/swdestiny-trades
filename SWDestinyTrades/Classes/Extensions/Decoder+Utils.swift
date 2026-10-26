@@ -9,7 +9,7 @@
 import Foundation
 
 extension KeyedDecodingContainer {
-    func decodeSafely<T: Decodable>(key: K, defaultValue: T) throws -> T {
+    nonisolated func decodeSafely<T: Decodable>(key: K, defaultValue: T) throws -> T {
         return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
     }
 }

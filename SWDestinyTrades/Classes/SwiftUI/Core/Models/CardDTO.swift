@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CardDTO: Decodable, Storable, Identifiable {
+nonisolated class CardDTO: Decodable, Storable, Identifiable {
     var id: String = UUID().uuidString
     var dieFaces: [String] = []
     var setCode: String = ""

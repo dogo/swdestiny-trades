@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PersonDTO: Storable, Identifiable {
+nonisolated class PersonDTO: Storable, Identifiable {
     var id: String = UUID().uuidString
     var name: String = ""
     var lastName: String = ""

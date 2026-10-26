@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SetDTO: Codable, Storable, Identifiable {
+nonisolated class SetDTO: Codable, Storable, Identifiable {
     var id: String = UUID().uuidString
     var name: String = ""
     var code: String = ""

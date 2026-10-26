@@ -76,7 +76,7 @@ final class PeopleListViewModel: ListViewModel<PersonDTO> {
 
             let freshPeople = await database.fetch(
                 PersonDTO.self,
-                predicate: NSPredicate(format: "id IN %@", remainingIds),
+                predicate: #Predicate<PersonDTO> { remainingIds.contains($0.id) },
                 sorted: nil
             )
 

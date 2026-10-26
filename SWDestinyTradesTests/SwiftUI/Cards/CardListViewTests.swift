@@ -147,7 +147,7 @@ final class CardListViewTests: BaseTestCase {
         let database: DatabaseProtocol = testContainer.resolve(DatabaseProtocol.self)
         let fetchedCards: [CardDTO] = await database.fetch(
             CardDTO.self,
-            predicate: NSPredicate(format: "code == %@", "01001"),
+            predicate: #Predicate<CardDTO> { $0.code == "01001" },
             sorted: nil
         )
 
@@ -199,7 +199,7 @@ final class CardListViewTests: BaseTestCase {
         let database: DatabaseProtocol = testContainer.resolve(DatabaseProtocol.self)
         let fetchedCards: [CardDTO] = await database.fetch(
             CardDTO.self,
-            predicate: NSPredicate(format: "setCode == %@", "AW"),
+            predicate: #Predicate<CardDTO> { $0.setCode == "AW" },
             sorted: nil
         )
 

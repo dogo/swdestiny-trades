@@ -59,7 +59,7 @@ protocol DatabaseProtocol: AnyObject {
     ///   - predicate: Optional predicate to filter results
     ///   - sorted: Optional sorting configuration
     /// - Returns: Array of fetched objects
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) async -> [T]
+    func fetch<T: Storable>(_ model: T.Type, predicate: Predicate<T>?, sorted: Sorted?) async -> [T]
 
     /// Fetch a single object by primary key (async)
     /// - Parameters:
@@ -108,7 +108,7 @@ protocol DatabaseProtocol: AnyObject {
     @discardableResult
     func observe<T: Storable>(
         _ model: T.Type,
-        predicate: NSPredicate?,
+        predicate: Predicate<T>?,
         sorted: Sorted?,
         onChange: @escaping @MainActor ([T]) -> Void
     ) -> DatabaseObservation

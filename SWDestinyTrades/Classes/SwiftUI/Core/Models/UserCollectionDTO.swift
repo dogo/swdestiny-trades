@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class UserCollectionDTO: Storable, Identifiable {
+final nonisolated class UserCollectionDTO: Storable, Identifiable {
     var id: String = UUID().uuidString
     var myCollection: [CardDTO] = []
 

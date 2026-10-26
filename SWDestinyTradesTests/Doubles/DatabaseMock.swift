@@ -20,10 +20,13 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
     private var storage: [String: [Any]] = [:]
     private var observerCallbacks: [String: [UUID: ObserverCallback]] = [:]
 
-    func fetch<T: Storable>(_ model: T.Type, predicate _: NSPredicate?, sorted: Sorted?) async -> [T] {
+    func fetch<T: Storable>(_ model: T.Type, predicate: Predicate<T>?, sorted: Sorted?) async -> [T] {
         let key = String(describing: model)
         let objects = storage[key] ?? []
         var result = objects.compactMap { $0 as? T }
+        if let predicate {
+            result = result.filter { (try? predicate.evaluate($0)) ?? false }
+        }
 
         print("🔍 DatabaseMock[\(ObjectIdentifier(self))].fetch: Fetching \(key), found \(result.count) objects")
 
@@ -108,7 +111,7 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
     @discardableResult
     func observe<T: Storable>(
         _ model: T.Type,
-        predicate _: NSPredicate?,
+        predicate _: Predicate<T>?,
         sorted _: Sorted?,
         onChange: @escaping @MainActor ([T]) -> Void
     ) -> DatabaseObservation {

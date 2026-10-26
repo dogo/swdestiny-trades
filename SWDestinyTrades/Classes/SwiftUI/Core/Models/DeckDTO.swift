@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DeckDTO: Storable, Identifiable {
+nonisolated class DeckDTO: Storable, Identifiable {
     var id: String = UUID().uuidString
     var name: String = ""
     var list: [CardDTO] = []

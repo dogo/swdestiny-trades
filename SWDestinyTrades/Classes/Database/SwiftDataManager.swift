@@ -60,21 +60,23 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
 
     // MARK: - DatabaseProtocol: Fetch
 
-    func fetch<T: Storable>(_ model: T.Type, predicate: NSPredicate?, sorted: Sorted?) async -> [T] {
-        switch model {
+    func fetch<T: Storable>(_ model: T.Type, predicate: Predicate<T>?, sorted: Sorted?) async -> [T] {
+        let items: [T] = switch model {
         case is CardDTO.Type:
-            return fetchCards(sorted: sorted) as? [T] ?? []
+            fetchCards(sorted: sorted) as? [T] ?? []
         case is SetDTO.Type:
-            return fetchSets(sorted: sorted) as? [T] ?? []
+            fetchSets(sorted: sorted) as? [T] ?? []
         case is DeckDTO.Type:
-            return fetchDecks(sorted: sorted) as? [T] ?? []
+            fetchDecks(sorted: sorted) as? [T] ?? []
         case is PersonDTO.Type:
-            return fetchPersons(sorted: sorted) as? [T] ?? []
+            fetchPersons(sorted: sorted) as? [T] ?? []
         case is UserCollectionDTO.Type:
-            return fetchUserCollections() as? [T] ?? []
+            fetchUserCollections() as? [T] ?? []
         default:
-            return []
+            []
         }
+        guard let predicate else { return items }
+        return items.filter { (try? predicate.evaluate($0)) ?? false }
     }
 
     func fetchByKey<T: Storable>(_ model: T.Type, key: Any) async -> T? {
@@ -148,7 +150,7 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
     @discardableResult
     func observe<T: Storable>(
         _ model: T.Type,
-        predicate: NSPredicate?,
+        predicate: Predicate<T>?,
         sorted: Sorted?,
         onChange: @escaping @MainActor ([T]) -> Void
     ) -> DatabaseObservation {
@@ -235,7 +237,7 @@ private final class SwiftDataObservation<T: Storable>: DatabaseObservation {
 
     private weak var database: SwiftDataManager?
     private let model: T.Type
-    private let predicate: NSPredicate?
+    private let predicate: Predicate<T>?
     private let sorted: Sorted?
     private let notification: Notification.Name
     private let onChange: @MainActor ([T]) -> Void
@@ -246,7 +248,7 @@ private final class SwiftDataObservation<T: Storable>: DatabaseObservation {
     init(
         database: SwiftDataManager,
         model: T.Type,
-        predicate: NSPredicate?,
+        predicate: Predicate<T>?,
         sorted: Sorted?,
         notification: Notification.Name,
         onChange: @escaping @MainActor ([T]) -> Void
