@@ -12,3 +12,4 @@
 --disable trailingCommas
 --disable unusedArguments
 --disable wrapMultilineStatementBraces
+--disable wrapIfStatementBodies
