@@ -9,7 +9,6 @@
 import iOSSnapshotTestCaseCore
 import Testing
 import UIKit
-import XCTest
 
 @objc
 protocol Snapshotable {
@@ -92,7 +91,7 @@ public extension FBSnapshotTestCase {
             if let ref = info[FBReferenceImageKey] as? UIImage {
                 FBSnapshotTestCase.attach(image: ref, named: "Reference_\(snapshot)")
             }
-            if let captured = info[FBCapturedImageKey] as? UIImage {
+            if let captured = info[FBCapturedImageKey] as? UIImage ?? render(instance) {
                 FBSnapshotTestCase.attach(image: captured, named: "Captured_\(snapshot)")
             }
             if let diff = info[FBDiffedImageKey] as? UIImage {
@@ -107,10 +106,14 @@ public extension FBSnapshotTestCase {
 
     @MainActor
     private static func attach(image: UIImage, named name: String) {
-        XCTContext.runActivity(named: name) { activity in
-            let attachment = XCTAttachment(image: image)
-            attachment.name = name
-            activity.add(attachment)
+        Attachment.record(image, named: name, as: .png)
+    }
+
+    @MainActor
+    private static func render(_ instance: AnyObject) -> UIImage? {
+        guard let view = instance as? UIView, view.bounds.size != .zero else { return nil }
+        return UIGraphicsImageRenderer(bounds: view.bounds).image { context in
+            view.layer.render(in: context.cgContext)
         }
     }
 

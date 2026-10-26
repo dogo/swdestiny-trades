@@ -12,7 +12,17 @@ public extension Project {
             .scheme(
                 name: "SWDestinyTrades",
                 buildAction: .buildAction(targets: ["SWDestinyTrades"]),
-                testAction: .targets(["SWDestinyTradesTests"], options: .options(coverage: true, codeCoverageTargets: ["SWDestinyTrades"])),
+                testAction: .targets(
+                    ["SWDestinyTradesTests"],
+                    arguments: .arguments(
+                        environmentVariables: [
+                            "FB_REFERENCE_IMAGE_DIR": .environmentVariable(value: "$(SOURCE_ROOT)/SWDestinyTradesTests/ReferenceImages", isEnabled: true),
+                            "IMAGE_DIFF_DIR": .environmentVariable(value: "$(SOURCE_ROOT)/SWDestinyTradesTests/FailureDiffs", isEnabled: true)
+                        ]
+                    ),
+                    expandVariableFromTarget: "SWDestinyTradesTests",
+                    options: .options(coverage: true, codeCoverageTargets: ["SWDestinyTrades"])
+                ),
                 runAction: .runAction(
                     arguments: .arguments(
                         environmentVariables: [
