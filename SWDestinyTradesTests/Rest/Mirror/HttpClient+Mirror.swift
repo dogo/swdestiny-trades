@@ -12,7 +12,7 @@ import Foundation
 
 extension HttpClient {
 
-    var activeTasks: [URLSessionDataTask]? {
+    var activeTasks: [URLRequest: Task<(Data, URLResponse), Error>]? {
         Mirror.extract(variable: "activeTasks", from: self)
     }
 }

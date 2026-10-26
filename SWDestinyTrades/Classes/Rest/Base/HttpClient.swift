@@ -10,7 +10,7 @@ import Foundation
 
 final class HttpClient: HttpClientProtocol {
     private let session: URLSession
-    private var activeTasks: [URLSessionDataTask] = []
+    private var activeTasks: [URLRequest: Task<(Data, URLResponse), Error>] = [:]
 
     init(session: URLSession = .shared) {
         self.session = session
@@ -20,7 +20,11 @@ final class HttpClient: HttpClientProtocol {
 extension HttpClient {
 
     var logger: NetworkingLogger {
+        #if DEBUG
         return NetworkingLogger(level: .debug)
+        #else
+        return NetworkingLogger(level: .none)
+        #endif
     }
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
@@ -29,16 +33,20 @@ extension HttpClient {
 
         let requestDate = Date()
 
-        let task = session.dataTask(with: request)
-        activeTasks.append(task)
-        task.resume()
+        let session = session
+        let task = Task { try await session.data(for: request) }
+        activeTasks[request] = task
 
         defer {
-            activeTasks.removeAll { $0.originalRequest == request }
+            activeTasks[request] = nil
         }
 
         do {
-            let (data, response) = try await session.data(for: request)
+            let (data, response) = try await withTaskCancellationHandler {
+                try await task.value
+            } onCancel: {
+                task.cancel()
+            }
 
             let responseTime = Date().timeIntervalSince(requestDate)
 
@@ -55,16 +63,16 @@ extension HttpClient {
             return try decodeData(data, decode: T.self)
         } catch let error as URLError where error.code == .cancelled {
             throw APIError.requestCancelled
+        } catch is CancellationError {
+            throw APIError.requestCancelled
         } catch {
             throw error
         }
     }
 
     func cancelRequest(_ request: URLRequest?) {
-        if let taskIndex = activeTasks.firstIndex(where: { $0.originalRequest == request }) {
-            activeTasks[taskIndex].cancel()
-            activeTasks.remove(at: taskIndex)
-        }
+        guard let request else { return }
+        activeTasks.removeValue(forKey: request)?.cancel()
     }
 
     // MARK: - Helper

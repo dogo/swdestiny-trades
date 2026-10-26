@@ -106,6 +106,19 @@ final class HttpClientTests {
     }
 
     @Test
+    func request_hitsNetworkOnce() async throws {
+        var hits = 0
+        URLProtocolMock.response = { _ in
+            hits += 1
+            return HTTPResponse(data: Data("{ \"bar\": true }".utf8), statusCode: 200)
+        }
+
+        _ = try await sut.request(request, decode: Foo.self)
+
+        #expect(hits == 1)
+    }
+
+    @Test
     func test_cancelRequest() async throws {
         setupURLProtocolMock(with: nil, statusCode: 200, delay: 1.0)
 
