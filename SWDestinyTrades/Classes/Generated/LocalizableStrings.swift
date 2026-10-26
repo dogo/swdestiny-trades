@@ -362,10 +362,8 @@ nonisolated internal enum L10n {
   internal static let scanNotRecognized = L10n.tr("Localizable", "SCAN_NOT_RECOGNIZED", fallback: "Not recognized")
   /// Point at one or more cards
   internal static let scanPointAtCards = L10n.tr("Localizable", "SCAN_POINT_AT_CARDS", fallback: "Point at one or more cards")
-  /// Preparing… %d%%
-  internal static func scanPreparing(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "SCAN_PREPARING", p1, fallback: "Preparing… %d%%")
-  }
+  /// Preparing…
+  internal static let scanPreparing = L10n.tr("Localizable", "SCAN_PREPARING", fallback: "Preparing…")
   /// Review cards
   internal static let scanReviewTitle = L10n.tr("Localizable", "SCAN_REVIEW_TITLE", fallback: "Review cards")
   /// Search manually

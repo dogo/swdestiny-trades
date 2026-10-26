@@ -22,7 +22,7 @@ final class CardScannerViewModel: BaseViewModel {
 
     enum IndexState: Equatable {
         case idle
-        case building(Double)
+        case building
         case ready
         case failed
     }
@@ -177,7 +177,7 @@ final class CardScannerViewModel: BaseViewModel {
         guard pipeline.matcher == nil else { return }
 
         // Feedback while the catalog loads, otherwise the screen looks idle (button disabled).
-        indexState = .building(0)
+        indexState = .building
 
         let cards = await (try? service.retrieveAllCards()) ?? []
         cardsByCode = Dictionary(cards.map { ($0.code, $0) }) { first, _ in first }

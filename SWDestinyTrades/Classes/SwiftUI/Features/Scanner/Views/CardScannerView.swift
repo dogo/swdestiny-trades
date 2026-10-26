@@ -64,8 +64,8 @@ struct CardScannerView: View {
 
     @ViewBuilder private var statusBadge: some View {
         switch viewModel.indexState {
-        case let .building(progress):
-            badge(L10n.scanPreparing(Int(progress * 100)), systemImage: "hourglass")
+        case .building:
+            badge(L10n.scanPreparing, systemImage: "hourglass")
         case .failed:
             badge(L10n.scanIndexFailed, systemImage: "exclamationmark.triangle.fill")
         case .ready, .idle:

@@ -169,7 +169,7 @@
 "SCAN_CAMERA_DENIED_TITLE" = "Camera access needed";
 "SCAN_CAMERA_DENIED_MESSAGE" = "Enable camera access in Settings to scan cards.";
 "OPEN_SETTINGS" = "Open Settings";
-"SCAN_PREPARING" = "Preparing… %d%%";
+"SCAN_PREPARING" = "Preparing…";
 "SCAN_INDEX_FAILED" = "Couldn't load card data";
 "SCAN_CONFIDENCE" = "Match confidence: %d%%";
 "SCAN_AGAIN" = "Scan again";
