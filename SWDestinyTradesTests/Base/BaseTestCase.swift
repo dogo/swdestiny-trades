@@ -90,7 +90,9 @@ class BaseTestCase {
     func waitUntil(timeout: TimeInterval = 2.0, _ condition: @escaping @MainActor () -> Bool) async {
         let start = Date()
         while !condition() {
-            if Date().timeIntervalSince(start) >= timeout { return }
+            if Date().timeIntervalSince(start) >= timeout {
+                return
+            }
             try? await Task.sleep(nanoseconds: 10_000_000) // 10ms
         }
     }

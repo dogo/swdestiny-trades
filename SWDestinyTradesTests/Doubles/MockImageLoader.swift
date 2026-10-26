@@ -27,7 +27,9 @@ final class MockImageLoader: ImageLoadingService {
     ) async throws -> UIImage {
         loadImageCallCount += 1
         lastLoadedSource = source
-        if let error = stubbedError { throw error }
+        if let error = stubbedError {
+            throw error
+        }
         onProgress?(1.0)
         return stubbedImage
     }

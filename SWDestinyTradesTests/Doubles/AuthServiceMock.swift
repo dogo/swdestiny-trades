@@ -18,13 +18,17 @@ final class AuthServiceMock: AuthServiceProtocol {
     private(set) var logoutCallCount = 0
 
     func authorizationURL() throws -> URL {
-        if let authorizationURLError { throw authorizationURLError }
+        if let authorizationURLError {
+            throw authorizationURLError
+        }
         return URL(string: "https://example.com/oauth/v2/auth")!
     }
 
     func completeLogin(callbackURL: URL) async throws {
         receivedCallbackURL = callbackURL
-        if let completeLoginError { throw completeLoginError }
+        if let completeLoginError {
+            throw completeLoginError
+        }
         isLoggedIn = true
     }
 

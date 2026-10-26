@@ -208,7 +208,9 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
     }
 
     private func deleteIfFound(_ model: (some PersistentModel)?) {
-        if let model { context.delete(model) }
+        if let model {
+            context.delete(model)
+        }
     }
 
     // MARK: - Private: Save
@@ -301,25 +303,33 @@ private extension SwiftDataManager {
 
     func fetchCards(sorted: Sorted?) -> [CardDTO] {
         var descriptor = FetchDescriptor<CardSD>()
-        if let sorted { descriptor.sortBy = sortDescriptors(for: CardSD.self, sorted: sorted) }
+        if let sorted {
+            descriptor.sortBy = sortDescriptors(for: CardSD.self, sorted: sorted)
+        }
         return ((try? context.fetch(descriptor)) ?? []).map { cardDTO(from: $0) }
     }
 
     func fetchSets(sorted: Sorted?) -> [SetDTO] {
         var descriptor = FetchDescriptor<SetSD>()
-        if let sorted { descriptor.sortBy = sortDescriptors(for: SetSD.self, sorted: sorted) }
+        if let sorted {
+            descriptor.sortBy = sortDescriptors(for: SetSD.self, sorted: sorted)
+        }
         return ((try? context.fetch(descriptor)) ?? []).map { setDTO(from: $0) }
     }
 
     func fetchDecks(sorted: Sorted?) -> [DeckDTO] {
         var descriptor = FetchDescriptor<DeckSD>()
-        if let sorted { descriptor.sortBy = sortDescriptors(for: DeckSD.self, sorted: sorted) }
+        if let sorted {
+            descriptor.sortBy = sortDescriptors(for: DeckSD.self, sorted: sorted)
+        }
         return ((try? context.fetch(descriptor)) ?? []).map { deckDTO(from: $0) }
     }
 
     func fetchPersons(sorted: Sorted?) -> [PersonDTO] {
         var descriptor = FetchDescriptor<PersonSD>()
-        if let sorted { descriptor.sortBy = sortDescriptors(for: PersonSD.self, sorted: sorted) }
+        if let sorted {
+            descriptor.sortBy = sortDescriptors(for: PersonSD.self, sorted: sorted)
+        }
         return ((try? context.fetch(descriptor)) ?? []).map { personDTO(from: $0) }
     }
 
@@ -383,35 +393,45 @@ extension SwiftDataManager {
     }
 
     func findOrCreateCard(id: String) -> CardSD {
-        if let existing = findCard(id: id) { return existing }
+        if let existing = findCard(id: id) {
+            return existing
+        }
         let card = CardSD(id: id)
         context.insert(card)
         return card
     }
 
     func findOrCreateSet(code: String) -> SetSD {
-        if let existing = findSet(code: code) { return existing }
+        if let existing = findSet(code: code) {
+            return existing
+        }
         let set = SetSD(code: code)
         context.insert(set)
         return set
     }
 
     func findOrCreateDeck(id: String) -> DeckSD {
-        if let existing = findDeck(id: id) { return existing }
+        if let existing = findDeck(id: id) {
+            return existing
+        }
         let deck = DeckSD(id: id)
         context.insert(deck)
         return deck
     }
 
     func findOrCreatePerson(id: String) -> PersonSD {
-        if let existing = findPerson(id: id) { return existing }
+        if let existing = findPerson(id: id) {
+            return existing
+        }
         let person = PersonSD(id: id)
         context.insert(person)
         return person
     }
 
     func findOrCreateUserCollection(id: String) -> UserCollectionSD {
-        if let existing = findUserCollection(id: id) { return existing }
+        if let existing = findUserCollection(id: id) {
+            return existing
+        }
         let collection = UserCollectionSD(id: id)
         context.insert(collection)
         return collection

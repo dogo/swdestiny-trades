@@ -23,10 +23,14 @@ struct NewPersonView: View {
         .toolbar { toolbarContent }
         .toastQueue(viewModel.toastQueue)
         .onChange(of: viewModel.isSaved) { _, isSaved in
-            if isSaved { focusedField = nil }
+            if isSaved {
+                focusedField = nil
+            }
         }
         .onChange(of: viewModel.shouldDismiss) { _, shouldDismiss in
-            if shouldDismiss { dismiss() }
+            if shouldDismiss {
+                dismiss()
+            }
         }
         .onChange(of: viewModel.firstName) { _, _ in viewModel.validate() }
         .onChange(of: viewModel.lastName) { _, _ in viewModel.validate() }

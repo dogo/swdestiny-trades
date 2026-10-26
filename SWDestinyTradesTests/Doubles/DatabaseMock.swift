@@ -56,7 +56,9 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
     }
 
     func save(object: Storable, update: UpdatePolicy) async throws {
-        if let error = stubbedSaveError { throw error }
+        if let error = stubbedSaveError {
+            throw error
+        }
         let key = String(describing: type(of: object))
         var objects = storage[key] ?? []
 
