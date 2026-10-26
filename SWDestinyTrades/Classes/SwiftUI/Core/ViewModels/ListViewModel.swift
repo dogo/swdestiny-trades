@@ -14,10 +14,6 @@ class ListViewModel<T: Identifiable>: BaseViewModel {
     private(set) var items: [T] = []
     private(set) var filteredItems: [T] = []
 
-    private(set) var hasMoreItems = true
-    private(set) var currentPage = 0
-    private let itemsPerPage = 50
-
     var searchText = ""
 
     required init(dependencyContainer: DependencyContainer = .shared) {
@@ -41,25 +37,12 @@ class ListViewModel<T: Identifiable>: BaseViewModel {
         // Override in subclasses
     }
 
-    func loadMoreItems() async {
-        guard hasMoreItems, !isLoading else { return }
-        await loadItems(page: currentPage + 1, reset: false)
-    }
-
     func refresh() async {
-        currentPage = 0
-        hasMoreItems = true
         await loadItems(page: 0, reset: true)
     }
 
-    func updateItems(_ newItems: [T], append: Bool = false) {
-        if append {
-            items.append(contentsOf: newItems)
-            currentPage += 1
-            hasMoreItems = newItems.count >= itemsPerPage
-        } else {
-            items = newItems
-        }
+    func updateItems(_ newItems: [T]) {
+        items = newItems
         filteredItems = filterItems(searchText: searchText)
     }
 }
