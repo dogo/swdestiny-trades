@@ -258,7 +258,59 @@ final class SwiftDataManagerTests {
         #expect(fetched.myCollection.map(\.code) == ["01001"])
     }
 
+    @Test
+    func savePerson_removedLoanCard_isDeleted() async throws {
+        let person = PersonDTO.stub(lentMe: [CardDTO.stub(code: "01001")])
+        try await sut.save(object: person, update: .all)
+
+        person.lentMe = []
+        try await sut.save(object: person, update: .modified)
+
+        let cards = await sut.fetch(CardDTO.self, predicate: nil, sorted: nil)
+        #expect(cards.isEmpty)
+    }
+
+    @Test
+    func savePerson_cardMovedBetweenLists_isKept() async throws {
+        let card = CardDTO.stub(code: "01001")
+        let person = PersonDTO.stub(lentMe: [card])
+        try await sut.save(object: person, update: .all)
+
+        person.lentMe = []
+        person.borrowed = [card]
+        try await sut.save(object: person, update: .modified)
+
+        let result = await sut.fetchByKey(PersonDTO.self, key: person.id)
+        let fetched = try #require(result)
+        #expect(fetched.lentMe.isEmpty)
+        #expect(fetched.borrowed.map(\.id) == [card.id])
+    }
+
     // MARK: - Observe
+
+    @Test
+    func observe_withPredicate_reemitsOnlyMatchesAfterSave() async throws {
+        try await sut.save(object: CardDTO.stub(code: "01001"), update: .all)
+
+        let (emissions, continuation) = AsyncStream.makeStream(of: [String].self)
+        let observation = sut.observe(
+            CardDTO.self,
+            predicate: #Predicate { $0.code != "01001" },
+            sorted: nil
+        ) { cards in
+            continuation.yield(cards.map(\.code))
+        }
+
+        try await sut.save(object: CardDTO.stub(code: "01002"), update: .all)
+        var emission: [String] = []
+        for await codes in emissions where !codes.isEmpty {
+            emission = codes
+            break
+        }
+        observation.cancel()
+
+        #expect(emission == ["01002"])
+    }
 
     @Test
     func observe_emitsInitialState() async throws {
