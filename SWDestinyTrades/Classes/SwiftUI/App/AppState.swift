@@ -66,6 +66,11 @@ final class AppState {
             return SWDestinyService(client: httpClient)
         }
 
+        dependencyContainer.register(type: AuthServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+            return AuthService(client: httpClient)
+        }
+
         dependencyContainer.register(type: ImageLoadingService.self) {
             KingfisherImageLoader()
         }

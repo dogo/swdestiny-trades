@@ -14,12 +14,15 @@ final class HttpClientMock: HttpClientProtocol {
     var fileName = String()
     var error: Bool = false
     var isCancelled = false
+    private(set) var lastRequest: URLRequest?
 
     var logger: NetworkingLogger {
         return NetworkingLogger(level: .none)
     }
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
+        lastRequest = request
+
         guard !error else {
             throw APIError.invalidData
         }

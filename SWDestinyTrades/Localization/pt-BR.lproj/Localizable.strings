@@ -163,3 +163,11 @@
 "DELETED_PERSON" = "Pessoa excluida";
 "LOADING_PEOPLE" = "Carregando pessoas...";
 "APP_FAILED_TO_INITIALIZE" = "App failed to initialize";
+"ACCOUNT" = "Conta";
+"ACCOUNT_CONNECTED" = "Conectado ao A Renewed Hope";
+"ACCOUNT_DISCONNECTED" = "Não conectado";
+"ACCOUNT_DESCRIPTION" = "Entre com sua conta do db.swdrenewedhope.com para usar seus decks do site.";
+"SIGN_IN_ARH" = "Entrar com A Renewed Hope";
+"SIGN_OUT" = "Sair";
+"LOGIN_FAILED" = "Não foi possível entrar. Tente novamente.";
+"LOGIN_NOT_CONFIGURED" = "O login não está disponível nesta versão.";

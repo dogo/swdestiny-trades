@@ -30,5 +30,6 @@ enum AppDestination: Hashable {
     case scanCard
 
     case about
+    case account
     case webview(url: URL)
 }

@@ -26,6 +26,14 @@ nonisolated internal enum L10n {
   internal static func aboutText(_ p1: Any) -> String {
     return L10n.tr("Localizable", "ABOUT_TEXT", String(describing: p1), fallback: "By Diogo Autilio\n\nAPI Data by ARH Team %@\n\nThe information presented on this app about Star Wars Destiny, both literal and graphical, is copyrighted by Fantasy Flight Games. This app is not produced, endorsed, supported, or affiliated with Fantasy Flight Games.")
   }
+  /// Account
+  internal static let account = L10n.tr("Localizable", "ACCOUNT", fallback: "Account")
+  /// Signed in to A Renewed Hope
+  internal static let accountConnected = L10n.tr("Localizable", "ACCOUNT_CONNECTED", fallback: "Signed in to A Renewed Hope")
+  /// Sign in with your db.swdrenewedhope.com account to use your decks from the website.
+  internal static let accountDescription = L10n.tr("Localizable", "ACCOUNT_DESCRIPTION", fallback: "Sign in with your db.swdrenewedhope.com account to use your decks from the website.")
+  /// Not signed in
+  internal static let accountDisconnected = L10n.tr("Localizable", "ACCOUNT_DISCONNECTED", fallback: "Not signed in")
   /// Add Borrowed Card
   internal static let addBorrowedCard = L10n.tr("Localizable", "ADD_BORROWED_CARD", fallback: "Add Borrowed Card")
   /// Add card
@@ -222,6 +230,10 @@ nonisolated internal enum L10n {
   internal static let loans = L10n.tr("Localizable", "LOANS", fallback: "Loans")
   /// Local
   internal static let local = L10n.tr("Localizable", "LOCAL", fallback: "Local")
+  /// Could not sign in. Please try again.
+  internal static let loginFailed = L10n.tr("Localizable", "LOGIN_FAILED", fallback: "Could not sign in. Please try again.")
+  /// Sign in is not available in this build.
+  internal static let loginNotConfigured = L10n.tr("Localizable", "LOGIN_NOT_CONFIGURED", fallback: "Sign in is not available in this build.")
   /// Max
   internal static let max = L10n.tr("Localizable", "MAX", fallback: "Max")
   /// Max cost
@@ -386,6 +398,10 @@ nonisolated internal enum L10n {
   internal static func sidesCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "SIDES_COUNT", p1, fallback: "Plural format key: \"%#@side@\"")
   }
+  /// Sign in with A Renewed Hope
+  internal static let signInArh = L10n.tr("Localizable", "SIGN_IN_ARH", fallback: "Sign in with A Renewed Hope")
+  /// Sign out
+  internal static let signOut = L10n.tr("Localizable", "SIGN_OUT", fallback: "Sign out")
   /// Sort By
   internal static let sortBy = L10n.tr("Localizable", "SORT_BY", fallback: "Sort By")
   /// Suggestions

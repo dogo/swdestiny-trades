@@ -41,6 +41,11 @@ struct DeckListView: View {
         .navigationTitle(L10n.decks)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(L10n.account, systemImage: "person.crop.circle") {
+                    navigationCoordinator.navigate(to: .account)
+                }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.createNewDeck, systemImage: "plus", action: createNewDeck)
             }

@@ -34,4 +34,12 @@ extension Bundle {
     var appBundleIdentifier: String {
         return Bundle.main.bundleIdentifier ?? "com.swdestiny.trades"
     }
+
+    var arhClientID: String {
+        return infoDictionary?["ARHClientID"] as? String ?? ""
+    }
+
+    var arhClientSecret: String {
+        return infoDictionary?["ARHClientSecret"] as? String ?? ""
+    }
 }

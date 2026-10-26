@@ -1,0 +1,5 @@
+// OAuth client for db.swdrenewedhope.com. Real values go in Configs/Secrets.xcconfig (git-ignored).
+ARH_CLIENT_ID =
+ARH_CLIENT_SECRET =
+
+#include? "Secrets.xcconfig"

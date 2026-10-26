@@ -85,3 +85,6 @@ firebase-crashreporting.json
 
 # App Store review contact info (personal data, written by deliver download_metadata)
 fastlane/metadata/review_information/
+
+## Secrets
+Configs/Secrets.xcconfig

@@ -184,3 +184,11 @@
 "SCAN_CAPTURE" = "Capture";
 "SCAN_CHOOSE_MATCH" = "Choose a different match";
 "SCAN_ALIGN_HINT" = "Align the card within the frame";
+"ACCOUNT" = "Account";
+"ACCOUNT_CONNECTED" = "Signed in to A Renewed Hope";
+"ACCOUNT_DISCONNECTED" = "Not signed in";
+"ACCOUNT_DESCRIPTION" = "Sign in with your db.swdrenewedhope.com account to use your decks from the website.";
+"SIGN_IN_ARH" = "Sign in with A Renewed Hope";
+"SIGN_OUT" = "Sign out";
+"LOGIN_FAILED" = "Could not sign in. Please try again.";
+"LOGIN_NOT_CONFIGURED" = "Sign in is not available in this build.";

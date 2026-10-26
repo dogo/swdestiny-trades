@@ -163,3 +163,11 @@
 "DELETED_PERSON" = "Persona Eliminada";
 "LOADING_PEOPLE" = "Cargando personas...";
 "APP_FAILED_TO_INITIALIZE" = "App failed to initialize";
+"ACCOUNT" = "Cuenta";
+"ACCOUNT_CONNECTED" = "Conectado a A Renewed Hope";
+"ACCOUNT_DISCONNECTED" = "Sin conectar";
+"ACCOUNT_DESCRIPTION" = "Inicia sesión con tu cuenta de db.swdrenewedhope.com para usar tus mazos del sitio.";
+"SIGN_IN_ARH" = "Iniciar sesión con A Renewed Hope";
+"SIGN_OUT" = "Cerrar sesión";
+"LOGIN_FAILED" = "No se pudo iniciar sesión. Inténtalo de nuevo.";
+"LOGIN_NOT_CONFIGURED" = "El inicio de sesión no está disponible en esta versión.";

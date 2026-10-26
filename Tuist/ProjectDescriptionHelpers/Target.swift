@@ -38,10 +38,16 @@ public extension Project {
                     .external(name: "FirebaseCrashlytics"),
                     .external(name: "Kingfisher")
                 ],
-                settings: .settings(base: [
-                    "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor",
-                    "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": ""
-                ])
+                settings: .settings(
+                    base: [
+                        "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor",
+                        "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": ""
+                    ],
+                    configurations: [
+                        .debug(name: "Debug", xcconfig: "Configs/App.xcconfig"),
+                        .release(name: "Release", xcconfig: "Configs/App.xcconfig")
+                    ]
+                )
             ),
             .target(
                 name: "SWDestinyTradesTests",

@@ -21,7 +21,7 @@ enum NavigationDestinationBuilder {
             buildPeopleDestination(destination)
         case .userCollection, .addCard, .addCardToCollection, .addCardToPerson, .scanCard:
             buildCollectionDestination(destination)
-        case .about, .webview:
+        case .about, .account, .webview:
             buildMiscDestination(destination)
         }
     }
@@ -95,6 +95,8 @@ enum NavigationDestinationBuilder {
         switch destination {
         case .about:
             AboutView()
+        case .account:
+            AccountView()
         case let .webview(url):
             WebViewWrapper(url: url)
         default:
