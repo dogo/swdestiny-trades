@@ -54,7 +54,7 @@ struct FullScreenCarouselViewer: View {
         if let loadedImage {
             Image(uiImage: loadedImage)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             ProgressView()

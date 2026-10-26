@@ -66,7 +66,7 @@ struct CardImageView: View {
         case let .loaded(image):
             Image(uiImage: image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
         case .failed:
             cardback(opacity: 0.5)
         case .idle, .loading:
@@ -81,7 +81,7 @@ struct CardImageView: View {
     private func cardback(opacity: Double) -> some View {
         Image(asset: Asset.icCardback)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .opacity(opacity)
     }
 

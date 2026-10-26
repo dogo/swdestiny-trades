@@ -15,7 +15,7 @@ struct CarouselPlaceholderView: View {
         if let placeholder {
             Image(uiImage: placeholder)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
         } else {
             Color(uiColor: .systemGray6)
         }

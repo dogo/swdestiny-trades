@@ -66,7 +66,7 @@ final class AuthService: AuthServiceProtocol {
             throw AuthError.tokenRequestFailed
         }
 
-        guard keychain.set(try JSONEncoder().encode(token), for: Self.tokenKey) else {
+        guard try keychain.set(JSONEncoder().encode(token), for: Self.tokenKey) else {
             throw AuthError.tokenRequestFailed
         }
     }

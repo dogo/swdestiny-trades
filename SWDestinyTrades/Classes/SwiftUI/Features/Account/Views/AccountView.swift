@@ -53,8 +53,8 @@ struct AccountView: View {
         Task {
             await viewModel.login { url, callbackScheme in
                 try await webAuthenticationSession.authenticate(using: url,
-                                                               callbackURLScheme: callbackScheme,
-                                                               preferredBrowserSession: .ephemeral)
+                                                                callbackURLScheme: callbackScheme,
+                                                                preferredBrowserSession: .ephemeral)
             }
         }
     }

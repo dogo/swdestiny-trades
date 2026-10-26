@@ -12,21 +12,19 @@ struct ContentView: View {
     @Environment(AppState.self) var appState
 
     var body: some View {
-        Group {
-            if appState.isLoading {
-                SharedLoadingView()
-            } else if let errorMessage = appState.errorMessage {
-                ErrorView(message: errorMessage) {
-                    appState.reset()
-                    appState.initialize()
-                }
-            } else if appState.isInitialized {
-                MainTabView()
-            } else {
-                ErrorView(message: L10n.appFailedToInitialize) {
-                    appState.reset()
-                    appState.initialize()
-                }
+        if appState.isLoading {
+            SharedLoadingView()
+        } else if let errorMessage = appState.errorMessage {
+            ErrorView(message: errorMessage) {
+                appState.reset()
+                appState.initialize()
+            }
+        } else if appState.isInitialized {
+            MainTabView()
+        } else {
+            ErrorView(message: L10n.appFailedToInitialize) {
+                appState.reset()
+                appState.initialize()
             }
         }
     }

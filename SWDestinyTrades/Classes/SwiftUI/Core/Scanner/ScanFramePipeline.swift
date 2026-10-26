@@ -21,7 +21,7 @@ import Synchronization
 /// there, so cropping and Vision embedding never touch the main thread.
 /// Matcher replacement and capture requests cross executors, so that state lives in a compiler-
 /// checked `Mutex`; image processing remains synchronous on the serial sample queue.
-nonisolated final class ScanFramePipeline: Sendable {
+final nonisolated class ScanFramePipeline: Sendable {
 
     private struct State {
         var matcher: CardScanMatching?

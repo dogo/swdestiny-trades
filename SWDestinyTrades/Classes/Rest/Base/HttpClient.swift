@@ -21,9 +21,9 @@ extension HttpClient {
 
     var logger: NetworkingLogger {
         #if DEBUG
-        return NetworkingLogger(level: .debug)
+            return NetworkingLogger(level: .debug)
         #else
-        return NetworkingLogger(level: .none)
+            return NetworkingLogger(level: .none)
         #endif
     }
 

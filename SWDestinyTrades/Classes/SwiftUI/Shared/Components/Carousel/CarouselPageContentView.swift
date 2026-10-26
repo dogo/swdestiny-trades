@@ -29,7 +29,7 @@ struct CarouselPageContentView: View {
         case let .loaded(image):
             Image(uiImage: image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .accessibilityHidden(true)
 
         case .failed:
@@ -37,7 +37,7 @@ struct CarouselPageContentView: View {
                 if let errorImage {
                     Image(uiImage: errorImage)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(maxWidth: 120)
                         .accessibilityHidden(true)
                 } else {

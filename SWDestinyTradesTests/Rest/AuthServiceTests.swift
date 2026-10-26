@@ -71,7 +71,7 @@ final class AuthServiceTests {
         try await sut.completeLogin(callbackURL: callbackURL(state: state))
 
         let request = try #require(client.lastRequest)
-        let body = String(decoding: try #require(request.httpBody), as: UTF8.self)
+        let body = try String(decoding: #require(request.httpBody), as: UTF8.self)
         #expect(request.url?.absoluteString == "https://db.swdrenewedhope.com/oauth/v2/token")
         #expect(request.httpMethod == "POST")
         #expect(request.value(forHTTPHeaderField: "Content-Type") == "application/x-www-form-urlencoded")

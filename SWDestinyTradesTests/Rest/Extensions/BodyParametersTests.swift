@@ -37,14 +37,14 @@ final class BodyParametersTests {
     }
 
     @Test
-    func test_formEncoded_sortsKeysAndEscapesReservedCharacters() throws {
+    func formEncoded_sortsKeysAndEscapesReservedCharacters() throws {
         let bodyParameters: BodyParameters = [
             "redirect_uri": "app://callback",
             "code": "a+b=c&d",
             "expires": 42
         ]
 
-        let body = String(decoding: try #require(bodyParameters.formEncoded), as: UTF8.self)
+        let body = try String(decoding: #require(bodyParameters.formEncoded), as: UTF8.self)
 
         #expect(body == "code=a%2Bb%3Dc%26d&expires=42&redirect_uri=app://callback")
     }

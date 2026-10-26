@@ -15,7 +15,7 @@ import Vision
 ///
 /// The encoder was fine-tuned so phone photos match the catalog scans (see Tooling/ml). The model
 /// bakes CLIP normalization; cosine normalization happens in `CardEmbeddingIndex`.
-nonisolated final class MobileCLIPEmbedder: Sendable {
+final nonisolated class MobileCLIPEmbedder: Sendable {
 
     static let bundledModelName = "MobileCLIPImage"
 
@@ -25,7 +25,7 @@ nonisolated final class MobileCLIPEmbedder: Sendable {
         let configuration = MLModelConfiguration()
         configuration.computeUnits = .all
         let mlModel = try MLModel(contentsOf: modelURL, configuration: configuration)
-        model = Mutex(try VNCoreMLModel(for: mlModel))
+        model = try Mutex(VNCoreMLModel(for: mlModel))
     }
 
     static func bundled(name: String = bundledModelName, in bundle: Bundle = .main) -> MobileCLIPEmbedder? {

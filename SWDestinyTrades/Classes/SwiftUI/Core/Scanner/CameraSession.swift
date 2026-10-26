@@ -97,7 +97,7 @@ actor CameraSession {
 
 // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
-nonisolated private final class CameraFrameDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+private final nonisolated class CameraFrameDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
     private let frameHandler: @Sendable (CVPixelBuffer) -> Void
 

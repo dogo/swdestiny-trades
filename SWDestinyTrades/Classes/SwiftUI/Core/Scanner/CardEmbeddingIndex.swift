@@ -24,7 +24,7 @@ nonisolated struct CardMatch: Equatable, Sendable {
 /// Binary format (`.swdx`, little-endian), shared with the Python index builder:
 /// `magic("SWDX") | version:UInt32 | dim:UInt32 | count:UInt32` then per entry
 /// `codeLen:UInt16 | codeUTF8 | dim×Float32`.
-nonisolated final class CardEmbeddingIndex: Sendable {
+final nonisolated class CardEmbeddingIndex: Sendable {
 
     private static let magic: [UInt8] = Array("SWDX".utf8)
 

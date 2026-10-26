@@ -19,9 +19,8 @@ final class URLSessionMock {
 
 final class URLProtocolMock: URLProtocol {
 
-    // Test-only global hook. HttpClientTests serializes access to avoid cross-test mutation races.
-    nonisolated(unsafe)
-    static var response: ((URLRequest) throws -> HTTPResponse?)?
+    /// Test-only global hook. HttpClientTests serializes access to avoid cross-test mutation races.
+    nonisolated(unsafe) static var response: ((URLRequest) throws -> HTTPResponse?)?
 
     // swiftlint:disable:next static_over_final_class
     override class func canInit(with request: URLRequest) -> Bool {

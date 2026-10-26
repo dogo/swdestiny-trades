@@ -40,8 +40,8 @@ final class AccountViewModelTests: BaseTestCase {
     }
 
     @Test
-    func login_passesCallbackToServiceAndLogsIn() async {
-        let callback = URL(string: "swdestinytrades://oauth-callback?code=abc&state=x")!
+    func login_passesCallbackToServiceAndLogsIn() async throws {
+        let callback = try #require(URL(string: "swdestinytrades://oauth-callback?code=abc&state=x"))
         var receivedScheme: String?
 
         await sut.login { _, scheme in

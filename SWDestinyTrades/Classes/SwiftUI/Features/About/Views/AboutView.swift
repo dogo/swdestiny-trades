@@ -23,7 +23,7 @@ struct AboutView: View {
                     .renderingMode(.template)
                     .foregroundStyle(.primary)
                     .frame(width: 280, height: 150)
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .padding(.top, 34)
 
                 HStack {
