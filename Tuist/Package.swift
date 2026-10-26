@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 import PackageDescription
 
 #if TUIST
@@ -17,8 +17,8 @@ import PackageDescription
 let package = Package(
     name: "PackageName",
     dependencies: [
-        .package(url: "https://github.com/onevcat/Kingfisher", from: "8.13.0"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "12.19.2"),
+        .package(url: "https://github.com/onevcat/Kingfisher", from: "8.14.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk", from: "13.1.1", traits: []),
         .package(url: "https://github.com/uber/ios-snapshot-test-case", from: "8.0.0")
     ]
 )
