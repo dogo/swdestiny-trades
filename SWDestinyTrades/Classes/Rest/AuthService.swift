@@ -15,6 +15,7 @@ final class AuthService: AuthServiceProtocol {
     private let clientID: String
     private let clientSecret: String
     private var pendingState: String?
+    private var refreshTask: Task<Void, Error>?
 
     init(client: HttpClientProtocol,
          keychain: KeychainStoreProtocol = KeychainStore(service: Bundle.main.appBundleIdentifier),
@@ -63,6 +64,31 @@ final class AuthService: AuthServiceProtocol {
         guard try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey) else {
             throw AuthError.tokenRequestFailed
         }
+    }
+
+    func refreshToken() async throws {
+        if let refreshTask {
+            return try await refreshTask.value
+        }
+
+        guard let refreshToken = keychain.oauthToken?.refreshToken else {
+            throw APIError.unauthorized
+        }
+
+        let endpoint: AuthEndpoint = .refresh(clientID: clientID, clientSecret: clientSecret, refreshToken: refreshToken)
+        let task = Task {
+            do {
+                let token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
+                try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey)
+            } catch let error as APIError where error != .requestCancelled {
+                keychain.delete(OAuthTokenDTO.keychainKey)
+                throw APIError.unauthorized
+            }
+        }
+        refreshTask = task
+        defer { refreshTask = nil }
+
+        try await task.value
     }
 
     func logout() {

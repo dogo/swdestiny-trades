@@ -16,5 +16,7 @@ protocol AuthServiceProtocol: AnyObject {
 
     func completeLogin(callbackURL: URL) async throws
 
+    func refreshToken() async throws
+
     func logout()
 }

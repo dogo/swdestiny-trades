@@ -14,8 +14,10 @@ final class HttpClientMock: HttpClientProtocol {
     var fileName = String()
     var stub: Decodable?
     var error: Bool = false
+    var errorsToThrow: [Error] = []
     var isCancelled = false
     private(set) var lastRequest: URLRequest?
+    private(set) var requestCount = 0
 
     var logger: NetworkingLogger {
         return NetworkingLogger(level: .none)
@@ -23,6 +25,11 @@ final class HttpClientMock: HttpClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
         lastRequest = request
+        requestCount += 1
+
+        if !errorsToThrow.isEmpty {
+            throw errorsToThrow.removeFirst()
+        }
 
         if !error, let stub = stub as? T {
             return stub

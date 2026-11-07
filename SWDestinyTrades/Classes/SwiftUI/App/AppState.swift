@@ -58,7 +58,8 @@ final class AppState {
 
     private func registerServices() {
         dependencyContainer.register(type: HttpClientProtocol.self) {
-            HttpClient()
+            let authService: AuthServiceProtocol = DependencyContainer.shared.resolve(type: AuthServiceProtocol.self)
+            return AuthenticatedHttpClient(client: HttpClient(), authService: authService)
         }
 
         dependencyContainer.register(type: SWDestinyServiceProtocol.self) {
@@ -67,8 +68,7 @@ final class AppState {
         }
 
         dependencyContainer.register(type: AuthServiceProtocol.self) {
-            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
-            return AuthService(client: httpClient)
+            AuthService(client: HttpClient())
         }
 
         dependencyContainer.register(type: DeckServiceProtocol.self) {

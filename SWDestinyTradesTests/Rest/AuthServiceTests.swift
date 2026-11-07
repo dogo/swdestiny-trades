@@ -120,6 +120,39 @@ final class AuthServiceTests {
     }
 
     @Test
+    func refreshToken_storesNewToken() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        let refreshedToken = OAuthTokenDTO.stub(accessToken: "new", refreshToken: "new-refresh")
+        client.stub = refreshedToken
+
+        try await sut.refreshToken()
+
+        let request = try #require(client.lastRequest)
+        let body = try String(decoding: #require(request.httpBody), as: UTF8.self)
+        #expect(keychain.oauthToken == refreshedToken)
+        #expect(body == "client_id=client&client_secret=secret&grant_type=refresh_token&refresh_token=refresh")
+    }
+
+    @Test
+    func refreshToken_rejected_clearsToken() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        client.error = true
+
+        await #expect(throws: APIError.unauthorized) {
+            try await self.sut.refreshToken()
+        }
+        #expect(sut.isLoggedIn == false)
+    }
+
+    @Test
+    func refreshToken_withoutStoredToken_throwsWithoutRequest() async {
+        await #expect(throws: APIError.unauthorized) {
+            try await self.sut.refreshToken()
+        }
+        #expect(client.lastRequest == nil)
+    }
+
+    @Test
     func logout_removesToken() async throws {
         let state = try startLogin()
         try await sut.completeLogin(callbackURL: callbackURL(state: state))

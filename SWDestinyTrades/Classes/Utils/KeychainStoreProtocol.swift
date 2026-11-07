@@ -22,4 +22,8 @@ extension KeychainStoreProtocol {
     var oauthToken: OAuthTokenDTO? {
         data(for: OAuthTokenDTO.keychainKey).flatMap { try? JSONDecoder().decode(OAuthTokenDTO.self, from: $0) }
     }
+
+    var accessToken: String? {
+        oauthToken?.accessToken
+    }
 }

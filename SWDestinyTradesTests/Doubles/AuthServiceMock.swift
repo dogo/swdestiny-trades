@@ -14,8 +14,10 @@ final class AuthServiceMock: AuthServiceProtocol {
     var isLoggedIn = false
     var authorizationURLError: Error?
     var completeLoginError: Error?
+    var refreshTokenError: Error?
     private(set) var receivedCallbackURL: URL?
     private(set) var logoutCallCount = 0
+    private(set) var refreshTokenCallCount = 0
 
     func authorizationURL() throws -> URL {
         if let authorizationURLError {
@@ -30,6 +32,13 @@ final class AuthServiceMock: AuthServiceProtocol {
             throw completeLoginError
         }
         isLoggedIn = true
+    }
+
+    func refreshToken() async throws {
+        refreshTokenCallCount += 1
+        if let refreshTokenError {
+            throw refreshTokenError
+        }
     }
 
     func logout() {
