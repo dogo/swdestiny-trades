@@ -95,9 +95,8 @@ final class CarouselViewModel {
                     from: source,
                     placeholder: placeholder
                 ) { [weak self] progress in
-                    Task { @MainActor [weak self] in
-                        self?.imageStates[source] = .loading(progress: progress)
-                    }
+                    guard case .loading = self?.imageStates[source] else { return }
+                    self?.imageStates[source] = .loading(progress: progress)
                 }
                 imageStates[source] = .loaded(image)
             } catch {
