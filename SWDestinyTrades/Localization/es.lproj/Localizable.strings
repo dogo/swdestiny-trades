@@ -165,6 +165,7 @@
 "APP_FAILED_TO_INITIALIZE" = "App failed to initialize";
 "ACCOUNT" = "Cuenta";
 "ACCOUNT_CONNECTED" = "Conectado a A Renewed Hope";
+"REMOTE_DECK" = "Mazo de A Renewed Hope";
 "ACCOUNT_DISCONNECTED" = "Sin conectar";
 "ACCOUNT_DESCRIPTION" = "Inicia sesión con tu cuenta de db.swdrenewedhope.com para usar tus mazos del sitio.";
 "SIGN_IN_ARH" = "Iniciar sesión con A Renewed Hope";

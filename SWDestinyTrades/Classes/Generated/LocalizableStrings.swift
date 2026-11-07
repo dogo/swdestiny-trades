@@ -314,6 +314,8 @@ nonisolated internal enum L10n {
   internal static let red = L10n.tr("Localizable", "RED", fallback: "Red")
   /// Remote
   internal static let remote = L10n.tr("Localizable", "REMOTE", fallback: "Remote")
+  /// Deck from A Renewed Hope
+  internal static let remoteDeck = L10n.tr("Localizable", "REMOTE_DECK", fallback: "Deck from A Renewed Hope")
   /// Retry
   internal static let retry = L10n.tr("Localizable", "RETRY", fallback: "Retry")
   /// Save person

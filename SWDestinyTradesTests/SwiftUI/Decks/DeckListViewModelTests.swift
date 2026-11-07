@@ -48,6 +48,7 @@ final class DeckListViewModelTests: BaseTestCase {
         await sut.loadDecks()
 
         let item = try #require(sut.items.first { $0.id == "arh-1" })
+        #expect(item.isRemote)
         let deck = try #require(await sut.resolvedDeck(for: item))
 
         #expect(deck.list.map(\.code) == ["05117"])

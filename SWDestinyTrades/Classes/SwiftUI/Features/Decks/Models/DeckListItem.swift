@@ -10,10 +10,12 @@ struct DeckListItem: Identifiable, Equatable {
     let id: String
     let name: String
     let cardCount: Int
+    let isRemote: Bool
 
-    init(deck: DeckDTO) {
+    init(deck: DeckDTO, isRemote: Bool = false) {
         id = deck.id
         name = deck.name
         cardCount = deck.list.reduce(0) { $0 + $1.quantity }
+        self.isRemote = isRemote
     }
 }

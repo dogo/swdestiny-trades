@@ -24,6 +24,7 @@ struct DeckRowView: View {
             DeckNameSection(
                 name: item.name,
                 cardCount: item.cardCount,
+                isRemote: item.isRemote,
                 isEditing: $isEditing,
                 editedName: $editedName,
                 onEdit: onEdit,

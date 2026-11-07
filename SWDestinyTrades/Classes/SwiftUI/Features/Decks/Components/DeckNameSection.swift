@@ -11,6 +11,7 @@ import SwiftUI
 struct DeckNameSection: View {
     let name: String
     let cardCount: Int
+    var isRemote = false
     @Binding var isEditing: Bool
     @Binding var editedName: String
     let onEdit: () -> Void
@@ -28,9 +29,17 @@ struct DeckNameSection: View {
         } else {
             Button(action: onEdit) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(name.isEmpty ? L10n.unnamedDeck : name)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
+                    HStack(spacing: 4) {
+                        Text(name.isEmpty ? L10n.unnamedDeck : name)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+
+                        if isRemote {
+                            Image(systemName: "cloud")
+                                .foregroundStyle(.secondary)
+                                .accessibilityLabel(L10n.remoteDeck)
+                        }
+                    }
 
                     cardCountLabel
                 }

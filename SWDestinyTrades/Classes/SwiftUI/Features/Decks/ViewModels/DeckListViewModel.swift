@@ -68,7 +68,7 @@ final class DeckListViewModel: ListViewModel<DeckListItem> {
             decks[deck.id] = deck
         }
 
-        updateItems((fetchedDecks + remoteDecks).map(DeckListItem.init))
+        updateItems(fetchedDecks.map { DeckListItem(deck: $0) } + remoteDecks.map { DeckListItem(deck: $0, isRemote: true) })
         applySorting()
         setLoaded()
     }
