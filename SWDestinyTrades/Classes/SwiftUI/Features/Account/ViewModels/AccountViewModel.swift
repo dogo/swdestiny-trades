@@ -36,7 +36,7 @@ final class AccountViewModel: BaseViewModel {
 
         do {
             let url = try authService.authorizationURL()
-            let callbackURL = try await authenticate(url, AuthEndpoint.callbackScheme)
+            let callbackURL = try await authenticate(url, AuthorizeEndpoint.callbackScheme)
             try await authService.completeLogin(callbackURL: callbackURL)
             isLoggedIn = true
         } catch ASWebAuthenticationSessionError.canceledLogin {

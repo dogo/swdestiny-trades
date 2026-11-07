@@ -51,7 +51,7 @@ final class SWDestinyServiceMock: SWDestinyServiceProtocol {
 
         // If no pre-configured result is set, delegate to the HTTP client
         if retrieveSetCardListResult.isEmpty {
-            let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
+            let endpoint = CardListEndpoint(setCode: setCode)
             let request = endpoint.request
             return try await httpClient.request(request, decode: [CardDTO].self)
         }

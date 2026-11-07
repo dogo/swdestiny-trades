@@ -123,14 +123,14 @@ final class HttpClientTests {
 
     @Test
     func requestEndpoint_needingToken_attachesBearer() async throws {
-        let authorization = try await sentAuthorization(for: DeckEndpoint.decks)
+        let authorization = try await sentAuthorization(for: DecksEndpoint())
 
         #expect(authorization == "Bearer access")
     }
 
     @Test
     func requestEndpoint_notNeedingToken_omitsBearer() async throws {
-        let authorization = try await sentAuthorization(for: SWDestinyEndpoint.setList)
+        let authorization = try await sentAuthorization(for: SetListEndpoint())
 
         #expect(authorization == nil)
     }
@@ -143,7 +143,7 @@ final class HttpClientTests {
             return HTTPResponse(data: Data("{ \"bar\": true }".utf8), statusCode: 200)
         }
 
-        _ = try await sut.request(DeckEndpoint.decks, decode: Foo.self)
+        _ = try await sut.request(DecksEndpoint(), decode: Foo.self)
 
         #expect(authorization == nil)
     }

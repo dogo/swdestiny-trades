@@ -35,7 +35,7 @@ final class AuthenticatedHttpClientTests {
     func request_unauthorizedNeedingToken_refreshesAndRetries() async throws {
         client.errorsToThrow = [APIError.unauthorized]
 
-        let decks = try await sut.request(DeckEndpoint.decks, decode: [RemoteDeckDTO].self)
+        let decks = try await sut.request(DecksEndpoint(), decode: [RemoteDeckDTO].self)
 
         #expect(decks.count == 1)
         #expect(authService.refreshTokenCallCount == 1)
@@ -47,7 +47,7 @@ final class AuthenticatedHttpClientTests {
         client.errorsToThrow = [APIError.unauthorized]
 
         await #expect(throws: APIError.unauthorized) {
-            _ = try await self.sut.request(SWDestinyEndpoint.setList, decode: [RemoteDeckDTO].self)
+            _ = try await self.sut.request(SetListEndpoint(), decode: [RemoteDeckDTO].self)
         }
         #expect(authService.refreshTokenCallCount == 0)
         #expect(client.requestCount == 1)
@@ -59,7 +59,7 @@ final class AuthenticatedHttpClientTests {
         authService.refreshTokenError = APIError.unauthorized
 
         await #expect(throws: APIError.unauthorized) {
-            _ = try await self.sut.request(DeckEndpoint.decks, decode: [RemoteDeckDTO].self)
+            _ = try await self.sut.request(DecksEndpoint(), decode: [RemoteDeckDTO].self)
         }
         #expect(client.requestCount == 1)
     }

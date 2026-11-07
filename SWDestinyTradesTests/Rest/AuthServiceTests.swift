@@ -32,7 +32,7 @@ final class AuthServiceTests {
     }
 
     private func callbackURL(state: String) -> URL {
-        var components = URLComponents(string: AuthEndpoint.redirectURI)!
+        var components = URLComponents(string: AuthorizeEndpoint.redirectURI)!
         components.queryItems = [URLQueryItem(name: "state", value: state), URLQueryItem(name: "code", value: "abc")]
         return components.url!
     }

@@ -36,7 +36,7 @@ final class AuthService: AuthServiceProtocol {
             throw AuthError.notConfigured
         }
         let state = UUID().uuidString
-        let endpoint: AuthEndpoint = .authorize(clientID: clientID, state: state)
+        let endpoint = AuthorizeEndpoint(clientID: clientID, state: state)
         guard let url = endpoint.urlComponents.url else {
             throw AuthError.notConfigured
         }
@@ -53,7 +53,7 @@ final class AuthService: AuthServiceProtocol {
             throw AuthError.invalidCallback
         }
 
-        let endpoint: AuthEndpoint = .token(clientID: clientID, clientSecret: clientSecret, code: code)
+        let endpoint = TokenEndpoint(clientID: clientID, clientSecret: clientSecret, code: code)
         let token: OAuthTokenDTO
         do {
             token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
@@ -75,7 +75,7 @@ final class AuthService: AuthServiceProtocol {
             throw APIError.unauthorized
         }
 
-        let endpoint: AuthEndpoint = .refresh(clientID: clientID, clientSecret: clientSecret, refreshToken: refreshToken)
+        let endpoint = RefreshTokenEndpoint(clientID: clientID, clientSecret: clientSecret, refreshToken: refreshToken)
         let task = Task {
             do {
                 let token = try await client.request(endpoint, decode: OAuthTokenDTO.self)

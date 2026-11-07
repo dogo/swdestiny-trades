@@ -17,31 +17,31 @@ final class SWDestinyService: SWDestinyServiceProtocol {
     }
 
     func search(query: String) async throws -> [CardDTO] {
-        let endpoint: SWDestinyEndpoint = .search(query: query)
+        let endpoint = SearchEndpoint(query: query)
 
         return try await client.request(endpoint, decode: [CardDTO].self)
     }
 
     func retrieveSetList() async throws -> [SetDTO] {
-        let endpoint: SWDestinyEndpoint = .setList
+        let endpoint = SetListEndpoint()
 
         return try await client.request(endpoint, decode: [SetDTO].self)
     }
 
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO] {
-        let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
+        let endpoint = CardListEndpoint(setCode: setCode)
 
         return try await client.request(endpoint, decode: [CardDTO].self)
     }
 
     func retrieveAllCards() async throws -> [CardDTO] {
-        let endpoint: SWDestinyEndpoint = .allCards
+        let endpoint = AllCardsEndpoint()
 
         return try await client.request(endpoint, decode: [CardDTO].self)
     }
 
     func retrieveCard(cardId: String) async throws -> CardDTO {
-        let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
+        let endpoint = CardEndpoint(cardId: cardId)
 
         return try await client.request(endpoint, decode: CardDTO.self)
     }

@@ -17,7 +17,7 @@ final class DeckService: DeckServiceProtocol {
     }
 
     func retrieveDecks() async throws -> [DeckDTO] {
-        let endpoint: DeckEndpoint = .decks
+        let endpoint = DecksEndpoint()
 
         return try await client.request(endpoint, decode: [RemoteDeckDTO].self).map(\.deck)
     }
