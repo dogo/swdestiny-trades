@@ -18,6 +18,8 @@ final class DeckListViewModelTests: BaseTestCase {
 
     override init() async throws {
         try await super.init()
+        registerMock(AuthServiceProtocol.self) { AuthServiceMock() }
+        registerMock(DeckServiceProtocol.self) { DeckServiceMock() }
         sut = DeckListViewModel(dependencyContainer: testContainer.container)
     }
 

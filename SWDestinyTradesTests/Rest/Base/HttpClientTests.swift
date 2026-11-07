@@ -122,6 +122,33 @@ final class HttpClientTests {
     }
 
     @Test
+    func requestEndpoint_needingToken_attachesBearer() async throws {
+        let authorization = try await sentAuthorization(for: DeckEndpoint.decks)
+
+        #expect(authorization == "Bearer access")
+    }
+
+    @Test
+    func requestEndpoint_notNeedingToken_omitsBearer() async throws {
+        let authorization = try await sentAuthorization(for: SWDestinyEndpoint.setList)
+
+        #expect(authorization == nil)
+    }
+
+    private func sentAuthorization(for endpoint: EndpointProtocol) async throws -> String? {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        var authorization: String?
+        URLProtocolMock.response = { request in
+            authorization = request.value(forHTTPHeaderField: "Authorization")
+            return HTTPResponse(data: Data("{ \"bar\": true }".utf8), statusCode: 200)
+        }
+
+        _ = try await sut.request(endpoint, decode: Foo.self)
+
+        return authorization
+    }
+
+    @Test
     func test_cancelRequest() async throws {
         setupURLProtocolMock(with: nil, statusCode: 200, delay: 1.0)
 

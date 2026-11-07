@@ -17,6 +17,14 @@ final class DeckListViewModel: ListViewModel<DeckListItem> {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
+    private var authService: AuthServiceProtocol {
+        dependencyContainer.resolve(type: AuthServiceProtocol.self)
+    }
+
+    private var deckService: DeckServiceProtocol {
+        dependencyContainer.resolve(type: DeckServiceProtocol.self)
+    }
+
     required init(dependencyContainer: DependencyContainer = .shared) {
         super.init(dependencyContainer: dependencyContainer)
     }
@@ -48,7 +56,9 @@ final class DeckListViewModel: ListViewModel<DeckListItem> {
             decks[deck.id] = deck
         }
 
-        updateItems(fetchedDecks.map(DeckListItem.init))
+        let remoteDecks = authService.isLoggedIn ? await (try? deckService.retrieveDecks()) ?? [] : []
+
+        updateItems((fetchedDecks + remoteDecks).map(DeckListItem.init))
         applySorting()
         setLoaded()
     }

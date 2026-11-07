@@ -71,6 +71,11 @@ final class AppState {
             return AuthService(client: httpClient)
         }
 
+        dependencyContainer.register(type: DeckServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+            return DeckService(client: httpClient)
+        }
+
         dependencyContainer.register(type: ImageLoadingService.self) {
             KingfisherImageLoader()
         }
