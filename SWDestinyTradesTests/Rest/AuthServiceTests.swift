@@ -20,7 +20,7 @@ final class AuthServiceTests {
 
     init() {
         client = HttpClientMock()
-        client.fileName = "oauth-token"
+        client.stub = OAuthTokenDTO.stub()
         keychain = KeychainStoreMock()
         sut = AuthService(client: client, keychain: keychain, clientID: "client", clientSecret: "secret")
     }
@@ -76,7 +76,7 @@ final class AuthServiceTests {
         #expect(request.httpMethod == "POST")
         #expect(request.value(forHTTPHeaderField: "Content-Type") == "application/x-www-form-urlencoded")
         #expect(body == "client_id=client&client_secret=secret&code=abc&grant_type=authorization_code&redirect_uri=swdestinytrades://oauth-callback")
-        #expect(sut.token == OAuthTokenDTO(accessToken: "access", refreshToken: "refresh", expiresIn: 3600))
+        #expect(sut.token == .stub())
     }
 
     @Test

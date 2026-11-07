@@ -12,6 +12,7 @@ import Foundation
 
 final class HttpClientMock: HttpClientProtocol {
     var fileName = String()
+    var stub: Decodable?
     var error: Bool = false
     var isCancelled = false
     private(set) var lastRequest: URLRequest?
@@ -22,6 +23,10 @@ final class HttpClientMock: HttpClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
         lastRequest = request
+
+        if !error, let stub = stub as? T {
+            return stub
+        }
 
         guard !error, !fileName.isEmpty, let decodable: T = JSONHelper.loadJSON(withFile: fileName) else {
             throw APIError.invalidData
