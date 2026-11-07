@@ -23,8 +23,8 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         case local
     }
 
-    private var service: SWDestinyServiceProtocol {
-        dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
+    private var service: CardServiceProtocol {
+        dependencyContainer.resolve(type: CardServiceProtocol.self)
     }
 
     private var database: DatabaseProtocol {

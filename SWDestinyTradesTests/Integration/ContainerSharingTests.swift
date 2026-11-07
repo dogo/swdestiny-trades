@@ -53,7 +53,7 @@ final class ContainerSharingTests: BaseTestCase {
         card.name = "Original Name"
         card.setCode = "AW"
 
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
@@ -62,7 +62,7 @@ final class ContainerSharingTests: BaseTestCase {
         #expect(viewModel1.items.first?.name == "Original Name")
 
         card.name = "Modified Name"
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
@@ -95,7 +95,7 @@ final class ContainerSharingTests: BaseTestCase {
         card2.name = "Card Two"
         card2.setCode = "AW"
 
-        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
+        mockCardService.retrieveSetCardListResult = [card1, card2]
 
         let viewModel = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel.loadCards()
@@ -124,7 +124,7 @@ final class ContainerSharingTests: BaseTestCase {
         card2.name = "Card Two"
         card2.setCode = "AW"
 
-        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
+        mockCardService.retrieveSetCardListResult = [card1, card2]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
@@ -151,7 +151,7 @@ final class ContainerSharingTests: BaseTestCase {
         card.name = "Initial"
         card.setCode = "AW"
 
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
 
         let viewModel1 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
         await viewModel1.loadCards()
@@ -159,7 +159,7 @@ final class ContainerSharingTests: BaseTestCase {
         #expect(viewModel1.items.first?.name == "Initial")
 
         card.name = "Updated Once"
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel2 = CardListViewModel(set: set, dependencyContainer: testContainer.container)
@@ -167,7 +167,7 @@ final class ContainerSharingTests: BaseTestCase {
         #expect(viewModel2.items.first?.name == "Updated Once")
 
         card.name = "Updated Twice"
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
         try await testDatabase.save(object: card, update: .all)
 
         let viewModel3 = CardListViewModel(set: set, dependencyContainer: testContainer.container)

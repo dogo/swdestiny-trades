@@ -12,8 +12,8 @@ import SwiftUI
 @Observable
 final class SetsListViewModel: ListViewModel<SetDTO> {
 
-    private var service: SWDestinyServiceProtocol {
-        dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
+    private var service: SetServiceProtocol {
+        dependencyContainer.resolve(type: SetServiceProtocol.self)
     }
 
     private var database: DatabaseProtocol {

@@ -28,7 +28,7 @@ final class SearchViewModelTests: BaseTestCase {
 
     @Test
     func performSearch_populatesResults() async {
-        mockSWDestinyService.searchResult = [
+        mockCardService.searchResult = [
             CardDTO.stub(code: "01001", name: "Luke Skywalker"),
             CardDTO.stub(code: "01002", name: "Luke's Lightsaber")
         ]
@@ -52,7 +52,7 @@ final class SearchViewModelTests: BaseTestCase {
 
     @Test
     func performSearch_onError_clearsResultsAndShowsErrorToast() async {
-        mockSWDestinyService.searchError = APIError.invalidData
+        mockCardService.searchError = APIError.invalidData
 
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.isLoading && self.sut.toastQueue.current != nil }
@@ -63,7 +63,7 @@ final class SearchViewModelTests: BaseTestCase {
 
     @Test
     func clearSearch_resetsState() async {
-        mockSWDestinyService.searchResult = [CardDTO.stub(code: "01001")]
+        mockCardService.searchResult = [CardDTO.stub(code: "01001")]
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.searchResults.isEmpty }
 
@@ -76,7 +76,7 @@ final class SearchViewModelTests: BaseTestCase {
 
     @Test
     func filterItems_returnsSearchResults() async {
-        mockSWDestinyService.searchResult = [CardDTO.stub(code: "01001")]
+        mockCardService.searchResult = [CardDTO.stub(code: "01001")]
         sut.performSearch(query: "Luke")
         await waitUntil { !self.sut.searchResults.isEmpty }
 
@@ -116,7 +116,7 @@ final class SearchViewModelTests: BaseTestCase {
 
     @Test
     func shouldShowEmptyState_afterSearchWithNoResults() async {
-        mockSWDestinyService.searchResult = []
+        mockCardService.searchResult = []
 
         sut.performSearch(query: "Nonexistent")
         await waitUntil { !self.sut.isLoading && self.sut.hasSearched }

@@ -1,14 +1,14 @@
 //
-//  SWDestinyService.swift
+//  CardService.swift
 //  SWDestiny Trades
 //
-//  Created by Diogo Autilio on 12/07/18.
-//  Copyright © 2018 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 07/11/26.
+//  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
 
-final class SWDestinyService: SWDestinyServiceProtocol {
+final class CardService: CardServiceProtocol {
 
     private let client: HttpClientProtocol
 
@@ -20,12 +20,6 @@ final class SWDestinyService: SWDestinyServiceProtocol {
         let endpoint = SearchEndpoint(query: query)
 
         return try await client.request(endpoint, decode: [CardDTO].self)
-    }
-
-    func retrieveSetList() async throws -> [SetDTO] {
-        let endpoint = SetListEndpoint()
-
-        return try await client.request(endpoint, decode: [SetDTO].self)
     }
 
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO] {

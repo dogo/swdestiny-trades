@@ -44,7 +44,7 @@ final class CardListViewModelTests: BaseTestCase {
             subtitle: "Vader's Disciple"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
+        mockCardService.retrieveSetCardListResult = [card1, card2]
 
         await sut.loadCards()
 
@@ -70,7 +70,7 @@ final class CardListViewModelTests: BaseTestCase {
             name: "Captain Phasma"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [awCard]
+        mockCardService.retrieveSetCardListResult = [awCard]
 
         await sut.loadCards()
 
@@ -92,7 +92,7 @@ final class CardListViewModelTests: BaseTestCase {
 
     @Test
     func loadCardsHandlesHttpError() async {
-        mockSWDestinyService.retrieveSetCardListError = APIError.invalidData
+        mockCardService.retrieveSetCardListError = APIError.invalidData
 
         await sut.loadCards()
 
@@ -105,7 +105,7 @@ final class CardListViewModelTests: BaseTestCase {
     func asyncOperationCompletesLoading() async {
         let card = CardDTO.stub(setCode: "AW", code: "01001")
 
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
 
         await sut.loadCards()
 
@@ -127,7 +127,7 @@ final class CardListViewModelTests: BaseTestCase {
             subtitle: "Vader's Disciple"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
+        mockCardService.retrieveSetCardListResult = [card1, card2]
 
         await sut.loadCards()
 
@@ -152,7 +152,7 @@ final class CardListViewModelTests: BaseTestCase {
             subtitle: "Vader's Disciple"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [card1, card2]
+        mockCardService.retrieveSetCardListResult = [card1, card2]
 
         await sut.loadCards()
 
@@ -177,7 +177,7 @@ final class CardListViewModelTests: BaseTestCase {
             name: "Rey"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [redCard, blueCard]
+        mockCardService.retrieveSetCardListResult = [redCard, blueCard]
 
         await sut.loadCards()
 
@@ -203,7 +203,7 @@ final class CardListViewModelTests: BaseTestCase {
             name: "Lightsaber"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [character, upgrade]
+        mockCardService.retrieveSetCardListResult = [character, upgrade]
 
         await sut.loadCards()
 
@@ -238,7 +238,7 @@ final class CardListViewModelTests: BaseTestCase {
             cost: 5
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [lowCostCard, midCostCard, highCostCard]
+        mockCardService.retrieveSetCardListResult = [lowCostCard, midCostCard, highCostCard]
 
         await sut.loadCards()
 
@@ -264,7 +264,7 @@ final class CardListViewModelTests: BaseTestCase {
                 randomCards.append(card)
             }
 
-            mockSWDestinyService.retrieveSetCardListResult = randomCards
+            mockCardService.retrieveSetCardListResult = randomCards
 
             let testViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
             await testViewModel.loadCards()

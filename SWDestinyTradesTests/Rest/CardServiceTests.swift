@@ -1,9 +1,9 @@
 //
-//  SWDestinyServiceTests.swift
-//  SWDestiny-TradesTests
+//  CardServiceTests.swift
+//  SWDestinyTradesTests
 //
-//  Created by Diogo Autilio on 12/07/18.
-//  Copyright © 2018 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 07/11/26.
+//  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
@@ -11,21 +11,13 @@ import Testing
 
 @testable import SWDestinyTrades
 
-final class SWDestinyServiceTests: BaseTestCase {
+final class CardServiceTests: BaseTestCase {
 
-    private var sut: SWDestinyService!
+    private var sut: CardService!
 
     override init() async throws {
         try await super.init()
-        sut = SWDestinyService(client: mockHttpClient)
-    }
-
-    @Test
-    func retrieveSetListWithSuccess() async throws {
-        mockHttpClient.fileName = "sets"
-        let result = try await sut.retrieveSetList()
-
-        #expect(result.isEmpty == false)
+        sut = CardService(client: mockHttpClient)
     }
 
     @Test

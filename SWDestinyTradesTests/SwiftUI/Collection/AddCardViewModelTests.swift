@@ -19,7 +19,7 @@ final class AddCardViewModelTests: BaseTestCase {
         collection: UserCollectionDTO,
         serviceCards: [CardDTO]
     ) async -> AddCardViewModel {
-        mockSWDestinyService.retrieveAllCardsResult = serviceCards
+        mockCardService.retrieveAllCardsResult = serviceCards
         try? await populateTestData(objects: [collection])
         let sut = AddCardViewModel(context: .collection(collection), dependencyContainer: testContainer.container)
         await waitUntil { sut.items.count == serviceCards.count }
@@ -41,7 +41,7 @@ final class AddCardViewModelTests: BaseTestCase {
 
     @Test
     func loadAllCards_onError_enqueuesErrorToast() async {
-        mockSWDestinyService.retrieveAllCardsError = APIError.invalidData
+        mockCardService.retrieveAllCardsError = APIError.invalidData
         let sut = AddCardViewModel(context: .collection(UserCollectionDTO()), dependencyContainer: testContainer.container)
 
         await waitUntil { sut.toastQueue.current != nil }
@@ -143,7 +143,7 @@ final class AddCardViewModelTests: BaseTestCase {
     // MARK: - Person context
 
     private func makePersonSUT(person: PersonDTO, type: AddCardType, serviceCards: [CardDTO]) async -> AddCardViewModel {
-        mockSWDestinyService.retrieveAllCardsResult = serviceCards
+        mockCardService.retrieveAllCardsResult = serviceCards
         try? await populateTestData(objects: [person])
         let sut = AddCardViewModel(context: .person(id: person.id, type: type), dependencyContainer: testContainer.container)
         await waitUntil { sut.items.count == serviceCards.count }
@@ -202,7 +202,7 @@ final class AddCardViewModelTests: BaseTestCase {
 
     @Test
     func personContext_unknownPerson_addCardDoesNothing() async {
-        mockSWDestinyService.retrieveAllCardsResult = [CardDTO.stub(code: "01001")]
+        mockCardService.retrieveAllCardsResult = [CardDTO.stub(code: "01001")]
         let sut = AddCardViewModel(context: .person(id: "missing", type: .lent), dependencyContainer: testContainer.container)
         await waitUntil { sut.items.count == 1 }
 

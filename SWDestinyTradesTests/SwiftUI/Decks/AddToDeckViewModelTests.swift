@@ -53,7 +53,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
 
     @Test
     func loadRemoteCards_populatesItemsFromService() async {
-        mockSWDestinyService.retrieveAllCardsResult = [
+        mockCardService.retrieveAllCardsResult = [
             CardDTO.stub(code: "01001"),
             CardDTO.stub(code: "01002")
         ]
@@ -68,7 +68,7 @@ final class AddToDeckViewModelTests: BaseTestCase {
 
     @Test
     func loadRemoteCards_onError_enqueuesErrorToast() async {
-        mockSWDestinyService.retrieveAllCardsError = APIError.invalidData
+        mockCardService.retrieveAllCardsError = APIError.invalidData
 
         sut.loadRemoteCards()
         await sut.awaitCurrentLoad()

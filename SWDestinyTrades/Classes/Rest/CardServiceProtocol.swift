@@ -1,18 +1,16 @@
 //
-//  SWDestinyServiceProtocol.swift
+//  CardServiceProtocol.swift
 //  SWDestiny Trades
 //
-//  Created by Diogo Autilio on 12/4/17.
-//  Copyright © 2017 Diogo Autilio. All rights reserved.
+//  Created by Diogo Autilio on 07/11/26.
+//  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
 import Foundation
 
-protocol SWDestinyServiceProtocol {
+protocol CardServiceProtocol {
 
     func search(query: String) async throws -> [CardDTO]
-
-    func retrieveSetList() async throws -> [SetDTO]
 
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO]
 

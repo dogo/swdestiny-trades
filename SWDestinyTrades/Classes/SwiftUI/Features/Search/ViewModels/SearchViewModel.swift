@@ -17,8 +17,8 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     var hasSearched = false
     var currentQuery = ""
 
-    private var service: SWDestinyServiceProtocol {
-        dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
+    private var service: CardServiceProtocol {
+        dependencyContainer.resolve(type: CardServiceProtocol.self)
     }
 
     @ObservationIgnored private var searchTask: Task<Void, Never>?

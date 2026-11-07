@@ -19,8 +19,8 @@ final class AddCardViewModel: ListViewModel<CardDTO> {
 
     var addCardContext: AddCardContext
 
-    private var service: SWDestinyServiceProtocol {
-        dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
+    private var service: CardServiceProtocol {
+        dependencyContainer.resolve(type: CardServiceProtocol.self)
     }
 
     private var database: DatabaseProtocol {

@@ -28,7 +28,7 @@ final class SetsListViewModelTests: BaseTestCase {
 
     @Test
     func loadItems_fetchesSetsAndPersistsThem() async {
-        mockSWDestinyService.retrieveSetListResult = [
+        mockSetService.retrieveSetListResult = [
             SetDTO.stub(name: "Awakenings", code: "AW"),
             SetDTO.stub(name: "Spark of Hope", code: "SOH")
         ]
@@ -43,7 +43,7 @@ final class SetsListViewModelTests: BaseTestCase {
 
     @Test
     func loadItems_onError_enqueuesErrorToast() async {
-        mockSWDestinyService.retrieveSetListError = APIError.invalidData
+        mockSetService.retrieveSetListError = APIError.invalidData
 
         await sut.loadItems()
 
@@ -53,7 +53,7 @@ final class SetsListViewModelTests: BaseTestCase {
 
     @Test
     func refreshSets_updatesItems() async {
-        mockSWDestinyService.retrieveSetListResult = [SetDTO.stub(name: "Awakenings", code: "AW")]
+        mockSetService.retrieveSetListResult = [SetDTO.stub(name: "Awakenings", code: "AW")]
 
         await sut.refreshSets()
 

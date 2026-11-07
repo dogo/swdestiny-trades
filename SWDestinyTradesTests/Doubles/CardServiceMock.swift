@@ -1,8 +1,8 @@
 //
-//  SWDestinyServiceMock.swift
-//  SWDestiny Trades
+//  CardServiceMock.swift
+//  SWDestinyTradesTests
 //
-//  Created by Diogo Autilio on 02/02/26.
+//  Created by Diogo Autilio on 07/11/26.
 //  Copyright © 2026 Diogo Autilio. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 
 @testable import SWDestinyTrades
 
-final class SWDestinyServiceMock: SWDestinyServiceProtocol {
+final class CardServiceMock: CardServiceProtocol {
 
     var httpClient: HttpClientProtocol
 
@@ -27,17 +27,6 @@ final class SWDestinyServiceMock: SWDestinyServiceProtocol {
             throw error
         }
         return searchResult
-    }
-
-    var retrieveSetListResult: [SetDTO] = []
-    var retrieveSetListError: Error?
-    private(set) var retrieveSetListCallCount = 0
-    func retrieveSetList() async throws -> [SetDTO] {
-        retrieveSetListCallCount += 1
-        if let error = retrieveSetListError {
-            throw error
-        }
-        return retrieveSetListResult
     }
 
     var retrieveSetCardListResult: [CardDTO] = []
@@ -78,7 +67,7 @@ final class SWDestinyServiceMock: SWDestinyServiceProtocol {
             throw error
         }
         guard let result = retrieveCardResult else {
-            throw NSError(domain: "SWDestinyServiceMock", code: 404, userInfo: [NSLocalizedDescriptionKey: "Card not found"])
+            throw NSError(domain: "CardServiceMock", code: 404, userInfo: [NSLocalizedDescriptionKey: "Card not found"])
         }
         return result
     }

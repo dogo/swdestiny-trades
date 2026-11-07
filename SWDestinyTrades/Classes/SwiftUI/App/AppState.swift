@@ -62,9 +62,14 @@ final class AppState {
             return AuthenticatedHttpClient(client: HttpClient(), authService: authService)
         }
 
-        dependencyContainer.register(type: SWDestinyServiceProtocol.self) {
+        dependencyContainer.register(type: SetServiceProtocol.self) {
             let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
-            return SWDestinyService(client: httpClient)
+            return SetService(client: httpClient)
+        }
+
+        dependencyContainer.register(type: CardServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+            return CardService(client: httpClient)
         }
 
         dependencyContainer.register(type: AuthServiceProtocol.self) {

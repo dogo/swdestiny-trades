@@ -60,7 +60,7 @@ final class CardListViewTests: BaseTestCase {
             name: "Test Card"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [card]
+        mockCardService.retrieveSetCardListResult = [card]
 
         let viewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
@@ -125,7 +125,7 @@ final class CardListViewTests: BaseTestCase {
             )
         }
 
-        mockSWDestinyService.retrieveSetCardListResult = cards
+        mockCardService.retrieveSetCardListResult = cards
 
         let viewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
 
@@ -168,7 +168,7 @@ final class CardListViewTests: BaseTestCase {
             name: "Spirit of Rebellion Card"
         )
 
-        mockSWDestinyService.retrieveSetCardListResult = [awCard]
+        mockCardService.retrieveSetCardListResult = [awCard]
 
         let awViewModel = CardListViewModel(set: testSet, dependencyContainer: testContainer.container)
         await awViewModel.loadCards()
@@ -176,7 +176,7 @@ final class CardListViewTests: BaseTestCase {
         #expect(awViewModel.items.count == 1)
         #expect(awViewModel.items.first?.setCode == "AW")
 
-        mockSWDestinyService.retrieveSetCardListResult = [sorCard]
+        mockCardService.retrieveSetCardListResult = [sorCard]
 
         let sorSet = SetDTO.stub(name: "Spirit of Rebellion", code: "SOR")
         let sorViewModel = CardListViewModel(set: sorSet, dependencyContainer: testContainer.container)

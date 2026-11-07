@@ -23,8 +23,8 @@ final class CardListViewModel: ListViewModel<CardDTO> {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
-    private var service: SWDestinyServiceProtocol {
-        dependencyContainer.resolve(type: SWDestinyServiceProtocol.self)
+    private var service: CardServiceProtocol {
+        dependencyContainer.resolve(type: CardServiceProtocol.self)
     }
 
     // MARK: - Initialization
