@@ -45,11 +45,8 @@ final class PreviewHelperTests {
     @Test
     func previewHttpClientMock_requestThrowsInvalidData() async throws {
         let sut = PreviewHttpClientMock()
-        let url = try #require(URL(string: "https://example.com/cards"))
-        let request = URLRequest(url: url)
-
         do {
-            let _: SetDTO = try await sut.request(request, decode: SetDTO.self)
+            let _: SetDTO = try await sut.request(SetListEndpoint(), decode: SetDTO.self)
             Issue.record("Expected PreviewHttpClientMock to throw invalidData")
         } catch let error as APIError {
             #expect(error == .invalidData)

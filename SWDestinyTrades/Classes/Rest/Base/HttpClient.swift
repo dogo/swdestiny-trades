@@ -30,7 +30,7 @@ extension HttpClient {
         #endif
     }
 
-    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
+    private func perform<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
 
         logger.log(request: request)
 
@@ -82,7 +82,7 @@ extension HttpClient {
         if endpoint.needsToken, let accessToken = keychain.accessToken {
             request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }
-        return try await self.request(request, decode: T.self)
+        return try await perform(request, decode: T.self)
     }
 
     func cancelRequest(_ request: URLRequest?) {

@@ -22,10 +22,6 @@ final class AuthenticatedHttpClient: HttpClientProtocol {
         client.logger
     }
 
-    func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
-        try await client.request(request, decode: T.self)
-    }
-
     func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
         do {
             return try await client.request(endpoint, decode: T.self)
