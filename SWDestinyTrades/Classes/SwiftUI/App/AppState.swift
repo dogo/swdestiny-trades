@@ -72,6 +72,11 @@ final class AppState {
             return CardService(client: httpClient)
         }
 
+        dependencyContainer.register(type: SearchServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+            return SearchService(client: httpClient)
+        }
+
         dependencyContainer.register(type: AuthServiceProtocol.self) {
             AuthService(client: HttpClient())
         }

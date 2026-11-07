@@ -16,12 +16,6 @@ final class CardService: CardServiceProtocol {
         self.client = client
     }
 
-    func search(query: String) async throws -> [CardDTO] {
-        let endpoint = SearchEndpoint(query: query)
-
-        return try await client.request(endpoint, decode: [CardDTO].self)
-    }
-
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO] {
         let endpoint = CardListEndpoint(setCode: setCode)
 

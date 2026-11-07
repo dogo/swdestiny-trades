@@ -18,17 +18,6 @@ final class CardServiceMock: CardServiceProtocol {
         self.httpClient = httpClient
     }
 
-    var searchResult: [CardDTO] = []
-    var searchError: Error?
-    private(set) var searchCallCount = 0
-    func search(query: String) async throws -> [CardDTO] {
-        searchCallCount += 1
-        if let error = searchError {
-            throw error
-        }
-        return searchResult
-    }
-
     var retrieveSetCardListResult: [CardDTO] = []
     var retrieveSetCardListError: Error?
     private(set) var retrieveSetCardListCallCount = 0

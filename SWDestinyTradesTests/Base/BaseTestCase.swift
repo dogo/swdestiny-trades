@@ -18,6 +18,7 @@ class BaseTestCase {
     var mockHttpClient: HttpClientMock!
     var mockCardService: CardServiceMock!
     var mockSetService: SetServiceMock!
+    var mockSearchService: SearchServiceMock!
 
     init() async throws {
         testContainer = TestContainer()
@@ -38,6 +39,12 @@ class BaseTestCase {
         testContainer.registerMock(SetServiceProtocol.self) { [weak self] in
             guard let self else { return SetServiceMock() }
             return mockSetService
+        }
+
+        mockSearchService = SearchServiceMock()
+        testContainer.registerMock(SearchServiceProtocol.self) { [weak self] in
+            guard let self else { return SearchServiceMock() }
+            return mockSearchService
         }
 
         testDatabase = DatabaseMock()
@@ -61,6 +68,7 @@ class BaseTestCase {
         mockHttpClient = nil
         mockCardService = nil
         mockSetService = nil
+        mockSearchService = nil
     }
 
     func registerMock<T>(_ type: T.Type, mock: @escaping () -> T) {

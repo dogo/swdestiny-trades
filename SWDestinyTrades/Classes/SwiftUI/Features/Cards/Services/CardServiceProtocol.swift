@@ -10,8 +10,6 @@ import Foundation
 
 protocol CardServiceProtocol {
 
-    func search(query: String) async throws -> [CardDTO]
-
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO]
 
     func retrieveAllCards() async throws -> [CardDTO]
