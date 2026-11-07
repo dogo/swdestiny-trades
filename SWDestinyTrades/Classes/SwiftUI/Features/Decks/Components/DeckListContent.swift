@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DeckListContent: View {
     let items: [DeckListItem]
+    var loadingItemID: String?
     let onEdit: (DeckListItem) -> Void
     let onGraph: (DeckListItem) -> Void
     let onDelete: (DeckListItem) -> Void
@@ -18,7 +19,7 @@ struct DeckListContent: View {
     var body: some View {
         List {
             ForEach(items) { item in
-                DeckRowView(item: item) {
+                DeckRowView(item: item, isLoading: item.id == loadingItemID) {
                     onEdit(item)
                 } onGraph: {
                     onGraph(item)

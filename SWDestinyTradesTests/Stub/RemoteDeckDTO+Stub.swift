@@ -15,6 +15,6 @@ extension RemoteDeckDTO {
     static func stub(id: Int = 1,
                      name: String = "Ewoks",
                      slots: [String: Int] = ["11093": 1, "05117": 2]) -> RemoteDeckDTO {
-        return RemoteDeckDTO(id: id, name: name, slots: slots.mapValues(Slot.init))
+        return RemoteDeckDTO(id: id, name: name, slots: slots.mapValues { Slot(quantity: $0, dice: 0) })
     }
 }

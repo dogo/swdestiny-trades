@@ -11,6 +11,7 @@ import Foundation
 struct RemoteDeckDTO: Decodable {
     struct Slot: Decodable {
         let quantity: Int
+        let dice: Int
     }
 
     let id: Int
@@ -26,6 +27,7 @@ struct RemoteDeckDTO: Decodable {
             card.id = code
             card.code = code
             card.quantity = slot.quantity
+            card.isElite = slot.dice > slot.quantity
             return card
         }
         return deck

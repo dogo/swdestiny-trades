@@ -10,6 +10,7 @@ import SwiftUI
 
 struct DeckRowView: View {
     let item: DeckListItem
+    var isLoading = false
     let onEdit: () -> Void
     let onGraph: () -> Void
     let onDelete: () -> Void
@@ -28,11 +29,15 @@ struct DeckRowView: View {
                 onEdit: onEdit,
                 onSave: saveName
             )
-            DeckActionButton(
-                isEditing: isEditing,
-                onSave: saveName,
-                onStartEditing: startEditing
-            )
+            if isLoading {
+                ProgressView()
+            } else {
+                DeckActionButton(
+                    isEditing: isEditing,
+                    onSave: saveName,
+                    onStartEditing: startEditing
+                )
+            }
         }
         .padding(.vertical, 4)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {

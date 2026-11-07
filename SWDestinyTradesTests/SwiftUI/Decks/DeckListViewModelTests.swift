@@ -34,6 +34,28 @@ final class DeckListViewModelTests: BaseTestCase {
         return deck
     }
 
+    // MARK: - Remote
+
+    @Test
+    func resolvedDeck_remote_loadsFullCards() async throws {
+        let authService = AuthServiceMock()
+        authService.isLoggedIn = true
+        let deckService = DeckServiceMock()
+        deckService.decks = [RemoteDeckDTO.stub(slots: ["05117": 2]).deck]
+        registerMock(AuthServiceProtocol.self) { authService }
+        registerMock(DeckServiceProtocol.self) { deckService }
+        mockCardService.retrieveCardResult = CardDTO.stub(code: "05117")
+        await sut.loadDecks()
+
+        let item = try #require(sut.items.first { $0.id == "arh-1" })
+        let deck = try #require(await sut.resolvedDeck(for: item))
+
+        #expect(deck.list.map(\.code) == ["05117"])
+        #expect(deck.list.map(\.quantity) == [2])
+        #expect(mockCardService.retrieveAllCardsCallCount == 0)
+        #expect(sut.loadingDeckID == nil)
+    }
+
     // MARK: - Load
 
     @Test

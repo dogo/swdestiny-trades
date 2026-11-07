@@ -27,6 +27,7 @@ struct DeckListView: View {
             } else {
                 DeckListContent(
                     items: viewModel.filteredItems,
+                    loadingItemID: viewModel.loadingDeckID,
                     onEdit: editDeck,
                     onGraph: showDeckGraph,
                     onDelete: { item in
@@ -71,13 +72,17 @@ struct DeckListView: View {
     }
 
     private func editDeck(_ item: DeckListItem) {
-        guard let deck = viewModel.deck(for: item) else { return }
-        navigationCoordinator.navigate(to: .deckBuilder(deck))
+        Task {
+            guard let deck = await viewModel.resolvedDeck(for: item) else { return }
+            navigationCoordinator.navigate(to: .deckBuilder(deck))
+        }
     }
 
     private func showDeckGraph(_ item: DeckListItem) {
-        guard let deck = viewModel.deck(for: item) else { return }
-        navigationCoordinator.navigate(to: .deckGraph(deck))
+        Task {
+            guard let deck = await viewModel.resolvedDeck(for: item) else { return }
+            navigationCoordinator.navigate(to: .deckGraph(deck))
+        }
     }
 
     private func refreshDecks() async {
