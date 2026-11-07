@@ -17,3 +17,9 @@ protocol KeychainStoreProtocol {
 
     func delete(_ key: String)
 }
+
+extension KeychainStoreProtocol {
+    var oauthToken: OAuthTokenDTO? {
+        data(for: OAuthTokenDTO.keychainKey).flatMap { try? JSONDecoder().decode(OAuthTokenDTO.self, from: $0) }
+    }
+}

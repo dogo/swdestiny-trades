@@ -9,6 +9,8 @@
 import Foundation
 
 struct OAuthTokenDTO: Codable, Equatable {
+    static let keychainKey = "oauth-token"
+
     let accessToken: String
     let refreshToken: String
     let expiresIn: Int

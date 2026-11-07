@@ -20,4 +20,6 @@ protocol EndpointProtocol {
     var bodyParameters: BodyParameters? { get }
     var method: HttpMethod { get }
     var headers: HttpHeaders? { get }
+    var needsToken: Bool { get }
+    var request: URLRequest { get }
 }

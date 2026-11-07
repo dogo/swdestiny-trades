@@ -18,37 +18,32 @@ final class SWDestinyService: SWDestinyServiceProtocol {
 
     func search(query: String) async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .search(query: query)
-        let request = endpoint.request
 
-        return try await client.request(request, decode: [CardDTO].self)
+        return try await client.request(endpoint, decode: [CardDTO].self)
     }
 
     func retrieveSetList() async throws -> [SetDTO] {
         let endpoint: SWDestinyEndpoint = .setList
-        let request = endpoint.request
 
-        return try await client.request(request, decode: [SetDTO].self)
+        return try await client.request(endpoint, decode: [SetDTO].self)
     }
 
     func retrieveSetCardList(setCode: String) async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .cardList(setCode: setCode)
-        let request = endpoint.request
 
-        return try await client.request(request, decode: [CardDTO].self)
+        return try await client.request(endpoint, decode: [CardDTO].self)
     }
 
     func retrieveAllCards() async throws -> [CardDTO] {
         let endpoint: SWDestinyEndpoint = .allCards
-        let request = endpoint.request
 
-        return try await client.request(request, decode: [CardDTO].self)
+        return try await client.request(endpoint, decode: [CardDTO].self)
     }
 
     func retrieveCard(cardId: String) async throws -> CardDTO {
         let endpoint: SWDestinyEndpoint = .card(cardId: cardId)
-        let request = endpoint.request
 
-        return try await client.request(request, decode: CardDTO.self)
+        return try await client.request(endpoint, decode: CardDTO.self)
     }
 
     func cancelRequest(_ request: URLRequest?) {

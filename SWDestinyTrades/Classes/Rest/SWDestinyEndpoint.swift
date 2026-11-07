@@ -71,6 +71,11 @@ extension SWDestinyEndpoint: EndpointProtocol {
         return ["Content-type": "application/json"]
     }
 
+    /// Whether the request carries the user's access token.
+    var needsToken: Bool {
+        return false
+    }
+
     /// The components of a URL.
     var urlComponents: URLComponents {
         var components = URLComponents()

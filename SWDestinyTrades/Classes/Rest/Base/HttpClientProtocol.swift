@@ -13,5 +13,13 @@ protocol HttpClientProtocol {
 
     func request<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T
 
+    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T
+
     func cancelRequest(_ request: URLRequest?)
+}
+
+extension HttpClientProtocol {
+    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
+        try await request(endpoint.request, decode: T.self)
+    }
 }

@@ -17,11 +17,13 @@ final class HttpClientTests {
 
     private var sut: HttpClient!
     private var session: URLSession!
+    private var keychain: KeychainStoreMock!
     private var request: URLRequest!
 
     init() {
         session = URLSessionMock().build()
-        sut = HttpClient(session: session)
+        keychain = KeychainStoreMock()
+        sut = HttpClient(session: session, keychain: keychain)
         request = URLRequest(url: URL(string: "https://base.url.com")!)
         request.httpMethod = HttpMethod.get.toString()
     }
@@ -29,6 +31,7 @@ final class HttpClientTests {
     isolated deinit {
         sut = nil
         session = nil
+        keychain = nil
         request = nil
     }
 

@@ -10,10 +10,13 @@ import Foundation
 
 final class HttpClient: HttpClientProtocol {
     private let session: URLSession
+    private let keychain: KeychainStoreProtocol
     private var activeTasks: [URLRequest: Task<(Data, URLResponse), Error>] = [:]
 
-    init(session: URLSession = .shared) {
+    init(session: URLSession = .shared,
+         keychain: KeychainStoreProtocol = KeychainStore(service: Bundle.main.appBundleIdentifier)) {
         self.session = session
+        self.keychain = keychain
     }
 }
 
@@ -68,6 +71,14 @@ extension HttpClient {
         } catch {
             throw error
         }
+    }
+
+    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
+        var request = endpoint.request
+        if endpoint.needsToken, let token = keychain.oauthToken {
+            request.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+        return try await self.request(request, decode: T.self)
     }
 
     func cancelRequest(_ request: URLRequest?) {

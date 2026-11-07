@@ -76,7 +76,7 @@ final class AuthServiceTests {
         #expect(request.httpMethod == "POST")
         #expect(request.value(forHTTPHeaderField: "Content-Type") == "application/x-www-form-urlencoded")
         #expect(body == "client_id=client&client_secret=secret&code=abc&grant_type=authorization_code&redirect_uri=swdestinytrades://oauth-callback")
-        #expect(sut.token == .stub())
+        #expect(keychain.oauthToken == .stub())
     }
 
     @Test

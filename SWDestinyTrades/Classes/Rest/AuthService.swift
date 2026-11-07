@@ -10,8 +10,6 @@ import Foundation
 
 final class AuthService: AuthServiceProtocol {
 
-    private static let tokenKey = "oauth-token"
-
     private let client: HttpClientProtocol
     private let keychain: KeychainStoreProtocol
     private let clientID: String
@@ -29,11 +27,7 @@ final class AuthService: AuthServiceProtocol {
     }
 
     var isLoggedIn: Bool {
-        token != nil
-    }
-
-    var token: OAuthTokenDTO? {
-        keychain.data(for: Self.tokenKey).flatMap { try? JSONDecoder().decode(OAuthTokenDTO.self, from: $0) }
+        keychain.oauthToken != nil
     }
 
     func authorizationURL() throws -> URL {
@@ -61,17 +55,17 @@ final class AuthService: AuthServiceProtocol {
         let endpoint: AuthEndpoint = .token(clientID: clientID, clientSecret: clientSecret, code: code)
         let token: OAuthTokenDTO
         do {
-            token = try await client.request(endpoint.request, decode: OAuthTokenDTO.self)
+            token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
         } catch {
             throw AuthError.tokenRequestFailed
         }
 
-        guard try keychain.set(JSONEncoder().encode(token), for: Self.tokenKey) else {
+        guard try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey) else {
             throw AuthError.tokenRequestFailed
         }
     }
 
     func logout() {
-        keychain.delete(Self.tokenKey)
+        keychain.delete(OAuthTokenDTO.keychainKey)
     }
 }
