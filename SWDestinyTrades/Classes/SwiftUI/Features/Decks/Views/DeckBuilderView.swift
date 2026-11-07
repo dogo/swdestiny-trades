@@ -89,17 +89,17 @@ struct DeckBuilderView: View {
     let sampleDeck = DeckDTO()
     sampleDeck.name = "Sample Deck"
 
-    return NavigationStack {
-        DeckBuilderView(deck: sampleDeck)
-            .environment(NavigationCoordinator())
-            .environment(\.dependencyContainer, DependencyContainer.shared)
+    return PreviewContainer {
+        NavigationStack {
+            DeckBuilderView(deck: sampleDeck)
+        }
     }
 }
 
 #Preview("Empty Deck") {
-    return NavigationStack {
-        DeckBuilderView(deck: nil)
-            .environment(NavigationCoordinator())
-            .environment(\.dependencyContainer, DependencyContainer.shared)
+    PreviewContainer {
+        NavigationStack {
+            DeckBuilderView(deck: nil)
+        }
     }
 }

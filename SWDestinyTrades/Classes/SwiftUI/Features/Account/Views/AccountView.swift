@@ -61,10 +61,9 @@ struct AccountView: View {
 }
 
 #Preview {
-    DependencyContainer.shared.register(type: AuthServiceProtocol.self) {
-        AuthService(client: PreviewHttpClientMock())
-    }
-    return NavigationStack {
-        AccountView()
+    PreviewContainer {
+        NavigationStack {
+            AccountView()
+        }
     }
 }

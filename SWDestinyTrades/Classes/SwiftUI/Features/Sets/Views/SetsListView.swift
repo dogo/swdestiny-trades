@@ -69,9 +69,9 @@ struct SetsListView: View {
 }
 
 #Preview {
-    NavigationStack {
-        SetsListView()
+    PreviewContainer {
+        NavigationStack {
+            SetsListView()
+        }
     }
-    .environment(NavigationCoordinator())
-    .environment(\.dependencyContainer, DependencyContainer.shared)
 }

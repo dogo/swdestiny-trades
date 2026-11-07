@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 enum PreviewHelper {
@@ -18,8 +19,24 @@ enum PreviewHelper {
             database
         }
 
+        let httpClient = PreviewHttpClientMock()
         container.register(type: HttpClientProtocol.self) {
-            PreviewHttpClientMock()
+            httpClient
+        }
+        container.register(type: AuthServiceProtocol.self) {
+            AuthService(client: httpClient)
+        }
+        container.register(type: CardServiceProtocol.self) {
+            CardService(client: httpClient)
+        }
+        container.register(type: SetServiceProtocol.self) {
+            SetService(client: httpClient)
+        }
+        container.register(type: SearchServiceProtocol.self) {
+            SearchService(client: httpClient)
+        }
+        container.register(type: DeckServiceProtocol.self) {
+            DeckService(client: httpClient)
         }
 
         return container
@@ -70,6 +87,35 @@ enum PreviewHelper {
         copy.lentMe = person.lentMe.map(CardDTO.init(copying:))
         copy.borrowed = person.borrowed.map(CardDTO.init(copying:))
         return copy
+    }
+}
+
+struct PreviewContainer<Content: View>: View {
+    private let content: () -> Content
+    @State private var container: DependencyContainer?
+    @State private var appState: AppState?
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    var body: some View {
+        if let container, let appState {
+            content()
+                .environment(NavigationCoordinator())
+                .environment(appState)
+                .environment(\.dependencyContainer, container)
+        } else {
+            ProgressView()
+                .task {
+                    do {
+                        container = try await PreviewHelper.createContainer()
+                        appState = try await PreviewHelper.createAppState()
+                    } catch {
+                        print("Preview setup failed: \(error)")
+                    }
+                }
+        }
     }
 }
 

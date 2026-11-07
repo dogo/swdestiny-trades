@@ -93,10 +93,10 @@ struct DeckListView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationStack {
-        DeckListView()
-            .environment(NavigationCoordinator())
-            .environment(\.dependencyContainer, DependencyContainer.shared)
+    PreviewContainer {
+        NavigationStack {
+            DeckListView()
+        }
     }
 }
 

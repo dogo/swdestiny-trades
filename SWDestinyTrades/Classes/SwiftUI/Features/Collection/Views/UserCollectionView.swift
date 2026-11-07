@@ -62,9 +62,9 @@ struct UserCollectionView: View {
 }
 
 #Preview {
-    NavigationStack {
-        UserCollectionView()
+    PreviewContainer {
+        NavigationStack {
+            UserCollectionView()
+        }
     }
-    .environment(NavigationCoordinator())
-    .environment(\.dependencyContainer, DependencyContainer.shared)
 }

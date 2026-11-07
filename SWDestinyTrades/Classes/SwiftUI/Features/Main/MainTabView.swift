@@ -33,7 +33,7 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView()
-        .environment(AppState())
-        .environment(\.dependencyContainer, DependencyContainer.shared)
+    PreviewContainer {
+        MainTabView()
+    }
 }

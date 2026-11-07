@@ -33,7 +33,7 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
-        .environment(NavigationCoordinator())
-        .environment(\.dependencyContainer, DependencyContainer.shared)
+    PreviewContainer {
+        SearchView()
+    }
 }

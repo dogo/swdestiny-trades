@@ -15,6 +15,19 @@ import Testing
 final class PreviewHelperTests {
 
     @Test
+    func createContainer_registersEveryScreenDependency() async throws {
+        let container = try await PreviewHelper.createContainer()
+
+        _ = container.resolve(type: DatabaseProtocol.self)
+        _ = container.resolve(type: HttpClientProtocol.self)
+        _ = container.resolve(type: AuthServiceProtocol.self)
+        _ = container.resolve(type: CardServiceProtocol.self)
+        _ = container.resolve(type: SetServiceProtocol.self)
+        _ = container.resolve(type: SearchServiceProtocol.self)
+        _ = container.resolve(type: DeckServiceProtocol.self)
+    }
+
+    @Test
     func createMockDatabase_populatesSampleData() async throws {
         let database = try await PreviewHelper.createMockDatabase()
 

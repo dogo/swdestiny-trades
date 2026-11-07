@@ -72,9 +72,7 @@ struct AddCardView: View {
 }
 
 #Preview {
-    let mockCollection = UserCollectionDTO()
-
-    AddCardView(context: .collection(mockCollection))
-        .environment(NavigationCoordinator())
-        .environment(\.dependencyContainer, DependencyContainer.shared)
+    PreviewContainer {
+        AddCardView(context: .collection(UserCollectionDTO()))
+    }
 }

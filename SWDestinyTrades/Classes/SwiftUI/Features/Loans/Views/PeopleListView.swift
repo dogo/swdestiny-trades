@@ -41,14 +41,14 @@ struct PeopleListView: View {
 }
 
 #Preview("People List - Light") {
-    PeopleListView()
-        .environment(NavigationCoordinator())
-        .environment(\.dependencyContainer, DependencyContainer.shared)
+    PreviewContainer {
+        PeopleListView()
+    }
 }
 
 #Preview("People List - Dark") {
-    PeopleListView()
-        .environment(NavigationCoordinator())
-        .environment(\.dependencyContainer, DependencyContainer.shared)
-        .preferredColorScheme(.dark)
+    PreviewContainer {
+        PeopleListView()
+    }
+    .preferredColorScheme(.dark)
 }
