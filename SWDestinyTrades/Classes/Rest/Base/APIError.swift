@@ -11,6 +11,7 @@ import Foundation
 enum APIError: Error, Equatable {
     case invalidData
     case responseUnsuccessful
+    case unauthorized
     case requestCancelled
     case keyNotFound(key: CodingKey, context: String)
     case valueNotFound(type: Any.Type, context: String)
@@ -23,6 +24,8 @@ enum APIError: Error, Equatable {
             return "Invalid Data"
         case .responseUnsuccessful:
             return "Response Unsuccessful"
+        case .unauthorized:
+            return "Unauthorized"
         case .requestCancelled:
             return "Request Cancelled"
         case let .keyNotFound(key, context):
@@ -40,6 +43,7 @@ enum APIError: Error, Equatable {
         switch (lhs, rhs) {
         case (.invalidData, .invalidData),
              (.responseUnsuccessful, .responseUnsuccessful),
+             (.unauthorized, .unauthorized),
              (.requestCancelled, .requestCancelled):
             return true
         case let (.keyNotFound(lhsKey, lhsContext), .keyNotFound(rhsKey, rhsContext)):

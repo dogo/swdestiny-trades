@@ -11,6 +11,7 @@ import Foundation
 enum AuthEndpoint {
     case authorize(clientID: String, state: String)
     case token(clientID: String, clientSecret: String, code: String)
+    case refresh(clientID: String, clientSecret: String, refreshToken: String)
 
     static let callbackScheme = "swdestinytrades"
     static let redirectURI = "\(callbackScheme)://oauth-callback"
@@ -32,7 +33,7 @@ extension AuthEndpoint: EndpointProtocol {
         switch self {
         case .authorize:
             return "/oauth/v2/auth"
-        case .token:
+        case .token, .refresh:
             return "/oauth/v2/token"
         }
     }
@@ -47,7 +48,7 @@ extension AuthEndpoint: EndpointProtocol {
                 "redirect_uri": Self.redirectURI,
                 "state": state
             ]
-        case .token:
+        case .token, .refresh:
             return nil
         }
     }
@@ -65,6 +66,13 @@ extension AuthEndpoint: EndpointProtocol {
                 "code": code,
                 "redirect_uri": Self.redirectURI
             ]
+        case let .refresh(clientID, clientSecret, refreshToken):
+            return [
+                "grant_type": "refresh_token",
+                "client_id": clientID,
+                "client_secret": clientSecret,
+                "refresh_token": refreshToken
+            ]
         }
     }
 
@@ -73,7 +81,7 @@ extension AuthEndpoint: EndpointProtocol {
         switch self {
         case .authorize:
             return .get
-        case .token:
+        case .token, .refresh:
             return .post
         }
     }
@@ -83,7 +91,7 @@ extension AuthEndpoint: EndpointProtocol {
         switch self {
         case .authorize:
             return nil
-        case .token:
+        case .token, .refresh:
             return ["Content-Type": "application/x-www-form-urlencoded"]
         }
     }

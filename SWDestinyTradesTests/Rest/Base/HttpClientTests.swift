@@ -23,7 +23,7 @@ final class HttpClientTests {
     init() {
         session = URLSessionMock().build()
         keychain = KeychainStoreMock()
-        sut = HttpClient(session: session, keychain: keychain)
+        sut = HttpClient(session: session, keychain: keychain, clientID: "client", clientSecret: "secret")
         request = URLRequest(url: URL(string: "https://base.url.com")!)
         request.httpMethod = HttpMethod.get.toString()
     }
@@ -133,6 +133,53 @@ final class HttpClientTests {
         let authorization = try await sentAuthorization(for: SWDestinyEndpoint.setList)
 
         #expect(authorization == nil)
+    }
+
+    @Test
+    func requestEndpoint_expiredToken_refreshesAndRetries() async throws {
+        let refreshedToken = OAuthTokenDTO.stub(accessToken: "new", refreshToken: "new-refresh")
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        var refreshBody: String?
+        URLProtocolMock.response = { request in
+            if request.url?.path == "/oauth/v2/token" {
+                refreshBody = request.httpBodyStream.map(Self.read)
+                return try HTTPResponse(data: JSONEncoder().encode(refreshedToken), statusCode: 200)
+            }
+            let isRefreshed = request.value(forHTTPHeaderField: "Authorization") == "Bearer new"
+            return HTTPResponse(data: Data("{ \"bar\": true }".utf8), statusCode: isRefreshed ? 200 : 401)
+        }
+
+        let result = try await sut.request(DeckEndpoint.decks, decode: Foo.self)
+
+        #expect(result.bar)
+        #expect(keychain.oauthToken == refreshedToken)
+        #expect(refreshBody == "client_id=client&client_secret=secret&grant_type=refresh_token&refresh_token=refresh")
+    }
+
+    @Test
+    func requestEndpoint_refreshRejected_clearsToken() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        URLProtocolMock.response = { request in
+            HTTPResponse(data: nil, statusCode: request.url?.path == "/oauth/v2/token" ? 400 : 401)
+        }
+
+        await assertThrowsError(of: .unauthorized) {
+            _ = try await self.sut.request(DeckEndpoint.decks, decode: Foo.self)
+        }
+        #expect(keychain.oauthToken == nil)
+    }
+
+    private nonisolated static func read(_ stream: InputStream) -> String {
+        stream.open()
+        defer { stream.close() }
+        var data = Data()
+        var buffer = [UInt8](repeating: 0, count: 1024)
+        while stream.hasBytesAvailable {
+            let count = stream.read(&buffer, maxLength: buffer.count)
+            guard count > 0 else { break }
+            data.append(buffer, count: count)
+        }
+        return String(decoding: data, as: UTF8.self)
     }
 
     private func sentAuthorization(for endpoint: EndpointProtocol) async throws -> String? {
