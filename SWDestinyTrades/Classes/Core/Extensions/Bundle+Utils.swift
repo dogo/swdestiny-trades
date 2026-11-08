@@ -31,7 +31,7 @@ extension Bundle {
         #endif
     }
 
-    var appBundleIdentifier: String {
+    nonisolated var appBundleIdentifier: String {
         return Bundle.main.bundleIdentifier ?? "com.swdestiny.trades"
     }
 

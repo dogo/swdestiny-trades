@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Synchronization
 import Testing
 
 @testable import SWDestinyTrades
@@ -14,11 +15,15 @@ import Testing
 @MainActor
 final class NetworkingLoggerTests {
 
-    private class TestOutputStream: TextOutputStream {
-        private(set) var output: [String] = []
+    private final class TestOutputStream: TextOutputStream {
+        private let lines = Mutex<[String]>([])
+
+        var output: [String] {
+            lines.withLock { $0 }
+        }
 
         func write(_ string: String) {
-            output.append(string)
+            lines.withLock { $0.append(string) }
         }
 
         var joined: String {

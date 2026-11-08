@@ -9,7 +9,7 @@
 import Foundation
 import OSLog
 
-final class NetworkingLogger {
+final nonisolated class NetworkingLogger: Sendable {
     enum LogLevel {
         case none
         case info
@@ -138,11 +138,11 @@ final class NetworkingLogger {
     }
 }
 
-protocol TextOutputStream {
+nonisolated protocol TextOutputStream: Sendable {
     func write(_ string: String)
 }
 
-struct OSLogOutputStream: TextOutputStream {
+nonisolated struct OSLogOutputStream: TextOutputStream {
     private let logger = Logger(
         subsystem: Bundle.main.appBundleIdentifier,
         category: "Networking"
@@ -159,13 +159,13 @@ struct OSLogOutputStream: TextOutputStream {
     }
 }
 
-struct StandardOutputStream: TextOutputStream {
+nonisolated struct StandardOutputStream: TextOutputStream {
     func write(_ string: String) {
         print(string, terminator: "")
     }
 }
 
-extension TimeInterval {
+nonisolated extension TimeInterval {
     /// Convert to full timestamp format
     func toString() -> String {
         let time = NSInteger(self)

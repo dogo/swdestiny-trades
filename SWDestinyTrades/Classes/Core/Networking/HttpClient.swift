@@ -57,19 +57,20 @@ extension HttpClient {
                 throw APIError.invalidData
             }
 
-            logger.log(response: response, data: data, time: responseTime)
-
-            if httpResponse.statusCode == 401 {
-                throw APIError.unauthorized
-            }
-
-            guard case 200 ... 300 = httpResponse.statusCode else {
-                throw APIError.responseUnsuccessful
-            }
-
+            let logger = logger
             // Swift 6.4.2 recognizes SendableMetatype captures here but warns on a generic @concurrent call.
             return try await { @concurrent @Sendable () async throws -> sending T in
-                try Self.decodeData(data, decode: T.self)
+                logger.log(response: response, data: data, time: responseTime)
+
+                if httpResponse.statusCode == 401 {
+                    throw APIError.unauthorized
+                }
+
+                guard case 200 ... 300 = httpResponse.statusCode else {
+                    throw APIError.responseUnsuccessful
+                }
+
+                return try Self.decodeData(data, decode: T.self)
             }()
         } catch let error as URLError where error.code == .cancelled {
             throw APIError.requestCancelled
