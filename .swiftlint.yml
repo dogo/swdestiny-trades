@@ -97,6 +97,7 @@ excluded:
   - Pods
   - Carthage
   - Tuist/.build
+  - Tooling/coreml/.venv
   - SWDestinyTrades/Classes/Generated
 
 custom_rules:
