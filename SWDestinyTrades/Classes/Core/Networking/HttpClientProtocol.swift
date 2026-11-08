@@ -11,7 +11,7 @@ import Foundation
 protocol HttpClientProtocol {
     var logger: NetworkingLogger { get }
 
-    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T
+    func request<T: Decodable & SendableMetatype>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T
 
     func cancelRequest(_ request: URLRequest?)
 }

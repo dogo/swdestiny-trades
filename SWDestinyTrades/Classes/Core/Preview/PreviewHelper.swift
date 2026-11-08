@@ -124,7 +124,7 @@ final class PreviewHttpClientMock: HttpClientProtocol {
         return NetworkingLogger(level: .none)
     }
 
-    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
+    func request<T: Decodable & SendableMetatype>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
         throw APIError.invalidData
     }
 

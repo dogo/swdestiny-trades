@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OAuthTokenDTO: Codable, Equatable {
+nonisolated struct OAuthTokenDTO: Codable, Equatable {
     static let keychainKey = "oauth-token"
 
     let accessToken: String

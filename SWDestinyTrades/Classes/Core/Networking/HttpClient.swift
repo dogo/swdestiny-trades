@@ -30,7 +30,7 @@ extension HttpClient {
         #endif
     }
 
-    private func perform<T: Decodable>(_ request: URLRequest, decode: T.Type) async throws -> T {
+    private func perform<T: Decodable & SendableMetatype>(_ request: URLRequest, decode: T.Type) async throws -> T {
 
         logger.log(request: request)
 
@@ -67,7 +67,10 @@ extension HttpClient {
                 throw APIError.responseUnsuccessful
             }
 
-            return try decodeData(data, decode: T.self)
+            // Swift 6.4.2 recognizes SendableMetatype captures here but warns on a generic @concurrent call.
+            return try await { @concurrent @Sendable () async throws -> sending T in
+                try Self.decodeData(data, decode: T.self)
+            }()
         } catch let error as URLError where error.code == .cancelled {
             throw APIError.requestCancelled
         } catch is CancellationError {
@@ -77,7 +80,7 @@ extension HttpClient {
         }
     }
 
-    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
+    func request<T: Decodable & SendableMetatype>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
         var request = endpoint.request
         if endpoint.needsToken, let accessToken = keychain.accessToken {
             request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
@@ -92,7 +95,7 @@ extension HttpClient {
 
     // MARK: - Helper
 
-    private func decodeData<T: Decodable>(_ data: Data, decode: T.Type) throws -> T {
+    private nonisolated static func decodeData<T: Decodable & SendableMetatype>(_ data: Data, decode: T.Type) throws -> T {
         do {
             return try JSONDecoder().decode(T.self, from: data)
         } catch let DecodingError.keyNotFound(key, context) {

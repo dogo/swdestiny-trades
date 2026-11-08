@@ -23,7 +23,7 @@ final class HttpClientMock: HttpClientProtocol {
         return NetworkingLogger(level: .none)
     }
 
-    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
+    func request<T: Decodable & SendableMetatype>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
         lastRequest = endpoint.request
         requestCount += 1
 

@@ -22,7 +22,7 @@ final class AuthenticatedHttpClient: HttpClientProtocol {
         client.logger
     }
 
-    func request<T: Decodable>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
+    func request<T: Decodable & SendableMetatype>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
         do {
             return try await client.request(endpoint, decode: T.self)
         } catch APIError.unauthorized where endpoint.needsToken {

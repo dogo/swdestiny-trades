@@ -106,6 +106,18 @@ final class HttpClientTests {
     }
 
     @Test
+    func request_decodesOffTheMainThread() async throws {
+        setupURLProtocolMock(with: Data("{ \"value\": 42 }".utf8), statusCode: 200)
+
+        let probe = try await sut.request(endpoint, decode: DecodingThreadProbe.self)
+
+        #expect(probe.decodedOnMainThread == false)
+        #expect(probe.value == 42)
+        probe.value += 1
+        #expect(probe.value == 43)
+    }
+
+    @Test
     func request_hitsNetworkOnce() async throws {
         var hits = 0
         URLProtocolMock.response = { _ in
@@ -246,6 +258,21 @@ final class HttpClientTests {
 struct DummyResponse: Decodable {
     let id: Int
     let name: String
+}
+
+final nonisolated class DecodingThreadProbe: Decodable {
+    let decodedOnMainThread: Bool
+    var value: Int
+
+    private enum CodingKeys: String, CodingKey {
+        case value
+    }
+
+    init(from decoder: Decoder) throws {
+        decodedOnMainThread = Thread.isMainThread
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        value = try container.decode(Int.self, forKey: .value)
+    }
 }
 
 struct Foo: Codable {

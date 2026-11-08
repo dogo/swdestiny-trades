@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct RemoteDeckDTO: Decodable {
-    struct Slot: Decodable {
+nonisolated struct RemoteDeckDTO: Decodable {
+    nonisolated struct Slot: Decodable {
         let quantity: Int
         let dice: Int
     }
