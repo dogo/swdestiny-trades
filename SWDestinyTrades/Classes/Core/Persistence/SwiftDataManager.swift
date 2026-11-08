@@ -291,7 +291,7 @@ private final class SwiftDataObservation<T: Storable>: DatabaseObservation {
     private func fetchCurrentValue() {
         fetchTask?.cancel()
         fetchTask = Task { @MainActor [weak self] in
-            guard let self, let database else { return }
+            guard let self, let database, !Task.isCancelled else { return }
             let items = await database.fetch(model, predicate: predicate, sorted: sorted)
             guard !Task.isCancelled else { return }
             onChange(items)
