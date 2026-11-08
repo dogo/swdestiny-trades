@@ -179,6 +179,9 @@ final class CardScannerViewModel: BaseViewModel {
         // Feedback while the catalog loads, otherwise the screen looks idle (button disabled).
         indexState = .building
 
+        let needsBundledMatcher = injectedMatcher == nil
+        async let bundledMatcher = needsBundledMatcher ? Self.loadBundledMatcher() : nil
+
         let cards = await (try? service.retrieveAllCards()) ?? []
         cardsByCode = Dictionary(cards.map { ($0.code, $0) }) { first, _ in first }
 
@@ -188,23 +191,26 @@ final class CardScannerViewModel: BaseViewModel {
             return
         }
 
-        if let injectedMatcher {
-            pipeline.matcher = injectedMatcher
-            indexState = .ready
-            return
-        }
-
-        guard let embedder = MobileCLIPEmbedder.bundled(),
-              let url = Bundle.main.url(forResource: "card-embeddings", withExtension: "swdx"),
-              let entries = try? CardEmbeddingIndex.load(from: url),
-              !entries.isEmpty else {
+        let loadedMatcher: CardScanMatching? = await bundledMatcher
+        guard let matcher = injectedMatcher ?? loadedMatcher else {
             indexState = .failed
             return
         }
 
-        let index = CardEmbeddingIndex(entries: entries)
-        pipeline.matcher = EmbeddingCardMatcher(embedder: embedder, index: index)
+        pipeline.matcher = matcher
         indexState = .ready
+    }
+
+    @concurrent
+    private nonisolated static func loadBundledMatcher() async -> EmbeddingCardMatcher? {
+        guard let embedder = MobileCLIPEmbedder.bundled(),
+              let url = Bundle.main.url(forResource: "card-embeddings", withExtension: "swdx"),
+              let entries = try? CardEmbeddingIndex.load(from: url),
+              !entries.isEmpty else {
+            return nil
+        }
+
+        return EmbeddingCardMatcher(embedder: embedder, index: CardEmbeddingIndex(entries: entries))
     }
 }
 
