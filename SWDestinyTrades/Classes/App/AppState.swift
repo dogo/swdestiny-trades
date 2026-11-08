@@ -17,9 +17,13 @@ final class AppState {
     var isLoading = false
     var errorMessage: String?
 
-    let dependencyContainer = DependencyContainer.shared
+    let dependencyContainer: DependencyContainer
+    private let makeDatabase: () async throws -> DatabaseProtocol
 
-    init() {
+    init(dependencyContainer: DependencyContainer = .shared,
+         makeDatabase: @escaping () async throws -> DatabaseProtocol = { try await SwiftDataManager.create() }) {
+        self.dependencyContainer = dependencyContainer
+        self.makeDatabase = makeDatabase
         setupInitialState()
     }
 
@@ -27,6 +31,7 @@ final class AppState {
         guard !isInitialized, !isLoading else { return }
 
         isLoading = true
+        registerServices()
         initializeDatabase()
     }
 
@@ -38,7 +43,7 @@ final class AppState {
     private func initializeDatabase() {
         Task { @MainActor in
             do {
-                let database = try await SwiftDataManager.create()
+                let database = try await makeDatabase()
                 self.database = database
                 isInitialized = true
                 errorMessage = nil
@@ -46,8 +51,6 @@ final class AppState {
                 dependencyContainer.register(type: DatabaseProtocol.self) {
                     database
                 }
-
-                registerServices()
             } catch {
                 errorMessage = "Failed to initialize database: \(error.localizedDescription)"
                 isInitialized = false
@@ -57,36 +60,38 @@ final class AppState {
     }
 
     private func registerServices() {
-        dependencyContainer.register(type: HttpClientProtocol.self) {
-            let authService: AuthServiceProtocol = DependencyContainer.shared.resolve(type: AuthServiceProtocol.self)
+        let container = dependencyContainer
+
+        container.register(type: HttpClientProtocol.self) {
+            let authService: AuthServiceProtocol = container.resolve(type: AuthServiceProtocol.self)
             return AuthenticatedHttpClient(client: HttpClient(), authService: authService)
         }
 
-        dependencyContainer.register(type: SetServiceProtocol.self) {
-            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+        container.register(type: SetServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = container.resolve(type: HttpClientProtocol.self)
             return SetService(client: httpClient)
         }
 
-        dependencyContainer.register(type: CardServiceProtocol.self) {
-            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+        container.register(type: CardServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = container.resolve(type: HttpClientProtocol.self)
             return CardService(client: httpClient)
         }
 
-        dependencyContainer.register(type: SearchServiceProtocol.self) {
-            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+        container.register(type: SearchServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = container.resolve(type: HttpClientProtocol.self)
             return SearchService(client: httpClient)
         }
 
-        dependencyContainer.register(type: AuthServiceProtocol.self) {
+        container.register(type: AuthServiceProtocol.self) {
             AuthService(client: HttpClient())
         }
 
-        dependencyContainer.register(type: DeckServiceProtocol.self) {
-            let httpClient: HttpClientProtocol = DependencyContainer.shared.resolve(type: HttpClientProtocol.self)
+        container.register(type: DeckServiceProtocol.self) {
+            let httpClient: HttpClientProtocol = container.resolve(type: HttpClientProtocol.self)
             return DeckService(client: httpClient)
         }
 
-        dependencyContainer.register(type: ImageLoadingService.self) {
+        container.register(type: ImageLoadingService.self) {
             KingfisherImageLoader()
         }
     }
