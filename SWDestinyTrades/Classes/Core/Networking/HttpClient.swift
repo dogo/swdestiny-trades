@@ -9,6 +9,8 @@
 import Foundation
 
 final class HttpClient: HttpClientProtocol {
+    private static let logQueue = DispatchQueue(label: "br.com.anykey.swdestiny.networking-log", qos: .utility)
+
     private let session: URLSession
     private let keychain: KeychainStoreProtocol
     private var activeTasks: [URLRequest: Task<(Data, URLResponse), Error>] = [:]
@@ -32,7 +34,8 @@ extension HttpClient {
 
     private func perform<T: Decodable & SendableMetatype>(_ request: URLRequest, decode: T.Type) async throws -> T {
 
-        logger.log(request: request)
+        let logger = logger
+        Self.logQueue.async { logger.log(request: request) }
 
         let requestDate = Date()
 
@@ -57,11 +60,10 @@ extension HttpClient {
                 throw APIError.invalidData
             }
 
-            let logger = logger
+            Self.logQueue.async { logger.log(response: response, data: data, time: responseTime) }
+
             // Swift 6.4.2 recognizes SendableMetatype captures here but warns on a generic @concurrent call.
             return try await { @concurrent @Sendable () async throws -> sending T in
-                logger.log(response: response, data: data, time: responseTime)
-
                 if httpResponse.statusCode == 401 {
                     throw APIError.unauthorized
                 }
