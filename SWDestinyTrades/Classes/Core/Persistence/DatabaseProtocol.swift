@@ -84,6 +84,13 @@ protocol DatabaseProtocol: AnyObject {
     /// - Throws: Database errors if save fails
     func save(object: Storable, update: UpdatePolicy) async throws
 
+    /// Save several objects in a single write (async)
+    /// - Parameters:
+    ///   - objects: The objects to save
+    ///   - update: The update policy to use
+    /// - Throws: Database errors if save fails
+    func save(objects: [Storable], update: UpdatePolicy) async throws
+
     /// Delete an object (async)
     /// - Parameter object: The object to delete
     /// - Throws: Database errors if deletion fails

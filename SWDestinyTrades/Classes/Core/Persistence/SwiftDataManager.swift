@@ -113,6 +113,13 @@ final class SwiftDataManager: @MainActor DatabaseProtocol {
         try saveContext()
     }
 
+    func save(objects: [Storable], update: UpdatePolicy) async throws {
+        for object in objects {
+            try upsert(object)
+        }
+        try saveContext()
+    }
+
     func delete(object: Storable) async throws {
         deleteStoredModel(for: object)
         try saveContext()

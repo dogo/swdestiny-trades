@@ -37,9 +37,7 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
 
             try Task.checkCancellation()
 
-            for set in sets {
-                try await database.save(object: set, update: .modified)
-            }
+            try await database.save(objects: sets, update: .modified)
 
             updateItems(sets)
             setLoaded()
@@ -55,9 +53,7 @@ final class SetsListViewModel: ListViewModel<SetDTO> {
         do {
             let sets = try await service.retrieveSetList()
 
-            for set in sets {
-                try await database.save(object: set, update: .modified)
-            }
+            try await database.save(objects: sets, update: .modified)
 
             updateItems(sets)
             setLoaded()

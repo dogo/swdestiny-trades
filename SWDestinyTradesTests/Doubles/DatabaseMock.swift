@@ -85,6 +85,12 @@ final class DatabaseMock: @MainActor DatabaseProtocol, @unchecked Sendable {
         notifyObservers(for: key)
     }
 
+    func save(objects: [Storable], update: UpdatePolicy) async throws {
+        for object in objects {
+            try await save(object: object, update: update)
+        }
+    }
+
     func delete(object: Storable) async throws {
         let key = String(describing: type(of: object))
         var objects = storage[key] ?? []

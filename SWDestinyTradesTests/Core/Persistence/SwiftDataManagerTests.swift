@@ -99,6 +99,16 @@ final class SwiftDataManagerTests {
     }
 
     @Test
+    func saveObjects_persistsEveryObject() async throws {
+        let sets = [SetDTO.stub(name: "Awakenings", code: "AW"), SetDTO.stub(name: "Spirit of Rebellion", code: "SoR")]
+
+        try await sut.save(objects: sets, update: .modified)
+
+        let fetched = await sut.fetch(SetDTO.self, predicate: nil, sorted: nil)
+        #expect(Set(fetched.map(\.code)) == ["AW", "SoR"])
+    }
+
+    @Test
     func create_persistsAndReturnsObject() async throws {
         let card = CardDTO.stub(code: "01005")
 
