@@ -173,4 +173,15 @@ final class AuthServiceTests {
         #expect(sut.isLoggedIn == false)
         #expect(keychain.storage.isEmpty)
     }
+
+    @Test
+    func logout_duringRefresh_staysLoggedOut() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        client.onRequest = { [weak self] in self?.sut.logout() }
+
+        await #expect(throws: CancellationError.self) {
+            try await self.sut.refreshToken()
+        }
+        #expect(sut.isLoggedIn == false)
+    }
 }

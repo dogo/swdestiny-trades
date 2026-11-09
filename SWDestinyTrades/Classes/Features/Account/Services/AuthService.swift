@@ -79,6 +79,7 @@ final class AuthService: AuthServiceProtocol {
         let task = Task {
             do {
                 let token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
+                try Task.checkCancellation()
                 try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey)
             } catch APIError.unauthorized, APIError.responseUnsuccessful {
                 keychain.delete(OAuthTokenDTO.keychainKey)
@@ -92,6 +93,7 @@ final class AuthService: AuthServiceProtocol {
     }
 
     func logout() {
+        refreshTask?.cancel()
         keychain.delete(OAuthTokenDTO.keychainKey)
     }
 }

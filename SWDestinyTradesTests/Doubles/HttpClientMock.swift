@@ -16,6 +16,7 @@ final class HttpClientMock: HttpClientProtocol {
     var error: Bool = false
     var errorsToThrow: [Error] = []
     var isCancelled = false
+    var onRequest: (() -> Void)?
     private(set) var lastRequest: URLRequest?
     private(set) var requestCount = 0
 
@@ -26,6 +27,7 @@ final class HttpClientMock: HttpClientProtocol {
     func request<T: Decodable & SendableMetatype>(_ endpoint: EndpointProtocol, decode: T.Type) async throws -> T {
         lastRequest = endpoint.request
         requestCount += 1
+        onRequest?()
 
         if !errorsToThrow.isEmpty {
             throw errorsToThrow.removeFirst()
