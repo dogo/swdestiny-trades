@@ -68,6 +68,15 @@ final class HttpClientTests {
     }
 
     @Test
+    func request_with_failure_badRequest() async {
+        setupURLProtocolMock(with: nil, statusCode: 400)
+
+        await assertThrowsError(of: .badRequest) {
+            _ = try await self.sut.request(self.endpoint, decode: Foo.self)
+        }
+    }
+
+    @Test
     func request_with_failure_serverError() async {
         setupURLProtocolMock(with: nil, statusCode: 503)
 
