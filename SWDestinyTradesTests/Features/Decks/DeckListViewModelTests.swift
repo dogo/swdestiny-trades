@@ -57,6 +57,37 @@ final class DeckListViewModelTests: BaseTestCase {
         #expect(sut.loadingDeckID == nil)
     }
 
+    @Test
+    func loadDecks_remoteFailure_keepsLocalDecksAndShowsToast() async throws {
+        try await populateTestData(objects: [makeDeck(name: "Local")])
+        let authService = AuthServiceMock()
+        authService.isLoggedIn = true
+        let deckService = DeckServiceMock()
+        deckService.error = APIError.serverError
+        registerMock(AuthServiceProtocol.self) { authService }
+        registerMock(DeckServiceProtocol.self) { deckService }
+
+        await sut.loadDecks()
+
+        #expect(sut.items.map(\.name) == ["Local"])
+        #expect(sut.loadingState.isLoaded)
+        #expect(sut.toastQueue.current?.type == .error)
+    }
+
+    @Test
+    func loadDecks_remoteCancelled_showsNoToast() async {
+        let authService = AuthServiceMock()
+        authService.isLoggedIn = true
+        let deckService = DeckServiceMock()
+        deckService.error = CancellationError()
+        registerMock(AuthServiceProtocol.self) { authService }
+        registerMock(DeckServiceProtocol.self) { deckService }
+
+        await sut.loadDecks()
+
+        #expect(sut.toastQueue.current == nil)
+    }
+
     // MARK: - Load
 
     @Test

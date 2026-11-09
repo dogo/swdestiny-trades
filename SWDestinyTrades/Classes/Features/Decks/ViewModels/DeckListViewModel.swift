@@ -63,7 +63,16 @@ final class DeckListViewModel: ListViewModel<DeckListItem> {
             decks[deck.id] = deck
         }
 
-        let remoteDecks = authService.isLoggedIn ? await (try? deckService.retrieveDecks()) ?? [] : []
+        var remoteDecks: [DeckDTO] = []
+        if authService.isLoggedIn {
+            do {
+                remoteDecks = try await deckService.retrieveDecks()
+            } catch {
+                if !ConcurrencyError.isCancellation(error) {
+                    toastQueue.enqueue(title: L10n.error, message: error.localizedDescription, type: .error, duration: 2.5)
+                }
+            }
+        }
         remoteDecksByID = remoteDecks.reduce(into: [:]) { decks, deck in
             decks[deck.id] = deck
         }

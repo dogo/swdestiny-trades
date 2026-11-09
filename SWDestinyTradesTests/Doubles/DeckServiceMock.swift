@@ -12,8 +12,12 @@ import Foundation
 
 final class DeckServiceMock: DeckServiceProtocol {
     var decks: [DeckDTO] = []
+    var error: Error?
 
     func retrieveDecks() async throws -> [DeckDTO] {
-        decks
+        if let error {
+            throw error
+        }
+        return decks
     }
 }
