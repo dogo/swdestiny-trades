@@ -87,6 +87,17 @@ final class KingfisherImageLoaderTests {
         #expect(progressCallCount == 0, "Progress callback should never be invoked for local images")
     }
 
+    @Test
+    func loadRemoteImage_throwsCancellation_whenTaskIsCancelled() async throws {
+        let url = try #require(URL(string: "https://example.invalid/card.png"))
+        let task = Task { try await self.sut.loadImage(from: .remote(url), placeholder: nil, onProgress: nil) }
+        task.cancel()
+
+        await #expect(throws: ImageLoadError.networkError(CancellationError())) {
+            try await task.value
+        }
+    }
+
     // MARK: - Protocol Conformance
 
     @Test

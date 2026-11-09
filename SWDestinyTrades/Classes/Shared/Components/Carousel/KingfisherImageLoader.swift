@@ -97,26 +97,19 @@ final class KingfisherImageLoader: ImageLoadingService {
     ) async throws -> UIImage {
         let options = makeOptions()
 
-        return try await withCheckedThrowingContinuation { continuation in
-            KingfisherManager.shared.retrieveImage(
+        do {
+            return try await KingfisherManager.shared.retrieveImage(
                 with: url,
-                options: options,
-                progressBlock: { received, total in
-                    guard total > 0 else { return }
-                    let progress = Double(received) / Double(total)
-                    if let onProgress {
-                        Task { await MainActor.run { onProgress(progress) } }
-                    }
-                },
-                completionHandler: { result in
-                    switch result {
-                    case let .success(value):
-                        continuation.resume(returning: value.image)
-                    case let .failure(error):
-                        continuation.resume(throwing: ImageLoadError.networkError(error))
-                    }
+                options: options
+            ) { @Sendable received, total in
+                guard total > 0 else { return }
+                let progress = Double(received) / Double(total)
+                if let onProgress {
+                    Task { await MainActor.run { onProgress(progress) } }
                 }
-            )
+            }.image
+        } catch {
+            throw ImageLoadError.networkError(error)
         }
     }
 }
