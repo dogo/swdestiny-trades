@@ -49,6 +49,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     }
 
     func performSearch(query: String) {
+        searchTask?.cancel()
         let normalizedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !normalizedQuery.isEmpty else {
             clearSearch()

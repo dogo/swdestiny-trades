@@ -43,6 +43,16 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
+    func performSearch_duringDebounce_searchesOnce() async throws {
+        sut.onSearchTextChanged("Luke")
+        sut.performSearch(query: "Luke")
+
+        try await Task.sleep(for: .milliseconds(700))
+
+        #expect(mockSearchService.searchCallCount == 1)
+    }
+
+    @Test
     func performSearch_blankQuery_clearsSearch() {
         sut.performSearch(query: "   ")
 
