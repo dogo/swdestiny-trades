@@ -88,10 +88,10 @@ final class HttpClientTests {
     }
 
     @Test
-    func request_with_failure_requestCancelled() async {
+    func request_with_failure_cancelled() async {
         setupURLProtocolMock(with: nil, statusCode: 200, error: URLError(.cancelled))
 
-        await assertThrowsError(of: .requestCancelled) {
+        await #expect(throws: CancellationError.self) {
             _ = try await self.sut.request(self.endpoint, decode: Foo.self)
         }
     }
@@ -242,7 +242,7 @@ final class HttpClientTests {
         try await waitUntil { self.sut.activeTasks?[endpoint.request]?.count == 1 }
         sut.cancelRequest(endpoint.request)
 
-        await assertThrowsError(of: .requestCancelled) {
+        await #expect(throws: CancellationError.self) {
             _ = try await request.value
         }
     }
@@ -273,13 +273,14 @@ final class HttpClientTests {
         try await waitUntil { self.sut.activeTasks?[self.endpoint.request]?.count == 1 }
         sut.cancelRequest(endpoint.request)
 
-        var errors: [APIError] = []
+        var errors: [Error] = []
         for request in requests {
             if let error = await request.value {
-                try errors.append(#require(error as? APIError))
+                errors.append(error)
             }
         }
-        #expect(errors == [.requestCancelled])
+        #expect(errors.count == 1)
+        #expect(errors.first is CancellationError)
     }
 
     private func waitUntil(_ condition: () -> Bool) async throws {

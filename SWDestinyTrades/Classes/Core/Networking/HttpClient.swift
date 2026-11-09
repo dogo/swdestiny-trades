@@ -86,9 +86,7 @@ extension HttpClient {
                 return try Self.decodeData(data, decode: T.self)
             }()
         } catch let error as URLError where error.code == .cancelled {
-            throw APIError.requestCancelled
-        } catch is CancellationError {
-            throw APIError.requestCancelled
+            throw CancellationError()
         } catch {
             throw error
         }
