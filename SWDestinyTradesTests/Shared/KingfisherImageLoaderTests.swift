@@ -13,6 +13,7 @@ import UIKit
 @testable import SWDestinyTrades
 
 @MainActor
+@Suite(.serialized)
 final class KingfisherImageLoaderTests {
 
     // MARK: - Properties
@@ -101,16 +102,11 @@ final class KingfisherImageLoaderTests {
 
     @Test(.timeLimit(.minutes(1)))
     func loadRemoteImage_cancelsInFlightDownload() async throws {
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [StalledURLProtocol.self]
-        let downloader = ImageDownloader(name: "stalled")
-        downloader.sessionConfiguration = configuration
-        let loader = KingfisherImageLoader(downloader: downloader)
-        let url = try #require(URL(string: "https://example.invalid/\(UUID().uuidString).png"))
-        var started = StalledURLProtocol.events.stream.makeAsyncIterator()
+        let loader = makeStalledLoader()
+        let url = try makeUniqueURL()
 
         let task = Task { try await loader.loadImage(from: .remote(url), placeholder: nil, onProgress: nil) }
-        _ = await started.next()
+        await StalledURLProtocol.wait(for: url, in: StalledURLProtocol.started.stream)
         task.cancel()
 
         do {
@@ -119,6 +115,31 @@ final class KingfisherImageLoaderTests {
         } catch let ImageLoadError.networkError(error as KingfisherError) {
             #expect(error.isTaskCancelled)
         }
+    }
+
+    @Test(.timeLimit(.minutes(1)))
+    func cancelPrefetch_stopsInFlightPrefetch() async throws {
+        let loader = makeStalledLoader()
+        let url = try makeUniqueURL()
+
+        loader.prefetch(sources: [.remote(url)])
+        await StalledURLProtocol.wait(for: url, in: StalledURLProtocol.started.stream)
+        loader.cancelPrefetch(sources: [.remote(url)])
+
+        await StalledURLProtocol.wait(for: url, in: StalledURLProtocol.stopped.stream)
+    }
+
+    private func makeStalledLoader() -> KingfisherImageLoader {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [StalledURLProtocol.self]
+        let downloader = ImageDownloader(name: "stalled")
+        downloader.sessionConfiguration = configuration
+        downloader.downloadTimeout = 120
+        return KingfisherImageLoader(downloader: downloader)
+    }
+
+    private func makeUniqueURL() throws -> URL {
+        try #require(URL(string: "https://example.invalid/\(UUID().uuidString).png"))
     }
 
     // MARK: - Protocol Conformance
@@ -143,7 +164,8 @@ final class KingfisherImageLoaderTests {
 }
 
 private final class StalledURLProtocol: URLProtocol {
-    static let events = AsyncStream<Void>.makeStream()
+    static let started = AsyncStream<URL?>.makeStream()
+    static let stopped = AsyncStream<URL?>.makeStream()
 
     override static func canInit(with request: URLRequest) -> Bool {
         true
@@ -154,8 +176,16 @@ private final class StalledURLProtocol: URLProtocol {
     }
 
     override func startLoading() {
-        Self.events.continuation.yield()
+        Self.started.continuation.yield(request.url)
     }
 
-    override func stopLoading() {}
+    override func stopLoading() {
+        Self.stopped.continuation.yield(request.url)
+    }
+
+    static func wait(for url: URL, in events: AsyncStream<URL?>) async {
+        for await event in events where event == url {
+            return
+        }
+    }
 }

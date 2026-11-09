@@ -14,6 +14,7 @@ final class KingfisherImageLoader: ImageLoadingService {
     private let downloader: ImageDownloader
     private let cache: ImageCache
     private let retryStrategy: DelayRetryStrategy
+    private var prefetchers: [URL: (id: UUID, prefetcher: ImagePrefetcher)] = [:]
 
     init(
         downloader: ImageDownloader = .default,
@@ -57,8 +58,18 @@ final class KingfisherImageLoader: ImageLoadingService {
             guard case let .remote(url) = source else { return nil }
             return url
         }
-        guard !urls.isEmpty else { return }
-        ImagePrefetcher(urls: urls, options: makeOptions()).start()
+        for url in urls where prefetchers[url] == nil {
+            let id = UUID()
+            let prefetcher = ImagePrefetcher(urls: [url], options: makeOptions()) { _, _, _ in
+                Task { @MainActor [weak self] in
+                    if self?.prefetchers[url]?.id == id {
+                        self?.prefetchers[url] = nil
+                    }
+                }
+            }
+            prefetchers[url] = (id, prefetcher)
+            prefetcher.start()
+        }
     }
 
     func cancelPrefetch(sources: [ImageSource]) {
@@ -66,8 +77,9 @@ final class KingfisherImageLoader: ImageLoadingService {
             guard case let .remote(url) = source else { return nil }
             return url
         }
-        guard !urls.isEmpty else { return }
-        ImagePrefetcher(urls: urls).stop()
+        for url in urls {
+            prefetchers.removeValue(forKey: url)?.prefetcher.stop()
+        }
     }
 
     func clearMemoryCache() {
