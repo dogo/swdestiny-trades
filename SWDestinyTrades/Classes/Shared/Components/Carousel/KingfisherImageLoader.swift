@@ -82,6 +82,7 @@ final class KingfisherImageLoader: ImageLoadingService {
 
         return [
             .targetCache(cache),
+            .downloader(downloader),
             .retryStrategy(retryStrategy),
             .transition(.fade(0.2)),
             .cacheOriginalImage,

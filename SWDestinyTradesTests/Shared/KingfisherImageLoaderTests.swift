@@ -6,6 +6,7 @@
 //  Copyright © 2025 Diogo Autilio. All rights reserved.
 //
 
+import Kingfisher
 import Testing
 import UIKit
 
@@ -98,6 +99,28 @@ final class KingfisherImageLoaderTests {
         }
     }
 
+    @Test(.timeLimit(.minutes(1)))
+    func loadRemoteImage_cancelsInFlightDownload() async throws {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [StalledURLProtocol.self]
+        let downloader = ImageDownloader(name: "stalled")
+        downloader.sessionConfiguration = configuration
+        let loader = KingfisherImageLoader(downloader: downloader)
+        let url = try #require(URL(string: "https://example.invalid/\(UUID().uuidString).png"))
+        var started = StalledURLProtocol.events.stream.makeAsyncIterator()
+
+        let task = Task { try await loader.loadImage(from: .remote(url), placeholder: nil, onProgress: nil) }
+        _ = await started.next()
+        task.cancel()
+
+        do {
+            _ = try await task.value
+            Issue.record("Expected the in-flight download to be cancelled")
+        } catch let ImageLoadError.networkError(error as KingfisherError) {
+            #expect(error.isTaskCancelled)
+        }
+    }
+
     // MARK: - Protocol Conformance
 
     @Test
@@ -117,4 +140,22 @@ final class KingfisherImageLoaderTests {
 
         #expect(result === image, "Should still be able to load images after clearing the cache")
     }
+}
+
+private final class StalledURLProtocol: URLProtocol {
+    static let events = AsyncStream<Void>.makeStream()
+
+    override static func canInit(with request: URLRequest) -> Bool {
+        true
+    }
+
+    override static func canonicalRequest(for request: URLRequest) -> URLRequest {
+        request
+    }
+
+    override func startLoading() {
+        Self.events.continuation.yield()
+    }
+
+    override func stopLoading() {}
 }
