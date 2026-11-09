@@ -81,6 +81,28 @@ final class AuthServiceTests {
     }
 
     @Test
+    func olderLogin_finishingAfterNewerLogin_keepsNewerSession() async throws {
+        let olderState = try startLogin()
+        let olderToken = OAuthTokenDTO.stub(accessToken: "older", refreshToken: "older-refresh")
+        let newerToken = OAuthTokenDTO.stub(accessToken: "newer", refreshToken: "newer-refresh")
+        client.stub = olderToken
+        client.onRequest = { [weak self] in
+            guard let self else { return }
+            client.onRequest = nil
+            client.stub = newerToken
+            if let newerState = try? startLogin() {
+                try? await sut.completeLogin(callbackURL: callbackURL(state: newerState))
+            }
+            client.stub = olderToken
+        }
+
+        await #expect(throws: CancellationError.self) {
+            try await self.sut.completeLogin(callbackURL: self.callbackURL(state: olderState))
+        }
+        #expect(keychain.oauthToken == newerToken)
+    }
+
+    @Test
     func completeLogin_withMismatchedState_throwsWithoutRequestingToken() async throws {
         _ = try startLogin()
 

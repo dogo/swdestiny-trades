@@ -47,7 +47,11 @@ final class AuthService: AuthServiceProtocol {
     func completeLogin(callbackURL: URL) async throws {
         let items = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false)?.queryItems ?? []
         let state = items.first { $0.name == "state" }?.value
-        defer { pendingState = nil }
+        defer {
+            if self.pendingState == state {
+                self.pendingState = nil
+            }
+        }
         guard let pendingState, state == pendingState,
               let code = items.first(where: { $0.name == "code" })?.value else {
             throw AuthError.invalidCallback
@@ -59,6 +63,10 @@ final class AuthService: AuthServiceProtocol {
             token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
         } catch {
             throw AuthError.tokenRequestFailed
+        }
+
+        guard self.pendingState == state else {
+            throw CancellationError()
         }
 
         guard try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey) else {
