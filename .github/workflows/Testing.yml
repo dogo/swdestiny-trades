@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache/restore@v6
         with:
           path: Tuist/.build
-          key: ${{ runner.os }}-app-${{ hashFiles('Package.resolved') }}
+          key: ${{ runner.os }}-app-${{ hashFiles('Tuist/Package.resolved') }}
 
       - name: Install Project Tools
         uses: jdx/mise-action@v5
