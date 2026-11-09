@@ -68,13 +68,6 @@ final nonisolated class NetworkingLogger: Sendable {
         printSeparator()
     }
 
-    // MARK: - Log Body
-
-    private func log(statusCode: Int, url: String, time: TimeInterval) {
-        printTagged("\(statusCode) '\(url)'")
-        printTagged("Duration: '\(time.toString())'")
-    }
-
     // MARK: - Log JSON
 
     private func logJSON(_ data: Data?) {
@@ -95,12 +88,6 @@ final nonisolated class NetworkingLogger: Sendable {
                 printTagged("📄 Response: <\(data.count) bytes>")
             }
         }
-    }
-
-    // MARK: - Log Headers
-
-    private func log(method: String, url: String) {
-        printTagged("\(method) '\(url)':")
     }
 
     // MARK: - Log Headers
@@ -167,18 +154,6 @@ nonisolated struct StandardOutputStream: TextOutputStream {
 }
 
 nonisolated extension TimeInterval {
-    /// Convert to full timestamp format
-    func toString() -> String {
-        let time = NSInteger(self)
-
-        let milliseconds = Int(truncatingRemainder(dividingBy: 1) * 1000)
-        let seconds = time % 60
-        let minutes = (time / 60) % 60
-        let hours = (time / 3600)
-
-        return String(format: "%00.2d:%0.2d:%0.2d.%0.3d", hours, minutes, seconds, milliseconds)
-    }
-
     /// Convert to compact format (e.g., "18ms" or "1.23s")
     func toCompactString() -> String {
         if self < 1 {

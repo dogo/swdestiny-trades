@@ -38,12 +38,6 @@ final class APIErrorTests {
     }
 
     @Test
-    func request_cancelled_error_description() {
-        let error = APIError.requestCancelled
-        #expect(error.localizedDescription == "Request Cancelled")
-    }
-
-    @Test
     func key_not_found_error_description() {
         let key = TestCodingKey(stringValue: "testKey")
         let error = APIError.keyNotFound(key: key, context: "missing key")
@@ -85,13 +79,6 @@ final class APIErrorTests {
     func response_unsuccessful_error_equality() {
         let error1 = APIError.responseUnsuccessful
         let error2 = APIError.responseUnsuccessful
-        #expect(error1 == error2)
-    }
-
-    @Test
-    func request_cancelled_error_equality() {
-        let error1 = APIError.requestCancelled
-        let error2 = APIError.requestCancelled
         #expect(error1 == error2)
     }
 

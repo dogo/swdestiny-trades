@@ -26,7 +26,6 @@ final class ConcurrencyErrorTests {
     func isCancellation_recognizesCancellationErrors() {
         #expect(ConcurrencyError.isCancellation(CancellationError()))
         #expect(ConcurrencyError.isCancellation(ConcurrencyError.taskCancelled))
-        #expect(ConcurrencyError.isCancellation(APIError.requestCancelled))
         #expect(ConcurrencyError.isCancellation(URLError(.cancelled)))
     }
 

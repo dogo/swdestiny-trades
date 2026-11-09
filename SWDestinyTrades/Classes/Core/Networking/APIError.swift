@@ -14,7 +14,6 @@ enum APIError: Error, LocalizedError, Equatable {
     case serverError
     case badRequest(Data)
     case unauthorized
-    case requestCancelled
     case keyNotFound(key: CodingKey, context: String)
     case valueNotFound(type: Any.Type, context: String)
     case typeMismatch(type: Any.Type, context: String)
@@ -32,8 +31,6 @@ enum APIError: Error, LocalizedError, Equatable {
             return "Bad Request"
         case .unauthorized:
             return "Unauthorized"
-        case .requestCancelled:
-            return "Request Cancelled"
         case let .keyNotFound(key, context):
             return "Could not find key \(key) in JSON: \(context)"
         case let .valueNotFound(type, context):
@@ -50,8 +47,7 @@ enum APIError: Error, LocalizedError, Equatable {
         case (.invalidData, .invalidData),
              (.responseUnsuccessful, .responseUnsuccessful),
              (.serverError, .serverError),
-             (.unauthorized, .unauthorized),
-             (.requestCancelled, .requestCancelled):
+             (.unauthorized, .unauthorized):
             return true
         case let (.badRequest(lhsBody), .badRequest(rhsBody)):
             return lhsBody == rhsBody
