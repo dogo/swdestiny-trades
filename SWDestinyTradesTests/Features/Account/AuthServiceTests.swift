@@ -17,6 +17,7 @@ final class AuthServiceTests {
     private var client: HttpClientMock!
     private var keychain: KeychainStoreMock!
     private var sut: AuthService!
+    private let invalidGrant = APIError.badRequest(Data(#"{"error":"invalid_grant"}"#.utf8))
 
     init() {
         client = HttpClientMock()
@@ -136,12 +137,23 @@ final class AuthServiceTests {
     @Test
     func refreshToken_rejected_clearsToken() async throws {
         try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
-        client.errorsToThrow = [APIError.badRequest]
+        client.errorsToThrow = [invalidGrant]
 
         await #expect(throws: APIError.unauthorized) {
             try await self.sut.refreshToken()
         }
         #expect(sut.isLoggedIn == false)
+    }
+
+    @Test(arguments: [APIError.unauthorized, .badRequest(Data(#"{"error":"invalid_client"}"#.utf8))])
+    func refreshToken_clientRejected_keepsToken(error: APIError) async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        client.errorsToThrow = [error]
+
+        await #expect(throws: error) {
+            try await self.sut.refreshToken()
+        }
+        #expect(sut.isLoggedIn)
     }
 
     @Test
@@ -201,7 +213,7 @@ final class AuthServiceTests {
         try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
         let nextSession = OAuthTokenDTO.stub(accessToken: "next", refreshToken: "next-refresh")
         let nextSessionData = try JSONEncoder().encode(nextSession)
-        client.errorsToThrow = [APIError.unauthorized]
+        client.errorsToThrow = [invalidGrant]
         client.onRequest = { [weak self] in
             self?.sut.logout()
             self?.keychain.set(nextSessionData, for: OAuthTokenDTO.keychainKey)

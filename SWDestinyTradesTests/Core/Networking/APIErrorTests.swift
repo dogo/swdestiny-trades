@@ -33,7 +33,7 @@ final class APIErrorTests {
 
     @Test
     func bad_request_error_description() {
-        let error = APIError.badRequest
+        let error = APIError.badRequest(Data())
         #expect(error.localizedDescription == "Bad Request")
     }
 

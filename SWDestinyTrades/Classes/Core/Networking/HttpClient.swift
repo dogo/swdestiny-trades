@@ -69,7 +69,7 @@ extension HttpClient {
                 }
 
                 if httpResponse.statusCode == 400 {
-                    throw APIError.badRequest
+                    throw APIError.badRequest(data)
                 }
 
                 if httpResponse.statusCode >= 500 {

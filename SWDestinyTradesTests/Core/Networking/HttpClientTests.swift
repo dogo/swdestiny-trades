@@ -69,9 +69,10 @@ final class HttpClientTests {
 
     @Test
     func request_with_failure_badRequest() async {
-        setupURLProtocolMock(with: nil, statusCode: 400)
+        let body = Data("{ \"error\": \"invalid_grant\" }".utf8)
+        setupURLProtocolMock(with: body, statusCode: 400)
 
-        await assertThrowsError(of: .badRequest) {
+        await assertThrowsError(of: .badRequest(body)) {
             _ = try await self.sut.request(self.endpoint, decode: Foo.self)
         }
     }

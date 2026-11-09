@@ -81,7 +81,7 @@ final class AuthService: AuthServiceProtocol {
                 let token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
                 try Task.checkCancellation()
                 try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey)
-            } catch APIError.unauthorized, APIError.badRequest {
+            } catch let APIError.badRequest(body) where isInvalidGrant(body) {
                 try Task.checkCancellation()
                 keychain.delete(OAuthTokenDTO.keychainKey)
                 throw APIError.unauthorized
@@ -97,4 +97,12 @@ final class AuthService: AuthServiceProtocol {
         refreshTask?.cancel()
         keychain.delete(OAuthTokenDTO.keychainKey)
     }
+
+    private func isInvalidGrant(_ body: Data) -> Bool {
+        (try? JSONDecoder().decode(OAuthErrorDTO.self, from: body))?.error == "invalid_grant"
+    }
+}
+
+nonisolated struct OAuthErrorDTO: Decodable {
+    let error: String
 }

@@ -12,7 +12,7 @@ enum APIError: Error, LocalizedError, Equatable {
     case invalidData
     case responseUnsuccessful
     case serverError
-    case badRequest
+    case badRequest(Data)
     case unauthorized
     case requestCancelled
     case keyNotFound(key: CodingKey, context: String)
@@ -50,10 +50,11 @@ enum APIError: Error, LocalizedError, Equatable {
         case (.invalidData, .invalidData),
              (.responseUnsuccessful, .responseUnsuccessful),
              (.serverError, .serverError),
-             (.badRequest, .badRequest),
              (.unauthorized, .unauthorized),
              (.requestCancelled, .requestCancelled):
             return true
+        case let (.badRequest(lhsBody), .badRequest(rhsBody)):
+            return lhsBody == rhsBody
         case let (.keyNotFound(lhsKey, lhsContext), .keyNotFound(rhsKey, rhsContext)):
             return lhsKey.stringValue == rhsKey.stringValue && lhsContext == rhsContext
         case let (.valueNotFound(lhsType, lhsContext), .valueNotFound(rhsType, rhsContext)),
