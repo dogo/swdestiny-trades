@@ -14,9 +14,19 @@ final class SearchServiceMock: SearchServiceProtocol {
 
     var searchResult: [CardDTO] = []
     var searchError: Error?
+    var delay: Duration?
     private(set) var searchCallCount = 0
+    private(set) var cancelledCount = 0
     func search(query: String) async throws -> [CardDTO] {
         searchCallCount += 1
+        if let delay {
+            do {
+                try await Task.sleep(for: delay)
+            } catch {
+                cancelledCount += 1
+                throw error
+            }
+        }
         if let error = searchError {
             throw error
         }

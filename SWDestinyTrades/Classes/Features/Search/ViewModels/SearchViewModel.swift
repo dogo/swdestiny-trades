@@ -60,7 +60,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
         setLoading(true)
         hasSearched = true
 
-        Task { @MainActor in
+        searchTask = Task { @MainActor in
             await executeSearch(for: normalizedQuery)
         }
     }
@@ -68,7 +68,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     private func executeSearch(for expectedQuery: String) async {
         do {
             let results = try await service.search(query: expectedQuery)
-            guard currentQuery == expectedQuery else { return }
+            guard !Task.isCancelled, currentQuery == expectedQuery else { return }
             searchResults = results
             updateItems(results)
             setLoaded()
@@ -76,7 +76,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
             guard currentQuery == expectedQuery else { return }
             setLoaded()
         } catch {
-            guard currentQuery == expectedQuery else { return }
+            guard !Task.isCancelled, currentQuery == expectedQuery else { return }
             handleError(error)
             searchResults = []
             updateItems([])
@@ -84,6 +84,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
     }
 
     func clearSearch() {
+        searchTask?.cancel()
         searchText = ""
         currentQuery = ""
         searchResults = []

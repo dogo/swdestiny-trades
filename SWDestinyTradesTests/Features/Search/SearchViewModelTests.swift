@@ -53,6 +53,37 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
+    func performSearch_newSearch_cancelsTheOneInFlight() async {
+        mockSearchService.delay = .milliseconds(300)
+        mockSearchService.searchResult = [CardDTO.stub(code: "01001")]
+
+        sut.performSearch(query: "Luke")
+        await waitUntil { self.mockSearchService.searchCallCount == 1 }
+        sut.performSearch(query: "Leia")
+        await waitUntil { self.mockSearchService.searchCallCount == 2 && !self.sut.isLoading }
+
+        #expect(mockSearchService.cancelledCount == 1)
+        #expect(sut.currentQuery == "Leia")
+        #expect(sut.searchResults.count == 1)
+    }
+
+    @Test
+    func clearSearch_cancelsSearchInFlight() async {
+        mockSearchService.delay = .milliseconds(300)
+        mockSearchService.searchResult = [CardDTO.stub(code: "01001")]
+
+        sut.performSearch(query: "Luke")
+        await waitUntil { self.mockSearchService.searchCallCount == 1 }
+        sut.clearSearch()
+        await waitUntil { self.mockSearchService.cancelledCount == 1 }
+        try? await Task.sleep(for: .milliseconds(400))
+
+        #expect(mockSearchService.cancelledCount == 1)
+        #expect(sut.searchResults.isEmpty)
+        #expect(sut.hasSearched == false)
+    }
+
+    @Test
     func performSearch_blankQuery_clearsSearch() {
         sut.performSearch(query: "   ")
 
