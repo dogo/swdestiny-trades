@@ -58,6 +58,7 @@ struct DeckListView: View {
         .refreshable {
             await refreshDecks()
         }
+        .toastQueue(viewModel.toastQueue)
         .onAppear {
             Task {
                 await viewModel.loadDecks()
