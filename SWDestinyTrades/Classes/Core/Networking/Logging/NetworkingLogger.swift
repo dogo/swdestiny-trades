@@ -58,7 +58,8 @@ final nonisolated class NetworkingLogger: Sendable {
     // MARK: - Log Error
 
     func logError(request: URLRequest, statusCode: Int, error: Error?) {
-        guard let method = request.httpMethod,
+        guard loglevel != .none,
+              let method = request.httpMethod,
               let url = request.url,
               let error else { return }
         printSeparator()

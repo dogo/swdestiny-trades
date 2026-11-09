@@ -106,4 +106,13 @@ final class NetworkingLoggerTests {
         #expect(output.contains("LOGGER | 💥 500 GET https://example.com"))
         #expect(output.contains("LOGGER |    Test error"))
     }
+
+    @Test
+    func log_error_withLevelNone_writesNothing() throws {
+        let logger = NetworkingLogger(level: .none, outputStream: testOutputStream)
+        let request = try URLRequest(url: #require(URL(string: "https://example.com")))
+        logger.logError(request: request, statusCode: 500, error: APIError.serverError)
+
+        #expect(testOutputStream.output.isEmpty)
+    }
 }
