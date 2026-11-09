@@ -67,6 +67,7 @@ struct DeckBuilderView: View {
                 await viewModel.handleViewAppear()
             }
         }
+        .toastQueue(viewModel.toastQueue)
     }
 
     // MARK: - Navigation Actions
