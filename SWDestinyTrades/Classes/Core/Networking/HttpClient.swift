@@ -68,6 +68,10 @@ extension HttpClient {
                     throw APIError.unauthorized
                 }
 
+                if httpResponse.statusCode >= 500 {
+                    throw APIError.serverError
+                }
+
                 guard case 200 ... 300 = httpResponse.statusCode else {
                     throw APIError.responseUnsuccessful
                 }

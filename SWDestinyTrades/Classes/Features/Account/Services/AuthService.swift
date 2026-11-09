@@ -80,7 +80,7 @@ final class AuthService: AuthServiceProtocol {
             do {
                 let token = try await client.request(endpoint, decode: OAuthTokenDTO.self)
                 try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey)
-            } catch let error as APIError where error != .requestCancelled {
+            } catch APIError.unauthorized, APIError.responseUnsuccessful {
                 keychain.delete(OAuthTokenDTO.keychainKey)
                 throw APIError.unauthorized
             }

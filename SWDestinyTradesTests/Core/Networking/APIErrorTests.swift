@@ -26,6 +26,12 @@ final class APIErrorTests {
     }
 
     @Test
+    func server_error_error_description() {
+        let error = APIError.serverError
+        #expect(error.localizedDescription == "Server Error")
+    }
+
+    @Test
     func request_cancelled_error_description() {
         let error = APIError.requestCancelled
         #expect(error.localizedDescription == "Request Cancelled")

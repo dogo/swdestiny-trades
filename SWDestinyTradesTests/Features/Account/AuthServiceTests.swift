@@ -136,12 +136,23 @@ final class AuthServiceTests {
     @Test
     func refreshToken_rejected_clearsToken() async throws {
         try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
-        client.error = true
+        client.errorsToThrow = [APIError.responseUnsuccessful]
 
         await #expect(throws: APIError.unauthorized) {
             try await self.sut.refreshToken()
         }
         #expect(sut.isLoggedIn == false)
+    }
+
+    @Test
+    func refreshToken_serverError_keepsToken() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        client.errorsToThrow = [APIError.serverError]
+
+        await #expect(throws: APIError.serverError) {
+            try await self.sut.refreshToken()
+        }
+        #expect(sut.isLoggedIn)
     }
 
     @Test

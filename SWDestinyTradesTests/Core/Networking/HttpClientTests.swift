@@ -59,6 +59,15 @@ final class HttpClientTests {
     }
 
     @Test
+    func request_with_failure_serverError() async {
+        setupURLProtocolMock(with: nil, statusCode: 503)
+
+        await assertThrowsError(of: .serverError) {
+            _ = try await self.sut.request(self.endpoint, decode: Foo.self)
+        }
+    }
+
+    @Test
     func request_with_failure_requestCancelled() async {
         setupURLProtocolMock(with: nil, statusCode: 200, error: URLError(.cancelled))
 
