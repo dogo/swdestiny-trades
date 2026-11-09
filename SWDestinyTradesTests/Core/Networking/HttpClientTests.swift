@@ -59,6 +59,15 @@ final class HttpClientTests {
     }
 
     @Test
+    func request_with_failure_multipleChoices() async {
+        setupURLProtocolMock(with: Data("{ \"bar\": true }".utf8), statusCode: 300)
+
+        await assertThrowsError(of: .responseUnsuccessful) {
+            _ = try await self.sut.request(self.endpoint, decode: Foo.self)
+        }
+    }
+
+    @Test
     func request_with_failure_serverError() async {
         setupURLProtocolMock(with: nil, statusCode: 503)
 

@@ -72,7 +72,7 @@ extension HttpClient {
                     throw APIError.serverError
                 }
 
-                guard case 200 ... 300 = httpResponse.statusCode else {
+                guard case 200 ..< 300 = httpResponse.statusCode else {
                     throw APIError.responseUnsuccessful
                 }
 
