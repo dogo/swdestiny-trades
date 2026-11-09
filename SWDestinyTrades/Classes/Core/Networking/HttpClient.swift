@@ -13,7 +13,7 @@ final class HttpClient: HttpClientProtocol {
 
     private let session: URLSession
     private let keychain: KeychainStoreProtocol
-    private var activeTasks: [URLRequest: Task<(Data, URLResponse), Error>] = [:]
+    private var activeTasks: [URLRequest: [Task<(Data, URLResponse), Error>]] = [:]
 
     init(session: URLSession = .shared,
          keychain: KeychainStoreProtocol = KeychainStore(service: Bundle.main.appBundleIdentifier)) {
@@ -32,7 +32,7 @@ extension HttpClient {
         #endif
     }
 
-    private func perform<T: Decodable & SendableMetatype>(_ request: URLRequest, decode: T.Type) async throws -> T {
+    private func perform<T: Decodable & SendableMetatype>(_ request: URLRequest, key: URLRequest, decode: T.Type) async throws -> T {
 
         let logger = logger
         Self.logQueue.async { logger.log(request: request) }
@@ -41,10 +41,13 @@ extension HttpClient {
 
         let session = session
         let task = Task { try await session.data(for: request) }
-        activeTasks[request] = task
+        activeTasks[key, default: []].append(task)
 
         defer {
-            activeTasks[request] = nil
+            activeTasks[key]?.removeAll { $0 == task }
+            if activeTasks[key]?.isEmpty == true {
+                activeTasks[key] = nil
+            }
         }
 
         do {
@@ -96,12 +99,12 @@ extension HttpClient {
         if endpoint.needsToken, let accessToken = keychain.accessToken {
             request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }
-        return try await perform(request, decode: T.self)
+        return try await perform(request, key: endpoint.request, decode: T.self)
     }
 
     func cancelRequest(_ request: URLRequest?) {
         guard let request else { return }
-        activeTasks.removeValue(forKey: request)?.cancel()
+        activeTasks.removeValue(forKey: request)?.forEach { $0.cancel() }
     }
 
     // MARK: - Helper

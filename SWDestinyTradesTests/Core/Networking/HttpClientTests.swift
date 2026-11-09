@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os
 import Testing
 
 @testable import SWDestinyTrades
@@ -229,6 +230,64 @@ final class HttpClientTests {
         #expect(areTasksEmpty, "Expected no active tasks after cancelling the request.")
 
         requestTask.cancel()
+    }
+
+    @Test
+    func cancelRequest_withAuthenticatedEndpoint_cancelsRequest() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        setupURLProtocolMock(with: nil, statusCode: 200, delay: 1.0)
+        let endpoint = DecksEndpoint()
+
+        let request = Task { try await self.sut.request(endpoint, decode: Foo.self) }
+        try await waitUntil { self.sut.activeTasks?[endpoint.request]?.count == 1 }
+        sut.cancelRequest(endpoint.request)
+
+        await assertThrowsError(of: .requestCancelled) {
+            _ = try await request.value
+        }
+    }
+
+    @Test
+    func cancelRequest_afterIdenticalRequestFinishes_cancelsTheOther() async throws {
+        let calls = OSAllocatedUnfairLock(initialState: 0)
+        URLProtocolMock.response = { _ in
+            let call = calls.withLock { count in
+                count += 1
+                return count
+            }
+            Thread.sleep(forTimeInterval: call == 1 ? 0.2 : 2.0)
+            return HTTPResponse(data: Data("{ \"bar\": true }".utf8), statusCode: 200)
+        }
+
+        let requests = (0 ..< 2).map { _ in
+            Task { () -> Error? in
+                do {
+                    _ = try await self.sut.request(self.endpoint, decode: Foo.self)
+                    return nil
+                } catch {
+                    return error
+                }
+            }
+        }
+        try await waitUntil { self.sut.activeTasks?[self.endpoint.request]?.count == 2 }
+        try await waitUntil { self.sut.activeTasks?[self.endpoint.request]?.count == 1 }
+        sut.cancelRequest(endpoint.request)
+
+        var errors: [APIError] = []
+        for request in requests {
+            if let error = await request.value {
+                try errors.append(#require(error as? APIError))
+            }
+        }
+        #expect(errors == [.requestCancelled])
+    }
+
+    private func waitUntil(_ condition: () -> Bool) async throws {
+        let deadline = ContinuousClock.now + .seconds(5)
+        while !condition() {
+            try #require(ContinuousClock.now < deadline, "Condition not met within 5 seconds")
+            try await Task.sleep(for: .milliseconds(10))
+        }
     }
 
     // MARK: - Helper Methods
