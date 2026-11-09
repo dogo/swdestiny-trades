@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum APIError: Error, Equatable {
+enum APIError: Error, LocalizedError, Equatable {
     case invalidData
     case responseUnsuccessful
     case unauthorized
@@ -18,7 +18,7 @@ enum APIError: Error, Equatable {
     case typeMismatch(type: Any.Type, context: String)
     case dataCorrupted(context: String)
 
-    var localizedDescription: String {
+    var errorDescription: String? {
         switch self {
         case .invalidData:
             return "Invalid Data"

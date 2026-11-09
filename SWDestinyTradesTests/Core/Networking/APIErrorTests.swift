@@ -57,6 +57,12 @@ final class APIErrorTests {
     }
 
     @Test
+    func error_description_through_error_existential() {
+        let error: Error = APIError.responseUnsuccessful
+        #expect(error.localizedDescription == "Response Unsuccessful")
+    }
+
+    @Test
     func invalid_data_error_equality() {
         let error1 = APIError.invalidData
         let error2 = APIError.invalidData
