@@ -82,6 +82,7 @@ final class AuthService: AuthServiceProtocol {
                 try Task.checkCancellation()
                 try keychain.set(JSONEncoder().encode(token), for: OAuthTokenDTO.keychainKey)
             } catch APIError.unauthorized, APIError.responseUnsuccessful {
+                try Task.checkCancellation()
                 keychain.delete(OAuthTokenDTO.keychainKey)
                 throw APIError.unauthorized
             }

@@ -184,4 +184,21 @@ final class AuthServiceTests {
         }
         #expect(sut.isLoggedIn == false)
     }
+
+    @Test
+    func failedRefresh_afterLogout_keepsNextSession() async throws {
+        try keychain.set(JSONEncoder().encode(OAuthTokenDTO.stub()), for: OAuthTokenDTO.keychainKey)
+        let nextSession = OAuthTokenDTO.stub(accessToken: "next", refreshToken: "next-refresh")
+        let nextSessionData = try JSONEncoder().encode(nextSession)
+        client.errorsToThrow = [APIError.unauthorized]
+        client.onRequest = { [weak self] in
+            self?.sut.logout()
+            self?.keychain.set(nextSessionData, for: OAuthTokenDTO.keychainKey)
+        }
+
+        await #expect(throws: CancellationError.self) {
+            try await self.sut.refreshToken()
+        }
+        #expect(keychain.oauthToken == nextSession)
+    }
 }
