@@ -99,8 +99,10 @@ struct CardImageView: View {
 
         do {
             let image = try await imageLoader.loadImage(from: .remote(url), placeholder: nil, onProgress: nil)
+            guard !Task.isCancelled else { return }
             state = .loaded(image)
         } catch {
+            guard !Task.isCancelled else { return }
             state = .failed(error)
         }
     }
