@@ -68,6 +68,21 @@ final class SearchViewModelTests: BaseTestCase {
     }
 
     @Test
+    func performSearch_sameQueryResubmitted_keepsLoadingUntilReplacementFinishes() async {
+        mockSearchService.delay = .milliseconds(300)
+
+        sut.performSearch(query: "Luke")
+        await waitUntil { self.mockSearchService.searchCallCount == 1 }
+        sut.performSearch(query: "Luke")
+        await waitUntil { self.mockSearchService.cancelledCount == 1 }
+        try? await Task.sleep(for: .milliseconds(50))
+
+        #expect(sut.isLoading)
+        await waitUntil { !self.sut.isLoading }
+        #expect(mockSearchService.searchCallCount == 2)
+    }
+
+    @Test
     func clearSearch_cancelsSearchInFlight() async {
         mockSearchService.delay = .milliseconds(300)
         mockSearchService.searchResult = [CardDTO.stub(code: "01001")]

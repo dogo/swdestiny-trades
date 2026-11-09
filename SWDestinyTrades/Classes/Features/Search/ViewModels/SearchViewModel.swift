@@ -73,7 +73,7 @@ final class SearchViewModel: ListViewModel<CardDTO> {
             updateItems(results)
             setLoaded()
         } catch is CancellationError {
-            guard currentQuery == expectedQuery else { return }
+            guard !Task.isCancelled, currentQuery == expectedQuery else { return }
             setLoaded()
         } catch {
             guard !Task.isCancelled, currentQuery == expectedQuery else { return }
