@@ -58,7 +58,7 @@ struct SwiftUIRadarChartView: View {
         let maxValue = Double(max(data.max() ?? 0, 1))
         let ringCount = max(min(data.max() ?? 1, 10), 1)
 
-        drawWeb(in: &context, center: center, radius: radius, count: count, ringCount: ringCount)
+        drawWeb(in: &context, center: center, radius: radius, ringCount: ringCount)
         drawSpokes(in: &context, center: center, radius: radius, count: count)
         drawDataPolygon(in: &context, center: center, radius: radius, count: count, maxValue: maxValue)
         drawLabels(in: &context, center: center, radius: radius, count: count)
@@ -71,26 +71,18 @@ struct SwiftUIRadarChartView: View {
         }
     }
 
-    private func drawWeb(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, count: Int, ringCount: Int) {
+    private func drawWeb(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, ringCount: Int) {
         for ring in 1 ... ringCount {
-            let fraction = Double(ring) / Double(ringCount)
-            var path = Path()
-            for index in 0 ..< count {
-                let vertex = point(center: center, radius: radius, index: index, fraction: fraction, count: count)
-                if index == 0 {
-                    path.move(to: vertex)
-                } else {
-                    path.addLine(to: vertex)
-                }
-            }
-            path.closeSubpath()
-            context.stroke(path, with: .color(webColor.opacity(0.5)), lineWidth: 1.0)
+            let ringRadius = radius * Double(ring) / Double(ringCount)
+            let circle = Path(ellipseIn: CGRect(x: center.x - ringRadius, y: center.y - ringRadius, width: ringRadius * 2.0, height: ringRadius * 2.0))
+            context.stroke(circle, with: .color(webColor.opacity(0.5)), lineWidth: 1.0)
         }
     }
 
     private func drawSpokes(in context: inout GraphicsContext, center: CGPoint, radius: CGFloat, count: Int) {
         for index in 0 ..< count {
-            let vertex = point(center: center, radius: radius, index: index, fraction: 1.0, count: count)
+            let radians = angle(index: index, count: count) - Double.pi / Double(count)
+            let vertex = CGPoint(x: center.x + radius * cos(radians), y: center.y + radius * sin(radians))
             var path = Path()
             path.move(to: center)
             path.addLine(to: vertex)
@@ -170,7 +162,7 @@ struct SwiftUIRadarChartView: View {
     // MARK: - Geometry
 
     private func angle(index: Int, count: Int) -> Double {
-        -Double.pi / 2.0 + Double(index) * (2.0 * Double.pi / Double(count))
+        -Double.pi / 2.0 + (Double(index) + 0.5) * (2.0 * Double.pi / Double(count))
     }
 
     private func point(center: CGPoint, radius: CGFloat, index: Int, fraction: Double, count: Int) -> CGPoint {
