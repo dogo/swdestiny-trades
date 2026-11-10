@@ -132,8 +132,13 @@ final class DeckListViewModel: ListViewModel<DeckListItem> {
             deck.list = remoteDeck.list.compactMap { slot in
                 guard let card = remoteCardsByCode[slot.code] else { return nil }
                 let copy = CardDTO(copying: card)
-                copy.quantity = slot.quantity
-                copy.isElite = slot.isElite
+                if copy.typeCode == "character", copy.isUnique, slot.quantity > 1 {
+                    copy.quantity = 1
+                    copy.isElite = true
+                } else {
+                    copy.quantity = slot.quantity
+                    copy.isElite = slot.isElite
+                }
                 return copy
             }
             return deck

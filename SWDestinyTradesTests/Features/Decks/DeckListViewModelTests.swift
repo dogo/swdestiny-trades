@@ -44,7 +44,7 @@ final class DeckListViewModelTests: BaseTestCase {
         deckService.decks = [RemoteDeckDTO.stub(slots: ["05117": 2]).deck]
         registerMock(AuthServiceProtocol.self) { authService }
         registerMock(DeckServiceProtocol.self) { deckService }
-        mockCardService.retrieveCardResult = CardDTO.stub(code: "05117")
+        mockCardService.retrieveCardResult = CardDTO.stub(typeCode: "event", code: "05117")
         await sut.loadDecks()
 
         let item = try #require(sut.items.first { $0.id == "arh-1" })
@@ -142,6 +142,24 @@ final class DeckListViewModelTests: BaseTestCase {
         await sut.delete(item)
 
         #expect(sut.items.map(\.name) == ["Keep"])
+    }
+
+    @Test
+    func resolvedDeck_uniqueCharacterWithTwoCopies_becomesOneEliteCopy() async throws {
+        let authService = AuthServiceMock()
+        authService.isLoggedIn = true
+        let deckService = DeckServiceMock()
+        deckService.decks = [RemoteDeckDTO.stub(slots: ["11056": 2]).deck]
+        registerMock(AuthServiceProtocol.self) { authService }
+        registerMock(DeckServiceProtocol.self) { deckService }
+        mockCardService.retrieveCardResult = CardDTO.stub(typeCode: "character", code: "11056", isUnique: true)
+        await sut.loadDecks()
+        let item = try #require(sut.items.first { $0.id == "arh-1" })
+
+        let card = try #require(await sut.resolvedDeck(for: item)?.list.first)
+
+        #expect(card.quantity == 1)
+        #expect(card.isElite)
     }
 
     @Test
