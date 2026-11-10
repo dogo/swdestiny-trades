@@ -83,9 +83,19 @@ final class DeckGraphViewModelTests: BaseTestCase {
             card(type: "upgrade", cost: 1, quantity: 2, dieFaces: ["2MD"])
         ])
 
-        // diceFaceLabels index 2 == Melee, matched by the "*MD*" filter; quantity 2.
-        #expect(sut.diceFaceData.count == 10)
-        #expect(sut.diceFaceData[2] == 2)
+        #expect(sut.diceFaceData.count == sut.diceFaceLabels.count)
+        #expect(sut.diceFaceData[0] == 2)
+    }
+
+    @Test
+    func generateGraphData_parsesFacesLikeARH() async {
+        let sut = await makeSUT(cards: [
+            card(type: "upgrade", cost: 1, quantity: 1, dieFaces: ["Re", "1Ri", "+2RD", "X1MD", "2R1", "-", "Sp"])
+        ])
+
+        let labels = ["Melee", "Ranged", "Indirect", "Focus", "Disrupt", "Reroll", "Shield", "Discard", "Resource", "Special", "Blank"]
+        #expect(sut.diceFaceLabels == labels)
+        #expect(sut.diceFaceData == [1, 1, 0, 0, 0, 1, 0, 0, 2, 1, 1])
     }
 
     @Test
@@ -94,7 +104,7 @@ final class DeckGraphViewModelTests: BaseTestCase {
         elite.isElite = true
         let sut = await makeSUT(cards: [elite])
 
-        #expect(sut.diceFaceData[2] == 2)
+        #expect(sut.diceFaceData[0] == 2)
         #expect(sut.diceFaceData[6] == 2)
     }
 

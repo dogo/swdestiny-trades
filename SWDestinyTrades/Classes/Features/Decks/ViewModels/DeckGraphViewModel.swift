@@ -19,8 +19,8 @@ final class DeckGraphViewModel: BaseViewModel {
     var hasData = false
 
     let cardTypeLabels = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
-    let diceFaceLabels = ["Special", "Blank", "Melee", "Ranged", "Focus",
-                          "Disrupt", "Shield", "Discard", "Resource", "Indirect"]
+    let diceFaceLabels = ["Melee", "Ranged", "Indirect", "Focus", "Disrupt", "Reroll",
+                          "Shield", "Discard", "Resource", "Special", "Blank"]
 
     init(deck: DeckDTO, dependencyContainer: DependencyContainer = .shared) {
         self.deck = deck
@@ -122,39 +122,19 @@ final class DeckGraphViewModel: BaseViewModel {
     }
 
     private nonisolated func buildRadarChartData(deckListData: [DeckCardData]) -> [Int] {
-        let filters = ["Sp", "-", "*MD*", "*RD*", "*F", "*Dr*", "*Sh", "*Dc*", "*R", "*ID*"]
+        let symbols = ["MD", "RD", "ID", "F", "Dr", "Re", "Sh", "Dc", "R", "Sp", "-"]
 
-        return filters.map { filter in
-            countFaces(filter: "value LIKE '\(filter)'", deckListData: deckListData)
-        }
-    }
-
-    private nonisolated func countFaces(filter: String, deckListData: [DeckCardData]) -> Int {
-        return deckListData.reduce(0) { total, cardData in
-            let matchingFaces = cardData.dieFaces.count { face in
-                evaluateFilter(filter, on: face)
+        return symbols.map { symbol in
+            deckListData.reduce(0) { total, cardData in
+                total + cardData.dieFaces.count { faceSymbol($0) == symbol } * cardData.dice
             }
-            return total + (matchingFaces * cardData.dice)
         }
     }
 
-    private nonisolated func evaluateFilter(_ filter: String, on value: String) -> Bool {
-        let pattern = filter
-            .replacingOccurrences(of: "value LIKE '", with: "")
-            .replacingOccurrences(of: "'", with: "")
-
-        if pattern.hasPrefix("*"), pattern.hasSuffix("*") {
-            let substring = String(pattern.dropFirst().dropLast())
-            return value.contains(substring)
-        } else if pattern.hasPrefix("*") {
-            let substring = String(pattern.dropFirst())
-            return value.hasSuffix(substring)
-        } else if pattern.hasSuffix("*") {
-            let substring = String(pattern.dropLast())
-            return value.hasPrefix(substring)
-        } else {
-            return value == pattern
-        }
+    private nonisolated func faceSymbol(_ face: String) -> String? {
+        let side = face.hasPrefix("X") ? String(face.dropFirst()) : face
+        guard let match = side.wholeMatch(of: /[-+]?[0-9X]*?([-A-Z][a-zA-Z]?)\d*?/) else { return nil }
+        return match.1 == "Ri" ? "R" : String(match.1)
     }
 
     func refresh() {
