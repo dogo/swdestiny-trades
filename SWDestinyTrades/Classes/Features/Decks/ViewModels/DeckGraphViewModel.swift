@@ -41,6 +41,7 @@ final class DeckGraphViewModel: BaseViewModel {
                 typeCode: card.typeCode,
                 cost: card.cost,
                 quantity: card.quantity,
+                dice: card.quantity * (card.isElite ? 2 : 1),
                 dieFaces: Array(card.dieFaces)
             )
         }
@@ -133,7 +134,7 @@ final class DeckGraphViewModel: BaseViewModel {
             let matchingFaces = cardData.dieFaces.count { face in
                 evaluateFilter(filter, on: face)
             }
-            return total + (matchingFaces * cardData.quantity)
+            return total + (matchingFaces * cardData.dice)
         }
     }
 
@@ -204,5 +205,6 @@ struct DeckCardData {
     let typeCode: String
     let cost: Int
     let quantity: Int
+    let dice: Int
     let dieFaces: [String]
 }

@@ -88,6 +88,16 @@ final class DeckGraphViewModelTests: BaseTestCase {
         #expect(sut.diceFaceData[2] == 2)
     }
 
+    @Test
+    func generateGraphData_countsBothDiceOfAnEliteCharacter() async {
+        let elite = card(type: "character", cost: 0, quantity: 1, dieFaces: ["1MD", "1Sh"])
+        elite.isElite = true
+        let sut = await makeSUT(cards: [elite])
+
+        #expect(sut.diceFaceData[2] == 2)
+        #expect(sut.diceFaceData[6] == 2)
+    }
+
     // MARK: - Chart helpers
 
     @Test
