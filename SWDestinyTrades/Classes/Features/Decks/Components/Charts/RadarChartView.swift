@@ -56,7 +56,7 @@ struct SwiftUIRadarChartView: View {
     }
 
     private func color(series: Int) -> Color {
-        ColorPalette.accent.mix(with: .black, by: Double(series) / 3.0)
+        ColorPalette.accent.mix(with: .primary, by: Double(series) / 3.0)
     }
 
     // MARK: - Drawing
