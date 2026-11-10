@@ -21,8 +21,10 @@ struct DeckQuantityControl: View {
                 onEliteToggle(newValue)
             }
         } else if !(card.typeCode == "character" && card.isUnique), card.typeCode != "battlefield" {
-            Stepper(L10n.quantity, value: $quantity, in: 1 ... card.deckLimit) { _ in
-                onQuantityChange(quantity)
+            Stepper(L10n.quantity, value: $quantity, in: 1 ... card.deckLimit) { isEditing in
+                if !isEditing {
+                    onQuantityChange(quantity)
+                }
             }
             .labelsHidden()
         }
