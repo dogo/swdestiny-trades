@@ -31,6 +31,10 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
+    private var deckService: DeckServiceProtocol {
+        dependencyContainer.resolve(type: DeckServiceProtocol.self)
+    }
+
     init(deck: DeckDTO, dependencyContainer: DependencyContainer = .shared) {
         self.deck = deck
         super.init(dependencyContainer: dependencyContainer)
@@ -119,11 +123,19 @@ final class AddToDeckViewModel: ListViewModel<CardDTO> {
         Task { @MainActor in
             do {
                 self.deck.list.append(cardCopy)
-                try await database.save(object: self.deck, update: .modified)
+                if let remoteID = self.deck.remoteID {
+                    try await deckService.saveDeck(self.deck, remoteID: remoteID)
+                } else {
+                    do {
+                        try await database.save(object: self.deck, update: .modified)
+                    } catch {
+                        throw ConcurrencyError.realmAccessError(error)
+                    }
+                }
 
                 toastQueue.enqueue(title: L10n.added, message: card.name, type: .success)
             } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
+                self.handleError(error)
             }
         }
     }

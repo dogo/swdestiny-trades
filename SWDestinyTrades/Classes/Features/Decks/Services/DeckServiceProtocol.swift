@@ -11,4 +11,5 @@ import Foundation
 protocol DeckServiceProtocol {
 
     func retrieveDecks() async throws -> [DeckDTO]
+    func saveDeck(_ deck: DeckDTO, remoteID: Int) async throws
 }

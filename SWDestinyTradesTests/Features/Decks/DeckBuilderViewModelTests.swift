@@ -170,4 +170,38 @@ final class DeckBuilderViewModelTests: BaseTestCase {
 
         #expect(card.isElite)
     }
+
+    // MARK: - Remote decks
+
+    @Test
+    func updateCardQuantity_remoteDeck_savesToAccount() async {
+        let deckService = DeckServiceMock()
+        registerMock(DeckServiceProtocol.self) { deckService }
+        let card = CardDTO.stub(code: "01001", quantity: 1)
+        let deck = makeDeck(cards: [card])
+        deck.id = "arh-12"
+        let sut = makeSUT(deck: deck)
+
+        sut.updateCardQuantity(card, quantity: 2)
+        await waitUntil { deckService.savedRemoteIDs == [12] }
+
+        #expect(sut.totalCardCount == 2)
+    }
+
+    @Test
+    func removeCard_remoteDeckSaveFails_showsErrorToast() async {
+        let deckService = DeckServiceMock()
+        deckService.error = SaveDeckError.rejected("Slots missing")
+        registerMock(DeckServiceProtocol.self) { deckService }
+        let card = CardDTO.stub(code: "01001")
+        let deck = makeDeck(cards: [card])
+        deck.id = "arh-12"
+        let sut = makeSUT(deck: deck)
+
+        sut.removeCard(card)
+        await waitUntil { sut.toastQueue.current != nil }
+
+        #expect(sut.toastQueue.current?.type == .error)
+        #expect(sut.toastQueue.current?.message == "Slots missing")
+    }
 }

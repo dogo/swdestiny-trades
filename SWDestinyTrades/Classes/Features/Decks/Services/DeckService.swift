@@ -11,6 +11,7 @@ import Foundation
 final class DeckService: DeckServiceProtocol {
 
     private let client: HttpClientProtocol
+    private var pendingSave: Task<Void, Error>?
 
     init(client: HttpClientProtocol) {
         self.client = client
@@ -20,5 +21,17 @@ final class DeckService: DeckServiceProtocol {
         let endpoint = DecksEndpoint()
 
         return try await client.request(endpoint, decode: [RemoteDeckDTO].self).map(\.deck)
+    }
+
+    func saveDeck(_ deck: DeckDTO, remoteID: Int) async throws {
+        let previousSave = pendingSave
+        let save = Task { [client] in
+            _ = await previousSave?.result
+            let endpoint = try SaveDeckEndpoint(remoteID: remoteID, deck: deck)
+            let response = try await client.request(endpoint, decode: SaveDeckResponseDTO.self)
+            guard response.success else { throw SaveDeckError.rejected(response.message) }
+        }
+        pendingSave = save
+        try await save.value
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 nonisolated struct RemoteDeckDTO: Decodable {
-    nonisolated struct Slot: Decodable {
+    nonisolated struct Slot: Codable {
         let quantity: Int
         let dice: Int
     }
@@ -31,5 +31,11 @@ nonisolated struct RemoteDeckDTO: Decodable {
             return card
         }
         return deck
+    }
+}
+
+extension DeckDTO {
+    var remoteID: Int? {
+        id.hasPrefix("arh-") ? Int(id.dropFirst(4)) : nil
     }
 }

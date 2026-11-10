@@ -21,6 +21,10 @@ final class DeckBuilderViewModel: BaseViewModel {
         dependencyContainer.resolve(type: DatabaseProtocol.self)
     }
 
+    private var deckService: DeckServiceProtocol {
+        dependencyContainer.resolve(type: DeckServiceProtocol.self)
+    }
+
     init(deck: DeckDTO?, dependencyContainer: DependencyContainer = .shared) {
         if let existingDeck = deck {
             self.deck = existingDeck
@@ -99,12 +103,12 @@ final class DeckBuilderViewModel: BaseViewModel {
                 try Task.checkCancellation()
 
                 card.quantity = quantity
-                try await database.save(object: card, update: .modified)
+                try await self.persist(card)
                 self.organizeDeckIntoSections()
             } catch is CancellationError {
                 return
             } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
+                self.handleError(error)
             }
         }
     }
@@ -115,12 +119,12 @@ final class DeckBuilderViewModel: BaseViewModel {
                 try Task.checkCancellation()
 
                 card.isElite = isElite
-                try await database.save(object: card, update: .modified)
+                try await self.persist(card)
                 self.organizeDeckIntoSections()
             } catch is CancellationError {
                 return
             } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
+                self.handleError(error)
             }
         }
     }
@@ -134,13 +138,25 @@ final class DeckBuilderViewModel: BaseViewModel {
                 if let index = self.deck.list.firstIndex(where: { $0.id == cardIDToRemove }) {
                     self.deck.list.remove(at: index)
                 }
-                try await database.save(object: self.deck, update: .modified)
+                try await self.persist(self.deck)
                 self.organizeDeckIntoSections()
             } catch is CancellationError {
                 return
             } catch {
-                self.handleError(ConcurrencyError.realmAccessError(error))
+                self.handleError(error)
             }
+        }
+    }
+
+    private func persist(_ object: Storable) async throws {
+        if let remoteID = deck.remoteID {
+            try await deckService.saveDeck(deck, remoteID: remoteID)
+            return
+        }
+        do {
+            try await database.save(object: object, update: .modified)
+        } catch {
+            throw ConcurrencyError.realmAccessError(error)
         }
     }
 

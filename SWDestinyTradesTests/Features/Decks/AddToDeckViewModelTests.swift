@@ -116,6 +116,19 @@ final class AddToDeckViewModelTests: BaseTestCase {
     }
 
     @Test
+    func addCardToDeck_remoteDeck_savesToAccount() async {
+        let deckService = DeckServiceMock()
+        registerMock(DeckServiceProtocol.self) { deckService }
+        deck.id = "arh-12"
+
+        sut.addCardToDeck(CardDTO.stub(code: "01001"))
+        await waitUntil { self.sut.toastQueue.current != nil }
+
+        #expect(deckService.savedRemoteIDs == [12])
+        #expect(sut.toastQueue.current?.type == .success)
+    }
+
+    @Test
     func addCardToDeck_duplicateCode_showsInfoAndDoesNotAppend() {
         deck.list = [CardDTO.stub(code: "01001")]
 

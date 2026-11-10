@@ -13,11 +13,19 @@ import Foundation
 final class DeckServiceMock: DeckServiceProtocol {
     var decks: [DeckDTO] = []
     var error: Error?
+    private(set) var savedRemoteIDs: [Int] = []
 
     func retrieveDecks() async throws -> [DeckDTO] {
         if let error {
             throw error
         }
         return decks
+    }
+
+    func saveDeck(_ deck: DeckDTO, remoteID: Int) async throws {
+        if let error {
+            throw error
+        }
+        savedRemoteIDs.append(remoteID)
     }
 }
