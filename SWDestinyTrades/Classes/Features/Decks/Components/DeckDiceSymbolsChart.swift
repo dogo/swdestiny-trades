@@ -11,13 +11,14 @@ import SwiftUI
 struct DeckDiceSymbolsChart: View {
     let hasData: Bool
     let title: String
-    let data: [Int]
+    let data: [[Int]]
     let labels: [String]
+    let seriesNames: [String]
 
     var body: some View {
         if hasData {
             ChartCardView(title: title) {
-                SwiftUIRadarChartView(data: data, labels: labels, title: title)
+                SwiftUIRadarChartView(data: data, labels: labels, seriesNames: seriesNames)
                     .frame(height: 300)
             }
         }

@@ -83,8 +83,9 @@ final class DeckGraphViewModelTests: BaseTestCase {
             card(type: "upgrade", cost: 1, quantity: 2, dieFaces: ["2MD"])
         ])
 
-        #expect(sut.diceFaceData.count == sut.diceFaceLabels.count)
-        #expect(sut.diceFaceData[0] == 2)
+        #expect(sut.diceFaceData.count == sut.diceSeriesNames.count)
+        #expect(sut.diceFaceData.allSatisfy { $0.count == sut.diceFaceLabels.count })
+        #expect(sut.diceFaceData[0][0] == 2)
     }
 
     @Test
@@ -95,7 +96,20 @@ final class DeckGraphViewModelTests: BaseTestCase {
 
         let labels = ["Melee", "Ranged", "Indirect", "Focus", "Disrupt", "Reroll", "Shield", "Discard", "Resource", "Special", "Blank"]
         #expect(sut.diceFaceLabels == labels)
-        #expect(sut.diceFaceData == [1, 1, 0, 0, 0, 1, 0, 0, 2, 1, 1])
+        #expect(sut.diceFaceData[0] == [1, 1, 0, 0, 0, 1, 0, 0, 2, 1, 1])
+    }
+
+    @Test
+    func generateGraphData_buildsDirectFacesAndDiceSeries() async {
+        let sut = await makeSUT(cards: [
+            card(type: "upgrade", cost: 1, quantity: 2, dieFaces: ["1MD", "2MD", "+1MD", "1Sh", "-", "-"])
+        ])
+
+        #expect(sut.diceFaceData[0][0] == 6)
+        #expect(sut.diceFaceData[1][0] == 4)
+        #expect(sut.diceFaceData[2][0] == 2)
+        #expect(sut.diceFaceData[0][10] == 4)
+        #expect(sut.diceFaceData[2][10] == 2)
     }
 
     @Test
@@ -104,8 +118,8 @@ final class DeckGraphViewModelTests: BaseTestCase {
         elite.isElite = true
         let sut = await makeSUT(cards: [elite])
 
-        #expect(sut.diceFaceData[0] == 2)
-        #expect(sut.diceFaceData[6] == 2)
+        #expect(sut.diceFaceData[0][0] == 2)
+        #expect(sut.diceFaceData[0][6] == 2)
     }
 
     // MARK: - Chart helpers

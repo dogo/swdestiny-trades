@@ -15,12 +15,13 @@ final class DeckGraphViewModel: BaseViewModel {
     var deck: DeckDTO
     var cardTypeData: [Int] = []
     var cardCostData: [Int] = []
-    var diceFaceData: [Int] = []
+    var diceFaceData: [[Int]] = []
     var hasData = false
 
     let cardTypeLabels = [L10n.upgrade, L10n.support, L10n.event, L10n.plot, L10n.downgrade]
     let diceFaceLabels = ["Melee", "Ranged", "Indirect", "Focus", "Disrupt", "Reroll",
                           "Shield", "Discard", "Resource", "Special", "Blank"]
+    let diceSeriesNames = [L10n.diceSeriesFaces, L10n.diceSeriesDirect, L10n.diceSeriesDice]
 
     init(deck: DeckDTO, dependencyContainer: DependencyContainer = .shared) {
         self.deck = deck
@@ -65,7 +66,7 @@ final class DeckGraphViewModel: BaseViewModel {
     }
 
     @MainActor
-    private func updateUI(cardTypeData: [Int], cardCostData: [Int], diceFaceData: [Int], hasData: Bool) {
+    private func updateUI(cardTypeData: [Int], cardCostData: [Int], diceFaceData: [[Int]], hasData: Bool) {
         self.cardTypeData = cardTypeData
         self.cardCostData = cardCostData
         self.diceFaceData = diceFaceData
@@ -121,20 +122,33 @@ final class DeckGraphViewModel: BaseViewModel {
         return costs
     }
 
-    private nonisolated func buildRadarChartData(deckListData: [DeckCardData]) -> [Int] {
+    private nonisolated func buildRadarChartData(deckListData: [DeckCardData]) -> [[Int]] {
         let symbols = ["MD", "RD", "ID", "F", "Dr", "Re", "Sh", "Dc", "R", "Sp", "-"]
+        var faces = Array(repeating: 0, count: symbols.count)
+        var directFaces = faces
+        var dice = faces
 
-        return symbols.map { symbol in
-            deckListData.reduce(0) { total, cardData in
-                total + cardData.dieFaces.count { faceSymbol($0) == symbol } * cardData.dice
+        for cardData in deckListData {
+            var symbolsOnDie = Set<Int>()
+            for face in cardData.dieFaces {
+                guard let parsed = parseFace(face), let index = symbols.firstIndex(of: parsed.symbol) else { continue }
+                faces[index] += cardData.dice
+                if !parsed.isModifier {
+                    directFaces[index] += cardData.dice
+                }
+                if symbolsOnDie.insert(index).inserted {
+                    dice[index] += cardData.dice
+                }
             }
         }
+
+        return [faces, directFaces, dice]
     }
 
-    private nonisolated func faceSymbol(_ face: String) -> String? {
+    private nonisolated func parseFace(_ face: String) -> (symbol: String, isModifier: Bool)? {
         let side = face.hasPrefix("X") ? String(face.dropFirst()) : face
-        guard let match = side.wholeMatch(of: /[-+]?[0-9X]*?([-A-Z][a-zA-Z]?)\d*?/) else { return nil }
-        return match.1 == "Ri" ? "R" : String(match.1)
+        guard let match = side.wholeMatch(of: /([-+]?)[0-9X]*?([-A-Z][a-zA-Z]?)\d*?/) else { return nil }
+        return (match.2 == "Ri" ? "R" : String(match.2), match.1 == "+")
     }
 
     func refresh() {

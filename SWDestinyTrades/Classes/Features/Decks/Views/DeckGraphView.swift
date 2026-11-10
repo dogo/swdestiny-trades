@@ -39,7 +39,8 @@ struct DeckGraphView: View {
                             hasData: viewModel.hasChartData(for: .diceSymbols),
                             title: viewModel.getChartTitle(for: .diceSymbols),
                             data: viewModel.diceFaceData,
-                            labels: viewModel.diceFaceLabels
+                            labels: viewModel.diceFaceLabels,
+                            seriesNames: viewModel.diceSeriesNames
                         )
                     }
                     .padding()

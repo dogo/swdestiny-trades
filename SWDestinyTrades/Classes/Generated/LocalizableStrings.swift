@@ -146,6 +146,12 @@ nonisolated internal enum L10n {
   internal static let deleteDeck = L10n.tr("Localizable", "DELETE_DECK", fallback: "Delete deck")
   /// Deleted Person
   internal static let deletedPerson = L10n.tr("Localizable", "DELETED_PERSON", fallback: "Deleted Person")
+  /// # of dice
+  internal static let diceSeriesDice = L10n.tr("Localizable", "DICE_SERIES_DICE", fallback: "# of dice")
+  /// # sides without +
+  internal static let diceSeriesDirect = L10n.tr("Localizable", "DICE_SERIES_DIRECT", fallback: "# sides without +")
+  /// # of die sides
+  internal static let diceSeriesFaces = L10n.tr("Localizable", "DICE_SERIES_FACES", fallback: "# of die sides")
   /// Dice symbols
   internal static let diceSymbols = L10n.tr("Localizable", "DICE_SYMBOLS", fallback: "Dice symbols")
   /// Done
@@ -394,10 +400,6 @@ nonisolated internal enum L10n {
   internal static let share = L10n.tr("Localizable", "SHARE", fallback: "Share")
   /// Shared with SWD Trades for iOS
   internal static let shareText = L10n.tr("Localizable", "SHARE_TEXT", fallback: "Shared with SWD Trades for iOS")
-  /// Plural format key: "%#@side@"
-  internal static func sidesCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "SIDES_COUNT", p1, fallback: "Plural format key: \"%#@side@\"")
-  }
   /// Sign in with A Renewed Hope
   internal static let signInArh = L10n.tr("Localizable", "SIGN_IN_ARH", fallback: "Sign in with A Renewed Hope")
   /// Sign out

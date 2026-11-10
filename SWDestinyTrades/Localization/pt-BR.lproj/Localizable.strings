@@ -54,6 +54,9 @@
 "INCREASE_QUANTITY" = "Aumentar quantidade";
 "DELETE_DECK" = "Excluir baralho";
 "DICE_SYMBOLS" = "Símbolos dos dados";
+"DICE_SERIES_FACES" = "# de lados do dado";
+"DICE_SERIES_DIRECT" = "# lados sem +";
+"DICE_SERIES_DICE" = "# de dados";
 "DONE" = "Concluído";
 "EDIT" = "Editar";
 "DOWNGRADE" = "Desvantagem";

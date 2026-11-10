@@ -54,6 +54,9 @@
 "INCREASE_QUANTITY" = "Increase quantity";
 "DELETE_DECK" = "Delete deck";
 "DICE_SYMBOLS" = "Dice symbols";
+"DICE_SERIES_FACES" = "# of die sides";
+"DICE_SERIES_DIRECT" = "# sides without +";
+"DICE_SERIES_DICE" = "# of dice";
 "DONE" = "Done";
 "EDIT" = "Edit";
 "DOWNGRADE" = "Downgrade";
