@@ -144,6 +144,43 @@ final class DeckListViewModelTests: BaseTestCase {
         #expect(sut.items.map(\.name) == ["Keep"])
     }
 
+    @Test
+    func delete_remoteDeck_deletesOnServerAndDropsFromList() async throws {
+        let authService = AuthServiceMock()
+        authService.isLoggedIn = true
+        let deckService = DeckServiceMock()
+        deckService.decks = [RemoteDeckDTO.stub().deck]
+        registerMock(AuthServiceProtocol.self) { authService }
+        registerMock(DeckServiceProtocol.self) { deckService }
+        let local = makeDeck(name: "Local")
+        try? await populateTestData(objects: [local])
+        await sut.loadDecks()
+        let item = try #require(sut.items.first { $0.id == "arh-1" })
+
+        await sut.delete(item)
+
+        #expect(deckService.deletedRemoteIDs == [1])
+        #expect(sut.items.map(\.name) == ["Local"])
+    }
+
+    @Test
+    func delete_remoteDeckFails_keepsItAndShowsError() async throws {
+        let authService = AuthServiceMock()
+        authService.isLoggedIn = true
+        let deckService = DeckServiceMock()
+        deckService.decks = [RemoteDeckDTO.stub().deck]
+        registerMock(AuthServiceProtocol.self) { authService }
+        registerMock(DeckServiceProtocol.self) { deckService }
+        await sut.loadDecks()
+        let item = try #require(sut.items.first { $0.id == "arh-1" })
+        deckService.error = APIError.serverError
+
+        await sut.delete(item)
+
+        #expect(sut.items.map(\.id) == ["arh-1"])
+        #expect(sut.toastQueue.current?.type == .error)
+    }
+
     // MARK: - Rename
 
     @Test

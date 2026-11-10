@@ -12,4 +12,5 @@ protocol DeckServiceProtocol {
 
     func retrieveDecks() async throws -> [DeckDTO]
     func saveDeck(_ deck: DeckDTO, remoteID: Int) async throws
+    func deleteDeck(remoteID: Int) async throws
 }

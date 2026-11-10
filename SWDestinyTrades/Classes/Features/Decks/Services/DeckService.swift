@@ -34,4 +34,9 @@ final class DeckService: DeckServiceProtocol {
         pendingSave = save
         try await save.value
     }
+
+    func deleteDeck(remoteID: Int) async throws {
+        let response = try await client.request(DeleteDeckEndpoint(remoteID: remoteID), decode: SaveDeckResponseDTO.self)
+        guard response.success else { throw SaveDeckError.rejected(response.message) }
+    }
 }

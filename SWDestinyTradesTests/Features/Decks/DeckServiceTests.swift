@@ -91,4 +91,14 @@ final class DeckServiceTests {
 
         #expect(finished == [1, 2])
     }
+
+    @Test
+    func deleteDeck_sendsDeleteForTheRemoteID() async throws {
+        client.stub = try JSONDecoder().decode(SaveDeckResponseDTO.self, from: Data(#"{"success":true,"msg":12}"#.utf8))
+
+        try await sut.deleteDeck(remoteID: 12)
+
+        #expect(client.lastRequest?.httpMethod == "DELETE")
+        #expect(client.lastRequest?.url?.path == "/api/deck/delete/12")
+    }
 }

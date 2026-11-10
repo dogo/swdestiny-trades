@@ -144,10 +144,14 @@ final class DeckListViewModel: ListViewModel<DeckListItem> {
     }
 
     func delete(_ item: DeckListItem) async {
-        guard let deck = deck(for: item) else { return }
-
         do {
-            try await database.delete(object: deck)
+            if let deck = deck(for: item) {
+                try await database.delete(object: deck)
+            } else if let remoteID = remoteDecksByID[item.id]?.remoteID {
+                try await deckService.deleteDeck(remoteID: remoteID)
+            } else {
+                return
+            }
             await loadDecksFromDatabase()
         } catch {
             handleError(error)

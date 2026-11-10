@@ -14,6 +14,7 @@ final class DeckServiceMock: DeckServiceProtocol {
     var decks: [DeckDTO] = []
     var error: Error?
     private(set) var savedRemoteIDs: [Int] = []
+    private(set) var deletedRemoteIDs: [Int] = []
 
     func retrieveDecks() async throws -> [DeckDTO] {
         if let error {
@@ -27,5 +28,13 @@ final class DeckServiceMock: DeckServiceProtocol {
             throw error
         }
         savedRemoteIDs.append(remoteID)
+    }
+
+    func deleteDeck(remoteID: Int) async throws {
+        if let error {
+            throw error
+        }
+        deletedRemoteIDs.append(remoteID)
+        decks.removeAll { $0.remoteID == remoteID }
     }
 }
